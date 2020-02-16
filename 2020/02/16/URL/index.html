@@ -5,13 +5,16 @@
   
 
   
-  <title>Hexo</title>
+  <title>URL constructor | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;index.html">
+  <meta name="description" content="Quick Start以前我们要对地址栏中的URL地址进行分析处理，需要自己进行字符串分析,有了URL构造函数之后就不需要了。 demo （修改|设置)query的一个参数1234const url = &quot;https:&#x2F;&#x2F;www.baidu.com&#x2F;wordpress&#x2F;?a=1&quot;const urlObj = new URL(url)urlObj.searchParams.set(&quot;a&quot;, 2);c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="URL constructor">
+<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;2020&#x2F;02&#x2F;16&#x2F;URL&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Quick Start以前我们要对地址栏中的URL地址进行分析处理，需要自己进行字符串分析,有了URL构造函数之后就不需要了。 demo （修改|设置)query的一个参数1234const url = &quot;https:&#x2F;&#x2F;www.baidu.com&#x2F;wordpress&#x2F;?a=1&quot;const urlObj = new URL(url)urlObj.searchParams.set(&quot;a&quot;, 2);c">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-02-16T08:50:09.619Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/blog/atom.xml" title="Hexo" type="application/atom+xml">
@@ -59,9 +62,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-URL" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-URL" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2020/02/16/URL/" class="article-date">
   <time datetime="2020-02-16T08:50:09.619Z" itemprop="datePublished">2020-02-16</time>
@@ -74,8 +75,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/02/16/URL/">URL constructor</a>
+    <h1 class="article-title" itemprop="name">
+      URL constructor
     </h1>
   
 
@@ -124,107 +125,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-URLSearchParams" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/02/16/URLSearchParams/" class="article-date">
-  <time datetime="2020-02-16T08:50:09.619Z" itemprop="datePublished">2020-02-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/02/16/URLSearchParams/">URLSearchParams constructor</a>
-    </h1>
+    <a href="/blog/2020/02/16/URLSearchParams/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">URLSearchParams constructor</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p>URLSearchParams是URL的一个属性的返回的构造函数</p>
-<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * params：（param）</span></span><br><span class="line"><span class="comment"> * url查询字符串    eg:'?s=url',location.search</span></span><br><span class="line"><span class="comment"> * 查询字符序列     eg:['s', 'url'], ['someId', 1]]</span></span><br><span class="line"><span class="comment"> * 查询键值对象     eg:&#123;"s": "url", "someId": 2&#125;</span></span><br><span class="line"><span class="comment"> * return 一个人 URL实例</span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="keyword">new</span> URLSearchParams(param);</span><br></pre></td></tr></table></figure>
-
-<h3 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h3><ol>
-<li>append()     追加参数params.append(‘from’, ‘zxx’);</li>
-<li>delete()     删除已存在的参数params.delete(‘from’);</li>
-<li>entries()    返回查询参数们的迭代器对象，可以使用for of循环</li>
-<li>forEach()    forEach(callback), callback = (value,key){}</li>
-<li>get()        params.get(‘s’);</li>
-<li>getAll()     params.getAll(‘s’);</li>
-<li>has()        params.has(‘s’) == true;    // true</li>
-<li>keys()       返回一个key迭代器对象</li>
-<li>values()     返回一个value迭代器对象</li>
-<li>set()       有则替换，无则加冕。params.set(‘s’, ‘css世界’);</li>
-<li>sort()      所有键/值对就地排序,稳定的排序算法</li>
-<li>toString()  输出字符串</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> searchParams = <span class="keyword">new</span> URLSearchParams(<span class="string">'c=4&amp;a=2&amp;b=3&amp;a=1'</span>); </span><br><span class="line"><span class="comment">// 键值对排序</span></span><br><span class="line">searchParams.sort();</span><br><span class="line"><span class="built_in">console</span>.log(searchParams.toString());    <span class="comment">// 结果是：a=2&amp;a=1&amp;b=3&amp;c=4</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/02/16/URLSearchParams/" data-id="ck6osht6y000133po1r3w0ld1" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-cross-origin" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/02/16/cross-origin/" class="article-date">
-  <time datetime="2020-02-16T08:50:09.619Z" itemprop="datePublished">2020-02-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/02/16/cross-origin/">cross origin</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>就是创建一个文件夹eg:devChromeData</p>
-<h3 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h3><p>第二步执行以下命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -n /Applications/Google\ Chrome.app/ --args --disable-web-security  --user-data-dir=/Users/ansike/devChromeData</span><br></pre></td></tr></table></figure>
-
-<p>微信开发者工具（注意app的名字是否一致）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -a /Applications/wechatwebdevtools.app --args --disable-web-security --user-data-dir</span><br></pre></td></tr></table></figure>
-<h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><p>创建该文件夹，右键浏览器快捷键，在目标中追加参数</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--disable-web-security --user-data-dir=C:\path\to\ChromeUserData</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/02/16/cross-origin/" data-id="ck6osht70000233pohebuhg3u" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
 
 </section>
         
