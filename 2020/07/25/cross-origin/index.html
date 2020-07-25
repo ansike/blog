@@ -5,16 +5,16 @@
   
 
   
-  <title>截流和去抖的深入理解结合loads | Hexo</title>
+  <title>cross origin | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="应用场景不说应用场景，自己都没有动力往下继续。debounce：input框keyup的search事件（等待时间之后只触发一次,若在等待时间内再次触发，则重新计算等待时间）【有可能出现事件一直触发，回调一直不会执行的情况】throttle：监听scroll事件（间隔触发）【在debounce的情况下，事件在等待时间内不断触发，增加maxWait时间即可实现】 throttle截流">
+  <meta name="description" content="就是创建一个文件夹eg:devChromeData mac第二步执行以下命令 1open -n &#x2F;Applications&#x2F;Google\ Chrome.app&#x2F; --args --disable-web-security  --user-data-dir=&#x2F;Users&#x2F;ansike&#x2F;devChromeData  微信开发者工具（注意app的名字是否一致） 1open -a &#x2F;Applicatio">
 <meta property="og:type" content="article">
-<meta property="og:title" content="截流和去抖的深入理解结合loads">
-<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;2020&#x2F;07&#x2F;12&#x2F;throttle-debounce&#x2F;index.html">
+<meta property="og:title" content="cross origin">
+<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;2020&#x2F;07&#x2F;25&#x2F;cross-origin&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="应用场景不说应用场景，自己都没有动力往下继续。debounce：input框keyup的search事件（等待时间之后只触发一次,若在等待时间内再次触发，则重新计算等待时间）【有可能出现事件一直触发，回调一直不会执行的情况】throttle：监听scroll事件（间隔触发）【在debounce的情况下，事件在等待时间内不断触发，增加maxWait时间即可实现】 throttle截流">
+<meta property="og:description" content="就是创建一个文件夹eg:devChromeData mac第二步执行以下命令 1open -n &#x2F;Applications&#x2F;Google\ Chrome.app&#x2F; --args --disable-web-security  --user-data-dir=&#x2F;Users&#x2F;ansike&#x2F;devChromeData  微信开发者工具（注意app的名字是否一致） 1open -a &#x2F;Applicatio">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-12T17:31:59.757Z">
+<meta property="og:updated_time" content="2020-07-25T14:49:48.588Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/blog/atom.xml" title="Hexo" type="application/atom+xml">
@@ -62,10 +62,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-throttle-debounce" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-cross-origin" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2020/07/12/throttle-debounce/" class="article-date">
-  <time datetime="2020-07-12T17:31:59.757Z" itemprop="datePublished">2020-07-12</time>
+    <a href="/blog/2020/07/25/cross-origin/" class="article-date">
+  <time datetime="2020-07-25T14:49:48.588Z" itemprop="datePublished">2020-07-25</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      截流和去抖的深入理解结合loads
+      cross origin
     </h1>
   
 
@@ -84,12 +84,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p><strong>不说应用场景，自己都没有动力往下继续。</strong><br>debounce：input框keyup的search事件（等待时间之后只触发一次,若在等待时间内再次触发，则重新计算等待时间）【有可能出现事件一直触发，回调一直不会执行的情况】<br>throttle：监听scroll事件（间隔触发）【在debounce的情况下，事件在等待时间内不断触发，增加maxWait时间即可实现】</p>
-<h3 id="throttle截流"><a href="#throttle截流" class="headerlink" title="throttle截流"></a>throttle截流</h3>
+        <p>就是创建一个文件夹eg:devChromeData</p>
+<h3 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h3><p>第二步执行以下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -n /Applications/Google\ Chrome.app/ --args --disable-web-security  --user-data-dir=/Users/ansike/devChromeData</span><br></pre></td></tr></table></figure>
+
+<p>微信开发者工具（注意app的名字是否一致）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -a /Applications/wechatwebdevtools.app --args --disable-web-security --user-data-dir</span><br></pre></td></tr></table></figure>
+<h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><p>创建该文件夹，右键浏览器快捷键，在目标中追加参数</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--disable-web-security --user-data-dir=C:\path\to\ChromeUserData</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/07/12/throttle-debounce/" data-id="ckcjcv5kz000346q9cvyqcjvp" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2020/07/25/cross-origin/" data-id="ckd1rsmtz00021urt13ul5z4y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -98,19 +104,19 @@
     
 <nav id="article-nav">
   
-    <a href="/blog/2020/07/12/cross-origin/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/blog/2020/07/25/URLSearchParams/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          cross origin
+          URLSearchParams constructor
         
       </div>
     </a>
   
   
-    <a href="/blog/2020/07/12/%E5%B7%A5%E7%A8%8B%E5%8C%96/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/blog/2020/07/25/throttle-debounce/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">前端工程化</div>
+      <div class="article-nav-title">截流和去抖的深入理解结合loads</div>
     </a>
   
 </nav>
@@ -147,23 +153,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2020/07/12/URL/">URL constructor</a>
+            <a href="/blog/2020/07/25/URL/">URL constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2020/07/12/URLSearchParams/">URLSearchParams constructor</a>
+            <a href="/blog/2020/07/25/URLSearchParams/">URLSearchParams constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2020/07/12/cross-origin/">cross origin</a>
+            <a href="/blog/2020/07/25/cross-origin/">cross origin</a>
           </li>
         
           <li>
-            <a href="/blog/2020/07/12/throttle-debounce/">截流和去抖的深入理解结合loads</a>
+            <a href="/blog/2020/07/25/throttle-debounce/">截流和去抖的深入理解结合loads</a>
           </li>
         
           <li>
-            <a href="/blog/2020/07/12/%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a>
+            <a href="/blog/2020/07/25/%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a>
           </li>
         
       </ul>
