@@ -63,8 +63,8 @@
   
     <article id="post-URL" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2020/07/25/URL/" class="article-date">
-  <time datetime="2020-07-25T14:49:48.588Z" itemprop="datePublished">2020-07-25</time>
+    <a href="/blog/2020/07/26/URL/" class="article-date">
+  <time datetime="2020-07-26T00:45:40.909Z" itemprop="datePublished">2020-07-26</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/07/25/URL/">URL constructor</a>
+      <a class="article-title" href="/blog/2020/07/26/URL/">URL constructor</a>
     </h1>
   
 
@@ -118,7 +118,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/07/25/URL/" data-id="ckd1rsmto00001urtg3sk1ixg" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2020/07/26/URL/" data-id="ckd2d2y6b00004sj79qjqc7zg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -130,8 +130,8 @@
   
     <article id="post-URLSearchParams" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2020/07/25/URLSearchParams/" class="article-date">
-  <time datetime="2020-07-25T14:49:48.588Z" itemprop="datePublished">2020-07-25</time>
+    <a href="/blog/2020/07/26/URLSearchParams/" class="article-date">
+  <time datetime="2020-07-26T00:45:40.909Z" itemprop="datePublished">2020-07-26</time>
 </a>
     
   </div>
@@ -142,7 +142,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/07/25/URLSearchParams/">URLSearchParams constructor</a>
+      <a class="article-title" href="/blog/2020/07/26/URLSearchParams/">URLSearchParams constructor</a>
     </h1>
   
 
@@ -171,7 +171,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/07/25/URLSearchParams/" data-id="ckd1rsmtx00011urt43xd8fzm" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2020/07/26/URLSearchParams/" data-id="ckd2d2y6t00014sj7fap67mfu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -183,8 +183,8 @@
   
     <article id="post-cross-origin" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2020/07/25/cross-origin/" class="article-date">
-  <time datetime="2020-07-25T14:49:48.588Z" itemprop="datePublished">2020-07-25</time>
+    <a href="/blog/2020/07/26/cross-origin/" class="article-date">
+  <time datetime="2020-07-26T00:45:40.909Z" itemprop="datePublished">2020-07-26</time>
 </a>
     
   </div>
@@ -195,7 +195,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/07/25/cross-origin/">cross origin</a>
+      <a class="article-title" href="/blog/2020/07/26/cross-origin/">cross origin</a>
     </h1>
   
 
@@ -214,7 +214,52 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/07/25/cross-origin/" data-id="ckd1rsmtz00021urt13ul5z4y" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2020/07/26/cross-origin/" data-id="ckd2d2y6v00024sj7037rh55p" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-promisefy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/07/26/promisefy/" class="article-date">
+  <time datetime="2020-07-26T00:45:40.909Z" itemprop="datePublished">2020-07-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/07/26/promisefy/">实现类似 node中util.promisefy的实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>分析需求：</p>
+<ol>
+<li>promisefy将异步回调的nodejs的api fn改成了promise fn</li>
+<li>传入一个fn，返回一个新的fn，且新的fn执行的时候返回一个promise</li>
+<li>发现所有的nodejs的api的回调函数参数格式一致(error, content)=&gt;{}</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"><span class="keyword">const</span> util = <span class="built_in">require</span>(<span class="string">"util"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将异步回调改为promise</span></span><br><span class="line"><span class="keyword">const</span> promisefyReadFile = util.promisify(fs.readFile);</span><br><span class="line">promisefyReadFile(path.resolve(__dirname, <span class="string">'./data.txt'</span>), <span class="string">'utf-8'</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">customPromiseFy</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 注意</span></span><br><span class="line">      <span class="keyword">const</span> widthCallBackArgs = [...args, <span class="function"><span class="keyword">function</span> (<span class="params">error, content</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (error) reject(error);</span><br><span class="line">        resolve(content)</span><br><span class="line">      &#125;]</span><br><span class="line">      fn.apply(fn, widthCallBackArgs);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> promisefyReadFile = customPromiseFy(fs.readFile);</span><br><span class="line">promisefyReadFile(path.resolve(__dirname, <span class="string">'./data.txt'</span>), <span class="string">'utf-8'</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2020/07/26/promisefy/" data-id="ckd2d2y6w00034sj74tpx0iu1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -226,8 +271,8 @@
   
     <article id="post-throttle-debounce" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2020/07/25/throttle-debounce/" class="article-date">
-  <time datetime="2020-07-25T14:49:48.588Z" itemprop="datePublished">2020-07-25</time>
+    <a href="/blog/2020/07/26/throttle-debounce/" class="article-date">
+  <time datetime="2020-07-26T00:45:40.909Z" itemprop="datePublished">2020-07-26</time>
 </a>
     
   </div>
@@ -238,7 +283,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/07/25/throttle-debounce/">截流和去抖的深入理解结合loads</a>
+      <a class="article-title" href="/blog/2020/07/26/throttle-debounce/">截流和去抖的深入理解结合loads</a>
     </h1>
   
 
@@ -251,7 +296,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/07/25/throttle-debounce/" data-id="ckd1rsmu000031urthe7gbysq" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2020/07/26/throttle-debounce/" data-id="ckd2d2y6x00044sj717lp9meb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -263,8 +308,8 @@
   
     <article id="post-工程化" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2020/07/25/%E5%B7%A5%E7%A8%8B%E5%8C%96/" class="article-date">
-  <time datetime="2020-07-25T14:49:48.588Z" itemprop="datePublished">2020-07-25</time>
+    <a href="/blog/2020/07/26/%E5%B7%A5%E7%A8%8B%E5%8C%96/" class="article-date">
+  <time datetime="2020-07-26T00:45:40.909Z" itemprop="datePublished">2020-07-26</time>
 </a>
     
   </div>
@@ -275,7 +320,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/07/25/%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a>
+      <a class="article-title" href="/blog/2020/07/26/%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a>
     </h1>
   
 
@@ -297,7 +342,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/07/25/%E5%B7%A5%E7%A8%8B%E5%8C%96/" data-id="ckd1rsmu100041urt2804auf4" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2020/07/26/%E5%B7%A5%E7%A8%8B%E5%8C%96/" data-id="ckd2d2y6y00054sj7gsr5c3oi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -309,8 +354,8 @@
   
     <article id="post-模块化" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2020/07/25/%E6%A8%A1%E5%9D%97%E5%8C%96/" class="article-date">
-  <time datetime="2020-07-25T14:49:48.588Z" itemprop="datePublished">2020-07-25</time>
+    <a href="/blog/2020/07/26/%E6%A8%A1%E5%9D%97%E5%8C%96/" class="article-date">
+  <time datetime="2020-07-26T00:45:40.909Z" itemprop="datePublished">2020-07-26</time>
 </a>
     
   </div>
@@ -321,7 +366,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/07/25/%E6%A8%A1%E5%9D%97%E5%8C%96/">Commonjs</a>
+      <a class="article-title" href="/blog/2020/07/26/%E6%A8%A1%E5%9D%97%E5%8C%96/">Commonjs</a>
     </h1>
   
 
@@ -341,7 +386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/07/25/%E6%A8%A1%E5%9D%97%E5%8C%96/" data-id="ckd1rsmu200051urtbmf11jtg" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2020/07/26/%E6%A8%A1%E5%9D%97%E5%8C%96/" data-id="ckd2d2y6z00064sj7921f4bkh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -353,8 +398,8 @@
   
     <article id="post-集中式和分布式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2020/07/25/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" class="article-date">
-  <time datetime="2020-07-25T14:49:48.588Z" itemprop="datePublished">2020-07-25</time>
+    <a href="/blog/2020/07/26/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" class="article-date">
+  <time datetime="2020-07-26T00:45:40.909Z" itemprop="datePublished">2020-07-26</time>
 </a>
     
   </div>
@@ -365,7 +410,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/07/25/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
+      <a class="article-title" href="/blog/2020/07/26/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
     </h1>
   
 
@@ -380,7 +425,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/07/25/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" data-id="ckd1rsmu300061urt7aovhssu" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2020/07/26/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" data-id="ckd2d2y7000074sj77ai3cu9y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -421,23 +466,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2020/07/25/URL/">URL constructor</a>
+            <a href="/blog/2020/07/26/URL/">URL constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2020/07/25/URLSearchParams/">URLSearchParams constructor</a>
+            <a href="/blog/2020/07/26/URLSearchParams/">URLSearchParams constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2020/07/25/cross-origin/">cross origin</a>
+            <a href="/blog/2020/07/26/cross-origin/">cross origin</a>
           </li>
         
           <li>
-            <a href="/blog/2020/07/25/throttle-debounce/">截流和去抖的深入理解结合loads</a>
+            <a href="/blog/2020/07/26/promisefy/">实现类似 node中util.promisefy的实现</a>
           </li>
         
           <li>
-            <a href="/blog/2020/07/25/%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a>
+            <a href="/blog/2020/07/26/throttle-debounce/">截流和去抖的深入理解结合loads</a>
           </li>
         
       </ul>
