@@ -5,16 +5,16 @@
   
 
   
-  <title>前端工程化 | Hexo</title>
+  <title>集中式系统和分布式系统的区别 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前端工程中需要解决的几个问题 快速搭建 各种cli工具：vue-cli，react-app 高效开发 各种功能：less-loader,sass-loader,css-loader,stylus,es6,jsx 便捷协作 协作工具：代理，mock数据能力，git版本管理 顺畅上线 上线工具：Jenkins，ci 稳健运行 检测工作：异常上报工具  styluscss预处理器，运行 stylus e">
+  <meta name="description" content="集中式集中式系统中版本库是集中存放在中央服务器的。以svn为例，开发人员工作的时候都需要从中央服务器获取最新的版本，工作完之后需要将工作推送给中央服务器。eg：SVN，云服务器（在云服务器开发）优点：减少了硬件和软件成本问题：必须联网（局域网或者互联网） 分布式分布式系统中没有中央服务器的概念。 eg：git优点：每个人的电脑中都有完整的版本库，所以安全性很高，即使服务器仓库被破坏了，损失也不会很">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前端工程化">
-<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;2020&#x2F;09&#x2F;01&#x2F;%E5%B7%A5%E7%A8%8B%E5%8C%96&#x2F;index.html">
+<meta property="og:title" content="集中式系统和分布式系统的区别">
+<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;2020&#x2F;09&#x2F;12&#x2F;%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前端工程中需要解决的几个问题 快速搭建 各种cli工具：vue-cli，react-app 高效开发 各种功能：less-loader,sass-loader,css-loader,stylus,es6,jsx 便捷协作 协作工具：代理，mock数据能力，git版本管理 顺畅上线 上线工具：Jenkins，ci 稳健运行 检测工作：异常上报工具  styluscss预处理器，运行 stylus e">
+<meta property="og:description" content="集中式集中式系统中版本库是集中存放在中央服务器的。以svn为例，开发人员工作的时候都需要从中央服务器获取最新的版本，工作完之后需要将工作推送给中央服务器。eg：SVN，云服务器（在云服务器开发）优点：减少了硬件和软件成本问题：必须联网（局域网或者互联网） 分布式分布式系统中没有中央服务器的概念。 eg：git优点：每个人的电脑中都有完整的版本库，所以安全性很高，即使服务器仓库被破坏了，损失也不会很">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-01T12:46:18.953Z">
+<meta property="og:updated_time" content="2020-09-12T17:33:03.853Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/blog/atom.xml" title="Hexo" type="application/atom+xml">
@@ -62,10 +62,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-工程化" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-集中式和分布式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2020/09/01/%E5%B7%A5%E7%A8%8B%E5%8C%96/" class="article-date">
-  <time datetime="2020-09-01T12:46:18.953Z" itemprop="datePublished">2020-09-01</time>
+    <a href="/blog/2020/09/12/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" class="article-date">
+  <time datetime="2020-09-12T17:33:03.853Z" itemprop="datePublished">2020-09-12</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      前端工程化
+      集中式系统和分布式系统的区别
     </h1>
   
 
@@ -84,21 +84,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="前端工程中需要解决的几个问题"><a href="#前端工程中需要解决的几个问题" class="headerlink" title="前端工程中需要解决的几个问题"></a>前端工程中需要解决的几个问题</h3><ol>
-<li>快速搭建 各种cli工具：vue-cli，react-app</li>
-<li>高效开发 各种功能：less-loader,sass-loader,css-loader,stylus,es6,jsx</li>
-<li>便捷协作 协作工具：代理，mock数据能力，git版本管理</li>
-<li>顺畅上线 上线工具：Jenkins，ci</li>
-<li>稳健运行 检测工作：异常上报工具</li>
-</ol>
-<h4 id="stylus"><a href="#stylus" class="headerlink" title="stylus"></a>stylus</h4><p>css预处理器，运行 stylus example.styl 可将 demo.styl 文件编译成 example.css 文件。在stylus中可以使用变量，函数，compose集成等</p>
-<h4 id="styled-components"><a href="#styled-components" class="headerlink" title="styled-components"></a>styled-components</h4><p>官网:<a href="https://styled-components.com/" target="_blank" rel="noopener">https://styled-components.com/</a></p>
-<h4 id="css-module"><a href="#css-module" class="headerlink" title="css module"></a>css module</h4><p>未完继续补充~</p>
+        <h3 id="集中式"><a href="#集中式" class="headerlink" title="集中式"></a>集中式</h3><p>集中式系统中版本库是集中存放在中央服务器的。以svn为例，开发人员工作的时候都需要从中央服务器获取最新的版本，工作完之后需要将工作推送给中央服务器。<br>eg：SVN，云服务器（在云服务器开发）<br>优点：减少了硬件和软件成本<br>问题：<strong>必须联网（局域网或者互联网）</strong></p>
+<h3 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h3><p>分布式系统中没有中央服务器的概念。</p>
+<p>eg：git<br>优点：每个人的电脑中都有完整的版本库，所以安全性很高，即使服务器仓库被破坏了，损失也不会很大。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/09/01/%E5%B7%A5%E7%A8%8B%E5%8C%96/" data-id="ckejy47jg00051vss8x9z3uzr" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2020/09/12/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" data-id="ckezy7bt400072mqlan6673za" class="article-share-link">Share</a>
       
       
     </footer>
@@ -107,20 +100,15 @@
     
 <nav id="article-nav">
   
-    <a href="/blog/2020/09/01/throttle-debounce/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/blog/2020/09/12/%E6%A8%A1%E5%9D%97%E5%8C%96/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          截流和去抖的深入理解结合loads
+          Commonjs
         
       </div>
     </a>
   
-  
-    <a href="/blog/2020/09/01/%E6%A8%A1%E5%9D%97%E5%8C%96/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Commonjs</div>
-    </a>
   
 </nav>
 
@@ -156,23 +144,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2020/09/01/URL/">URL constructor</a>
+            <a href="/blog/2020/09/12/URL/">URL constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2020/09/01/URLSearchParams/">URLSearchParams constructor</a>
+            <a href="/blog/2020/09/12/URLSearchParams/">URLSearchParams constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2020/09/01/cross-origin/">cross origin</a>
+            <a href="/blog/2020/09/12/cross-origin/">cross origin</a>
           </li>
         
           <li>
-            <a href="/blog/2020/09/01/promisefy/">实现类似 node中util.promisefy的实现</a>
+            <a href="/blog/2020/09/12/promisefy/">实现类似 node中util.promisefy的实现</a>
           </li>
         
           <li>
-            <a href="/blog/2020/09/01/throttle-debounce/">截流和去抖的深入理解结合loads</a>
+            <a href="/blog/2020/09/12/throttle-debounce/">截流和去抖的深入理解结合loads</a>
           </li>
         
       </ul>
