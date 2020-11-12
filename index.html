@@ -61,264 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-cross-origin" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/10/12/cross-origin/" class="article-date">
-  <time datetime="2020-10-12T17:33:29.376Z" itemprop="datePublished">2020-10-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/10/12/cross-origin/">cross origin</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>就是创建一个文件夹eg:devChromeData</p>
-<h3 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h3><p>第二步执行以下命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -n /Applications/Google\ Chrome.app/ --args --disable-web-security  --user-data-dir=/Users/ansike/devChromeData</span><br></pre></td></tr></table></figure>
-
-<p>微信开发者工具（注意app的名字是否一致）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -a /Applications/wechatwebdevtools.app --args --disable-web-security --user-data-dir</span><br></pre></td></tr></table></figure>
-<h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><p>创建该文件夹，右键浏览器快捷键，在目标中追加参数</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--disable-web-security --user-data-dir=C:\path\to\ChromeUserData</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/10/12/cross-origin/" data-id="ckg6tffxt00023asm3chqc53q" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-promisefy" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/10/12/promisefy/" class="article-date">
-  <time datetime="2020-10-12T17:33:29.376Z" itemprop="datePublished">2020-10-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/10/12/promisefy/">实现类似 node中util.promisefy的实现</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>分析需求：</p>
-<ol>
-<li>promisefy将异步回调的nodejs的api fn改成了promise fn</li>
-<li>传入一个fn，返回一个新的fn，且新的fn执行的时候返回一个promise</li>
-<li>发现所有的nodejs的api的回调函数参数格式一致(error, content)=&gt;{}</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"><span class="keyword">const</span> util = <span class="built_in">require</span>(<span class="string">"util"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将异步回调改为promise</span></span><br><span class="line"><span class="keyword">const</span> promisefyReadFile = util.promisify(fs.readFile);</span><br><span class="line">promisefyReadFile(path.resolve(__dirname, <span class="string">'./data.txt'</span>), <span class="string">'utf-8'</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">customPromiseFy</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 注意</span></span><br><span class="line">      <span class="keyword">const</span> widthCallBackArgs = [...args, <span class="function"><span class="keyword">function</span> (<span class="params">error, content</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (error) reject(error);</span><br><span class="line">        resolve(content)</span><br><span class="line">      &#125;]</span><br><span class="line">      fn.apply(fn, widthCallBackArgs);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> promisefyReadFile = customPromiseFy(fs.readFile);</span><br><span class="line">promisefyReadFile(path.resolve(__dirname, <span class="string">'./data.txt'</span>), <span class="string">'utf-8'</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/10/12/promisefy/" data-id="ckg6tffxu00033asm991u6urx" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-throttle-debounce" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/10/12/throttle-debounce/" class="article-date">
-  <time datetime="2020-10-12T17:33:29.376Z" itemprop="datePublished">2020-10-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/10/12/throttle-debounce/">截流和去抖的深入理解结合loads</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p><strong>不说应用场景，自己都没有动力往下继续。</strong><br>debounce：input框keyup的search事件（等待时间之后只触发一次,若在等待时间内再次触发，则重新计算等待时间）【有可能出现事件一直触发，回调一直不会执行的情况。触发间隔小于延迟间隔】<br>throttle：监听scroll事件（间隔触发）【在debounce的情况下，事件在等待时间内不断触发，增加maxWait时间即可实现】</p>
-<h3 id="throttle截流"><a href="#throttle截流" class="headerlink" title="throttle截流"></a>throttle截流</h3>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/10/12/throttle-debounce/" data-id="ckg6tffxv00043asmd2tj2qmk" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-工程化" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/10/12/%E5%B7%A5%E7%A8%8B%E5%8C%96/" class="article-date">
-  <time datetime="2020-10-12T17:33:29.376Z" itemprop="datePublished">2020-10-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/10/12/%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="前端工程中需要解决的几个问题"><a href="#前端工程中需要解决的几个问题" class="headerlink" title="前端工程中需要解决的几个问题"></a>前端工程中需要解决的几个问题</h3><ol>
-<li>快速搭建 各种cli工具：vue-cli，react-app</li>
-<li>高效开发 各种功能：less-loader,sass-loader,css-loader,stylus,es6,jsx</li>
-<li>便捷协作 协作工具：代理，mock数据能力，git版本管理</li>
-<li>顺畅上线 上线工具：Jenkins，ci</li>
-<li>稳健运行 检测工作：异常上报工具</li>
-</ol>
-<h4 id="stylus"><a href="#stylus" class="headerlink" title="stylus"></a>stylus</h4><p>css预处理器，运行 stylus example.styl 可将 demo.styl 文件编译成 example.css 文件。在stylus中可以使用变量，函数，compose集成等</p>
-<h4 id="styled-components"><a href="#styled-components" class="headerlink" title="styled-components"></a>styled-components</h4><p>官网:<a href="https://styled-components.com/" target="_blank" rel="noopener">https://styled-components.com/</a></p>
-<h4 id="css-module"><a href="#css-module" class="headerlink" title="css module"></a>css module</h4><p>未完继续补充~</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/10/12/%E5%B7%A5%E7%A8%8B%E5%8C%96/" data-id="ckg6tffxw00053asm9axz8a4p" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-模块化" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/10/12/%E6%A8%A1%E5%9D%97%E5%8C%96/" class="article-date">
-  <time datetime="2020-10-12T17:33:29.376Z" itemprop="datePublished">2020-10-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/10/12/%E6%A8%A1%E5%9D%97%E5%8C%96/">Commonjs</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="问题1-Commonjs和es-module的区别"><a href="#问题1-Commonjs和es-module的区别" class="headerlink" title="问题1 Commonjs和es module的区别"></a>问题1 Commonjs和es module的区别</h3><ol>
-<li>使用方式看：导入和导出方式不同<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ====commonjs</span></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="built_in">module</span>.export = <span class="string">'hello'</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'a.js'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ====es module</span></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="string">'hello'</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">import</span> a <span class="keyword">from</span> <span class="string">"./a.js"</span>;</span><br></pre></td></tr></table></figure>
-延伸看级别不一样：<b>commonjs是node运行时的实现，非官方标准</b>。es module中的<code>export default, import</code>都是js关键字，从语言层面实现的支持，是官方标准。</li>
-</ol>
-<h3 id="问题2-exports和module-exports区别"><a href="#问题2-exports和module-exports区别" class="headerlink" title="问题2 exports和module.exports区别"></a>问题2 exports和module.exports区别</h3><p>看下在commonjs中的实现就能明白</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 两个变量初始的时候都指向了同一块内存地址</span></span><br><span class="line"><span class="built_in">console</span>.log(exports === <span class="built_in">module</span>.exports) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 当发生直接赋值的情况后commonjs只会使用module.exports指向的值(和导出的顺序无关)</span></span><br><span class="line"><span class="comment">// module.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="string">"hello"</span>;</span><br><span class="line">exports = <span class="string">"hello2"</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">"./module.js"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// hello</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="问题3-require的实现"><a href="#问题3-require的实现" class="headerlink" title="问题3 require的实现"></a>问题3 require的实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"><span class="keyword">const</span> vm = <span class="built_in">require</span>(<span class="string">"vm"</span>);</span><br><span class="line"><span class="comment">// 实现 require</span></span><br><span class="line"><span class="comment">// const a = require("./module.js");</span></span><br><span class="line"><span class="keyword">const</span> a = customRequire(<span class="string">"./module.js"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">customRequire</span>(<span class="params">filePath</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> content = fs.readFileSync(path.join(__dirname, filePath), <span class="string">'utf-8'</span>);</span><br><span class="line">  <span class="comment">// 包裹一层避免作用于污染，隔离变量</span></span><br><span class="line">  <span class="keyword">const</span> wrapper = [</span><br><span class="line">    <span class="string">"(function(require, module, exports)&#123;"</span>,</span><br><span class="line">    <span class="string">"&#125;)"</span></span><br><span class="line">  ]</span><br><span class="line">  <span class="keyword">const</span> <span class="built_in">module</span> = &#123;</span><br><span class="line">    exports: &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> wrapperFn = wrapper[<span class="number">0</span>] + content + wrapper[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 两种实现方式都OK--实现字符串转js 运行时代码</span></span><br><span class="line">  <span class="keyword">const</span> canHandleFn = vm.runInThisContext(wrapperFn)</span><br><span class="line">  <span class="comment">// const canHandleFn = eval(wrapperFn);</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 这一步解决了问题三的疑惑</span></span><br><span class="line">  canHandleFn(customRequire, <span class="built_in">module</span>, <span class="built_in">module</span>.exports)</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">module</span>.exports</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/10/12/%E6%A8%A1%E5%9D%97%E5%8C%96/" data-id="ckg6tffxy00063asmfo73c0ww" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-集中式和分布式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2020/10/12/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" class="article-date">
-  <time datetime="2020-10-12T17:33:29.376Z" itemprop="datePublished">2020-10-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/10/12/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="集中式"><a href="#集中式" class="headerlink" title="集中式"></a>集中式</h3><p>集中式系统中版本库是集中存放在中央服务器的。以svn为例，开发人员工作的时候都需要从中央服务器获取最新的版本，工作完之后需要将工作推送给中央服务器。<br>eg：SVN，云服务器（在云服务器开发）<br>优点：减少了硬件和软件成本<br>问题：<strong>必须联网（局域网或者互联网）</strong></p>
-<h3 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h3><p>分布式系统中没有中央服务器的概念。</p>
-<p>eg：git<br>优点：每个人的电脑中都有完整的版本库，所以安全性很高，即使服务器仓库被破坏了，损失也不会很大。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/10/12/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" data-id="ckg6tffxz00073asm8779901b" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-URL" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2020/10/12/URL/" class="article-date">
-  <time datetime="2020-10-12T17:33:29.372Z" itemprop="datePublished">2020-10-12</time>
+    <a href="/blog/2020/11/12/URL/" class="article-date">
+  <time datetime="2020-11-12T17:34:11.256Z" itemprop="datePublished">2020-11-12</time>
 </a>
     
   </div>
@@ -329,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/10/12/URL/">URL constructor</a>
+      <a class="article-title" href="/blog/2020/11/12/URL/">URL constructor</a>
     </h1>
   
 
@@ -372,7 +118,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/10/12/URL/" data-id="ckg6tffx800003asmdft55qoj" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2020/11/12/URL/" data-id="ckhf43q0g000012yx76vn8xwo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -384,8 +130,8 @@
   
     <article id="post-URLSearchParams" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2020/10/12/URLSearchParams/" class="article-date">
-  <time datetime="2020-10-12T17:33:29.372Z" itemprop="datePublished">2020-10-12</time>
+    <a href="/blog/2020/11/12/URLSearchParams/" class="article-date">
+  <time datetime="2020-11-12T17:34:11.256Z" itemprop="datePublished">2020-11-12</time>
 </a>
     
   </div>
@@ -396,7 +142,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/10/12/URLSearchParams/">URLSearchParams constructor</a>
+      <a class="article-title" href="/blog/2020/11/12/URLSearchParams/">URLSearchParams constructor</a>
     </h1>
   
 
@@ -425,7 +171,261 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/10/12/URLSearchParams/" data-id="ckg6tffxq00013asm1g3q1ma0" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2020/11/12/URLSearchParams/" data-id="ckhf43q0p000112yxcu5p3g57" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-cross-origin" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/11/12/cross-origin/" class="article-date">
+  <time datetime="2020-11-12T17:34:11.256Z" itemprop="datePublished">2020-11-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/11/12/cross-origin/">cross origin</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>就是创建一个文件夹eg:devChromeData</p>
+<h3 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h3><p>第二步执行以下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -n /Applications/Google\ Chrome.app/ --args --disable-web-security  --user-data-dir=/Users/ansike/devChromeData</span><br></pre></td></tr></table></figure>
+
+<p>微信开发者工具（注意app的名字是否一致）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -a /Applications/wechatwebdevtools.app --args --disable-web-security --user-data-dir</span><br></pre></td></tr></table></figure>
+<h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><p>创建该文件夹，右键浏览器快捷键，在目标中追加参数</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--disable-web-security --user-data-dir=C:\path\to\ChromeUserData</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2020/11/12/cross-origin/" data-id="ckhf43q0r000212yxfwjo2v2n" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-promisefy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/11/12/promisefy/" class="article-date">
+  <time datetime="2020-11-12T17:34:11.256Z" itemprop="datePublished">2020-11-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/11/12/promisefy/">实现类似 node中util.promisefy的实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>分析需求：</p>
+<ol>
+<li>promisefy将异步回调的nodejs的api fn改成了promise fn</li>
+<li>传入一个fn，返回一个新的fn，且新的fn执行的时候返回一个promise</li>
+<li>发现所有的nodejs的api的回调函数参数格式一致(error, content)=&gt;{}</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"><span class="keyword">const</span> util = <span class="built_in">require</span>(<span class="string">"util"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将异步回调改为promise</span></span><br><span class="line"><span class="keyword">const</span> promisefyReadFile = util.promisify(fs.readFile);</span><br><span class="line">promisefyReadFile(path.resolve(__dirname, <span class="string">'./data.txt'</span>), <span class="string">'utf-8'</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">customPromiseFy</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 注意</span></span><br><span class="line">      <span class="keyword">const</span> widthCallBackArgs = [...args, <span class="function"><span class="keyword">function</span> (<span class="params">error, content</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (error) reject(error);</span><br><span class="line">        resolve(content)</span><br><span class="line">      &#125;]</span><br><span class="line">      fn.apply(fn, widthCallBackArgs);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> promisefyReadFile = customPromiseFy(fs.readFile);</span><br><span class="line">promisefyReadFile(path.resolve(__dirname, <span class="string">'./data.txt'</span>), <span class="string">'utf-8'</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2020/11/12/promisefy/" data-id="ckhf43q0s000312yx3boi73zd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-throttle-debounce" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/11/12/throttle-debounce/" class="article-date">
+  <time datetime="2020-11-12T17:34:11.256Z" itemprop="datePublished">2020-11-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/11/12/throttle-debounce/">截流和去抖的深入理解结合loads</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p><strong>不说应用场景，自己都没有动力往下继续。</strong><br>debounce：input框keyup的search事件（等待时间之后只触发一次,若在等待时间内再次触发，则重新计算等待时间）【有可能出现事件一直触发，回调一直不会执行的情况。触发间隔小于延迟间隔】<br>throttle：监听scroll事件（间隔触发）【在debounce的情况下，事件在等待时间内不断触发，增加maxWait时间即可实现】</p>
+<h3 id="throttle截流"><a href="#throttle截流" class="headerlink" title="throttle截流"></a>throttle截流</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2020/11/12/throttle-debounce/" data-id="ckhf43q0t000412yxb41o2bme" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-工程化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/11/12/%E5%B7%A5%E7%A8%8B%E5%8C%96/" class="article-date">
+  <time datetime="2020-11-12T17:34:11.256Z" itemprop="datePublished">2020-11-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/11/12/%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前端工程中需要解决的几个问题"><a href="#前端工程中需要解决的几个问题" class="headerlink" title="前端工程中需要解决的几个问题"></a>前端工程中需要解决的几个问题</h3><ol>
+<li>快速搭建 各种cli工具：vue-cli，react-app</li>
+<li>高效开发 各种功能：less-loader,sass-loader,css-loader,stylus,es6,jsx</li>
+<li>便捷协作 协作工具：代理，mock数据能力，git版本管理</li>
+<li>顺畅上线 上线工具：Jenkins，ci</li>
+<li>稳健运行 检测工作：异常上报工具</li>
+</ol>
+<h4 id="stylus"><a href="#stylus" class="headerlink" title="stylus"></a>stylus</h4><p>css预处理器，运行 stylus example.styl 可将 demo.styl 文件编译成 example.css 文件。在stylus中可以使用变量，函数，compose集成等</p>
+<h4 id="styled-components"><a href="#styled-components" class="headerlink" title="styled-components"></a>styled-components</h4><p>官网:<a href="https://styled-components.com/" target="_blank" rel="noopener">https://styled-components.com/</a></p>
+<h4 id="css-module"><a href="#css-module" class="headerlink" title="css module"></a>css module</h4><p>未完继续补充~</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2020/11/12/%E5%B7%A5%E7%A8%8B%E5%8C%96/" data-id="ckhf43q0u000512yx1y3wfpqi" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-模块化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/11/12/%E6%A8%A1%E5%9D%97%E5%8C%96/" class="article-date">
+  <time datetime="2020-11-12T17:34:11.256Z" itemprop="datePublished">2020-11-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/11/12/%E6%A8%A1%E5%9D%97%E5%8C%96/">Commonjs</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="问题1-Commonjs和es-module的区别"><a href="#问题1-Commonjs和es-module的区别" class="headerlink" title="问题1 Commonjs和es module的区别"></a>问题1 Commonjs和es module的区别</h3><ol>
+<li>使用方式看：导入和导出方式不同<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ====commonjs</span></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="built_in">module</span>.export = <span class="string">'hello'</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'a.js'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ====es module</span></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="string">'hello'</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">import</span> a <span class="keyword">from</span> <span class="string">"./a.js"</span>;</span><br></pre></td></tr></table></figure>
+延伸看级别不一样：<b>commonjs是node运行时的实现，非官方标准</b>。es module中的<code>export default, import</code>都是js关键字，从语言层面实现的支持，是官方标准。</li>
+</ol>
+<h3 id="问题2-exports和module-exports区别"><a href="#问题2-exports和module-exports区别" class="headerlink" title="问题2 exports和module.exports区别"></a>问题2 exports和module.exports区别</h3><p>看下在commonjs中的实现就能明白</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 两个变量初始的时候都指向了同一块内存地址</span></span><br><span class="line"><span class="built_in">console</span>.log(exports === <span class="built_in">module</span>.exports) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 当发生直接赋值的情况后commonjs只会使用module.exports指向的值(和导出的顺序无关)</span></span><br><span class="line"><span class="comment">// module.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="string">"hello"</span>;</span><br><span class="line">exports = <span class="string">"hello2"</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">"./module.js"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// hello</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="问题3-require的实现"><a href="#问题3-require的实现" class="headerlink" title="问题3 require的实现"></a>问题3 require的实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"><span class="keyword">const</span> vm = <span class="built_in">require</span>(<span class="string">"vm"</span>);</span><br><span class="line"><span class="comment">// 实现 require</span></span><br><span class="line"><span class="comment">// const a = require("./module.js");</span></span><br><span class="line"><span class="keyword">const</span> a = customRequire(<span class="string">"./module.js"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">customRequire</span>(<span class="params">filePath</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> content = fs.readFileSync(path.join(__dirname, filePath), <span class="string">'utf-8'</span>);</span><br><span class="line">  <span class="comment">// 包裹一层避免作用于污染，隔离变量</span></span><br><span class="line">  <span class="keyword">const</span> wrapper = [</span><br><span class="line">    <span class="string">"(function(require, module, exports)&#123;"</span>,</span><br><span class="line">    <span class="string">"&#125;)"</span></span><br><span class="line">  ]</span><br><span class="line">  <span class="keyword">const</span> <span class="built_in">module</span> = &#123;</span><br><span class="line">    exports: &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> wrapperFn = wrapper[<span class="number">0</span>] + content + wrapper[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 两种实现方式都OK--实现字符串转js 运行时代码</span></span><br><span class="line">  <span class="keyword">const</span> canHandleFn = vm.runInThisContext(wrapperFn)</span><br><span class="line">  <span class="comment">// const canHandleFn = eval(wrapperFn);</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 这一步解决了问题三的疑惑</span></span><br><span class="line">  canHandleFn(customRequire, <span class="built_in">module</span>, <span class="built_in">module</span>.exports)</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">module</span>.exports</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2020/11/12/%E6%A8%A1%E5%9D%97%E5%8C%96/" data-id="ckhf43q0v000612yx3voc1y7o" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-集中式和分布式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/11/12/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" class="article-date">
+  <time datetime="2020-11-12T17:34:11.256Z" itemprop="datePublished">2020-11-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/11/12/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="集中式"><a href="#集中式" class="headerlink" title="集中式"></a>集中式</h3><p>集中式系统中版本库是集中存放在中央服务器的。以svn为例，开发人员工作的时候都需要从中央服务器获取最新的版本，工作完之后需要将工作推送给中央服务器。<br>eg：SVN，云服务器（在云服务器开发）<br>优点：减少了硬件和软件成本<br>问题：<strong>必须联网（局域网或者互联网）</strong></p>
+<h3 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h3><p>分布式系统中没有中央服务器的概念。</p>
+<p>eg：git<br>优点：每个人的电脑中都有完整的版本库，所以安全性很高，即使服务器仓库被破坏了，损失也不会很大。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2020/11/12/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" data-id="ckhf43q0w000712yxan6eelcd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -453,7 +453,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/10/">October 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/11/">November 2020</a></li></ul>
     </div>
   </div>
 
@@ -466,23 +466,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2020/10/12/cross-origin/">cross origin</a>
+            <a href="/blog/2020/11/12/URL/">URL constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2020/10/12/promisefy/">实现类似 node中util.promisefy的实现</a>
+            <a href="/blog/2020/11/12/URLSearchParams/">URLSearchParams constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2020/10/12/throttle-debounce/">截流和去抖的深入理解结合loads</a>
+            <a href="/blog/2020/11/12/cross-origin/">cross origin</a>
           </li>
         
           <li>
-            <a href="/blog/2020/10/12/%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a>
+            <a href="/blog/2020/11/12/promisefy/">实现类似 node中util.promisefy的实现</a>
           </li>
         
           <li>
-            <a href="/blog/2020/10/12/%E6%A8%A1%E5%9D%97%E5%8C%96/">Commonjs</a>
+            <a href="/blog/2020/11/12/throttle-debounce/">截流和去抖的深入理解结合loads</a>
           </li>
         
       </ul>
