@@ -5,16 +5,16 @@
   
 
   
-  <title>截流和去抖的深入理解结合loads | Hexo</title>
+  <title>canvas 动画 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="应用场景不说应用场景，自己都没有动力往下继续。debounce：input框keyup的search事件（等待时间之后只触发一次,若在等待时间内再次触发，则重新计算等待时间）【有可能出现事件一直触发，回调一直不会执行的情况。触发间隔小于延迟间隔】throttle：监听scroll事件（间隔触发）【在debounce的情况下，事件在等待时间内不断触发，增加maxWait时间即可实现】 throttl">
+  <meta name="description" content="结果展示代码分析原理分析知识点总结 canvas 基础知识，比如stroke，fill，arc，rect等基础API">
 <meta property="og:type" content="article">
-<meta property="og:title" content="截流和去抖的深入理解结合loads">
-<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;2020&#x2F;12&#x2F;12&#x2F;throttle-debounce&#x2F;index.html">
+<meta property="og:title" content="canvas 动画">
+<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;2020&#x2F;12&#x2F;27&#x2F;canvas%E5%8A%A8%E7%94%BB&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="应用场景不说应用场景，自己都没有动力往下继续。debounce：input框keyup的search事件（等待时间之后只触发一次,若在等待时间内再次触发，则重新计算等待时间）【有可能出现事件一直触发，回调一直不会执行的情况。触发间隔小于延迟间隔】throttle：监听scroll事件（间隔触发）【在debounce的情况下，事件在等待时间内不断触发，增加maxWait时间即可实现】 throttl">
+<meta property="og:description" content="结果展示代码分析原理分析知识点总结 canvas 基础知识，比如stroke，fill，arc，rect等基础API">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-12T17:34:29.637Z">
+<meta property="og:updated_time" content="2020-12-27T15:30:23.692Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/blog/atom.xml" title="Hexo" type="application/atom+xml">
@@ -62,10 +62,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-throttle-debounce" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-canvas动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2020/12/12/throttle-debounce/" class="article-date">
-  <time datetime="2020-12-12T17:34:29.637Z" itemprop="datePublished">2020-12-12</time>
+    <a href="/blog/2020/12/27/canvas%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2020-12-27T15:30:23.692Z" itemprop="datePublished">2020-12-27</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      截流和去抖的深入理解结合loads
+      canvas 动画
     </h1>
   
 
@@ -84,12 +84,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p><strong>不说应用场景，自己都没有动力往下继续。</strong><br>debounce：input框keyup的search事件（等待时间之后只触发一次,若在等待时间内再次触发，则重新计算等待时间）【有可能出现事件一直触发，回调一直不会执行的情况。触发间隔小于延迟间隔】<br>throttle：监听scroll事件（间隔触发）【在debounce的情况下，事件在等待时间内不断触发，增加maxWait时间即可实现】</p>
-<h3 id="throttle截流"><a href="#throttle截流" class="headerlink" title="throttle截流"></a>throttle截流</h3>
+        <h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ol>
+<li>canvas 基础知识，比如stroke，fill，arc，rect等基础API</li>
+</ol>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/12/12/throttle-debounce/" data-id="ckilzbnot000403q819pb3rom" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2020/12/27/canvas%E5%8A%A8%E7%94%BB/" data-id="ckj7ahyfi000225q98n8ohoh6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -98,19 +100,19 @@
     
 <nav id="article-nav">
   
-    <a href="/blog/2020/12/12/promisefy/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/blog/2020/12/27/URL/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          实现类似 node中util.promisefy的实现
+          URL constructor
         
       </div>
     </a>
   
   
-    <a href="/blog/2020/12/12/%E5%B7%A5%E7%A8%8B%E5%8C%96/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/blog/2020/12/27/cross-origin/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">前端工程化</div>
+      <div class="article-nav-title">cross origin</div>
     </a>
   
 </nav>
@@ -147,23 +149,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2020/12/12/URL/">URL constructor</a>
+            <a href="/blog/2020/12/27/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
           </li>
         
           <li>
-            <a href="/blog/2020/12/12/URLSearchParams/">URLSearchParams constructor</a>
+            <a href="/blog/2020/12/27/URL/">URL constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2020/12/12/cross-origin/">cross origin</a>
+            <a href="/blog/2020/12/27/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
           </li>
         
           <li>
-            <a href="/blog/2020/12/12/promisefy/">实现类似 node中util.promisefy的实现</a>
+            <a href="/blog/2020/12/27/cross-origin/">cross origin</a>
           </li>
         
           <li>
-            <a href="/blog/2020/12/12/throttle-debounce/">截流和去抖的深入理解结合loads</a>
+            <a href="/blog/2020/12/27/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
           </li>
         
       </ul>
