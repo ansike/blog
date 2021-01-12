@@ -5,13 +5,16 @@
   
 
   
-  <title>Archives | Hexo</title>
+  <title>shell脚本 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;archives&#x2F;page&#x2F;2&#x2F;index.html">
+  <meta name="description" content="执行顺序 先加载系统环境变量ENV.该变量指定了环境文件(加载顺序通常是&#x2F;etc&#x2F;profile,&#x2F;.bash_profile,&#x2F;.bashrc,&#x2F;etc&#x2F;bashrc),依次加载环境文件 开始执行shell 遇到子脚本的时候一般会开启一个新的进程执行子shell  执行方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell脚本">
+<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;2021&#x2F;01&#x2F;12&#x2F;shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="执行顺序 先加载系统环境变量ENV.该变量指定了环境文件(加载顺序通常是&#x2F;etc&#x2F;profile,&#x2F;.bash_profile,&#x2F;.bashrc,&#x2F;etc&#x2F;bashrc),依次加载环境文件 开始执行shell 遇到子脚本的时候一般会开启一个新的进程执行子shell  执行方式">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-01-12T17:35:21.425Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/blog/atom.xml" title="Hexo" type="application/atom+xml">
@@ -59,102 +62,65 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/blog/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blog/2021/01/12/%E5%8A%A8%E7%94%BB/" class="archive-article-date">
-  <time datetime="2021-01-12T17:35:21.425Z" itemprop="datePublished">Jan 12</time>
+        <section id="main"><article id="post-shell脚本执行" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/01/12/shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C/" class="article-date">
+  <time datetime="2021-01-12T17:35:21.425Z" itemprop="datePublished">2021-01-12</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2021/01/12/%E5%8A%A8%E7%94%BB/">动画</a>
+    <h1 class="article-title" itemprop="name">
+      shell脚本
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blog/2021/01/12/%E5%B7%A5%E7%A8%8B%E5%8C%96/" class="archive-article-date">
-  <time datetime="2021-01-12T17:35:21.425Z" itemprop="datePublished">Jan 12</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2021/01/12/%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blog/2021/01/12/%E6%A8%A1%E5%9D%97%E5%8C%96/" class="archive-article-date">
-  <time datetime="2021-01-12T17:35:21.425Z" itemprop="datePublished">Jan 12</time>
-</a>
+        <h3 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h3><ol>
+<li>先加载系统环境变量ENV.该变量指定了环境文件(加载顺序通常是/etc/profile,<del>/.bash_profile,</del>/.bashrc,/etc/bashrc),依次加载环境文件</li>
+<li>开始执行shell</li>
+<li>遇到子脚本的时候一般会开启一个新的进程执行子shell</li>
+</ol>
+<h3 id="执行方式"><a href="#执行方式" class="headerlink" title="执行方式"></a>执行方式</h3>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2021/01/12/%E6%A8%A1%E5%9D%97%E5%8C%96/">Commonjs</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blog/2021/01/12/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" class="archive-article-date">
-  <time datetime="2021-01-12T17:35:21.425Z" itemprop="datePublished">Jan 12</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/01/12/shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C/" data-id="ckjua078x000633tlg0f6hydm" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2021/01/12/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
-    </h1>
-  
-
-    </header>
+      
+    </footer>
   </div>
-</article>
   
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/blog/archives/">&amp;laquo; Prev</a><a class="page-number" href="/blog/archives/">1</a><span class="page-number current">2</span>
-  </nav>
+<nav id="article-nav">
+  
+    <a href="/blog/2021/01/12/promisefy/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          实现类似 node中util.promisefy的实现
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2021/01/12/URLSearchParams/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">URLSearchParams constructor</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         

@@ -5,13 +5,16 @@
   
 
   
-  <title>Hexo</title>
+  <title>Commonjs | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;page&#x2F;2&#x2F;index.html">
+  <meta name="description" content="问题1 Commonjs和es module的区别 使用方式看：导入和导出方式不同1234567891011&#x2F;&#x2F; ====commonjs&#x2F;&#x2F; a.jsmodule.export = &amp;apos;hello&amp;apos;;&#x2F;&#x2F; main.jsconst a = require(&amp;apos;a.js&amp;apos;);&#x2F;&#x2F; ====es module&#x2F;&#x2F; a.jsexport default &amp;apos;hello&amp;apos;;&#x2F;&#x2F; main.jsimport a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Commonjs">
+<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;2021&#x2F;01&#x2F;12&#x2F;%E6%A8%A1%E5%9D%97%E5%8C%96&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="问题1 Commonjs和es module的区别 使用方式看：导入和导出方式不同1234567891011&#x2F;&#x2F; ====commonjs&#x2F;&#x2F; a.jsmodule.export = &amp;apos;hello&amp;apos;;&#x2F;&#x2F; main.jsconst a = require(&amp;apos;a.js&amp;apos;);&#x2F;&#x2F; ====es module&#x2F;&#x2F; a.jsexport default &amp;apos;hello&amp;apos;;&#x2F;&#x2F; main.jsimport a">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-01-12T17:35:21.425Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/blog/atom.xml" title="Hexo" type="application/atom+xml">
@@ -59,101 +62,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-动画" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/01/12/%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-01-12T17:35:21.425Z" itemprop="datePublished">2021-01-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/01/12/%E5%8A%A8%E7%94%BB/">动画</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="动画演示"><a href="#动画演示" class="headerlink" title="动画演示"></a>动画演示</h3><p><a href="./canvas动画.md">canvas动画</a><br><a href="./svg动画.md">svg动画</a><br><a href="./css动画.md">css动画</a></p>
-<h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ul>
-<li>无论是css动画，canvas动画，还是svg动画，基本思想都需要考虑一下几点：</li>
-</ul>
-<ol>
-<li>动画当前的状态即是画布在当前时间内（浏览器渲染间隔）的一帧图像。</li>
-<li>前提需要定时调用渲染函数不断绘制。【借助定时器或者requestAnimationFrame—最好依赖浏览器的渲染机制】</li>
-<li>每次渲染的状态由当前动画进度决定。不管是一次性动画还是循环动画，都有一个最小环节，想清楚自己的最小环节。</li>
-<li>每个最小环节由duration决定，受delayTime影响。</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/01/12/%E5%8A%A8%E7%94%BB/" data-id="ckjua0795000a33tl98qh7uta" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-工程化" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/01/12/%E5%B7%A5%E7%A8%8B%E5%8C%96/" class="article-date">
-  <time datetime="2021-01-12T17:35:21.425Z" itemprop="datePublished">2021-01-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/01/12/%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="前端工程中需要解决的几个问题"><a href="#前端工程中需要解决的几个问题" class="headerlink" title="前端工程中需要解决的几个问题"></a>前端工程中需要解决的几个问题</h3><ol>
-<li>快速搭建 各种cli工具：vue-cli，react-app</li>
-<li>高效开发 各种功能：less-loader,sass-loader,css-loader,stylus,es6,jsx</li>
-<li>便捷协作 协作工具：代理，mock数据能力，git版本管理</li>
-<li>顺畅上线 上线工具：Jenkins，ci</li>
-<li>稳健运行 检测工作：异常上报工具</li>
-</ol>
-<h4 id="stylus"><a href="#stylus" class="headerlink" title="stylus"></a>stylus</h4><p>css预处理器，运行 stylus example.styl 可将 demo.styl 文件编译成 example.css 文件。在stylus中可以使用变量，函数，compose集成等</p>
-<h4 id="styled-components"><a href="#styled-components" class="headerlink" title="styled-components"></a>styled-components</h4><p>官网:<a href="https://styled-components.com/" target="_blank" rel="noopener">https://styled-components.com/</a></p>
-<h4 id="css-module"><a href="#css-module" class="headerlink" title="css module"></a>css module</h4><p>未完继续补充~</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/01/12/%E5%B7%A5%E7%A8%8B%E5%8C%96/" data-id="ckjua0796000b33tlhgo326ah" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-模块化" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-模块化" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2021/01/12/%E6%A8%A1%E5%9D%97%E5%8C%96/" class="article-date">
   <time datetime="2021-01-12T17:35:21.425Z" itemprop="datePublished">2021-01-12</time>
@@ -166,8 +75,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/01/12/%E6%A8%A1%E5%9D%97%E5%8C%96/">Commonjs</a>
+    <h1 class="article-title" itemprop="name">
+      Commonjs
     </h1>
   
 
@@ -193,55 +102,28 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-集中式和分布式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/01/12/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" class="article-date">
-  <time datetime="2021-01-12T17:35:21.425Z" itemprop="datePublished">2021-01-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/blog/2021/01/12/%E5%B7%A5%E7%A8%8B%E5%8C%96/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
         
+          前端工程化
+        
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/01/12/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
-    </h1>
   
+    <a href="/blog/2021/01/12/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">集中式系统和分布式系统的区别</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="集中式"><a href="#集中式" class="headerlink" title="集中式"></a>集中式</h3><p>集中式系统中版本库是集中存放在中央服务器的。以svn为例，开发人员工作的时候都需要从中央服务器获取最新的版本，工作完之后需要将工作推送给中央服务器。<br>eg：SVN，云服务器（在云服务器开发）<br>优点：减少了硬件和软件成本<br>问题：<strong>必须联网（局域网或者互联网）</strong></p>
-<h3 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h3><p>分布式系统中没有中央服务器的概念。</p>
-<p>eg：git<br>优点：每个人的电脑中都有完整的版本库，所以安全性很高，即使服务器仓库被破坏了，损失也不会很大。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/01/12/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" data-id="ckjua079b000d33tlhik037ch" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/blog/">&amp;laquo; Prev</a><a class="page-number" href="/blog/">1</a><span class="page-number current">2</span>
-  </nav>
 
 </section>
         
