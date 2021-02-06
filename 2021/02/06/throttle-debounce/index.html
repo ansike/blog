@@ -5,13 +5,16 @@
   
 
   
-  <title>Archives: 2021 | Hexo</title>
+  <title>截流和去抖的深入理解结合loads | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;archives&#x2F;2021&#x2F;page&#x2F;2&#x2F;index.html">
+  <meta name="description" content="应用场景不说应用场景，自己都没有动力往下继续。debounce：input框keyup的search事件（等待时间之后只触发一次,若在等待时间内再次触发，则重新计算等待时间）【有可能出现事件一直触发，回调一直不会执行的情况。触发间隔小于延迟间隔】throttle：监听scroll事件（间隔触发）【在debounce的情况下，事件在等待时间内不断触发，增加maxWait时间即可实现】 throttl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="截流和去抖的深入理解结合loads">
+<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;2021&#x2F;02&#x2F;06&#x2F;throttle-debounce&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="应用场景不说应用场景，自己都没有动力往下继续。debounce：input框keyup的search事件（等待时间之后只触发一次,若在等待时间内再次触发，则重新计算等待时间）【有可能出现事件一直触发，回调一直不会执行的情况。触发间隔小于延迟间隔】throttle：监听scroll事件（间隔触发）【在debounce的情况下，事件在等待时间内不断触发，增加maxWait时间即可实现】 throttl">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-02-06T14:17:40.012Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/blog/atom.xml" title="Hexo" type="application/atom+xml">
@@ -59,121 +62,61 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/blog/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blog/2021/02/06/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="archive-article-date">
-  <time datetime="2021-02-06T14:17:40.012Z" itemprop="datePublished">Feb 6</time>
+        <section id="main"><article id="post-throttle-debounce" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/02/06/throttle-debounce/" class="article-date">
+  <time datetime="2021-02-06T14:17:40.012Z" itemprop="datePublished">2021-02-06</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2021/02/06/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
+    <h1 class="article-title" itemprop="name">
+      截流和去抖的深入理解结合loads
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blog/2021/02/06/%E5%8A%A8%E7%94%BB/" class="archive-article-date">
-  <time datetime="2021-02-06T14:17:40.012Z" itemprop="datePublished">Feb 6</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2021/02/06/%E5%8A%A8%E7%94%BB/">动画</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blog/2021/02/06/%E5%B7%A5%E7%A8%8B%E5%8C%96/" class="archive-article-date">
-  <time datetime="2021-02-06T14:17:40.012Z" itemprop="datePublished">Feb 6</time>
-</a>
+        <h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p><strong>不说应用场景，自己都没有动力往下继续。</strong><br>debounce：input框keyup的search事件（等待时间之后只触发一次,若在等待时间内再次触发，则重新计算等待时间）【有可能出现事件一直触发，回调一直不会执行的情况。触发间隔小于延迟间隔】<br>throttle：监听scroll事件（间隔触发）【在debounce的情况下，事件在等待时间内不断触发，增加maxWait时间即可实现】</p>
+<h3 id="throttle截流"><a href="#throttle截流" class="headerlink" title="throttle截流"></a>throttle截流</h3>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2021/02/06/%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blog/2021/02/06/%E6%A8%A1%E5%9D%97%E5%8C%96/" class="archive-article-date">
-  <time datetime="2021-02-06T14:17:40.012Z" itemprop="datePublished">Feb 6</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/02/06/throttle-debounce/" data-id="ckktsy94s00093ups0todh0aw" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2021/02/06/%E6%A8%A1%E5%9D%97%E5%8C%96/">Commonjs</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blog/2021/02/06/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" class="archive-article-date">
-  <time datetime="2021-02-06T14:17:40.012Z" itemprop="datePublished">Feb 6</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2021/02/06/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
-    </h1>
-  
-
-    </header>
+    </footer>
   </div>
-</article>
   
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/blog/archives/2021/">&amp;laquo; Prev</a><a class="page-number" href="/blog/archives/2021/">1</a><span class="page-number current">2</span>
-  </nav>
+<nav id="article-nav">
+  
+    <a href="/blog/2021/02/06/svg%E5%8A%A8%E7%94%BB/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SVG动画
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2021/02/06/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">从数字分隔符看正则表达式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         
