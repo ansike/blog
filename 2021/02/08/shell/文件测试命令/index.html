@@ -5,16 +5,16 @@
   
 
   
-  <title>cross origin | Hexo</title>
+  <title>文件测试 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="就是创建一个文件夹eg:devChromeData mac第二步执行以下命令 1open -n &#x2F;Applications&#x2F;Google\ Chrome.app&#x2F; --args --disable-web-security  --user-data-dir=&#x2F;Users&#x2F;ansike&#x2F;devChromeData  微信开发者工具（注意app的名字是否一致） 1open -a &#x2F;Applicatio">
+  <meta name="description" content="测试语法 -d 判断是目录 -f 判断是文件 -e 判断目录或者文件存在 -r 判断文件可读 -s 判断文件大小不为0为真 -x 判断文件可执行 -w 判断文件可写 -L 文件存在且链接文件为真 f1 -nt f2  f1比f2新则为真 f1 -ot f2  f1比f2旧则为真   1和2是等价的 [[]]为test拓展的命令，常用语通配符进行模式匹配。&amp;amp;&amp;amp;,||,&amp;gt;,&amp;lt">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cross origin">
-<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;2021&#x2F;02&#x2F;08&#x2F;cross-origin&#x2F;index.html">
+<meta property="og:title" content="文件测试">
+<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;2021&#x2F;02&#x2F;08&#x2F;shell&#x2F;%E6%96%87%E4%BB%B6%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="就是创建一个文件夹eg:devChromeData mac第二步执行以下命令 1open -n &#x2F;Applications&#x2F;Google\ Chrome.app&#x2F; --args --disable-web-security  --user-data-dir=&#x2F;Users&#x2F;ansike&#x2F;devChromeData  微信开发者工具（注意app的名字是否一致） 1open -a &#x2F;Applicatio">
+<meta property="og:description" content="测试语法 -d 判断是目录 -f 判断是文件 -e 判断目录或者文件存在 -r 判断文件可读 -s 判断文件大小不为0为真 -x 判断文件可执行 -w 判断文件可写 -L 文件存在且链接文件为真 f1 -nt f2  f1比f2新则为真 f1 -ot f2  f1比f2旧则为真   1和2是等价的 [[]]为test拓展的命令，常用语通配符进行模式匹配。&amp;amp;&amp;amp;,||,&amp;gt;,&amp;lt">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-02-08T10:00:57.332Z">
+<meta property="og:updated_time" content="2021-02-08T10:00:57.336Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/blog/atom.xml" title="Hexo" type="application/atom+xml">
@@ -62,10 +62,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-cross-origin" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-shell/文件测试命令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/08/cross-origin/" class="article-date">
-  <time datetime="2021-02-08T10:00:57.332Z" itemprop="datePublished">2021-02-08</time>
+    <a href="/blog/2021/02/08/shell/%E6%96%87%E4%BB%B6%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time datetime="2021-02-08T10:00:57.336Z" itemprop="datePublished">2021-02-08</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      cross origin
+      文件测试
     </h1>
   
 
@@ -84,18 +84,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>就是创建一个文件夹eg:devChromeData</p>
-<h3 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h3><p>第二步执行以下命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -n /Applications/Google\ Chrome.app/ --args --disable-web-security  --user-data-dir=/Users/ansike/devChromeData</span><br></pre></td></tr></table></figure>
+        <h5 id="测试语法"><a href="#测试语法" class="headerlink" title="测试语法"></a>测试语法</h5><ol>
+<li>-d 判断是目录</li>
+<li>-f 判断是文件</li>
+<li>-e 判断目录或者文件存在</li>
+<li>-r 判断文件可读</li>
+<li>-s 判断文件大小不为0为真</li>
+<li>-x 判断文件可执行</li>
+<li>-w 判断文件可写</li>
+<li>-L 文件存在且链接文件为真</li>
+<li>f1 -nt f2  f1比f2新则为真</li>
+<li>f1 -ot f2  f1比f2旧则为真</li>
+</ol>
+<ul>
+<li>1和2是等价的</li>
+<li>[[]]为test拓展的命令，常用语通配符进行模式匹配。&amp;&amp;,||,&gt;,&lt;可以使用</li>
+<li>(())常用语计算</li>
+</ul>
+<h5 id=""><a href="#" class="headerlink" title=""></a></h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[ -d public ] &amp;&amp; echo 1</span><br><span class="line">[ -s package.json ] &amp;&amp; echo 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">  不存在的变量必须加引号包裹</span></span><br><span class="line">[ -f $a ] &amp;&amp; echo 1 || echo 0 # 1</span><br><span class="line">[ -f "$a" ] &amp;&amp; echo 1 || echo 0 # 0</span><br></pre></td></tr></table></figure>
 
-<p>微信开发者工具（注意app的名字是否一致）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -a /Applications/wechatwebdevtools.app --args --disable-web-security --user-data-dir</span><br></pre></td></tr></table></figure>
-<h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><p>创建该文件夹，右键浏览器快捷键，在目标中追加参数</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--disable-web-security --user-data-dir=C:\path\to\ChromeUserData</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/08/cross-origin/" data-id="ckkwentjc0004ytsoax0x02m7" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/08/shell/%E6%96%87%E4%BB%B6%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" data-id="ckkwentke000iytso3fwb2f32" class="article-share-link">Share</a>
       
       
     </footer>
@@ -104,19 +115,19 @@
     
 <nav id="article-nav">
   
-    <a href="/blog/2021/02/08/css%E5%8A%A8%E7%94%BB/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/blog/2021/02/08/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          canvas 动画
+          条件测试
         
       </div>
     </a>
   
   
-    <a href="/blog/2021/02/08/canvas%E5%8A%A8%E7%94%BB/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/blog/2021/02/08/shell/read/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">canvas 动画</div>
+      <div class="article-nav-title">read 命令</div>
     </a>
   
 </nav>
