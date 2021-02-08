@@ -63,8 +63,8 @@
   
     <article id="post-svg动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/06/svg%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-02-06T16:09:43.309Z" itemprop="datePublished">2021-02-06</time>
+    <a href="/blog/2021/02/08/svg%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-02-08T09:10:45.937Z" itemprop="datePublished">2021-02-08</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/06/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
+      <a class="article-title" href="/blog/2021/02/08/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
     </h1>
   
 
@@ -87,7 +87,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/06/svg%E5%8A%A8%E7%94%BB/" data-id="ckktwyd2t00082nuka64f3nej" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/08/svg%E5%8A%A8%E7%94%BB/" data-id="ckkwcv9yl000923v6hske1x9l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -99,8 +99,8 @@
   
     <article id="post-URL" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/06/URL/" class="article-date">
-  <time datetime="2021-02-06T16:09:43.309Z" itemprop="datePublished">2021-02-06</time>
+    <a href="/blog/2021/02/08/URL/" class="article-date">
+  <time datetime="2021-02-08T09:10:45.937Z" itemprop="datePublished">2021-02-08</time>
 </a>
     
   </div>
@@ -111,7 +111,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/06/URL/">URL constructor</a>
+      <a class="article-title" href="/blog/2021/02/08/URL/">URL constructor</a>
     </h1>
   
 
@@ -154,7 +154,63 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/06/URL/" data-id="ckktwyd2500002nuk5eob5mwd" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/08/URL/" data-id="ckkwcv9y7000023v6242f1ogf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-canvas-基础特性" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/02/08/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" class="article-date">
+  <time datetime="2021-02-08T09:10:45.937Z" itemprop="datePublished">2021-02-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/02/08/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="对象创建"><a href="#对象创建" class="headerlink" title="对象创建"></a>对象创建</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HTML</span></span><br><span class="line">&lt;canvas id=<span class="string">"canvas"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//JS</span></span><br><span class="line"><span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"><span class="keyword">const</span> ctx = canvas.getContext(<span class="string">"2d"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="canvas元素的属性和方法"><a href="#canvas元素的属性和方法" class="headerlink" title="canvas元素的属性和方法"></a>canvas元素的属性和方法</h3><p><strong>1. 属性</strong></p>
+<ul>
+<li>width</li>
+<li>height</li>
+</ul>
+<p><strong>2. 方法</strong></p>
+<ul>
+<li><ol>
+<li>getContext(contextId: “2d”, options?: CanvasRenderingContext2DSettings): CanvasRenderingContext2D | null;</li>
+<li>getContext(contextId: “bitmaprenderer”, options?: ImageBitmapRenderingContextSettings):mageBitmapRenderingContext | null;</li>
+<li>getContext(contextId: “webgl”, options?: WebGLContextAttributes): WebGLRenderingContext | null;</li>
+<li>getContext(contextId: “webgl2”, options?: WebGLContextAttributes): WebGL2RenderingContext | null;</li>
+<li>getContext(contextId: string, options?: any): RenderingContext | null;<br>// 返回绘图环境对象</li>
+</ol>
+</li>
+<li>toDataURL(type?: string, quality?: any): string; // 返回数据地址，可以直接给img的src赋值</li>
+<li>toBlob(callback: BlobCallback, type?: string, quality?: any): void; // 返回表示图像文件的blob，可以将该blob做文件上传使用</li>
+<li>transferControlToOffscreen(): OffscreenCanvas;</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/02/08/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" data-id="ckkwcv9yd000223v60pfl4vfd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -166,8 +222,8 @@
   
     <article id="post-canvas动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/06/canvas%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-02-06T16:09:43.309Z" itemprop="datePublished">2021-02-06</time>
+    <a href="/blog/2021/02/08/canvas%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-02-08T09:10:45.937Z" itemprop="datePublished">2021-02-08</time>
 </a>
     
   </div>
@@ -178,7 +234,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/06/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+      <a class="article-title" href="/blog/2021/02/08/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
     </h1>
   
 
@@ -193,7 +249,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/06/canvas%E5%8A%A8%E7%94%BB/" data-id="ckktwyd2i00022nukf6s8ef1h" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/08/canvas%E5%8A%A8%E7%94%BB/" data-id="ckkwcv9ye000323v69maral6e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -205,8 +261,8 @@
   
     <article id="post-cross-origin" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/06/cross-origin/" class="article-date">
-  <time datetime="2021-02-06T16:09:43.309Z" itemprop="datePublished">2021-02-06</time>
+    <a href="/blog/2021/02/08/cross-origin/" class="article-date">
+  <time datetime="2021-02-08T09:10:45.937Z" itemprop="datePublished">2021-02-08</time>
 </a>
     
   </div>
@@ -217,7 +273,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/06/cross-origin/">cross origin</a>
+      <a class="article-title" href="/blog/2021/02/08/cross-origin/">cross origin</a>
     </h1>
   
 
@@ -236,7 +292,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/06/cross-origin/" data-id="ckktwyd2k00032nukbuab2rus" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/08/cross-origin/" data-id="ckkwcv9yf000423v60s34bueb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -248,8 +304,8 @@
   
     <article id="post-css动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/06/css%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-02-06T16:09:43.309Z" itemprop="datePublished">2021-02-06</time>
+    <a href="/blog/2021/02/08/css%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-02-08T09:10:45.937Z" itemprop="datePublished">2021-02-08</time>
 </a>
     
   </div>
@@ -260,7 +316,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/06/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+      <a class="article-title" href="/blog/2021/02/08/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
     </h1>
   
 
@@ -275,7 +331,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/06/css%E5%8A%A8%E7%94%BB/" data-id="ckktwyd2m00042nukcxto8ai6" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/08/css%E5%8A%A8%E7%94%BB/" data-id="ckkwcv9yg000523v6h1s8ez2s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -287,8 +343,8 @@
   
     <article id="post-promisefy" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/06/promisefy/" class="article-date">
-  <time datetime="2021-02-06T16:09:43.309Z" itemprop="datePublished">2021-02-06</time>
+    <a href="/blog/2021/02/08/promisefy/" class="article-date">
+  <time datetime="2021-02-08T09:10:45.937Z" itemprop="datePublished">2021-02-08</time>
 </a>
     
   </div>
@@ -299,7 +355,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/06/promisefy/">实现类似 node中util.promisefy的实现</a>
+      <a class="article-title" href="/blog/2021/02/08/promisefy/">实现类似 node中util.promisefy的实现</a>
     </h1>
   
 
@@ -320,7 +376,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/06/promisefy/" data-id="ckktwyd2o00052nukeqj50qr9" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/08/promisefy/" data-id="ckkwcv9yh000623v62lhd393r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -332,8 +388,8 @@
   
     <article id="post-shell比较常用的符号" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/06/shell%E6%AF%94%E8%BE%83%E5%B8%B8%E7%94%A8%E7%9A%84%E7%AC%A6%E5%8F%B7/" class="article-date">
-  <time datetime="2021-02-06T16:09:43.309Z" itemprop="datePublished">2021-02-06</time>
+    <a href="/blog/2021/02/08/shell%E6%AF%94%E8%BE%83%E5%B8%B8%E7%94%A8%E7%9A%84%E7%AC%A6%E5%8F%B7/" class="article-date">
+  <time datetime="2021-02-08T09:10:45.937Z" itemprop="datePublished">2021-02-08</time>
 </a>
     
   </div>
@@ -344,7 +400,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/06/shell%E6%AF%94%E8%BE%83%E5%B8%B8%E7%94%A8%E7%9A%84%E7%AC%A6%E5%8F%B7/">shell比较符号含义</a>
+      <a class="article-title" href="/blog/2021/02/08/shell%E6%AF%94%E8%BE%83%E5%B8%B8%E7%94%A8%E7%9A%84%E7%AC%A6%E5%8F%B7/">shell比较符号含义</a>
     </h1>
   
 
@@ -364,7 +420,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/06/shell%E6%AF%94%E8%BE%83%E5%B8%B8%E7%94%A8%E7%9A%84%E7%AC%A6%E5%8F%B7/" data-id="ckktwyd2q00062nukflpia853" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/08/shell%E6%AF%94%E8%BE%83%E5%B8%B8%E7%94%A8%E7%9A%84%E7%AC%A6%E5%8F%B7/" data-id="ckkwcv9yi000723v6gjsoelhg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -376,8 +432,8 @@
   
     <article id="post-shell脚本执行" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/06/shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C/" class="article-date">
-  <time datetime="2021-02-06T16:09:43.309Z" itemprop="datePublished">2021-02-06</time>
+    <a href="/blog/2021/02/08/shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C/" class="article-date">
+  <time datetime="2021-02-08T09:10:45.937Z" itemprop="datePublished">2021-02-08</time>
 </a>
     
   </div>
@@ -388,7 +444,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/06/shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C/">shell脚本</a>
+      <a class="article-title" href="/blog/2021/02/08/shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C/">shell脚本</a>
     </h1>
   
 
@@ -405,7 +461,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/06/shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C/" data-id="ckktwyd2s00072nukeiku264c" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/08/shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C/" data-id="ckkwcv9yj000823v684dpcad6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -417,8 +473,8 @@
   
     <article id="post-URLSearchParams" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/06/URLSearchParams/" class="article-date">
-  <time datetime="2021-02-06T16:09:43.309Z" itemprop="datePublished">2021-02-06</time>
+    <a href="/blog/2021/02/08/URLSearchParams/" class="article-date">
+  <time datetime="2021-02-08T09:10:45.937Z" itemprop="datePublished">2021-02-08</time>
 </a>
     
   </div>
@@ -429,7 +485,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/06/URLSearchParams/">URLSearchParams constructor</a>
+      <a class="article-title" href="/blog/2021/02/08/URLSearchParams/">URLSearchParams constructor</a>
     </h1>
   
 
@@ -458,44 +514,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/06/URLSearchParams/" data-id="ckktwyd2e00012nuk2cd2dsyb" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-throttle-debounce" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/02/06/throttle-debounce/" class="article-date">
-  <time datetime="2021-02-06T16:09:43.309Z" itemprop="datePublished">2021-02-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/06/throttle-debounce/">截流和去抖的深入理解结合loads</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p><strong>不说应用场景，自己都没有动力往下继续。</strong><br>debounce：input框keyup的search事件（等待时间之后只触发一次,若在等待时间内再次触发，则重新计算等待时间）【有可能出现事件一直触发，回调一直不会执行的情况。触发间隔小于延迟间隔】<br>throttle：监听scroll事件（间隔触发）【在debounce的情况下，事件在等待时间内不断触发，增加maxWait时间即可实现】</p>
-<h3 id="throttle截流"><a href="#throttle截流" class="headerlink" title="throttle截流"></a>throttle截流</h3>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/06/throttle-debounce/" data-id="ckktwyd2v00092nukckbp45h4" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/08/URLSearchParams/" data-id="ckkwcv9yc000123v63o3j1poy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -541,23 +560,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/02/06/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
+            <a href="/blog/2021/02/08/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/06/URL/">URL constructor</a>
+            <a href="/blog/2021/02/08/URL/">URL constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/06/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+            <a href="/blog/2021/02/08/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/06/cross-origin/">cross origin</a>
+            <a href="/blog/2021/02/08/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/06/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+            <a href="/blog/2021/02/08/cross-origin/">cross origin</a>
           </li>
         
       </ul>
