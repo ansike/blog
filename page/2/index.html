@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-URLSearchParams" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/08/URLSearchParams/" class="article-date">
-  <time datetime="2021-02-08T10:19:41.888Z" itemprop="datePublished">2021-02-08</time>
+    <a href="/blog/2021/02/09/%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-02-09T10:51:08.345Z" itemprop="datePublished">2021-02-09</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/08/URLSearchParams/">URLSearchParams constructor</a>
+      <a class="article-title" href="/blog/2021/02/09/%E5%8A%A8%E7%94%BB/">动画</a>
     </h1>
   
 
@@ -83,28 +83,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p>URLSearchParams是URL的一个属性的返回的构造函数</p>
-<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * params：（param）</span></span><br><span class="line"><span class="comment"> * url查询字符串    eg:'?s=url',location.search</span></span><br><span class="line"><span class="comment"> * 查询字符序列     eg:['s', 'url'], ['someId', 1]]</span></span><br><span class="line"><span class="comment"> * 查询键值对象     eg:&#123;"s": "url", "someId": 2&#125;</span></span><br><span class="line"><span class="comment"> * return 一个人 URL实例</span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="keyword">new</span> URLSearchParams(param);</span><br></pre></td></tr></table></figure>
-
-<h3 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h3><ol>
-<li>append()     追加参数params.append(‘from’, ‘zxx’);</li>
-<li>delete()     删除已存在的参数params.delete(‘from’);</li>
-<li>entries()    返回查询参数们的迭代器对象，可以使用for of循环</li>
-<li>forEach()    forEach(callback), callback = (value,key){}</li>
-<li>get()        params.get(‘s’);</li>
-<li>getAll()     params.getAll(‘s’);</li>
-<li>has()        params.has(‘s’) == true;    // true</li>
-<li>keys()       返回一个key迭代器对象</li>
-<li>values()     返回一个value迭代器对象</li>
-<li>set()       有则替换，无则加冕。params.set(‘s’, ‘css世界’);</li>
-<li>sort()      所有键/值对就地排序,稳定的排序算法</li>
-<li>toString()  输出字符串</li>
+        <h3 id="动画演示"><a href="#动画演示" class="headerlink" title="动画演示"></a>动画演示</h3><p><a href="./canvas动画.md">canvas动画</a><br><a href="./svg动画.md">svg动画</a><br><a href="./css动画.md">css动画</a></p>
+<h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ul>
+<li>无论是css动画，canvas动画，还是svg动画，基本思想都需要考虑一下几点：</li>
+</ul>
+<ol>
+<li>动画当前的状态即是画布在当前时间内（浏览器渲染间隔）的一帧图像。</li>
+<li>前提需要定时调用渲染函数不断绘制。【借助定时器或者requestAnimationFrame—最好依赖浏览器的渲染机制】</li>
+<li>每次渲染的状态由当前动画进度决定。不管是一次性动画还是循环动画，都有一个最小环节，想清楚自己的最小环节。</li>
+<li>每个最小环节由duration决定，受delayTime影响。</li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> searchParams = <span class="keyword">new</span> URLSearchParams(<span class="string">'c=4&amp;a=2&amp;b=3&amp;a=1'</span>); </span><br><span class="line"><span class="comment">// 键值对排序</span></span><br><span class="line">searchParams.sort();</span><br><span class="line"><span class="built_in">console</span>.log(searchParams.toString());    <span class="comment">// 结果是：a=2&amp;a=1&amp;b=3&amp;c=4</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/08/URLSearchParams/" data-id="ckkwfbxua00013fw45y0vaepk" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/09/%E5%8A%A8%E7%94%BB/" data-id="ckkxvw7d7000c2x0a5kxzdico" class="article-share-link">Share</a>
       
       
     </footer>
@@ -116,8 +109,8 @@
   
     <article id="post-从数字分隔符看正则" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/08/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="article-date">
-  <time datetime="2021-02-08T10:19:41.888Z" itemprop="datePublished">2021-02-08</time>
+    <a href="/blog/2021/02/09/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="article-date">
+  <time datetime="2021-02-09T10:51:08.345Z" itemprop="datePublished">2021-02-09</time>
 </a>
     
   </div>
@@ -128,7 +121,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/08/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
+      <a class="article-title" href="/blog/2021/02/09/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
     </h1>
   
 
@@ -166,7 +159,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/08/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="ckkwfbxuq000b3fw429zv98pc" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/09/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="ckkxvw7d4000b2x0adm4u48sl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -176,10 +169,10 @@
 
 
   
-    <article id="post-动画" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-URLSearchParams" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/08/%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-02-08T10:19:41.888Z" itemprop="datePublished">2021-02-08</time>
+    <a href="/blog/2021/02/09/URLSearchParams/" class="article-date">
+  <time datetime="2021-02-09T10:51:08.341Z" itemprop="datePublished">2021-02-09</time>
 </a>
     
   </div>
@@ -190,7 +183,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/08/%E5%8A%A8%E7%94%BB/">动画</a>
+      <a class="article-title" href="/blog/2021/02/09/URLSearchParams/">URLSearchParams constructor</a>
     </h1>
   
 
@@ -198,21 +191,73 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="动画演示"><a href="#动画演示" class="headerlink" title="动画演示"></a>动画演示</h3><p><a href="./canvas动画.md">canvas动画</a><br><a href="./svg动画.md">svg动画</a><br><a href="./css动画.md">css动画</a></p>
-<h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ul>
-<li>无论是css动画，canvas动画，还是svg动画，基本思想都需要考虑一下几点：</li>
-</ul>
+        <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p>URLSearchParams是URL的一个属性的返回的构造函数</p>
+<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * params：（param）</span></span><br><span class="line"><span class="comment"> * url查询字符串    eg:'?s=url',location.search</span></span><br><span class="line"><span class="comment"> * 查询字符序列     eg:['s', 'url'], ['someId', 1]]</span></span><br><span class="line"><span class="comment"> * 查询键值对象     eg:&#123;"s": "url", "someId": 2&#125;</span></span><br><span class="line"><span class="comment"> * return 一个人 URL实例</span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="keyword">new</span> URLSearchParams(param);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h3><ol>
+<li>append()     追加参数params.append(‘from’, ‘zxx’);</li>
+<li>delete()     删除已存在的参数params.delete(‘from’);</li>
+<li>entries()    返回查询参数们的迭代器对象，可以使用for of循环</li>
+<li>forEach()    forEach(callback), callback = (value,key){}</li>
+<li>get()        params.get(‘s’);</li>
+<li>getAll()     params.getAll(‘s’);</li>
+<li>has()        params.has(‘s’) == true;    // true</li>
+<li>keys()       返回一个key迭代器对象</li>
+<li>values()     返回一个value迭代器对象</li>
+<li>set()       有则替换，无则加冕。params.set(‘s’, ‘css世界’);</li>
+<li>sort()      所有键/值对就地排序,稳定的排序算法</li>
+<li>toString()  输出字符串</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> searchParams = <span class="keyword">new</span> URLSearchParams(<span class="string">'c=4&amp;a=2&amp;b=3&amp;a=1'</span>); </span><br><span class="line"><span class="comment">// 键值对排序</span></span><br><span class="line">searchParams.sort();</span><br><span class="line"><span class="built_in">console</span>.log(searchParams.toString());    <span class="comment">// 结果是：a=2&amp;a=1&amp;b=3&amp;c=4</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/02/09/URLSearchParams/" data-id="ckkxvw7ct00012x0a4fqh82fr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-promisefy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/02/09/promisefy/" class="article-date">
+  <time datetime="2021-02-09T10:51:08.341Z" itemprop="datePublished">2021-02-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/02/09/promisefy/">实现类似 node中util.promisefy的实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>分析需求：</p>
 <ol>
-<li>动画当前的状态即是画布在当前时间内（浏览器渲染间隔）的一帧图像。</li>
-<li>前提需要定时调用渲染函数不断绘制。【借助定时器或者requestAnimationFrame—最好依赖浏览器的渲染机制】</li>
-<li>每次渲染的状态由当前动画进度决定。不管是一次性动画还是循环动画，都有一个最小环节，想清楚自己的最小环节。</li>
-<li>每个最小环节由duration决定，受delayTime影响。</li>
+<li>promisefy将异步回调的nodejs的api fn改成了promise fn</li>
+<li>传入一个fn，返回一个新的fn，且新的fn执行的时候返回一个promise</li>
+<li>发现所有的nodejs的api的回调函数参数格式一致(error, content)=&gt;{}</li>
 </ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"><span class="keyword">const</span> util = <span class="built_in">require</span>(<span class="string">"util"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将异步回调改为promise</span></span><br><span class="line"><span class="keyword">const</span> promisefyReadFile = util.promisify(fs.readFile);</span><br><span class="line">promisefyReadFile(path.resolve(__dirname, <span class="string">'./data.txt'</span>), <span class="string">'utf-8'</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">customPromiseFy</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 注意</span></span><br><span class="line">      <span class="keyword">const</span> widthCallBackArgs = [...args, <span class="function"><span class="keyword">function</span> (<span class="params">error, content</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (error) reject(error);</span><br><span class="line">        resolve(content)</span><br><span class="line">      &#125;]</span><br><span class="line">      fn.apply(fn, widthCallBackArgs);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> promisefyReadFile = customPromiseFy(fs.readFile);</span><br><span class="line">promisefyReadFile(path.resolve(__dirname, <span class="string">'./data.txt'</span>), <span class="string">'utf-8'</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/08/%E5%8A%A8%E7%94%BB/" data-id="ckkwfbxut000c3fw44pst9c6x" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/09/promisefy/" data-id="ckkxvw7cz00062x0aboztasqu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -222,10 +267,10 @@
 
 
   
-    <article id="post-工程化" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-css动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/08/%E5%B7%A5%E7%A8%8B%E5%8C%96/" class="article-date">
-  <time datetime="2021-02-08T10:19:41.888Z" itemprop="datePublished">2021-02-08</time>
+    <a href="/blog/2021/02/09/css%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-02-09T10:51:08.341Z" itemprop="datePublished">2021-02-09</time>
 </a>
     
   </div>
@@ -236,7 +281,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/08/%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a>
+      <a class="article-title" href="/blog/2021/02/09/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
     </h1>
   
 
@@ -244,21 +289,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="前端工程中需要解决的几个问题"><a href="#前端工程中需要解决的几个问题" class="headerlink" title="前端工程中需要解决的几个问题"></a>前端工程中需要解决的几个问题</h3><ol>
-<li>快速搭建 各种cli工具：vue-cli，react-app</li>
-<li>高效开发 各种功能：less-loader,sass-loader,css-loader,stylus,es6,jsx</li>
-<li>便捷协作 协作工具：代理，mock数据能力，git版本管理</li>
-<li>顺畅上线 上线工具：Jenkins，ci</li>
-<li>稳健运行 检测工作：异常上报工具</li>
+        <h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ol>
+<li>canvas 基础知识，比如stroke，fill，arc，rect等基础API</li>
 </ol>
-<h4 id="stylus"><a href="#stylus" class="headerlink" title="stylus"></a>stylus</h4><p>css预处理器，运行 stylus example.styl 可将 demo.styl 文件编译成 example.css 文件。在stylus中可以使用变量，函数，compose集成等</p>
-<h4 id="styled-components"><a href="#styled-components" class="headerlink" title="styled-components"></a>styled-components</h4><p>官网:<a href="https://styled-components.com/" target="_blank" rel="noopener">https://styled-components.com/</a></p>
-<h4 id="css-module"><a href="#css-module" class="headerlink" title="css module"></a>css module</h4><p>未完继续补充~</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/08/%E5%B7%A5%E7%A8%8B%E5%8C%96/" data-id="ckkwfbxuu000d3fw4gk2x12p1" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/09/css%E5%8A%A8%E7%94%BB/" data-id="ckkxvw7cy00052x0a1hvah976" class="article-share-link">Share</a>
       
       
     </footer>
@@ -268,10 +306,10 @@
 
 
   
-    <article id="post-模块化" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-cross-origin" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/08/%E6%A8%A1%E5%9D%97%E5%8C%96/" class="article-date">
-  <time datetime="2021-02-08T10:19:41.888Z" itemprop="datePublished">2021-02-08</time>
+    <a href="/blog/2021/02/09/cross-origin/" class="article-date">
+  <time datetime="2021-02-09T10:51:08.341Z" itemprop="datePublished">2021-02-09</time>
 </a>
     
   </div>
@@ -282,7 +320,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/08/%E6%A8%A1%E5%9D%97%E5%8C%96/">Commonjs</a>
+      <a class="article-title" href="/blog/2021/02/09/cross-origin/">cross origin</a>
     </h1>
   
 
@@ -290,58 +328,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="问题1-Commonjs和es-module的区别"><a href="#问题1-Commonjs和es-module的区别" class="headerlink" title="问题1 Commonjs和es module的区别"></a>问题1 Commonjs和es module的区别</h3><ol>
-<li>使用方式看：导入和导出方式不同<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ====commonjs</span></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="built_in">module</span>.export = <span class="string">'hello'</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'a.js'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ====es module</span></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="string">'hello'</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">import</span> a <span class="keyword">from</span> <span class="string">"./a.js"</span>;</span><br></pre></td></tr></table></figure>
-延伸看级别不一样：<b>commonjs是node运行时的实现，非官方标准</b>。es module中的<code>export default, import</code>都是js关键字，从语言层面实现的支持，是官方标准。</li>
-</ol>
-<h3 id="问题2-exports和module-exports区别"><a href="#问题2-exports和module-exports区别" class="headerlink" title="问题2 exports和module.exports区别"></a>问题2 exports和module.exports区别</h3><p>看下在commonjs中的实现就能明白</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 两个变量初始的时候都指向了同一块内存地址</span></span><br><span class="line"><span class="built_in">console</span>.log(exports === <span class="built_in">module</span>.exports) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 当发生直接赋值的情况后commonjs只会使用module.exports指向的值(和导出的顺序无关)</span></span><br><span class="line"><span class="comment">// module.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="string">"hello"</span>;</span><br><span class="line">exports = <span class="string">"hello2"</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">"./module.js"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// hello</span></span><br></pre></td></tr></table></figure>
+        <p>就是创建一个文件夹eg:devChromeData</p>
+<h3 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h3><p>第二步执行以下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -n /Applications/Google\ Chrome.app/ --args --disable-web-security  --user-data-dir=/Users/ansike/devChromeData</span><br></pre></td></tr></table></figure>
 
-<h3 id="问题3-require的实现"><a href="#问题3-require的实现" class="headerlink" title="问题3 require的实现"></a>问题3 require的实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"><span class="keyword">const</span> vm = <span class="built_in">require</span>(<span class="string">"vm"</span>);</span><br><span class="line"><span class="comment">// 实现 require</span></span><br><span class="line"><span class="comment">// const a = require("./module.js");</span></span><br><span class="line"><span class="keyword">const</span> a = customRequire(<span class="string">"./module.js"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">customRequire</span>(<span class="params">filePath</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> content = fs.readFileSync(path.join(__dirname, filePath), <span class="string">'utf-8'</span>);</span><br><span class="line">  <span class="comment">// 包裹一层避免作用于污染，隔离变量</span></span><br><span class="line">  <span class="keyword">const</span> wrapper = [</span><br><span class="line">    <span class="string">"(function(require, module, exports)&#123;"</span>,</span><br><span class="line">    <span class="string">"&#125;)"</span></span><br><span class="line">  ]</span><br><span class="line">  <span class="keyword">const</span> <span class="built_in">module</span> = &#123;</span><br><span class="line">    exports: &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> wrapperFn = wrapper[<span class="number">0</span>] + content + wrapper[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 两种实现方式都OK--实现字符串转js 运行时代码</span></span><br><span class="line">  <span class="keyword">const</span> canHandleFn = vm.runInThisContext(wrapperFn)</span><br><span class="line">  <span class="comment">// const canHandleFn = eval(wrapperFn);</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 这一步解决了问题三的疑惑</span></span><br><span class="line">  canHandleFn(customRequire, <span class="built_in">module</span>, <span class="built_in">module</span>.exports)</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">module</span>.exports</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br></pre></td></tr></table></figure>
-
+<p>微信开发者工具（注意app的名字是否一致）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -a /Applications/wechatwebdevtools.app --args --disable-web-security --user-data-dir</span><br></pre></td></tr></table></figure>
+<h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><p>创建该文件夹，右键浏览器快捷键，在目标中追加参数</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--disable-web-security --user-data-dir=C:\path\to\ChromeUserData</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/08/%E6%A8%A1%E5%9D%97%E5%8C%96/" data-id="ckkwfbxuw000e3fw4hxjl81bn" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-集中式和分布式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/02/08/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" class="article-date">
-  <time datetime="2021-02-08T10:19:41.888Z" itemprop="datePublished">2021-02-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/08/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="集中式"><a href="#集中式" class="headerlink" title="集中式"></a>集中式</h3><p>集中式系统中版本库是集中存放在中央服务器的。以svn为例，开发人员工作的时候都需要从中央服务器获取最新的版本，工作完之后需要将工作推送给中央服务器。<br>eg：SVN，云服务器（在云服务器开发）<br>优点：减少了硬件和软件成本<br>问题：<strong>必须联网（局域网或者互联网）</strong></p>
-<h3 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h3><p>分布式系统中没有中央服务器的概念。</p>
-<p>eg：git<br>优点：每个人的电脑中都有完整的版本库，所以安全性很高，即使服务器仓库被破坏了，损失也不会很大。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/08/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" data-id="ckkwfbxuy000f3fw47jfz6p1f" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/09/cross-origin/" data-id="ckkxvw7cx00042x0a1pl081co" class="article-share-link">Share</a>
       
       
     </footer>
@@ -353,8 +351,8 @@
   
     <article id="post-shell/calc" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/08/shell/calc/" class="article-date">
-  <time datetime="2021-02-08T10:19:41.888Z" itemprop="datePublished">2021-02-08</time>
+    <a href="/blog/2021/02/09/shell/calc/" class="article-date">
+  <time datetime="2021-02-09T10:51:08.341Z" itemprop="datePublished">2021-02-09</time>
 </a>
     
   </div>
@@ -365,7 +363,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/08/shell/calc/">shell中变量的数值计算</a>
+      <a class="article-title" href="/blog/2021/02/09/shell/calc/">shell中变量的数值计算</a>
     </h1>
   
 
@@ -401,7 +399,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/08/shell/calc/" data-id="ckkwfbxvf000g3fw4124177ku" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/09/shell/calc/" data-id="ckkxvw7e0000g2x0aayx82hnx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -411,10 +409,10 @@
 
 
   
-    <article id="post-shell/read" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-canvas动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/08/shell/read/" class="article-date">
-  <time datetime="2021-02-08T10:19:41.888Z" itemprop="datePublished">2021-02-08</time>
+    <a href="/blog/2021/02/09/canvas%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-02-09T10:51:08.341Z" itemprop="datePublished">2021-02-09</time>
 </a>
     
   </div>
@@ -425,7 +423,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/08/shell/read/">read 命令</a>
+      <a class="article-title" href="/blog/2021/02/09/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
     </h1>
   
 
@@ -433,16 +431,70 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="从标准输入中读取信息"><a href="#从标准输入中读取信息" class="headerlink" title="从标准输入中读取信息"></a>从标准输入中读取信息</h3><h5 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h5><ol>
-<li>-p prompt #提示</li>
-<li>-t timeout # 超时时间, 单位为s<h5 id="命令行使用"><a href="#命令行使用" class="headerlink" title="命令行使用"></a>命令行使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">read -p "Pls Input Your Vars: " var1 var2</span><br><span class="line">echo "$&#123;var1&#125;, $&#123;var2&#125;"</span><br><span class="line"></span><br><span class="line">read -t 3 -p "Pls Input Your Vars: " var3 var4</span><br><span class="line">echo "$&#123;var3&#125;, $&#123;var4&#125;"</span><br></pre></td></tr></table></figure>
+        <h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ol>
+<li>canvas 基础知识，比如stroke，fill，arc，rect等基础API</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/02/09/canvas%E5%8A%A8%E7%94%BB/" data-id="ckkxvw7cw00032x0agghr1tfl" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-canvas-基础特性" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/02/09/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" class="article-date">
+  <time datetime="2021-02-09T10:51:08.341Z" itemprop="datePublished">2021-02-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/02/09/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="对象创建"><a href="#对象创建" class="headerlink" title="对象创建"></a>对象创建</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HTML</span></span><br><span class="line">&lt;canvas id=<span class="string">"canvas"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//JS</span></span><br><span class="line"><span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"><span class="keyword">const</span> ctx = canvas.getContext(<span class="string">"2d"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="canvas元素的属性和方法"><a href="#canvas元素的属性和方法" class="headerlink" title="canvas元素的属性和方法"></a>canvas元素的属性和方法</h3><p><strong>1. 属性</strong></p>
+<ul>
+<li>width</li>
+<li>height</li>
+</ul>
+<p><strong>2. 方法</strong></p>
+<ul>
+<li><ol>
+<li>getContext(contextId: “2d”, options?: CanvasRenderingContext2DSettings): CanvasRenderingContext2D | null;</li>
+<li>getContext(contextId: “bitmaprenderer”, options?: ImageBitmapRenderingContextSettings):mageBitmapRenderingContext | null;</li>
+<li>getContext(contextId: “webgl”, options?: WebGLContextAttributes): WebGLRenderingContext | null;</li>
+<li>getContext(contextId: “webgl2”, options?: WebGLContextAttributes): WebGL2RenderingContext | null;</li>
+<li>getContext(contextId: string, options?: any): RenderingContext | null;<br>// 返回绘图环境对象</li>
+</ol>
 </li>
-</ol>
+<li>toDataURL(type?: string, quality?: any): string; // 返回数据地址，可以直接给img的src赋值</li>
+<li>toBlob(callback: BlobCallback, type?: string, quality?: any): void; // 返回表示图像文件的blob，可以将该blob做文件上传使用</li>
+<li>transferControlToOffscreen(): OffscreenCanvas;</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/08/shell/read/" data-id="ckkwfbxvg000h3fw4helvayck" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/09/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" data-id="ckkxvw7cv00022x0adh0y7s9o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -452,10 +504,10 @@
 
 
   
-    <article id="post-shell/条件测试" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-URL" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/08/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/" class="article-date">
-  <time datetime="2021-02-08T10:19:41.888Z" itemprop="datePublished">2021-02-08</time>
+    <a href="/blog/2021/02/09/URL/" class="article-date">
+  <time datetime="2021-02-09T10:51:08.341Z" itemprop="datePublished">2021-02-09</time>
 </a>
     
   </div>
@@ -466,7 +518,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/08/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/">条件测试</a>
+      <a class="article-title" href="/blog/2021/02/09/URL/">URL constructor</a>
     </h1>
   
 
@@ -474,113 +526,42 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="测试语法"><a href="#测试语法" class="headerlink" title="测试语法"></a>测试语法</h5><ol>
-<li>test &lt;测试表达式&gt;</li>
-<li>[ &lt;测试表达式&gt; ]  # 常用这个</li>
-<li>[[ &lt;测试表达式&gt; ]]</li>
-<li>((&lt;测试表达式&gt;))</li>
+        <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p>以前我们要对地址栏中的URL地址进行分析处理，需要自己进行字符串分析,有了URL构造函数之后就不需要了。</p>
+<h3 id="demo-（修改-设置-query的一个参数"><a href="#demo-（修改-设置-query的一个参数" class="headerlink" title="demo （修改|设置)query的一个参数"></a>demo （修改|设置)query的一个参数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> url = <span class="string">"https://www.baidu.com/wordpress/?a=1"</span></span><br><span class="line"><span class="keyword">const</span> urlObj = <span class="keyword">new</span> URL(url)</span><br><span class="line">urlObj.searchParams.set(<span class="string">"a"</span>, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">console</span>.log(urlObj.href); <span class="comment">//https://www.baidu.com/wordpress/?a=2</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * params：（url）相对地址或者绝对地址，如果是绝对地址的时候会忽略base参数</span></span><br><span class="line"><span class="comment"> * params：（base）基地址，默认为空字符串</span></span><br><span class="line"><span class="comment"> * 注意：如果参数无法组合成完整的url地址，则会报TypeError错误</span></span><br><span class="line"><span class="comment"> * return 一个人 URL实例</span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="keyword">new</span> URL(url [,base])</span><br></pre></td></tr></table></figure>
+
+<h3 id="Attributes"><a href="#Attributes" class="headerlink" title="Attributes"></a>Attributes</h3><ol>
+<li>hash</li>
+<li>host</li>
+<li>hostname</li>
+<li>href</li>
+<li>origin       常用</li>
+<li>password</li>
+<li>username</li>
+<li>pathname</li>
+<li>port</li>
+<li>protocol     eg:http:</li>
+<li>search</li>
+<li>searchParams 返回一个URLSearchParams对象，可以调用URLSearchParams对象的各种方法，对查询，设置字符串进行非常方便的处理。以下会重点说这个对象 </li>
 </ol>
-<ul>
-<li>1和2是等价的</li>
-<li>[[]]为test拓展的命令，常用语通配符进行模式匹配。&amp;&amp;,||,&gt;,&lt;可以使用</li>
-<li>(())常用语计算</li>
-</ul>
-<h5 id="test使用"><a href="#test使用" class="headerlink" title="test使用"></a>test使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 判断file文件是否存在</span></span><br><span class="line">test -f file &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断字符串长度是否为0</span></span><br><span class="line">test -z "file" &amp;&amp; echo 1 || echo 0</span><br></pre></td></tr></table></figure>
-<h5 id="使用"><a href="#使用" class="headerlink" title="[]使用"></a>[]使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 判断file文件是否存在</span></span><br><span class="line">[ -f file ] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断字符串长度是否为0</span></span><br><span class="line">[ -z "file" ] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> -o 表示或者</span></span><br><span class="line">[ -z "file" -o -z "" ] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> -a 表示且</span></span><br><span class="line">[ -z "file" -a -z "" ] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断字符串相等</span></span><br><span class="line">[ "file" = "1" ] &amp;&amp; echo 1 || echo 0</span><br></pre></td></tr></table></figure>
-<h5 id="使用-1"><a href="#使用-1" class="headerlink" title="[]使用"></a>[]使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 判断file文件是否存在</span></span><br><span class="line">[[ -f file ]] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断字符串长度是否为0</span></span><br><span class="line">[[ -z "file" ]] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> -o 表示或者</span></span><br><span class="line">[[ -z "file" || -z "" ]] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> -a 表示且</span></span><br><span class="line">[[ -z "file" &amp;&amp; -z "" ]] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> TODO 判断字符串相等</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/08/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/" data-id="ckkwfbxvh000i3fw445js6rur" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-shell/比较测试命令" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/02/08/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" class="article-date">
-  <time datetime="2021-02-08T10:19:41.888Z" itemprop="datePublished">2021-02-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/08/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/">常用测试语法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="文件测试语法"><a href="#文件测试语法" class="headerlink" title="文件测试语法"></a>文件测试语法</h2><h2 id="字符串测试语法"><a href="#字符串测试语法" class="headerlink" title="字符串测试语法"></a>字符串测试语法</h2><h2 id="整数二元比较操作符"><a href="#整数二元比较操作符" class="headerlink" title="整数二元比较操作符"></a>整数二元比较操作符</h2><h2 id="逻辑操作符"><a href="#逻辑操作符" class="headerlink" title="逻辑操作符"></a>逻辑操作符</h2><h3 id="文件测试语法-1"><a href="#文件测试语法-1" class="headerlink" title="文件测试语法"></a>文件测试语法</h3><ol>
-<li>-d 判断是目录</li>
-<li>-f 判断是文件</li>
-<li>-e 判断目录或者文件存在</li>
-<li>-r 判断文件可读</li>
-<li>-s 判断文件大小不为0为真</li>
-<li>-x 判断文件可执行</li>
-<li>-w 判断文件可写</li>
-<li>-L 文件存在且链接文件为真</li>
-<li>f1 -nt f2  f1比f2新则为真</li>
-<li>f1 -ot f2  f1比f2旧则为真</li>
+<h3 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h3><ol>
+<li>toString()   返回完整的URL地址，只能输出不能修改值</li>
+<li>toJSON       目前看是一样的（有变动再修改）</li>
 </ol>
-<ul>
-<li>1和2是等价的</li>
-<li>[[]]为test拓展的命令，常用语通配符进行模式匹配。&amp;&amp;,||,&gt;,&lt;可以使用</li>
-<li>(())常用语计算</li>
-</ul>
-<h5 id=""><a href="#" class="headerlink" title=""></a></h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[ -d public ] &amp;&amp; echo 1</span><br><span class="line">[ -s package.json ] &amp;&amp; echo 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">  不存在的变量必须加引号包裹</span></span><br><span class="line">[ -f $a ] &amp;&amp; echo 1 || echo 0 # 1</span><br><span class="line">[ -f "$a" ] &amp;&amp; echo 1 || echo 0 # 0</span><br></pre></td></tr></table></figure>
-
-<h3 id="字符串测试语法-1"><a href="#字符串测试语法-1" class="headerlink" title="字符串测试语法"></a>字符串测试语法</h3><ol>
-<li>-n “字符串” 判断字符串长度不为0为真</li>
-<li>-z “字符串” 判断字符串长度为0为真</li>
-<li>“字符串1” = “字符串2” 相等为真</li>
-<li>“字符串1” != “字符串2” 不等为真</li>
+<h3 id="Static-Function"><a href="#Static-Function" class="headerlink" title="Static Function"></a>Static Function</h3><ol>
+<li>URL.createObjectURL(object). <strong>将对象变成一个唯一的blob URL，参数可以是File，Blob，MediaSource对象</strong></li>
+<li>URL.revokeObjectURL(objectURL);<strong>撤销上一个API创建的URL对象</strong></li>
 </ol>
-<ul>
-<li>字符串测试时必须加引号，不加很有可能发生语法没问题，但是逻辑结果和预期的不一致</li>
-</ul>
-<h5 id="-1"><a href="#-1" class="headerlink" title=""></a></h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[ "a" = "a" ] &amp;&amp; echo 1 || echo 0 </span><br><span class="line">[ "a" = "b" ] &amp;&amp; echo 1 || echo 0</span><br></pre></td></tr></table></figure>
+<p>eg:使用Ajax请求一个跨域图片避免canvas跨域生成问题的时候可以使用这两个静态方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> url = URL.createObjectURL(<span class="keyword">this</span>.response);</span><br><span class="line">    <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">    img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 此时你就可以使用canvas对img为所欲为了</span></span><br><span class="line">        <span class="comment">// ... code ...</span></span><br><span class="line">        <span class="comment">// 图片用完后记得释放内存</span></span><br><span class="line">        URL.revokeObjectURL(url);</span><br><span class="line">    &#125;;</span><br><span class="line">    img.src = url;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.open(<span class="string">'GET'</span>, url, <span class="literal">true</span>);</span><br><span class="line">xhr.responseType = <span class="string">'blob'</span>;</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
 
 
-<h3 id="整数二元比较操作符-1"><a href="#整数二元比较操作符-1" class="headerlink" title="整数二元比较操作符"></a>整数二元比较操作符</h3><ol>
-<li>-eq 相等在test和[]中是这样，在[[]]和(())是 ==或者=</li>
-<li>-ne 不等在test和[]中是这样，在[[]]和(())是 !=</li>
-<li>-gt 大于在test和[]中是这样，在[[]]和(())是 &gt;</li>
-<li>-lt 小于在test和[]中是这样，在[[]]和(())是 &lt;</li>
-<li>-ge 大于等于在test和[]中是这样，在[[]]和(())是 &gt;=</li>
-<li>-le 小于等于在test和[]中是这样，在[[]]和(())是 &lt;=</li>
-</ol>
-<ul>
-<li>[]也可以使用=, !=。注意使用&lt;,&gt;时使用转义字符</li>
-</ul>
-<h5 id="-2"><a href="#-2" class="headerlink" title=""></a></h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 尽量按照上诉规则</span></span><br><span class="line">[ 1 -gt 2 ] &amp;&amp; echo 1 || echo 0 # 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> [ 1 &gt; 2 ] &amp;&amp; <span class="built_in">echo</span> 1 || <span class="built_in">echo</span> 0 <span class="comment"># 1</span></span></span><br></pre></td></tr></table></figure>
-
-<h3 id="逻辑操作符-1"><a href="#逻辑操作符-1" class="headerlink" title="逻辑操作符"></a>逻辑操作符</h3><ol>
-<li>-a 相等在test和[]中是这样，在[[]]和(())是 &amp;&amp;</li>
-<li>-o 相等在test和[]中是这样，在[[]]和(())是 ||</li>
-<li>! 相等在test和[]中是这样，在[[]]和(())是 !</li>
-</ol>
-<ul>
-<li>[]也可以使用=, !=。注意使用&lt;,&gt;时使用转义字符</li>
-</ul>
-<h5 id="-3"><a href="#-3" class="headerlink" title=""></a></h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[ -z "file" &amp;&amp; -z "" ]] &amp;&amp; echo 1 || echo 0</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/08/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" data-id="ckkwfbxvi000j3fw4aznt1l40" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/09/URL/" data-id="ckkxvw7cl00002x0ae22b1d13" class="article-share-link">Share</a>
       
       
     </footer>
@@ -626,23 +607,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/02/08/throttle-debounce/">截流和去抖的深入理解结合loads</a>
+            <a href="/blog/2021/02/09/throttle-debounce/">截流和去抖的深入理解结合loads</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/08/URL/">URL constructor</a>
+            <a href="/blog/2021/02/09/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/">常用测试语法</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/08/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+            <a href="/blog/2021/02/09/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/">条件测试</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/08/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+            <a href="/blog/2021/02/09/shell/read/">read 命令</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/08/cross-origin/">cross origin</a>
+            <a href="/blog/2021/02/09/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
           </li>
         
       </ul>
