@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-URL" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/邮件报警脚本及实现" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/12/URL/" class="article-date">
-  <time datetime="2021-02-12T14:20:53.229Z" itemprop="datePublished">2021-02-12</time>
+    <a href="/blog/2021/02/12/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/" class="article-date">
+  <time datetime="2021-02-12T17:35:44.527Z" itemprop="datePublished">2021-02-12</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/12/URL/">URL constructor</a>
+      <a class="article-title" href="/blog/2021/02/12/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/">Linux邮件报警脚本及实现【阿里云服务器，Centos8】</a>
     </h1>
   
 
@@ -83,42 +83,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p>以前我们要对地址栏中的URL地址进行分析处理，需要自己进行字符串分析,有了URL构造函数之后就不需要了。</p>
-<h3 id="demo-（修改-设置-query的一个参数"><a href="#demo-（修改-设置-query的一个参数" class="headerlink" title="demo （修改|设置)query的一个参数"></a>demo （修改|设置)query的一个参数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> url = <span class="string">"https://www.baidu.com/wordpress/?a=1"</span></span><br><span class="line"><span class="keyword">const</span> urlObj = <span class="keyword">new</span> URL(url)</span><br><span class="line">urlObj.searchParams.set(<span class="string">"a"</span>, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">console</span>.log(urlObj.href); <span class="comment">//https://www.baidu.com/wordpress/?a=2</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * params：（url）相对地址或者绝对地址，如果是绝对地址的时候会忽略base参数</span></span><br><span class="line"><span class="comment"> * params：（base）基地址，默认为空字符串</span></span><br><span class="line"><span class="comment"> * 注意：如果参数无法组合成完整的url地址，则会报TypeError错误</span></span><br><span class="line"><span class="comment"> * return 一个人 URL实例</span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="keyword">new</span> URL(url [,base])</span><br></pre></td></tr></table></figure>
-
-<h3 id="Attributes"><a href="#Attributes" class="headerlink" title="Attributes"></a>Attributes</h3><ol>
-<li>hash</li>
-<li>host</li>
-<li>hostname</li>
-<li>href</li>
-<li>origin       常用</li>
-<li>password</li>
-<li>username</li>
-<li>pathname</li>
-<li>port</li>
-<li>protocol     eg:http:</li>
-<li>search</li>
-<li>searchParams 返回一个URLSearchParams对象，可以调用URLSearchParams对象的各种方法，对查询，设置字符串进行非常方便的处理。以下会重点说这个对象 </li>
+        <p><code>实现: 监控linux机器内存，低于阈值则邮件报警，每三分钟检查一次。</code></p>
+<h3 id="拆分步骤"><a href="#拆分步骤" class="headerlink" title="拆分步骤"></a>拆分步骤</h3><ol>
+<li>获取内存大小</li>
+<li>判断是否小于阈值</li>
+<li>发送邮件</li>
 </ol>
-<h3 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h3><ol>
-<li>toString()   返回完整的URL地址，只能输出不能修改值</li>
-<li>toJSON       目前看是一样的（有变动再修改）</li>
-</ol>
-<h3 id="Static-Function"><a href="#Static-Function" class="headerlink" title="Static Function"></a>Static Function</h3><ol>
-<li>URL.createObjectURL(object). <strong>将对象变成一个唯一的blob URL，参数可以是File，Blob，MediaSource对象</strong></li>
-<li>URL.revokeObjectURL(objectURL);<strong>撤销上一个API创建的URL对象</strong></li>
-</ol>
-<p>eg:使用Ajax请求一个跨域图片避免canvas跨域生成问题的时候可以使用这两个静态方法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> url = URL.createObjectURL(<span class="keyword">this</span>.response);</span><br><span class="line">    <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">    img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 此时你就可以使用canvas对img为所欲为了</span></span><br><span class="line">        <span class="comment">// ... code ...</span></span><br><span class="line">        <span class="comment">// 图片用完后记得释放内存</span></span><br><span class="line">        URL.revokeObjectURL(url);</span><br><span class="line">    &#125;;</span><br><span class="line">    img.src = url;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.open(<span class="string">'GET'</span>, url, <span class="literal">true</span>);</span><br><span class="line">xhr.responseType = <span class="string">'blob'</span>;</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
+<h4 id="获取内存大小"><a href="#获取内存大小" class="headerlink" title="获取内存大小"></a>获取内存大小</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Display amount of free and used memory <span class="keyword">in</span> the system</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -b 　以Byte为单位显示内存使用情况。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -k 　以KB为单位显示内存使用情况。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -m 　以MB为单位显示内存使用情况。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -o 　不显示缓冲区调节列。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -s     &lt;间隔秒数&gt; 　持续观察内存使用状况。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -t 　显示内存总和列。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -V 　显示版本信息。</span></span><br><span class="line">free </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看空闲的空间大小</span></span><br><span class="line">Memo=`free -m | awk 'NR==3 &#123;print $NF&#125;'`</span><br></pre></td></tr></table></figure>
+<h4 id="判断是否小于阈值"><a href="#判断是否小于阈值" class="headerlink" title="判断是否小于阈值"></a>判断是否小于阈值</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Limit=10000</span><br><span class="line">if [ "$Memo" -lt "$Limit" ]</span><br><span class="line">  then</span><br><span class="line">    echo "开始发送邮件"</span><br><span class="line">    exit 0;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h4 id="发送邮件，使用163邮件服务"><a href="#发送邮件，使用163邮件服务" class="headerlink" title="发送邮件，使用163邮件服务"></a>发送邮件，使用163邮件服务</h4><p><code>使用本地邮件客户端，mailx</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">yum install mailx -y</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置邮件的smtp服务为163，因为服务器用了阿里云，所以不能使用默认的25端口，只能使用ssl的端口默认465</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 请求数字证书</span></span><br><span class="line">mkdir -p /root/.certs/  # 创建目录，用来存放证书</span><br><span class="line">echo -n | openssl s_client -connect smtp.163.com:465 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' &gt; ~/.certs/163.crt  # 向163请求证书</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意password为163申请的token，在163官网的设置页面创建一个第三方邮件客户端的专用密码，注意更换为自己的</span></span><br><span class="line">echo -e 'set from=15910250965@163.com smtp=smtps://smtp.163.com:465\nset smtp-auth-user=15910250965@163.com smtp-auth-password=XXXX smtp-auth-login' &gt;&gt; /etc/mail.rc</span><br></pre></td></tr></table></figure>
+<p><a href="https://blog.csdn.net/qq_42859864/article/details/84862977" target="_blank" rel="noopener">参考链接</a></p>
+<h1 id="执行一下命令。查看邮件或者垃圾箱中是否是新发的邮件"><a href="#执行一下命令。查看邮件或者垃圾箱中是否是新发的邮件" class="headerlink" title="执行一下命令。查看邮件或者垃圾箱中是否是新发的邮件"></a>执行一下命令。查看邮件或者垃圾箱中是否是新发的邮件</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo "body" | mailx -s "title" 15910250965@163.com</span><br></pre></td></tr></table></figure>
 
+<h4 id="完整脚本"><a href="#完整脚本" class="headerlink" title="完整脚本"></a>完整脚本</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> monitor.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!bin/bash</span></span><br><span class="line">set -e</span><br><span class="line">Limit=10000</span><br><span class="line">Memo=`free -m | awk 'NR==3 &#123;print $NF&#125;'`</span><br><span class="line"></span><br><span class="line">if [ "$Memo" -lt "$Limit" ]</span><br><span class="line">  then</span><br><span class="line">    echo "开始发送邮件"</span><br><span class="line">    echo "内存小于【$Limit】，当前内存剩余【$Memo】" | mail -s "内存紧张报警邮件" 15910250965@163.com</span><br><span class="line">    [ $? -eq 0 ] &amp;&amp; &#123;</span><br><span class="line">      echo "发送邮件成功"</span><br><span class="line">      exit 0;</span><br><span class="line">    &#125; || &#123;</span><br><span class="line">      echo "发送邮件失败"</span><br><span class="line">      exit 1;</span><br><span class="line">    &#125;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
-
+<p><a href="https://www.runoob.com/w3cnote/linux-crontab-tasks.html" target="_blank" rel="noopener">https://www.runoob.com/w3cnote/linux-crontab-tasks.html</a></p>
+<h4 id="使用crontab设置定时任务"><a href="#使用crontab设置定时任务" class="headerlink" title="使用crontab设置定时任务"></a>使用crontab设置定时任务</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> -e (编辑工作表)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -l (列出工作表里的命令)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -r (删除工作作)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> crontab [-u username] <span class="comment"># 省略用户表表示操作当前用户的crontab</span></span></span><br><span class="line">crontab -e</span><br><span class="line"><span class="meta">#</span><span class="bash"> eidt </span></span><br><span class="line">3 * * * * sh ~/job/monitor.sh</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/12/URL/" data-id="ckl2dpj4x0000zmt28lwwg12g" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/12/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/" data-id="ckl2ko3dy000k1wofcuxfeifx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -168,19 +153,19 @@
           </li>
         
           <li>
-            <a href="/blog/2021/02/12/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/">Linux邮件报警脚本及实现【阿里云服务器，Centos8】</a>
+            <a href="/blog/2021/02/12/URL/">URL constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/12/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/">常用测试语法</a>
+            <a href="/blog/2021/02/12/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/12/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/">条件测试</a>
+            <a href="/blog/2021/02/12/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/12/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
+            <a href="/blog/2021/02/12/cross-origin/">cross origin</a>
           </li>
         
       </ul>
