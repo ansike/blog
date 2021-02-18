@@ -5,13 +5,16 @@
   
 
   
-  <title>Archives: 2021 | Hexo</title>
+  <title>动画 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;archives&#x2F;2021&#x2F;page&#x2F;3&#x2F;index.html">
+  <meta name="description" content="动画演示canvas动画svg动画css动画 知识点总结 无论是css动画，canvas动画，还是svg动画，基本思想都需要考虑一下几点：   动画当前的状态即是画布在当前时间内（浏览器渲染间隔）的一帧图像。 前提需要定时调用渲染函数不断绘制。【借助定时器或者requestAnimationFrame—最好依赖浏览器的渲染机制】 每次渲染的状态由当前动画进度决定。不管是一次性动画还是循环动画，都有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动画">
+<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;2021&#x2F;02&#x2F;18&#x2F;%E5%8A%A8%E7%94%BB&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="动画演示canvas动画svg动画css动画 知识点总结 无论是css动画，canvas动画，还是svg动画，基本思想都需要考虑一下几点：   动画当前的状态即是画布在当前时间内（浏览器渲染间隔）的一帧图像。 前提需要定时调用渲染函数不断绘制。【借助定时器或者requestAnimationFrame—最好依赖浏览器的渲染机制】 每次渲染的状态由当前动画进度决定。不管是一次性动画还是循环动画，都有">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-02-18T02:25:11.213Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/blog/atom.xml" title="Hexo" type="application/atom+xml">
@@ -59,45 +62,70 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/blog/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/blog/2021/02/18/URL/" class="archive-article-date">
-  <time datetime="2021-02-18T02:25:11.209Z" itemprop="datePublished">Feb 18</time>
+        <section id="main"><article id="post-动画" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/02/18/%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-02-18T02:25:11.213Z" itemprop="datePublished">2021-02-18</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/blog/2021/02/18/URL/">URL constructor</a>
+    <h1 class="article-title" itemprop="name">
+      动画
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
+      </header>
     
-    <a class="extend prev" rel="prev" href="/blog/archives/2021/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/blog/archives/2021/">1</a><a class="page-number" href="/blog/archives/2021/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="动画演示"><a href="#动画演示" class="headerlink" title="动画演示"></a>动画演示</h3><p><a href="./canvas动画.md">canvas动画</a><br><a href="./svg动画.md">svg动画</a><br><a href="./css动画.md">css动画</a></p>
+<h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ul>
+<li>无论是css动画，canvas动画，还是svg动画，基本思想都需要考虑一下几点：</li>
+</ul>
+<ol>
+<li>动画当前的状态即是画布在当前时间内（浏览器渲染间隔）的一帧图像。</li>
+<li>前提需要定时调用渲染函数不断绘制。【借助定时器或者requestAnimationFrame—最好依赖浏览器的渲染机制】</li>
+<li>每次渲染的状态由当前动画进度决定。不管是一次性动画还是循环动画，都有一个最小环节，想清楚自己的最小环节。</li>
+<li>每个最小环节由duration决定，受delayTime影响。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/02/18/%E5%8A%A8%E7%94%BB/" data-id="ckla8s8fi000c10wda73jb843" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2021/02/18/%E5%B7%A5%E7%A8%8B%E5%8C%96/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          前端工程化
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2021/02/18/shell%E6%AF%94%E8%BE%83%E5%B8%B8%E7%94%A8%E7%9A%84%E7%AC%A6%E5%8F%B7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">shell比较符号含义</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         
