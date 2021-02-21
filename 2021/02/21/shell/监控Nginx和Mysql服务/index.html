@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="环境：CentOS Linux release 8.1.1911 (Core)软件：  mysql Ver 8.0.21 for Linux on x86_64 (Source distribution),nginx version: nginx&#x2F;1.14.1   一、问题分析 怎么判断服务是否正常运行 启动相应的服务  1.1、判断服务正常运行 通过查询服务监听端口   本地端口查询常见命令：">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-02-21T04:12:04.124Z">
+<meta property="og:updated_time" content="2021-02-21T08:16:07.609Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/blog/atom.xml" title="Hexo" type="application/atom+xml">
@@ -65,7 +65,7 @@
         <section id="main"><article id="post-shell/监控Nginx和Mysql服务" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2021/02/21/shell/%E7%9B%91%E6%8E%A7Nginx%E5%92%8CMysql%E6%9C%8D%E5%8A%A1/" class="article-date">
-  <time datetime="2021-02-21T04:12:04.124Z" itemprop="datePublished">2021-02-21</time>
+  <time datetime="2021-02-21T08:16:07.609Z" itemprop="datePublished">2021-02-21</time>
 </a>
     
   </div>
@@ -146,16 +146,19 @@
 <h2 id="三、Mysql-服务监听"><a href="#三、Mysql-服务监听" class="headerlink" title="三、Mysql 服务监听"></a>三、Mysql 服务监听</h2><p>mysql的判断和nginx类似，以下备注会减少</p>
 </li>
 <li><p>端口号判断</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 本地端口查询</span></span><br><span class="line">[ "`netstat -lnt | grep 3306 | awk -F "[ :]+" 'NR==1 &#123;print $5&#125;'`" -eq "3306" ] &amp;&amp; &#123;</span><br><span class="line">  echo "Mysql is running."</span><br><span class="line">&#125; || &#123;</span><br><span class="line">  echo "Mysql is stopped."</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 启动Mysql</span></span><br><span class="line">  systemctl start mysqld</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[ `netstat -lnt | grep 3306 | wc -l` -gt 1 ] &amp;&amp; &#123;</span><br><span class="line">  echo "Mysql is running."</span><br><span class="line">&#125; || &#123;</span><br><span class="line">  echo "Mysql is stopped."</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 启动Mysql</span></span><br><span class="line">  systemctl start mysqld</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[ `ss -lnt | grep 3306 | wc -l` -gt 1 ] &amp;&amp; &#123;</span><br><span class="line">  echo "Mysql is running."</span><br><span class="line">&#125; || &#123;</span><br><span class="line">  echo "Mysql is stopped."</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 启动Mysql</span></span><br><span class="line">  systemctl start mysqld</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> [ `ss -i:3306 -n -P | wc -l` -gt 1 ] &amp;&amp; &#123;</span></span><br><span class="line">[ `ss -i -n -P | grep 3306 | wc -l` -gt 1 ] &amp;&amp; &#123;</span><br><span class="line">  echo "Mysql is running."</span><br><span class="line">&#125; || &#123;</span><br><span class="line">  echo "Mysql is stopped."</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 启动Mysql</span></span><br><span class="line">  systemctl start mysqld</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 远程端口查询</span></span><br><span class="line">[ `echo "" | telnet www.baidu.com 3306 2&gt;/dev/null | grep Connected | wc -l` -gt 0 ] &amp;&amp; &#123;   echo "服务状态：success"; &#125;</span><br><span class="line">[ `nmap www.baidu.com -p 3006 | grep open | wc -l` -gt 0 ] &amp;&amp; &#123;</span><br><span class="line">  echo "服务状态：success"</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 通过nc扫描结果判断服务状态</span></span><br><span class="line">nc -w 2 www.baidu.com 3006</span><br><span class="line">[ $? -eq 0 ] &amp;&amp; &#123;</span><br><span class="line">  echo "服务状态：success"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 本地端口查询</span></span><br><span class="line">[ "`netstat -lnt | grep 3306 | awk -F "[ :]+" 'NR==1 &#123;print $5&#125;'`" -eq "3306" ] &amp;&amp; &#123;</span><br><span class="line">  echo "Mysql is running."</span><br><span class="line">&#125; || &#123;</span><br><span class="line">  echo "Mysql is stopped."</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 启动Mysql</span></span><br><span class="line">  systemctl start mysqld</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[ `netstat -lnt | grep 3306 | wc -l` -gt 1 ] &amp;&amp; &#123;</span><br><span class="line">  echo "Mysql is running."</span><br><span class="line">&#125; || &#123;</span><br><span class="line">  echo "Mysql is stopped."</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 启动Mysql</span></span><br><span class="line">  systemctl start mysqld</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[ `ss -lnt | grep 3306 | wc -l` -gt 1 ] &amp;&amp; &#123;</span><br><span class="line">  echo "Mysql is running."</span><br><span class="line">&#125; || &#123;</span><br><span class="line">  echo "Mysql is stopped."</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 启动Mysql</span></span><br><span class="line">  systemctl start mysqld</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> [ `ss -i:3306 -n -P | wc -l` -gt 1 ] &amp;&amp; &#123;</span></span><br><span class="line">[ `ss -i -n -P | grep 3306 | wc -l` -gt 1 ] &amp;&amp; &#123;</span><br><span class="line">  echo "Mysql is running."</span><br><span class="line">&#125; || &#123;</span><br><span class="line">  echo "Mysql is stopped."</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 启动Mysql</span></span><br><span class="line">  systemctl start mysqld</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 远程端口查询</span></span><br><span class="line">[ `echo "" | telnet 127.0.0.1 3306 2&gt;/dev/null | grep Connected | wc -l` -gt 0 ] &amp;&amp; &#123;   echo "服务状态：success"; &#125;</span><br><span class="line">[ `nmap 127.0.0.1 -p 3006 | grep open | wc -l` -gt 0 ] &amp;&amp; &#123;</span><br><span class="line">  echo "服务状态：success"</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 通过nc扫描结果判断服务状态</span></span><br><span class="line">nc -w 2 127.0.0.1 3006</span><br><span class="line">[ $? -eq 0 ] &amp;&amp; &#123;</span><br><span class="line">  echo "服务状态：success"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>进程判断</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ps通过行数判断【推荐】</span></span><br><span class="line">[ `ps -ef | grep -v grep | grep mysql | wc -l` -gt 0 ] &amp;&amp; &#123;</span><br><span class="line">  echo "mysql is running."</span><br><span class="line">&#125; || &#123;</span><br><span class="line">  echo "mysql is stopped."</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 启动mysql服务</span></span><br><span class="line">  systemctl start mysqld</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ps通过行数判断【推荐】</span></span><br><span class="line">[ `ps -ef | grep -v grep | grep mysqld | wc -l` -gt 0 ] &amp;&amp; &#123;</span><br><span class="line">  echo "mysqld is running."</span><br><span class="line">&#125; || &#123;</span><br><span class="line">  echo "mysqld is stopped."</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 启动mysql服务</span></span><br><span class="line">  systemctl start mysqld</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>服务判断<br>使用mysql客户端连接mysqld服务判断</p>
+</li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/21/shell/%E7%9B%91%E6%8E%A7Nginx%E5%92%8CMysql%E6%9C%8D%E5%8A%A1/" data-id="cklemx7st000k3ttw8v8u32eb" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/21/shell/%E7%9B%91%E6%8E%A7Nginx%E5%92%8CMysql%E6%9C%8D%E5%8A%A1/" data-id="cklevn3gv000k1jnia42k6zoc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -164,19 +167,19 @@
     
 <nav id="article-nav">
   
-    <a href="/blog/2021/02/21/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/blog/2021/02/21/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          常用测试语法
+          Linux邮件报警脚本及实现【阿里云服务器，Centos8】
         
       </div>
     </a>
   
   
-    <a href="/blog/2021/02/21/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/blog/2021/02/21/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Linux邮件报警脚本及实现【阿里云服务器，Centos8】</div>
+      <div class="article-nav-title">常用测试语法</div>
     </a>
   
 </nav>
@@ -217,19 +220,19 @@
           </li>
         
           <li>
-            <a href="/blog/2021/02/21/URL/">URL constructor</a>
+            <a href="/blog/2021/02/21/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/">Linux邮件报警脚本及实现【阿里云服务器，Centos8】</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/21/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+            <a href="/blog/2021/02/21/shell/%E7%9B%91%E6%8E%A7Nginx%E5%92%8CMysql%E6%9C%8D%E5%8A%A1/">监控Nginx和Mysql服务是否正常,如果未启动则启动相应服务</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/21/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+            <a href="/blog/2021/02/21/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/">常用测试语法</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/21/cross-origin/">cross origin</a>
+            <a href="/blog/2021/02/21/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/">条件测试</a>
           </li>
         
       </ul>
