@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-从数字分隔符看正则" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-throttle-debounce" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/18/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="article-date">
-  <time datetime="2021-02-18T02:25:11.213Z" itemprop="datePublished">2021-02-18</time>
+    <a href="/blog/2021/02/21/throttle-debounce/" class="article-date">
+  <time datetime="2021-02-21T04:12:04.124Z" itemprop="datePublished">2021-02-21</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/18/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
+      <a class="article-title" href="/blog/2021/02/21/throttle-debounce/">截流和去抖的深入理解结合loads</a>
     </h1>
   
 
@@ -83,37 +83,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="格式化数字：”1234567890”-gt-”1-234-567-890”"><a href="#格式化数字：”1234567890”-gt-”1-234-567-890”" class="headerlink" title="格式化数字：”1234567890”=&gt;”1,234,567,890”"></a>格式化数字：”1234567890”=&gt;”1,234,567,890”</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种方案</span></span><br><span class="line"><span class="string">"1234567890"</span>.replace(<span class="regexp">/\B(?=(\d&#123;3&#125;)+(?!\d))/g</span>,<span class="string">","</span>) </span><br><span class="line"><span class="string">"1234567890"</span>.replace(<span class="regexp">/\B(?=(\d&#123;3&#125;)+$)/g</span>,<span class="string">","</span>) </span><br><span class="line"><span class="comment">// 第二种方案</span></span><br><span class="line"><span class="string">"1234567890"</span>.replace(<span class="regexp">/(?&lt;=\d)(?=(\d&#123;3&#125;)+$)/g</span>,<span class="string">','</span>)</span><br></pre></td></tr></table></figure>
-<!-- 匹配的是后面是3*n个数字的非单词边界(\B) -->
-
-
-<h3 id="第一种方案表达式分析"><a href="#第一种方案表达式分析" class="headerlink" title="第一种方案表达式分析"></a>第一种方案表达式分析</h3><p>需求：给定数字字符串，从后往前每隔三位插入一个逗号分隔符<br>分析：该需求和普通的正则表达式处理需求不一样。一般常见的需求是使用正则表达式找到匹配的单词修改单词，如80%replace方法都是这种。 <strong>而该需求是是使用正则表达式，找到合适的位置，在该位置插入字符串。</strong></p>
-<p><strong>第一部分： \B 标识非单词边界</strong><br>匹配从非单词边界开始，反向理解一下就是从单词内部</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'a b'</span>.replace(<span class="regexp">/\b/g</span>,<span class="string">','</span>) <span class="comment">// ",a, ,b,"</span></span><br><span class="line"><span class="string">'a b'</span>.replace(<span class="regexp">/\B/g</span>,<span class="string">','</span>) <span class="comment">// "a b"</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>第二部分：(?=(\d{3})+(?!\d)) 查找位置</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// (?=(\d&#123;3&#125;)+(?!\d)) // 分解该部分</span></span><br><span class="line"><span class="comment">// ?= // 匹配后边的内容</span></span><br><span class="line"><span class="comment">// (\d&#123;3&#125;)+ // 匹配数字3个一组，一次或者多次</span></span><br><span class="line"><span class="comment">// (?!\d) // 匹配后边的内容不是数字</span></span><br><span class="line"><span class="comment">// (\d&#123;3&#125;)+(?!\d) // 所以这个整体的意思是数字三个一组至少一组，且三个一组的数字后边不是数字</span></span><br></pre></td></tr></table></figure>
-<p>第一种整体分析</p>
-<ol>
-<li>匹配从非单词边界开始，避免出现开头位置被抓取的case。</li>
-<li>然后从左往右开始扫描字符串，因为第一部分的原因，直接跳过1的左侧位置；</li>
-<li>到达2的左侧后发现正好可以匹配当前的位置此时可以在这个位置上插入分隔符【(\d{3})+(?!\d) 能和9个数字<code>234567890</code>匹配哦】；</li>
-<li>同理继续往后找，依次到达5的左侧和8的左侧和第三步一致，分别插入分隔符</li>
-</ol>
-<p><strong>写完分析后发现其实可以直接用<code>$</code>将<code>(?!\d)</code>替换掉<code>&quot;1234567890&quot;.replace(/\B(?=(\d{3})+$)/g,&quot;,&quot;)</code></strong></p>
-<h3 id="第二种方案表达式分析"><a href="#第二种方案表达式分析" class="headerlink" title="第二种方案表达式分析"></a>第二种方案表达式分析</h3><p>第二种整体分析-和第一种差不多，前置使用了左环的方案替代\B方案</p>
-<ol>
-<li>左环保证不会出现分隔符插在最左侧的情况</li>
-<li>使用右环查找为3倍数的数字位置，至少存在一组</li>
-<li>到达2的左侧，左边有数字，右边有三组3个数字，符合条件，插入分隔符</li>
-<li>同理继续往后找，依次到达5的左侧和8的左侧和第三步一致，分别插入分隔符</li>
-</ol>
-<h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><p><a href="https://blog.csdn.net/xichanjuan6481/article/details/89434402?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param" target="_blank" rel="noopener">分析(?=pattern) (?!pattern) (?&lt;=pattern) (?&lt;!pattern)</a></p>
-
+        <h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><p><strong>不说应用场景，自己都没有动力往下继续。</strong><br>debounce：input框keyup的search事件（等待时间之后只触发一次,若在等待时间内再次触发，则重新计算等待时间）【有可能出现事件一直触发，回调一直不会执行的情况。触发间隔小于延迟间隔】<br>throttle：监听scroll事件（间隔触发）【在debounce的情况下，事件在等待时间内不断触发，增加maxWait时间即可实现】</p>
+<h3 id="throttle截流"><a href="#throttle截流" class="headerlink" title="throttle截流"></a>throttle截流</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/18/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="ckla8s8fg000b10wdfuc8draq" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/21/throttle-debounce/" data-id="cklemx7s0000a3ttwgc8v7db0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -125,8 +100,8 @@
   
     <article id="post-URLSearchParams" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/18/URLSearchParams/" class="article-date">
-  <time datetime="2021-02-18T02:25:11.209Z" itemprop="datePublished">2021-02-18</time>
+    <a href="/blog/2021/02/21/URLSearchParams/" class="article-date">
+  <time datetime="2021-02-21T04:12:04.124Z" itemprop="datePublished">2021-02-21</time>
 </a>
     
   </div>
@@ -137,7 +112,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/18/URLSearchParams/">URLSearchParams constructor</a>
+      <a class="article-title" href="/blog/2021/02/21/URLSearchParams/">URLSearchParams constructor</a>
     </h1>
   
 
@@ -166,7 +141,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/18/URLSearchParams/" data-id="ckla8s8ew000110wdca60am42" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/21/URLSearchParams/" data-id="cklemx7rm00013ttw8o78aly9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -176,10 +151,10 @@
 
 
   
-    <article id="post-promisefy" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/18/promisefy/" class="article-date">
-  <time datetime="2021-02-18T02:25:11.209Z" itemprop="datePublished">2021-02-18</time>
+    <a href="/blog/2021/02/21/%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-02-21T04:12:04.124Z" itemprop="datePublished">2021-02-21</time>
 </a>
     
   </div>
@@ -190,7 +165,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/18/promisefy/">实现类似 node中util.promisefy的实现</a>
+      <a class="article-title" href="/blog/2021/02/21/%E5%8A%A8%E7%94%BB/">动画</a>
     </h1>
   
 
@@ -198,20 +173,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>分析需求：</p>
+        <h3 id="动画演示"><a href="#动画演示" class="headerlink" title="动画演示"></a>动画演示</h3><p><a href="./canvas动画.md">canvas动画</a><br><a href="./svg动画.md">svg动画</a><br><a href="./css动画.md">css动画</a></p>
+<h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ul>
+<li>无论是css动画，canvas动画，还是svg动画，基本思想都需要考虑一下几点：</li>
+</ul>
 <ol>
-<li>promisefy将异步回调的nodejs的api fn改成了promise fn</li>
-<li>传入一个fn，返回一个新的fn，且新的fn执行的时候返回一个promise</li>
-<li>发现所有的nodejs的api的回调函数参数格式一致(error, content)=&gt;{}</li>
+<li>动画当前的状态即是画布在当前时间内（浏览器渲染间隔）的一帧图像。</li>
+<li>前提需要定时调用渲染函数不断绘制。【借助定时器或者requestAnimationFrame—最好依赖浏览器的渲染机制】</li>
+<li>每次渲染的状态由当前动画进度决定。不管是一次性动画还是循环动画，都有一个最小环节，想清楚自己的最小环节。</li>
+<li>每个最小环节由duration决定，受delayTime影响。</li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"><span class="keyword">const</span> util = <span class="built_in">require</span>(<span class="string">"util"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将异步回调改为promise</span></span><br><span class="line"><span class="keyword">const</span> promisefyReadFile = util.promisify(fs.readFile);</span><br><span class="line">promisefyReadFile(path.resolve(__dirname, <span class="string">'./data.txt'</span>), <span class="string">'utf-8'</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">customPromiseFy</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 注意</span></span><br><span class="line">      <span class="keyword">const</span> widthCallBackArgs = [...args, <span class="function"><span class="keyword">function</span> (<span class="params">error, content</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (error) reject(error);</span><br><span class="line">        resolve(content)</span><br><span class="line">      &#125;]</span><br><span class="line">      fn.apply(fn, widthCallBackArgs);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> promisefyReadFile = customPromiseFy(fs.readFile);</span><br><span class="line">promisefyReadFile(path.resolve(__dirname, <span class="string">'./data.txt'</span>), <span class="string">'utf-8'</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/18/promisefy/" data-id="ckla8s8f5000610wd076bc13o" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/21/%E5%8A%A8%E7%94%BB/" data-id="cklemx7s3000c3ttwccbzg36n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -221,10 +197,10 @@
 
 
   
-    <article id="post-css动画" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-工程化" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/18/css%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-02-18T02:25:11.209Z" itemprop="datePublished">2021-02-18</time>
+    <a href="/blog/2021/02/21/%E5%B7%A5%E7%A8%8B%E5%8C%96/" class="article-date">
+  <time datetime="2021-02-21T04:12:04.124Z" itemprop="datePublished">2021-02-21</time>
 </a>
     
   </div>
@@ -235,7 +211,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/18/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+      <a class="article-title" href="/blog/2021/02/21/%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a>
     </h1>
   
 
@@ -243,14 +219,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ol>
-<li>canvas 基础知识，比如stroke，fill，arc，rect等基础API</li>
+        <h3 id="前端工程中需要解决的几个问题"><a href="#前端工程中需要解决的几个问题" class="headerlink" title="前端工程中需要解决的几个问题"></a>前端工程中需要解决的几个问题</h3><ol>
+<li>快速搭建 各种cli工具：vue-cli，react-app</li>
+<li>高效开发 各种功能：less-loader,sass-loader,css-loader,stylus,es6,jsx</li>
+<li>便捷协作 协作工具：代理，mock数据能力，git版本管理</li>
+<li>顺畅上线 上线工具：Jenkins，ci</li>
+<li>稳健运行 检测工作：异常上报工具</li>
 </ol>
+<h4 id="stylus"><a href="#stylus" class="headerlink" title="stylus"></a>stylus</h4><p>css预处理器，运行 stylus example.styl 可将 demo.styl 文件编译成 example.css 文件。在stylus中可以使用变量，函数，compose集成等</p>
+<h4 id="styled-components"><a href="#styled-components" class="headerlink" title="styled-components"></a>styled-components</h4><p>官网:<a href="https://styled-components.com/" target="_blank" rel="noopener">https://styled-components.com/</a></p>
+<h4 id="css-module"><a href="#css-module" class="headerlink" title="css module"></a>css module</h4><p>未完继续补充~</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/18/css%E5%8A%A8%E7%94%BB/" data-id="ckla8s8f3000510wdgav01e4z" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/21/%E5%B7%A5%E7%A8%8B%E5%8C%96/" data-id="cklemx7s5000d3ttw25m058v7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -260,10 +243,10 @@
 
 
   
-    <article id="post-cross-origin" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-模块化" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/18/cross-origin/" class="article-date">
-  <time datetime="2021-02-18T02:25:11.209Z" itemprop="datePublished">2021-02-18</time>
+    <a href="/blog/2021/02/21/%E6%A8%A1%E5%9D%97%E5%8C%96/" class="article-date">
+  <time datetime="2021-02-21T04:12:04.124Z" itemprop="datePublished">2021-02-21</time>
 </a>
     
   </div>
@@ -274,7 +257,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/18/cross-origin/">cross origin</a>
+      <a class="article-title" href="/blog/2021/02/21/%E6%A8%A1%E5%9D%97%E5%8C%96/">Commonjs</a>
     </h1>
   
 
@@ -282,18 +265,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>就是创建一个文件夹eg:devChromeData</p>
-<h3 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h3><p>第二步执行以下命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -n /Applications/Google\ Chrome.app/ --args --disable-web-security  --user-data-dir=/Users/ansike/devChromeData</span><br></pre></td></tr></table></figure>
+        <h3 id="问题1-Commonjs和es-module的区别"><a href="#问题1-Commonjs和es-module的区别" class="headerlink" title="问题1 Commonjs和es module的区别"></a>问题1 Commonjs和es module的区别</h3><ol>
+<li>使用方式看：导入和导出方式不同<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ====commonjs</span></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="built_in">module</span>.export = <span class="string">'hello'</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'a.js'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ====es module</span></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="string">'hello'</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">import</span> a <span class="keyword">from</span> <span class="string">"./a.js"</span>;</span><br></pre></td></tr></table></figure>
+延伸看级别不一样：<b>commonjs是node运行时的实现，非官方标准</b>。es module中的<code>export default, import</code>都是js关键字，从语言层面实现的支持，是官方标准。</li>
+</ol>
+<h3 id="问题2-exports和module-exports区别"><a href="#问题2-exports和module-exports区别" class="headerlink" title="问题2 exports和module.exports区别"></a>问题2 exports和module.exports区别</h3><p>看下在commonjs中的实现就能明白</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 两个变量初始的时候都指向了同一块内存地址</span></span><br><span class="line"><span class="built_in">console</span>.log(exports === <span class="built_in">module</span>.exports) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 当发生直接赋值的情况后commonjs只会使用module.exports指向的值(和导出的顺序无关)</span></span><br><span class="line"><span class="comment">// module.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="string">"hello"</span>;</span><br><span class="line">exports = <span class="string">"hello2"</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">"./module.js"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// hello</span></span><br></pre></td></tr></table></figure>
 
-<p>微信开发者工具（注意app的名字是否一致）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -a /Applications/wechatwebdevtools.app --args --disable-web-security --user-data-dir</span><br></pre></td></tr></table></figure>
-<h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><p>创建该文件夹，右键浏览器快捷键，在目标中追加参数</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--disable-web-security --user-data-dir=C:\path\to\ChromeUserData</span><br></pre></td></tr></table></figure>
+<h3 id="问题3-require的实现"><a href="#问题3-require的实现" class="headerlink" title="问题3 require的实现"></a>问题3 require的实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"><span class="keyword">const</span> vm = <span class="built_in">require</span>(<span class="string">"vm"</span>);</span><br><span class="line"><span class="comment">// 实现 require</span></span><br><span class="line"><span class="comment">// const a = require("./module.js");</span></span><br><span class="line"><span class="keyword">const</span> a = customRequire(<span class="string">"./module.js"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">customRequire</span>(<span class="params">filePath</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> content = fs.readFileSync(path.join(__dirname, filePath), <span class="string">'utf-8'</span>);</span><br><span class="line">  <span class="comment">// 包裹一层避免作用于污染，隔离变量</span></span><br><span class="line">  <span class="keyword">const</span> wrapper = [</span><br><span class="line">    <span class="string">"(function(require, module, exports)&#123;"</span>,</span><br><span class="line">    <span class="string">"&#125;)"</span></span><br><span class="line">  ]</span><br><span class="line">  <span class="keyword">const</span> <span class="built_in">module</span> = &#123;</span><br><span class="line">    exports: &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> wrapperFn = wrapper[<span class="number">0</span>] + content + wrapper[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 两种实现方式都OK--实现字符串转js 运行时代码</span></span><br><span class="line">  <span class="keyword">const</span> canHandleFn = vm.runInThisContext(wrapperFn)</span><br><span class="line">  <span class="comment">// const canHandleFn = eval(wrapperFn);</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 这一步解决了问题三的疑惑</span></span><br><span class="line">  canHandleFn(customRequire, <span class="built_in">module</span>, <span class="built_in">module</span>.exports)</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">module</span>.exports</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/18/cross-origin/" data-id="ckla8s8f1000410wdasxj9euh" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/21/%E6%A8%A1%E5%9D%97%E5%8C%96/" data-id="cklemx7s7000e3ttw5lqwczdl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -303,10 +287,10 @@
 
 
   
-    <article id="post-canvas动画" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-集中式和分布式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/18/canvas%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-02-18T02:25:11.209Z" itemprop="datePublished">2021-02-18</time>
+    <a href="/blog/2021/02/21/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" class="article-date">
+  <time datetime="2021-02-21T04:12:04.124Z" itemprop="datePublished">2021-02-21</time>
 </a>
     
   </div>
@@ -317,7 +301,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/18/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+      <a class="article-title" href="/blog/2021/02/21/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
     </h1>
   
 
@@ -325,14 +309,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ol>
-<li>canvas 基础知识，比如stroke，fill，arc，rect等基础API</li>
-</ol>
+        <h3 id="集中式"><a href="#集中式" class="headerlink" title="集中式"></a>集中式</h3><p>集中式系统中版本库是集中存放在中央服务器的。以svn为例，开发人员工作的时候都需要从中央服务器获取最新的版本，工作完之后需要将工作推送给中央服务器。<br>eg：SVN，云服务器（在云服务器开发）<br>优点：减少了硬件和软件成本<br>问题：<strong>必须联网（局域网或者互联网）</strong></p>
+<h3 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h3><p>分布式系统中没有中央服务器的概念。</p>
+<p>eg：git<br>优点：每个人的电脑中都有完整的版本库，所以安全性很高，即使服务器仓库被破坏了，损失也不会很大。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/18/canvas%E5%8A%A8%E7%94%BB/" data-id="ckla8s8f0000310wddruf8leh" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/21/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" data-id="cklemx7s9000f3ttw4yb6hc7f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -344,8 +328,8 @@
   
     <article id="post-shell/calc" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/18/shell/calc/" class="article-date">
-  <time datetime="2021-02-18T02:25:11.209Z" itemprop="datePublished">2021-02-18</time>
+    <a href="/blog/2021/02/21/shell/calc/" class="article-date">
+  <time datetime="2021-02-21T04:12:04.124Z" itemprop="datePublished">2021-02-21</time>
 </a>
     
   </div>
@@ -356,7 +340,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/18/shell/calc/">shell中变量的数值计算</a>
+      <a class="article-title" href="/blog/2021/02/21/shell/calc/">shell中变量的数值计算</a>
     </h1>
   
 
@@ -392,7 +376,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/18/shell/calc/" data-id="ckla8s8g4000g10wdbr4e8e9o" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/21/shell/calc/" data-id="cklemx7sq000g3ttw9eq7dj1r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -404,8 +388,8 @@
   
     <article id="post-shell/read" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/18/shell/read/" class="article-date">
-  <time datetime="2021-02-18T02:25:11.209Z" itemprop="datePublished">2021-02-18</time>
+    <a href="/blog/2021/02/21/shell/read/" class="article-date">
+  <time datetime="2021-02-21T04:12:04.124Z" itemprop="datePublished">2021-02-21</time>
 </a>
     
   </div>
@@ -416,7 +400,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/18/shell/read/">read 命令</a>
+      <a class="article-title" href="/blog/2021/02/21/shell/read/">read 命令</a>
     </h1>
   
 
@@ -433,7 +417,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/18/shell/read/" data-id="ckla8s8g5000h10wd4qxx7q9d" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/21/shell/read/" data-id="cklemx7sr000h3ttwa2pjd5ff" class="article-share-link">Share</a>
       
       
     </footer>
@@ -445,8 +429,8 @@
   
     <article id="post-shell/条件测试" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/18/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/" class="article-date">
-  <time datetime="2021-02-18T02:25:11.209Z" itemprop="datePublished">2021-02-18</time>
+    <a href="/blog/2021/02/21/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/" class="article-date">
+  <time datetime="2021-02-21T04:12:04.124Z" itemprop="datePublished">2021-02-21</time>
 </a>
     
   </div>
@@ -457,7 +441,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/18/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/">条件测试</a>
+      <a class="article-title" href="/blog/2021/02/21/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/">条件测试</a>
     </h1>
   
 
@@ -482,7 +466,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/18/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/" data-id="ckla8s8g6000i10wd7i7w87jd" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/21/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/" data-id="cklemx7ss000i3ttwgnpl6073" class="article-share-link">Share</a>
       
       
     </footer>
@@ -492,10 +476,10 @@
 
 
   
-    <article id="post-canvas-基础特性" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/比较测试命令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/18/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" class="article-date">
-  <time datetime="2021-02-18T02:25:11.209Z" itemprop="datePublished">2021-02-18</time>
+    <a href="/blog/2021/02/21/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time datetime="2021-02-21T04:12:04.124Z" itemprop="datePublished">2021-02-21</time>
 </a>
     
   </div>
@@ -506,7 +490,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/18/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+      <a class="article-title" href="/blog/2021/02/21/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/">常用测试语法</a>
     </h1>
   
 
@@ -514,31 +498,69 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="对象创建"><a href="#对象创建" class="headerlink" title="对象创建"></a>对象创建</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HTML</span></span><br><span class="line">&lt;canvas id=<span class="string">"canvas"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//JS</span></span><br><span class="line"><span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"><span class="keyword">const</span> ctx = canvas.getContext(<span class="string">"2d"</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="canvas元素的属性和方法"><a href="#canvas元素的属性和方法" class="headerlink" title="canvas元素的属性和方法"></a>canvas元素的属性和方法</h3><p><strong>1. 属性</strong></p>
-<ul>
-<li>width</li>
-<li>height</li>
-</ul>
-<p><strong>2. 方法</strong></p>
-<ul>
-<li><ol>
-<li>getContext(contextId: “2d”, options?: CanvasRenderingContext2DSettings): CanvasRenderingContext2D | null;</li>
-<li>getContext(contextId: “bitmaprenderer”, options?: ImageBitmapRenderingContextSettings):mageBitmapRenderingContext | null;</li>
-<li>getContext(contextId: “webgl”, options?: WebGLContextAttributes): WebGLRenderingContext | null;</li>
-<li>getContext(contextId: “webgl2”, options?: WebGLContextAttributes): WebGL2RenderingContext | null;</li>
-<li>getContext(contextId: string, options?: any): RenderingContext | null;<br>// 返回绘图环境对象</li>
+        <ol>
+<li>文件测试语法</li>
+<li>字符串测试语法</li>
+<li>整数二元比较操作符</li>
+<li>逻辑操作符</li>
 </ol>
-</li>
-<li>toDataURL(type?: string, quality?: any): string; // 返回数据地址，可以直接给img的src赋值</li>
-<li>toBlob(callback: BlobCallback, type?: string, quality?: any): void; // 返回表示图像文件的blob，可以将该blob做文件上传使用</li>
-<li>transferControlToOffscreen(): OffscreenCanvas;</li>
+<h3 id="文件目录测试语法"><a href="#文件目录测试语法" class="headerlink" title="文件目录测试语法"></a>文件目录测试语法</h3><ol>
+<li>-d 判断是目录</li>
+<li>-f 判断是文件</li>
+<li>-e 判断目录或者文件存在</li>
+<li>-r 判断文件可读</li>
+<li>-s 判断文件大小不为0为真</li>
+<li>-x 判断文件可执行</li>
+<li>-w 判断文件可写</li>
+<li>-L 文件存在且链接文件为真</li>
+<li>f1 -nt f2  f1比f2新则为真</li>
+<li>f1 -ot f2  f1比f2旧则为真</li>
+</ol>
+<ul>
+<li>1和2是等价的</li>
+<li>[[]]为test拓展的命令，常用语通配符进行模式匹配。&amp;&amp;,||,&gt;,&lt;可以使用</li>
+<li>(())常用语计算</li>
 </ul>
+<h5 id="示例示例"><a href="#示例示例" class="headerlink" title="示例示例"></a>示例示例</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[ -d public ] &amp;&amp; echo 1</span><br><span class="line">[ -s package.json ] &amp;&amp; echo 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">  不存在的变量必须加引号包裹</span></span><br><span class="line">[ -f $a ] &amp;&amp; echo 1 || echo 0 # 1</span><br><span class="line">[ -f "$a" ] &amp;&amp; echo 1 || echo 0 # 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串测试语法"><a href="#字符串测试语法" class="headerlink" title="字符串测试语法"></a>字符串测试语法</h3><ol>
+<li>-n “字符串” 判断字符串长度不为0为真[no zero]</li>
+<li>-z “字符串” 判断字符串长度为0为真  [zero]</li>
+<li>“字符串1” = “字符串2” 相等为真</li>
+<li>“字符串1” != “字符串2” 不等为真</li>
+</ol>
+<ul>
+<li>字符串测试时必须加引号，不加很有可能发生语法没问题，但是逻辑结果和预期的不一致</li>
+</ul>
+<h5 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[ "a" = "a" ] &amp;&amp; echo 1 || echo 0</span><br><span class="line">[ "a" = "b" ] &amp;&amp; echo 1 || echo 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="整数二元比较操作符"><a href="#整数二元比较操作符" class="headerlink" title="整数二元比较操作符"></a>整数二元比较操作符</h3><ol>
+<li>-eq 相等在test和[]中是这样，在[[]]和(())是 ==或者=</li>
+<li>-ne 不等在test和[]中是这样，在[[]]和(())是 !=</li>
+<li>-gt 大于在test和[]中是这样，在[[]]和(())是 &gt;</li>
+<li>-lt 小于在test和[]中是这样，在[[]]和(())是 &lt;</li>
+<li>-ge 大于等于在test和[]中是这样，在[[]]和(())是 &gt;=</li>
+<li>-le 小于等于在test和[]中是这样，在[[]]和(())是 &lt;=</li>
+</ol>
+<ul>
+<li>[]也可以使用=, !=。注意使用&lt;,&gt;时使用转义字符</li>
+</ul>
+<h5 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 尽量按照上诉规则</span></span><br><span class="line">[ 1 -gt 2 ] &amp;&amp; echo 1 || echo 0 # 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> [ 1 &gt; 2 ] &amp;&amp; <span class="built_in">echo</span> 1 || <span class="built_in">echo</span> 0 <span class="comment"># 1</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="逻辑操作符"><a href="#逻辑操作符" class="headerlink" title="逻辑操作符"></a>逻辑操作符</h3><ol>
+<li>-a 相等在test和[]中是这样，在[[]]和(())是 &amp;&amp;</li>
+<li>-o 相等在test和[]中是这样，在[[]]和(())是 ||</li>
+<li>! 相等在test和[]中是这样，在[[]]和(())是 !</li>
+</ol>
+<ul>
+<li>[]也可以使用=, !=。注意使用&lt;,&gt;时使用转义字符</li>
+</ul>
+<h5 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ -z "file" -a -z "" ] &amp;&amp; echo 1 || echo 0</span><br><span class="line">[ -z "file" -o -z "" ] &amp;&amp; echo 1 || echo 0</span><br><span class="line">[[ -z "file" &amp;&amp; -z "" ]] &amp;&amp; echo 1 || echo 0</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/18/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" data-id="ckla8s8ey000210wd1n6s0q9q" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/21/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" data-id="cklemx7ss000j3ttwcjewdvt4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -584,23 +606,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/02/18/throttle-debounce/">截流和去抖的深入理解结合loads</a>
+            <a href="/blog/2021/02/21/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/18/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/">Linux邮件报警脚本及实现【阿里云服务器，Centos8】</a>
+            <a href="/blog/2021/02/21/URL/">URL constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/18/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/">常用测试语法</a>
+            <a href="/blog/2021/02/21/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/18/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
+            <a href="/blog/2021/02/21/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/18/%E6%A8%A1%E5%9D%97%E5%8C%96/">Commonjs</a>
+            <a href="/blog/2021/02/21/cross-origin/">cross origin</a>
           </li>
         
       </ul>
