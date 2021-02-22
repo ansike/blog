@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-shell/比较测试命令" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/判断字符串长度为0" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/21/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" class="article-date">
-  <time datetime="2021-02-21T15:07:13.228Z" itemprop="datePublished">2021-02-21</time>
+    <a href="/blog/2021/02/22/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6%E4%B8%BA0/" class="article-date">
+  <time datetime="2021-02-22T15:37:57.529Z" itemprop="datePublished">2021-02-22</time>
 </a>
     
   </div>
@@ -75,7 +75,101 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/21/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/">常用测试语法</a>
+      <a class="article-title" href="/blog/2021/02/22/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6%E4%B8%BA0/">判断字符串长度为0</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="n-和-z-判断"><a href="#n-和-z-判断" class="headerlink" title="-n 和 -z 判断"></a>-n 和 -z 判断</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> -z:zero, -n:nozero</span></span><br><span class="line">var1="11"</span><br><span class="line">var2=""</span><br><span class="line">[ -z "$var1" ] &amp;&amp; echo 1 || echo 2 # 2</span><br><span class="line">[ -z "$var2" ] &amp;&amp; echo 1 || echo 2 # 1</span><br><span class="line">[ -n "$var1" ] &amp;&amp; echo 1 || echo 2 # 1</span><br><span class="line">[ -n "$var2" ] &amp;&amp; echo 1 || echo 2 # 2</span><br></pre></td></tr></table></figure>
+
+<h5 id="变量字符串的方式"><a href="#变量字符串的方式" class="headerlink" title="变量字符串的方式"></a>变量字符串的方式</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var1="11"</span><br><span class="line">var2=""</span><br><span class="line">[ "$&#123;#var1&#125;" -eq 0 ] &amp;&amp; echo 1 || echo 2 # 2</span><br><span class="line">[ "$&#123;#var2&#125;" -eq 0 ] &amp;&amp; echo 1 || echo 2 # 1</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过expr的length计算"><a href="#通过expr的length计算" class="headerlink" title="通过expr的length计算"></a>通过<code>expr</code>的<code>length</code>计算</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var1="11"</span><br><span class="line">var2=""</span><br><span class="line">[ `expr length "$&#123;var1&#125;"` -eq 0 ] &amp;&amp; echo 1 || echo 2 # 2</span><br><span class="line">[ `expr length "$&#123;var2&#125;"` -eq 0 ] &amp;&amp; echo 1 || echo 2 # 1</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过wc-L"><a href="#通过wc-L" class="headerlink" title="通过wc -L"></a>通过<code>wc -L</code></h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var1="11"</span><br><span class="line">var2=""</span><br><span class="line"><span class="meta">#</span><span class="bash"> -L 查最大行数</span></span><br><span class="line">[ `echo $&#123;var1&#125; | wc -L` -eq 0 ] &amp;&amp; echo 1 || echo 2 # 2</span><br><span class="line">[ `echo $&#123;var2&#125; | wc -L` -eq 0 ] &amp;&amp; echo 1 || echo 2 # 1</span><br><span class="line"><span class="meta">#</span><span class="bash"> -w 查看单词数量</span></span><br><span class="line">[ `echo $&#123;var1&#125; | wc -w` -eq 0 ] &amp;&amp; echo 1 || echo 2 # 2</span><br><span class="line">[ `echo $&#123;var2&#125; | wc -w` -eq 0 ] &amp;&amp; echo 1 || echo 2 # 1</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过awk-length"><a href="#通过awk-length" class="headerlink" title="通过awk length"></a>通过<code>awk length</code></h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var1="11"</span><br><span class="line">var2=""</span><br><span class="line">[ `echo $&#123;var1&#125; | awk '&#123;print length&#125;'` -eq 0 ] &amp;&amp; echo 1 || echo 2 # 2</span><br><span class="line">[ `echo $&#123;var2&#125; | awk '&#123;print length&#125;'` -eq 0 ] &amp;&amp; echo 1 || echo 2 # 1</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/02/22/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6%E4%B8%BA0/" data-id="cklgqv5q2000k3vqaf7qc4u91" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-shell/条件测试" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/02/22/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/" class="article-date">
+  <time datetime="2021-02-22T15:37:57.529Z" itemprop="datePublished">2021-02-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/02/22/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/">条件测试</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="测试语法"><a href="#测试语法" class="headerlink" title="测试语法"></a>测试语法</h5><ol>
+<li>test &lt;测试表达式&gt;</li>
+<li>[ &lt;测试表达式&gt; ]  # 常用这个</li>
+<li>[[ &lt;测试表达式&gt; ]]</li>
+<li>((&lt;测试表达式&gt;))</li>
+</ol>
+<ul>
+<li>1和2是等价的</li>
+<li>[[]]为test拓展的命令，常用语通配符进行模式匹配。&amp;&amp;,||,&gt;,&lt;可以使用</li>
+<li>(())常用语计算</li>
+</ul>
+<h5 id="test使用"><a href="#test使用" class="headerlink" title="test使用"></a>test使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 判断file文件是否存在</span></span><br><span class="line">test -f file &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断字符串长度是否为0</span></span><br><span class="line">test -z "file" &amp;&amp; echo 1 || echo 0</span><br></pre></td></tr></table></figure>
+<h5 id="使用"><a href="#使用" class="headerlink" title="[]使用"></a>[]使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 判断file文件是否存在</span></span><br><span class="line">[ -f file ] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断字符串长度是否为0</span></span><br><span class="line">[ -z "file" ] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> -o 表示或者</span></span><br><span class="line">[ -z "file" -o -z "" ] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> -a 表示且</span></span><br><span class="line">[ -z "file" -a -z "" ] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断字符串相等</span></span><br><span class="line">[ "file" = "1" ] &amp;&amp; echo 1 || echo 0</span><br></pre></td></tr></table></figure>
+<h5 id="使用-1"><a href="#使用-1" class="headerlink" title="[]使用"></a>[]使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 判断file文件是否存在</span></span><br><span class="line">[[ -f file ]] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断字符串长度是否为0</span></span><br><span class="line">[[ -z "file" ]] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> -o 表示或者</span></span><br><span class="line">[[ -z "file" || -z "" ]] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> -a 表示且</span></span><br><span class="line">[[ -z "file" &amp;&amp; -z "" ]] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> TODO 判断字符串相等</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/02/22/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/" data-id="cklgqv5q3000l3vqa5z38c45l" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-shell/比较测试命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/02/22/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time datetime="2021-02-22T15:37:57.529Z" itemprop="datePublished">2021-02-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/02/22/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/">常用测试语法</a>
     </h1>
   
 
@@ -145,7 +239,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/21/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" data-id="cklfabrsd000k1vmk9qztfsoo" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/22/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" data-id="cklgqv5q4000m3vqa048i2cev" class="article-share-link">Share</a>
       
       
     </footer>
@@ -157,8 +251,8 @@
   
     <article id="post-shell/监控Nginx和Mysql服务" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/21/shell/%E7%9B%91%E6%8E%A7Nginx%E5%92%8CMysql%E6%9C%8D%E5%8A%A1/" class="article-date">
-  <time datetime="2021-02-21T15:07:13.228Z" itemprop="datePublished">2021-02-21</time>
+    <a href="/blog/2021/02/22/shell/%E7%9B%91%E6%8E%A7Nginx%E5%92%8CMysql%E6%9C%8D%E5%8A%A1/" class="article-date">
+  <time datetime="2021-02-22T15:37:57.529Z" itemprop="datePublished">2021-02-22</time>
 </a>
     
   </div>
@@ -169,7 +263,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/21/shell/%E7%9B%91%E6%8E%A7Nginx%E5%92%8CMysql%E6%9C%8D%E5%8A%A1/">监控Nginx和Mysql服务是否正常,如果未启动则启动相应服务</a>
+      <a class="article-title" href="/blog/2021/02/22/shell/%E7%9B%91%E6%8E%A7Nginx%E5%92%8CMysql%E6%9C%8D%E5%8A%A1/">监控Nginx和Mysql服务是否正常,如果未启动则启动相应服务</a>
     </h1>
   
 
@@ -251,7 +345,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/21/shell/%E7%9B%91%E6%8E%A7Nginx%E5%92%8CMysql%E6%9C%8D%E5%8A%A1/" data-id="cklfabrse000l1vmk7fq5861j" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/22/shell/%E7%9B%91%E6%8E%A7Nginx%E5%92%8CMysql%E6%9C%8D%E5%8A%A1/" data-id="cklgqv5q5000n3vqaajyih1ph" class="article-share-link">Share</a>
       
       
     </footer>
@@ -263,8 +357,8 @@
   
     <article id="post-shell/邮件报警脚本及实现" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/21/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/" class="article-date">
-  <time datetime="2021-02-21T15:07:13.228Z" itemprop="datePublished">2021-02-21</time>
+    <a href="/blog/2021/02/22/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/" class="article-date">
+  <time datetime="2021-02-22T15:37:57.529Z" itemprop="datePublished">2021-02-22</time>
 </a>
     
   </div>
@@ -275,7 +369,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/21/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/">Linux邮件报警脚本及实现【阿里云服务器，Centos8】</a>
+      <a class="article-title" href="/blog/2021/02/22/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/">Linux邮件报警脚本及实现【阿里云服务器，Centos8】</a>
     </h1>
   
 
@@ -303,7 +397,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/21/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/" data-id="cklfabrsf000m1vmk6d5uegm4" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/22/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/" data-id="cklgqv5q6000o3vqacyy38uyj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -349,23 +443,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/02/21/%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a>
+            <a href="/blog/2021/02/22/%E6%A8%A1%E5%9D%97%E5%8C%96/">Commonjs</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/21/URL/">URL constructor</a>
+            <a href="/blog/2021/02/22/URL/">URL constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/21/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+            <a href="/blog/2021/02/22/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/21/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+            <a href="/blog/2021/02/22/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/21/cross-origin/">cross origin</a>
+            <a href="/blog/2021/02/22/cross-origin/">cross origin</a>
           </li>
         
       </ul>
