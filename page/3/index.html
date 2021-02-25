@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-shell/判断字符串是否为数字的多种思路" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/shell脚本执行" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/24/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/" class="article-date">
-  <time datetime="2021-02-24T15:33:46.823Z" itemprop="datePublished">2021-02-24</time>
+    <a href="/blog/2021/02/25/shell/shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C/" class="article-date">
+  <time datetime="2021-02-25T15:53:52.905Z" itemprop="datePublished">2021-02-25</time>
 </a>
     
   </div>
@@ -75,7 +75,48 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/24/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/">判断字符串是否为数字的多种思路</a>
+      <a class="article-title" href="/blog/2021/02/25/shell/shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C/">shell脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h3><ol>
+<li>先加载系统环境变量ENV.该变量指定了环境文件(加载顺序通常是/etc/profile,<del>/.bash_profile,</del>/.bashrc,/etc/bashrc),依次加载环境文件</li>
+<li>开始执行shell</li>
+<li>遇到子脚本的时候一般会开启一个新的进程执行子shell</li>
+</ol>
+<h3 id="执行方式"><a href="#执行方式" class="headerlink" title="执行方式"></a>执行方式</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/02/25/shell/shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C/" data-id="ckll1r6sh000k2rnfbt000axp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-shell/判断字符串是否为数字的多种思路" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/02/25/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/" class="article-date">
+  <time datetime="2021-02-25T15:53:52.905Z" itemprop="datePublished">2021-02-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/02/25/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/">判断字符串是否为数字的多种思路</a>
     </h1>
   
 
@@ -91,7 +132,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/24/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/" data-id="ckljllhs8000k21rof9z2hmwd" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/25/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/" data-id="ckll1r6si000l2rnff6k86wgr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -103,8 +144,8 @@
   
     <article id="post-shell/判断字符串长度为0" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/24/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6%E4%B8%BA0/" class="article-date">
-  <time datetime="2021-02-24T15:33:46.823Z" itemprop="datePublished">2021-02-24</time>
+    <a href="/blog/2021/02/25/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6%E4%B8%BA0/" class="article-date">
+  <time datetime="2021-02-25T15:53:52.905Z" itemprop="datePublished">2021-02-25</time>
 </a>
     
   </div>
@@ -115,7 +156,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/24/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6%E4%B8%BA0/">判断字符串长度为0</a>
+      <a class="article-title" href="/blog/2021/02/25/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6%E4%B8%BA0/">判断字符串长度为0</a>
     </h1>
   
 
@@ -136,7 +177,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/24/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6%E4%B8%BA0/" data-id="ckljllhs9000l21ro0479fpcf" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/25/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6%E4%B8%BA0/" data-id="ckll1r6sk000m2rnf6jciaubo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -148,8 +189,8 @@
   
     <article id="post-shell/条件测试" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/24/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/" class="article-date">
-  <time datetime="2021-02-24T15:33:46.823Z" itemprop="datePublished">2021-02-24</time>
+    <a href="/blog/2021/02/25/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/" class="article-date">
+  <time datetime="2021-02-25T15:53:52.905Z" itemprop="datePublished">2021-02-25</time>
 </a>
     
   </div>
@@ -160,7 +201,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/24/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/">条件测试</a>
+      <a class="article-title" href="/blog/2021/02/25/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/">条件测试</a>
     </h1>
   
 
@@ -185,7 +226,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/24/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/" data-id="ckljllhsf000m21rogohm7fvf" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/25/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/" data-id="ckll1r6sl000n2rnf36bzebl1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -197,8 +238,8 @@
   
     <article id="post-shell/比较测试命令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/24/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" class="article-date">
-  <time datetime="2021-02-24T15:33:46.823Z" itemprop="datePublished">2021-02-24</time>
+    <a href="/blog/2021/02/25/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time datetime="2021-02-25T15:53:52.905Z" itemprop="datePublished">2021-02-25</time>
 </a>
     
   </div>
@@ -209,7 +250,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/24/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/">常用测试语法</a>
+      <a class="article-title" href="/blog/2021/02/25/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/">常用测试语法</a>
     </h1>
   
 
@@ -279,7 +320,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/24/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" data-id="ckljllhsg000n21ro0vuo4jn7" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/25/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" data-id="ckll1r6sm000o2rnf0quza2sx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -291,8 +332,8 @@
   
     <article id="post-shell/监控Nginx和Mysql服务" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/24/shell/%E7%9B%91%E6%8E%A7Nginx%E5%92%8CMysql%E6%9C%8D%E5%8A%A1/" class="article-date">
-  <time datetime="2021-02-24T15:33:46.823Z" itemprop="datePublished">2021-02-24</time>
+    <a href="/blog/2021/02/25/shell/%E7%9B%91%E6%8E%A7Nginx%E5%92%8CMysql%E6%9C%8D%E5%8A%A1/" class="article-date">
+  <time datetime="2021-02-25T15:53:52.905Z" itemprop="datePublished">2021-02-25</time>
 </a>
     
   </div>
@@ -303,7 +344,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/24/shell/%E7%9B%91%E6%8E%A7Nginx%E5%92%8CMysql%E6%9C%8D%E5%8A%A1/">监控Nginx和Mysql服务是否正常,如果未启动则启动相应服务</a>
+      <a class="article-title" href="/blog/2021/02/25/shell/%E7%9B%91%E6%8E%A7Nginx%E5%92%8CMysql%E6%9C%8D%E5%8A%A1/">监控Nginx和Mysql服务是否正常,如果未启动则启动相应服务</a>
     </h1>
   
 
@@ -385,7 +426,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/24/shell/%E7%9B%91%E6%8E%A7Nginx%E5%92%8CMysql%E6%9C%8D%E5%8A%A1/" data-id="ckljllhsh000o21rohhuxd3va" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/25/shell/%E7%9B%91%E6%8E%A7Nginx%E5%92%8CMysql%E6%9C%8D%E5%8A%A1/" data-id="ckll1r6sn000p2rnf2rqgfxq6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -397,8 +438,8 @@
   
     <article id="post-shell/邮件报警脚本及实现" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/24/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/" class="article-date">
-  <time datetime="2021-02-24T15:33:46.823Z" itemprop="datePublished">2021-02-24</time>
+    <a href="/blog/2021/02/25/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/" class="article-date">
+  <time datetime="2021-02-25T15:53:52.905Z" itemprop="datePublished">2021-02-25</time>
 </a>
     
   </div>
@@ -409,7 +450,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/24/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/">Linux邮件报警脚本及实现【阿里云服务器，Centos8】</a>
+      <a class="article-title" href="/blog/2021/02/25/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/">Linux邮件报警脚本及实现【阿里云服务器，Centos8】</a>
     </h1>
   
 
@@ -437,7 +478,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/24/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/" data-id="ckljllhsi000p21roh6fxbwhn" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/25/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/" data-id="ckll1r6so000q2rnf7exfctfi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -483,23 +524,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/02/24/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
+            <a href="/blog/2021/02/25/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/24/URL/">URL constructor</a>
+            <a href="/blog/2021/02/25/URL/">URL constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/24/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+            <a href="/blog/2021/02/25/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/24/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+            <a href="/blog/2021/02/25/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/24/cross-origin/">cross origin</a>
+            <a href="/blog/2021/02/25/cross-origin/">cross origin</a>
           </li>
         
       </ul>
