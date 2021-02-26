@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>常用测试语法 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="文件测试语法 字符串测试语法 整数二元比较操作符 逻辑操作符  文件目录测试语法 -d 判断是目录 -f 判断是文件 -e 判断目录或者文件存在 -r 判断文件可读 -s 判断文件大小不为0为真 -x 判断文件可执行 -w 判断文件可写 -L 文件存在且链接文件为真 f1 -nt f2  f1比f2新则为真 f1 -ot f2  f1比f2旧则为真   1和2是等价的 [[]]为test拓展的命">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用测试语法">
+<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;2021&#x2F;02&#x2F;26&#x2F;shell&#x2F;%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4&#x2F;index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="文件测试语法 字符串测试语法 整数二元比较操作符 逻辑操作符  文件目录测试语法 -d 判断是目录 -f 判断是文件 -e 判断目录或者文件存在 -r 判断文件可读 -s 判断文件大小不为0为真 -x 判断文件可执行 -w 判断文件可写 -L 文件存在且链接文件为真 f1 -nt f2  f1比f2新则为真 f1 -ot f2  f1比f2旧则为真   1和2是等价的 [[]]为test拓展的命">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-02-26T15:16:27.257Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://ansike.github.io/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-shell/比较测试命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/02/26/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      常用测试语法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>文件测试语法</li>
+<li>字符串测试语法</li>
+<li>整数二元比较操作符</li>
+<li>逻辑操作符</li>
+</ol>
+<h3 id="文件目录测试语法"><a href="#文件目录测试语法" class="headerlink" title="文件目录测试语法"></a>文件目录测试语法</h3><ol>
+<li>-d 判断是目录</li>
+<li>-f 判断是文件</li>
+<li>-e 判断目录或者文件存在</li>
+<li>-r 判断文件可读</li>
+<li>-s 判断文件大小不为0为真</li>
+<li>-x 判断文件可执行</li>
+<li>-w 判断文件可写</li>
+<li>-L 文件存在且链接文件为真</li>
+<li>f1 -nt f2  f1比f2新则为真</li>
+<li>f1 -ot f2  f1比f2旧则为真</li>
+</ol>
+<ul>
+<li>1和2是等价的</li>
+<li>[[]]为test拓展的命令，常用语通配符进行模式匹配。&amp;&amp;,||,&gt;,&lt;可以使用</li>
+<li>(())常用语计算</li>
+</ul>
+<h5 id="示例示例"><a href="#示例示例" class="headerlink" title="示例示例"></a>示例示例</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[ -d public ] &amp;&amp; echo 1</span><br><span class="line">[ -s package.json ] &amp;&amp; echo 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">  不存在的变量必须加引号包裹</span></span><br><span class="line">[ -f $a ] &amp;&amp; echo 1 || echo 0 # 1</span><br><span class="line">[ -f "$a" ] &amp;&amp; echo 1 || echo 0 # 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串测试语法"><a href="#字符串测试语法" class="headerlink" title="字符串测试语法"></a>字符串测试语法</h3><ol>
+<li>-n “字符串” 判断字符串长度不为0为真[no zero]</li>
+<li>-z “字符串” 判断字符串长度为0为真  [zero]</li>
+<li>“字符串1” = “字符串2” 相等为真</li>
+<li>“字符串1” != “字符串2” 不等为真</li>
+</ol>
+<ul>
+<li>字符串测试时必须加引号，不加很有可能发生语法没问题，但是逻辑结果和预期的不一致</li>
+</ul>
+<h5 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[ "a" = "a" ] &amp;&amp; echo 1 || echo 0</span><br><span class="line">[ "a" = "b" ] &amp;&amp; echo 1 || echo 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="整数二元比较操作符"><a href="#整数二元比较操作符" class="headerlink" title="整数二元比较操作符"></a>整数二元比较操作符</h3><ol>
+<li>-eq 相等在test和[]中是这样，在[[]]和(())是 ==或者=</li>
+<li>-ne 不等在test和[]中是这样，在[[]]和(())是 !=</li>
+<li>-gt 大于在test和[]中是这样，在[[]]和(())是 &gt;</li>
+<li>-lt 小于在test和[]中是这样，在[[]]和(())是 &lt;</li>
+<li>-ge 大于等于在test和[]中是这样，在[[]]和(())是 &gt;=</li>
+<li>-le 小于等于在test和[]中是这样，在[[]]和(())是 &lt;=</li>
+</ol>
+<ul>
+<li>[]也可以使用=, !=。注意使用&lt;,&gt;时使用转义字符</li>
+</ul>
+<h5 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 尽量按照上诉规则</span></span><br><span class="line">[ 1 -gt 2 ] &amp;&amp; echo 1 || echo 0 # 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> [ 1 &gt; 2 ] &amp;&amp; <span class="built_in">echo</span> 1 || <span class="built_in">echo</span> 0 <span class="comment"># 1</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="逻辑操作符"><a href="#逻辑操作符" class="headerlink" title="逻辑操作符"></a>逻辑操作符</h3><ol>
+<li>-a 相等在test和[]中是这样，在[[]]和(())是 &amp;&amp;</li>
+<li>-o 相等在test和[]中是这样，在[[]]和(())是 ||</li>
+<li>! 相等在test和[]中是这样，在[[]]和(())是 !</li>
+</ol>
+<ul>
+<li>[]也可以使用=, !=。注意使用&lt;,&gt;时使用转义字符</li>
+</ul>
+<h5 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ -z "file" -a -z "" ] &amp;&amp; echo 1 || echo 0</span><br><span class="line">[ -z "file" -o -z "" ] &amp;&amp; echo 1 || echo 0</span><br><span class="line">[[ -z "file" &amp;&amp; -z "" ]] &amp;&amp; echo 1 || echo 0</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/02/26/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" data-id="cklmfuvol000p1ix5amey5s6z" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2021/02/26/shell/%E6%A3%80%E6%9F%A5web%E7%AB%99%E7%82%B9%E6%AD%A3%E5%B8%B8/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          function函数实战-脚本检查web站点正常
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2021/02/26/shell/%E7%9B%91%E6%8E%A7Nginx%E5%92%8CMysql%E6%9C%8D%E5%8A%A1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">监控Nginx和Mysql服务是否正常,如果未启动则启动相应服务</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/02/">February 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2021/02/26/shell/awk/">awk命令</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2021/02/26/URL/">URL constructor</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2021/02/26/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2021/02/26/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2021/02/26/cross-origin/">cross origin</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+  <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-集中式和分布式" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/awk" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/25/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" class="article-date">
-  <time datetime="2021-02-25T15:53:52.905Z" itemprop="datePublished">2021-02-25</time>
+    <a href="/blog/2021/02/26/shell/awk/" class="article-date">
+  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/25/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
+      <a class="article-title" href="/blog/2021/02/26/shell/awk/">awk命令</a>
     </h1>
   
 
@@ -83,14 +83,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="集中式"><a href="#集中式" class="headerlink" title="集中式"></a>集中式</h3><p>集中式系统中版本库是集中存放在中央服务器的。以svn为例，开发人员工作的时候都需要从中央服务器获取最新的版本，工作完之后需要将工作推送给中央服务器。<br>eg：SVN，云服务器（在云服务器开发）<br>优点：减少了硬件和软件成本<br>问题：<strong>必须联网（局域网或者互联网）</strong></p>
-<h3 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h3><p>分布式系统中没有中央服务器的概念。</p>
-<p>eg：git<br>优点：每个人的电脑中都有完整的版本库，所以安全性很高，即使服务器仓库被破坏了，损失也不会很大。</p>
+        <p>从练习入手</p>
+<h3 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h3><p><a href="https://blog.csdn.net/aywb1314/article/details/52239281" target="_blank" rel="noopener">https://blog.csdn.net/aywb1314/article/details/52239281</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 输入</span></span><br><span class="line">a='wang     4</span><br><span class="line">cui      3</span><br><span class="line">zhao     4</span><br><span class="line">liu      3</span><br><span class="line">liu      3</span><br><span class="line">chang    5</span><br><span class="line">li       2'</span><br><span class="line"></span><br><span class="line"><span class="meta">  #</span><span class="bash">  1 通过第一个域找出字符长度为4的</span></span><br><span class="line">echo $a | awk 'length($1) == "4" &#123;print $1&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  2 当第二列值大于3时，创建空白文件，文件名为当前行第一个域<span class="variable">$1</span> (touch <span class="variable">$1</span>)</span></span><br><span class="line">echo $a | awk '&#123;if($2&gt;3)&#123; system ("touch "$1)&#125;&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  3 将文档中 liu 字符串替换为 hong</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">  4 求第二列的和</span></span><br><span class="line">echo $a | awk '&#123;a+=$2&#125; END &#123;print a&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  5 求第二列的平均值</span></span><br><span class="line">echo $a | awk '&#123;a+=$2&#125; END &#123;print a/NR&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  6 求第二列中的最大值</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">  7 将第一列过滤重复后，列出每一项，每一项的出现次数，每一项的大小总和</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/25/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" data-id="ckll1r6rc000d2rnfffq0ggsj" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/26/shell/awk/" data-id="cklmfuvod000e1ix5ae2n4zu5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -102,8 +102,8 @@
   
     <article id="post-URL" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/25/URL/" class="article-date">
-  <time datetime="2021-02-25T15:53:52.905Z" itemprop="datePublished">2021-02-25</time>
+    <a href="/blog/2021/02/26/URL/" class="article-date">
+  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
 </a>
     
   </div>
@@ -114,7 +114,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/25/URL/">URL constructor</a>
+      <a class="article-title" href="/blog/2021/02/26/URL/">URL constructor</a>
     </h1>
   
 
@@ -157,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/25/URL/" data-id="ckll1r6qi00002rnf327l3f1k" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/26/URL/" data-id="cklmfuvn700001ix563sn3y41" class="article-share-link">Share</a>
       
       
     </footer>
@@ -169,8 +169,8 @@
   
     <article id="post-canvas-基础特性" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/25/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" class="article-date">
-  <time datetime="2021-02-25T15:53:52.905Z" itemprop="datePublished">2021-02-25</time>
+    <a href="/blog/2021/02/26/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" class="article-date">
+  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
 </a>
     
   </div>
@@ -181,7 +181,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/25/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+      <a class="article-title" href="/blog/2021/02/26/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
     </h1>
   
 
@@ -213,7 +213,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/25/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" data-id="ckll1r6qv00022rnf20qwb940" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/26/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" data-id="cklmfuvnh00021ix54zryd1zv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -225,8 +225,8 @@
   
     <article id="post-canvas动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/25/canvas%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-02-25T15:53:52.905Z" itemprop="datePublished">2021-02-25</time>
+    <a href="/blog/2021/02/26/canvas%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
 </a>
     
   </div>
@@ -237,7 +237,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/25/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+      <a class="article-title" href="/blog/2021/02/26/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
     </h1>
   
 
@@ -252,7 +252,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/25/canvas%E5%8A%A8%E7%94%BB/" data-id="ckll1r6qx00032rnf0ftr3j7q" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/26/canvas%E5%8A%A8%E7%94%BB/" data-id="cklmfuvnj00031ix56k0b8da8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -264,8 +264,8 @@
   
     <article id="post-cross-origin" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/25/cross-origin/" class="article-date">
-  <time datetime="2021-02-25T15:53:52.905Z" itemprop="datePublished">2021-02-25</time>
+    <a href="/blog/2021/02/26/cross-origin/" class="article-date">
+  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
 </a>
     
   </div>
@@ -276,7 +276,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/25/cross-origin/">cross origin</a>
+      <a class="article-title" href="/blog/2021/02/26/cross-origin/">cross origin</a>
     </h1>
   
 
@@ -295,7 +295,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/25/cross-origin/" data-id="ckll1r6qy00042rnfebd70qf5" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/26/cross-origin/" data-id="cklmfuvnk00041ix5fg8t2tfn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -307,8 +307,8 @@
   
     <article id="post-css动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/25/css%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-02-25T15:53:52.905Z" itemprop="datePublished">2021-02-25</time>
+    <a href="/blog/2021/02/26/css%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
 </a>
     
   </div>
@@ -319,7 +319,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/25/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+      <a class="article-title" href="/blog/2021/02/26/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
     </h1>
   
 
@@ -334,7 +334,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/25/css%E5%8A%A8%E7%94%BB/" data-id="ckll1r6qz00052rnfdi6z4xwl" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/26/css%E5%8A%A8%E7%94%BB/" data-id="cklmfuvnl00051ix5bicyb242" class="article-share-link">Share</a>
       
       
     </footer>
@@ -346,8 +346,8 @@
   
     <article id="post-promisefy" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/25/promisefy/" class="article-date">
-  <time datetime="2021-02-25T15:53:52.905Z" itemprop="datePublished">2021-02-25</time>
+    <a href="/blog/2021/02/26/promisefy/" class="article-date">
+  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
 </a>
     
   </div>
@@ -358,7 +358,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/25/promisefy/">实现类似 node中util.promisefy的实现</a>
+      <a class="article-title" href="/blog/2021/02/26/promisefy/">实现类似 node中util.promisefy的实现</a>
     </h1>
   
 
@@ -379,7 +379,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/25/promisefy/" data-id="ckll1r6r000062rnf79due5yf" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/26/promisefy/" data-id="cklmfuvnm00061ix5dfjn0v96" class="article-share-link">Share</a>
       
       
     </footer>
@@ -391,8 +391,8 @@
   
     <article id="post-svg动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/25/svg%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-02-25T15:53:52.905Z" itemprop="datePublished">2021-02-25</time>
+    <a href="/blog/2021/02/26/svg%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
 </a>
     
   </div>
@@ -403,7 +403,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/25/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
+      <a class="article-title" href="/blog/2021/02/26/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
     </h1>
   
 
@@ -415,7 +415,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/25/svg%E5%8A%A8%E7%94%BB/" data-id="ckll1r6r200072rnf3r5lb4gb" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/26/svg%E5%8A%A8%E7%94%BB/" data-id="cklmfuvnn00071ix56vanbvaz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -427,8 +427,8 @@
   
     <article id="post-throttle-debounce" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/25/throttle-debounce/" class="article-date">
-  <time datetime="2021-02-25T15:53:52.905Z" itemprop="datePublished">2021-02-25</time>
+    <a href="/blog/2021/02/26/throttle-debounce/" class="article-date">
+  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
 </a>
     
   </div>
@@ -439,7 +439,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/25/throttle-debounce/">截流和去抖的深入理解结合loads</a>
+      <a class="article-title" href="/blog/2021/02/26/throttle-debounce/">截流和去抖的深入理解结合loads</a>
     </h1>
   
 
@@ -452,7 +452,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/25/throttle-debounce/" data-id="ckll1r6r300082rnf863i232z" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/26/throttle-debounce/" data-id="cklmfuvno00081ix54rlfhnve" class="article-share-link">Share</a>
       
       
     </footer>
@@ -464,8 +464,8 @@
   
     <article id="post-从数字分隔符看正则" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/25/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="article-date">
-  <time datetime="2021-02-25T15:53:52.905Z" itemprop="datePublished">2021-02-25</time>
+    <a href="/blog/2021/02/26/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="article-date">
+  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
 </a>
     
   </div>
@@ -476,7 +476,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/25/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
+      <a class="article-title" href="/blog/2021/02/26/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
     </h1>
   
 
@@ -514,7 +514,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/25/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="ckll1r6r400092rnfglagczar" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/26/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="cklmfuvnq00091ix5e5bsgvom" class="article-share-link">Share</a>
       
       
     </footer>
@@ -560,23 +560,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/02/25/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
+            <a href="/blog/2021/02/26/shell/awk/">awk命令</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/25/URL/">URL constructor</a>
+            <a href="/blog/2021/02/26/URL/">URL constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/25/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+            <a href="/blog/2021/02/26/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/25/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+            <a href="/blog/2021/02/26/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/25/cross-origin/">cross origin</a>
+            <a href="/blog/2021/02/26/cross-origin/">cross origin</a>
           </li>
         
       </ul>
