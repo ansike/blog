@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-shell/awk" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-msyql/基础命令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/26/shell/awk/" class="article-date">
-  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
+    <a href="/blog/2021/02/28/msyql/%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" class="article-date">
+  <time datetime="2021-02-28T05:33:06.106Z" itemprop="datePublished">2021-02-28</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/26/shell/awk/">awk命令</a>
+      <a class="article-title" href="/blog/2021/02/28/msyql/%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/">mysql 基础命令</a>
     </h1>
   
 
@@ -83,14 +83,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>从练习入手</p>
-<h3 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h3><p><a href="https://blog.csdn.net/aywb1314/article/details/52239281" target="_blank" rel="noopener">https://blog.csdn.net/aywb1314/article/details/52239281</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 输入</span></span><br><span class="line">a='wang     4</span><br><span class="line">cui      3</span><br><span class="line">zhao     4</span><br><span class="line">liu      3</span><br><span class="line">liu      3</span><br><span class="line">chang    5</span><br><span class="line">li       2'</span><br><span class="line"></span><br><span class="line"><span class="meta">  #</span><span class="bash">  1 通过第一个域找出字符长度为4的</span></span><br><span class="line">echo $a | awk 'length($1) == "4" &#123;print $1&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  2 当第二列值大于3时，创建空白文件，文件名为当前行第一个域<span class="variable">$1</span> (touch <span class="variable">$1</span>)</span></span><br><span class="line">echo $a | awk '&#123;if($2&gt;3)&#123; system ("touch "$1)&#125;&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  3 将文档中 liu 字符串替换为 hong</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">  4 求第二列的和</span></span><br><span class="line">echo $a | awk '&#123;a+=$2&#125; END &#123;print a&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  5 求第二列的平均值</span></span><br><span class="line">echo $a | awk '&#123;a+=$2&#125; END &#123;print a/NR&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  6 求第二列中的最大值</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">  7 将第一列过滤重复后，列出每一项，每一项的出现次数，每一项的大小总和</span></span><br></pre></td></tr></table></figure>
+        <h5 id="命令行使用"><a href="#命令行使用" class="headerlink" title="命令行使用"></a>命令行使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看所有的数据库</span></span><br><span class="line">SHOW DATABASES;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用某个数据库</span></span><br><span class="line">USE [DATABASENAME];</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看当前数据库所有的表</span></span><br><span class="line">SHOW TABLES;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看表结构</span></span><br><span class="line">SHOW COLUMNS FROM testalter_tbl;</span><br><span class="line">DESC setting;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建表</span></span><br><span class="line">CREATE TABLE IF NOT EXIST `test_tlb` (</span><br><span class="line">  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT "主键ID",</span><br><span class="line">  `name` VARCHAR(50) NOT NULL COMMENT "用户名",</span><br><span class="line">  `description` VARCHAR(100) NOT NULL COMMENT "描述",</span><br><span class="line">  `createdTime` DATE COMMENT "创建时间",</span><br><span class="line">  `UpdatedTime` DATE COMMENT "更新时间",</span><br><span class="line">)ENGINE=InnoDB DEFAULT CHARSET=utf8;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除表</span></span><br><span class="line">DROP TABLE [tableName];</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 给表插入数据</span></span><br><span class="line">INSERT INTO test_tlb (name, description, createdTime, UpdatedTime) VALUES ('name1', 'desc1', NOW(), NOW())</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> UPDATE</span></span><br><span class="line">UPDATE table_name SET field1=new-value1, field2=new-value2</span><br><span class="line">[WHERE Clause]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ALTER</span></span><br><span class="line">ALTER TABLE testalter_tbl  DROP i;</span><br><span class="line">ALTER TABLE testalter_tbl  ADD i INT;</span><br><span class="line">ALTER TABLE testalter_tbl CHANGE i j BIGINT;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/26/shell/awk/" data-id="cklmfuvod000e1ix5ae2n4zu5" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/28/msyql/%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" data-id="cklopwfec000e3xsr5lbed3l5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -102,8 +100,8 @@
   
     <article id="post-URL" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/26/URL/" class="article-date">
-  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
+    <a href="/blog/2021/02/28/URL/" class="article-date">
+  <time datetime="2021-02-28T05:33:06.106Z" itemprop="datePublished">2021-02-28</time>
 </a>
     
   </div>
@@ -114,7 +112,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/26/URL/">URL constructor</a>
+      <a class="article-title" href="/blog/2021/02/28/URL/">URL constructor</a>
     </h1>
   
 
@@ -157,7 +155,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/26/URL/" data-id="cklmfuvn700001ix563sn3y41" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/28/URL/" data-id="cklopwfd400003xsr3a4vhsxi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -169,8 +167,8 @@
   
     <article id="post-canvas-基础特性" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/26/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" class="article-date">
-  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
+    <a href="/blog/2021/02/28/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" class="article-date">
+  <time datetime="2021-02-28T05:33:06.106Z" itemprop="datePublished">2021-02-28</time>
 </a>
     
   </div>
@@ -181,7 +179,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/26/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+      <a class="article-title" href="/blog/2021/02/28/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
     </h1>
   
 
@@ -213,7 +211,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/26/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" data-id="cklmfuvnh00021ix54zryd1zv" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/28/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" data-id="cklopwfdg00023xsrfnu6g0cw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -225,8 +223,8 @@
   
     <article id="post-canvas动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/26/canvas%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
+    <a href="/blog/2021/02/28/canvas%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-02-28T05:33:06.106Z" itemprop="datePublished">2021-02-28</time>
 </a>
     
   </div>
@@ -237,7 +235,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/26/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+      <a class="article-title" href="/blog/2021/02/28/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
     </h1>
   
 
@@ -252,7 +250,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/26/canvas%E5%8A%A8%E7%94%BB/" data-id="cklmfuvnj00031ix56k0b8da8" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/28/canvas%E5%8A%A8%E7%94%BB/" data-id="cklopwfdh00033xsr4tb81c45" class="article-share-link">Share</a>
       
       
     </footer>
@@ -264,8 +262,8 @@
   
     <article id="post-cross-origin" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/26/cross-origin/" class="article-date">
-  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
+    <a href="/blog/2021/02/28/cross-origin/" class="article-date">
+  <time datetime="2021-02-28T05:33:06.106Z" itemprop="datePublished">2021-02-28</time>
 </a>
     
   </div>
@@ -276,7 +274,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/26/cross-origin/">cross origin</a>
+      <a class="article-title" href="/blog/2021/02/28/cross-origin/">cross origin</a>
     </h1>
   
 
@@ -295,7 +293,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/26/cross-origin/" data-id="cklmfuvnk00041ix5fg8t2tfn" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/28/cross-origin/" data-id="cklopwfdj00043xsrgc5qg15y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -307,8 +305,8 @@
   
     <article id="post-css动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/26/css%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
+    <a href="/blog/2021/02/28/css%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-02-28T05:33:06.106Z" itemprop="datePublished">2021-02-28</time>
 </a>
     
   </div>
@@ -319,7 +317,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/26/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+      <a class="article-title" href="/blog/2021/02/28/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
     </h1>
   
 
@@ -334,7 +332,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/26/css%E5%8A%A8%E7%94%BB/" data-id="cklmfuvnl00051ix5bicyb242" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/28/css%E5%8A%A8%E7%94%BB/" data-id="cklopwfdk00053xsr8rm5682d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -346,8 +344,8 @@
   
     <article id="post-promisefy" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/26/promisefy/" class="article-date">
-  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
+    <a href="/blog/2021/02/28/promisefy/" class="article-date">
+  <time datetime="2021-02-28T05:33:06.106Z" itemprop="datePublished">2021-02-28</time>
 </a>
     
   </div>
@@ -358,7 +356,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/26/promisefy/">实现类似 node中util.promisefy的实现</a>
+      <a class="article-title" href="/blog/2021/02/28/promisefy/">实现类似 node中util.promisefy的实现</a>
     </h1>
   
 
@@ -379,7 +377,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/26/promisefy/" data-id="cklmfuvnm00061ix5dfjn0v96" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/28/promisefy/" data-id="cklopwfdl00063xsr6qkh3zlo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -391,8 +389,8 @@
   
     <article id="post-svg动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/26/svg%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
+    <a href="/blog/2021/02/28/svg%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-02-28T05:33:06.106Z" itemprop="datePublished">2021-02-28</time>
 </a>
     
   </div>
@@ -403,7 +401,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/26/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
+      <a class="article-title" href="/blog/2021/02/28/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
     </h1>
   
 
@@ -415,7 +413,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/26/svg%E5%8A%A8%E7%94%BB/" data-id="cklmfuvnn00071ix56vanbvaz" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/28/svg%E5%8A%A8%E7%94%BB/" data-id="cklopwfdm00073xsrh7mjcvo4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -427,8 +425,8 @@
   
     <article id="post-throttle-debounce" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/26/throttle-debounce/" class="article-date">
-  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
+    <a href="/blog/2021/02/28/throttle-debounce/" class="article-date">
+  <time datetime="2021-02-28T05:33:06.106Z" itemprop="datePublished">2021-02-28</time>
 </a>
     
   </div>
@@ -439,7 +437,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/26/throttle-debounce/">截流和去抖的深入理解结合loads</a>
+      <a class="article-title" href="/blog/2021/02/28/throttle-debounce/">截流和去抖的深入理解结合loads</a>
     </h1>
   
 
@@ -452,7 +450,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/26/throttle-debounce/" data-id="cklmfuvno00081ix54rlfhnve" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/28/throttle-debounce/" data-id="cklopwfdn00083xsr4zzp4cqp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -464,8 +462,8 @@
   
     <article id="post-从数字分隔符看正则" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/02/26/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="article-date">
-  <time datetime="2021-02-26T15:16:27.257Z" itemprop="datePublished">2021-02-26</time>
+    <a href="/blog/2021/02/28/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="article-date">
+  <time datetime="2021-02-28T05:33:06.106Z" itemprop="datePublished">2021-02-28</time>
 </a>
     
   </div>
@@ -476,7 +474,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/26/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
+      <a class="article-title" href="/blog/2021/02/28/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
     </h1>
   
 
@@ -514,7 +512,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/26/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="cklmfuvnq00091ix5e5bsgvom" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/28/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="cklopwfdp00093xsr2ij35tcj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -560,23 +558,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/02/26/shell/awk/">awk命令</a>
+            <a href="/blog/2021/02/28/msyql/%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/">mysql 基础命令</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/26/URL/">URL constructor</a>
+            <a href="/blog/2021/02/28/URL/">URL constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/26/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+            <a href="/blog/2021/02/28/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/26/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+            <a href="/blog/2021/02/28/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
           </li>
         
           <li>
-            <a href="/blog/2021/02/26/cross-origin/">cross origin</a>
+            <a href="/blog/2021/02/28/cross-origin/">cross origin</a>
           </li>
         
       </ul>
