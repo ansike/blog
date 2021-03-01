@@ -23,7 +23,11 @@ wget --spider -q -T 2 -t 1 -o /dev/null $1
 }
 ```
 
+<<<<<<< HEAD
 ### 函数写法
+=======
+### 常规写法
+>>>>>>> 527ad9fc6ebcbb147ff1b6cc81f0e65a9dbf88f9
 
 ```shell
 # 使用wget检查站点服务是否正常
