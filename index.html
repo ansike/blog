@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-shell/awk" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/calc" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/01/shell/awk/" class="article-date">
-  <time datetime="2021-03-01T01:45:56.204Z" itemprop="datePublished">2021-03-01</time>
+    <a href="/blog/2021/03/02/shell/calc/" class="article-date">
+  <time datetime="2021-03-02T16:07:27.982Z" itemprop="datePublished">2021-03-02</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/01/shell/awk/">awk命令</a>
+      <a class="article-title" href="/blog/2021/03/02/shell/calc/">shell中变量的数值计算</a>
     </h1>
   
 
@@ -83,14 +83,35 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>从练习入手</p>
-<h3 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h3><p><a href="https://blog.csdn.net/aywb1314/article/details/52239281" target="_blank" rel="noopener">https://blog.csdn.net/aywb1314/article/details/52239281</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 输入</span></span><br><span class="line">a='wang     4</span><br><span class="line">cui      3</span><br><span class="line">zhao     4</span><br><span class="line">liu      3</span><br><span class="line">liu      3</span><br><span class="line">chang    5</span><br><span class="line">li       2'</span><br><span class="line"></span><br><span class="line"><span class="meta">  #</span><span class="bash">  1 通过第一个域找出字符长度为4的</span></span><br><span class="line">echo $a | awk 'length($1) == "4" &#123;print $1&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  2 当第二列值大于3时，创建空白文件，文件名为当前行第一个域<span class="variable">$1</span> (touch <span class="variable">$1</span>)</span></span><br><span class="line">echo $a | awk '&#123;if($2&gt;3)&#123; system ("touch "$1)&#125;&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  3 将文档中 liu 字符串替换为 hong</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">  4 求第二列的和</span></span><br><span class="line">echo $a | awk '&#123;a+=$2&#125; END &#123;print a&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  5 求第二列的平均值</span></span><br><span class="line">echo $a | awk '&#123;a+=$2&#125; END &#123;print a/NR&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  6 求第二列中的最大值</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">  7 将第一列过滤重复后，列出每一项，每一项的出现次数，每一项的大小总和</span></span><br></pre></td></tr></table></figure>
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><ol>
+<li>(())</li>
+<li>let</li>
+<li>expr</li>
+<li>bc是UNIX/Linux下的计算器</li>
+<li>$[]</li>
+<li>awk</li>
+<li>declare</li>
+</ol>
+<h3 id="计算"><a href="#计算" class="headerlink" title="(()) 计算"></a>(()) 计算</h3><h3 id="let-计算"><a href="#let-计算" class="headerlink" title="let 计算"></a>let 计算</h3><h3 id="expr-计算"><a href="#expr-计算" class="headerlink" title="expr 计算"></a>expr 计算</h3><h3 id="bc-执行交互式计算"><a href="#bc-执行交互式计算" class="headerlink" title="bc 执行交互式计算"></a>bc 执行交互式计算</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bc # 输入bc后可以在命令行开始执行交互式计算,退出使用quit</span><br></pre></td></tr></table></figure>
+
+<h5 id="命令行使用"><a href="#命令行使用" class="headerlink" title="命令行使用"></a>命令行使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">echo 2 + 2 | bc # 直接`echo 2+2`将会输出`2+2`字符串,使用bc能输出计算后的值</span><br><span class="line">echo 2.1 + 2 | bc # 支持浮点运算(awk), 整数的话可以考虑(()), let, expr</span><br><span class="line">echo "scale=2;12313/123" | bc # 使用scale保留2位小数</span><br><span class="line">echo "scale=4;12313/13" | bc # 使用scale保留2位小数</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 配合变量做运算,效率略低下</span></span><br><span class="line">i=5</span><br><span class="line">i=`echo $i + 6 | bc`</span><br><span class="line">echo $i</span><br></pre></td></tr></table></figure>
+
+<h5 id="生成数字序列并做计算"><a href="#生成数字序列并做计算" class="headerlink" title="生成数字序列并做计算"></a>生成数字序列并做计算</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 计算1加到n的值</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1+2+3+4+5+6+7+8+9+10=55</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> bc</span></span><br><span class="line">echo `seq -s "+" 10`=`seq -s "+" 10 | bc`</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> (())</span></span><br><span class="line">echo `seq -s "+" 10`=$((`seq -s "+" 10`))</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> expr, 注意操作符两边必须有空格</span></span><br><span class="line">echo `seq -s "+" 10`=`seq -s " + " 10 | xargs expr`</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> $[]</span></span><br><span class="line">echo `seq -s "+" 10`=$[`seq -s "+" 10`]</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="awk-计算"><a href="#awk-计算" class="headerlink" title="awk 计算"></a>awk 计算</h3><p>适合小数和整数运算,很精确,适合命令行运算</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 注意awk 后边是单引号</span></span><br><span class="line">echo "4.31 12.222" | awk '&#123;print ($1-$2)&#125;'</span><br><span class="line">echo "3 4" | awk '&#123;print ($1**2+$2**2)&#125;'</span><br></pre></td></tr></table></figure>
+
+<h3 id="declare-计算"><a href="#declare-计算" class="headerlink" title="declare 计算"></a>declare 计算</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> </span></span><br><span class="line">declare -i A=30 B=7</span><br><span class="line">A=A+B</span><br><span class="line">echo $A</span><br></pre></td></tr></table></figure>
+
+<h3 id="计算-1"><a href="#计算-1" class="headerlink" title="$[] 计算"></a>$[] 计算</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">i=5</span><br><span class="line">i=$[$i+1]</span><br><span class="line">echo $i</span><br><span class="line">echo $[2*3]</span><br><span class="line">echo $[2**3]</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/01/shell/awk/" data-id="cklpx84fq000f1aqj2asygu1n" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/02/shell/calc/" data-id="ckls7fxnf000g0ts8bkvw9rkw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -102,8 +123,8 @@
   
     <article id="post-URL" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/01/URL/" class="article-date">
-  <time datetime="2021-03-01T01:45:56.204Z" itemprop="datePublished">2021-03-01</time>
+    <a href="/blog/2021/03/02/URL/" class="article-date">
+  <time datetime="2021-03-02T16:07:27.982Z" itemprop="datePublished">2021-03-02</time>
 </a>
     
   </div>
@@ -114,7 +135,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/01/URL/">URL constructor</a>
+      <a class="article-title" href="/blog/2021/03/02/URL/">URL constructor</a>
     </h1>
   
 
@@ -157,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/01/URL/" data-id="cklpx84el00001aqj41z5a8q8" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/02/URL/" data-id="ckls7fxm400000ts8h72n1e09" class="article-share-link">Share</a>
       
       
     </footer>
@@ -169,8 +190,8 @@
   
     <article id="post-canvas-基础特性" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/01/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" class="article-date">
-  <time datetime="2021-03-01T01:45:56.204Z" itemprop="datePublished">2021-03-01</time>
+    <a href="/blog/2021/03/02/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" class="article-date">
+  <time datetime="2021-03-02T16:07:27.982Z" itemprop="datePublished">2021-03-02</time>
 </a>
     
   </div>
@@ -181,7 +202,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/01/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+      <a class="article-title" href="/blog/2021/03/02/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
     </h1>
   
 
@@ -213,7 +234,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/01/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" data-id="cklpx84ev00021aqjhhuvfsu6" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/02/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" data-id="ckls7fxmf00020ts89bis6zt4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -225,8 +246,8 @@
   
     <article id="post-canvas动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/01/canvas%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-03-01T01:45:56.204Z" itemprop="datePublished">2021-03-01</time>
+    <a href="/blog/2021/03/02/canvas%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-03-02T16:07:27.982Z" itemprop="datePublished">2021-03-02</time>
 </a>
     
   </div>
@@ -237,7 +258,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/01/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+      <a class="article-title" href="/blog/2021/03/02/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
     </h1>
   
 
@@ -252,7 +273,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/01/canvas%E5%8A%A8%E7%94%BB/" data-id="cklpx84ew00031aqjgwi9bau8" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/02/canvas%E5%8A%A8%E7%94%BB/" data-id="ckls7fxmg00030ts8eo1i08zv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -264,8 +285,8 @@
   
     <article id="post-cross-origin" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/01/cross-origin/" class="article-date">
-  <time datetime="2021-03-01T01:45:56.204Z" itemprop="datePublished">2021-03-01</time>
+    <a href="/blog/2021/03/02/cross-origin/" class="article-date">
+  <time datetime="2021-03-02T16:07:27.982Z" itemprop="datePublished">2021-03-02</time>
 </a>
     
   </div>
@@ -276,7 +297,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/01/cross-origin/">cross origin</a>
+      <a class="article-title" href="/blog/2021/03/02/cross-origin/">cross origin</a>
     </h1>
   
 
@@ -295,7 +316,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/01/cross-origin/" data-id="cklpx84ex00041aqjg3sn45co" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/02/cross-origin/" data-id="ckls7fxmi00040ts82a55g1d6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -307,8 +328,8 @@
   
     <article id="post-css动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/01/css%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-03-01T01:45:56.204Z" itemprop="datePublished">2021-03-01</time>
+    <a href="/blog/2021/03/02/css%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-03-02T16:07:27.982Z" itemprop="datePublished">2021-03-02</time>
 </a>
     
   </div>
@@ -319,7 +340,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/01/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+      <a class="article-title" href="/blog/2021/03/02/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
     </h1>
   
 
@@ -334,7 +355,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/01/css%E5%8A%A8%E7%94%BB/" data-id="cklpx84ez00051aqjhubuaqmk" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/02/css%E5%8A%A8%E7%94%BB/" data-id="ckls7fxmj00050ts8g3dcdq0l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -346,8 +367,8 @@
   
     <article id="post-promisefy" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/01/promisefy/" class="article-date">
-  <time datetime="2021-03-01T01:45:56.204Z" itemprop="datePublished">2021-03-01</time>
+    <a href="/blog/2021/03/02/promisefy/" class="article-date">
+  <time datetime="2021-03-02T16:07:27.982Z" itemprop="datePublished">2021-03-02</time>
 </a>
     
   </div>
@@ -358,7 +379,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/01/promisefy/">实现类似 node中util.promisefy的实现</a>
+      <a class="article-title" href="/blog/2021/03/02/promisefy/">实现类似 node中util.promisefy的实现</a>
     </h1>
   
 
@@ -379,7 +400,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/01/promisefy/" data-id="cklpx84f000061aqj0bnh6to4" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/02/promisefy/" data-id="ckls7fxmk00060ts8efmi62g9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -391,8 +412,8 @@
   
     <article id="post-svg动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/01/svg%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-03-01T01:45:56.204Z" itemprop="datePublished">2021-03-01</time>
+    <a href="/blog/2021/03/02/svg%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-03-02T16:07:27.982Z" itemprop="datePublished">2021-03-02</time>
 </a>
     
   </div>
@@ -403,7 +424,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/01/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
+      <a class="article-title" href="/blog/2021/03/02/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
     </h1>
   
 
@@ -415,7 +436,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/01/svg%E5%8A%A8%E7%94%BB/" data-id="cklpx84f100071aqj844m8bnm" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/02/svg%E5%8A%A8%E7%94%BB/" data-id="ckls7fxml00070ts84xq94bw9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -427,8 +448,8 @@
   
     <article id="post-throttle-debounce" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/01/throttle-debounce/" class="article-date">
-  <time datetime="2021-03-01T01:45:56.204Z" itemprop="datePublished">2021-03-01</time>
+    <a href="/blog/2021/03/02/throttle-debounce/" class="article-date">
+  <time datetime="2021-03-02T16:07:27.982Z" itemprop="datePublished">2021-03-02</time>
 </a>
     
   </div>
@@ -439,7 +460,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/01/throttle-debounce/">截流和去抖的深入理解结合loads</a>
+      <a class="article-title" href="/blog/2021/03/02/throttle-debounce/">截流和去抖的深入理解结合loads</a>
     </h1>
   
 
@@ -452,7 +473,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/01/throttle-debounce/" data-id="cklpx84f200081aqjfh3fcetc" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/02/throttle-debounce/" data-id="ckls7fxmm00080ts8galcfb2q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -464,8 +485,8 @@
   
     <article id="post-从数字分隔符看正则" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/01/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="article-date">
-  <time datetime="2021-03-01T01:45:56.204Z" itemprop="datePublished">2021-03-01</time>
+    <a href="/blog/2021/03/02/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="article-date">
+  <time datetime="2021-03-02T16:07:27.982Z" itemprop="datePublished">2021-03-02</time>
 </a>
     
   </div>
@@ -476,7 +497,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/01/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
+      <a class="article-title" href="/blog/2021/03/02/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
     </h1>
   
 
@@ -514,7 +535,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/01/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="cklpx84f300091aqj8ocu9bis" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/02/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="ckls7fxmn00090ts8gyog347t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -528,7 +549,7 @@
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><a class="extend next" rel="next" href="/blog/page/2/">Next &amp;raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><a class="page-number" href="/blog/page/4/">4</a><a class="extend next" rel="next" href="/blog/page/2/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -560,23 +581,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/03/01/shell/awk/">awk命令</a>
+            <a href="/blog/2021/03/02/shell/calc/">shell中变量的数值计算</a>
           </li>
         
           <li>
-            <a href="/blog/2021/03/01/URL/">URL constructor</a>
+            <a href="/blog/2021/03/02/URL/">URL constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2021/03/01/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+            <a href="/blog/2021/03/02/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
           </li>
         
           <li>
-            <a href="/blog/2021/03/01/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+            <a href="/blog/2021/03/02/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
           </li>
         
           <li>
-            <a href="/blog/2021/03/01/cross-origin/">cross origin</a>
+            <a href="/blog/2021/03/02/cross-origin/">cross origin</a>
           </li>
         
       </ul>
