@@ -36,3 +36,47 @@ case "$var" in
     ;;
 esac
 ```
+
+### 数字匹配菜单
+```shell
+#!/bin/bash
+echo '
+  =======================
+  1.apple
+  2.pear
+  3.banana
+  4.cherry
+  =======================
+'
+read -p "Pls select a num: " num
+
+case "$num" in
+  1)
+    echo "apple"
+    ;;
+  2)
+    echo "pear"
+    ;;
+  3)
+    echo "banana"
+    ;;
+  4)
+    echo "cherry"
+    ;;
+  *)
+    echo "must be {1|2|3|4}"
+esac
+```
+
+##### 优化打印菜单方式
+```shell
+function menu() {
+  cat <<END
+1.apple
+2.pear
+3.banana
+4.cherry
+END
+}
+menu
+```
