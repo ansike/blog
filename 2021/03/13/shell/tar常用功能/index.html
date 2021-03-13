@@ -5,14 +5,14 @@
   
 
   
-  <title>awk命令 | Hexo</title>
+  <title>tar常用功能 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="从练习入手 练习题https:&#x2F;&#x2F;blog.csdn.net&#x2F;aywb1314&#x2F;article&#x2F;details&#x2F;52239281 1234567891011121314151617181920# 输入a=&amp;apos;wang     4cui      3zhao     4liu      3liu      3chang    5li       2&amp;apos;  #  1 通过第一个域找出字符长度为4的echo">
+  <meta name="description" content="Wget - The non-interactive network downloader. 基本使用方式见man wgetwget [option]... [URL]... 场景一、压缩1tar -cvzf a.gz.tar a 场景二、解压1234tar -xvzf a.gz.tar# 解压到指定目录tar -xvzf a.gz.tar -C path 场景三、查看1tar -tvzf a.g">
 <meta property="og:type" content="article">
-<meta property="og:title" content="awk命令">
-<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;2021&#x2F;03&#x2F;13&#x2F;shell&#x2F;awk&#x2F;index.html">
+<meta property="og:title" content="tar常用功能">
+<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;2021&#x2F;03&#x2F;13&#x2F;shell&#x2F;tar%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="从练习入手 练习题https:&#x2F;&#x2F;blog.csdn.net&#x2F;aywb1314&#x2F;article&#x2F;details&#x2F;52239281 1234567891011121314151617181920# 输入a=&amp;apos;wang     4cui      3zhao     4liu      3liu      3chang    5li       2&amp;apos;  #  1 通过第一个域找出字符长度为4的echo">
+<meta property="og:description" content="Wget - The non-interactive network downloader. 基本使用方式见man wgetwget [option]... [URL]... 场景一、压缩1tar -cvzf a.gz.tar a 场景二、解压1234tar -xvzf a.gz.tar# 解压到指定目录tar -xvzf a.gz.tar -C path 场景三、查看1tar -tvzf a.g">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2021-03-13T02:40:52.231Z">
 <meta name="twitter:card" content="summary">
@@ -62,9 +62,9 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-shell/awk" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-shell/tar常用功能" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/13/shell/awk/" class="article-date">
+    <a href="/blog/2021/03/13/shell/tar%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/" class="article-date">
   <time datetime="2021-03-13T02:40:52.231Z" itemprop="datePublished">2021-03-13</time>
 </a>
     
@@ -76,7 +76,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      awk命令
+      tar常用功能
     </h1>
   
 
@@ -84,14 +84,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>从练习入手</p>
-<h3 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h3><p><a href="https://blog.csdn.net/aywb1314/article/details/52239281" target="_blank" rel="noopener">https://blog.csdn.net/aywb1314/article/details/52239281</a></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 输入</span></span><br><span class="line">a='wang     4</span><br><span class="line">cui      3</span><br><span class="line">zhao     4</span><br><span class="line">liu      3</span><br><span class="line">liu      3</span><br><span class="line">chang    5</span><br><span class="line">li       2'</span><br><span class="line"></span><br><span class="line"><span class="meta">  #</span><span class="bash">  1 通过第一个域找出字符长度为4的</span></span><br><span class="line">echo $a | awk 'length($1) == "4" &#123;print $1&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  2 当第二列值大于3时，创建空白文件，文件名为当前行第一个域<span class="variable">$1</span> (touch <span class="variable">$1</span>)</span></span><br><span class="line">echo $a | awk '&#123;if($2&gt;3)&#123; system ("touch "$1)&#125;&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  3 将文档中 liu 字符串替换为 hong</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">  4 求第二列的和</span></span><br><span class="line">echo $a | awk '&#123;a+=$2&#125; END &#123;print a&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  5 求第二列的平均值</span></span><br><span class="line">echo $a | awk '&#123;a+=$2&#125; END &#123;print a/NR&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  6 求第二列中的最大值</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">  7 将第一列过滤重复后，列出每一项，每一项的出现次数，每一项的大小总和</span></span><br></pre></td></tr></table></figure>
+        <p><code>Wget - The non-interactive network downloader.</code></p>
+<h3 id="基本使用方式见man-wget"><a href="#基本使用方式见man-wget" class="headerlink" title="基本使用方式见man wget"></a>基本使用方式见man wget</h3><p><code>wget [option]... [URL]...</code></p>
+<h3 id="场景一、压缩"><a href="#场景一、压缩" class="headerlink" title="场景一、压缩"></a>场景一、压缩</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -cvzf a.gz.tar a</span><br></pre></td></tr></table></figure>
+<h3 id="场景二、解压"><a href="#场景二、解压" class="headerlink" title="场景二、解压"></a>场景二、解压</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar -xvzf a.gz.tar</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 解压到指定目录</span></span><br><span class="line">tar -xvzf a.gz.tar -C path</span><br></pre></td></tr></table></figure>
+<h3 id="场景三、查看"><a href="#场景三、查看" class="headerlink" title="场景三、查看"></a>场景三、查看</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -tvzf a.gz.tar</span><br></pre></td></tr></table></figure>
+
+<p>-c: create 创建<br>-v: verbose 详细信息<br>-z: gzip压缩<br>-f file: 生成的文件，也可以像wget一样指定<code>-</code>输出到<code>stdout</code>中<br>-t: list备份内容</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/13/shell/awk/" data-id="ckm74gyqz000f2ht31l722sp6" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/13/shell/tar%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/" data-id="ckm74gyrq000o2ht3gsur8lzu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -100,19 +104,19 @@
     
 <nav id="article-nav">
   
-    <a href="/blog/2021/03/13/msyql/%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/blog/2021/03/13/shell/shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          mysql 基础命令
+          shell脚本
         
       </div>
     </a>
   
   
-    <a href="/blog/2021/03/13/shell/calc/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/blog/2021/03/13/shell/wget%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">shell中变量的数值计算</div>
+      <div class="article-nav-title">wget常用功能</div>
     </a>
   
 </nav>
