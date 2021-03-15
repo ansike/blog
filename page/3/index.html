@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-shell/read" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/nginx自启动脚本" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/13/shell/read/" class="article-date">
-  <time datetime="2021-03-13T02:40:52.231Z" itemprop="datePublished">2021-03-13</time>
+    <a href="/blog/2021/03/15/shell/nginx%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/" class="article-date">
+  <time datetime="2021-03-15T01:40:48.425Z" itemprop="datePublished">2021-03-15</time>
 </a>
     
   </div>
@@ -75,7 +75,52 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/13/shell/read/">read 命令</a>
+      <a class="article-title" href="/blog/2021/03/15/shell/nginx%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/">nginx自启动脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用<code>/etc/init.d/nginx {start|stop|restart}</code>启动,停止,重启</p>
+<p>CentOS Linux release 8.3.2011</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><ol>
+<li><code>nginx</code>的命令<br>systemctl start nginx.service<br>systemctl stop nginx.service<br>systemctl restart nginx.service<br>systemctl status nginx.service</li>
+<li>实现<code>/etc/init.d/nginx</code>脚本</li>
+<li>通过 chkconfig 实现开机自启动<br>注意下方文件中的二行和第三行</li>
+</ol>
+<h5 id="主干脚本"><a href="#主干脚本" class="headerlink" title="主干脚本"></a>主干脚本</h5><p>执行前该文件需要<code>chmod +x /etc/init.d/rsyncd</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chkconfig 2345 40 90</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> nginx 开机自启脚本</span></span><br><span class="line">set -e</span><br><span class="line">function usage()&#123;</span><br><span class="line">  echo "USAGE: $0 &#123;start|stop|restart&#125;"</span><br><span class="line">  exit 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[ $# -ne 1 ] &amp;&amp; &#123;</span><br><span class="line">  usage</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function start()&#123;</span><br><span class="line"><span class="meta">  #</span><span class="bash"> netstat -lnt | grep 80</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> lsof -i:80 -P | grep <span class="string">"LISTEN"</span></span></span><br><span class="line">  [ `netstat -lnt | grep 80 | wc -l` -gt 0 ] &amp;&amp; &#123;</span><br><span class="line">    echo "nginx is started."</span><br><span class="line">    exit 0</span><br><span class="line">  &#125;</span><br><span class="line">  systemctl start nginx.service</span><br><span class="line">  echo "nginx is started."</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function stop()&#123;</span><br><span class="line">  [ `ps -ef | grep -v grep | grep nginx | wc -l` -eq 0 ] &amp;&amp; &#123;</span><br><span class="line">    echo "nginx is stopped."</span><br><span class="line">    exit 0</span><br><span class="line">  &#125;</span><br><span class="line">  systemctl stop nginx.service</span><br><span class="line">  echo "nginx is stopped."</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">case $1 in </span><br><span class="line">  start)</span><br><span class="line">    start</span><br><span class="line">    ;;</span><br><span class="line">  stop)</span><br><span class="line">    stop</span><br><span class="line">    ;;</span><br><span class="line">  restart)</span><br><span class="line">    systemctl restart nginx.service</span><br><span class="line">    ;;</span><br><span class="line">  *)</span><br><span class="line">    usage</span><br><span class="line">    ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/03/15/shell/nginx%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/" data-id="ckm9x7glk000k18xs0vhy6erk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-shell/read" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/03/15/shell/read/" class="article-date">
+  <time datetime="2021-03-15T01:40:48.425Z" itemprop="datePublished">2021-03-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/03/15/shell/read/">read 命令</a>
     </h1>
   
 
@@ -92,7 +137,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/13/shell/read/" data-id="ckm74gyr4000k2ht37237dicy" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/15/shell/read/" data-id="ckm9x7gll000l18xs06fy6jk6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -104,8 +149,8 @@
   
     <article id="post-shell/rsync自启动脚本" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/13/shell/rsync%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/" class="article-date">
-  <time datetime="2021-03-13T02:40:52.231Z" itemprop="datePublished">2021-03-13</time>
+    <a href="/blog/2021/03/15/shell/rsync%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/" class="article-date">
+  <time datetime="2021-03-15T01:40:48.425Z" itemprop="datePublished">2021-03-15</time>
 </a>
     
   </div>
@@ -116,7 +161,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/13/shell/rsync%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/">系统自启动rsync服务的方法</a>
+      <a class="article-title" href="/blog/2021/03/15/shell/rsync%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/">系统自启动rsync服务的方法</a>
     </h1>
   
 
@@ -143,7 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/13/shell/rsync%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/" data-id="ckm74gyrn000l2ht367v44lim" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/15/shell/rsync%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/" data-id="ckm9x7gll000m18xs17xbg3p3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -155,8 +200,8 @@
   
     <article id="post-shell/shell比较常用的符号" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/13/shell/shell%E6%AF%94%E8%BE%83%E5%B8%B8%E7%94%A8%E7%9A%84%E7%AC%A6%E5%8F%B7/" class="article-date">
-  <time datetime="2021-03-13T02:40:52.231Z" itemprop="datePublished">2021-03-13</time>
+    <a href="/blog/2021/03/15/shell/shell%E6%AF%94%E8%BE%83%E5%B8%B8%E7%94%A8%E7%9A%84%E7%AC%A6%E5%8F%B7/" class="article-date">
+  <time datetime="2021-03-15T01:40:48.425Z" itemprop="datePublished">2021-03-15</time>
 </a>
     
   </div>
@@ -167,7 +212,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/13/shell/shell%E6%AF%94%E8%BE%83%E5%B8%B8%E7%94%A8%E7%9A%84%E7%AC%A6%E5%8F%B7/">shell比较符号含义</a>
+      <a class="article-title" href="/blog/2021/03/15/shell/shell%E6%AF%94%E8%BE%83%E5%B8%B8%E7%94%A8%E7%9A%84%E7%AC%A6%E5%8F%B7/">shell比较符号含义</a>
     </h1>
   
 
@@ -187,7 +232,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/13/shell/shell%E6%AF%94%E8%BE%83%E5%B8%B8%E7%94%A8%E7%9A%84%E7%AC%A6%E5%8F%B7/" data-id="ckm74gyro000m2ht35v70fzv1" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/15/shell/shell%E6%AF%94%E8%BE%83%E5%B8%B8%E7%94%A8%E7%9A%84%E7%AC%A6%E5%8F%B7/" data-id="ckm9x7glm000n18xshb29aq2z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -199,8 +244,8 @@
   
     <article id="post-shell/shell脚本执行" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/13/shell/shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C/" class="article-date">
-  <time datetime="2021-03-13T02:40:52.231Z" itemprop="datePublished">2021-03-13</time>
+    <a href="/blog/2021/03/15/shell/shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C/" class="article-date">
+  <time datetime="2021-03-15T01:40:48.425Z" itemprop="datePublished">2021-03-15</time>
 </a>
     
   </div>
@@ -211,7 +256,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/13/shell/shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C/">shell脚本</a>
+      <a class="article-title" href="/blog/2021/03/15/shell/shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C/">shell脚本</a>
     </h1>
   
 
@@ -228,7 +273,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/13/shell/shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C/" data-id="ckm74gyrp000n2ht370b0gcf3" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/15/shell/shell%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C/" data-id="ckm9x7glm000o18xs3wx3f7gt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -240,8 +285,8 @@
   
     <article id="post-shell/tar常用功能" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/13/shell/tar%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/" class="article-date">
-  <time datetime="2021-03-13T02:40:52.231Z" itemprop="datePublished">2021-03-13</time>
+    <a href="/blog/2021/03/15/shell/tar%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/" class="article-date">
+  <time datetime="2021-03-15T01:40:48.425Z" itemprop="datePublished">2021-03-15</time>
 </a>
     
   </div>
@@ -252,7 +297,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/13/shell/tar%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/">tar常用功能</a>
+      <a class="article-title" href="/blog/2021/03/15/shell/tar%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/">tar常用功能</a>
     </h1>
   
 
@@ -271,7 +316,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/13/shell/tar%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/" data-id="ckm74gyrq000o2ht3gsur8lzu" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/15/shell/tar%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/" data-id="ckm9x7gln000p18xs88dn9bad" class="article-share-link">Share</a>
       
       
     </footer>
@@ -283,8 +328,8 @@
   
     <article id="post-shell/wget常用功能" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/13/shell/wget%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/" class="article-date">
-  <time datetime="2021-03-13T02:40:52.231Z" itemprop="datePublished">2021-03-13</time>
+    <a href="/blog/2021/03/15/shell/wget%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/" class="article-date">
+  <time datetime="2021-03-15T01:40:48.425Z" itemprop="datePublished">2021-03-15</time>
 </a>
     
   </div>
@@ -295,7 +340,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/13/shell/wget%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/">wget常用功能</a>
+      <a class="article-title" href="/blog/2021/03/15/shell/wget%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/">wget常用功能</a>
     </h1>
   
 
@@ -315,7 +360,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/13/shell/wget%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/" data-id="ckm74gyrq000p2ht3b7e8d6m5" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/15/shell/wget%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/" data-id="ckm9x7glo000q18xs5vsiefga" class="article-share-link">Share</a>
       
       
     </footer>
@@ -327,8 +372,8 @@
   
     <article id="post-shell/一键优化系统脚本" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/13/shell/%E4%B8%80%E9%94%AE%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E8%84%9A%E6%9C%AC/" class="article-date">
-  <time datetime="2021-03-13T02:40:52.231Z" itemprop="datePublished">2021-03-13</time>
+    <a href="/blog/2021/03/15/shell/%E4%B8%80%E9%94%AE%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E8%84%9A%E6%9C%AC/" class="article-date">
+  <time datetime="2021-03-15T01:40:48.425Z" itemprop="datePublished">2021-03-15</time>
 </a>
     
   </div>
@@ -339,7 +384,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/13/shell/%E4%B8%80%E9%94%AE%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E8%84%9A%E6%9C%AC/">一键优化系统脚本</a>
+      <a class="article-title" href="/blog/2021/03/15/shell/%E4%B8%80%E9%94%AE%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E8%84%9A%E6%9C%AC/">一键优化系统脚本</a>
     </h1>
   
 
@@ -364,7 +409,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/13/shell/%E4%B8%80%E9%94%AE%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E8%84%9A%E6%9C%AC/" data-id="ckm74gyrr000q2ht34ifo97f4" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/15/shell/%E4%B8%80%E9%94%AE%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E8%84%9A%E6%9C%AC/" data-id="ckm9x7glo000r18xs9njphuhv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -376,8 +421,8 @@
   
     <article id="post-shell/判断字符串是否为数字的多种思路" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/13/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/" class="article-date">
-  <time datetime="2021-03-13T02:40:52.231Z" itemprop="datePublished">2021-03-13</time>
+    <a href="/blog/2021/03/15/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/" class="article-date">
+  <time datetime="2021-03-15T01:40:48.425Z" itemprop="datePublished">2021-03-15</time>
 </a>
     
   </div>
@@ -388,7 +433,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/13/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/">判断字符串是否为数字的多种思路</a>
+      <a class="article-title" href="/blog/2021/03/15/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/">判断字符串是否为数字的多种思路</a>
     </h1>
   
 
@@ -404,7 +449,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/13/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/" data-id="ckm74gyrr000r2ht369kc98vr" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/15/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/" data-id="ckm9x7glp000s18xsfmjg7fy8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -416,8 +461,8 @@
   
     <article id="post-shell/判断字符串长度为0" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/13/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6%E4%B8%BA0/" class="article-date">
-  <time datetime="2021-03-13T02:40:52.231Z" itemprop="datePublished">2021-03-13</time>
+    <a href="/blog/2021/03/15/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6%E4%B8%BA0/" class="article-date">
+  <time datetime="2021-03-15T01:40:48.425Z" itemprop="datePublished">2021-03-15</time>
 </a>
     
   </div>
@@ -428,7 +473,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/13/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6%E4%B8%BA0/">判断字符串长度为0</a>
+      <a class="article-title" href="/blog/2021/03/15/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6%E4%B8%BA0/">判断字符串长度为0</a>
     </h1>
   
 
@@ -449,56 +494,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/13/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6%E4%B8%BA0/" data-id="ckm74gyrs000s2ht345tbc5g5" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-shell/条件测试" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/03/13/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/" class="article-date">
-  <time datetime="2021-03-13T02:40:52.231Z" itemprop="datePublished">2021-03-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/13/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/">条件测试</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h5 id="测试语法"><a href="#测试语法" class="headerlink" title="测试语法"></a>测试语法</h5><ol>
-<li>test &lt;测试表达式&gt;</li>
-<li>[ &lt;测试表达式&gt; ]  # 常用这个</li>
-<li>[[ &lt;测试表达式&gt; ]]</li>
-<li>((&lt;测试表达式&gt;))</li>
-</ol>
-<ul>
-<li>1和2是等价的</li>
-<li>[[]]为test拓展的命令，常用语通配符进行模式匹配。&amp;&amp;,||,&gt;,&lt;可以使用</li>
-<li>(())常用语计算</li>
-</ul>
-<h5 id="test使用"><a href="#test使用" class="headerlink" title="test使用"></a>test使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 判断file文件是否存在</span></span><br><span class="line">test -f file &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断字符串长度是否为0</span></span><br><span class="line">test -z "file" &amp;&amp; echo 1 || echo 0</span><br></pre></td></tr></table></figure>
-<h5 id="使用"><a href="#使用" class="headerlink" title="[]使用"></a>[]使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 判断file文件是否存在</span></span><br><span class="line">[ -f file ] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断字符串长度是否为0</span></span><br><span class="line">[ -z "file" ] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> -o 表示或者</span></span><br><span class="line">[ -z "file" -o -z "" ] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> -a 表示且</span></span><br><span class="line">[ -z "file" -a -z "" ] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断字符串相等</span></span><br><span class="line">[ "file" = "1" ] &amp;&amp; echo 1 || echo 0</span><br></pre></td></tr></table></figure>
-<h5 id="使用-1"><a href="#使用-1" class="headerlink" title="[]使用"></a>[]使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 判断file文件是否存在</span></span><br><span class="line">[[ -f file ]] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断字符串长度是否为0</span></span><br><span class="line">[[ -z "file" ]] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> -o 表示或者</span></span><br><span class="line">[[ -z "file" || -z "" ]] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> -a 表示且</span></span><br><span class="line">[[ -z "file" &amp;&amp; -z "" ]] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> TODO 判断字符串相等</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/13/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/" data-id="ckm74gyrt000t2ht3aqwx3255" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/15/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6%E4%B8%BA0/" data-id="ckm9x7glp000t18xs1lszdvw5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -544,23 +540,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/03/13/shell/case%E8%AF%AD%E6%B3%95/">case应用及实践</a>
+            <a href="/blog/2021/03/15/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/">Linux邮件报警脚本及实现【阿里云服务器，Centos8】</a>
           </li>
         
           <li>
-            <a href="/blog/2021/03/13/URL/">URL constructor</a>
+            <a href="/blog/2021/03/15/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
           </li>
         
           <li>
-            <a href="/blog/2021/03/13/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+            <a href="/blog/2021/03/15/throttle-debounce/">截流和去抖的深入理解结合loads</a>
           </li>
         
           <li>
-            <a href="/blog/2021/03/13/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+            <a href="/blog/2021/03/15/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
           </li>
         
           <li>
-            <a href="/blog/2021/03/13/cross-origin/">cross origin</a>
+            <a href="/blog/2021/03/15/%E5%8A%A8%E7%94%BB/">动画</a>
           </li>
         
       </ul>
