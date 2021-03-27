@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-shell/echo字体加颜色" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/tar常用功能" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/26/shell/echo%E5%AD%97%E4%BD%93%E5%8A%A0%E9%A2%9C%E8%89%B2/" class="article-date">
-  <time datetime="2021-03-26T01:31:32.561Z" itemprop="datePublished">2021-03-26</time>
+    <a href="/blog/2021/03/27/shell/tar%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/" class="article-date">
+  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/26/shell/echo%E5%AD%97%E4%BD%93%E5%8A%A0%E9%A2%9C%E8%89%B2/">echo字体加颜色</a>
+      <a class="article-title" href="/blog/2021/03/27/shell/tar%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/">tar常用功能</a>
     </h1>
   
 
@@ -83,321 +83,70 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo -e "\E[1;31mmawasd\E[0m"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 红色的=&gt;mawasd</span></span><br></pre></td></tr></table></figure>
-<ol>
-<li><code>echo -e</code>可以识别转义字符</li>
-<li><code>\E</code>可以使用<code>\033</code>代替,中间内容就是其作用空间</li>
-<li><code>[1</code>表示加粗显示</li>
-<li><code>[0m</code>表示关闭所有属性</li>
+        <p><code>Wget - The non-interactive network downloader.</code></p>
+<h3 id="基本使用方式见man-wget"><a href="#基本使用方式见man-wget" class="headerlink" title="基本使用方式见man wget"></a>基本使用方式见man wget</h3><p><code>wget [option]... [URL]...</code></p>
+<h3 id="场景一、压缩"><a href="#场景一、压缩" class="headerlink" title="场景一、压缩"></a>场景一、压缩</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -cvzf a.gz.tar a</span><br></pre></td></tr></table></figure>
+<h3 id="场景二、解压"><a href="#场景二、解压" class="headerlink" title="场景二、解压"></a>场景二、解压</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar -xvzf a.gz.tar</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 解压到指定目录</span></span><br><span class="line">tar -xvzf a.gz.tar -C path</span><br></pre></td></tr></table></figure>
+<h3 id="场景三、查看"><a href="#场景三、查看" class="headerlink" title="场景三、查看"></a>场景三、查看</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -tvzf a.gz.tar</span><br></pre></td></tr></table></figure>
+
+<p>-c: create 创建<br>-v: verbose 详细信息<br>-z: gzip压缩<br>-f file: 生成的文件，也可以像wget一样指定<code>-</code>输出到<code>stdout</code>中<br>-t: list备份内容</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/03/27/shell/tar%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/" data-id="ckmrt2y3m000qzrnud3ne4ndv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-shell/邮件报警脚本及实现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/03/27/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/" class="article-date">
+  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/03/27/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/">Linux邮件报警脚本及实现【阿里云服务器，Centos8】</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>实现: 监控linux机器内存，低于阈值则邮件报警，每三分钟检查一次。</code></p>
+<h3 id="拆分步骤"><a href="#拆分步骤" class="headerlink" title="拆分步骤"></a>拆分步骤</h3><ol>
+<li>获取内存大小</li>
+<li>判断是否小于阈值</li>
+<li>发送邮件</li>
 </ol>
-<p>详情见<code>man console_codes</code></p>
-<h3 id="数字匹配demo"><a href="#数字匹配demo" class="headerlink" title="数字匹配demo"></a>数字匹配demo</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h4 id="获取内存大小"><a href="#获取内存大小" class="headerlink" title="获取内存大小"></a>获取内存大小</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Display amount of free and used memory <span class="keyword">in</span> the system</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -b 　以Byte为单位显示内存使用情况。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -k 　以KB为单位显示内存使用情况。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -m 　以MB为单位显示内存使用情况。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -o 　不显示缓冲区调节列。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -s     &lt;间隔秒数&gt; 　持续观察内存使用状况。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -t 　显示内存总和列。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -V 　显示版本信息。</span></span><br><span class="line">free </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看空闲的空间大小</span></span><br><span class="line">Memo=`free -m | awk 'NR==3 &#123;print $NF&#125;'`</span><br></pre></td></tr></table></figure>
+<h4 id="判断是否小于阈值"><a href="#判断是否小于阈值" class="headerlink" title="判断是否小于阈值"></a>判断是否小于阈值</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Limit=10000</span><br><span class="line">if [ "$Memo" -lt "$Limit" ]</span><br><span class="line">  then</span><br><span class="line">    echo "开始发送邮件"</span><br><span class="line">    exit 0;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h4 id="发送邮件，使用163邮件服务"><a href="#发送邮件，使用163邮件服务" class="headerlink" title="发送邮件，使用163邮件服务"></a>发送邮件，使用163邮件服务</h4><p><code>使用本地邮件客户端，mailx</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">yum install mailx -y</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置邮件的smtp服务为163，因为服务器用了阿里云，所以不能使用默认的25端口，只能使用ssl的端口默认465</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 请求数字证书</span></span><br><span class="line">mkdir -p /root/.certs/  # 创建目录，用来存放证书</span><br><span class="line">echo -n | openssl s_client -connect smtp.163.com:465 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' &gt; ~/.certs/163.crt  # 向163请求证书</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 注意password为163申请的token，在163官网的设置页面创建一个第三方邮件客户端的专用密码，注意更换为自己的</span></span><br><span class="line">echo -e 'set from=15910250965@163.com smtp=smtps://smtp.163.com:465\nset smtp-auth-user=15910250965@163.com smtp-auth-password=XXXX smtp-auth-login' &gt;&gt; /etc/mail.rc</span><br></pre></td></tr></table></figure>
+<p><a href="https://blog.csdn.net/qq_42859864/article/details/84862977" target="_blank" rel="noopener">参考链接</a></p>
+<h1 id="执行一下命令。查看邮件或者垃圾箱中是否是新发的邮件"><a href="#执行一下命令。查看邮件或者垃圾箱中是否是新发的邮件" class="headerlink" title="执行一下命令。查看邮件或者垃圾箱中是否是新发的邮件"></a>执行一下命令。查看邮件或者垃圾箱中是否是新发的邮件</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo "body" | mailx -s "title" 15910250965@163.com</span><br></pre></td></tr></table></figure>
 
+<h4 id="完整脚本"><a href="#完整脚本" class="headerlink" title="完整脚本"></a>完整脚本</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> monitor.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!bin/bash</span></span><br><span class="line">set -e</span><br><span class="line">Limit=10000</span><br><span class="line">Memo=`free -m | awk 'NR==3 &#123;print $NF&#125;'`</span><br><span class="line"></span><br><span class="line">if [ "$Memo" -lt "$Limit" ]</span><br><span class="line">  then</span><br><span class="line">    echo "开始发送邮件"</span><br><span class="line">    echo "内存小于【$Limit】，当前内存剩余【$Memo】" | mail -s "内存紧张报警邮件" 15910250965@163.com</span><br><span class="line">    [ $? -eq 0 ] &amp;&amp; &#123;</span><br><span class="line">      echo "发送邮件成功"</span><br><span class="line">      exit 0;</span><br><span class="line">    &#125; || &#123;</span><br><span class="line">      echo "发送邮件失败"</span><br><span class="line">      exit 1;</span><br><span class="line">    &#125;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://www.runoob.com/w3cnote/linux-crontab-tasks.html" target="_blank" rel="noopener">https://www.runoob.com/w3cnote/linux-crontab-tasks.html</a></p>
+<h4 id="使用crontab设置定时任务"><a href="#使用crontab设置定时任务" class="headerlink" title="使用crontab设置定时任务"></a>使用crontab设置定时任务</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> -e (编辑工作表)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -l (列出工作表里的命令)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -r (删除工作作)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> crontab [-u username] <span class="comment"># 省略用户表表示操作当前用户的crontab</span></span></span><br><span class="line">crontab -e</span><br><span class="line"><span class="meta">#</span><span class="bash"> eidt </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 分 时 天 周 月</span></span><br><span class="line">3 * * * * sh ~/job/monitor.sh</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/26/shell/echo%E5%AD%97%E4%BD%93%E5%8A%A0%E9%A2%9C%E8%89%B2/" data-id="ckmpmpxij000j2atxav0ygu2a" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-shell/chapter10/while循环" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/03/26/shell/chapter10/while%E5%BE%AA%E7%8E%AF/" class="article-date">
-  <time datetime="2021-03-26T01:31:32.561Z" itemprop="datePublished">2021-03-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/26/shell/chapter10/while%E5%BE%AA%E7%8E%AF/">while循环</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h3><p>while &lt;条件表达式&gt;<br>do<br>  指令…<br>done</p>
-<p>while.sh</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">  uptime</span><br><span class="line">  sleep 1</span><br><span class="line"><span class="meta">  #</span><span class="bash"> usleep 1000000 表示1s</span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h3 id="使用while打印54321"><a href="#使用while打印54321" class="headerlink" title="使用while打印54321"></a>使用while打印54321</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">i=5</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">while</span> ((i&gt;0))</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">while</span> [ <span class="variable">$i</span> -gt 0 ]</span></span><br><span class="line">while [[ $i &gt; 0 ]]</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">  ((--i))</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<h3 id="计算从1加到100"><a href="#计算从1加到100" class="headerlink" title="计算从1加到100"></a>计算从1加到100</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">max=100</span><br><span class="line">sum=0</span><br><span class="line">while [[ $max &gt; 0 ]]</span><br><span class="line">do</span><br><span class="line"><span class="meta">  #</span><span class="bash"> sum=`expr <span class="variable">$sum</span> + <span class="variable">$max</span>`</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> <span class="built_in">let</span> sum=sum+max</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> sum=$((sum+max))</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> ((sum=sum+max))</span></span><br><span class="line">  ((sum+=max))</span><br><span class="line">  ((--max))</span><br><span class="line">done</span><br><span class="line">echo $sum</span><br></pre></td></tr></table></figure>
-
-<h3 id="命令后台执行相关知识"><a href="#命令后台执行相关知识" class="headerlink" title="命令后台执行相关知识"></a>命令后台执行相关知识</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 进入后台</span></span><br><span class="line">sh while.sh &amp;</span><br><span class="line"><span class="meta">#</span><span class="bash"> ctrl+c 停止执行</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ctrl+z 暂停执行</span></span><br><span class="line">jobs # 查看当前执行的任务和脚本</span><br><span class="line">fg # 把当前执行的任务和脚本放到前台执行，多个任务可以加 fg %n n为任务的序号</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">kill</span> %n 杀死任务</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/26/shell/chapter10/while%E5%BE%AA%E7%8E%AF/" data-id="ckmpmpxj500112atxbfuz6yzt" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-canvas-基础特性" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/03/26/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" class="article-date">
-  <time datetime="2021-03-26T01:31:32.561Z" itemprop="datePublished">2021-03-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/26/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="对象创建"><a href="#对象创建" class="headerlink" title="对象创建"></a>对象创建</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HTML</span></span><br><span class="line">&lt;canvas id=<span class="string">"canvas"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//JS</span></span><br><span class="line"><span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"><span class="keyword">const</span> ctx = canvas.getContext(<span class="string">"2d"</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="canvas元素的属性和方法"><a href="#canvas元素的属性和方法" class="headerlink" title="canvas元素的属性和方法"></a>canvas元素的属性和方法</h3><p><strong>1. 属性</strong></p>
-<ul>
-<li>width</li>
-<li>height</li>
-</ul>
-<p><strong>2. 方法</strong></p>
-<ul>
-<li><ol>
-<li>getContext(contextId: “2d”, options?: CanvasRenderingContext2DSettings): CanvasRenderingContext2D | null;</li>
-<li>getContext(contextId: “bitmaprenderer”, options?: ImageBitmapRenderingContextSettings):mageBitmapRenderingContext | null;</li>
-<li>getContext(contextId: “webgl”, options?: WebGLContextAttributes): WebGLRenderingContext | null;</li>
-<li>getContext(contextId: “webgl2”, options?: WebGLContextAttributes): WebGL2RenderingContext | null;</li>
-<li>getContext(contextId: string, options?: any): RenderingContext | null;<br>// 返回绘图环境对象</li>
-</ol>
-</li>
-<li>toDataURL(type?: string, quality?: any): string; // 返回数据地址，可以直接给img的src赋值</li>
-<li>toBlob(callback: BlobCallback, type?: string, quality?: any): void; // 返回表示图像文件的blob，可以将该blob做文件上传使用</li>
-<li>transferControlToOffscreen(): OffscreenCanvas;</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/26/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" data-id="ckmpmpxhd00022atxa7oy14fo" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-canvas动画" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/03/26/canvas%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-03-26T01:31:32.561Z" itemprop="datePublished">2021-03-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/26/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ol>
-<li>canvas 基础知识，比如stroke，fill，arc，rect等基础API</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/26/canvas%E5%8A%A8%E7%94%BB/" data-id="ckmpmpxhe00032atx6ehoefcg" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-cross-origin" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/03/26/cross-origin/" class="article-date">
-  <time datetime="2021-03-26T01:31:32.561Z" itemprop="datePublished">2021-03-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/26/cross-origin/">cross origin</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>就是创建一个文件夹eg:devChromeData</p>
-<h3 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h3><p>第二步执行以下命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -n /Applications/Google\ Chrome.app/ --args --disable-web-security  --user-data-dir=/Users/ansike/devChromeData</span><br></pre></td></tr></table></figure>
-
-<p>微信开发者工具（注意app的名字是否一致）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -a /Applications/wechatwebdevtools.app --args --disable-web-security --user-data-dir</span><br></pre></td></tr></table></figure>
-<h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><p>创建该文件夹，右键浏览器快捷键，在目标中追加参数</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--disable-web-security --user-data-dir=C:\path\to\ChromeUserData</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/26/cross-origin/" data-id="ckmpmpxhf00042atx1a025382" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-css动画" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/03/26/css%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-03-26T01:31:32.561Z" itemprop="datePublished">2021-03-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/26/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ol>
-<li>canvas 基础知识，比如stroke，fill，arc，rect等基础API</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/26/css%E5%8A%A8%E7%94%BB/" data-id="ckmpmpxhg00052atx3av23ek3" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-promisefy" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/03/26/promisefy/" class="article-date">
-  <time datetime="2021-03-26T01:31:32.561Z" itemprop="datePublished">2021-03-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/26/promisefy/">实现类似 node中util.promisefy的实现</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>分析需求：</p>
-<ol>
-<li>promisefy将异步回调的nodejs的api fn改成了promise fn</li>
-<li>传入一个fn，返回一个新的fn，且新的fn执行的时候返回一个promise</li>
-<li>发现所有的nodejs的api的回调函数参数格式一致(error, content)=&gt;{}</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"><span class="keyword">const</span> util = <span class="built_in">require</span>(<span class="string">"util"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将异步回调改为promise</span></span><br><span class="line"><span class="keyword">const</span> promisefyReadFile = util.promisify(fs.readFile);</span><br><span class="line">promisefyReadFile(path.resolve(__dirname, <span class="string">'./data.txt'</span>), <span class="string">'utf-8'</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">customPromiseFy</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 注意</span></span><br><span class="line">      <span class="keyword">const</span> widthCallBackArgs = [...args, <span class="function"><span class="keyword">function</span> (<span class="params">error, content</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (error) reject(error);</span><br><span class="line">        resolve(content)</span><br><span class="line">      &#125;]</span><br><span class="line">      fn.apply(fn, widthCallBackArgs);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> promisefyReadFile = customPromiseFy(fs.readFile);</span><br><span class="line">promisefyReadFile(path.resolve(__dirname, <span class="string">'./data.txt'</span>), <span class="string">'utf-8'</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/26/promisefy/" data-id="ckmpmpxhh00062atxevy4f3at" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-svg动画" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/03/26/svg%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-03-26T01:31:32.561Z" itemprop="datePublished">2021-03-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/26/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/26/svg%E5%8A%A8%E7%94%BB/" data-id="ckmpmpxhi00072atx8jj57fpc" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/27/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/" data-id="ckmrt2y3v0011zrnu6nj9bial" class="article-share-link">Share</a>
       
       
     </footer>
@@ -409,8 +158,8 @@
   
     <article id="post-throttle-debounce" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/26/throttle-debounce/" class="article-date">
-  <time datetime="2021-03-26T01:31:32.561Z" itemprop="datePublished">2021-03-26</time>
+    <a href="/blog/2021/03/27/throttle-debounce/" class="article-date">
+  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
 </a>
     
   </div>
@@ -421,7 +170,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/26/throttle-debounce/">截流和去抖的深入理解结合loads</a>
+      <a class="article-title" href="/blog/2021/03/27/throttle-debounce/">截流和去抖的深入理解结合loads</a>
     </h1>
   
 
@@ -434,7 +183,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/26/throttle-debounce/" data-id="ckmpmpxhj00082atx1hhgcxuy" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/27/throttle-debounce/" data-id="ckmrt2y1o0008zrnu095g564q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -446,8 +195,8 @@
   
     <article id="post-从数字分隔符看正则" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/26/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="article-date">
-  <time datetime="2021-03-26T01:31:32.561Z" itemprop="datePublished">2021-03-26</time>
+    <a href="/blog/2021/03/27/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="article-date">
+  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
 </a>
     
   </div>
@@ -458,7 +207,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/26/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
+      <a class="article-title" href="/blog/2021/03/27/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
     </h1>
   
 
@@ -496,7 +245,274 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/26/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="ckmpmpxhk00092atxco4e0amz" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/27/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="ckmrt2y1q0009zrnua8fq7ug7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-动画" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/03/27/%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/03/27/%E5%8A%A8%E7%94%BB/">动画</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="动画演示"><a href="#动画演示" class="headerlink" title="动画演示"></a>动画演示</h3><p><a href="./canvas动画.md">canvas动画</a><br><a href="./svg动画.md">svg动画</a><br><a href="./css动画.md">css动画</a></p>
+<h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ul>
+<li>无论是css动画，canvas动画，还是svg动画，基本思想都需要考虑一下几点：</li>
+</ul>
+<ol>
+<li>动画当前的状态即是画布在当前时间内（浏览器渲染间隔）的一帧图像。</li>
+<li>前提需要定时调用渲染函数不断绘制。【借助定时器或者requestAnimationFrame—最好依赖浏览器的渲染机制】</li>
+<li>每次渲染的状态由当前动画进度决定。不管是一次性动画还是循环动画，都有一个最小环节，想清楚自己的最小环节。</li>
+<li>每个最小环节由duration决定，受delayTime影响。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/03/27/%E5%8A%A8%E7%94%BB/" data-id="ckmrt2y1r000azrnu32mx0jvw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-工程化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/03/27/%E5%B7%A5%E7%A8%8B%E5%8C%96/" class="article-date">
+  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/03/27/%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前端工程中需要解决的几个问题"><a href="#前端工程中需要解决的几个问题" class="headerlink" title="前端工程中需要解决的几个问题"></a>前端工程中需要解决的几个问题</h3><ol>
+<li>快速搭建 各种cli工具：vue-cli，react-app</li>
+<li>高效开发 各种功能：less-loader,sass-loader,css-loader,stylus,es6,jsx</li>
+<li>便捷协作 协作工具：代理，mock数据能力，git版本管理</li>
+<li>顺畅上线 上线工具：Jenkins，ci</li>
+<li>稳健运行 检测工作：异常上报工具</li>
+</ol>
+<h4 id="stylus"><a href="#stylus" class="headerlink" title="stylus"></a>stylus</h4><p>css预处理器，运行 stylus example.styl 可将 demo.styl 文件编译成 example.css 文件。在stylus中可以使用变量，函数，compose集成等</p>
+<h4 id="styled-components"><a href="#styled-components" class="headerlink" title="styled-components"></a>styled-components</h4><p>官网:<a href="https://styled-components.com/" target="_blank" rel="noopener">https://styled-components.com/</a></p>
+<h4 id="css-module"><a href="#css-module" class="headerlink" title="css module"></a>css module</h4><p>未完继续补充~</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/03/27/%E5%B7%A5%E7%A8%8B%E5%8C%96/" data-id="ckmrt2y1s000bzrnu8si8dkah" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-模块化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/03/27/%E6%A8%A1%E5%9D%97%E5%8C%96/" class="article-date">
+  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/03/27/%E6%A8%A1%E5%9D%97%E5%8C%96/">Commonjs</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="问题1-Commonjs和es-module的区别"><a href="#问题1-Commonjs和es-module的区别" class="headerlink" title="问题1 Commonjs和es module的区别"></a>问题1 Commonjs和es module的区别</h3><ol>
+<li>使用方式看：导入和导出方式不同<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ====commonjs</span></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="built_in">module</span>.export = <span class="string">'hello'</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'a.js'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ====es module</span></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="string">'hello'</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">import</span> a <span class="keyword">from</span> <span class="string">"./a.js"</span>;</span><br></pre></td></tr></table></figure>
+延伸看级别不一样：<b>commonjs是node运行时的实现，非官方标准</b>。es module中的<code>export default, import</code>都是js关键字，从语言层面实现的支持，是官方标准。</li>
+</ol>
+<h3 id="问题2-exports和module-exports区别"><a href="#问题2-exports和module-exports区别" class="headerlink" title="问题2 exports和module.exports区别"></a>问题2 exports和module.exports区别</h3><p>看下在commonjs中的实现就能明白</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 两个变量初始的时候都指向了同一块内存地址</span></span><br><span class="line"><span class="built_in">console</span>.log(exports === <span class="built_in">module</span>.exports) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 当发生直接赋值的情况后commonjs只会使用module.exports指向的值(和导出的顺序无关)</span></span><br><span class="line"><span class="comment">// module.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="string">"hello"</span>;</span><br><span class="line">exports = <span class="string">"hello2"</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">"./module.js"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// hello</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="问题3-require的实现"><a href="#问题3-require的实现" class="headerlink" title="问题3 require的实现"></a>问题3 require的实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"><span class="keyword">const</span> vm = <span class="built_in">require</span>(<span class="string">"vm"</span>);</span><br><span class="line"><span class="comment">// 实现 require</span></span><br><span class="line"><span class="comment">// const a = require("./module.js");</span></span><br><span class="line"><span class="keyword">const</span> a = customRequire(<span class="string">"./module.js"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">customRequire</span>(<span class="params">filePath</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> content = fs.readFileSync(path.join(__dirname, filePath), <span class="string">'utf-8'</span>);</span><br><span class="line">  <span class="comment">// 包裹一层避免作用于污染，隔离变量</span></span><br><span class="line">  <span class="keyword">const</span> wrapper = [</span><br><span class="line">    <span class="string">"(function(require, module, exports)&#123;"</span>,</span><br><span class="line">    <span class="string">"&#125;)"</span></span><br><span class="line">  ]</span><br><span class="line">  <span class="keyword">const</span> <span class="built_in">module</span> = &#123;</span><br><span class="line">    exports: &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> wrapperFn = wrapper[<span class="number">0</span>] + content + wrapper[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 两种实现方式都OK--实现字符串转js 运行时代码</span></span><br><span class="line">  <span class="keyword">const</span> canHandleFn = vm.runInThisContext(wrapperFn)</span><br><span class="line">  <span class="comment">// const canHandleFn = eval(wrapperFn);</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 这一步解决了问题三的疑惑</span></span><br><span class="line">  canHandleFn(customRequire, <span class="built_in">module</span>, <span class="built_in">module</span>.exports)</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">module</span>.exports</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/03/27/%E6%A8%A1%E5%9D%97%E5%8C%96/" data-id="ckmrt2y1u000czrnu129tam81" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-集中式和分布式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/03/27/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" class="article-date">
+  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/03/27/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="集中式"><a href="#集中式" class="headerlink" title="集中式"></a>集中式</h3><p>集中式系统中版本库是集中存放在中央服务器的。以svn为例，开发人员工作的时候都需要从中央服务器获取最新的版本，工作完之后需要将工作推送给中央服务器。<br>eg：SVN，云服务器（在云服务器开发）<br>优点：减少了硬件和软件成本<br>问题：<strong>必须联网（局域网或者互联网）</strong></p>
+<h3 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h3><p>分布式系统中没有中央服务器的概念。</p>
+<p>eg：git<br>优点：每个人的电脑中都有完整的版本库，所以安全性很高，即使服务器仓库被破坏了，损失也不会很大。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/03/27/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" data-id="ckmrt2y1v000dzrnu554lc0r7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-shell/read" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/03/27/shell/read/" class="article-date">
+  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/03/27/shell/read/">read 命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="从标准输入中读取信息"><a href="#从标准输入中读取信息" class="headerlink" title="从标准输入中读取信息"></a>从标准输入中读取信息</h3><h5 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h5><ol>
+<li>-p prompt #提示</li>
+<li>-t timeout # 超时时间, 单位为s<h5 id="命令行使用"><a href="#命令行使用" class="headerlink" title="命令行使用"></a>命令行使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">read -p "Pls Input Your Vars: " var1 var2</span><br><span class="line">echo "$&#123;var1&#125;, $&#123;var2&#125;"</span><br><span class="line"></span><br><span class="line">read -t 3 -p "Pls Input Your Vars: " var3 var4</span><br><span class="line">echo "$&#123;var3&#125;, $&#123;var4&#125;"</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/03/27/shell/read/" data-id="ckmrt2y38000mzrnu90nwa0b2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-shell/rsync自启动脚本" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/03/27/shell/rsync%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/" class="article-date">
+  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/03/27/shell/rsync%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/">系统自启动rsync服务的方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用<code>/etc/init.d/rsyncd {start|stop|restart}</code>启动,停止,重启</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><ol>
+<li><code>rsync</code>的命令<br>rsync –daemon<br>pkill rsync<br>netstat -lntp | grep 873</li>
+<li>实现<code>/etc/init.d/rsyncd</code>脚本</li>
+<li>通过 chkconfig 实现开机自启动<br>注意下方文件中的二行和第三行</li>
+</ol>
+<h5 id="主干脚本"><a href="#主干脚本" class="headerlink" title="主干脚本"></a>主干脚本</h5><p>执行前该文件需要<code>chmod +x /etc/init.d/rsyncd</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chkconfig: 2345 20 80</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> description: Save and restores system entropy poll</span></span><br><span class="line">[ $# -ne 1 ] &amp;&amp; &#123;</span><br><span class="line">  echo "USAGE:$0 &#123;start|stop|restart&#125;"</span><br><span class="line">  exit 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if [ "$1" = "start" ]; then</span><br><span class="line">  rsync --daemon</span><br><span class="line">  sleep 2</span><br><span class="line">  [ `netstat -lntp | grep rsync | wc -l` -gt 0 ] &amp;&amp; &#123;</span><br><span class="line">    echo "rsyncd is start."</span><br><span class="line">    exit 0</span><br><span class="line">  &#125;</span><br><span class="line">elif [ "$1" = "stop" ]; then</span><br><span class="line">  killall rsync &amp;&gt;/etc/null</span><br><span class="line">  sleep 2</span><br><span class="line">  [ `netstat -lntp | grep rsync | wc -l` -eq 0 ] &amp;&amp; &#123;</span><br><span class="line">    echo "rsyncd is stopped."</span><br><span class="line">    exit 0</span><br><span class="line">  &#125;</span><br><span class="line">elif [ "$1" = "restart" ]; then</span><br><span class="line">  killall rsync</span><br><span class="line">  sleep 1</span><br><span class="line">  killPro=`netstat -lntp | grep rsync | wc -l`</span><br><span class="line">  rsync --daemon</span><br><span class="line">  sleep 1</span><br><span class="line">  startPro=`netstat -lntp | grep rsync | wc -l`</span><br><span class="line">  [ "$killPro" -eq 0 -a "$startPro" -gt 0 ] &amp;&amp; &#123;</span><br><span class="line">    echo "rsyncd is restarted."</span><br><span class="line">    exit 0</span><br><span class="line">  &#125;</span><br><span class="line">else</span><br><span class="line">  echo "USAGE:$0 &#123;start|stop|restart&#125;"</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<h5 id="主干脚本-函数版本"><a href="#主干脚本-函数版本" class="headerlink" title="主干脚本[函数版本]"></a>主干脚本[函数版本]</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chkconfig: 2345 20 80</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> description: Save and restores system entropy poll</span></span><br><span class="line">. /etc/init.d/functions</span><br><span class="line">function usage() &#123;</span><br><span class="line">  echo "USAGE:$0 &#123;start|stop|restart&#125;"</span><br><span class="line">  exit 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function start() &#123;</span><br><span class="line">  rsync --daemon</span><br><span class="line">  sleep 2</span><br><span class="line">  [ `netstat -lntp | grep rsync | wc -l` -gt 0 ] &amp;&amp; &#123;</span><br><span class="line">    action "rsyncd is start." /bin/true</span><br><span class="line">  &#125; || &#123;</span><br><span class="line">    action "rsyncd is start." /bin/false</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function stop() &#123;</span><br><span class="line">  killall rsync &amp;&gt;/etc/null</span><br><span class="line">  sleep 2</span><br><span class="line">  [ `netstat -lntp | grep rsync | wc -l` -eq 0 ] &amp;&amp; &#123;</span><br><span class="line">    action "rsyncd is stopped." /bin/true</span><br><span class="line">  &#125; || &#123;</span><br><span class="line">    action "rsyncd is started." /bin/false</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function main()&#123;</span><br><span class="line">  [ $# -ne 1 ] &amp;&amp; &#123;</span><br><span class="line">    usage</span><br><span class="line">  &#125;</span><br><span class="line">  if [ "$1" = "start" ]; then</span><br><span class="line">    start</span><br><span class="line">  elif [ "$1" = "stop" ]; then</span><br><span class="line">    stop</span><br><span class="line">  elif [ "$1" = "restart" ]; then</span><br><span class="line">    stop</span><br><span class="line">    sleep 1</span><br><span class="line">    start</span><br><span class="line">  else</span><br><span class="line">    usage</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main $*</span><br></pre></td></tr></table></figure>
+
+<h5 id="加入开机自启动"><a href="#加入开机自启动" class="headerlink" title="加入开机自启动"></a>加入开机自启动</h5><p>注意脚本的第二行<br><code># chkconfig: 2345 20 80</code><br>2345 表示 Linux 运行级别,20 表示开始启动顺序,80 表示脚本停止顺序<br>应用服务一般考后启动,越早停止越好</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --list [命令名] # 如 rsyncd, /etc/init.d/rsyncd</span><br><span class="line">chkconfig --add [命令名] # 添加任务</span><br><span class="line">chkconfig --del [命令名] # 删除任务</span><br><span class="line"></span><br><span class="line">chkconfig rsyncd on # 启动</span><br><span class="line">chkconfig rsyncd off # 停止</span><br></pre></td></tr></table></figure>
+
+<h5 id="kill-pkill-killall"><a href="#kill-pkill-killall" class="headerlink" title="kill pkill killall"></a>kill pkill killall</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep -v grep | grep rsync</span><br><span class="line"><span class="meta">#</span><span class="bash">root       705     1  0 23:29 ?        00:00:00 rsync --daemon</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 比较麻烦需要先查处进程号才能杀死</span></span><br><span class="line">kill 705</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 没有任何提示杀死[据说有误杀问题]</span></span><br><span class="line">pkill rsync</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 杀死全部进程,有提示</span></span><br><span class="line">killall rsync</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/03/27/shell/rsync%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/" data-id="ckmrt2y3h000nzrnu4el16sm3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -542,23 +558,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/03/26/shell/echo%E5%AD%97%E4%BD%93%E5%8A%A0%E9%A2%9C%E8%89%B2/">echo字体加颜色</a>
+            <a href="/blog/2021/03/27/shell/tar%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/">tar常用功能</a>
           </li>
         
           <li>
-            <a href="/blog/2021/03/26/shell/chapter10/while%E5%BE%AA%E7%8E%AF/">while循环</a>
+            <a href="/blog/2021/03/27/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/">Linux邮件报警脚本及实现【阿里云服务器，Centos8】</a>
           </li>
         
           <li>
-            <a href="/blog/2021/03/26/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+            <a href="/blog/2021/03/27/throttle-debounce/">截流和去抖的深入理解结合loads</a>
           </li>
         
           <li>
-            <a href="/blog/2021/03/26/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+            <a href="/blog/2021/03/27/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
           </li>
         
           <li>
-            <a href="/blog/2021/03/26/cross-origin/">cross origin</a>
+            <a href="/blog/2021/03/27/%E5%8A%A8%E7%94%BB/">动画</a>
           </li>
         
       </ul>
