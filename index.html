@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-shell/tar常用功能" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/判断字符串是否为数字的多种思路" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/27/shell/tar%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/" class="article-date">
-  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
+    <a href="/blog/2021/03/27/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/" class="article-date">
+  <time datetime="2021-03-27T14:28:09.601Z" itemprop="datePublished">2021-03-27</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/27/shell/tar%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/">tar常用功能</a>
+      <a class="article-title" href="/blog/2021/03/27/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/">判断字符串是否为数字的多种思路</a>
     </h1>
   
 
@@ -83,18 +83,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><code>Wget - The non-interactive network downloader.</code></p>
-<h3 id="基本使用方式见man-wget"><a href="#基本使用方式见man-wget" class="headerlink" title="基本使用方式见man wget"></a>基本使用方式见man wget</h3><p><code>wget [option]... [URL]...</code></p>
-<h3 id="场景一、压缩"><a href="#场景一、压缩" class="headerlink" title="场景一、压缩"></a>场景一、压缩</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -cvzf a.gz.tar a</span><br></pre></td></tr></table></figure>
-<h3 id="场景二、解压"><a href="#场景二、解压" class="headerlink" title="场景二、解压"></a>场景二、解压</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tar -xvzf a.gz.tar</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 解压到指定目录</span></span><br><span class="line">tar -xvzf a.gz.tar -C path</span><br></pre></td></tr></table></figure>
-<h3 id="场景三、查看"><a href="#场景三、查看" class="headerlink" title="场景三、查看"></a>场景三、查看</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -tvzf a.gz.tar</span><br></pre></td></tr></table></figure>
+        <h5 id="将字符串中的所有数字都删除-判断是否是空串"><a href="#将字符串中的所有数字都删除-判断是否是空串" class="headerlink" title="将字符串中的所有数字都删除,判断是否是空串"></a>将字符串中的所有数字都删除,判断是否是空串</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> -z:zero, -n:nozero</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sed + 正则</span></span><br><span class="line">[ -z "`echo test111 | sed 's/[0-9]//g'`" ] &amp;&amp; echo int || echo char</span><br><span class="line">[ -z "`echo 111 | sed 's/[0-9]//g'`" ] &amp;&amp; echo int || echo char</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 变量字串</span></span><br><span class="line">var1=test111</span><br><span class="line">[ -n "`echo $&#123;var1//[0-9]/&#125;`" ] &amp;&amp; echo char || echo int</span><br><span class="line">var2=111</span><br><span class="line">[ -n "`echo $&#123;var2//[0-9]/&#125;`" ] &amp;&amp; echo char || echo int</span><br></pre></td></tr></table></figure>
 
-<p>-c: create 创建<br>-v: verbose 详细信息<br>-z: gzip压缩<br>-f file: 生成的文件，也可以像wget一样指定<code>-</code>输出到<code>stdout</code>中<br>-t: list备份内容</p>
+<h5 id="将字符串中的所有非数字都删除-判断和原串是否相等"><a href="#将字符串中的所有非数字都删除-判断和原串是否相等" class="headerlink" title="将字符串中的所有非数字都删除,判断和原串是否相等"></a>将字符串中的所有非数字都删除,判断和原串是否相等</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var1=test111</span><br><span class="line">[ -n "$var1" -a "$&#123;var1//[^0-9]/&#125;" != "$var1" ] &amp;&amp; echo char || echo int</span><br><span class="line">var2=111</span><br><span class="line">[ -n "$var2" -a "$&#123;var2//[^0-9]/&#125;" != "$var2" ] &amp;&amp; echo char || echo int</span><br></pre></td></tr></table></figure>
 
+<h5 id="通过expr进行整数运算-判断执行结果"><a href="#通过expr进行整数运算-判断执行结果" class="headerlink" title="通过expr进行整数运算,判断执行结果"></a>通过expr进行整数运算,判断执行结果</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var1=test111</span><br><span class="line">expr 1 + $var1 &amp;&gt;/dev/null</span><br><span class="line">[ $? -ne 0 ] &amp;&amp; echo char || echo int</span><br><span class="line"></span><br><span class="line">var2=111</span><br><span class="line">expr 1 + $var2 &amp;&gt;/dev/null</span><br><span class="line">[ $? -ne 0 ] &amp;&amp; echo char || echo int</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/27/shell/tar%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/" data-id="ckmrt2y3m000qzrnud3ne4ndv" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/27/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/" data-id="ckmrtwhbb000t1aps0td2fnx7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -107,7 +104,7 @@
     <article id="post-shell/邮件报警脚本及实现" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2021/03/27/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/" class="article-date">
-  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
+  <time datetime="2021-03-27T14:28:09.601Z" itemprop="datePublished">2021-03-27</time>
 </a>
     
   </div>
@@ -146,7 +143,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/27/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/" data-id="ckmrt2y3v0011zrnu6nj9bial" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/27/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/" data-id="ckmrtwhbh00121aps0sek97iu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -159,7 +156,7 @@
     <article id="post-throttle-debounce" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2021/03/27/throttle-debounce/" class="article-date">
-  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
+  <time datetime="2021-03-27T14:28:09.601Z" itemprop="datePublished">2021-03-27</time>
 </a>
     
   </div>
@@ -183,7 +180,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/27/throttle-debounce/" data-id="ckmrt2y1o0008zrnu095g564q" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/27/throttle-debounce/" data-id="ckmrtwhad00081aps2nxe1e8u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -196,7 +193,7 @@
     <article id="post-从数字分隔符看正则" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2021/03/27/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="article-date">
-  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
+  <time datetime="2021-03-27T14:28:09.601Z" itemprop="datePublished">2021-03-27</time>
 </a>
     
   </div>
@@ -245,7 +242,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/27/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="ckmrt2y1q0009zrnua8fq7ug7" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/27/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="ckmrtwhaf00091aps21be7y6y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -258,7 +255,7 @@
     <article id="post-动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2021/03/27/%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
+  <time datetime="2021-03-27T14:28:09.601Z" itemprop="datePublished">2021-03-27</time>
 </a>
     
   </div>
@@ -291,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/27/%E5%8A%A8%E7%94%BB/" data-id="ckmrt2y1r000azrnu32mx0jvw" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/27/%E5%8A%A8%E7%94%BB/" data-id="ckmrtwhag000a1aps0smibuli" class="article-share-link">Share</a>
       
       
     </footer>
@@ -304,7 +301,7 @@
     <article id="post-工程化" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2021/03/27/%E5%B7%A5%E7%A8%8B%E5%8C%96/" class="article-date">
-  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
+  <time datetime="2021-03-27T14:28:09.601Z" itemprop="datePublished">2021-03-27</time>
 </a>
     
   </div>
@@ -337,7 +334,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/27/%E5%B7%A5%E7%A8%8B%E5%8C%96/" data-id="ckmrt2y1s000bzrnu8si8dkah" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/27/%E5%B7%A5%E7%A8%8B%E5%8C%96/" data-id="ckmrtwhai000b1aps4nxt1sdd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -350,7 +347,7 @@
     <article id="post-模块化" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2021/03/27/%E6%A8%A1%E5%9D%97%E5%8C%96/" class="article-date">
-  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
+  <time datetime="2021-03-27T14:28:09.601Z" itemprop="datePublished">2021-03-27</time>
 </a>
     
   </div>
@@ -381,7 +378,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/27/%E6%A8%A1%E5%9D%97%E5%8C%96/" data-id="ckmrt2y1u000czrnu129tam81" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/27/%E6%A8%A1%E5%9D%97%E5%8C%96/" data-id="ckmrtwhal000c1apsglyfc5ph" class="article-share-link">Share</a>
       
       
     </footer>
@@ -394,7 +391,7 @@
     <article id="post-集中式和分布式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2021/03/27/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" class="article-date">
-  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
+  <time datetime="2021-03-27T14:28:09.601Z" itemprop="datePublished">2021-03-27</time>
 </a>
     
   </div>
@@ -420,7 +417,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/27/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" data-id="ckmrt2y1v000dzrnu554lc0r7" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/27/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" data-id="ckmrtwham000d1apsf1ij5nrp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -430,10 +427,10 @@
 
 
   
-    <article id="post-shell/read" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/wget常用功能" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/27/shell/read/" class="article-date">
-  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
+    <a href="/blog/2021/03/27/shell/wget%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/" class="article-date">
+  <time datetime="2021-03-27T14:28:09.601Z" itemprop="datePublished">2021-03-27</time>
 </a>
     
   </div>
@@ -444,7 +441,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/27/shell/read/">read 命令</a>
+      <a class="article-title" href="/blog/2021/03/27/shell/wget%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/">wget常用功能</a>
     </h1>
   
 
@@ -452,16 +449,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="从标准输入中读取信息"><a href="#从标准输入中读取信息" class="headerlink" title="从标准输入中读取信息"></a>从标准输入中读取信息</h3><h5 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h5><ol>
-<li>-p prompt #提示</li>
-<li>-t timeout # 超时时间, 单位为s<h5 id="命令行使用"><a href="#命令行使用" class="headerlink" title="命令行使用"></a>命令行使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">read -p "Pls Input Your Vars: " var1 var2</span><br><span class="line">echo "$&#123;var1&#125;, $&#123;var2&#125;"</span><br><span class="line"></span><br><span class="line">read -t 3 -p "Pls Input Your Vars: " var3 var4</span><br><span class="line">echo "$&#123;var3&#125;, $&#123;var4&#125;"</span><br></pre></td></tr></table></figure>
-</li>
+        <p><code>Wget - The non-interactive network downloader.</code></p>
+<h3 id="基本使用方式见man-wget"><a href="#基本使用方式见man-wget" class="headerlink" title="基本使用方式见man wget"></a>基本使用方式见man wget</h3><p><code>wget [option]... [URL]...</code></p>
+<h3 id="场景一、获取输出到标准输出中赋值给变量"><a href="#场景一、获取输出到标准输出中赋值给变量" class="headerlink" title="场景一、获取输出到标准输出中赋值给变量"></a>场景一、获取输出到标准输出中赋值给变量</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Var=`wget -O - http://www.baidu.com`m</span><br><span class="line">echo $Var</span><br></pre></td></tr></table></figure>
+<p>-O file<br>–output-document=file</p>
+<ol>
+<li>The documents will not be written to the appropriate files, but all will be concatenated together and written to file.</li>
+<li>If - is used as file, documents will be printed to standard output, disabling link conversion.</li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/27/shell/read/" data-id="ckmrt2y38000mzrnu90nwa0b2" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/27/shell/wget%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/" data-id="ckmrtwhb9000r1aps053xb8si" class="article-share-link">Share</a>
       
       
     </footer>
@@ -471,10 +471,10 @@
 
 
   
-    <article id="post-shell/rsync自启动脚本" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/一键优化系统脚本" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/27/shell/rsync%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/" class="article-date">
-  <time datetime="2021-03-27T14:05:11.021Z" itemprop="datePublished">2021-03-27</time>
+    <a href="/blog/2021/03/27/shell/%E4%B8%80%E9%94%AE%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E8%84%9A%E6%9C%AC/" class="article-date">
+  <time datetime="2021-03-27T14:28:09.601Z" itemprop="datePublished">2021-03-27</time>
 </a>
     
   </div>
@@ -485,7 +485,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/27/shell/rsync%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/">系统自启动rsync服务的方法</a>
+      <a class="article-title" href="/blog/2021/03/27/shell/%E4%B8%80%E9%94%AE%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E8%84%9A%E6%9C%AC/">一键优化系统脚本</a>
     </h1>
   
 
@@ -493,26 +493,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>使用<code>/etc/init.d/rsyncd {start|stop|restart}</code>启动,停止,重启</p>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><ol>
-<li><code>rsync</code>的命令<br>rsync –daemon<br>pkill rsync<br>netstat -lntp | grep 873</li>
-<li>实现<code>/etc/init.d/rsyncd</code>脚本</li>
-<li>通过 chkconfig 实现开机自启动<br>注意下方文件中的二行和第三行</li>
+        <p>系统版本: CentOS Linux release 8.3.2011<br>使用<code>/etc/init.d/rsyncd {start|stop|restart}</code>启动,停止,重启</p>
+<h5 id="优化项"><a href="#优化项" class="headerlink" title="优化项"></a>优化项</h5><ol>
+<li>配置国内yum源</li>
+<li>关闭SELinux</li>
+<li>关闭iptables</li>
 </ol>
-<h5 id="主干脚本"><a href="#主干脚本" class="headerlink" title="主干脚本"></a>主干脚本</h5><p>执行前该文件需要<code>chmod +x /etc/init.d/rsyncd</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chkconfig: 2345 20 80</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> description: Save and restores system entropy poll</span></span><br><span class="line">[ $# -ne 1 ] &amp;&amp; &#123;</span><br><span class="line">  echo "USAGE:$0 &#123;start|stop|restart&#125;"</span><br><span class="line">  exit 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if [ "$1" = "start" ]; then</span><br><span class="line">  rsync --daemon</span><br><span class="line">  sleep 2</span><br><span class="line">  [ `netstat -lntp | grep rsync | wc -l` -gt 0 ] &amp;&amp; &#123;</span><br><span class="line">    echo "rsyncd is start."</span><br><span class="line">    exit 0</span><br><span class="line">  &#125;</span><br><span class="line">elif [ "$1" = "stop" ]; then</span><br><span class="line">  killall rsync &amp;&gt;/etc/null</span><br><span class="line">  sleep 2</span><br><span class="line">  [ `netstat -lntp | grep rsync | wc -l` -eq 0 ] &amp;&amp; &#123;</span><br><span class="line">    echo "rsyncd is stopped."</span><br><span class="line">    exit 0</span><br><span class="line">  &#125;</span><br><span class="line">elif [ "$1" = "restart" ]; then</span><br><span class="line">  killall rsync</span><br><span class="line">  sleep 1</span><br><span class="line">  killPro=`netstat -lntp | grep rsync | wc -l`</span><br><span class="line">  rsync --daemon</span><br><span class="line">  sleep 1</span><br><span class="line">  startPro=`netstat -lntp | grep rsync | wc -l`</span><br><span class="line">  [ "$killPro" -eq 0 -a "$startPro" -gt 0 ] &amp;&amp; &#123;</span><br><span class="line">    echo "rsyncd is restarted."</span><br><span class="line">    exit 0</span><br><span class="line">  &#125;</span><br><span class="line">else</span><br><span class="line">  echo "USAGE:$0 &#123;start|stop|restart&#125;"</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h5 id="主干脚本"><a href="#主干脚本" class="headerlink" title="主干脚本"></a>主干脚本</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 更换镜像源</span></span><br><span class="line">function change_mirrors()&#123;</span><br><span class="line">  mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup &amp;&amp; \</span><br><span class="line">  wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-8.repo</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 关闭SELinux</span></span><br><span class="line">function close_selinux()&#123;</span><br><span class="line">  sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config</span><br><span class="line">  grep SELINUX=disabled /etc/selinux/config</span><br><span class="line">  setenforce 0</span><br><span class="line">  getenforce</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 关闭iptables</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置中文字符集</span></span><br><span class="line">function set_lang()&#123;</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 查看当前字符集</span></span><br><span class="line">  locale</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 查看是否有中文字符集</span></span><br><span class="line">  locale -a | grep CN</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 安装中文字符集</span></span><br><span class="line">  yum install -y langpacks-zh_CN</span><br><span class="line">  echo LANG=zh_CN.utf8 &gt; /etc/locale.conf</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 同步系统时间,ntp已经无法使用,使用chrony</span></span><br><span class="line">yum -y install chrony</span><br></pre></td></tr></table></figure>
 
-<h5 id="主干脚本-函数版本"><a href="#主干脚本-函数版本" class="headerlink" title="主干脚本[函数版本]"></a>主干脚本[函数版本]</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chkconfig: 2345 20 80</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> description: Save and restores system entropy poll</span></span><br><span class="line">. /etc/init.d/functions</span><br><span class="line">function usage() &#123;</span><br><span class="line">  echo "USAGE:$0 &#123;start|stop|restart&#125;"</span><br><span class="line">  exit 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function start() &#123;</span><br><span class="line">  rsync --daemon</span><br><span class="line">  sleep 2</span><br><span class="line">  [ `netstat -lntp | grep rsync | wc -l` -gt 0 ] &amp;&amp; &#123;</span><br><span class="line">    action "rsyncd is start." /bin/true</span><br><span class="line">  &#125; || &#123;</span><br><span class="line">    action "rsyncd is start." /bin/false</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function stop() &#123;</span><br><span class="line">  killall rsync &amp;&gt;/etc/null</span><br><span class="line">  sleep 2</span><br><span class="line">  [ `netstat -lntp | grep rsync | wc -l` -eq 0 ] &amp;&amp; &#123;</span><br><span class="line">    action "rsyncd is stopped." /bin/true</span><br><span class="line">  &#125; || &#123;</span><br><span class="line">    action "rsyncd is started." /bin/false</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function main()&#123;</span><br><span class="line">  [ $# -ne 1 ] &amp;&amp; &#123;</span><br><span class="line">    usage</span><br><span class="line">  &#125;</span><br><span class="line">  if [ "$1" = "start" ]; then</span><br><span class="line">    start</span><br><span class="line">  elif [ "$1" = "stop" ]; then</span><br><span class="line">    stop</span><br><span class="line">  elif [ "$1" = "restart" ]; then</span><br><span class="line">    stop</span><br><span class="line">    sleep 1</span><br><span class="line">    start</span><br><span class="line">  else</span><br><span class="line">    usage</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main $*</span><br></pre></td></tr></table></figure>
-
-<h5 id="加入开机自启动"><a href="#加入开机自启动" class="headerlink" title="加入开机自启动"></a>加入开机自启动</h5><p>注意脚本的第二行<br><code># chkconfig: 2345 20 80</code><br>2345 表示 Linux 运行级别,20 表示开始启动顺序,80 表示脚本停止顺序<br>应用服务一般考后启动,越早停止越好</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --list [命令名] # 如 rsyncd, /etc/init.d/rsyncd</span><br><span class="line">chkconfig --add [命令名] # 添加任务</span><br><span class="line">chkconfig --del [命令名] # 删除任务</span><br><span class="line"></span><br><span class="line">chkconfig rsyncd on # 启动</span><br><span class="line">chkconfig rsyncd off # 停止</span><br></pre></td></tr></table></figure>
-
-<h5 id="kill-pkill-killall"><a href="#kill-pkill-killall" class="headerlink" title="kill pkill killall"></a>kill pkill killall</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep -v grep | grep rsync</span><br><span class="line"><span class="meta">#</span><span class="bash">root       705     1  0 23:29 ?        00:00:00 rsync --daemon</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 比较麻烦需要先查处进程号才能杀死</span></span><br><span class="line">kill 705</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 没有任何提示杀死[据说有误杀问题]</span></span><br><span class="line">pkill rsync</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 杀死全部进程,有提示</span></span><br><span class="line">killall rsync</span><br></pre></td></tr></table></figure>
-
+<h5 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看centos版本</span></span><br><span class="line">cat /etc/redhat-release</span><br></pre></td></tr></table></figure>
+<h5 id="什么是SELinux-安全增强型linux-https-zhuanlan-zhihu-com-p-30483108"><a href="#什么是SELinux-安全增强型linux-https-zhuanlan-zhihu-com-p-30483108" class="headerlink" title="什么是SELinux[安全增强型linux] https://zhuanlan.zhihu.com/p/30483108"></a>什么是SELinux[安全增强型linux] <a href="https://zhuanlan.zhihu.com/p/30483108" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/30483108</a></h5><p>是一个linux内核模块,也是linux的一个安全子系统<br>作用:最大限度的减少系统中服务进程可访问的资源(控制对象是进程,常规控制对象是用户)</p>
+<h5 id="什么是iptables-https-www-zsythink-net-archives-1199"><a href="#什么是iptables-https-www-zsythink-net-archives-1199" class="headerlink" title="什么是iptables https://www.zsythink.net/archives/1199"></a>什么是iptables <a href="https://www.zsythink.net/archives/1199" target="_blank" rel="noopener">https://www.zsythink.net/archives/1199</a></h5><p>简单理解就是防火墙</p>
+<h5 id="什么是UTC-GMT-https-www-zhihu-com-question-27052407"><a href="#什么是UTC-GMT-https-www-zhihu-com-question-27052407" class="headerlink" title="什么是UTC,GMT https://www.zhihu.com/question/27052407"></a>什么是UTC,GMT <a href="https://www.zhihu.com/question/27052407" target="_blank" rel="noopener">https://www.zhihu.com/question/27052407</a></h5><p>UTC(Coordinated Universal Time)协调世界时,来自地球自传<br>GMT(Greenwich Mean Time)格林尼治标准时间,来自原子钟</p>
+<h5 id="linux系统时间和硬件时钟问题-date和hwclock-https-blog-csdn-net-wangshuminjava-article-details-79308130"><a href="#linux系统时间和硬件时钟问题-date和hwclock-https-blog-csdn-net-wangshuminjava-article-details-79308130" class="headerlink" title="linux系统时间和硬件时钟问题(date和hwclock) https://blog.csdn.net/wangshuminjava/article/details/79308130"></a>linux系统时间和硬件时钟问题(date和hwclock) <a href="https://blog.csdn.net/wangshuminjava/article/details/79308130" target="_blank" rel="noopener">https://blog.csdn.net/wangshuminjava/article/details/79308130</a></h5><p>系统关闭时会同步系统时间到硬件时钟，系统启动时会从硬件时钟读取时间更新到系统，这2个步骤都要根据 /etc/sysconfig/clock 文件中UTC的参数来设置时区转换</p>
+<h6 id="etc-init-d-mysqld"><a href="#etc-init-d-mysqld" class="headerlink" title="/etc/init.d/mysqld"></a>/etc/init.d/mysqld</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">. /etc/init.d/functions</span><br><span class="line">function usage()&#123;</span><br><span class="line">  echo "USAGE:$0 &#123;start|stop|restart&#125;"</span><br><span class="line">  exit 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[ $# -ne 1 ] &amp;&amp; &#123;</span><br><span class="line">  usage</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[ "$1" = "start" ] &amp;&amp; &#123;</span><br><span class="line">  systemctl start  mysqld.service</span><br><span class="line">  action "started" /bin/true</span><br><span class="line">  exit 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[ "$1" = "stop" ] &amp;&amp; &#123;</span><br><span class="line">  systemctl stop mysqld.service</span><br><span class="line">  action "stop" /bin/true</span><br><span class="line">  exit 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[ "$1" = "restart" ] &amp;&amp; &#123;</span><br><span class="line">  systemctl restart mysqld.service</span><br><span class="line">  action "restart" /bin/true</span><br><span class="line">  exit 0</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">usage</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/27/shell/rsync%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/" data-id="ckmrt2y3h000nzrnu4el16sm3" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/03/27/shell/%E4%B8%80%E9%94%AE%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E8%84%9A%E6%9C%AC/" data-id="ckmrtwhba000s1apsav1oeqw7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -558,7 +556,7 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/03/27/shell/tar%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD/">tar常用功能</a>
+            <a href="/blog/2021/03/27/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/">判断字符串是否为数字的多种思路</a>
           </li>
         
           <li>
