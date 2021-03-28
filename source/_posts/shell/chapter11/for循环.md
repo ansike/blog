@@ -31,3 +31,12 @@ do
   echo $i
 done
 ```
+### 使用for批量换后缀
+```shell
+#!/bin/bash
+for file in `ls temp`
+do
+  # 使用cut对文件名切割，读取切割的第一个域，拼接text后缀
+  mv temp/$file temp/`echo $file | cut -d . -f1`".text"
+done
+```
