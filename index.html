@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-shell/function" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/nginx自启动脚本" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/28/shell/function/" class="article-date">
-  <time datetime="2021-03-28T16:38:07.316Z" itemprop="datePublished">2021-03-28</time>
+    <a href="/blog/2021/04/10/shell/nginx%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/" class="article-date">
+  <time datetime="2021-04-10T04:41:03.891Z" itemprop="datePublished">2021-04-10</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/28/shell/function/">shell中的函数</a>
+      <a class="article-title" href="/blog/2021/04/10/shell/nginx%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/">nginx自启动脚本</a>
     </h1>
   
 
@@ -83,21 +83,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 标准写法</span></span><br><span class="line">function fn1()&#123;</span><br><span class="line">  echo 222</span><br><span class="line">&#125;</span><br><span class="line">a=$(fn1)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 简化写法1, 函数名右的空格必须</span></span><br><span class="line">function fn2 &#123;</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 返回值当成是该函数的执行退出值</span></span><br><span class="line">  return 221</span><br><span class="line">&#125;</span><br><span class="line">fn2</span><br><span class="line">b=$?</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 简化写法2</span></span><br><span class="line">fn3 () &#123;</span><br><span class="line">  echo "fn3-3 参数个数:$#,分别是 $1,$2"</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">c=$(fn3 a b)</span><br><span class="line"></span><br><span class="line">echo "$a,$b,$c"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">fn1 arg1 arg2 ..</span></span><br><span class="line">fn1</span><br></pre></td></tr></table></figure>
-<h4 id="执行说明"><a href="#执行说明" class="headerlink" title="执行说明"></a>执行说明</h4><ol>
-<li>执行时函数名之前的function和之后的小括号都不需要</li>
-<li>函数的定义必须在执行之前</li>
-<li>函数执行时会和脚本共用变量</li>
-<li>函数中的return和exit类似,会直接退出函数.如果脚本开头设置了<code>set -e</code>的话尽量不要使用return或者使用<code>set +e</code>包裹一下,否则也会因为函数返回非0而直接退出脚本</li>
-<li>return的返回值必须是数字,返回的值会当成当前命令执行的返回值,该返回值只能是数字</li>
-<li>函数放在独立文件中时需要使用<code>source</code>或者<code>.</code>进行加载</li>
-<li>函数执行时,父脚本的参数临时被函数参数掩盖或者隐藏</li>
+        <p>使用<code>/etc/init.d/nginx {start|stop|restart}</code>启动,停止,重启</p>
+<p>CentOS Linux release 8.3.2011</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><ol>
+<li><code>nginx</code>的命令<br>systemctl start nginx.service<br>systemctl stop nginx.service<br>systemctl restart nginx.service<br>systemctl status nginx.service</li>
+<li>实现<code>/etc/init.d/nginx</code>脚本</li>
+<li>通过 chkconfig 实现开机自启动<br>注意下方文件中的二行和第三行</li>
 </ol>
+<h5 id="主干脚本"><a href="#主干脚本" class="headerlink" title="主干脚本"></a>主干脚本</h5><p>执行前该文件需要<code>chmod +x /etc/init.d/rsyncd</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chkconfig: 2345 40 90</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> nginx 开机自启脚本</span></span><br><span class="line">set -e</span><br><span class="line">function usage()&#123;</span><br><span class="line">  echo "USAGE: $0 &#123;start|stop|restart&#125;"</span><br><span class="line">  exit 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[ $# -ne 1 ] &amp;&amp; &#123;</span><br><span class="line">  usage</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function start()&#123;</span><br><span class="line"><span class="meta">  #</span><span class="bash"> netstat -lnt | grep 80</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> lsof -i:80 -P | grep <span class="string">"LISTEN"</span></span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> 不要使用该方式，当前脚本中也有nginx关键字，查询不符合：[ `ps -ef | grep -v grep | grep nginx | wc -l` -gt 0 ] &amp;&amp; &#123;</span></span><br><span class="line">  [ `netstat -lnt | grep 80 | wc -l` -gt 0 ] &amp;&amp; &#123;</span><br><span class="line">    echo "nginx is started."</span><br><span class="line">    exit 0</span><br><span class="line">  &#125;</span><br><span class="line">  systemctl start nginx.service</span><br><span class="line">  echo "nginx is started."</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function stop()&#123;</span><br><span class="line">  [ `netstat -lnt | grep 80 | wc -l` -eq 0 ] &amp;&amp; &#123;</span><br><span class="line">    echo "nginx is stopped."</span><br><span class="line">    exit 0</span><br><span class="line">  &#125;</span><br><span class="line">  systemctl stop nginx.service</span><br><span class="line">  echo "nginx is stopped."</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">case $1 in </span><br><span class="line">  start)</span><br><span class="line">    start</span><br><span class="line">    ;;</span><br><span class="line">  stop)</span><br><span class="line">    stop</span><br><span class="line">    ;;</span><br><span class="line">  restart)</span><br><span class="line">    systemctl restart nginx.service</span><br><span class="line">    ;;</span><br><span class="line">  *)</span><br><span class="line">    usage</span><br><span class="line">    ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/28/shell/function/" data-id="ckmtdzgu3000k1qov5j2b50xd" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/10/shell/nginx%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/" data-id="cknb93emk000l29qxbcbqdsxi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -109,8 +108,8 @@
   
     <article id="post-URL" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/28/URL/" class="article-date">
-  <time datetime="2021-03-28T16:38:07.316Z" itemprop="datePublished">2021-03-28</time>
+    <a href="/blog/2021/04/10/URL/" class="article-date">
+  <time datetime="2021-04-10T04:41:03.891Z" itemprop="datePublished">2021-04-10</time>
 </a>
     
   </div>
@@ -121,7 +120,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/28/URL/">URL constructor</a>
+      <a class="article-title" href="/blog/2021/04/10/URL/">URL constructor</a>
     </h1>
   
 
@@ -164,7 +163,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/28/URL/" data-id="ckmtdzgss00001qovfylr2lpk" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/10/URL/" data-id="cknb93el2000029qx3xjt20ls" class="article-share-link">Share</a>
       
       
     </footer>
@@ -176,8 +175,8 @@
   
     <article id="post-canvas-基础特性" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/28/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" class="article-date">
-  <time datetime="2021-03-28T16:38:07.316Z" itemprop="datePublished">2021-03-28</time>
+    <a href="/blog/2021/04/10/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" class="article-date">
+  <time datetime="2021-04-10T04:41:03.891Z" itemprop="datePublished">2021-04-10</time>
 </a>
     
   </div>
@@ -188,7 +187,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/28/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+      <a class="article-title" href="/blog/2021/04/10/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
     </h1>
   
 
@@ -220,7 +219,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/28/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" data-id="ckmtdzgt300021qovc26w0fpu" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/10/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" data-id="cknb93el9000229qx22nzg2nv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -232,8 +231,8 @@
   
     <article id="post-canvas动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/28/canvas%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-03-28T16:38:07.316Z" itemprop="datePublished">2021-03-28</time>
+    <a href="/blog/2021/04/10/canvas%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-04-10T04:41:03.891Z" itemprop="datePublished">2021-04-10</time>
 </a>
     
   </div>
@@ -244,7 +243,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/28/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+      <a class="article-title" href="/blog/2021/04/10/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
     </h1>
   
 
@@ -259,7 +258,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/28/canvas%E5%8A%A8%E7%94%BB/" data-id="ckmtdzgt500031qov9i3ler2v" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/10/canvas%E5%8A%A8%E7%94%BB/" data-id="cknb93ela000329qx82xmadzp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -271,8 +270,8 @@
   
     <article id="post-cross-origin" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/28/cross-origin/" class="article-date">
-  <time datetime="2021-03-28T16:38:07.316Z" itemprop="datePublished">2021-03-28</time>
+    <a href="/blog/2021/04/10/cross-origin/" class="article-date">
+  <time datetime="2021-04-10T04:41:03.891Z" itemprop="datePublished">2021-04-10</time>
 </a>
     
   </div>
@@ -283,7 +282,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/28/cross-origin/">cross origin</a>
+      <a class="article-title" href="/blog/2021/04/10/cross-origin/">cross origin</a>
     </h1>
   
 
@@ -302,7 +301,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/28/cross-origin/" data-id="ckmtdzgt600041qovevfufp79" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/10/cross-origin/" data-id="cknb93elb000429qx87f13did" class="article-share-link">Share</a>
       
       
     </footer>
@@ -314,8 +313,8 @@
   
     <article id="post-css动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/28/css%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-03-28T16:38:07.316Z" itemprop="datePublished">2021-03-28</time>
+    <a href="/blog/2021/04/10/css%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-04-10T04:41:03.891Z" itemprop="datePublished">2021-04-10</time>
 </a>
     
   </div>
@@ -326,7 +325,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/28/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+      <a class="article-title" href="/blog/2021/04/10/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
     </h1>
   
 
@@ -341,7 +340,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/28/css%E5%8A%A8%E7%94%BB/" data-id="ckmtdzgt700051qov8k0c4atz" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/10/css%E5%8A%A8%E7%94%BB/" data-id="cknb93elc000529qx168odmub" class="article-share-link">Share</a>
       
       
     </footer>
@@ -353,8 +352,8 @@
   
     <article id="post-promisefy" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/28/promisefy/" class="article-date">
-  <time datetime="2021-03-28T16:38:07.316Z" itemprop="datePublished">2021-03-28</time>
+    <a href="/blog/2021/04/10/promisefy/" class="article-date">
+  <time datetime="2021-04-10T04:41:03.891Z" itemprop="datePublished">2021-04-10</time>
 </a>
     
   </div>
@@ -365,7 +364,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/28/promisefy/">实现类似 node中util.promisefy的实现</a>
+      <a class="article-title" href="/blog/2021/04/10/promisefy/">实现类似 node中util.promisefy的实现</a>
     </h1>
   
 
@@ -386,7 +385,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/28/promisefy/" data-id="ckmtdzgt800061qov0de63ep9" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/10/promisefy/" data-id="cknb93eld000629qx19jt77kd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -398,8 +397,8 @@
   
     <article id="post-svg动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/28/svg%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-03-28T16:38:07.316Z" itemprop="datePublished">2021-03-28</time>
+    <a href="/blog/2021/04/10/svg%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-04-10T04:41:03.891Z" itemprop="datePublished">2021-04-10</time>
 </a>
     
   </div>
@@ -410,7 +409,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/28/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
+      <a class="article-title" href="/blog/2021/04/10/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
     </h1>
   
 
@@ -422,7 +421,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/28/svg%E5%8A%A8%E7%94%BB/" data-id="ckmtdzgta00071qovd15rctv7" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/10/svg%E5%8A%A8%E7%94%BB/" data-id="cknb93ele000729qxgrs62c1p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -434,8 +433,8 @@
   
     <article id="post-throttle-debounce" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/28/throttle-debounce/" class="article-date">
-  <time datetime="2021-03-28T16:38:07.316Z" itemprop="datePublished">2021-03-28</time>
+    <a href="/blog/2021/04/10/throttle-debounce/" class="article-date">
+  <time datetime="2021-04-10T04:41:03.891Z" itemprop="datePublished">2021-04-10</time>
 </a>
     
   </div>
@@ -446,7 +445,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/28/throttle-debounce/">截流和去抖的深入理解结合loads</a>
+      <a class="article-title" href="/blog/2021/04/10/throttle-debounce/">截流和去抖的深入理解结合loads</a>
     </h1>
   
 
@@ -459,7 +458,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/28/throttle-debounce/" data-id="ckmtdzgtb00081qov52y540b3" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/10/throttle-debounce/" data-id="cknb93elf000829qxgou28efo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -471,8 +470,8 @@
   
     <article id="post-从数字分隔符看正则" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/03/28/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="article-date">
-  <time datetime="2021-03-28T16:38:07.316Z" itemprop="datePublished">2021-03-28</time>
+    <a href="/blog/2021/04/10/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="article-date">
+  <time datetime="2021-04-10T04:41:03.891Z" itemprop="datePublished">2021-04-10</time>
 </a>
     
   </div>
@@ -483,7 +482,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/28/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
+      <a class="article-title" href="/blog/2021/04/10/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
     </h1>
   
 
@@ -521,7 +520,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/28/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="ckmtdzgtd00091qoves7t588d" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/10/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="cknb93elh000929qx8uz4831a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -554,7 +553,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/03/">March 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/04/">April 2021</a></li></ul>
     </div>
   </div>
 
@@ -567,23 +566,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/03/28/shell/function/">shell中的函数</a>
+            <a href="/blog/2021/04/10/shell/nginx%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/">nginx自启动脚本</a>
           </li>
         
           <li>
-            <a href="/blog/2021/03/28/URL/">URL constructor</a>
+            <a href="/blog/2021/04/10/URL/">URL constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2021/03/28/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+            <a href="/blog/2021/04/10/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
           </li>
         
           <li>
-            <a href="/blog/2021/03/28/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+            <a href="/blog/2021/04/10/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
           </li>
         
           <li>
-            <a href="/blog/2021/03/28/cross-origin/">cross origin</a>
+            <a href="/blog/2021/04/10/cross-origin/">cross origin</a>
           </li>
         
       </ul>
