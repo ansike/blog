@@ -61,10 +61,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-shell/chapter10/while循环" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/04/14/shell/chapter10/while%E5%BE%AA%E7%8E%AF/" class="article-date">
+  <time datetime="2021-04-14T01:40:15.625Z" itemprop="datePublished">2021-04-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/04/14/shell/chapter10/while%E5%BE%AA%E7%8E%AF/">while循环</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h3><p>while &lt;条件表达式&gt;<br>do<br>  指令…<br>done</p>
+<p>while.sh</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">  uptime</span><br><span class="line">  sleep 1</span><br><span class="line"><span class="meta">  #</span><span class="bash"> usleep 1000000 表示1s</span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="使用while打印54321"><a href="#使用while打印54321" class="headerlink" title="使用while打印54321"></a>使用while打印54321</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">i=5</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">while</span> ((i&gt;0))</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">while</span> [ <span class="variable">$i</span> -gt 0 ]</span></span><br><span class="line">while [[ $i &gt; 0 ]]</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">  ((--i))</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="计算从1加到100"><a href="#计算从1加到100" class="headerlink" title="计算从1加到100"></a>计算从1加到100</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">max=100</span><br><span class="line">sum=0</span><br><span class="line">while [[ $max &gt; 0 ]]</span><br><span class="line">do</span><br><span class="line"><span class="meta">  #</span><span class="bash"> sum=`expr <span class="variable">$sum</span> + <span class="variable">$max</span>`</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> <span class="built_in">let</span> sum=sum+max</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> sum=$((sum+max))</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> ((sum=sum+max))</span></span><br><span class="line">  ((sum+=max))</span><br><span class="line">  ((--max))</span><br><span class="line">done</span><br><span class="line">echo $sum</span><br></pre></td></tr></table></figure>
+
+<h3 id="命令后台执行相关知识"><a href="#命令后台执行相关知识" class="headerlink" title="命令后台执行相关知识"></a>命令后台执行相关知识</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 进入后台</span></span><br><span class="line">sh while.sh &amp;</span><br><span class="line"><span class="meta">#</span><span class="bash"> ctrl+c 停止执行</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ctrl+z 暂停执行</span></span><br><span class="line">jobs # 查看当前执行的任务和脚本</span><br><span class="line">fg # 把当前执行的任务和脚本放到前台执行，多个任务可以加 fg %n n为任务的序号</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">kill</span> %n 杀死任务</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/04/14/shell/chapter10/while%E5%BE%AA%E7%8E%AF/" data-id="ckngseaoc001406rpbow9hzrp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-shell/chapter11/for循环" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/12/shell/chapter11/for%E5%BE%AA%E7%8E%AF/" class="article-date">
-  <time datetime="2021-04-12T17:36:52.320Z" itemprop="datePublished">2021-04-12</time>
+    <a href="/blog/2021/04/14/shell/chapter11/for%E5%BE%AA%E7%8E%AF/" class="article-date">
+  <time datetime="2021-04-14T01:40:15.625Z" itemprop="datePublished">2021-04-14</time>
 </a>
     
   </div>
@@ -75,7 +118,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/12/shell/chapter11/for%E5%BE%AA%E7%8E%AF/">for循环</a>
+      <a class="article-title" href="/blog/2021/04/14/shell/chapter11/for%E5%BE%AA%E7%8E%AF/">for循环</a>
     </h1>
   
 
@@ -83,12 +126,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h3><p>for var in vars<br>for ((expr1;expr2;expr3))<br>do<br>  指令…<br>done</p>
-<h3 id="使用for打印54321"><a href="#使用for打印54321" class="headerlink" title="使用for打印54321"></a>使用for打印54321</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> C语言型</span></span><br><span class="line">for ((i=5;i&gt;0;i--))</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">i=5</span><br><span class="line">for ((;i&gt;0;))</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">  ((i--))</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">for i in 5 4 3 2 1</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> i <span class="keyword">in</span> &#123;5..1&#125;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> i <span class="keyword">in</span> `seq 5 -1 1`</span></span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+        <h3 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h3><p>for var in vars<br>for ((expr1;expr2;expr3))<br>do<br>指令…<br>done</p>
+<h3 id="使用-for-打印-54321"><a href="#使用-for-打印-54321" class="headerlink" title="使用 for 打印 54321"></a>使用 for 打印 54321</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> C语言型</span></span><br><span class="line">for ((i=5;i&gt;0;i--))</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">i=5</span><br><span class="line">for ((;i&gt;0;))</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">  ((i--))</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">for i in 5 4 3 2 1</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> i <span class="keyword">in</span> &#123;5..1&#125;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> i <span class="keyword">in</span> `seq 5 -1 1`</span></span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用-for-批量换后缀"><a href="#使用-for-批量换后缀" class="headerlink" title="使用 for 批量换后缀"></a>使用 for 批量换后缀</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">for file in `ls temp`</span><br><span class="line">do</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 使用cut对文件名切割，读取切割的第一个域，拼接text后缀</span></span><br><span class="line">  mv temp/$file temp/`echo $file | cut -d . -f1`".text"</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 将所有的后缀都改为.text</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> ls | awk -F <span class="string">"."</span> <span class="string">'&#123;print "mv",$0, $1".text"&#125;'</span> | bash</span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用-for-乘法表"><a href="#使用-for-乘法表" class="headerlink" title="使用 for 乘法表"></a>使用 for 乘法表</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">set -e</span><br><span class="line">for ((i=1;i&lt;=9;i++))</span><br><span class="line">do</span><br><span class="line">  str=""</span><br><span class="line">  for ((j=1;j&lt;=$i;j++))</span><br><span class="line">  do</span><br><span class="line">    str="$str $i*$j=$((i*j))"</span><br><span class="line">  done</span><br><span class="line">  echo $str</span><br><span class="line">done</span><br><span class="line"><span class="meta">#</span><span class="bash"> res</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1*1=1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2*1=2 2*2=4</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3*1=3 3*2=6 3*3=9</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4*1=4 4*2=8 4*3=12 4*4=16</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 5*1=5 5*2=10 5*3=15 5*4=20 5*5=25</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 6*1=6 6*2=12 6*3=18 6*4=24 6*5=30 6*6=36</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 7*1=7 7*2=14 7*3=21 7*4=28 7*5=35 7*6=42 7*7=49</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 8*1=8 8*2=16 8*3=24 8*4=32 8*5=40 8*6=48 8*7=56 8*8=64</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 9*1=9 9*2=18 9*3=27 9*4=36 9*5=45 9*6=54 9*7=63 9*8=72 9*9=81</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="批量创建数据库"><a href="#批量创建数据库" class="headerlink" title="批量创建数据库"></a>批量创建数据库</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">USER=root</span><br><span class="line">PASSWORD=123456</span><br><span class="line">LOGINCMD="mysql -u$USER -p$PASSWORD"</span><br><span class="line"></span><br><span class="line">for dbname in oldBody oldgirl xxx yyy</span><br><span class="line">do</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 不存在则创建</span></span><br><span class="line"><span class="meta">  $</span><span class="bash">LOGINCMD -e <span class="string">"create database IF NOT EXISTS <span class="variable">$dbname</span>"</span></span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> 强制删除，重新创建</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> <span class="variable">$LOGINCMD</span> -e <span class="string">"drop database <span class="variable">$dbname</span>; create database <span class="variable">$dbname</span>"</span></span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/12/shell/chapter11/for%E5%BE%AA%E7%8E%AF/" data-id="cknevott9001411lz51mz9ash" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/14/shell/chapter11/for%E5%BE%AA%E7%8E%AF/" data-id="ckngseaod001506rphnwkf38w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -98,10 +148,10 @@
 
 
   
-    <article id="post-shell/chapter11/select语法" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/chapter13-array/数组" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/12/shell/chapter11/select%E8%AF%AD%E6%B3%95/" class="article-date">
-  <time datetime="2021-04-12T17:36:52.320Z" itemprop="datePublished">2021-04-12</time>
+    <a href="/blog/2021/04/14/shell/chapter13-array/%E6%95%B0%E7%BB%84/" class="article-date">
+  <time datetime="2021-04-14T01:40:15.625Z" itemprop="datePublished">2021-04-14</time>
 </a>
     
   </div>
@@ -112,7 +162,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/12/shell/chapter11/select%E8%AF%AD%E6%B3%95/">select语法</a>
+      <a class="article-title" href="/blog/2021/04/14/shell/chapter13-array/%E6%95%B0%E7%BB%84/">数组</a>
     </h1>
   
 
@@ -120,11 +170,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">PS3="`Pls input the num you want`"</span><br><span class="line">select item in a b c</span><br><span class="line">do</span><br><span class="line">  echo $item</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 不显式退出，程序不会退出</span></span><br><span class="line">  exit 0</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+        <h3 id="定义及打印"><a href="#定义及打印" class="headerlink" title="定义及打印"></a>定义及打印</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 基础定义</span></span><br><span class="line">array=(one two three)</span><br><span class="line"><span class="meta">#</span><span class="bash"> 动态数组</span></span><br><span class="line">array2=($(ls ../))</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 繁琐赋值</span></span><br><span class="line">array3=([1]=one [2]=two [3]=three)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 分别赋值</span></span><br><span class="line">array4[1]=one; array4[2]=two; array4[3]=three;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 打印数组</span></span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line">echo $&#123;array[@]&#125;</span><br><span class="line">echo $&#123;array2[@]&#125;</span><br><span class="line">echo $&#123;array3[@]&#125;</span><br><span class="line">echo $&#123;array4[@]&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组增删改查"><a href="#数组增删改查" class="headerlink" title="数组增删改查"></a>数组增删改查</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">array=(one two three)</span><br><span class="line"><span class="meta">#</span><span class="bash"> 增</span></span><br><span class="line">array[3]=test</span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 删</span></span><br><span class="line">unset array[2]</span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 改</span></span><br><span class="line">array[1]=change</span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查</span></span><br><span class="line">echo $&#123;array[1]&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组常用api"><a href="#数组常用api" class="headerlink" title="数组常用api"></a>数组常用api</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">array=(one two three)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 数组长度</span></span><br><span class="line">echo $&#123;#array&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 截取数组</span></span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 截取位置到结尾</span></span><br><span class="line">echo $&#123;array[*]:1&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 截取位置及长度</span></span><br><span class="line">echo $&#123;array[*]:1:1&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除数组</span></span><br><span class="line">array[4]=one4one</span><br><span class="line"><span class="meta">#</span><span class="bash"> 从头开始 one change <span class="built_in">test</span> one4one</span></span><br><span class="line">echo $&#123;array[*]&#125; </span><br><span class="line">echo $&#123;array[*]#one&#125; #change test 4one</span><br><span class="line">echo $&#123;array[*]##one*&#125; # change test</span><br><span class="line"><span class="meta">#</span><span class="bash"> 从尾开始 one change <span class="built_in">test</span> one4one</span></span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line">echo $&#123;array[*]%one&#125; # change test one4</span><br><span class="line">echo $&#123;array[*]%%one*&#125; # change test</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 替换数组</span></span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 仅第一次匹配到替换</span></span><br><span class="line">echo $&#123;array[*]/one/one1&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 匹配到所有替换</span></span><br><span class="line">echo $&#123;array[*]//one/one1&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/12/shell/chapter11/select%E8%AF%AD%E6%B3%95/" data-id="cknevotta001511lz8nh0dito" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/14/shell/chapter13-array/%E6%95%B0%E7%BB%84/" data-id="ckngseaoe001606rphfesgebw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -134,10 +189,10 @@
 
 
   
-    <article id="post-shell/chapter11/批量操作数据库" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/chapter4-parameter/parameter" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/12/shell/chapter11/%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" class="article-date">
-  <time datetime="2021-04-12T17:36:52.320Z" itemprop="datePublished">2021-04-12</time>
+    <a href="/blog/2021/04/14/shell/chapter4-parameter/parameter/" class="article-date">
+  <time datetime="2021-04-14T01:40:15.625Z" itemprop="datePublished">2021-04-14</time>
 </a>
     
   </div>
@@ -148,7 +203,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/12/shell/chapter11/%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/">批量操作数据库</a>
+      <a class="article-title" href="/blog/2021/04/14/shell/chapter4-parameter/parameter/">变量字串</a>
     </h1>
   
 
@@ -156,17 +211,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="批量创建数据库"><a href="#批量创建数据库" class="headerlink" title="批量创建数据库"></a>批量创建数据库</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">USER=root</span><br><span class="line">PASSWORD=123456</span><br><span class="line">LOGINCMD="mysql -u$USER -p$PASSWORD"</span><br><span class="line"></span><br><span class="line">for dbname in oldBody oldgirl xxx yyy</span><br><span class="line">do</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 不存在则创建</span></span><br><span class="line"><span class="meta">  $</span><span class="bash">LOGINCMD -e <span class="string">"create database IF NOT EXISTS <span class="variable">$dbname</span>"</span></span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> 强制删除，重新创建</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> <span class="variable">$LOGINCMD</span> -e <span class="string">"drop database <span class="variable">$dbname</span>; create database <span class="variable">$dbname</span>"</span></span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+        <h3 id="变量字串说明"><a href="#变量字串说明" class="headerlink" title="变量字串说明"></a>变量字串说明</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">parameter=asbcd</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出变量的内容</span></span><br><span class="line">echo $&#123;parameter&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 返回变量的长度</span></span><br><span class="line">echo $&#123;#parameter&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> offset从位置开始介入到结尾</span></span><br><span class="line">echo $&#123;parameter:2&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="数据库批量转存数据"><a href="#数据库批量转存数据" class="headerlink" title="数据库批量转存数据"></a>数据库批量转存数据</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">USER=root</span><br><span class="line">DBPATH=./temp</span><br><span class="line">PASSWORD=123456</span><br><span class="line">LOGINCMD="mysql -u$USER -p$PASSWORD"</span><br><span class="line">DUMPCMD="mysqldump -u$USER -p$PASSWORD"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定拷贝</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> dbname <span class="keyword">in</span> oldBody oldgirl xxx yyy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 获取mysql中的所需要数据库转存</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> dbname <span class="keyword">in</span> `<span class="variable">$&#123;LOGINCMD&#125;</span> -e <span class="string">"show databases;"</span> | sed <span class="string">'1d'</span> | egrep -v <span class="string">"mysql|schema"</span>`</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">do</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   <span class="variable">$DUMPCMD</span> <span class="variable">$dbname</span> | gzip &gt; <span class="variable">$DBPATH</span>/<span class="variable">$&#123;dbname&#125;</span>_$(date +%F)_sql.gz</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">done</span></span></span><br><span class="line"></span><br><span class="line">rm -rf $DBPATH</span><br><span class="line">for dbname in `$&#123;LOGINCMD&#125; -e "show databases;" | sed '1d' | egrep -v "mysql|schema"`</span><br><span class="line">do</span><br><span class="line">  mkdir -p $DBPATH/$&#123;dbname&#125;</span><br><span class="line">  for table in `$&#123;LOGINCMD&#125; -e "use $&#123;dbname&#125;; show tables;" | sed '1d'`</span><br><span class="line">  do</span><br><span class="line">    $DUMPCMD $dbname $table | gzip &gt; $DBPATH/$&#123;dbname&#125;/$&#123;table&#125;_$(date +%F)_sql.gz</span><br><span class="line">  done</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<h3 id="数据库批量创建表及插入数据"><a href="#数据库批量创建表及插入数据" class="headerlink" title="数据库批量创建表及插入数据"></a>数据库批量创建表及插入数据</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">USER=root</span><br><span class="line">PASSWORD=123456</span><br><span class="line">LOGINCMD="mysql -u$USER -p$PASSWORD"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定拷贝</span></span><br><span class="line">for dbname in oldBody oldgirl xxx yyy</span><br><span class="line">do</span><br><span class="line"><span class="meta">  $</span><span class="bash">LOGINCMD -e <span class="string">"use <span class="variable">$&#123;dbname&#125;</span>; create table if not exsits test(id int, name varchar(12)); insert into test values (1, 'testData')"</span></span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<h3 id="数据库批量查询数据"><a href="#数据库批量查询数据" class="headerlink" title="数据库批量查询数据"></a>数据库批量查询数据</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">USER=root</span><br><span class="line">PASSWORD=123456</span><br><span class="line">LOGINCMD="mysql -u$USER -p$PASSWORD"</span><br><span class="line">for dbname in oldBody oldgirl xxx yyy</span><br><span class="line">do</span><br><span class="line"><span class="meta">  $</span><span class="bash">LOGINCMD -e <span class="string">"select * from <span class="variable">$&#123;dbname&#125;</span>.test\G;"</span></span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/12/shell/chapter11/%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" data-id="cknevottc001611lz06ih6ks8" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/14/shell/chapter4-parameter/parameter/" data-id="ckngseaof001706rpb6wf8ryj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -212,23 +262,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/04/12/shell/nginx%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/">nginx自启动脚本</a>
+            <a href="/blog/2021/04/14/shell/nginx%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/">nginx自启动脚本</a>
           </li>
         
           <li>
-            <a href="/blog/2021/04/12/URL/">URL constructor</a>
+            <a href="/blog/2021/04/14/URL/">URL constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2021/04/12/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+            <a href="/blog/2021/04/14/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
           </li>
         
           <li>
-            <a href="/blog/2021/04/12/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+            <a href="/blog/2021/04/14/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
           </li>
         
           <li>
-            <a href="/blog/2021/04/12/cross-origin/">cross origin</a>
+            <a href="/blog/2021/04/14/cross-origin/">cross origin</a>
           </li>
         
       </ul>
