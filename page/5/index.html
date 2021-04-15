@@ -63,8 +63,8 @@
   
     <article id="post-shell/chapter10/while循环" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/14/shell/chapter10/while%E5%BE%AA%E7%8E%AF/" class="article-date">
-  <time datetime="2021-04-14T01:40:15.625Z" itemprop="datePublished">2021-04-14</time>
+    <a href="/blog/2021/04/15/shell/chapter10/while%E5%BE%AA%E7%8E%AF/" class="article-date">
+  <time datetime="2021-04-15T16:02:46.813Z" itemprop="datePublished">2021-04-15</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/14/shell/chapter10/while%E5%BE%AA%E7%8E%AF/">while循环</a>
+      <a class="article-title" href="/blog/2021/04/15/shell/chapter10/while%E5%BE%AA%E7%8E%AF/">while循环</a>
     </h1>
   
 
@@ -94,7 +94,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/14/shell/chapter10/while%E5%BE%AA%E7%8E%AF/" data-id="ckngseaoc001406rpbow9hzrp" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/15/shell/chapter10/while%E5%BE%AA%E7%8E%AF/" data-id="cknj2nfvb001433r44jthcwar" class="article-share-link">Share</a>
       
       
     </footer>
@@ -106,8 +106,8 @@
   
     <article id="post-shell/chapter11/for循环" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/14/shell/chapter11/for%E5%BE%AA%E7%8E%AF/" class="article-date">
-  <time datetime="2021-04-14T01:40:15.625Z" itemprop="datePublished">2021-04-14</time>
+    <a href="/blog/2021/04/15/shell/chapter11/for%E5%BE%AA%E7%8E%AF/" class="article-date">
+  <time datetime="2021-04-15T16:02:46.813Z" itemprop="datePublished">2021-04-15</time>
 </a>
     
   </div>
@@ -118,7 +118,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/14/shell/chapter11/for%E5%BE%AA%E7%8E%AF/">for循环</a>
+      <a class="article-title" href="/blog/2021/04/15/shell/chapter11/for%E5%BE%AA%E7%8E%AF/">for循环</a>
     </h1>
   
 
@@ -138,7 +138,44 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/14/shell/chapter11/for%E5%BE%AA%E7%8E%AF/" data-id="ckngseaod001506rphnwkf38w" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/15/shell/chapter11/for%E5%BE%AA%E7%8E%AF/" data-id="cknj2nfvd001533r46lkuetgw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-shell/chapter13-array/字符串单词检查" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/04/15/shell/chapter13-array/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8D%95%E8%AF%8D%E6%A3%80%E6%9F%A5/" class="article-date">
+  <time datetime="2021-04-15T16:02:46.813Z" itemprop="datePublished">2021-04-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/04/15/shell/chapter13-array/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8D%95%E8%AF%8D%E6%A3%80%E6%9F%A5/">字符串中单词长度检查</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 打印长度大于6的单词</span></span><br><span class="line">str="I am oldboy teacher welcome to oldboy class"</span><br><span class="line">maxLength=6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 计算字符串长度的方法</span></span><br><span class="line">echo `echo $str | wc -L`</span><br><span class="line">echo `expr length "$str"`</span><br><span class="line">echo $&#123;#str&#125;</span><br><span class="line">echo `echo $str | awk '&#123;print length($0)&#125;'`</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> awk 方式</span></span><br><span class="line">echo $str | awk '&#123;for(i=1;i&lt;=NF;i++) if(length($i)&gt;6) print $i&#125;'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 数组方式</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> arr=(<span class="variable">$str</span>)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> word <span class="keyword">in</span> <span class="variable">$&#123;arr[*]&#125;</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">do</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   [ <span class="variable">$&#123;#word&#125;</span> -gt <span class="variable">$maxLength</span> ] &amp;&amp; &#123;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     <span class="built_in">echo</span> <span class="variable">$word</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   &#125;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">done</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span>循环方式</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> word <span class="keyword">in</span> <span class="variable">$str</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">do</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   [ <span class="variable">$&#123;#word&#125;</span> -gt <span class="variable">$maxLength</span> ] &amp;&amp; &#123;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     <span class="built_in">echo</span> <span class="variable">$word</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   &#125;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">done</span></span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/04/15/shell/chapter13-array/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8D%95%E8%AF%8D%E6%A3%80%E6%9F%A5/" data-id="cknj2nfve001633r41plmarns" class="article-share-link">Share</a>
       
       
     </footer>
@@ -150,8 +187,8 @@
   
     <article id="post-shell/chapter13-array/数组" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/14/shell/chapter13-array/%E6%95%B0%E7%BB%84/" class="article-date">
-  <time datetime="2021-04-14T01:40:15.625Z" itemprop="datePublished">2021-04-14</time>
+    <a href="/blog/2021/04/15/shell/chapter13-array/%E6%95%B0%E7%BB%84/" class="article-date">
+  <time datetime="2021-04-15T16:02:46.813Z" itemprop="datePublished">2021-04-15</time>
 </a>
     
   </div>
@@ -162,7 +199,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/14/shell/chapter13-array/%E6%95%B0%E7%BB%84/">数组</a>
+      <a class="article-title" href="/blog/2021/04/15/shell/chapter13-array/%E6%95%B0%E7%BB%84/">数组</a>
     </h1>
   
 
@@ -179,7 +216,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/14/shell/chapter13-array/%E6%95%B0%E7%BB%84/" data-id="ckngseaoe001606rphfesgebw" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/15/shell/chapter13-array/%E6%95%B0%E7%BB%84/" data-id="cknj2nfvf001733r42h8a7b9i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -191,8 +228,8 @@
   
     <article id="post-shell/chapter4-parameter/parameter" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/14/shell/chapter4-parameter/parameter/" class="article-date">
-  <time datetime="2021-04-14T01:40:15.625Z" itemprop="datePublished">2021-04-14</time>
+    <a href="/blog/2021/04/15/shell/chapter4-parameter/parameter/" class="article-date">
+  <time datetime="2021-04-15T16:02:46.813Z" itemprop="datePublished">2021-04-15</time>
 </a>
     
   </div>
@@ -203,7 +240,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/14/shell/chapter4-parameter/parameter/">变量字串</a>
+      <a class="article-title" href="/blog/2021/04/15/shell/chapter4-parameter/parameter/">变量字串</a>
     </h1>
   
 
@@ -216,7 +253,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/14/shell/chapter4-parameter/parameter/" data-id="ckngseaof001706rpb6wf8ryj" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/15/shell/chapter4-parameter/parameter/" data-id="cknj2nfvh001833r406xj77df" class="article-share-link">Share</a>
       
       
     </footer>
@@ -262,23 +299,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/04/14/shell/nginx%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/">nginx自启动脚本</a>
+            <a href="/blog/2021/04/15/shell/nginx%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/">nginx自启动脚本</a>
           </li>
         
           <li>
-            <a href="/blog/2021/04/14/URL/">URL constructor</a>
+            <a href="/blog/2021/04/15/URL/">URL constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2021/04/14/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+            <a href="/blog/2021/04/15/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
           </li>
         
           <li>
-            <a href="/blog/2021/04/14/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+            <a href="/blog/2021/04/15/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
           </li>
         
           <li>
-            <a href="/blog/2021/04/14/cross-origin/">cross origin</a>
+            <a href="/blog/2021/04/15/cross-origin/">cross origin</a>
           </li>
         
       </ul>
