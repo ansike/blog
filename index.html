@@ -61,10 +61,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-shell/nginx自启动脚本" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/rsync自启动脚本" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/15/shell/nginx%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/" class="article-date">
-  <time datetime="2021-04-15T16:02:46.813Z" itemprop="datePublished">2021-04-15</time>
+    <a href="/blog/2021/04/17/shell/rsync%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/" class="article-date">
+  <time datetime="2021-04-17T09:39:20.457Z" itemprop="datePublished">2021-04-17</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/15/shell/nginx%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/">nginx自启动脚本</a>
+      <a class="article-title" href="/blog/2021/04/17/shell/rsync%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/">系统自启动rsync服务的方法</a>
     </h1>
   
 
@@ -83,20 +83,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>使用<code>/etc/init.d/nginx {start|stop|restart}</code>启动,停止,重启</p>
-<p>CentOS Linux release 8.3.2011</p>
+        <p>使用<code>/etc/init.d/rsyncd {start|stop|restart}</code>启动,停止,重启</p>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><ol>
-<li><code>nginx</code>的命令<br>systemctl start nginx.service<br>systemctl stop nginx.service<br>systemctl restart nginx.service<br>systemctl status nginx.service</li>
-<li>实现<code>/etc/init.d/nginx</code>脚本</li>
+<li><code>rsync</code>的命令<br>rsync –daemon<br>pkill rsync<br>netstat -lntp | grep 873</li>
+<li>实现<code>/etc/init.d/rsyncd</code>脚本</li>
 <li>通过 chkconfig 实现开机自启动<br>注意下方文件中的二行和第三行</li>
 </ol>
 <h5 id="主干脚本"><a href="#主干脚本" class="headerlink" title="主干脚本"></a>主干脚本</h5><p>执行前该文件需要<code>chmod +x /etc/init.d/rsyncd</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chkconfig: 2345 40 90</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> nginx 开机自启脚本</span></span><br><span class="line">set -e</span><br><span class="line">function usage()&#123;</span><br><span class="line">  echo "USAGE: $0 &#123;start|stop|restart&#125;"</span><br><span class="line">  exit 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[ $# -ne 1 ] &amp;&amp; &#123;</span><br><span class="line">  usage</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function start()&#123;</span><br><span class="line"><span class="meta">  #</span><span class="bash"> netstat -lnt | grep 80</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> lsof -i:80 -P | grep <span class="string">"LISTEN"</span></span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> 不要使用该方式，当前脚本中也有nginx关键字，查询不符合：[ `ps -ef | grep -v grep | grep nginx | wc -l` -gt 0 ] &amp;&amp; &#123;</span></span><br><span class="line">  [ `netstat -lnt | grep 80 | wc -l` -gt 0 ] &amp;&amp; &#123;</span><br><span class="line">    echo "nginx is started."</span><br><span class="line">    exit 0</span><br><span class="line">  &#125;</span><br><span class="line">  systemctl start nginx.service</span><br><span class="line">  echo "nginx is started."</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function stop()&#123;</span><br><span class="line">  [ `netstat -lnt | grep 80 | wc -l` -eq 0 ] &amp;&amp; &#123;</span><br><span class="line">    echo "nginx is stopped."</span><br><span class="line">    exit 0</span><br><span class="line">  &#125;</span><br><span class="line">  systemctl stop nginx.service</span><br><span class="line">  echo "nginx is stopped."</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">case $1 in </span><br><span class="line">  start)</span><br><span class="line">    start</span><br><span class="line">    ;;</span><br><span class="line">  stop)</span><br><span class="line">    stop</span><br><span class="line">    ;;</span><br><span class="line">  restart)</span><br><span class="line">    systemctl restart nginx.service</span><br><span class="line">    ;;</span><br><span class="line">  *)</span><br><span class="line">    usage</span><br><span class="line">    ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chkconfig: 2345 20 80</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> description: Save and restores system entropy poll</span></span><br><span class="line">[ $# -ne 1 ] &amp;&amp; &#123;</span><br><span class="line">  echo "USAGE:$0 &#123;start|stop|restart&#125;"</span><br><span class="line">  exit 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">if [ "$1" = "start" ]; then</span><br><span class="line">  rsync --daemon</span><br><span class="line">  sleep 2</span><br><span class="line">  [ `netstat -lntp | grep rsync | wc -l` -gt 0 ] &amp;&amp; &#123;</span><br><span class="line">    echo "rsyncd is start."</span><br><span class="line">    exit 0</span><br><span class="line">  &#125;</span><br><span class="line">elif [ "$1" = "stop" ]; then</span><br><span class="line">  killall rsync &amp;&gt;/etc/null</span><br><span class="line">  sleep 2</span><br><span class="line">  [ `netstat -lntp | grep rsync | wc -l` -eq 0 ] &amp;&amp; &#123;</span><br><span class="line">    echo "rsyncd is stopped."</span><br><span class="line">    exit 0</span><br><span class="line">  &#125;</span><br><span class="line">elif [ "$1" = "restart" ]; then</span><br><span class="line">  killall rsync</span><br><span class="line">  sleep 1</span><br><span class="line">  killPro=`netstat -lntp | grep rsync | wc -l`</span><br><span class="line">  rsync --daemon</span><br><span class="line">  sleep 1</span><br><span class="line">  startPro=`netstat -lntp | grep rsync | wc -l`</span><br><span class="line">  [ "$killPro" -eq 0 -a "$startPro" -gt 0 ] &amp;&amp; &#123;</span><br><span class="line">    echo "rsyncd is restarted."</span><br><span class="line">    exit 0</span><br><span class="line">  &#125;</span><br><span class="line">else</span><br><span class="line">  echo "USAGE:$0 &#123;start|stop|restart&#125;"</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<h5 id="主干脚本-函数版本"><a href="#主干脚本-函数版本" class="headerlink" title="主干脚本[函数版本]"></a>主干脚本[函数版本]</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chkconfig: 2345 20 80</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> description: Save and restores system entropy poll</span></span><br><span class="line">. /etc/init.d/functions</span><br><span class="line">function usage() &#123;</span><br><span class="line">  echo "USAGE:$0 &#123;start|stop|restart&#125;"</span><br><span class="line">  exit 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function start() &#123;</span><br><span class="line">  rsync --daemon</span><br><span class="line">  sleep 2</span><br><span class="line">  [ `netstat -lntp | grep rsync | wc -l` -gt 0 ] &amp;&amp; &#123;</span><br><span class="line">    action "rsyncd is start." /bin/true</span><br><span class="line">  &#125; || &#123;</span><br><span class="line">    action "rsyncd is start." /bin/false</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function stop() &#123;</span><br><span class="line">  killall rsync &amp;&gt;/etc/null</span><br><span class="line">  sleep 2</span><br><span class="line">  [ `netstat -lntp | grep rsync | wc -l` -eq 0 ] &amp;&amp; &#123;</span><br><span class="line">    action "rsyncd is stopped." /bin/true</span><br><span class="line">  &#125; || &#123;</span><br><span class="line">    action "rsyncd is started." /bin/false</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function main()&#123;</span><br><span class="line">  [ $# -ne 1 ] &amp;&amp; &#123;</span><br><span class="line">    usage</span><br><span class="line">  &#125;</span><br><span class="line">  if [ "$1" = "start" ]; then</span><br><span class="line">    start</span><br><span class="line">  elif [ "$1" = "stop" ]; then</span><br><span class="line">    stop</span><br><span class="line">  elif [ "$1" = "restart" ]; then</span><br><span class="line">    stop</span><br><span class="line">    sleep 1</span><br><span class="line">    start</span><br><span class="line">  else</span><br><span class="line">    usage</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main $*</span><br></pre></td></tr></table></figure>
+
+<h5 id="加入开机自启动"><a href="#加入开机自启动" class="headerlink" title="加入开机自启动"></a>加入开机自启动</h5><p>注意脚本的第二行<br><code># chkconfig: 2345 20 80</code><br>2345 表示 Linux 运行级别,20 表示开始启动顺序,80 表示脚本停止顺序<br>应用服务一般考后启动,越早停止越好</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">chkconfig --list [命令名] # 如 rsyncd, /etc/init.d/rsyncd</span><br><span class="line">chkconfig --add [命令名] # 添加任务</span><br><span class="line">chkconfig --del [命令名] # 删除任务</span><br><span class="line"></span><br><span class="line">chkconfig rsyncd on # 启动</span><br><span class="line">chkconfig rsyncd off # 停止</span><br></pre></td></tr></table></figure>
+
+<h5 id="kill-pkill-killall"><a href="#kill-pkill-killall" class="headerlink" title="kill pkill killall"></a>kill pkill killall</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep -v grep | grep rsync</span><br><span class="line"><span class="meta">#</span><span class="bash">root       705     1  0 23:29 ?        00:00:00 rsync --daemon</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 比较麻烦需要先查处进程号才能杀死</span></span><br><span class="line">kill 705</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 没有任何提示杀死[据说有误杀问题]</span></span><br><span class="line">pkill rsync</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 杀死全部进程,有提示</span></span><br><span class="line">killall rsync</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/15/shell/nginx%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/" data-id="cknj2nfuh000m33r43s0r84bd" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/17/shell/rsync%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/" data-id="cknljtym9000o25ul7yin8o3b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -106,10 +112,10 @@
 
 
   
-    <article id="post-URL" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/chapter4-parameter/parameter" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/15/URL/" class="article-date">
-  <time datetime="2021-04-15T16:02:46.813Z" itemprop="datePublished">2021-04-15</time>
+    <a href="/blog/2021/04/17/shell/chapter4-parameter/parameter/" class="article-date">
+  <time datetime="2021-04-17T09:39:20.457Z" itemprop="datePublished">2021-04-17</time>
 </a>
     
   </div>
@@ -120,7 +126,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/15/URL/">URL constructor</a>
+      <a class="article-title" href="/blog/2021/04/17/shell/chapter4-parameter/parameter/">变量字串</a>
     </h1>
   
 
@@ -128,42 +134,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p>以前我们要对地址栏中的URL地址进行分析处理，需要自己进行字符串分析,有了URL构造函数之后就不需要了。</p>
-<h3 id="demo-（修改-设置-query的一个参数"><a href="#demo-（修改-设置-query的一个参数" class="headerlink" title="demo （修改|设置)query的一个参数"></a>demo （修改|设置)query的一个参数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> url = <span class="string">"https://www.baidu.com/wordpress/?a=1"</span></span><br><span class="line"><span class="keyword">const</span> urlObj = <span class="keyword">new</span> URL(url)</span><br><span class="line">urlObj.searchParams.set(<span class="string">"a"</span>, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">console</span>.log(urlObj.href); <span class="comment">//https://www.baidu.com/wordpress/?a=2</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * params：（url）相对地址或者绝对地址，如果是绝对地址的时候会忽略base参数</span></span><br><span class="line"><span class="comment"> * params：（base）基地址，默认为空字符串</span></span><br><span class="line"><span class="comment"> * 注意：如果参数无法组合成完整的url地址，则会报TypeError错误</span></span><br><span class="line"><span class="comment"> * return 一个人 URL实例</span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="keyword">new</span> URL(url [,base])</span><br></pre></td></tr></table></figure>
-
-<h3 id="Attributes"><a href="#Attributes" class="headerlink" title="Attributes"></a>Attributes</h3><ol>
-<li>hash</li>
-<li>host</li>
-<li>hostname</li>
-<li>href</li>
-<li>origin       常用</li>
-<li>password</li>
-<li>username</li>
-<li>pathname</li>
-<li>port</li>
-<li>protocol     eg:http:</li>
-<li>search</li>
-<li>searchParams 返回一个URLSearchParams对象，可以调用URLSearchParams对象的各种方法，对查询，设置字符串进行非常方便的处理。以下会重点说这个对象 </li>
-</ol>
-<h3 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h3><ol>
-<li>toString()   返回完整的URL地址，只能输出不能修改值</li>
-<li>toJSON       目前看是一样的（有变动再修改）</li>
-</ol>
-<h3 id="Static-Function"><a href="#Static-Function" class="headerlink" title="Static Function"></a>Static Function</h3><ol>
-<li>URL.createObjectURL(object). <strong>将对象变成一个唯一的blob URL，参数可以是File，Blob，MediaSource对象</strong></li>
-<li>URL.revokeObjectURL(objectURL);<strong>撤销上一个API创建的URL对象</strong></li>
-</ol>
-<p>eg:使用Ajax请求一个跨域图片避免canvas跨域生成问题的时候可以使用这两个静态方法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> url = URL.createObjectURL(<span class="keyword">this</span>.response);</span><br><span class="line">    <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">    img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 此时你就可以使用canvas对img为所欲为了</span></span><br><span class="line">        <span class="comment">// ... code ...</span></span><br><span class="line">        <span class="comment">// 图片用完后记得释放内存</span></span><br><span class="line">        URL.revokeObjectURL(url);</span><br><span class="line">    &#125;;</span><br><span class="line">    img.src = url;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.open(<span class="string">'GET'</span>, url, <span class="literal">true</span>);</span><br><span class="line">xhr.responseType = <span class="string">'blob'</span>;</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
-
-
+        <h3 id="变量字串说明"><a href="#变量字串说明" class="headerlink" title="变量字串说明"></a>变量字串说明</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">parameter=asbcd</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出变量的内容</span></span><br><span class="line">echo $&#123;parameter&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 返回变量的长度</span></span><br><span class="line">echo $&#123;#parameter&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> offset从位置开始介入到结尾</span></span><br><span class="line">echo $&#123;parameter:2&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/15/URL/" data-id="cknj2nfsf000033r4474o7kv5" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/17/shell/chapter4-parameter/parameter/" data-id="cknljtyn2001c25ulcx9yh6gx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -173,10 +149,10 @@
 
 
   
-    <article id="post-canvas-基础特性" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/chapter13-array/数组" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/15/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" class="article-date">
-  <time datetime="2021-04-15T16:02:46.813Z" itemprop="datePublished">2021-04-15</time>
+    <a href="/blog/2021/04/17/shell/chapter13-array/%E6%95%B0%E7%BB%84/" class="article-date">
+  <time datetime="2021-04-17T09:39:20.457Z" itemprop="datePublished">2021-04-17</time>
 </a>
     
   </div>
@@ -187,7 +163,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/15/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+      <a class="article-title" href="/blog/2021/04/17/shell/chapter13-array/%E6%95%B0%E7%BB%84/">数组</a>
     </h1>
   
 
@@ -195,31 +171,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="对象创建"><a href="#对象创建" class="headerlink" title="对象创建"></a>对象创建</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HTML</span></span><br><span class="line">&lt;canvas id=<span class="string">"canvas"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//JS</span></span><br><span class="line"><span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"><span class="keyword">const</span> ctx = canvas.getContext(<span class="string">"2d"</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="canvas元素的属性和方法"><a href="#canvas元素的属性和方法" class="headerlink" title="canvas元素的属性和方法"></a>canvas元素的属性和方法</h3><p><strong>1. 属性</strong></p>
-<ul>
-<li>width</li>
-<li>height</li>
-</ul>
-<p><strong>2. 方法</strong></p>
-<ul>
-<li><ol>
-<li>getContext(contextId: “2d”, options?: CanvasRenderingContext2DSettings): CanvasRenderingContext2D | null;</li>
-<li>getContext(contextId: “bitmaprenderer”, options?: ImageBitmapRenderingContextSettings):mageBitmapRenderingContext | null;</li>
-<li>getContext(contextId: “webgl”, options?: WebGLContextAttributes): WebGLRenderingContext | null;</li>
-<li>getContext(contextId: “webgl2”, options?: WebGLContextAttributes): WebGL2RenderingContext | null;</li>
-<li>getContext(contextId: string, options?: any): RenderingContext | null;<br>// 返回绘图环境对象</li>
-</ol>
-</li>
-<li>toDataURL(type?: string, quality?: any): string; // 返回数据地址，可以直接给img的src赋值</li>
-<li>toBlob(callback: BlobCallback, type?: string, quality?: any): void; // 返回表示图像文件的blob，可以将该blob做文件上传使用</li>
-<li>transferControlToOffscreen(): OffscreenCanvas;</li>
-</ul>
+        <h3 id="定义及打印"><a href="#定义及打印" class="headerlink" title="定义及打印"></a>定义及打印</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 基础定义</span></span><br><span class="line">array=(one two three)</span><br><span class="line"><span class="meta">#</span><span class="bash"> 动态数组</span></span><br><span class="line">array2=($(ls ../))</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 繁琐赋值</span></span><br><span class="line">array3=([1]=one [2]=two [3]=three)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 分别赋值</span></span><br><span class="line">array4[1]=one; array4[2]=two; array4[3]=three;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 打印数组</span></span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line">echo $&#123;array[@]&#125;</span><br><span class="line">echo $&#123;array2[@]&#125;</span><br><span class="line">echo $&#123;array3[@]&#125;</span><br><span class="line">echo $&#123;array4[@]&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组增删改查"><a href="#数组增删改查" class="headerlink" title="数组增删改查"></a>数组增删改查</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">array=(one two three)</span><br><span class="line"><span class="meta">#</span><span class="bash"> 增</span></span><br><span class="line">array[3]=test</span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 删</span></span><br><span class="line">unset array[2]</span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 改</span></span><br><span class="line">array[1]=change</span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查</span></span><br><span class="line">echo $&#123;array[1]&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组常用api"><a href="#数组常用api" class="headerlink" title="数组常用api"></a>数组常用api</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">array=(one two three)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 数组长度</span></span><br><span class="line">echo $&#123;#array&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 截取数组</span></span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 截取位置到结尾</span></span><br><span class="line">echo $&#123;array[*]:1&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 截取位置及长度</span></span><br><span class="line">echo $&#123;array[*]:1:1&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除数组</span></span><br><span class="line">array[4]=one4one</span><br><span class="line"><span class="meta">#</span><span class="bash"> 从头开始 one change <span class="built_in">test</span> one4one</span></span><br><span class="line">echo $&#123;array[*]&#125; </span><br><span class="line">echo $&#123;array[*]#one&#125; #change test 4one</span><br><span class="line">echo $&#123;array[*]##one*&#125; # change test</span><br><span class="line"><span class="meta">#</span><span class="bash"> 从尾开始 one change <span class="built_in">test</span> one4one</span></span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line">echo $&#123;array[*]%one&#125; # change test one4</span><br><span class="line">echo $&#123;array[*]%%one*&#125; # change test</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 替换数组</span></span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 仅第一次匹配到替换</span></span><br><span class="line">echo $&#123;array[*]/one/one1&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 匹配到所有替换</span></span><br><span class="line">echo $&#123;array[*]//one/one1&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/15/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" data-id="cknj2nfsr000233r4fe4i2fqz" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/17/shell/chapter13-array/%E6%95%B0%E7%BB%84/" data-id="cknljtyn2001b25ulhryl1m2a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -229,10 +190,10 @@
 
 
   
-    <article id="post-canvas动画" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/chapter13-array/字符串单词检查" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/15/canvas%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-04-15T16:02:46.813Z" itemprop="datePublished">2021-04-15</time>
+    <a href="/blog/2021/04/17/shell/chapter13-array/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8D%95%E8%AF%8D%E6%A3%80%E6%9F%A5/" class="article-date">
+  <time datetime="2021-04-17T09:39:20.457Z" itemprop="datePublished">2021-04-17</time>
 </a>
     
   </div>
@@ -243,7 +204,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/15/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+      <a class="article-title" href="/blog/2021/04/17/shell/chapter13-array/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8D%95%E8%AF%8D%E6%A3%80%E6%9F%A5/">字符串中单词长度检查</a>
     </h1>
   
 
@@ -251,14 +212,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ol>
-<li>canvas 基础知识，比如stroke，fill，arc，rect等基础API</li>
-</ol>
+        <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 打印长度大于6的单词</span></span><br><span class="line">str="I am oldboy teacher welcome to oldboy class"</span><br><span class="line">maxLength=6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 计算字符串长度的方法</span></span><br><span class="line">echo `echo $str | wc -L`</span><br><span class="line">echo `expr length "$str"`</span><br><span class="line">echo $&#123;#str&#125;</span><br><span class="line">echo `echo $str | awk '&#123;print length($0)&#125;'`</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> awk 方式</span></span><br><span class="line">echo $str | awk '&#123;for(i=1;i&lt;=NF;i++) if(length($i)&gt;6) print $i&#125;'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 数组方式</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> arr=(<span class="variable">$str</span>)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> word <span class="keyword">in</span> <span class="variable">$&#123;arr[*]&#125;</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">do</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   [ <span class="variable">$&#123;#word&#125;</span> -gt <span class="variable">$maxLength</span> ] &amp;&amp; &#123;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     <span class="built_in">echo</span> <span class="variable">$word</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   &#125;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">done</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span>循环方式</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> word <span class="keyword">in</span> <span class="variable">$str</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">do</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   [ <span class="variable">$&#123;#word&#125;</span> -gt <span class="variable">$maxLength</span> ] &amp;&amp; &#123;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     <span class="built_in">echo</span> <span class="variable">$word</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   &#125;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">done</span></span></span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/15/canvas%E5%8A%A8%E7%94%BB/" data-id="cknj2nfst000333r428iucje1" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/17/shell/chapter13-array/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8D%95%E8%AF%8D%E6%A3%80%E6%9F%A5/" data-id="cknljtyn1001a25ulf1ephcte" class="article-share-link">Share</a>
       
       
     </footer>
@@ -268,10 +227,10 @@
 
 
   
-    <article id="post-cross-origin" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/chapter12/控制语句" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/15/cross-origin/" class="article-date">
-  <time datetime="2021-04-15T16:02:46.813Z" itemprop="datePublished">2021-04-15</time>
+    <a href="/blog/2021/04/17/shell/chapter12/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/" class="article-date">
+  <time datetime="2021-04-17T09:39:20.457Z" itemprop="datePublished">2021-04-17</time>
 </a>
     
   </div>
@@ -282,7 +241,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/15/cross-origin/">cross origin</a>
+      <a class="article-title" href="/blog/2021/04/17/shell/chapter12/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/">shell中的控制语句</a>
     </h1>
   
 
@@ -290,18 +249,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>就是创建一个文件夹eg:devChromeData</p>
-<h3 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h3><p>第二步执行以下命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -n /Applications/Google\ Chrome.app/ --args --disable-web-security  --user-data-dir=/Users/ansike/devChromeData</span><br></pre></td></tr></table></figure>
-
-<p>微信开发者工具（注意app的名字是否一致）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -a /Applications/wechatwebdevtools.app --args --disable-web-security --user-data-dir</span><br></pre></td></tr></table></figure>
-<h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><p>创建该文件夹，右键浏览器快捷键，在目标中追加参数</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--disable-web-security --user-data-dir=C:\path\to\ChromeUserData</span><br></pre></td></tr></table></figure>
+        <ol>
+<li>break n 跳出循环n层，省略的话跳出整个循环</li>
+<li>continue n 退到n层继续循环，省略的话忽略本次循环的剩余代码继续循环</li>
+<li>return n 用在函数里作为函数的返回值</li>
+<li>exit n 退出当前shell程序，作为上一次shell程序执行的返回值</li>
+</ol>
+<p>? 好像没有发现break n和continue n于编程中的实际意义</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">break</span>， <span class="built_in">continue</span></span></span><br><span class="line">for ((i=0;i&lt;=5;i++))</span><br><span class="line">do</span><br><span class="line">  if [ $i -eq 3 ]</span><br><span class="line">  then</span><br><span class="line">    echo "cur is $i"</span><br><span class="line">    break</span><br><span class="line">    # continue</span><br><span class="line">  fi</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/15/cross-origin/" data-id="cknj2nfsw000433r49ibl7fm5" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/17/shell/chapter12/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/" data-id="cknljtyn0001925ul3ddb946t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -311,10 +270,10 @@
 
 
   
-    <article id="post-css动画" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/chapter11/批量操作数据库" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/15/css%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-04-15T16:02:46.813Z" itemprop="datePublished">2021-04-15</time>
+    <a href="/blog/2021/04/17/shell/chapter11/%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" class="article-date">
+  <time datetime="2021-04-17T09:39:20.457Z" itemprop="datePublished">2021-04-17</time>
 </a>
     
   </div>
@@ -325,7 +284,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/15/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+      <a class="article-title" href="/blog/2021/04/17/shell/chapter11/%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/">批量操作数据库</a>
     </h1>
   
 
@@ -333,14 +292,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ol>
-<li>canvas 基础知识，比如stroke，fill，arc，rect等基础API</li>
-</ol>
+        <h3 id="批量创建数据库"><a href="#批量创建数据库" class="headerlink" title="批量创建数据库"></a>批量创建数据库</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">USER=root</span><br><span class="line">PASSWORD=123456</span><br><span class="line">LOGINCMD="mysql -u$USER -p$PASSWORD"</span><br><span class="line"></span><br><span class="line">for dbname in oldBody oldgirl xxx yyy</span><br><span class="line">do</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 不存在则创建</span></span><br><span class="line"><span class="meta">  $</span><span class="bash">LOGINCMD -e <span class="string">"create database IF NOT EXISTS <span class="variable">$dbname</span>"</span></span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> 强制删除，重新创建</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> <span class="variable">$LOGINCMD</span> -e <span class="string">"drop database <span class="variable">$dbname</span>; create database <span class="variable">$dbname</span>"</span></span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
 
+<h3 id="数据库批量转存数据"><a href="#数据库批量转存数据" class="headerlink" title="数据库批量转存数据"></a>数据库批量转存数据</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">USER=root</span><br><span class="line">DBPATH=./temp</span><br><span class="line">PASSWORD=123456</span><br><span class="line">LOGINCMD="mysql -u$USER -p$PASSWORD"</span><br><span class="line">DUMPCMD="mysqldump -u$USER -p$PASSWORD"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定拷贝</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> dbname <span class="keyword">in</span> oldBody oldgirl xxx yyy</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 获取mysql中的所需要数据库转存</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> dbname <span class="keyword">in</span> `<span class="variable">$&#123;LOGINCMD&#125;</span> -e <span class="string">"show databases;"</span> | sed <span class="string">'1d'</span> | egrep -v <span class="string">"mysql|schema"</span>`</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">do</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   <span class="variable">$DUMPCMD</span> <span class="variable">$dbname</span> | gzip &gt; <span class="variable">$DBPATH</span>/<span class="variable">$&#123;dbname&#125;</span>_$(date +%F)_sql.gz</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">done</span></span></span><br><span class="line"></span><br><span class="line">rm -rf $DBPATH</span><br><span class="line">for dbname in `$&#123;LOGINCMD&#125; -e "show databases;" | sed '1d' | egrep -v "mysql|schema"`</span><br><span class="line">do</span><br><span class="line">  mkdir -p $DBPATH/$&#123;dbname&#125;</span><br><span class="line">  for table in `$&#123;LOGINCMD&#125; -e "use $&#123;dbname&#125;; show tables;" | sed '1d'`</span><br><span class="line">  do</span><br><span class="line">    $DUMPCMD $dbname $table | gzip &gt; $DBPATH/$&#123;dbname&#125;/$&#123;table&#125;_$(date +%F)_sql.gz</span><br><span class="line">  done</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据库批量创建表及插入数据"><a href="#数据库批量创建表及插入数据" class="headerlink" title="数据库批量创建表及插入数据"></a>数据库批量创建表及插入数据</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">USER=root</span><br><span class="line">PASSWORD=123456</span><br><span class="line">LOGINCMD="mysql -u$USER -p$PASSWORD"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 指定拷贝</span></span><br><span class="line">for dbname in oldBody oldgirl xxx yyy</span><br><span class="line">do</span><br><span class="line"><span class="meta">  $</span><span class="bash">LOGINCMD -e <span class="string">"use <span class="variable">$&#123;dbname&#125;</span>; create table if not exsits test(id int, name varchar(12)); insert into test values (1, 'testData')"</span></span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据库批量查询数据"><a href="#数据库批量查询数据" class="headerlink" title="数据库批量查询数据"></a>数据库批量查询数据</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">USER=root</span><br><span class="line">PASSWORD=123456</span><br><span class="line">LOGINCMD="mysql -u$USER -p$PASSWORD"</span><br><span class="line">for dbname in oldBody oldgirl xxx yyy</span><br><span class="line">do</span><br><span class="line"><span class="meta">  $</span><span class="bash">LOGINCMD -e <span class="string">"select * from <span class="variable">$&#123;dbname&#125;</span>.test\G;"</span></span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/15/css%E5%8A%A8%E7%94%BB/" data-id="cknj2nfsx000533r45hgo2kmc" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/17/shell/chapter11/%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" data-id="cknljtymz001825ulaf2mfrvt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -350,10 +312,10 @@
 
 
   
-    <article id="post-promisefy" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/chapter11/select语法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/15/promisefy/" class="article-date">
-  <time datetime="2021-04-15T16:02:46.813Z" itemprop="datePublished">2021-04-15</time>
+    <a href="/blog/2021/04/17/shell/chapter11/select%E8%AF%AD%E6%B3%95/" class="article-date">
+  <time datetime="2021-04-17T09:39:20.457Z" itemprop="datePublished">2021-04-17</time>
 </a>
     
   </div>
@@ -364,7 +326,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/15/promisefy/">实现类似 node中util.promisefy的实现</a>
+      <a class="article-title" href="/blog/2021/04/17/shell/chapter11/select%E8%AF%AD%E6%B3%95/">select语法</a>
     </h1>
   
 
@@ -372,20 +334,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>分析需求：</p>
-<ol>
-<li>promisefy将异步回调的nodejs的api fn改成了promise fn</li>
-<li>传入一个fn，返回一个新的fn，且新的fn执行的时候返回一个promise</li>
-<li>发现所有的nodejs的api的回调函数参数格式一致(error, content)=&gt;{}</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"><span class="keyword">const</span> util = <span class="built_in">require</span>(<span class="string">"util"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将异步回调改为promise</span></span><br><span class="line"><span class="keyword">const</span> promisefyReadFile = util.promisify(fs.readFile);</span><br><span class="line">promisefyReadFile(path.resolve(__dirname, <span class="string">'./data.txt'</span>), <span class="string">'utf-8'</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">customPromiseFy</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 注意</span></span><br><span class="line">      <span class="keyword">const</span> widthCallBackArgs = [...args, <span class="function"><span class="keyword">function</span> (<span class="params">error, content</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (error) reject(error);</span><br><span class="line">        resolve(content)</span><br><span class="line">      &#125;]</span><br><span class="line">      fn.apply(fn, widthCallBackArgs);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> promisefyReadFile = customPromiseFy(fs.readFile);</span><br><span class="line">promisefyReadFile(path.resolve(__dirname, <span class="string">'./data.txt'</span>), <span class="string">'utf-8'</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-
+        <h3 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">PS3="`Pls input the num you want`"</span><br><span class="line">select item in a b c</span><br><span class="line">do</span><br><span class="line">  echo $item</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 不显式退出，程序不会退出</span></span><br><span class="line">  exit 0</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/15/promisefy/" data-id="cknj2nft0000633r44hn46xgu" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/17/shell/chapter11/select%E8%AF%AD%E6%B3%95/" data-id="cknljtymy001725ulbciw1ko9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -397,8 +350,8 @@
   
     <article id="post-svg动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/15/svg%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-04-15T16:02:46.813Z" itemprop="datePublished">2021-04-15</time>
+    <a href="/blog/2021/04/17/svg%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-04-17T09:39:20.457Z" itemprop="datePublished">2021-04-17</time>
 </a>
     
   </div>
@@ -409,7 +362,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/15/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
+      <a class="article-title" href="/blog/2021/04/17/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
     </h1>
   
 
@@ -421,7 +374,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/15/svg%E5%8A%A8%E7%94%BB/" data-id="cknj2nft2000733r40oaaft68" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/17/svg%E5%8A%A8%E7%94%BB/" data-id="cknljtylb000725ulesvh2n7l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -433,8 +386,8 @@
   
     <article id="post-throttle-debounce" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/15/throttle-debounce/" class="article-date">
-  <time datetime="2021-04-15T16:02:46.813Z" itemprop="datePublished">2021-04-15</time>
+    <a href="/blog/2021/04/17/throttle-debounce/" class="article-date">
+  <time datetime="2021-04-17T09:39:20.457Z" itemprop="datePublished">2021-04-17</time>
 </a>
     
   </div>
@@ -445,7 +398,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/15/throttle-debounce/">截流和去抖的深入理解结合loads</a>
+      <a class="article-title" href="/blog/2021/04/17/throttle-debounce/">截流和去抖的深入理解结合loads</a>
     </h1>
   
 
@@ -458,7 +411,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/15/throttle-debounce/" data-id="cknj2nft5000833r43jsba5s0" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/17/throttle-debounce/" data-id="cknljtyle000825ul4qr70bw5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -470,8 +423,8 @@
   
     <article id="post-从数字分隔符看正则" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/15/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="article-date">
-  <time datetime="2021-04-15T16:02:46.813Z" itemprop="datePublished">2021-04-15</time>
+    <a href="/blog/2021/04/17/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="article-date">
+  <time datetime="2021-04-17T09:39:20.457Z" itemprop="datePublished">2021-04-17</time>
 </a>
     
   </div>
@@ -482,7 +435,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/15/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
+      <a class="article-title" href="/blog/2021/04/17/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
     </h1>
   
 
@@ -520,7 +473,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/15/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="cknj2nft7000933r42hch3nz0" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/17/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="cknljtylf000925ul7xcg1j4m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -566,23 +519,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/04/15/shell/nginx%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/">nginx自启动脚本</a>
+            <a href="/blog/2021/04/17/shell/rsync%E8%87%AA%E5%90%AF%E5%8A%A8%E8%84%9A%E6%9C%AC/">系统自启动rsync服务的方法</a>
           </li>
         
           <li>
-            <a href="/blog/2021/04/15/URL/">URL constructor</a>
+            <a href="/blog/2021/04/17/shell/chapter4-parameter/parameter/">变量字串</a>
           </li>
         
           <li>
-            <a href="/blog/2021/04/15/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+            <a href="/blog/2021/04/17/shell/chapter13-array/%E6%95%B0%E7%BB%84/">数组</a>
           </li>
         
           <li>
-            <a href="/blog/2021/04/15/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+            <a href="/blog/2021/04/17/shell/chapter13-array/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8D%95%E8%AF%8D%E6%A3%80%E6%9F%A5/">字符串中单词长度检查</a>
           </li>
         
           <li>
-            <a href="/blog/2021/04/15/cross-origin/">cross origin</a>
+            <a href="/blog/2021/04/17/shell/chapter12/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/">shell中的控制语句</a>
           </li>
         
       </ul>
