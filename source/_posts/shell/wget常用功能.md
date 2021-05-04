@@ -8,8 +8,12 @@ title:  wget常用功能
 
 ### 场景一、获取输出到标准输出中赋值给变量
 ```shell
-Var=`wget -O - http://www.baidu.com`m
+Var=`wget -O - http://www.baidu.com`
 echo $Var
+
+# 获取远程shell的内容，执行脚本【安装node】
+sh -c "$(wget -O- https://raw.githubusercontent.com/ansike/study/dev/shell/install-node.sh)"
+
 ```
 -O file
 --output-document=file
