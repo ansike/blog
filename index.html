@@ -63,8 +63,8 @@
   
     <article id="post-shell/shell脚本开发规范" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/24/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" class="article-date">
-  <time datetime="2021-04-24T15:10:17.124Z" itemprop="datePublished">2021-04-24</time>
+    <a href="/blog/2021/05/04/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" class="article-date">
+  <time datetime="2021-05-04T15:26:22.785Z" itemprop="datePublished">2021-05-04</time>
 </a>
     
   </div>
@@ -75,7 +75,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/24/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/">shell脚本开发规范</a>
+      <a class="article-title" href="/blog/2021/05/04/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/">shell脚本开发规范</a>
     </h1>
   
 
@@ -157,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/24/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" data-id="cknvvqjcn000q1hu3d13y3a0w" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/05/04/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" data-id="ckoa6pr8d000q0cxj9y8qbbbo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -167,10 +167,10 @@
 
 
   
-    <article id="post-URL" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/chapter4-parameter/parameter" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/24/URL/" class="article-date">
-  <time datetime="2021-04-24T15:10:17.124Z" itemprop="datePublished">2021-04-24</time>
+    <a href="/blog/2021/05/04/shell/chapter4-parameter/parameter/" class="article-date">
+  <time datetime="2021-05-04T15:26:22.785Z" itemprop="datePublished">2021-05-04</time>
 </a>
     
   </div>
@@ -181,7 +181,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/24/URL/">URL constructor</a>
+      <a class="article-title" href="/blog/2021/05/04/shell/chapter4-parameter/parameter/">变量字串</a>
     </h1>
   
 
@@ -189,42 +189,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p>以前我们要对地址栏中的URL地址进行分析处理，需要自己进行字符串分析,有了URL构造函数之后就不需要了。</p>
-<h3 id="demo-（修改-设置-query的一个参数"><a href="#demo-（修改-设置-query的一个参数" class="headerlink" title="demo （修改|设置)query的一个参数"></a>demo （修改|设置)query的一个参数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> url = <span class="string">"https://www.baidu.com/wordpress/?a=1"</span></span><br><span class="line"><span class="keyword">const</span> urlObj = <span class="keyword">new</span> URL(url)</span><br><span class="line">urlObj.searchParams.set(<span class="string">"a"</span>, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">console</span>.log(urlObj.href); <span class="comment">//https://www.baidu.com/wordpress/?a=2</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * params：（url）相对地址或者绝对地址，如果是绝对地址的时候会忽略base参数</span></span><br><span class="line"><span class="comment"> * params：（base）基地址，默认为空字符串</span></span><br><span class="line"><span class="comment"> * 注意：如果参数无法组合成完整的url地址，则会报TypeError错误</span></span><br><span class="line"><span class="comment"> * return 一个人 URL实例</span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="keyword">new</span> URL(url [,base])</span><br></pre></td></tr></table></figure>
-
-<h3 id="Attributes"><a href="#Attributes" class="headerlink" title="Attributes"></a>Attributes</h3><ol>
-<li>hash</li>
-<li>host</li>
-<li>hostname</li>
-<li>href</li>
-<li>origin       常用</li>
-<li>password</li>
-<li>username</li>
-<li>pathname</li>
-<li>port</li>
-<li>protocol     eg:http:</li>
-<li>search</li>
-<li>searchParams 返回一个URLSearchParams对象，可以调用URLSearchParams对象的各种方法，对查询，设置字符串进行非常方便的处理。以下会重点说这个对象 </li>
-</ol>
-<h3 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h3><ol>
-<li>toString()   返回完整的URL地址，只能输出不能修改值</li>
-<li>toJSON       目前看是一样的（有变动再修改）</li>
-</ol>
-<h3 id="Static-Function"><a href="#Static-Function" class="headerlink" title="Static Function"></a>Static Function</h3><ol>
-<li>URL.createObjectURL(object). <strong>将对象变成一个唯一的blob URL，参数可以是File，Blob，MediaSource对象</strong></li>
-<li>URL.revokeObjectURL(objectURL);<strong>撤销上一个API创建的URL对象</strong></li>
-</ol>
-<p>eg:使用Ajax请求一个跨域图片避免canvas跨域生成问题的时候可以使用这两个静态方法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> url = URL.createObjectURL(<span class="keyword">this</span>.response);</span><br><span class="line">    <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">    img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 此时你就可以使用canvas对img为所欲为了</span></span><br><span class="line">        <span class="comment">// ... code ...</span></span><br><span class="line">        <span class="comment">// 图片用完后记得释放内存</span></span><br><span class="line">        URL.revokeObjectURL(url);</span><br><span class="line">    &#125;;</span><br><span class="line">    img.src = url;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.open(<span class="string">'GET'</span>, url, <span class="literal">true</span>);</span><br><span class="line">xhr.responseType = <span class="string">'blob'</span>;</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
-
-
+        <h3 id="变量字串说明"><a href="#变量字串说明" class="headerlink" title="变量字串说明"></a>变量字串说明</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">parameter=asbcd</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出变量的内容</span></span><br><span class="line">echo $&#123;parameter&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 返回变量的长度</span></span><br><span class="line">echo $&#123;#parameter&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> offset从位置开始介入到结尾</span></span><br><span class="line">echo $&#123;parameter:2&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/24/URL/" data-id="cknvvqjb400001hu3646n8o5m" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/05/04/shell/chapter4-parameter/parameter/" data-id="ckoa6pr99001f0cxjb1270vxk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -234,10 +204,10 @@
 
 
   
-    <article id="post-canvas-基础特性" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/chapter20-子shell/子shell产生途径及特点" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/24/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" class="article-date">
-  <time datetime="2021-04-24T15:10:17.124Z" itemprop="datePublished">2021-04-24</time>
+    <a href="/blog/2021/05/04/shell/chapter20-%E5%AD%90shell/%E5%AD%90shell%E4%BA%A7%E7%94%9F%E9%80%94%E5%BE%84%E5%8F%8A%E7%89%B9%E7%82%B9/" class="article-date">
+  <time datetime="2021-05-04T15:26:22.785Z" itemprop="datePublished">2021-05-04</time>
 </a>
     
   </div>
@@ -248,7 +218,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/24/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+      <a class="article-title" href="/blog/2021/05/04/shell/chapter20-%E5%AD%90shell/%E5%AD%90shell%E4%BA%A7%E7%94%9F%E9%80%94%E5%BE%84%E5%8F%8A%E7%89%B9%E7%82%B9/">子shell产生途径及特点</a>
     </h1>
   
 
@@ -256,70 +226,42 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="对象创建"><a href="#对象创建" class="headerlink" title="对象创建"></a>对象创建</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HTML</span></span><br><span class="line">&lt;canvas id=<span class="string">"canvas"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//JS</span></span><br><span class="line"><span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"><span class="keyword">const</span> ctx = canvas.getContext(<span class="string">"2d"</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="canvas元素的属性和方法"><a href="#canvas元素的属性和方法" class="headerlink" title="canvas元素的属性和方法"></a>canvas元素的属性和方法</h3><p><strong>1. 属性</strong></p>
-<ul>
-<li>width</li>
-<li>height</li>
-</ul>
-<p><strong>2. 方法</strong></p>
-<ul>
-<li><ol>
-<li>getContext(contextId: “2d”, options?: CanvasRenderingContext2DSettings): CanvasRenderingContext2D | null;</li>
-<li>getContext(contextId: “bitmaprenderer”, options?: ImageBitmapRenderingContextSettings):mageBitmapRenderingContext | null;</li>
-<li>getContext(contextId: “webgl”, options?: WebGLContextAttributes): WebGLRenderingContext | null;</li>
-<li>getContext(contextId: “webgl2”, options?: WebGLContextAttributes): WebGL2RenderingContext | null;</li>
-<li>getContext(contextId: string, options?: any): RenderingContext | null;<br>// 返回绘图环境对象</li>
+        <h4 id="产生的途径"><a href="#产生的途径" class="headerlink" title="产生的途径"></a>产生的途径</h4><ol>
+<li>带”&amp;”提交后台作业【异步模式】。能使用本地变量</li>
+<li>使用管道功能。能使用本地变量</li>
+<li>使用”()”功能。能使用本地变量</li>
+<li>通过调用外部的shell脚本产生子shell，子shell中仅能使用父shell中的环境变量，不能使用本地变量</li>
 </ol>
+<h4 id="测试shell"><a href="#测试shell" class="headerlink" title="测试shell"></a>测试shell</h4><ol>
+<li>使用&amp;后台执行<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">/bin/bash</span></span><br><span class="line">parent_var="Parent"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出父shell同级，BASH_SUBSHELL为系统环境变量</span></span><br><span class="line">echo "Shell start: ParentShell: Level: $BASH_SUBSHELL"</span><br><span class="line">&#123;</span><br><span class="line">  echo "SubShell Level: $BASH_SUBSHELL"</span><br><span class="line">  sub_var="SUb"</span><br><span class="line">  echo "parent_var=$parent_var"</span><br><span class="line">  sleep 2</span><br><span class="line">  echo "SubShell is over"</span><br><span class="line">&#125; &amp;</span><br><span class="line"></span><br><span class="line">sleep 1</span><br><span class="line">echo "ParentShell start again"</span><br><span class="line">echo "Shell start: ParentShell: Level: $BASH_SUBSHELL"</span><br><span class="line">if [ -z $sub_var ]</span><br><span class="line">then</span><br><span class="line">  echo "sub_var is not defined in parent shell"</span><br><span class="line">else</span><br><span class="line">  echo "sub_var is defined $sub_var in parent shell"</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+
 </li>
-<li>toDataURL(type?: string, quality?: any): string; // 返回数据地址，可以直接给img的src赋值</li>
-<li>toBlob(callback: BlobCallback, type?: string, quality?: any): void; // 返回表示图像文件的blob，可以将该blob做文件上传使用</li>
-<li>transferControlToOffscreen(): OffscreenCanvas;</li>
-</ul>
+</ol>
+<ol start="2">
+<li><p>使用管道</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">/bin/bash</span></span><br><span class="line">parent_var="Parent"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出父shell同级，BASH_SUBSHELL为系统环境变量</span></span><br><span class="line">echo "Shell start: ParentShell: Level: $BASH_SUBSHELL"</span><br><span class="line">echo "管道" | &#123;</span><br><span class="line">  echo "SubShell Level: $BASH_SUBSHELL"</span><br><span class="line">  sub_var="SUb"</span><br><span class="line">  echo "parent_var=$parent_var"</span><br><span class="line">  sleep 2</span><br><span class="line">  echo "SubShell is over"</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sleep 1</span><br><span class="line">echo "ParentShell start again"</span><br><span class="line">echo "Shell start: ParentShell: Level: $BASH_SUBSHELL"</span><br><span class="line">if [ -z $sub_var ]</span><br><span class="line">then</span><br><span class="line">  echo "sub_var is not defined in parent shell"</span><br><span class="line">else</span><br><span class="line">  echo "sub_var is defined $sub_var in parent shell"</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用()功能</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">/bin/bash</span></span><br><span class="line">parent_var="Parent"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出父shell同级，BASH_SUBSHELL为系统环境变量</span></span><br><span class="line">echo "Shell start: ParentShell: Level: $BASH_SUBSHELL"</span><br><span class="line">(</span><br><span class="line">  echo "SubShell Level: $BASH_SUBSHELL"</span><br><span class="line">  sub_var="SUb"</span><br><span class="line">  echo "parent_var=$parent_var"</span><br><span class="line">  sleep 2</span><br><span class="line">  echo "SubShell is over"</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">sleep 1</span><br><span class="line">echo "ParentShell start again"</span><br><span class="line">echo "Shell start: ParentShell: Level: $BASH_SUBSHELL"</span><br><span class="line">if [ -z $sub_var ]</span><br><span class="line">then</span><br><span class="line">  echo "sub_var is not defined in parent shell"</span><br><span class="line">else</span><br><span class="line">  echo "sub_var is defined $sub_var in parent shell"</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用外部shell</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">/bin/bash</span></span><br><span class="line">parent_var="Parent"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出父shell同级，BASH_SUBSHELL为系统环境变量</span></span><br><span class="line">echo "Shell start: ParentShell: Level: $BASH_SUBSHELL"</span><br><span class="line">sh ./subshell.sh</span><br><span class="line">sleep 1</span><br><span class="line">echo "ParentShell start again"</span><br><span class="line">echo "Shell start: ParentShell: Level: $BASH_SUBSHELL"</span><br><span class="line">if [ -z $sub_var ]</span><br><span class="line">then</span><br><span class="line">  echo "sub_var is not defined in parent shell"</span><br><span class="line">else</span><br><span class="line">  echo "sub_var is defined $sub_var in parent shell"</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/24/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" data-id="cknvvqjbf00021hu32hjkdtdu" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
+</li>
+</ol>
+<p>subshell</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">/bin/bash</span></span><br><span class="line">echo "SubShell Level: $BASH_SUBSHELL"</span><br><span class="line">sub_var="SUb"</span><br><span class="line">echo "parent_var=$parent_var"</span><br><span class="line">sleep 2</span><br><span class="line">echo "SubShell is over"</span><br></pre></td></tr></table></figure>
 
-
-  
-    <article id="post-canvas动画" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/04/24/canvas%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-04-24T15:10:17.124Z" itemprop="datePublished">2021-04-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/24/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ol>
-<li>canvas 基础知识，比如stroke，fill，arc，rect等基础API</li>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ol>
+<li>父shell不能使用子shell中的变量，子shell可以使用父shell中的变量。注意区分局部变量和环境变量</li>
+<li>管道,(),{}&amp;都会生成子shell，注意变量使用避坑。</li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/24/canvas%E5%8A%A8%E7%94%BB/" data-id="cknvvqjbh00031hu37asg8pfm" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/05/04/shell/chapter20-%E5%AD%90shell/%E5%AD%90shell%E4%BA%A7%E7%94%9F%E9%80%94%E5%BE%84%E5%8F%8A%E7%89%B9%E7%82%B9/" data-id="ckoa6pr98001e0cxjgrllepal" class="article-share-link">Share</a>
       
       
     </footer>
@@ -329,10 +271,10 @@
 
 
   
-    <article id="post-cross-origin" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/chapter20-子shell/shell调用方式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/24/cross-origin/" class="article-date">
-  <time datetime="2021-04-24T15:10:17.124Z" itemprop="datePublished">2021-04-24</time>
+    <a href="/blog/2021/05/04/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/" class="article-date">
+  <time datetime="2021-05-04T15:26:22.785Z" itemprop="datePublished">2021-05-04</time>
 </a>
     
   </div>
@@ -343,7 +285,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/24/cross-origin/">cross origin</a>
+      <a class="article-title" href="/blog/2021/05/04/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/">shell调用方式</a>
     </h1>
   
 
@@ -351,57 +293,94 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>就是创建一个文件夹eg:devChromeData</p>
-<h3 id="mac"><a href="#mac" class="headerlink" title="mac"></a>mac</h3><p>第二步执行以下命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -n /Applications/Google\ Chrome.app/ --args --disable-web-security  --user-data-dir=/Users/ansike/devChromeData</span><br></pre></td></tr></table></figure>
-
-<p>微信开发者工具（注意app的名字是否一致）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open -a /Applications/wechatwebdevtools.app --args --disable-web-security --user-data-dir</span><br></pre></td></tr></table></figure>
-<h3 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h3><p>创建该文件夹，右键浏览器快捷键，在目标中追加参数</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--disable-web-security --user-data-dir=C:\path\to\ChromeUserData</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/24/cross-origin/" data-id="cknvvqjbi00041hu34u1i82bx" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-css动画" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/04/24/css%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-04-24T15:10:17.124Z" itemprop="datePublished">2021-04-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/24/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ol>
-<li>canvas 基础知识，比如stroke，fill，arc，rect等基础API</li>
+        <h3 id="调用方式分类"><a href="#调用方式分类" class="headerlink" title="调用方式分类"></a>调用方式分类</h3><ol>
+<li><code>fork</code>方式。<code>sh xxx.sh</code> 同步执行所有的shell</li>
+<li><code>exec</code>方式。<code>exec xxx.sh</code> 执行完exec脚本的内容后，父shell剩余的代码不能执行</li>
+<li><code>source</code>或者<code>.</code>方式。<code>source xxx.sh</code> 同步执行所有的shell，且能读取子shell中的全部变量</li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/24/css%E5%8A%A8%E7%94%BB/" data-id="cknvvqjbk00051hu3eracg46d" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/05/04/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/" data-id="ckoa6pr97001d0cxjet251vqq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-shell/chapter13-array/数组" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/05/04/shell/chapter13-array/%E6%95%B0%E7%BB%84/" class="article-date">
+  <time datetime="2021-05-04T15:26:22.785Z" itemprop="datePublished">2021-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/05/04/shell/chapter13-array/%E6%95%B0%E7%BB%84/">数组</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="定义及打印"><a href="#定义及打印" class="headerlink" title="定义及打印"></a>定义及打印</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 基础定义</span></span><br><span class="line">array=(one two three)</span><br><span class="line"><span class="meta">#</span><span class="bash"> 动态数组</span></span><br><span class="line">array2=($(ls ../))</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 繁琐赋值</span></span><br><span class="line">array3=([1]=one [2]=two [3]=three)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 分别赋值</span></span><br><span class="line">array4[1]=one; array4[2]=two; array4[3]=three;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 打印数组</span></span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line">echo $&#123;array[@]&#125;</span><br><span class="line">echo $&#123;array2[@]&#125;</span><br><span class="line">echo $&#123;array3[@]&#125;</span><br><span class="line">echo $&#123;array4[@]&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组增删改查"><a href="#数组增删改查" class="headerlink" title="数组增删改查"></a>数组增删改查</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">array=(one two three)</span><br><span class="line"><span class="meta">#</span><span class="bash"> 增</span></span><br><span class="line">array[3]=test</span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 删</span></span><br><span class="line">unset array[2]</span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 改</span></span><br><span class="line">array[1]=change</span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查</span></span><br><span class="line">echo $&#123;array[1]&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="数组常用api"><a href="#数组常用api" class="headerlink" title="数组常用api"></a>数组常用api</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">array=(one two three)</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 数组长度</span></span><br><span class="line">echo $&#123;#array&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 截取数组</span></span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 截取位置到结尾</span></span><br><span class="line">echo $&#123;array[*]:1&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 截取位置及长度</span></span><br><span class="line">echo $&#123;array[*]:1:1&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除数组</span></span><br><span class="line">array[4]=one4one</span><br><span class="line"><span class="meta">#</span><span class="bash"> 从头开始 one change <span class="built_in">test</span> one4one</span></span><br><span class="line">echo $&#123;array[*]&#125; </span><br><span class="line">echo $&#123;array[*]#one&#125; #change test 4one</span><br><span class="line">echo $&#123;array[*]##one*&#125; # change test</span><br><span class="line"><span class="meta">#</span><span class="bash"> 从尾开始 one change <span class="built_in">test</span> one4one</span></span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line">echo $&#123;array[*]%one&#125; # change test one4</span><br><span class="line">echo $&#123;array[*]%%one*&#125; # change test</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 替换数组</span></span><br><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 仅第一次匹配到替换</span></span><br><span class="line">echo $&#123;array[*]/one/one1&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> 匹配到所有替换</span></span><br><span class="line">echo $&#123;array[*]//one/one1&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/05/04/shell/chapter13-array/%E6%95%B0%E7%BB%84/" data-id="ckoa6pr97001c0cxj66uafoiv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-shell/chapter13-array/字符串单词检查" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/05/04/shell/chapter13-array/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8D%95%E8%AF%8D%E6%A3%80%E6%9F%A5/" class="article-date">
+  <time datetime="2021-05-04T15:26:22.785Z" itemprop="datePublished">2021-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/05/04/shell/chapter13-array/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8D%95%E8%AF%8D%E6%A3%80%E6%9F%A5/">字符串中单词长度检查</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 打印长度大于6的单词</span></span><br><span class="line">str="I am oldboy teacher welcome to oldboy class"</span><br><span class="line">maxLength=6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 计算字符串长度的方法</span></span><br><span class="line">echo `echo $str | wc -L`</span><br><span class="line">echo `expr length "$str"`</span><br><span class="line">echo $&#123;#str&#125;</span><br><span class="line">echo `echo $str | awk '&#123;print length($0)&#125;'`</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> awk 方式</span></span><br><span class="line">echo $str | awk '&#123;for(i=1;i&lt;=NF;i++) if(length($i)&gt;6) print $i&#125;'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 数组方式</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> arr=(<span class="variable">$str</span>)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> word <span class="keyword">in</span> <span class="variable">$&#123;arr[*]&#125;</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">do</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   [ <span class="variable">$&#123;#word&#125;</span> -gt <span class="variable">$maxLength</span> ] &amp;&amp; &#123;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     <span class="built_in">echo</span> <span class="variable">$word</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   &#125;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">done</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span>循环方式</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> word <span class="keyword">in</span> <span class="variable">$str</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">do</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   [ <span class="variable">$&#123;#word&#125;</span> -gt <span class="variable">$maxLength</span> ] &amp;&amp; &#123;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     <span class="built_in">echo</span> <span class="variable">$word</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   &#125;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">done</span></span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/05/04/shell/chapter13-array/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8D%95%E8%AF%8D%E6%A3%80%E6%9F%A5/" data-id="ckoa6pr96001b0cxj3qn9f5iu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -413,8 +392,8 @@
   
     <article id="post-promisefy" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/24/promisefy/" class="article-date">
-  <time datetime="2021-04-24T15:10:17.124Z" itemprop="datePublished">2021-04-24</time>
+    <a href="/blog/2021/05/04/promisefy/" class="article-date">
+  <time datetime="2021-05-04T15:26:22.785Z" itemprop="datePublished">2021-05-04</time>
 </a>
     
   </div>
@@ -425,7 +404,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/24/promisefy/">实现类似 node中util.promisefy的实现</a>
+      <a class="article-title" href="/blog/2021/05/04/promisefy/">实现类似 node中util.promisefy的实现</a>
     </h1>
   
 
@@ -446,7 +425,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/24/promisefy/" data-id="cknvvqjbm00061hu39o2n0ikg" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/05/04/promisefy/" data-id="ckoa6pr6t00060cxjf4pbby47" class="article-share-link">Share</a>
       
       
     </footer>
@@ -458,8 +437,8 @@
   
     <article id="post-svg动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/24/svg%E5%8A%A8%E7%94%BB/" class="article-date">
-  <time datetime="2021-04-24T15:10:17.124Z" itemprop="datePublished">2021-04-24</time>
+    <a href="/blog/2021/05/04/svg%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-05-04T15:26:22.785Z" itemprop="datePublished">2021-05-04</time>
 </a>
     
   </div>
@@ -470,7 +449,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/24/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
+      <a class="article-title" href="/blog/2021/05/04/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
     </h1>
   
 
@@ -482,7 +461,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/24/svg%E5%8A%A8%E7%94%BB/" data-id="cknvvqjbo00071hu3721cgx0y" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/05/04/svg%E5%8A%A8%E7%94%BB/" data-id="ckoa6pr6v00070cxj5j7u6wc1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -494,8 +473,8 @@
   
     <article id="post-throttle-debounce" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/24/throttle-debounce/" class="article-date">
-  <time datetime="2021-04-24T15:10:17.124Z" itemprop="datePublished">2021-04-24</time>
+    <a href="/blog/2021/05/04/throttle-debounce/" class="article-date">
+  <time datetime="2021-05-04T15:26:22.785Z" itemprop="datePublished">2021-05-04</time>
 </a>
     
   </div>
@@ -506,7 +485,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/24/throttle-debounce/">截流和去抖的深入理解结合loads</a>
+      <a class="article-title" href="/blog/2021/05/04/throttle-debounce/">截流和去抖的深入理解结合loads</a>
     </h1>
   
 
@@ -519,7 +498,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/24/throttle-debounce/" data-id="cknvvqjbq00081hu3904xcm4v" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/05/04/throttle-debounce/" data-id="ckoa6pr6x00080cxjaxlo68r6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -531,8 +510,8 @@
   
     <article id="post-从数字分隔符看正则" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/24/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="article-date">
-  <time datetime="2021-04-24T15:10:17.124Z" itemprop="datePublished">2021-04-24</time>
+    <a href="/blog/2021/05/04/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="article-date">
+  <time datetime="2021-05-04T15:26:22.785Z" itemprop="datePublished">2021-05-04</time>
 </a>
     
   </div>
@@ -543,7 +522,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/24/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
+      <a class="article-title" href="/blog/2021/05/04/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
     </h1>
   
 
@@ -581,7 +560,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/24/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="cknvvqjbs00091hu3hl1r4u47" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/05/04/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="ckoa6pr6z00090cxj3086g732" class="article-share-link">Share</a>
       
       
     </footer>
@@ -614,7 +593,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/04/">April 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">May 2021</a></li></ul>
     </div>
   </div>
 
@@ -627,23 +606,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/04/24/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/">shell脚本开发规范</a>
+            <a href="/blog/2021/05/04/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/">shell脚本开发规范</a>
           </li>
         
           <li>
-            <a href="/blog/2021/04/24/URL/">URL constructor</a>
+            <a href="/blog/2021/05/04/shell/chapter4-parameter/parameter/">变量字串</a>
           </li>
         
           <li>
-            <a href="/blog/2021/04/24/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+            <a href="/blog/2021/05/04/shell/chapter20-%E5%AD%90shell/%E5%AD%90shell%E4%BA%A7%E7%94%9F%E9%80%94%E5%BE%84%E5%8F%8A%E7%89%B9%E7%82%B9/">子shell产生途径及特点</a>
           </li>
         
           <li>
-            <a href="/blog/2021/04/24/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+            <a href="/blog/2021/05/04/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/">shell调用方式</a>
           </li>
         
           <li>
-            <a href="/blog/2021/04/24/cross-origin/">cross origin</a>
+            <a href="/blog/2021/05/04/shell/chapter13-array/%E6%95%B0%E7%BB%84/">数组</a>
           </li>
         
       </ul>
