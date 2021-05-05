@@ -1,5 +1,8 @@
 ---
 title: cross origin
+categories: 编程
+tags:
+date: 2021-05-05 17:24:39
 ---
 
 就是创建一个文件夹eg:devChromeData

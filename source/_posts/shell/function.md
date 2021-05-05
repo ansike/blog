@@ -1,5 +1,8 @@
 ---
 title: shell中的函数
+categories: 编程
+tags:
+date: 2021-02-25 23:52:51
 ---
 
 ### 语法

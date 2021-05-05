@@ -1,5 +1,9 @@
 ---
 title:  wget常用功能
+categories: 编程
+tags:
+date: 2021-03-13 10:18:59
+
 ---
 
 `Wget - The non-interactive network downloader.`

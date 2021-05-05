@@ -1,5 +1,8 @@
 ---
 title:  tar常用功能
+categories: 编程
+tags:
+date: 2021-03-13 10:40:00
 ---
 
 `Wget - The non-interactive network downloader.`

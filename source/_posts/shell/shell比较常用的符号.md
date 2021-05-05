@@ -1,5 +1,8 @@
 ---
 title:  shell比较符号含义
+categories: 编程
+tags:
+date: 2021-02-21 23:06:11
 ---
 1. -eq #equal 相等
 2. -ne #not equal 不相等

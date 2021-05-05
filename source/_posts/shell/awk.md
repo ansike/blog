@@ -1,5 +1,8 @@
 ---
 title: awk命令
+categories: 编程
+tags:
+date: 2021-02-22 23:36:36
 ---
 
 从练习入手

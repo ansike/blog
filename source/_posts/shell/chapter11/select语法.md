@@ -1,5 +1,9 @@
 ---
 title: select语法
+categories: 编程
+tags:
+date: 2021-04-10 13:09:02
+
 ---
 
 ### 基础语法

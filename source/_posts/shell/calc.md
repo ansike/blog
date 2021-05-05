@@ -1,5 +1,8 @@
 ---
 title: shell中变量的数值计算
+categories: 编程
+tags:
+date: 2021-02-07 00:08:53
 ---
 ### 简介
 1. (())

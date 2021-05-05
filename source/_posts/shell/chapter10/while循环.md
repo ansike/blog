@@ -1,5 +1,9 @@
 ---
 title: while循环
+categories: 编程
+tags:
+date: 2021-03-16 23:11:08
+
 ---
 ### 基础使用
 while <条件表达式>

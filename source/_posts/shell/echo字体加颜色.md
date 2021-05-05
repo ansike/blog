@@ -1,5 +1,9 @@
 ---
 title: echo字体加颜色
+categories: 编程
+tags:
+date: 2021-03-03 00:06:34
+
 ---
 ### 基础语法
 ``` shell

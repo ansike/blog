@@ -1,6 +1,10 @@
 ---
 title: canvas 基础特性
 categories: 编程
+tags:
+date: 2021-05-05 17:24:39
+
+
 ---
 ### 对象创建
 ```javascript

@@ -1,5 +1,8 @@
 ---
 title: shell调用方式
+categories: 编程
+tags:
+date: 2021-04-24 23:08:59
 ---
 
 ### 调用方式分类
