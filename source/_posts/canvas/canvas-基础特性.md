@@ -1,5 +1,6 @@
 ---
 title: canvas 基础特性
+categories: 编程
 ---
 ### 对象创建
 ```javascript

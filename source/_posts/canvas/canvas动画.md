@@ -1,5 +1,7 @@
 ---
 title: canvas 动画
+categories: 编程
+tags: canvas
 ---
 ### 结果展示
 
