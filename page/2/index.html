@@ -64,9 +64,9 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-svg/svg动画" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-canvas/canvas-基础特性" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/05/05/svg/svg%E5%8A%A8%E7%94%BB/" class="article-date">
+    <a href="/blog/2021/05/05/canvas/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" class="article-date">
   <time datetime="2021-05-05T09:24:39.000Z" itemprop="datePublished">2021-05-05</time>
 </a>
     
@@ -82,7 +82,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/05/05/svg/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
+      <a class="article-title" href="/blog/2021/05/05/canvas/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
     </h1>
   
 
@@ -90,13 +90,35 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3>
+        <h3 id="对象创建"><a href="#对象创建" class="headerlink" title="对象创建"></a>对象创建</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HTML</span></span><br><span class="line">&lt;canvas id=<span class="string">"canvas"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//JS</span></span><br><span class="line"><span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"><span class="keyword">const</span> ctx = canvas.getContext(<span class="string">"2d"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="canvas元素的属性和方法"><a href="#canvas元素的属性和方法" class="headerlink" title="canvas元素的属性和方法"></a>canvas元素的属性和方法</h3><p><strong>1. 属性</strong></p>
+<ul>
+<li>width</li>
+<li>height</li>
+</ul>
+<p><strong>2. 方法</strong></p>
+<ul>
+<li><ol>
+<li>getContext(contextId: “2d”, options?: CanvasRenderingContext2DSettings): CanvasRenderingContext2D | null;</li>
+<li>getContext(contextId: “bitmaprenderer”, options?: ImageBitmapRenderingContextSettings):mageBitmapRenderingContext | null;</li>
+<li>getContext(contextId: “webgl”, options?: WebGLContextAttributes): WebGLRenderingContext | null;</li>
+<li>getContext(contextId: “webgl2”, options?: WebGLContextAttributes): WebGL2RenderingContext | null;</li>
+<li>getContext(contextId: string, options?: any): RenderingContext | null;<br>// 返回绘图环境对象</li>
+</ol>
+</li>
+<li>toDataURL(type?: string, quality?: any): string; // 返回数据地址，可以直接给img的src赋值</li>
+<li>toBlob(callback: BlobCallback, type?: string, quality?: any): void; // 返回表示图像文件的blob，可以将该blob做文件上传使用</li>
+<li>transferControlToOffscreen(): OffscreenCanvas;</li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/05/05/svg/svg%E5%8A%A8%E7%94%BB/" data-id="ckobbscpk002219qu3iep967o" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/05/05/canvas/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" data-id="ckobc3039000523rq4xekauac" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li></ul>
+
     </footer>
   </div>
   
@@ -142,9 +164,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/05/05/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E6%A8%A1%E5%9D%97%E5%8C%96/" data-id="ckobbscpn002819qu2hku5iqj" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/05/05/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E6%A8%A1%E5%9D%97%E5%8C%96/" data-id="ckobc305b003g23rqemux5ui6" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li></ul>
+
     </footer>
   </div>
   
@@ -192,9 +216,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/05/05/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E5%B7%A5%E7%A8%8B%E5%8C%96/" data-id="ckobbscpm002619qu3cr9fmna" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/05/05/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E5%B7%A5%E7%A8%8B%E5%8C%96/" data-id="ckobc3059003c23rq1rox8nnf" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li></ul>
+
     </footer>
   </div>
   
@@ -202,9 +228,9 @@
 
 
   
-    <article id="post-动画/动画" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-canvas/canvas动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/05/05/%E5%8A%A8%E7%94%BB/%E5%8A%A8%E7%94%BB/" class="article-date">
+    <a href="/blog/2021/05/05/canvas/canvas%E5%8A%A8%E7%94%BB/" class="article-date">
   <time datetime="2021-05-05T09:24:39.000Z" itemprop="datePublished">2021-05-05</time>
 </a>
     
@@ -220,7 +246,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/05/05/%E5%8A%A8%E7%94%BB/%E5%8A%A8%E7%94%BB/">动画</a>
+      <a class="article-title" href="/blog/2021/05/05/canvas/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
     </h1>
   
 
@@ -228,23 +254,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="动画演示"><a href="#动画演示" class="headerlink" title="动画演示"></a>动画演示</h3><p><a href="./canvas动画.md">canvas动画</a><br><a href="./svg动画.md">svg动画</a><br><a href="./css动画.md">css动画</a></p>
-<h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ul>
-<li>无论是css动画，canvas动画，还是svg动画，基本思想都需要考虑一下几点：</li>
-</ul>
-<ol>
-<li>动画当前的状态即是画布在当前时间内（浏览器渲染间隔）的一帧图像。</li>
-<li>前提需要定时调用渲染函数不断绘制。【借助定时器或者requestAnimationFrame—最好依赖浏览器的渲染机制】</li>
-<li>每次渲染的状态由当前动画进度决定。不管是一次性动画还是循环动画，都有一个最小环节，想清楚自己的最小环节。</li>
-<li>每个最小环节由duration决定，受delayTime影响。</li>
+        <h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ol>
+<li>canvas 基础知识，比如stroke，fill，arc，rect等基础API</li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/05/05/%E5%8A%A8%E7%94%BB/%E5%8A%A8%E7%94%BB/" data-id="ckobbscpl002419qu0apa1gco" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/05/05/canvas/canvas%E5%8A%A8%E7%94%BB/" data-id="ckobc303f000623rq8c937ly7" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li></ul>
+
     </footer>
   </div>
   
@@ -252,10 +273,10 @@
 
 
   
-    <article id="post-js/从数字分隔符看正则" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/chapter20-子shell/shell调用方式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/05/05/js/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" class="article-date">
-  <time datetime="2021-05-05T09:24:39.000Z" itemprop="datePublished">2021-05-05</time>
+    <a href="/blog/2021/04/24/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/" class="article-date">
+  <time datetime="2021-04-24T15:08:59.000Z" itemprop="datePublished">2021-04-24</time>
 </a>
     
   <div class="article-category">
@@ -270,7 +291,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/05/05/js/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
+      <a class="article-title" href="/blog/2021/04/24/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/">shell调用方式</a>
     </h1>
   
 
@@ -278,39 +299,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="格式化数字：”1234567890”-gt-”1-234-567-890”"><a href="#格式化数字：”1234567890”-gt-”1-234-567-890”" class="headerlink" title="格式化数字：”1234567890”=&gt;”1,234,567,890”"></a>格式化数字：”1234567890”=&gt;”1,234,567,890”</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种方案</span></span><br><span class="line"><span class="string">"1234567890"</span>.replace(<span class="regexp">/\B(?=(\d&#123;3&#125;)+(?!\d))/g</span>,<span class="string">","</span>) </span><br><span class="line"><span class="string">"1234567890"</span>.replace(<span class="regexp">/\B(?=(\d&#123;3&#125;)+$)/g</span>,<span class="string">","</span>) </span><br><span class="line"><span class="comment">// 第二种方案</span></span><br><span class="line"><span class="string">"1234567890"</span>.replace(<span class="regexp">/(?&lt;=\d)(?=(\d&#123;3&#125;)+$)/g</span>,<span class="string">','</span>)</span><br></pre></td></tr></table></figure>
-<!-- 匹配的是后面是3*n个数字的非单词边界(\B) -->
-
-
-<h3 id="第一种方案表达式分析"><a href="#第一种方案表达式分析" class="headerlink" title="第一种方案表达式分析"></a>第一种方案表达式分析</h3><p>需求：给定数字字符串，从后往前每隔三位插入一个逗号分隔符<br>分析：该需求和普通的正则表达式处理需求不一样。一般常见的需求是使用正则表达式找到匹配的单词修改单词，如80%replace方法都是这种。 <strong>而该需求是是使用正则表达式，找到合适的位置，在该位置插入字符串。</strong></p>
-<p><strong>第一部分： \B 标识非单词边界</strong><br>匹配从非单词边界开始，反向理解一下就是从单词内部</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'a b'</span>.replace(<span class="regexp">/\b/g</span>,<span class="string">','</span>) <span class="comment">// ",a, ,b,"</span></span><br><span class="line"><span class="string">'a b'</span>.replace(<span class="regexp">/\B/g</span>,<span class="string">','</span>) <span class="comment">// "a b"</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>第二部分：(?=(\d{3})+(?!\d)) 查找位置</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// (?=(\d&#123;3&#125;)+(?!\d)) // 分解该部分</span></span><br><span class="line"><span class="comment">// ?= // 匹配后边的内容</span></span><br><span class="line"><span class="comment">// (\d&#123;3&#125;)+ // 匹配数字3个一组，一次或者多次</span></span><br><span class="line"><span class="comment">// (?!\d) // 匹配后边的内容不是数字</span></span><br><span class="line"><span class="comment">// (\d&#123;3&#125;)+(?!\d) // 所以这个整体的意思是数字三个一组至少一组，且三个一组的数字后边不是数字</span></span><br></pre></td></tr></table></figure>
-<p>第一种整体分析</p>
-<ol>
-<li>匹配从非单词边界开始，避免出现开头位置被抓取的case。</li>
-<li>然后从左往右开始扫描字符串，因为第一部分的原因，直接跳过1的左侧位置；</li>
-<li>到达2的左侧后发现正好可以匹配当前的位置此时可以在这个位置上插入分隔符【(\d{3})+(?!\d) 能和9个数字<code>234567890</code>匹配哦】；</li>
-<li>同理继续往后找，依次到达5的左侧和8的左侧和第三步一致，分别插入分隔符</li>
+        <h3 id="调用方式分类"><a href="#调用方式分类" class="headerlink" title="调用方式分类"></a>调用方式分类</h3><ol>
+<li><code>fork</code>方式。<code>sh xxx.sh</code> 同步执行所有的shell</li>
+<li><code>exec</code>方式。<code>exec xxx.sh</code> 执行完exec脚本的内容后，父shell剩余的代码不能执行</li>
+<li><code>source</code>或者<code>.</code>方式。<code>source xxx.sh</code> 同步执行所有的shell，且能读取子shell中的全部变量</li>
 </ol>
-<p><strong>写完分析后发现其实可以直接用<code>$</code>将<code>(?!\d)</code>替换掉<code>&quot;1234567890&quot;.replace(/\B(?=(\d{3})+$)/g,&quot;,&quot;)</code></strong></p>
-<h3 id="第二种方案表达式分析"><a href="#第二种方案表达式分析" class="headerlink" title="第二种方案表达式分析"></a>第二种方案表达式分析</h3><p>第二种整体分析-和第一种差不多，前置使用了左环的方案替代\B方案</p>
-<ol>
-<li>左环保证不会出现分隔符插在最左侧的情况</li>
-<li>使用右环查找为3倍数的数字位置，至少存在一组</li>
-<li>到达2的左侧，左边有数字，右边有三组3个数字，符合条件，插入分隔符</li>
-<li>同理继续往后找，依次到达5的左侧和8的左侧和第三步一致，分别插入分隔符</li>
-</ol>
-<h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><p><a href="https://blog.csdn.net/xichanjuan6481/article/details/89434402?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param" target="_blank" rel="noopener">分析(?=pattern) (?!pattern) (?&lt;=pattern) (?&lt;!pattern)</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/05/05/js/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/" data-id="ckobbscoh000i19quci1b9xxr" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/24/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/" data-id="ckobc3063004w23rq2m8815f3" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
     </footer>
   </div>
   
@@ -379,54 +381,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/24/shell/chapter20-%E5%AD%90shell/%E5%AD%90shell%E4%BA%A7%E7%94%9F%E9%80%94%E5%BE%84%E5%8F%8A%E7%89%B9%E7%82%B9/" data-id="ckobbscq5002q19qubw8tgsfo" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/24/shell/chapter20-%E5%AD%90shell/%E5%AD%90shell%E4%BA%A7%E7%94%9F%E9%80%94%E5%BE%84%E5%8F%8A%E7%89%B9%E7%82%B9/" data-id="ckobc3065004z23rqfd2nanfj" class="article-share-link">Share</a>
       
       
-    </footer>
-  </div>
-  
-</article>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
 
-
-  
-    <article id="post-shell/chapter20-子shell/shell调用方式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/04/24/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/" class="article-date">
-  <time datetime="2021-04-24T15:08:59.000Z" itemprop="datePublished">2021-04-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/24/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/">shell调用方式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="调用方式分类"><a href="#调用方式分类" class="headerlink" title="调用方式分类"></a>调用方式分类</h3><ol>
-<li><code>fork</code>方式。<code>sh xxx.sh</code> 同步执行所有的shell</li>
-<li><code>exec</code>方式。<code>exec xxx.sh</code> 执行完exec脚本的内容后，父shell剩余的代码不能执行</li>
-<li><code>source</code>或者<code>.</code>方式。<code>source xxx.sh</code> 同步执行所有的shell，且能读取子shell中的全部变量</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/24/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/" data-id="ckobbscq4002o19quhm8zczbe" class="article-share-link">Share</a>
-      
-      
     </footer>
   </div>
   
@@ -487,9 +446,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/18/shell/shell%E8%84%9A%E6%9C%AC%E7%9A%84%E8%B0%83%E8%AF%95/" data-id="ckobbscp5001a19qudfqrfrok" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/18/shell/shell%E8%84%9A%E6%9C%AC%E7%9A%84%E8%B0%83%E8%AF%95/" data-id="ckobc304m001w23rqcs059fqi" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
     </footer>
   </div>
   
@@ -534,9 +495,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/16/shell/chapter12/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/" data-id="ckobbscq0002i19qu092rfykq" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/16/shell/chapter12/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/" data-id="ckobc3060004n23rq784q27l9" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
     </footer>
   </div>
   
@@ -644,9 +607,54 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/16/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" data-id="ckobbscp2001619qu1a2802rg" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/16/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" data-id="ckobc304i001q23rqg66rak03" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-shell/chapter13-array/字符串单词检查" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/04/15/shell/chapter13-array/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8D%95%E8%AF%8D%E6%A3%80%E6%9F%A5/" class="article-date">
+  <time datetime="2021-04-15T16:01:09.000Z" itemprop="datePublished">2021-04-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/04/15/shell/chapter13-array/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8D%95%E8%AF%8D%E6%A3%80%E6%9F%A5/">字符串中单词长度检查</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 打印长度大于6的单词</span></span><br><span class="line">str="I am oldboy teacher welcome to oldboy class"</span><br><span class="line">maxLength=6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 计算字符串长度的方法</span></span><br><span class="line">echo `echo $str | wc -L`</span><br><span class="line">echo `expr length "$str"`</span><br><span class="line">echo $&#123;#str&#125;</span><br><span class="line">echo `echo $str | awk '&#123;print length($0)&#125;'`</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> awk 方式</span></span><br><span class="line">echo $str | awk '&#123;for(i=1;i&lt;=NF;i++) if(length($i)&gt;6) print $i&#125;'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 数组方式</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> arr=(<span class="variable">$str</span>)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> word <span class="keyword">in</span> <span class="variable">$&#123;arr[*]&#125;</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">do</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   [ <span class="variable">$&#123;#word&#125;</span> -gt <span class="variable">$maxLength</span> ] &amp;&amp; &#123;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     <span class="built_in">echo</span> <span class="variable">$word</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   &#125;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">done</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span>循环方式</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> word <span class="keyword">in</span> <span class="variable">$str</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">do</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   [ <span class="variable">$&#123;#word&#125;</span> -gt <span class="variable">$maxLength</span> ] &amp;&amp; &#123;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     <span class="built_in">echo</span> <span class="variable">$word</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   &#125;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">done</span></span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/04/15/shell/chapter13-array/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8D%95%E8%AF%8D%E6%A3%80%E6%9F%A5/" data-id="ckobc3061004q23rq4fm27n6j" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
     </footer>
   </div>
   
@@ -676,15 +684,29 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/canvas/" style="font-size: 12.5px;">canvas</a> <a href="/blog/tags/js/" style="font-size: 17.5px;">js</a> <a href="/blog/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 15px;">动画</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 10px;">基础概念</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 12.5px;">工程化</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/02/">二月 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/02/">二月 2020</a></li></ul>
     </div>
   </div>
 
@@ -697,15 +719,11 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/05/05/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
-          </li>
-        
-          <li>
             <a href="/blog/2021/05/05/shell/read/">read 命令</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/05/js/URL/">URL constructor</a>
+            <a href="/blog/2021/05/05/svg/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
           </li>
         
           <li>
@@ -714,6 +732,10 @@
         
           <li>
             <a href="/blog/2021/05/05/js/cross-origin/">cross origin</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2021/05/05/js/promisefy/">实现类似 node中util.promisefy的实现</a>
           </li>
         
       </ul>

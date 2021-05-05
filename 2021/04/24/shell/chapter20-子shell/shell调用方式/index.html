@@ -8,14 +8,14 @@
   <title>shell调用方式 | 安思科的备忘录</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="调用方式分类 fork方式。sh xxx.sh 同步执行所有的shell exec方式。exec xxx.sh 执行完exec脚本的内容后，父shell剩余的代码不能执行 source或者.方式。source xxx.sh 同步执行所有的shell，且能读取子shell中的全部变量">
-<meta name="keywords" content="安思科, ansike">
+<meta name="keywords" content="shell">
 <meta property="og:type" content="article">
 <meta property="og:title" content="shell调用方式">
 <meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;2021&#x2F;04&#x2F;24&#x2F;shell&#x2F;chapter20-%E5%AD%90shell&#x2F;shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F&#x2F;index.html">
 <meta property="og:site_name" content="安思科的备忘录">
 <meta property="og:description" content="调用方式分类 fork方式。sh xxx.sh 同步执行所有的shell exec方式。exec xxx.sh 执行完exec脚本的内容后，父shell剩余的代码不能执行 source或者.方式。source xxx.sh 同步执行所有的shell，且能读取子shell中的全部变量">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-05-05T10:36:09.963Z">
+<meta property="og:updated_time" content="2021-05-05T10:44:25.360Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/blog/atom.xml" title="安思科的备忘录" type="application/atom+xml">
@@ -98,28 +98,30 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/24/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/" data-id="ckobbscq4002o19quhm8zczbe" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/24/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/" data-id="ckobc3063004w23rq2m8815f3" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/blog/2021/04/24/shell/chapter20-%E5%AD%90shell/%E5%AD%90shell%E4%BA%A7%E7%94%9F%E9%80%94%E5%BE%84%E5%8F%8A%E7%89%B9%E7%82%B9/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/blog/2021/05/05/canvas/canvas%E5%8A%A8%E7%94%BB/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          子shell产生途径及特点
+          canvas 动画
         
       </div>
     </a>
   
   
-    <a href="/blog/2021/04/18/shell/shell%E8%84%9A%E6%9C%AC%E7%9A%84%E8%B0%83%E8%AF%95/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/blog/2021/04/24/shell/chapter20-%E5%AD%90shell/%E5%AD%90shell%E4%BA%A7%E7%94%9F%E9%80%94%E5%BE%84%E5%8F%8A%E7%89%B9%E7%82%B9/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">shell脚本的调试</div>
+      <div class="article-nav-title">子shell产生途径及特点</div>
     </a>
   
 </nav>
@@ -142,15 +144,29 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/canvas/" style="font-size: 12.5px;">canvas</a> <a href="/blog/tags/js/" style="font-size: 17.5px;">js</a> <a href="/blog/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 15px;">动画</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 10px;">基础概念</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 12.5px;">工程化</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/02/">二月 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/02/">二月 2020</a></li></ul>
     </div>
   </div>
 
@@ -163,15 +179,11 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/05/05/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
-          </li>
-        
-          <li>
             <a href="/blog/2021/05/05/shell/read/">read 命令</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/05/js/URL/">URL constructor</a>
+            <a href="/blog/2021/05/05/svg/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
           </li>
         
           <li>
@@ -180,6 +192,10 @@
         
           <li>
             <a href="/blog/2021/05/05/js/cross-origin/">cross origin</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2021/05/05/js/promisefy/">实现类似 node中util.promisefy的实现</a>
           </li>
         
       </ul>
