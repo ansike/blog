@@ -1,7 +1,7 @@
 ---
 title: URL constructor
 categories: 编程
-tags:
+tags: js
 date: 2021-05-05 17:24:39
 ---
 

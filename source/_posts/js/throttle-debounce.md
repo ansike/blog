@@ -1,7 +1,7 @@
 ---
 title: 截流和去抖的深入理解结合loads
 categories: 编程
-tags:
+tags: js
 date: 2021-05-05 17:24:39
 ---
 ### 应用场景

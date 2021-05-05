@@ -1,7 +1,7 @@
 ---
 title: read 命令
 categories: 编程
-tags:
+tags: shell
 date: 2021-02-08 17:09:52
  2021-02-08 17:09:52
 

@@ -1,7 +1,7 @@
 ---
 title: canvas 基础特性
 categories: 编程
-tags:
+tags: canvas
 date: 2021-05-05 17:24:39
 
 

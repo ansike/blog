@@ -1,7 +1,7 @@
 ---
 title:  shell比较符号含义
 categories: 编程
-tags:
+tags: shell
 date: 2021-02-21 23:06:11
 ---
 1. -eq #equal 相等

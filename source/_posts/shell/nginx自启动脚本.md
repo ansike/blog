@@ -1,7 +1,7 @@
 ---
 title: nginx自启动脚本
 categories: 编程
-tags:
+tags: shell
 date: 2021-03-15 09:39:51
 
 ---

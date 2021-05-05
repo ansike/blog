@@ -1,7 +1,7 @@
 ---
 title: shell脚本的调试
 categories: 编程
-tags:
+tags: shell
 date: 2021-04-18 18:02:22
 
 ---

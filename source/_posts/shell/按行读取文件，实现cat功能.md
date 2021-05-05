@@ -1,7 +1,7 @@
 ---
 title: 按行读取文件，实现cat功能
 categories: 编程
-tags:
+tags: shell
 date: 2021-03-27 22:27:18
 
 ---

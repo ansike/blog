@@ -1,7 +1,7 @@
 ---
 title:  wget常用功能
 categories: 编程
-tags:
+tags: shell
 date: 2021-03-13 10:18:59
 
 ---

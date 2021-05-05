@@ -1,7 +1,9 @@
 ---
 title:  SVG动画
 categories: 编程
-tags:
+tags: 
+  - svg
+  - 动画
 date: 2021-05-05 17:24:39
 
 ---

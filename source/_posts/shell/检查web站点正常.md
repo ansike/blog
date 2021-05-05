@@ -1,7 +1,7 @@
 ---
 title: function函数实战-脚本检查web站点正常
 categories: 编程
-tags:
+tags: shell
 date: 2021-02-26 23:14:03
 
 ---

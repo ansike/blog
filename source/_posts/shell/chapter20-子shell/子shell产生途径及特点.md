@@ -1,7 +1,7 @@
 ---
 title: 子shell产生途径及特点
 categories: 编程
-tags:
+tags: shell
 date: 2021-04-24 23:08:59
 
 ---

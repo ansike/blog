@@ -1,7 +1,7 @@
 ---
 title: awk命令
 categories: 编程
-tags:
+tags: shell
 date: 2021-02-22 23:36:36
 ---
 

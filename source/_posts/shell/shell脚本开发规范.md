@@ -1,7 +1,7 @@
 ---
 title: shell脚本开发规范
 categories: 编程
-tags:
+tags: shell
 date: 2021-04-16 23:43:04
 
 ---

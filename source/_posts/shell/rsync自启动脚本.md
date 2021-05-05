@@ -1,7 +1,7 @@
 ---
 title: 系统自启动rsync服务的方法
 categories: 编程
-tags:
+tags: shell
 date: 2021-02-24 23:30:42
 
 ---

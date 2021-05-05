@@ -1,7 +1,7 @@
 ---
 title: 变量字串
 categories: 编程
-tags:
+tags: shell
 date: 2021-04-14 00:10:45
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 监控Nginx和Mysql服务是否正常,如果未启动则启动相应服务
 categories: 编程
-tags:
+tags: shell
 date: 2021-02-21 00:12:35
 
 ---
