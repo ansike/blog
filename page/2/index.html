@@ -64,9 +64,9 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-canvas/canvas-基础特性" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-编程/canvas/canvas-基础特性" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/05/05/canvas/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" class="article-date">
+    <a href="/blog/2021/05/05/%E7%BC%96%E7%A8%8B/canvas/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" class="article-date">
   <time datetime="2021-05-05T09:24:39.000Z" itemprop="datePublished">2021-05-05</time>
 </a>
     
@@ -82,7 +82,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/05/05/canvas/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+      <a class="article-title" href="/blog/2021/05/05/%E7%BC%96%E7%A8%8B/canvas/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
     </h1>
   
 
@@ -114,7 +114,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/05/05/canvas/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" data-id="ckobc3039000523rq4xekauac" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/05/05/%E7%BC%96%E7%A8%8B/canvas/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" data-id="ckobkr1gf000azeoybna87qc7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li></ul>
@@ -126,9 +126,9 @@
 
 
   
-    <article id="post-工程化/模块化" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-编程/svg/svg动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/05/05/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E6%A8%A1%E5%9D%97%E5%8C%96/" class="article-date">
+    <a href="/blog/2021/05/05/%E7%BC%96%E7%A8%8B/svg/svg%E5%8A%A8%E7%94%BB/" class="article-date">
   <time datetime="2021-05-05T09:24:39.000Z" itemprop="datePublished">2021-05-05</time>
 </a>
     
@@ -144,7 +144,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/05/05/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E6%A8%A1%E5%9D%97%E5%8C%96/">Commonjs</a>
+      <a class="article-title" href="/blog/2021/05/05/%E7%BC%96%E7%A8%8B/svg/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
     </h1>
   
 
@@ -152,22 +152,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="问题1-Commonjs和es-module的区别"><a href="#问题1-Commonjs和es-module的区别" class="headerlink" title="问题1 Commonjs和es module的区别"></a>问题1 Commonjs和es module的区别</h3><ol>
-<li>使用方式看：导入和导出方式不同<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ====commonjs</span></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="built_in">module</span>.export = <span class="string">'hello'</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'a.js'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ====es module</span></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="string">'hello'</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">import</span> a <span class="keyword">from</span> <span class="string">"./a.js"</span>;</span><br></pre></td></tr></table></figure>
-延伸看级别不一样：<b>commonjs是node运行时的实现，非官方标准</b>。es module中的<code>export default, import</code>都是js关键字，从语言层面实现的支持，是官方标准。</li>
-</ol>
-<h3 id="问题2-exports和module-exports区别"><a href="#问题2-exports和module-exports区别" class="headerlink" title="问题2 exports和module.exports区别"></a>问题2 exports和module.exports区别</h3><p>看下在commonjs中的实现就能明白</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 两个变量初始的时候都指向了同一块内存地址</span></span><br><span class="line"><span class="built_in">console</span>.log(exports === <span class="built_in">module</span>.exports) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 当发生直接赋值的情况后commonjs只会使用module.exports指向的值(和导出的顺序无关)</span></span><br><span class="line"><span class="comment">// module.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="string">"hello"</span>;</span><br><span class="line">exports = <span class="string">"hello2"</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">"./module.js"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// hello</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="问题3-require的实现"><a href="#问题3-require的实现" class="headerlink" title="问题3 require的实现"></a>问题3 require的实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"><span class="keyword">const</span> vm = <span class="built_in">require</span>(<span class="string">"vm"</span>);</span><br><span class="line"><span class="comment">// 实现 require</span></span><br><span class="line"><span class="comment">// const a = require("./module.js");</span></span><br><span class="line"><span class="keyword">const</span> a = customRequire(<span class="string">"./module.js"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">customRequire</span>(<span class="params">filePath</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> content = fs.readFileSync(path.join(__dirname, filePath), <span class="string">'utf-8'</span>);</span><br><span class="line">  <span class="comment">// 包裹一层避免作用于污染，隔离变量</span></span><br><span class="line">  <span class="keyword">const</span> wrapper = [</span><br><span class="line">    <span class="string">"(function(require, module, exports)&#123;"</span>,</span><br><span class="line">    <span class="string">"&#125;)"</span></span><br><span class="line">  ]</span><br><span class="line">  <span class="keyword">const</span> <span class="built_in">module</span> = &#123;</span><br><span class="line">    exports: &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> wrapperFn = wrapper[<span class="number">0</span>] + content + wrapper[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 两种实现方式都OK--实现字符串转js 运行时代码</span></span><br><span class="line">  <span class="keyword">const</span> canHandleFn = vm.runInThisContext(wrapperFn)</span><br><span class="line">  <span class="comment">// const canHandleFn = eval(wrapperFn);</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 这一步解决了问题三的疑惑</span></span><br><span class="line">  canHandleFn(customRequire, <span class="built_in">module</span>, <span class="built_in">module</span>.exports)</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">module</span>.exports</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br></pre></td></tr></table></figure>
-
+        <h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/05/05/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E6%A8%A1%E5%9D%97%E5%8C%96/" data-id="ckobc305b003g23rqemux5ui6" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/05/05/%E7%BC%96%E7%A8%8B/svg/svg%E5%8A%A8%E7%94%BB/" data-id="ckobkr1id003azeoy1ly70qz1" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li></ul>
 
     </footer>
   </div>
@@ -176,9 +168,9 @@
 
 
   
-    <article id="post-工程化/工程化" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-编程/动画/动画" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/05/05/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E5%B7%A5%E7%A8%8B%E5%8C%96/" class="article-date">
+    <a href="/blog/2021/05/05/%E7%BC%96%E7%A8%8B/%E5%8A%A8%E7%94%BB/%E5%8A%A8%E7%94%BB/" class="article-date">
   <time datetime="2021-05-05T09:24:39.000Z" itemprop="datePublished">2021-05-05</time>
 </a>
     
@@ -194,7 +186,57 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/05/05/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a>
+      <a class="article-title" href="/blog/2021/05/05/%E7%BC%96%E7%A8%8B/%E5%8A%A8%E7%94%BB/%E5%8A%A8%E7%94%BB/">动画</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="动画演示"><a href="#动画演示" class="headerlink" title="动画演示"></a>动画演示</h3><p><a href="./canvas动画.md">canvas动画</a><br><a href="./svg动画.md">svg动画</a><br><a href="./css动画.md">css动画</a></p>
+<h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ul>
+<li>无论是css动画，canvas动画，还是svg动画，基本思想都需要考虑一下几点：</li>
+</ul>
+<ol>
+<li>动画当前的状态即是画布在当前时间内（浏览器渲染间隔）的一帧图像。</li>
+<li>前提需要定时调用渲染函数不断绘制。【借助定时器或者requestAnimationFrame—最好依赖浏览器的渲染机制】</li>
+<li>每次渲染的状态由当前动画进度决定。不管是一次性动画还是循环动画，都有一个最小环节，想清楚自己的最小环节。</li>
+<li>每个最小环节由duration决定，受delayTime影响。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/05/05/%E7%BC%96%E7%A8%8B/%E5%8A%A8%E7%94%BB/%E5%8A%A8%E7%94%BB/" data-id="ckobkr1ig003ezeoyb8px6lb6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/工程化/工程化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/05/05/%E7%BC%96%E7%A8%8B/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E5%B7%A5%E7%A8%8B%E5%8C%96/" class="article-date">
+  <time datetime="2021-05-05T09:24:39.000Z" itemprop="datePublished">2021-05-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/05/05/%E7%BC%96%E7%A8%8B/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E5%B7%A5%E7%A8%8B%E5%8C%96/">前端工程化</a>
     </h1>
   
 
@@ -216,7 +258,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/05/05/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E5%B7%A5%E7%A8%8B%E5%8C%96/" data-id="ckobc3059003c23rq1rox8nnf" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/05/05/%E7%BC%96%E7%A8%8B/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E5%B7%A5%E7%A8%8B%E5%8C%96/" data-id="ckobkr1ih003hzeoyggf55q5l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li></ul>
@@ -228,9 +270,9 @@
 
 
   
-    <article id="post-canvas/canvas动画" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-编程/工程化/模块化" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/05/05/canvas/canvas%E5%8A%A8%E7%94%BB/" class="article-date">
+    <a href="/blog/2021/05/05/%E7%BC%96%E7%A8%8B/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E6%A8%A1%E5%9D%97%E5%8C%96/" class="article-date">
   <time datetime="2021-05-05T09:24:39.000Z" itemprop="datePublished">2021-05-05</time>
 </a>
     
@@ -246,7 +288,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/05/05/canvas/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+      <a class="article-title" href="/blog/2021/05/05/%E7%BC%96%E7%A8%8B/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E6%A8%A1%E5%9D%97%E5%8C%96/">Commonjs</a>
     </h1>
   
 
@@ -254,17 +296,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ol>
-<li>canvas 基础知识，比如stroke，fill，arc，rect等基础API</li>
+        <h3 id="问题1-Commonjs和es-module的区别"><a href="#问题1-Commonjs和es-module的区别" class="headerlink" title="问题1 Commonjs和es module的区别"></a>问题1 Commonjs和es module的区别</h3><ol>
+<li>使用方式看：导入和导出方式不同<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ====commonjs</span></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="built_in">module</span>.export = <span class="string">'hello'</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'a.js'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// ====es module</span></span><br><span class="line"><span class="comment">// a.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="string">'hello'</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">import</span> a <span class="keyword">from</span> <span class="string">"./a.js"</span>;</span><br></pre></td></tr></table></figure>
+延伸看级别不一样：<b>commonjs是node运行时的实现，非官方标准</b>。es module中的<code>export default, import</code>都是js关键字，从语言层面实现的支持，是官方标准。</li>
 </ol>
+<h3 id="问题2-exports和module-exports区别"><a href="#问题2-exports和module-exports区别" class="headerlink" title="问题2 exports和module.exports区别"></a>问题2 exports和module.exports区别</h3><p>看下在commonjs中的实现就能明白</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 两个变量初始的时候都指向了同一块内存地址</span></span><br><span class="line"><span class="built_in">console</span>.log(exports === <span class="built_in">module</span>.exports) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 当发生直接赋值的情况后commonjs只会使用module.exports指向的值(和导出的顺序无关)</span></span><br><span class="line"><span class="comment">// module.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="string">"hello"</span>;</span><br><span class="line">exports = <span class="string">"hello2"</span>;</span><br><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">"./module.js"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// hello</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="问题3-require的实现"><a href="#问题3-require的实现" class="headerlink" title="问题3 require的实现"></a>问题3 require的实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"><span class="keyword">const</span> vm = <span class="built_in">require</span>(<span class="string">"vm"</span>);</span><br><span class="line"><span class="comment">// 实现 require</span></span><br><span class="line"><span class="comment">// const a = require("./module.js");</span></span><br><span class="line"><span class="keyword">const</span> a = customRequire(<span class="string">"./module.js"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">customRequire</span>(<span class="params">filePath</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> content = fs.readFileSync(path.join(__dirname, filePath), <span class="string">'utf-8'</span>);</span><br><span class="line">  <span class="comment">// 包裹一层避免作用于污染，隔离变量</span></span><br><span class="line">  <span class="keyword">const</span> wrapper = [</span><br><span class="line">    <span class="string">"(function(require, module, exports)&#123;"</span>,</span><br><span class="line">    <span class="string">"&#125;)"</span></span><br><span class="line">  ]</span><br><span class="line">  <span class="keyword">const</span> <span class="built_in">module</span> = &#123;</span><br><span class="line">    exports: &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> wrapperFn = wrapper[<span class="number">0</span>] + content + wrapper[<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 两种实现方式都OK--实现字符串转js 运行时代码</span></span><br><span class="line">  <span class="keyword">const</span> canHandleFn = vm.runInThisContext(wrapperFn)</span><br><span class="line">  <span class="comment">// const canHandleFn = eval(wrapperFn);</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 这一步解决了问题三的疑惑</span></span><br><span class="line">  canHandleFn(customRequire, <span class="built_in">module</span>, <span class="built_in">module</span>.exports)</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">module</span>.exports</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/05/05/canvas/canvas%E5%8A%A8%E7%94%BB/" data-id="ckobc303f000623rq8c937ly7" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/05/05/%E7%BC%96%E7%A8%8B/%E5%B7%A5%E7%A8%8B%E5%8C%96/%E6%A8%A1%E5%9D%97%E5%8C%96/" data-id="ckobkr1ik003lzeoy1esz1vg5" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li></ul>
 
     </footer>
   </div>
@@ -273,9 +320,9 @@
 
 
   
-    <article id="post-shell/chapter20-子shell/shell调用方式" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-编程/shell/chapter20-子shell/shell调用方式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/24/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/" class="article-date">
+    <a href="/blog/2021/04/24/%E7%BC%96%E7%A8%8B/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/" class="article-date">
   <time datetime="2021-04-24T15:08:59.000Z" itemprop="datePublished">2021-04-24</time>
 </a>
     
@@ -291,7 +338,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/24/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/">shell调用方式</a>
+      <a class="article-title" href="/blog/2021/04/24/%E7%BC%96%E7%A8%8B/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/">shell调用方式</a>
     </h1>
   
 
@@ -308,7 +355,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/24/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/" data-id="ckobc3063004w23rq2m8815f3" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/24/%E7%BC%96%E7%A8%8B/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/" data-id="ckobkr1ji0051zeoycksjfle7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
@@ -320,9 +367,9 @@
 
 
   
-    <article id="post-shell/chapter20-子shell/子shell产生途径及特点" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-编程/shell/chapter20-子shell/子shell产生途径及特点" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/24/shell/chapter20-%E5%AD%90shell/%E5%AD%90shell%E4%BA%A7%E7%94%9F%E9%80%94%E5%BE%84%E5%8F%8A%E7%89%B9%E7%82%B9/" class="article-date">
+    <a href="/blog/2021/04/24/%E7%BC%96%E7%A8%8B/shell/chapter20-%E5%AD%90shell/%E5%AD%90shell%E4%BA%A7%E7%94%9F%E9%80%94%E5%BE%84%E5%8F%8A%E7%89%B9%E7%82%B9/" class="article-date">
   <time datetime="2021-04-24T15:08:59.000Z" itemprop="datePublished">2021-04-24</time>
 </a>
     
@@ -338,7 +385,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/24/shell/chapter20-%E5%AD%90shell/%E5%AD%90shell%E4%BA%A7%E7%94%9F%E9%80%94%E5%BE%84%E5%8F%8A%E7%89%B9%E7%82%B9/">子shell产生途径及特点</a>
+      <a class="article-title" href="/blog/2021/04/24/%E7%BC%96%E7%A8%8B/shell/chapter20-%E5%AD%90shell/%E5%AD%90shell%E4%BA%A7%E7%94%9F%E9%80%94%E5%BE%84%E5%8F%8A%E7%89%B9%E7%82%B9/">子shell产生途径及特点</a>
     </h1>
   
 
@@ -381,7 +428,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/24/shell/chapter20-%E5%AD%90shell/%E5%AD%90shell%E4%BA%A7%E7%94%9F%E9%80%94%E5%BE%84%E5%8F%8A%E7%89%B9%E7%82%B9/" data-id="ckobc3065004z23rqfd2nanfj" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/24/%E7%BC%96%E7%A8%8B/shell/chapter20-%E5%AD%90shell/%E5%AD%90shell%E4%BA%A7%E7%94%9F%E9%80%94%E5%BE%84%E5%8F%8A%E7%89%B9%E7%82%B9/" data-id="ckobkr1jj0054zeoyf30d5wod" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
@@ -393,9 +440,9 @@
 
 
   
-    <article id="post-shell/shell脚本的调试" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-编程/shell/shell脚本的调试" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/18/shell/shell%E8%84%9A%E6%9C%AC%E7%9A%84%E8%B0%83%E8%AF%95/" class="article-date">
+    <a href="/blog/2021/04/18/%E7%BC%96%E7%A8%8B/shell/shell%E8%84%9A%E6%9C%AC%E7%9A%84%E8%B0%83%E8%AF%95/" class="article-date">
   <time datetime="2021-04-18T10:02:22.000Z" itemprop="datePublished">2021-04-18</time>
 </a>
     
@@ -411,7 +458,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/18/shell/shell%E8%84%9A%E6%9C%AC%E7%9A%84%E8%B0%83%E8%AF%95/">shell脚本的调试</a>
+      <a class="article-title" href="/blog/2021/04/18/%E7%BC%96%E7%A8%8B/shell/shell%E8%84%9A%E6%9C%AC%E7%9A%84%E8%B0%83%E8%AF%95/">shell脚本的调试</a>
     </h1>
   
 
@@ -446,7 +493,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/18/shell/shell%E8%84%9A%E6%9C%AC%E7%9A%84%E8%B0%83%E8%AF%95/" data-id="ckobc304m001w23rqcs059fqi" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/18/%E7%BC%96%E7%A8%8B/shell/shell%E8%84%9A%E6%9C%AC%E7%9A%84%E8%B0%83%E8%AF%95/" data-id="ckobkr1ht0021zeoy7kiyew1m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
@@ -458,9 +505,9 @@
 
 
   
-    <article id="post-shell/chapter12/控制语句" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-编程/shell/chapter12/控制语句" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/16/shell/chapter12/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/" class="article-date">
+    <a href="/blog/2021/04/16/%E7%BC%96%E7%A8%8B/shell/chapter12/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/" class="article-date">
   <time datetime="2021-04-16T15:43:04.000Z" itemprop="datePublished">2021-04-16</time>
 </a>
     
@@ -476,7 +523,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/16/shell/chapter12/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/">shell中的控制语句</a>
+      <a class="article-title" href="/blog/2021/04/16/%E7%BC%96%E7%A8%8B/shell/chapter12/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/">shell中的控制语句</a>
     </h1>
   
 
@@ -495,7 +542,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/16/shell/chapter12/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/" data-id="ckobc3060004n23rq784q27l9" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/16/%E7%BC%96%E7%A8%8B/shell/chapter12/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/" data-id="ckobkr1je004szeoyco7q5lf1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
@@ -507,9 +554,9 @@
 
 
   
-    <article id="post-shell/shell脚本开发规范" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-编程/shell/shell脚本开发规范" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/04/16/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" class="article-date">
+    <a href="/blog/2021/04/16/%E7%BC%96%E7%A8%8B/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" class="article-date">
   <time datetime="2021-04-16T15:43:04.000Z" itemprop="datePublished">2021-04-16</time>
 </a>
     
@@ -525,7 +572,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/16/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/">shell脚本开发规范</a>
+      <a class="article-title" href="/blog/2021/04/16/%E7%BC%96%E7%A8%8B/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/">shell脚本开发规范</a>
     </h1>
   
 
@@ -607,50 +654,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/16/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" data-id="ckobc304i001q23rqg66rak03" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-shell/chapter13-array/字符串单词检查" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/04/15/shell/chapter13-array/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8D%95%E8%AF%8D%E6%A3%80%E6%9F%A5/" class="article-date">
-  <time datetime="2021-04-15T16:01:09.000Z" itemprop="datePublished">2021-04-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/15/shell/chapter13-array/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8D%95%E8%AF%8D%E6%A3%80%E6%9F%A5/">字符串中单词长度检查</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 打印长度大于6的单词</span></span><br><span class="line">str="I am oldboy teacher welcome to oldboy class"</span><br><span class="line">maxLength=6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 计算字符串长度的方法</span></span><br><span class="line">echo `echo $str | wc -L`</span><br><span class="line">echo `expr length "$str"`</span><br><span class="line">echo $&#123;#str&#125;</span><br><span class="line">echo `echo $str | awk '&#123;print length($0)&#125;'`</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> awk 方式</span></span><br><span class="line">echo $str | awk '&#123;for(i=1;i&lt;=NF;i++) if(length($i)&gt;6) print $i&#125;'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 数组方式</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> arr=(<span class="variable">$str</span>)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> word <span class="keyword">in</span> <span class="variable">$&#123;arr[*]&#125;</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">do</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   [ <span class="variable">$&#123;#word&#125;</span> -gt <span class="variable">$maxLength</span> ] &amp;&amp; &#123;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     <span class="built_in">echo</span> <span class="variable">$word</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   &#125;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">done</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span>循环方式</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> word <span class="keyword">in</span> <span class="variable">$str</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">do</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   [ <span class="variable">$&#123;#word&#125;</span> -gt <span class="variable">$maxLength</span> ] &amp;&amp; &#123;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     <span class="built_in">echo</span> <span class="variable">$word</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   &#125;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">done</span></span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/15/shell/chapter13-array/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8D%95%E8%AF%8D%E6%A3%80%E6%9F%A5/" data-id="ckobc3061004q23rq4fm27n6j" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/16/%E7%BC%96%E7%A8%8B/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" data-id="ckobkr1hq001vzeoycbsg1zqn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
@@ -677,7 +681,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li></ul>
     </div>
   </div>
 
@@ -687,7 +691,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%90%86%E8%B4%A2/" rel="tag">理财</a></li></ul>
     </div>
   </div>
 
@@ -697,7 +701,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/blog/tags/canvas/" style="font-size: 12.5px;">canvas</a> <a href="/blog/tags/js/" style="font-size: 17.5px;">js</a> <a href="/blog/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 15px;">动画</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 10px;">基础概念</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 12.5px;">工程化</a>
+      <a href="/blog/tags/canvas/" style="font-size: 12.5px;">canvas</a> <a href="/blog/tags/js/" style="font-size: 17.5px;">js</a> <a href="/blog/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 15px;">动画</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 10px;">基础概念</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 12.5px;">工程化</a> <a href="/blog/tags/%E7%90%86%E8%B4%A2/" style="font-size: 10px;">理财</a>
     </div>
   </div>
 
@@ -719,23 +723,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/05/05/shell/read/">read 命令</a>
+            <a href="/blog/2021/05/05/%E7%94%9F%E6%B4%BB/%E7%90%86%E8%B4%A2%E6%96%B9%E5%90%91/">理财方向</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/05/svg/svg%E5%8A%A8%E7%94%BB/">SVG动画</a>
+            <a href="/blog/2021/05/05/%E7%BC%96%E7%A8%8B/shell/read/">read 命令</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/05/js/URLSearchParams/">URLSearchParams constructor</a>
+            <a href="/blog/2021/05/05/%E7%BC%96%E7%A8%8B/canvas/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/05/js/cross-origin/">cross origin</a>
+            <a href="/blog/2021/05/05/%E7%BC%96%E7%A8%8B/css/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/05/js/promisefy/">实现类似 node中util.promisefy的实现</a>
+            <a href="/blog/2021/05/05/%E7%BC%96%E7%A8%8B/js/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
           </li>
         
       </ul>
