@@ -5,16 +5,19 @@
   
 
   
-  <title>Hexo</title>
+  <title>安思科的备忘录</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+  <meta name="description" content="记录一些平时点滴">
+<meta name="keywords" content="安思科, ansike">
+<meta property="og:type" content="website">
+<meta property="og:title" content="安思科的备忘录">
 <meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;page&#x2F;6&#x2F;index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en">
+<meta property="og:site_name" content="安思科的备忘录">
+<meta property="og:description" content="记录一些平时点滴">
+<meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/blog/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/blog/atom.xml" title="安思科的备忘录" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -33,7 +36,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/blog/" id="logo">Hexo</a>
+        <a href="/blog/" id="logo">安思科的备忘录</a>
       </h1>
       
     </div>
@@ -50,7 +53,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://ansike.github.io/blog"></form>
@@ -61,12 +64,16 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-canvas-基础特性" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/条件测试" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/05/04/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" class="article-date">
-  <time datetime="2021-05-04T15:26:22.781Z" itemprop="datePublished">2021-05-04</time>
+    <a href="/blog/2021/02/08/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/" class="article-date">
+  <time datetime="2021-02-08T10:00:11.000Z" itemprop="datePublished">2021-02-08</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -75,7 +82,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/05/04/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+      <a class="article-title" href="/blog/2021/02/08/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/">条件测试</a>
     </h1>
   
 
@@ -83,31 +90,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="对象创建"><a href="#对象创建" class="headerlink" title="对象创建"></a>对象创建</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HTML</span></span><br><span class="line">&lt;canvas id=<span class="string">"canvas"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//JS</span></span><br><span class="line"><span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"><span class="keyword">const</span> ctx = canvas.getContext(<span class="string">"2d"</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="canvas元素的属性和方法"><a href="#canvas元素的属性和方法" class="headerlink" title="canvas元素的属性和方法"></a>canvas元素的属性和方法</h3><p><strong>1. 属性</strong></p>
-<ul>
-<li>width</li>
-<li>height</li>
-</ul>
-<p><strong>2. 方法</strong></p>
-<ul>
-<li><ol>
-<li>getContext(contextId: “2d”, options?: CanvasRenderingContext2DSettings): CanvasRenderingContext2D | null;</li>
-<li>getContext(contextId: “bitmaprenderer”, options?: ImageBitmapRenderingContextSettings):mageBitmapRenderingContext | null;</li>
-<li>getContext(contextId: “webgl”, options?: WebGLContextAttributes): WebGLRenderingContext | null;</li>
-<li>getContext(contextId: “webgl2”, options?: WebGLContextAttributes): WebGL2RenderingContext | null;</li>
-<li>getContext(contextId: string, options?: any): RenderingContext | null;<br>// 返回绘图环境对象</li>
+        <h5 id="测试语法"><a href="#测试语法" class="headerlink" title="测试语法"></a>测试语法</h5><ol>
+<li>test &lt;测试表达式&gt;</li>
+<li>[ &lt;测试表达式&gt; ]  # 常用这个</li>
+<li>[[ &lt;测试表达式&gt; ]]</li>
+<li>((&lt;测试表达式&gt;))</li>
 </ol>
-</li>
-<li>toDataURL(type?: string, quality?: any): string; // 返回数据地址，可以直接给img的src赋值</li>
-<li>toBlob(callback: BlobCallback, type?: string, quality?: any): void; // 返回表示图像文件的blob，可以将该blob做文件上传使用</li>
-<li>transferControlToOffscreen(): OffscreenCanvas;</li>
+<ul>
+<li>1和2是等价的</li>
+<li>[[]]为test拓展的命令，常用语通配符进行模式匹配。&amp;&amp;,||,&gt;,&lt;可以使用</li>
+<li>(())常用语计算</li>
 </ul>
-
+<h5 id="test使用"><a href="#test使用" class="headerlink" title="test使用"></a>test使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 判断file文件是否存在</span></span><br><span class="line">test -f file &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断字符串长度是否为0</span></span><br><span class="line">test -z "file" &amp;&amp; echo 1 || echo 0</span><br></pre></td></tr></table></figure>
+<h5 id="使用"><a href="#使用" class="headerlink" title="[]使用"></a>[]使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 判断file文件是否存在</span></span><br><span class="line">[ -f file ] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断字符串长度是否为0</span></span><br><span class="line">[ -z "file" ] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> -o 表示或者</span></span><br><span class="line">[ -z "file" -o -z "" ] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> -a 表示且</span></span><br><span class="line">[ -z "file" -a -z "" ] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断字符串相等</span></span><br><span class="line">[ "file" = "1" ] &amp;&amp; echo 1 || echo 0</span><br></pre></td></tr></table></figure>
+<h5 id="使用-1"><a href="#使用-1" class="headerlink" title="[]使用"></a>[]使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 判断file文件是否存在</span></span><br><span class="line">[[ -f file ]] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断字符串长度是否为0</span></span><br><span class="line">[[ -z "file" ]] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> -o 表示或者</span></span><br><span class="line">[[ -z "file" || -z "" ]] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> -a 表示且</span></span><br><span class="line">[[ -z "file" &amp;&amp; -z "" ]] &amp;&amp; echo 1 || echo 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> TODO 判断字符串相等</span></span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/05/04/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" data-id="ckoa6pr6m00020cxj2wynb294" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/08/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/" data-id="ckobbscpe001o19qu6vuaalbe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -117,12 +117,16 @@
 
 
   
-    <article id="post-URL" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-shell/calc" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/05/04/URL/" class="article-date">
-  <time datetime="2021-05-04T15:26:22.781Z" itemprop="datePublished">2021-05-04</time>
+    <a href="/blog/2021/02/06/shell/calc/" class="article-date">
+  <time datetime="2021-02-06T16:08:53.000Z" itemprop="datePublished">2021-02-07</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -131,7 +135,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/05/04/URL/">URL constructor</a>
+      <a class="article-title" href="/blog/2021/02/06/shell/calc/">shell中变量的数值计算</a>
     </h1>
   
 
@@ -139,42 +143,35 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p>以前我们要对地址栏中的URL地址进行分析处理，需要自己进行字符串分析,有了URL构造函数之后就不需要了。</p>
-<h3 id="demo-（修改-设置-query的一个参数"><a href="#demo-（修改-设置-query的一个参数" class="headerlink" title="demo （修改|设置)query的一个参数"></a>demo （修改|设置)query的一个参数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> url = <span class="string">"https://www.baidu.com/wordpress/?a=1"</span></span><br><span class="line"><span class="keyword">const</span> urlObj = <span class="keyword">new</span> URL(url)</span><br><span class="line">urlObj.searchParams.set(<span class="string">"a"</span>, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">console</span>.log(urlObj.href); <span class="comment">//https://www.baidu.com/wordpress/?a=2</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * params：（url）相对地址或者绝对地址，如果是绝对地址的时候会忽略base参数</span></span><br><span class="line"><span class="comment"> * params：（base）基地址，默认为空字符串</span></span><br><span class="line"><span class="comment"> * 注意：如果参数无法组合成完整的url地址，则会报TypeError错误</span></span><br><span class="line"><span class="comment"> * return 一个人 URL实例</span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="keyword">new</span> URL(url [,base])</span><br></pre></td></tr></table></figure>
-
-<h3 id="Attributes"><a href="#Attributes" class="headerlink" title="Attributes"></a>Attributes</h3><ol>
-<li>hash</li>
-<li>host</li>
-<li>hostname</li>
-<li>href</li>
-<li>origin       常用</li>
-<li>password</li>
-<li>username</li>
-<li>pathname</li>
-<li>port</li>
-<li>protocol     eg:http:</li>
-<li>search</li>
-<li>searchParams 返回一个URLSearchParams对象，可以调用URLSearchParams对象的各种方法，对查询，设置字符串进行非常方便的处理。以下会重点说这个对象 </li>
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><ol>
+<li>(())</li>
+<li>let</li>
+<li>expr</li>
+<li>bc是UNIX/Linux下的计算器</li>
+<li>$[]</li>
+<li>awk</li>
+<li>declare</li>
 </ol>
-<h3 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h3><ol>
-<li>toString()   返回完整的URL地址，只能输出不能修改值</li>
-<li>toJSON       目前看是一样的（有变动再修改）</li>
-</ol>
-<h3 id="Static-Function"><a href="#Static-Function" class="headerlink" title="Static Function"></a>Static Function</h3><ol>
-<li>URL.createObjectURL(object). <strong>将对象变成一个唯一的blob URL，参数可以是File，Blob，MediaSource对象</strong></li>
-<li>URL.revokeObjectURL(objectURL);<strong>撤销上一个API创建的URL对象</strong></li>
-</ol>
-<p>eg:使用Ajax请求一个跨域图片避免canvas跨域生成问题的时候可以使用这两个静态方法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> url = URL.createObjectURL(<span class="keyword">this</span>.response);</span><br><span class="line">    <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">    img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 此时你就可以使用canvas对img为所欲为了</span></span><br><span class="line">        <span class="comment">// ... code ...</span></span><br><span class="line">        <span class="comment">// 图片用完后记得释放内存</span></span><br><span class="line">        URL.revokeObjectURL(url);</span><br><span class="line">    &#125;;</span><br><span class="line">    img.src = url;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.open(<span class="string">'GET'</span>, url, <span class="literal">true</span>);</span><br><span class="line">xhr.responseType = <span class="string">'blob'</span>;</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
+<h3 id="计算"><a href="#计算" class="headerlink" title="(()) 计算"></a>(()) 计算</h3><h3 id="let-计算"><a href="#let-计算" class="headerlink" title="let 计算"></a>let 计算</h3><h3 id="expr-计算"><a href="#expr-计算" class="headerlink" title="expr 计算"></a>expr 计算</h3><h3 id="bc-执行交互式计算"><a href="#bc-执行交互式计算" class="headerlink" title="bc 执行交互式计算"></a>bc 执行交互式计算</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bc # 输入bc后可以在命令行开始执行交互式计算,退出使用quit</span><br></pre></td></tr></table></figure>
+
+<h5 id="命令行使用"><a href="#命令行使用" class="headerlink" title="命令行使用"></a>命令行使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">echo 2 + 2 | bc # 直接`echo 2+2`将会输出`2+2`字符串,使用bc能输出计算后的值</span><br><span class="line">echo 2.1 + 2 | bc # 支持浮点运算(awk), 整数的话可以考虑(()), let, expr</span><br><span class="line">echo "scale=2;12313/123" | bc # 使用scale保留2位小数</span><br><span class="line">echo "scale=4;12313/13" | bc # 使用scale保留2位小数</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 配合变量做运算,效率略低下</span></span><br><span class="line">i=5</span><br><span class="line">i=`echo $i + 6 | bc`</span><br><span class="line">echo $i</span><br></pre></td></tr></table></figure>
+
+<h5 id="生成数字序列并做计算"><a href="#生成数字序列并做计算" class="headerlink" title="生成数字序列并做计算"></a>生成数字序列并做计算</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 计算1加到n的值</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1+2+3+4+5+6+7+8+9+10=55</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> bc</span></span><br><span class="line">echo `seq -s "+" 10`=`seq -s "+" 10 | bc`</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> (())</span></span><br><span class="line">echo `seq -s "+" 10`=$((`seq -s "+" 10`))</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> expr, 注意操作符两边必须有空格</span></span><br><span class="line">echo `seq -s "+" 10`=`seq -s " + " 10 | xargs expr`</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> $[]</span></span><br><span class="line">echo `seq -s "+" 10`=$[`seq -s "+" 10`]</span><br></pre></td></tr></table></figure>
 
 
+
+
+<h3 id="awk-计算"><a href="#awk-计算" class="headerlink" title="awk 计算"></a>awk 计算</h3><p>适合小数和整数运算,很精确,适合命令行运算</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 注意awk 后边是单引号</span></span><br><span class="line">echo "4.31 12.222" | awk '&#123;print ($1-$2)&#125;'</span><br><span class="line">echo "3 4" | awk '&#123;print ($1**2+$2**2)&#125;'</span><br></pre></td></tr></table></figure>
+
+<h3 id="declare-计算"><a href="#declare-计算" class="headerlink" title="declare 计算"></a>declare 计算</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> </span></span><br><span class="line">declare -i A=30 B=7</span><br><span class="line">A=A+B</span><br><span class="line">echo $A</span><br></pre></td></tr></table></figure>
+
+<h3 id="计算-1"><a href="#计算-1" class="headerlink" title="$[] 计算"></a>$[] 计算</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">i=5</span><br><span class="line">i=$[$i+1]</span><br><span class="line">echo $i</span><br><span class="line">echo $[2*3]</span><br><span class="line">echo $[2**3]</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/05/04/URL/" data-id="ckoa6pr6b00000cxjdzkp2ce9" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/06/shell/calc/" data-id="ckobbscoq000q19qubzbma36p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -188,7 +185,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/blog/page/5/">&amp;laquo; Prev</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/">4</a><a class="page-number" href="/blog/page/5/">5</a><span class="page-number current">6</span>
+    <a class="extend prev" rel="prev" href="/blog/page/5/">&amp;laquo; 上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/">4</a><a class="page-number" href="/blog/page/5/">5</a><span class="page-number current">6</span>
   </nav>
 
 </section>
@@ -196,6 +193,13 @@
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li></ul>
+    </div>
+  </div>
+
 
   
     
@@ -205,9 +209,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">May 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/02/">二月 2021</a></li></ul>
     </div>
   </div>
 
@@ -215,28 +219,28 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/blog/2021/05/04/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/">shell脚本开发规范</a>
+            <a href="/blog/2021/05/05/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/04/shell/chapter4-parameter/parameter/">变量字串</a>
+            <a href="/blog/2021/05/05/shell/read/">read 命令</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/04/shell/chapter20-%E5%AD%90shell/%E5%AD%90shell%E4%BA%A7%E7%94%9F%E9%80%94%E5%BE%84%E5%8F%8A%E7%89%B9%E7%82%B9/">子shell产生途径及特点</a>
+            <a href="/blog/2021/05/05/js/URL/">URL constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/04/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/">shell调用方式</a>
+            <a href="/blog/2021/05/05/js/URLSearchParams/">URLSearchParams constructor</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/04/shell/chapter13-array/%E6%95%B0%E7%BB%84/">数组</a>
+            <a href="/blog/2021/05/05/js/cross-origin/">cross origin</a>
           </li>
         
       </ul>
@@ -251,7 +255,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2021 John Doe<br>
+      &copy; 2021 安思科<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
