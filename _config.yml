@@ -3,13 +3,13 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: 安思科的备忘录
 subtitle: ''
-description: ''
-keywords:
-author: John Doe
-language: en
-timezone: ''
+description: '记录一些平时点滴'
+keywords: '安思科, ansike'
+author: 安思科
+language: zh-CN
+timezone: 'Asia/Shanghai'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -60,8 +60,18 @@ index_generator:
 
 # Category & Tag
 default_category: uncategorized
-category_map:
+category_map: 
+  编程: programming
+  生活: life
+  其他: other
 tag_map:
+  - mysql
+  - webpack
+  - canvas
+  - linux
+  - shell
+  - css
+  - docker
 
 # Metadata elements
 ## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
