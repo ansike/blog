@@ -64,6 +64,352 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-编程/shell/chapter20-子shell/子shell产生途径及特点" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/04/24/%E7%BC%96%E7%A8%8B/shell/chapter20-%E5%AD%90shell/%E5%AD%90shell%E4%BA%A7%E7%94%9F%E9%80%94%E5%BE%84%E5%8F%8A%E7%89%B9%E7%82%B9/" class="article-date">
+  <time datetime="2021-04-24T15:08:59.000Z" itemprop="datePublished">2021-04-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/04/24/%E7%BC%96%E7%A8%8B/shell/chapter20-%E5%AD%90shell/%E5%AD%90shell%E4%BA%A7%E7%94%9F%E9%80%94%E5%BE%84%E5%8F%8A%E7%89%B9%E7%82%B9/">子shell产生途径及特点</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="产生的途径"><a href="#产生的途径" class="headerlink" title="产生的途径"></a>产生的途径</h4><ol>
+<li>带”&amp;”提交后台作业【异步模式】。能使用本地变量</li>
+<li>使用管道功能。能使用本地变量</li>
+<li>使用”()”功能。能使用本地变量</li>
+<li>通过调用外部的shell脚本产生子shell，子shell中仅能使用父shell中的环境变量，不能使用本地变量</li>
+</ol>
+<h4 id="测试shell"><a href="#测试shell" class="headerlink" title="测试shell"></a>测试shell</h4><ol>
+<li>使用&amp;后台执行<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">/bin/bash</span></span><br><span class="line">parent_var="Parent"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出父shell同级，BASH_SUBSHELL为系统环境变量</span></span><br><span class="line">echo "Shell start: ParentShell: Level: $BASH_SUBSHELL"</span><br><span class="line">&#123;</span><br><span class="line">  echo "SubShell Level: $BASH_SUBSHELL"</span><br><span class="line">  sub_var="SUb"</span><br><span class="line">  echo "parent_var=$parent_var"</span><br><span class="line">  sleep 2</span><br><span class="line">  echo "SubShell is over"</span><br><span class="line">&#125; &amp;</span><br><span class="line"></span><br><span class="line">sleep 1</span><br><span class="line">echo "ParentShell start again"</span><br><span class="line">echo "Shell start: ParentShell: Level: $BASH_SUBSHELL"</span><br><span class="line">if [ -z $sub_var ]</span><br><span class="line">then</span><br><span class="line">  echo "sub_var is not defined in parent shell"</span><br><span class="line">else</span><br><span class="line">  echo "sub_var is defined $sub_var in parent shell"</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>使用管道</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">/bin/bash</span></span><br><span class="line">parent_var="Parent"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出父shell同级，BASH_SUBSHELL为系统环境变量</span></span><br><span class="line">echo "Shell start: ParentShell: Level: $BASH_SUBSHELL"</span><br><span class="line">echo "管道" | &#123;</span><br><span class="line">  echo "SubShell Level: $BASH_SUBSHELL"</span><br><span class="line">  sub_var="SUb"</span><br><span class="line">  echo "parent_var=$parent_var"</span><br><span class="line">  sleep 2</span><br><span class="line">  echo "SubShell is over"</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sleep 1</span><br><span class="line">echo "ParentShell start again"</span><br><span class="line">echo "Shell start: ParentShell: Level: $BASH_SUBSHELL"</span><br><span class="line">if [ -z $sub_var ]</span><br><span class="line">then</span><br><span class="line">  echo "sub_var is not defined in parent shell"</span><br><span class="line">else</span><br><span class="line">  echo "sub_var is defined $sub_var in parent shell"</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用()功能</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">/bin/bash</span></span><br><span class="line">parent_var="Parent"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出父shell同级，BASH_SUBSHELL为系统环境变量</span></span><br><span class="line">echo "Shell start: ParentShell: Level: $BASH_SUBSHELL"</span><br><span class="line">(</span><br><span class="line">  echo "SubShell Level: $BASH_SUBSHELL"</span><br><span class="line">  sub_var="SUb"</span><br><span class="line">  echo "parent_var=$parent_var"</span><br><span class="line">  sleep 2</span><br><span class="line">  echo "SubShell is over"</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">sleep 1</span><br><span class="line">echo "ParentShell start again"</span><br><span class="line">echo "Shell start: ParentShell: Level: $BASH_SUBSHELL"</span><br><span class="line">if [ -z $sub_var ]</span><br><span class="line">then</span><br><span class="line">  echo "sub_var is not defined in parent shell"</span><br><span class="line">else</span><br><span class="line">  echo "sub_var is defined $sub_var in parent shell"</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用外部shell</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">/bin/bash</span></span><br><span class="line">parent_var="Parent"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出父shell同级，BASH_SUBSHELL为系统环境变量</span></span><br><span class="line">echo "Shell start: ParentShell: Level: $BASH_SUBSHELL"</span><br><span class="line">sh ./subshell.sh</span><br><span class="line">sleep 1</span><br><span class="line">echo "ParentShell start again"</span><br><span class="line">echo "Shell start: ParentShell: Level: $BASH_SUBSHELL"</span><br><span class="line">if [ -z $sub_var ]</span><br><span class="line">then</span><br><span class="line">  echo "sub_var is not defined in parent shell"</span><br><span class="line">else</span><br><span class="line">  echo "sub_var is defined $sub_var in parent shell"</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>subshell</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">/bin/bash</span></span><br><span class="line">echo "SubShell Level: $BASH_SUBSHELL"</span><br><span class="line">sub_var="SUb"</span><br><span class="line">echo "parent_var=$parent_var"</span><br><span class="line">sleep 2</span><br><span class="line">echo "SubShell is over"</span><br></pre></td></tr></table></figure>
+
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ol>
+<li>父shell不能使用子shell中的变量，子shell可以使用父shell中的变量。注意区分局部变量和环境变量</li>
+<li>管道,(),{}&amp;都会生成子shell，注意变量使用避坑。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/04/24/%E7%BC%96%E7%A8%8B/shell/chapter20-%E5%AD%90shell/%E5%AD%90shell%E4%BA%A7%E7%94%9F%E9%80%94%E5%BE%84%E5%8F%8A%E7%89%B9%E7%82%B9/" data-id="ckojcdofv005l10qo0hh613s4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/chapter20-子shell/shell调用方式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/04/24/%E7%BC%96%E7%A8%8B/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/" class="article-date">
+  <time datetime="2021-04-24T15:08:59.000Z" itemprop="datePublished">2021-04-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/04/24/%E7%BC%96%E7%A8%8B/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/">shell调用方式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="调用方式分类"><a href="#调用方式分类" class="headerlink" title="调用方式分类"></a>调用方式分类</h3><ol>
+<li><code>fork</code>方式。<code>sh xxx.sh</code> 同步执行所有的shell</li>
+<li><code>exec</code>方式。<code>exec xxx.sh</code> 执行完exec脚本的内容后，父shell剩余的代码不能执行</li>
+<li><code>source</code>或者<code>.</code>方式。<code>source xxx.sh</code> 同步执行所有的shell，且能读取子shell中的全部变量</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/04/24/%E7%BC%96%E7%A8%8B/shell/chapter20-%E5%AD%90shell/shell%E8%B0%83%E7%94%A8%E6%96%B9%E5%BC%8F/" data-id="ckojcdofu005j10qo0c7hfva7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/shell脚本的调试" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/04/18/%E7%BC%96%E7%A8%8B/shell/shell%E8%84%9A%E6%9C%AC%E7%9A%84%E8%B0%83%E8%AF%95/" class="article-date">
+  <time datetime="2021-04-18T10:02:22.000Z" itemprop="datePublished">2021-04-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/04/18/%E7%BC%96%E7%A8%8B/shell/shell%E8%84%9A%E6%9C%AC%E7%9A%84%E8%B0%83%E8%AF%95/">shell脚本的调试</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>shell脚本的错误提示一般都不是很准确（eg:缺少一个双引号通常会提示下一行或者几行报错，因为缺少引号后shell认为后几行进行了调用）</li>
+<li>windows开发的shell脚本通常不能直接在linux中运行，需要进行格式化。dos2unix</li>
+<li>echo 是最好的调试手段</li>
+<li>sh [options] xxx.sh</li>
+</ol>
+<ul>
+<li><ol>
+<li>-n 不会执行脚本，仅检查脚本的正确性</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>-v 先输出脚本内容，再执行脚本，如有错误，输出错误信息</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>-x 执行脚本及内容显示到屏幕上</li>
+</ol>
+</li>
+</ul>
+<ol start="5">
+<li>set -[n|v|x] 在脚本中作用和sh一致</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/04/18/%E7%BC%96%E7%A8%8B/shell/shell%E8%84%9A%E6%9C%AC%E7%9A%84%E8%B0%83%E8%AF%95/" data-id="ckojcdodz002d10qo45hqaog1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/chapter12/控制语句" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/04/16/%E7%BC%96%E7%A8%8B/shell/chapter12/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/" class="article-date">
+  <time datetime="2021-04-16T15:43:04.000Z" itemprop="datePublished">2021-04-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/04/16/%E7%BC%96%E7%A8%8B/shell/chapter12/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/">shell中的控制语句</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>break n 跳出循环n层，省略的话跳出整个循环</li>
+<li>continue n 退到n层继续循环，省略的话忽略本次循环的剩余代码继续循环</li>
+<li>return n 用在函数里作为函数的返回值</li>
+<li>exit n 退出当前shell程序，作为上一次shell程序执行的返回值</li>
+</ol>
+<p>? 好像没有发现break n和continue n于编程中的实际意义</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">break</span>， <span class="built_in">continue</span></span></span><br><span class="line">for ((i=0;i&lt;=5;i++))</span><br><span class="line">do</span><br><span class="line">  if [ $i -eq 3 ]</span><br><span class="line">  then</span><br><span class="line">    echo "cur is $i"</span><br><span class="line">    break</span><br><span class="line">    # continue</span><br><span class="line">  fi</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/04/16/%E7%BC%96%E7%A8%8B/shell/chapter12/%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5/" data-id="ckojcdofp005510qohi1rge7c" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/shell脚本开发规范" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/04/16/%E7%BC%96%E7%A8%8B/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" class="article-date">
+  <time datetime="2021-04-16T15:43:04.000Z" itemprop="datePublished">2021-04-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/04/16/%E7%BC%96%E7%A8%8B/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/">shell脚本开发规范</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="#1">1.代码框架规范（目录规范）</a><br><a href="#2">2.shell文件命名规范</a><br><a href="#3">3.首行内容编写</a><br><a href="#4">4.文件注释及行注释</a><br><a href="#5">5.变量命名及定义规范</a></p>
+<ul>
+<li><a href="#5.1">5.1 全局变量</a></li>
+<li><a href="#5.2">5.2 局部变量</a></li>
+<li><a href="#5.3">5.3 变量使用</a></li>
+</ul>
+<p><a href="#6">6.函数命名及定义规范</a></p>
+<h3 id="1">1.代码框架规范（目录规范）</h3>
+
+<p>在大型的程序中（如nginx）通常会将程序按照功能职责拆分成多个文件，放到对应的文件夹下，这在所有的程序开发中大致思路是一致的。文件或者目录分类大致为以下三类。</p>
+<ol>
+<li>入口文件</li>
+<li>配置文件</li>
+<li>工具函数</li>
+</ol>
+<h3 id="2">2.shell文件命名规范</h3>
+
+<ol>
+<li>统一使用后缀<code>.sh</code>结尾</li>
+<li>根据函数的意思命名脚本<br>2.1 开始和停止脚本<code>start_module.sh</code>，<code>stop_module.sh</code><br>2.2 监控脚本<code>*_mon.sh</code><br>2.3 控制脚本<code>*_ctl.sh</code><h3 id="3">3.首行内容编写</h3>
+
+</li>
+</ol>
+<p>描述脚本的解释器，一般为<code>#!/bin/bash</code>。指定以该解释器执行脚本，非必须，但是属于优秀的规范和习惯。执行shell的时候可以自己指定解释器。<br>脚本的解释器还有：</p>
+<ol>
+<li>Bourne Shell（/usr/bin/sh或/bin/sh）</li>
+<li>Bourne Again Shell（/bin/bash）</li>
+<li>C Shell（/usr/bin/csh）</li>
+<li>K Shell（/usr/bin/ksh）</li>
+<li>Shell for Root（/sbin/sh）</li>
+</ol>
+<h3 id="4">4.文件注释及行注释</h3>
+
+<p>文件注释一般由一下几部分构成</p>
+<ol>
+<li>日期</li>
+<li>作者</li>
+<li>邮箱</li>
+<li>脚本描述</li>
+<li>版本信息</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Date: 16:20 2021-04-17</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Author: ansike</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Mail: ansike@qq.com</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Description: deal ** fun</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Version: 1.0.0</span></span><br></pre></td></tr></table></figure>
+<p>尽量不要使用中文。必须使用中文的话，根据自身客户端对系统进行字符集调整。<code>export LANG=&quot;zh_CN.UTF-8&quot;</code></p>
+<h3 id="5">5.变量命名及定义规范</h3>
+<h4 id="5.1">5.1全局变量（环境变量）</h4>
+
+<ul>
+<li>变量定义应该全部为大写，单词间通过下划线进行分割，位置一般放在系统路径中；</li>
+<li>最好用export定义；</li>
+<li>定时任务执行时，最好在shell中重新定义这些全局变量；</li>
+</ul>
+<h4 id="5.2">5.2局部变量（函数变量）</h4>
+
+<ul>
+<li>一般使用驼峰方式命名，在函数作用域内有效；</li>
+<li>可以使用local定义；</li>
+</ul>
+<h4 id="5.3">5.变量使用</h4>
+
+<ul>
+<li>变量前后都有字符或字符串中使用变量时用<code>${}</code>包裹<code>${variable}</code></li>
+<li>变量内容为数字时$variable</li>
+<li>变量容错${variable:-default}或者${variable:=default}</li>
+</ul>
+<h3 id="6">6.函数命名及定义规范</h3>
+
+<ul>
+<li>函数的书写通常有多种形式，最规范的方式<code>function funName(){ body }</code></li>
+<li>最好在函数结束时有<code>return</code></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/04/16/%E7%BC%96%E7%A8%8B/shell/shell%E8%84%9A%E6%9C%AC%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" data-id="ckojcdodx002710qo75f64f1h" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-编程/shell/chapter13-array/字符串单词检查" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2021/04/15/%E7%BC%96%E7%A8%8B/shell/chapter13-array/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8D%95%E8%AF%8D%E6%A3%80%E6%9F%A5/" class="article-date">
@@ -95,7 +441,50 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/15/%E7%BC%96%E7%A8%8B/shell/chapter13-array/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8D%95%E8%AF%8D%E6%A3%80%E6%9F%A5/" data-id="ckobkr1jg004vzeoyhh497a6q" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/15/%E7%BC%96%E7%A8%8B/shell/chapter13-array/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8D%95%E8%AF%8D%E6%A3%80%E6%9F%A5/" data-id="ckojcdofq005810qo52k14iy6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/chapter4-parameter/parameter" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/04/13/%E7%BC%96%E7%A8%8B/shell/chapter4-parameter/parameter/" class="article-date">
+  <time datetime="2021-04-13T16:10:45.000Z" itemprop="datePublished">2021-04-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/04/13/%E7%BC%96%E7%A8%8B/shell/chapter4-parameter/parameter/">变量字串</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="变量字串说明"><a href="#变量字串说明" class="headerlink" title="变量字串说明"></a>变量字串说明</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">parameter=asbcd</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出变量的内容</span></span><br><span class="line">echo $&#123;parameter&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 返回变量的长度</span></span><br><span class="line">echo $&#123;#parameter&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> offset从位置开始介入到结尾</span></span><br><span class="line">echo $&#123;parameter:2&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/04/13/%E7%BC%96%E7%A8%8B/shell/chapter4-parameter/parameter/" data-id="ckojcdofx005n10qobnh0fv46" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
@@ -142,50 +531,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/13/%E7%BC%96%E7%A8%8B/shell/chapter13-array/%E6%95%B0%E7%BB%84/" data-id="ckobkr1jh004yzeoy6ahf5n2y" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-编程/shell/chapter4-parameter/parameter" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/04/13/%E7%BC%96%E7%A8%8B/shell/chapter4-parameter/parameter/" class="article-date">
-  <time datetime="2021-04-13T16:10:45.000Z" itemprop="datePublished">2021-04-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/13/%E7%BC%96%E7%A8%8B/shell/chapter4-parameter/parameter/">变量字串</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="变量字串说明"><a href="#变量字串说明" class="headerlink" title="变量字串说明"></a>变量字串说明</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">parameter=asbcd</span><br><span class="line"><span class="meta">#</span><span class="bash"> 输出变量的内容</span></span><br><span class="line">echo $&#123;parameter&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 返回变量的长度</span></span><br><span class="line">echo $&#123;#parameter&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> offset从位置开始介入到结尾</span></span><br><span class="line">echo $&#123;parameter:2&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/13/%E7%BC%96%E7%A8%8B/shell/chapter4-parameter/parameter/" data-id="ckobkr1jk0057zeoy6jaz84fs" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/13/%E7%BC%96%E7%A8%8B/shell/chapter13-array/%E6%95%B0%E7%BB%84/" data-id="ckojcdofr005b10qo7ffa1wl9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
@@ -227,7 +573,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/10/%E7%BC%96%E7%A8%8B/shell/chapter11/select%E8%AF%AD%E6%B3%95/" data-id="ckobkr1jb004nzeoy12ufhh8z" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/10/%E7%BC%96%E7%A8%8B/shell/chapter11/select%E8%AF%AD%E6%B3%95/" data-id="ckojcdofm005010qo7yi16tzx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
@@ -275,230 +621,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/10/%E7%BC%96%E7%A8%8B/shell/chapter11/%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" data-id="ckobkr1jd004pzeoy3185hjur" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/04/10/%E7%BC%96%E7%A8%8B/shell/chapter11/%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8D%AE%E5%BA%93/" data-id="ckojcdofo005210qogcvefgz8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-编程/msyql/常规设置" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/04/07/%E7%BC%96%E7%A8%8B/msyql/%E5%B8%B8%E8%A7%84%E8%AE%BE%E7%BD%AE/" class="article-date">
-  <time datetime="2021-04-07T16:05:53.000Z" itemprop="datePublished">2021-04-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/04/07/%E7%BC%96%E7%A8%8B/msyql/%E5%B8%B8%E8%A7%84%E8%AE%BE%E7%BD%AE/">mysql 基础命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h5 id="修改用户密码"><a href="#修改用户密码" class="headerlink" title="修改用户密码"></a>修改用户密码</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">方法1： 用SET PASSWORD命令 </span><br><span class="line">首先登录MySQL。 </span><br><span class="line">格式：mysql&gt; set password for 用户名@localhost = password(‘新密码’); </span><br><span class="line">例子：mysql&gt; set password for root@localhost = password(‘123’);</span><br><span class="line"></span><br><span class="line">方法2：用mysqladmin </span><br><span class="line">格式：mysqladmin -u用户名 -p旧密码 password 新密码 </span><br><span class="line">例子：mysqladmin -uroot -p123456 password 123</span><br><span class="line"></span><br><span class="line">方法3：用UPDATE直接编辑user表 </span><br><span class="line">首先登录MySQL。 </span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> use mysql; </span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> update user <span class="built_in">set</span> password=password(‘123’) <span class="built_in">where</span> user=’root’ and host=’localhost’; </span></span><br><span class="line"><span class="meta">mysql&gt;</span><span class="bash"> flush privileges;</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/04/07/%E7%BC%96%E7%A8%8B/msyql/%E5%B8%B8%E8%A7%84%E8%AE%BE%E7%BD%AE/" data-id="ckobkr1h80011zeoy397udbbl" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-编程/shell/chapter11/for循环" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/03/28/%E7%BC%96%E7%A8%8B/shell/chapter11/for%E5%BE%AA%E7%8E%AF/" class="article-date">
-  <time datetime="2021-03-28T16:14:53.000Z" itemprop="datePublished">2021-03-29</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/28/%E7%BC%96%E7%A8%8B/shell/chapter11/for%E5%BE%AA%E7%8E%AF/">for循环</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h3><p>for var in vars<br>for ((expr1;expr2;expr3))<br>do<br>指令…<br>done</p>
-<h3 id="使用-for-打印-54321"><a href="#使用-for-打印-54321" class="headerlink" title="使用 for 打印 54321"></a>使用 for 打印 54321</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> C语言型</span></span><br><span class="line">for ((i=5;i&gt;0;i--))</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">i=5</span><br><span class="line">for ((;i&gt;0;))</span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">  ((i--))</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">for i in 5 4 3 2 1</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> i <span class="keyword">in</span> &#123;5..1&#125;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">for</span> i <span class="keyword">in</span> `seq 5 -1 1`</span></span><br><span class="line">do</span><br><span class="line">  echo $i</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-<h3 id="使用-for-批量换后缀"><a href="#使用-for-批量换后缀" class="headerlink" title="使用 for 批量换后缀"></a>使用 for 批量换后缀</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">for file in `ls temp`</span><br><span class="line">do</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 使用cut对文件名切割，读取切割的第一个域，拼接text后缀</span></span><br><span class="line">  mv temp/$file temp/`echo $file | cut -d . -f1`".text"</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 将所有的后缀都改为.text</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> ls | awk -F <span class="string">"."</span> <span class="string">'&#123;print "mv",$0, $1".text"&#125;'</span> | bash</span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用-for-乘法表"><a href="#使用-for-乘法表" class="headerlink" title="使用 for 乘法表"></a>使用 for 乘法表</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">set -e</span><br><span class="line">for ((i=1;i&lt;=9;i++))</span><br><span class="line">do</span><br><span class="line">  str=""</span><br><span class="line">  for ((j=1;j&lt;=$i;j++))</span><br><span class="line">  do</span><br><span class="line">    str="$str $i*$j=$((i*j))"</span><br><span class="line">  done</span><br><span class="line">  echo $str</span><br><span class="line">done</span><br><span class="line"><span class="meta">#</span><span class="bash"> res</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1*1=1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2*1=2 2*2=4</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3*1=3 3*2=6 3*3=9</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4*1=4 4*2=8 4*3=12 4*4=16</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 5*1=5 5*2=10 5*3=15 5*4=20 5*5=25</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 6*1=6 6*2=12 6*3=18 6*4=24 6*5=30 6*6=36</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 7*1=7 7*2=14 7*3=21 7*4=28 7*5=35 7*6=42 7*7=49</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 8*1=8 8*2=16 8*3=24 8*4=32 8*5=40 8*6=48 8*7=56 8*8=64</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 9*1=9 9*2=18 9*3=27 9*4=36 9*5=45 9*6=54 9*7=63 9*8=72 9*9=81</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="批量创建数据库"><a href="#批量创建数据库" class="headerlink" title="批量创建数据库"></a>批量创建数据库</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">USER=root</span><br><span class="line">PASSWORD=123456</span><br><span class="line">LOGINCMD="mysql -u$USER -p$PASSWORD"</span><br><span class="line"></span><br><span class="line">for dbname in oldBody oldgirl xxx yyy</span><br><span class="line">do</span><br><span class="line"><span class="meta">  #</span><span class="bash"> 不存在则创建</span></span><br><span class="line"><span class="meta">  $</span><span class="bash">LOGINCMD -e <span class="string">"create database IF NOT EXISTS <span class="variable">$dbname</span>"</span></span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> 强制删除，重新创建</span></span><br><span class="line"><span class="meta">  #</span><span class="bash"> <span class="variable">$LOGINCMD</span> -e <span class="string">"drop database <span class="variable">$dbname</span>; create database <span class="variable">$dbname</span>"</span></span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/28/%E7%BC%96%E7%A8%8B/shell/chapter11/for%E5%BE%AA%E7%8E%AF/" data-id="ckobkr1j9004lzeoy7mcacp6o" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-编程/shell/按行读取文件，实现cat功能" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/03/27/%E7%BC%96%E7%A8%8B/shell/%E6%8C%89%E8%A1%8C%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%EF%BC%8C%E5%AE%9E%E7%8E%B0cat%E5%8A%9F%E8%83%BD/" class="article-date">
-  <time datetime="2021-03-27T14:27:18.000Z" itemprop="datePublished">2021-03-27</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/27/%E7%BC%96%E7%A8%8B/shell/%E6%8C%89%E8%A1%8C%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%EF%BC%8C%E5%AE%9E%E7%8E%B0cat%E5%8A%9F%E8%83%BD/">按行读取文件，实现cat功能</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="按行读取文件"><a href="#按行读取文件" class="headerlink" title="按行读取文件"></a>按行读取文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">[ $# -ne 1 ] &amp;&amp; &#123;</span><br><span class="line">  echo "usage: $0 [file]"</span><br><span class="line">  exit 1</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">exec</span>读取文件</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">function</span> <span class="function"><span class="title">readFile</span></span>() &#123;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   [ ! -f <span class="variable">$1</span> ] &amp;&amp; &#123;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     <span class="built_in">echo</span> <span class="string">"文件不存在: <span class="variable">$1</span>"</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">     <span class="built_in">exit</span> 2</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   &#125;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   <span class="built_in">exec</span> &lt;<span class="variable">$1</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   <span class="keyword">while</span> <span class="built_in">read</span> line</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   <span class="keyword">do</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">     <span class="built_in">echo</span> <span class="variable">$line</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   <span class="keyword">done</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   <span class="keyword">done</span>&lt;<span class="variable">$1</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="comment"># 重定向输入</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="keyword">function</span> <span class="function"><span class="title">readFile</span></span>() &#123;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   [ ! -f <span class="variable">$1</span> ] &amp;&amp; &#123;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     <span class="built_in">echo</span> <span class="string">"文件不存在: <span class="variable">$1</span>"</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">     <span class="built_in">exit</span> 2</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   &#125;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   <span class="keyword">while</span> <span class="built_in">read</span> line</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   <span class="keyword">do</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">     <span class="built_in">echo</span> <span class="variable">$line</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   <span class="keyword">done</span>&lt;<span class="variable">$1</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 通过管道方式</span></span><br><span class="line">function readFile() &#123;</span><br><span class="line">  [ ! -f $1 ] &amp;&amp; &#123;</span><br><span class="line">    echo "文件不存在: $1"</span><br><span class="line">    exit 2</span><br><span class="line">  &#125;</span><br><span class="line">  cat $1 | while read line</span><br><span class="line">  do</span><br><span class="line">    echo $line</span><br><span class="line">  done</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">readFile $1</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/27/%E7%BC%96%E7%A8%8B/shell/%E6%8C%89%E8%A1%8C%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%EF%BC%8C%E5%AE%9E%E7%8E%B0cat%E5%8A%9F%E8%83%BD/" data-id="ckobkr1i0002izeoyd2ik1528" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-编程/shell/系统相关命令" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/03/27/%E7%BC%96%E7%A8%8B/shell/%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/" class="article-date">
-  <time datetime="2021-03-27T14:03:59.000Z" itemprop="datePublished">2021-03-27</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/27/%E7%BC%96%E7%A8%8B/shell/%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/">系统相关命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="du-disk-usage-递归查看文件夹下所有文件的大小"><a href="#du-disk-usage-递归查看文件夹下所有文件的大小" class="headerlink" title="du [disk usage] 递归查看文件夹下所有文件的大小"></a>du [disk usage] 递归查看文件夹下所有文件的大小</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 文件夹占用空间查看</span></span><br><span class="line">du -sh</span><br><span class="line"><span class="meta">#</span><span class="bash"> 当前目录下一级子文件和子目录占用的磁盘容量</span></span><br><span class="line">du -lh --max-depth=1</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/27/%E7%BC%96%E7%A8%8B/shell/%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/" data-id="ckobkr1i80030zeoygp1ac56p" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-编程/docker/入门篇" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/03/26/%E7%BC%96%E7%A8%8B/docker/%E5%85%A5%E9%97%A8%E7%AF%87/" class="article-date">
-  <time datetime="2021-03-26T01:30:27.000Z" itemprop="datePublished">2021-03-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/03/26/%E7%BC%96%E7%A8%8B/docker/%E5%85%A5%E9%97%A8%E7%AF%87/">docker入门</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="docker基础命令"><a href="#docker基础命令" class="headerlink" title="docker基础命令"></a>docker基础命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 镜像相关</span></span><br><span class="line">docker images</span><br><span class="line"><span class="meta">#</span><span class="bash"> docker image rm [imageId]</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 容器相关</span></span><br><span class="line">docker ps -a</span><br><span class="line"><span class="meta">#</span><span class="bash"> docker container rm [containerId]</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> docker &#123;start|stop&#125; [containerId]</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 运行</span></span><br><span class="line">docker run </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 编译</span></span><br><span class="line">docker build</span><br><span class="line"><span class="meta">#</span><span class="bash"> docker build -f [dockerfile path] -t [name:tag] .(build上下文位置)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入容器查看</span></span><br><span class="line">docker exec -it [containerId] bash</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/03/26/%E7%BC%96%E7%A8%8B/docker/%E5%85%A5%E9%97%A8%E7%AF%87/" data-id="ckobkr1gl000ezeoyfxzeb7mu" class="article-share-link">Share</a>
-      
-      
     </footer>
   </div>
   
@@ -521,7 +648,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
     </div>
   </div>
 
@@ -531,7 +658,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%90%86%E8%B4%A2/" rel="tag">理财</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%90%86%E8%B4%A2/" rel="tag">理财</a></li></ul>
     </div>
   </div>
 
@@ -541,7 +668,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/blog/tags/canvas/" style="font-size: 12.5px;">canvas</a> <a href="/blog/tags/js/" style="font-size: 17.5px;">js</a> <a href="/blog/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 15px;">动画</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 10px;">基础概念</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 12.5px;">工程化</a> <a href="/blog/tags/%E7%90%86%E8%B4%A2/" style="font-size: 10px;">理财</a>
+      <a href="/blog/tags/canvas/" style="font-size: 12.5px;">canvas</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/js/" style="font-size: 17.5px;">js</a> <a href="/blog/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 15px;">动画</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 10px;">基础概念</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 12.5px;">工程化</a> <a href="/blog/tags/%E7%90%86%E8%B4%A2/" style="font-size: 10px;">理财</a>
     </div>
   </div>
 
@@ -563,23 +690,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/05/05/%E7%94%9F%E6%B4%BB/%E7%90%86%E8%B4%A2%E6%96%B9%E5%90%91/">理财方向</a>
+            <a href="/blog/2021/05/11/%E8%8B%B1%E8%AF%AD/food/">食物 Food</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/05/%E7%BC%96%E7%A8%8B/shell/read/">read 命令</a>
+            <a href="/blog/2021/05/11/%E8%8B%B1%E8%AF%AD/clothes/">衣服 Clothes</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/05/%E7%BC%96%E7%A8%8B/canvas/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+            <a href="/blog/2021/05/11/%E7%BC%96%E7%A8%8B/shell/chapter18-expect/%20%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2ssh%E5%AF%86%E9%92%A5/">expect相关</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/05/%E7%BC%96%E7%A8%8B/css/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+            <a href="/blog/2021/05/11/%E7%BC%96%E7%A8%8B/shell/chapter17-trap/linux%E4%BF%A1%E5%8F%B7%E5%8F%8Atrap/">linux信号及trap</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/05/%E7%BC%96%E7%A8%8B/js/%E4%BB%8E%E6%95%B0%E5%AD%97%E5%88%86%E9%9A%94%E7%AC%A6%E7%9C%8B%E6%AD%A3%E5%88%99/">从数字分隔符看正则表达式</a>
+            <a href="/blog/2021/05/11/%E7%BC%96%E7%A8%8B/webpack/webpack%E7%9A%84%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B/">webpack的构建流程</a>
           </li>
         
       </ul>
