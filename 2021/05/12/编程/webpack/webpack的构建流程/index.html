@@ -5,17 +5,15 @@
   
 
   
-  <title>read 命令 | 安思科的备忘录</title>
+  <title>webpack的构建流程 | 安思科的备忘录</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="从标准输入中读取信息参数 -p prompt #提示 -t timeout # 超时时间, 单位为s命令行使用12345read -p &quot;Pls Input Your Vars: &quot; var1 var2echo &quot;$&amp;#123;var1&amp;#125;, $&amp;#123;var2&amp;#125;&quot;read -t 3 -p &quot;Pls Input Your Vars: &quot; var3 var4echo &quot;$&amp;#1">
-<meta name="keywords" content="shell">
+  <meta name="keywords" content="安思科, ansike">
 <meta property="og:type" content="article">
-<meta property="og:title" content="read 命令">
-<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;2021&#x2F;05&#x2F;11&#x2F;%E7%BC%96%E7%A8%8B&#x2F;shell&#x2F;read&#x2F;index.html">
+<meta property="og:title" content="webpack的构建流程">
+<meta property="og:url" content="https:&#x2F;&#x2F;ansike.github.io&#x2F;blog&#x2F;2021&#x2F;05&#x2F;12&#x2F;%E7%BC%96%E7%A8%8B&#x2F;webpack&#x2F;webpack%E7%9A%84%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B&#x2F;index.html">
 <meta property="og:site_name" content="安思科的备忘录">
-<meta property="og:description" content="从标准输入中读取信息参数 -p prompt #提示 -t timeout # 超时时间, 单位为s命令行使用12345read -p &quot;Pls Input Your Vars: &quot; var1 var2echo &quot;$&amp;#123;var1&amp;#125;, $&amp;#123;var2&amp;#125;&quot;read -t 3 -p &quot;Pls Input Your Vars: &quot; var3 var4echo &quot;$&amp;#1">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-05-11T01:14:52.937Z">
+<meta property="og:updated_time" content="2021-05-12T17:37:14.341Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/blog/atom.xml" title="安思科的备忘录" type="application/atom+xml">
@@ -63,16 +61,12 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-编程/shell/read" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-编程/webpack/webpack的构建流程" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2021/05/11/%E7%BC%96%E7%A8%8B/shell/read/" class="article-date">
-  <time datetime="2021-05-11T01:14:52.937Z" itemprop="datePublished">2021-05-11</time>
+    <a href="/blog/2021/05/12/%E7%BC%96%E7%A8%8B/webpack/webpack%E7%9A%84%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B/" class="article-date">
+  <time datetime="2021-05-12T17:37:14.341Z" itemprop="datePublished">2021-05-13</time>
 </a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
-  </div>
-
   </div>
   <div class="article-inner">
     
@@ -81,7 +75,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      read 命令
+      webpack的构建流程
     </h1>
   
 
@@ -89,39 +83,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="从标准输入中读取信息"><a href="#从标准输入中读取信息" class="headerlink" title="从标准输入中读取信息"></a>从标准输入中读取信息</h3><h5 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h5><ol>
-<li>-p prompt #提示</li>
-<li>-t timeout # 超时时间, 单位为s<h5 id="命令行使用"><a href="#命令行使用" class="headerlink" title="命令行使用"></a>命令行使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">read -p "Pls Input Your Vars: " var1 var2</span><br><span class="line">echo "$&#123;var1&#125;, $&#123;var2&#125;"</span><br><span class="line"></span><br><span class="line">read -t 3 -p "Pls Input Your Vars: " var3 var4</span><br><span class="line">echo "$&#123;var3&#125;, $&#123;var4&#125;"</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
+        <h3 id=""><a href="#" class="headerlink" title=""></a></h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/05/11/%E7%BC%96%E7%A8%8B/shell/read/" data-id="ckojcdods001y10qoaxd97cqi" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/05/12/%E7%BC%96%E7%A8%8B/webpack/webpack%E7%9A%84%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B/" data-id="ckolqwu4f003q40lp5ml0go0z" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
-
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/blog/2021/05/11/%E7%BC%96%E7%A8%8B/webpack/webpack%E7%9A%84%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/blog/2021/05/12/%E8%8B%B1%E8%AF%AD/clothes/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          webpack的构建流程
+          衣服 Clothes
         
       </div>
     </a>
   
   
-    <a href="/blog/2021/05/11/%E7%94%9F%E6%B4%BB/%E7%90%86%E8%B4%A2%E6%96%B9%E5%90%91/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/blog/2021/05/12/%E7%BC%96%E7%A8%8B/shell/read/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">理财方向</div>
+      <div class="article-nav-title">read 命令</div>
     </a>
   
 </nav>
@@ -179,23 +166,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/05/11/%E8%8B%B1%E8%AF%AD/food/">食物 Food</a>
+            <a href="/blog/2021/05/12/%E8%8B%B1%E8%AF%AD/food/">食物 Food</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/11/%E8%8B%B1%E8%AF%AD/clothes/">衣服 Clothes</a>
+            <a href="/blog/2021/05/12/%E8%8B%B1%E8%AF%AD/clothes/">衣服 Clothes</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/11/%E7%BC%96%E7%A8%8B/shell/chapter18-expect/%20%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2ssh%E5%AF%86%E9%92%A5/">expect相关</a>
+            <a href="/blog/2021/05/12/%E7%BC%96%E7%A8%8B/webpack/webpack%E7%9A%84%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B/">webpack的构建流程</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/11/%E7%BC%96%E7%A8%8B/shell/chapter17-trap/linux%E4%BF%A1%E5%8F%B7%E5%8F%8Atrap/">linux信号及trap</a>
+            <a href="/blog/2021/05/12/%E7%BC%96%E7%A8%8B/shell/read/">read 命令</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/11/%E7%BC%96%E7%A8%8B/webpack/webpack%E7%9A%84%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B/">webpack的构建流程</a>
+            <a href="/blog/2021/05/12/%E7%94%9F%E6%B4%BB/%E7%90%86%E8%B4%A2%E6%96%B9%E5%90%91/">理财方向</a>
           </li>
         
       </ul>
