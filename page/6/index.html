@@ -64,52 +64,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-编程/shell/判断字符串是否为数字的多种思路" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2021/02/21/%E7%BC%96%E7%A8%8B/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/" class="article-date">
-  <time datetime="2021-02-21T15:06:11.000Z" itemprop="datePublished">2021-02-21</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/2021/02/21/%E7%BC%96%E7%A8%8B/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/">判断字符串是否为数字的多种思路</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h5 id="将字符串中的所有数字都删除-判断是否是空串"><a href="#将字符串中的所有数字都删除-判断是否是空串" class="headerlink" title="将字符串中的所有数字都删除,判断是否是空串"></a>将字符串中的所有数字都删除,判断是否是空串</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> -z:zero, -n:nozero</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sed + 正则</span></span><br><span class="line">[ -z "`echo test111 | sed 's/[0-9]//g'`" ] &amp;&amp; echo int || echo char</span><br><span class="line">[ -z "`echo 111 | sed 's/[0-9]//g'`" ] &amp;&amp; echo int || echo char</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 变量字串</span></span><br><span class="line">var1=test111</span><br><span class="line">[ -n "`echo $&#123;var1//[0-9]/&#125;`" ] &amp;&amp; echo char || echo int</span><br><span class="line">var2=111</span><br><span class="line">[ -n "`echo $&#123;var2//[0-9]/&#125;`" ] &amp;&amp; echo char || echo int</span><br></pre></td></tr></table></figure>
-
-<h5 id="将字符串中的所有非数字都删除-判断和原串是否相等"><a href="#将字符串中的所有非数字都删除-判断和原串是否相等" class="headerlink" title="将字符串中的所有非数字都删除,判断和原串是否相等"></a>将字符串中的所有非数字都删除,判断和原串是否相等</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var1=test111</span><br><span class="line">[ -n "$var1" -a "$&#123;var1//[^0-9]/&#125;" != "$var1" ] &amp;&amp; echo char || echo int</span><br><span class="line">var2=111</span><br><span class="line">[ -n "$var2" -a "$&#123;var2//[^0-9]/&#125;" != "$var2" ] &amp;&amp; echo char || echo int</span><br></pre></td></tr></table></figure>
-
-<h5 id="通过expr进行整数运算-判断执行结果"><a href="#通过expr进行整数运算-判断执行结果" class="headerlink" title="通过expr进行整数运算,判断执行结果"></a>通过expr进行整数运算,判断执行结果</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var1=test111</span><br><span class="line">expr 1 + $var1 &amp;&gt;/dev/null</span><br><span class="line">[ $? -ne 0 ] &amp;&amp; echo char || echo int</span><br><span class="line"></span><br><span class="line">var2=111</span><br><span class="line">expr 1 + $var2 &amp;&gt;/dev/null</span><br><span class="line">[ $? -ne 0 ] &amp;&amp; echo char || echo int</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/21/%E7%BC%96%E7%A8%8B/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/" data-id="ckolqwu3n002p40lpdpzg3lrz" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-编程/shell/shell比较常用的符号" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2021/02/21/%E7%BC%96%E7%A8%8B/shell/shell%E6%AF%94%E8%BE%83%E5%B8%B8%E7%94%A8%E7%9A%84%E7%AC%A6%E5%8F%B7/" class="article-date">
@@ -148,7 +102,53 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/21/%E7%BC%96%E7%A8%8B/shell/shell%E6%AF%94%E8%BE%83%E5%B8%B8%E7%94%A8%E7%9A%84%E7%AC%A6%E5%8F%B7/" data-id="ckolqwu3f002440lpa4dx7oe1" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/21/%E7%BC%96%E7%A8%8B/shell/shell%E6%AF%94%E8%BE%83%E5%B8%B8%E7%94%A8%E7%9A%84%E7%AC%A6%E5%8F%B7/" data-id="ckozv16f900281srv4gfb95s1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/判断字符串是否为数字的多种思路" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2021/02/21/%E7%BC%96%E7%A8%8B/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/" class="article-date">
+  <time datetime="2021-02-21T15:06:11.000Z" itemprop="datePublished">2021-02-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2021/02/21/%E7%BC%96%E7%A8%8B/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/">判断字符串是否为数字的多种思路</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="将字符串中的所有数字都删除-判断是否是空串"><a href="#将字符串中的所有数字都删除-判断是否是空串" class="headerlink" title="将字符串中的所有数字都删除,判断是否是空串"></a>将字符串中的所有数字都删除,判断是否是空串</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> -z:zero, -n:nozero</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sed + 正则</span></span><br><span class="line">[ -z "`echo test111 | sed 's/[0-9]//g'`" ] &amp;&amp; echo int || echo char</span><br><span class="line">[ -z "`echo 111 | sed 's/[0-9]//g'`" ] &amp;&amp; echo int || echo char</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 变量字串</span></span><br><span class="line">var1=test111</span><br><span class="line">[ -n "`echo $&#123;var1//[0-9]/&#125;`" ] &amp;&amp; echo char || echo int</span><br><span class="line">var2=111</span><br><span class="line">[ -n "`echo $&#123;var2//[0-9]/&#125;`" ] &amp;&amp; echo char || echo int</span><br></pre></td></tr></table></figure>
+
+<h5 id="将字符串中的所有非数字都删除-判断和原串是否相等"><a href="#将字符串中的所有非数字都删除-判断和原串是否相等" class="headerlink" title="将字符串中的所有非数字都删除,判断和原串是否相等"></a>将字符串中的所有非数字都删除,判断和原串是否相等</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var1=test111</span><br><span class="line">[ -n "$var1" -a "$&#123;var1//[^0-9]/&#125;" != "$var1" ] &amp;&amp; echo char || echo int</span><br><span class="line">var2=111</span><br><span class="line">[ -n "$var2" -a "$&#123;var2//[^0-9]/&#125;" != "$var2" ] &amp;&amp; echo char || echo int</span><br></pre></td></tr></table></figure>
+
+<h5 id="通过expr进行整数运算-判断执行结果"><a href="#通过expr进行整数运算-判断执行结果" class="headerlink" title="通过expr进行整数运算,判断执行结果"></a>通过expr进行整数运算,判断执行结果</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var1=test111</span><br><span class="line">expr 1 + $var1 &amp;&gt;/dev/null</span><br><span class="line">[ $? -ne 0 ] &amp;&amp; echo char || echo int</span><br><span class="line"></span><br><span class="line">var2=111</span><br><span class="line">expr 1 + $var2 &amp;&gt;/dev/null</span><br><span class="line">[ $? -ne 0 ] &amp;&amp; echo char || echo int</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2021/02/21/%E7%BC%96%E7%A8%8B/shell/%E5%88%A4%E6%96%AD%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%98%AF%E5%90%A6%E4%B8%BA%E6%95%B0%E5%AD%97%E7%9A%84%E5%A4%9A%E7%A7%8D%E6%80%9D%E8%B7%AF/" data-id="ckozv16fi002t1srvgyd25ubo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
@@ -260,7 +260,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/20/%E7%BC%96%E7%A8%8B/shell/%E7%9B%91%E6%8E%A7Nginx%E5%92%8CMysql%E6%9C%8D%E5%8A%A1/" data-id="ckolqwu3x003840lp6c8vd5n6" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/20/%E7%BC%96%E7%A8%8B/shell/%E7%9B%91%E6%8E%A7Nginx%E5%92%8CMysql%E6%9C%8D%E5%8A%A1/" data-id="ckozv16g1003d1srve09wesay" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
@@ -318,7 +318,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/12/%E7%BC%96%E7%A8%8B/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/" data-id="ckolqwu46003j40lp4m8q58d2" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/12/%E7%BC%96%E7%A8%8B/shell/%E9%82%AE%E4%BB%B6%E6%8A%A5%E8%AD%A6%E8%84%9A%E6%9C%AC%E5%8F%8A%E5%AE%9E%E7%8E%B0/" data-id="ckozv16g8003n1srv35pk0y5h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
@@ -418,7 +418,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/08/%E7%BC%96%E7%A8%8B/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" data-id="ckolqwu3v003540lpg5yncekb" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/08/%E7%BC%96%E7%A8%8B/shell/%E6%AF%94%E8%BE%83%E6%B5%8B%E8%AF%95%E5%91%BD%E4%BB%A4/" data-id="ckozv16fw00391srvhng6755t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
@@ -473,7 +473,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/08/%E7%BC%96%E7%A8%8B/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/" data-id="ckolqwu3q002y40lph4ss9h9z" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/08/%E7%BC%96%E7%A8%8B/shell/%E6%9D%A1%E4%BB%B6%E6%B5%8B%E8%AF%95/" data-id="ckozv16fr00321srv39tufpbd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
@@ -539,7 +539,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2021/02/06/%E7%BC%96%E7%A8%8B/shell/calc/" data-id="ckolqwu35001j40lpgr57aul0" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2021/02/06/%E7%BC%96%E7%A8%8B/shell/calc/" data-id="ckozv16es001n1srvec2ia5cn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
@@ -551,10 +551,10 @@
 
 
   
-    <article id="post-编程/集中式和分布式" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-编程/node/http/pipe流" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2020/02/17/%E7%BC%96%E7%A8%8B/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" class="article-date">
-  <time datetime="2020-02-17T06:23:28.000Z" itemprop="datePublished">2020-02-17</time>
+    <a href="/blog/2020/05/22/%E7%BC%96%E7%A8%8B/node/http/pipe%E6%B5%81/" class="article-date">
+  <time datetime="2020-05-22T09:39:28.000Z" itemprop="datePublished">2020-05-22</time>
 </a>
     
   <div class="article-category">
@@ -569,7 +569,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2020/02/17/%E7%BC%96%E7%A8%8B/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/">集中式系统和分布式系统的区别</a>
+      <a class="article-title" href="/blog/2020/05/22/%E7%BC%96%E7%A8%8B/node/http/pipe%E6%B5%81/">http 读 流</a>
     </h1>
   
 
@@ -577,14 +577,133 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="集中式"><a href="#集中式" class="headerlink" title="集中式"></a>集中式</h3><p>集中式系统中版本库是集中存放在中央服务器的。以svn为例，开发人员工作的时候都需要从中央服务器获取最新的版本，工作完之后需要将工作推送给中央服务器。<br>eg：SVN，云服务器（在云服务器开发）<br>优点：减少了硬件和软件成本<br>问题：<strong>必须联网（局域网或者互联网）</strong></p>
-<h3 id="分布式"><a href="#分布式" class="headerlink" title="分布式"></a>分布式</h3><p>分布式系统中没有中央服务器的概念。</p>
-<p>eg：git<br>优点：每个人的电脑中都有完整的版本库，所以安全性很高，即使服务器仓库被破坏了，损失也不会很大。</p>
+        <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">cReq, cRes</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="comment">// 读取文件文件流返回给Res对象处理</span></span><br><span class="line">  fs.ReadStream(<span class="string">'./server.js'</span>).pipe(cRes)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">8001</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'服务启动8001'</span>);</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/2020/02/17/%E7%BC%96%E7%A8%8B/%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F/" data-id="ckolqwu1r000140lp0j068kkc" class="article-share-link">Share</a>
+      <a data-url="https://ansike.github.io/blog/2020/05/22/%E7%BC%96%E7%A8%8B/node/http/pipe%E6%B5%81/" data-id="ckozv16h2004z1srv8wzh4887" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/node/http/中间人代理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/05/22/%E7%BC%96%E7%A8%8B/node/http/%E4%B8%AD%E9%97%B4%E4%BA%BA%E4%BB%A3%E7%90%86/" class="article-date">
+  <time datetime="2020-05-22T09:39:28.000Z" itemprop="datePublished">2020-05-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/05/22/%E7%BC%96%E7%A8%8B/node/http/%E4%B8%AD%E9%97%B4%E4%BA%BA%E4%BB%A3%E7%90%86/">中间人代理-http,https</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="中间人代理-http"><a href="#中间人代理-http" class="headerlink" title="中间人代理-http"></a>中间人代理-http</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 最后要请求的真实服务</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">cReq, cRes</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="comment">// 读取文件文件流返回给Res对象处理</span></span><br><span class="line">  fs.ReadStream(<span class="string">'./server.js'</span>).pipe(cRes)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">8001</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'服务启动8001'</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户直接请求的服务</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">cReq, cRes</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> options = &#123;</span><br><span class="line">    hostname: cReq.hostname,</span><br><span class="line">    <span class="comment">// 在这儿改了端口</span></span><br><span class="line">    port: <span class="string">"8001"</span>,</span><br><span class="line">    path: cReq.path,</span><br><span class="line">    method: cReq.method,</span><br><span class="line">    headers: cReq.headers,</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> newReq = http.request(options, (nRes)=&gt;&#123;</span><br><span class="line">    cRes.writeHead(nRes.statusCode, nRes.headers);</span><br><span class="line">    nRes.pipe(cRes);</span><br><span class="line">  &#125;).on(<span class="string">"error"</span>, (e)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e);</span><br><span class="line">    cRes.end(<span class="string">"error"</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">  cReq.pipe(newReq);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">8888</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"服务8888开始启动"</span>);</span><br><span class="line"><span class="comment">// 客户此时请求时会拿到真实服务中返回的"this data is from 8001"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="中间人代理-https"><a href="#中间人代理-https" class="headerlink" title="中间人代理-https"></a>中间人代理-https</h4><p>差异仅有http换成https，增加了证书部分<br>可以跨协议代理</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 最后要请求的真实服务</span></span><br><span class="line"><span class="keyword">const</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">	key: fs.readFileSync(<span class="string">'./server.key'</span>),</span><br><span class="line">	cert: fs.readFileSync(<span class="string">'./server.crt'</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = https.createServer(options);</span><br><span class="line"><span class="keyword">const</span> request = <span class="function">(<span class="params">cReq, cRes</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'新的请求'</span>);</span><br><span class="line">	fs.ReadStream(<span class="string">'./server.key'</span>).pipe(cRes);</span><br><span class="line">&#125;;</span><br><span class="line">server.on(<span class="string">'request'</span>, request);</span><br><span class="line">server.listen(<span class="number">8001</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'服务启动8001'</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//禁用证书验证，不然自签名的证书无法建立 TLS 连接</span></span><br><span class="line">process.env.NODE_TLS_REJECT_UNAUTHORIZED = <span class="string">"0"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> request = <span class="function">(<span class="params">cReq, cRes</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'request'</span>);</span><br><span class="line">	<span class="keyword">const</span> options = &#123;</span><br><span class="line">		hostname: cReq.hostname,</span><br><span class="line">		<span class="comment">// 在这儿改了端口</span></span><br><span class="line">		port: <span class="string">'8001'</span>,</span><br><span class="line">		path: cReq.path,</span><br><span class="line">		method: cReq.method,</span><br><span class="line">		headers: cReq.headers,</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="keyword">const</span> newReq = https</span><br><span class="line">		.request(options, (nRes) =&gt; &#123;</span><br><span class="line">			cRes.writeHead(nRes.statusCode, nRes.headers);</span><br><span class="line">			nRes.pipe(cRes);</span><br><span class="line">		&#125;)</span><br><span class="line">		.on(<span class="string">'error'</span>, (e) =&gt; &#123;</span><br><span class="line">			<span class="built_in">console</span>.log(e);</span><br><span class="line">			cRes.end(<span class="string">'error'</span>);</span><br><span class="line">		&#125;);</span><br><span class="line">	cReq.pipe(newReq);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">	key: fs.readFileSync(<span class="string">'./server.key'</span>),</span><br><span class="line">	cert: fs.readFileSync(<span class="string">'./server.crt'</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = https.createServer(options);</span><br><span class="line">server.on(<span class="string">'request'</span>, request);</span><br><span class="line">server.listen(<span class="number">8888</span>, <span class="string">'127.0.0.1'</span>, () =&gt; &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'服务8888开始启动'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2020/05/22/%E7%BC%96%E7%A8%8B/node/http/%E4%B8%AD%E9%97%B4%E4%BA%BA%E4%BB%A3%E7%90%86/" data-id="ckozv16h500521srveriy8uye" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/node/http/tunnel代理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/05/22/%E7%BC%96%E7%A8%8B/node/http/tunnel%E4%BB%A3%E7%90%86/" class="article-date">
+  <time datetime="2020-05-22T09:39:28.000Z" itemprop="datePublished">2020-05-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2020/05/22/%E7%BC%96%E7%A8%8B/node/http/tunnel%E4%BB%A3%E7%90%86/">隧道代理-https</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>以下需要创建https的整数，参考<a href="https://www.jianshu.com/p/d600bd2ef440" target="_blank" rel="noopener">创建证书跳转</a></p>
+<ol>
+<li>请求方发起connect请求</li>
+<li>代理方监听到connect请求后，尝试建立一个请求方到目标服务的tcp连接</li>
+<li>请求方和目标服务进行TLS握手</li>
+<li>验证通过之后TCP连接建立成功，随后代理方进行无脑传递数据</li>
+</ol>
+<h4 id="目标服务"><a href="#目标服务" class="headerlink" title="目标服务"></a>目标服务</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>);</span><br><span class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = https.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'start server'</span>);</span><br><span class="line">	connectRequest(res);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="代理服务"><a href="#代理服务" class="headerlink" title="代理服务"></a>代理服务</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// create tunnel</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">connect</span>(<span class="params">cReq, clientSock</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'connect'</span>);</span><br><span class="line">	<span class="keyword">var</span> serverSock = net</span><br><span class="line">		<span class="comment">// 注意此处的隧道不近可以当前服务建立，也可以和任意服务简历，如果和其他服务建立之后，之后的数据通信将不会通过该服务</span></span><br><span class="line">		.connect(<span class="string">'8001'</span>, <span class="string">'127.0.0.1'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="comment">// .connect('8888', '127.0.0.1', function() &#123;</span></span><br><span class="line">			<span class="built_in">console</span>.log(<span class="string">'connect:8001'</span>);</span><br><span class="line">			clientSock.write(<span class="string">'HTTP/1.1 200 Connection Established\r\n\r\n'</span>);</span><br><span class="line">			clientSock.write(<span class="string">'这是一段文本'</span>);</span><br><span class="line">			serverSock.pipe(clientSock);</span><br><span class="line">		&#125;)</span><br><span class="line">		.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">			clientSock.end();</span><br><span class="line">		&#125;);</span><br><span class="line">	clientSock.pipe(serverSock);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">	key: fs.readFileSync(<span class="string">'./server.key'</span>),</span><br><span class="line">	cert: fs.readFileSync(<span class="string">'./server.crt'</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = https.createServer(options);</span><br><span class="line">server.on(<span class="string">'connect'</span>, connect);</span><br><span class="line">server.listen(<span class="number">8888</span>, <span class="string">'127.0.0.1'</span>, () =&gt; &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'服务8888开始启动'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="验证tunnel的服务"><a href="#验证tunnel的服务" class="headerlink" title="验证tunnel的服务"></a>验证tunnel的服务</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">	hostname: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">	port: <span class="number">8888</span>,</span><br><span class="line">	path: <span class="string">'/'</span>,</span><br><span class="line">	method: <span class="string">'CONNECT'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//禁用证书验证，不然自签名的证书无法建立 TLS 连接</span></span><br><span class="line">process.env.NODE_TLS_REJECT_UNAUTHORIZED = <span class="string">'0'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> req = https.request(options);</span><br><span class="line"></span><br><span class="line">req.on(<span class="string">'connect'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res, socket</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'connect'</span>);</span><br><span class="line">	socket.write(<span class="string">'GET / HTTP/1.1\r\n'</span> + <span class="string">'Host: 127.0.0.1\r\n'</span> + <span class="string">'Connection: Close\r\n'</span> + <span class="string">'\r\n'</span>);</span><br><span class="line"></span><br><span class="line">	socket.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(chunk.toString());</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">	socket.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'socket end.'</span>);</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">req.end();</span><br></pre></td></tr></table></figure>
+<p>控制台打印</p>
+<pre><code class="(node:27498)">connect
+这是一段文本
+HTTP/1.1 200 OK
+Date: Sat, 22 May 2021 14:10:42 GMT
+Connection: close
+Transfer-Encoding: chunked
+
+68f
+-----BEGIN RSA PRIVATE KEY-----
+xxx,删除无用信息
+-----END RSA PRIVATE KEY-----
+
+
+0
+
+
+socket end.</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/2020/05/22/%E7%BC%96%E7%A8%8B/node/http/tunnel%E4%BB%A3%E7%90%86/" data-id="ckozv16h400501srv6y2m59f5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li></ul>
@@ -600,7 +719,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/blog/page/5/">&amp;laquo; 上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/">4</a><a class="page-number" href="/blog/page/5/">5</a><span class="page-number current">6</span>
+    <a class="extend prev" rel="prev" href="/blog/page/5/">&amp;laquo; 上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/">4</a><a class="page-number" href="/blog/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/blog/page/7/">7</a><a class="extend next" rel="next" href="/blog/page/7/">下一页 &amp;raquo;</a>
   </nav>
 
 </section>
@@ -631,7 +750,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/blog/tags/canvas/" style="font-size: 12.5px;">canvas</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/js/" style="font-size: 17.5px;">js</a> <a href="/blog/tags/mysql/" style="font-size: 12.5px;">mysql</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 15px;">动画</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 10px;">基础概念</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 12.5px;">工程化</a> <a href="/blog/tags/%E7%90%86%E8%B4%A2/" style="font-size: 10px;">理财</a>
+      <a href="/blog/tags/canvas/" style="font-size: 12px;">canvas</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/js/" style="font-size: 18px;">js</a> <a href="/blog/tags/mysql/" style="font-size: 12px;">mysql</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 14px;">动画</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 16px;">基础概念</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 12px;">工程化</a> <a href="/blog/tags/%E7%90%86%E8%B4%A2/" style="font-size: 10px;">理财</a>
     </div>
   </div>
 
@@ -640,7 +759,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/02/">二月 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/04/">四月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/03/">三月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/02/">二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/02/">二月 2020</a></li></ul>
     </div>
   </div>
 
@@ -653,23 +772,23 @@
       <ul>
         
           <li>
-            <a href="/blog/2021/05/12/%E8%8B%B1%E8%AF%AD/food/">食物 Food</a>
+            <a href="/blog/2021/05/22/%E8%8B%B1%E8%AF%AD/food/">食物 Food</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/12/%E8%8B%B1%E8%AF%AD/clothes/">衣服 Clothes</a>
+            <a href="/blog/2021/05/22/%E7%BC%96%E7%A8%8B/webpack/webpack%E7%9A%84%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B/">webpack的构建流程</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/12/%E7%BC%96%E7%A8%8B/webpack/webpack%E7%9A%84%E6%9E%84%E5%BB%BA%E6%B5%81%E7%A8%8B/">webpack的构建流程</a>
+            <a href="/blog/2021/05/22/%E8%8B%B1%E8%AF%AD/clothes/">衣服 Clothes</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/12/%E7%BC%96%E7%A8%8B/shell/read/">read 命令</a>
+            <a href="/blog/2021/05/22/%E7%BC%96%E7%A8%8B/shell/chapter18-expect/%20%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2ssh%E5%AF%86%E9%92%A5/">expect相关</a>
           </li>
         
           <li>
-            <a href="/blog/2021/05/12/%E7%94%9F%E6%B4%BB/%E7%90%86%E8%B4%A2%E6%96%B9%E5%90%91/">理财方向</a>
+            <a href="/blog/2021/05/22/%E7%BC%96%E7%A8%8B/shell/chapter17-trap/linux%E4%BF%A1%E5%8F%B7%E5%8F%8Atrap/">linux信号及trap</a>
           </li>
         
       </ul>
