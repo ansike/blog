@@ -63,6 +63,7 @@ default_category: uncategorized
 category_map: 
   编程: programming
   生活: life
+  英语: english
   其他: other
 tag_map:
   - mysql
@@ -72,6 +73,8 @@ tag_map:
   - shell
   - css
   - docker
+  - food
+  - clothes
 
 # Metadata elements
 ## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
