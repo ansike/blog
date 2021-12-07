@@ -2,8 +2,7 @@
 title: 系统自启动rsync服务的方法
 categories: 编程
 tags: shell
-date: 2021-02-24 23:30:42
-
+date: 2021-05-05 22:46:13
 ---
 
 使用`/etc/init.d/rsyncd {start|stop|restart}`启动,停止,重启

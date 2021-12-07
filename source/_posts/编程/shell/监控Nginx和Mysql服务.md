@@ -2,8 +2,7 @@
 title: 监控Nginx和Mysql服务是否正常,如果未启动则启动相应服务
 categories: 编程
 tags: shell
-date: 2021-02-21 00:12:35
-
+date: 2021-05-05 22:46:13
 ---
 
 > 环境：CentOS Linux release 8.1.1911 (Core)

@@ -2,8 +2,7 @@
 title: js对象
 categories: 编程
 tags: js
-date: 2021-05-05 17:24:39
-
+date: 2021-07-22 00:13:29
 ---
 ### 对象的属性
 ECMAScript中有两种属性: 数据属性和访问器属性

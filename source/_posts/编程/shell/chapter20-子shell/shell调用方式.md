@@ -2,7 +2,7 @@
 title: shell调用方式
 categories: 编程
 tags: shell
-date: 2021-04-24 23:08:59
+date: 2021-05-05 22:46:13
 ---
 
 ### 调用方式分类

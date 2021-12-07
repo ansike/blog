@@ -2,8 +2,7 @@
 title: nginx自启动脚本
 categories: 编程
 tags: shell
-date: 2021-03-15 09:39:51
-
+date: 2021-05-05 22:46:13
 ---
 
 使用`/etc/init.d/nginx {start|stop|restart}`启动,停止,重启

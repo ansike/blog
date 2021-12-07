@@ -2,7 +2,7 @@
 title: 变量字串
 categories: 编程
 tags: shell
-date: 2021-04-14 00:10:45
+date: 2021-05-05 22:46:13
 ---
 
 ### 变量字串说明

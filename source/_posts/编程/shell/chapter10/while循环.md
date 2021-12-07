@@ -2,8 +2,7 @@
 title: while循环
 categories: 编程
 tags: shell
-date: 2021-03-16 23:11:08
-
+date: 2021-05-05 22:46:13
 ---
 ### 基础使用
 while <条件表达式>

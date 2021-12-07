@@ -2,9 +2,7 @@
 title: canvas 基础特性
 categories: 编程
 tags: canvas
-date: 2021-05-05 17:24:39
-
-
+date: 2021-05-05 22:46:13
 ---
 ### 对象创建
 ```javascript
