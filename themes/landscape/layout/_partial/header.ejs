@@ -24,8 +24,9 @@
         <% } %>
         <a id="nav-search-btn" class="nav-icon" title="<%= __('search') %>"></a>
       </nav>
-      <div id="search-form-wrap">
-        <%- search_form({button: '&#xF002;'}) %>
+      <div id="search-box-wrap">
+        <!-- <%- search_form({button: '&#xF002;'}) %> -->
+        <%- partial('../_widget/search_form') %> 
       </div>
     </div>
   </div>
