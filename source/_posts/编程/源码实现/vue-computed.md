@@ -4,6 +4,7 @@ categories: 编程
 tags:
   - vue
   - computed
+  - js
 date: 2018-05-05 22:46:13
 ---
 
