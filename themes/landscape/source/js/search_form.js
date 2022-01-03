@@ -43,8 +43,8 @@
 
   $(".search-box-input").on("change", function (e) {
     const value = e.target.value;
-    if (value) {
-      const posts = data.Post;
+    const posts = data.Post;
+    if (value && posts) {
       const matchedPostList = posts
         .filter((post) => {
           const title = post.title;
