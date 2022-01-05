@@ -2,7 +2,7 @@
 title: for循环
 categories: 编程
 tags: shell
-date: 2021-03-29 00:14:53
+date: 2021-05-05 22:46:13
 ---
 
 ### 基础使用

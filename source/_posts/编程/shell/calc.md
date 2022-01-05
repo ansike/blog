@@ -2,7 +2,7 @@
 title: shell中变量的数值计算
 categories: 编程
 tags: shell
-date: 2021-02-07 00:08:53
+date: 2021-05-05 22:46:13
 ---
 ### 简介
 1. (())

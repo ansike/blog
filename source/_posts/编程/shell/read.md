@@ -2,7 +2,7 @@
 title: read 命令
 categories: 编程
 tags: shell
-date: 2021-02-08 17:09:52
+date: 2021-05-05 22:46:13
  2021-02-08 17:09:52
 
 ---

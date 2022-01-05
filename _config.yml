@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 安思科的备忘录
+title: 安思科的博客
 subtitle: ''
 description: '记录一些平时点滴'
 keywords: '安思科, ansike'
@@ -40,7 +40,10 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
+marked:
+  prependRoot: true
+  postAsset: true
 relative_link: false
 future: true
 highlight:
@@ -72,6 +75,7 @@ tag_map:
   - linux
   - shell
   - css
+  - js
   - docker
   - food
   - clothes

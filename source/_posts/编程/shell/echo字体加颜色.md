@@ -2,8 +2,7 @@
 title: echo字体加颜色
 categories: 编程
 tags: shell
-date: 2021-03-03 00:06:34
-
+date: 2021-05-05 22:46:13
 ---
 ### 基础语法
 ``` shell

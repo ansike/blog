@@ -1,8 +1,8 @@
 ---
-title: cross origin
+title: 浏览器跨域[cross origin]
 categories: 编程
 tags: js
-date: 2021-05-05 17:24:39
+date: 2019-03-15 12:11:18
 ---
 
 就是创建一个文件夹eg:devChromeData

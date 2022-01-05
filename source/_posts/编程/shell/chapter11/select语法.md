@@ -2,8 +2,7 @@
 title: select语法
 categories: 编程
 tags: shell
-date: 2021-04-10 13:09:02
-
+date: 2021-05-05 22:46:13
 ---
 
 ### 基础语法

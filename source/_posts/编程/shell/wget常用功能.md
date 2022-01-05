@@ -2,8 +2,7 @@
 title:  wget常用功能
 categories: 编程
 tags: shell
-date: 2021-03-13 10:18:59
-
+date: 2021-05-05 22:46:13
 ---
 
 `Wget - The non-interactive network downloader.`
