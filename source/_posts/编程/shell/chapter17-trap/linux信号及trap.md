@@ -1,12 +1,16 @@
 ---
 title: linux信号及trap
+categories: 编程
+tags: shell
+date: 2021-02-10 17:09:52
 ---
 
-运行shell脚本时,按下ctrl+C程序就会立即终止运行.ctrl+C就会发出一个linux信号,通知shell进程终止运行.
-某些情况下我们并不希望shell脚本在运行时被信号终端,此时可以使用屏蔽信号的手段.
-简单说:linux信号是由一个整数构成的异步消息. 可以由某个进程发给其他进程,也可以由用户按下特定键由系统发给某个进程.
+运行 shell 脚本时,按下 ctrl+C 程序就会立即终止运行.ctrl+C 就会发出一个 linux 信号,通知 shell 进程终止运行.
+某些情况下我们并不希望 shell 脚本在运行时被信号终端,此时可以使用屏蔽信号的手段.
+简单说:linux 信号是由一个整数构成的异步消息. 可以由某个进程发给其他进程,也可以由用户按下特定键由系统发给某个进程.
 
 #### 系统支持的各种信号
+
 ```shell
  1) SIGHUP       2) SIGINT       3) SIGQUIT      4) SIGILL       5) SIGTRAP
  6) SIGABRT      7) SIGBUS       8) SIGFPE       9) SIGKILL     10) SIGUSR1
@@ -24,8 +28,10 @@ title: linux信号及trap
 
 ```
 
-#### 使用tap控制信号
+#### 使用 tap 控制信号
+
 用途: 程序被中断时完成清理工作, 或者屏蔽用户非法输入
+
 ```shell
 # 监听ctrl+c信号
 trap "echo hello" INT # trap "echo hello" 2
