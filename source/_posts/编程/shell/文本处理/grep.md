@@ -25,7 +25,7 @@ grep [options] [pattern] [FILE]
 ### Detail
 
 ```shell
-# test file
+# test file > 为覆盖, >>为追加
 echo "test1\ntest2\ntest3" > test.txt
 
 # -v
