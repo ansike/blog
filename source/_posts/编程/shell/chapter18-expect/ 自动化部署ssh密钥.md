@@ -2,7 +2,7 @@
 title: expect相关
 categories: 编程
 tags: shell
-date: 2021-02-11 17:09:52
+date: 
 ---
 
 #### expect常用命令
