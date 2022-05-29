@@ -5,7 +5,7 @@ tags: js
 date: 2022-04-17 16:24:45
 ---
 
-该章节只会记录一些工作/生活中能用得倒的 leetcode 题解思路
+该章节只会记录一些工作/生活中能用得到的 leetcode 题解思路
 
 1. 整数划分
    leetcode https://leetcode.cn/problems/coin-change/
@@ -45,4 +45,32 @@ function coinChange(coins, amount) {
 }
 ```
 
-2.
+2. 最长公共部分（字符串最长子串，718. 最长重复子数组）
+
+```javascript
+// 两个数组的最长重复子数组
+function findLength(nums1: number[], nums2: number[]): number {
+  let maxLen = 0;
+  let arr = [];
+  const dp = Array.from({ length: nums1.length + 1 }, () =>
+    new Array(nums2.length + 1).fill(0)
+  );
+  for (let i = 1; i <= nums1.length; i++) {
+    for (let j = 1; j <= nums2.length; j++) {
+      if (nums1[i - 1] === nums2[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1] + 1;
+      }
+      if (dp[i][j] > maxLen) {
+        maxLen = dp[i][j];
+        arr = nums1.slice(i - maxLen, i);
+      }
+    }
+  }
+  console.log(arr);
+  return maxLen;
+}
+```
+
+3. 树的遍历 （前，中，后）（深度优先，按层遍历）
+
+4. 两个数组的交集
