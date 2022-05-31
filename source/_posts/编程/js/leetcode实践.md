@@ -74,3 +74,19 @@ function findLength(nums1: number[], nums2: number[]): number {
 3. 树的遍历 （前，中，后）（深度优先，按层遍历）
 
 4. 两个数组的交集
+
+5. 大顶堆和小顶堆
+
+6. 数组中查找非偶数对的数(eg:[1,1,2] 查找 2)
+   最简单的做饭是利用 map 存每个数出现的次数，最后查找满足条件的数
+   还可以利用异或的`自反特性`a^a=0 且 a^0=0
+
+```typescript
+function singleNumber(nums: number[]): number {
+  let res = 0;
+  for (const num of nums) {
+    res ^= num;
+  }
+  return res;
+}
+```
