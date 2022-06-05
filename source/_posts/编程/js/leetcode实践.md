@@ -90,3 +90,48 @@ function singleNumber(nums: number[]): number {
   return res;
 }
 ```
+
+7. 设计哈希映射
+   没有一个 map 能完全存储所有的映射关系，需要一种方式来实现有限的资源做无限的事儿（理论上）。
+   横向上无法扩展太多，可以从纵向考虑，对象+链表的方法
+1. 选择一个最大的 BASE 值，作为取于的数
+1. 创建结构化的数据结构(data)存储所有的 key，长度为（BASE）
+1. 每次新增一个 key，都需要 key%BASE，然后再 data[key%BASE]中存储对应的链表，在链表上存储 hash 冲突的 key
+
+```typescript
+class MyHashMap {
+  BASE = 679;
+  data = Array.from({ length: this.BASE }, () => []);
+  constructor() {}
+
+  put(key: number, value: number): void {
+    const idx = this.hash(key);
+    for (const ele of this.data[idx]) {
+      if (key === ele[0]) {
+        ele[1] = value;
+        return;
+      }
+    }
+    this.data[idx].push([key, value]);
+  }
+
+  get(key: number): number {
+    const idx = this.hash(key);
+    for (const ele of this.data[idx]) {
+      if (key === ele[0]) {
+        return ele[1];
+      }
+    }
+    return -1;
+  }
+
+  remove(key: number): void {
+    const idx = this.hash(key);
+    this.data[idx] = this.data[idx].filter((it) => it[0] !== key);
+  }
+
+  hash(key: number): number {
+    return key % this.BASE;
+  }
+}
+```
