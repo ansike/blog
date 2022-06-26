@@ -92,11 +92,12 @@ function singleNumber(nums: number[]): number {
 ```
 
 7. 设计哈希映射
-   没有一个 map 能完全存储所有的映射关系，需要一种方式来实现有限的资源做无限的事儿（理论上）。
+没有一个 map 能完全存储所有的映射关系，需要一种方式来实现有限的资源做无限的事儿（理论上）。
    横向上无法扩展太多，可以从纵向考虑，对象+链表的方法
-1. 选择一个最大的 BASE 值，作为取于的数
-1. 创建结构化的数据结构(data)存储所有的 key，长度为（BASE）
-1. 每次新增一个 key，都需要 key%BASE，然后再 data[key%BASE]中存储对应的链表，在链表上存储 hash 冲突的 key
+   
+  >1. 选择一个最大的 BASE 值，作为取于的数
+  >2. 创建结构化的数据结构(data)存储所有的 key，长度为（BASE）
+  >3. 每次新增一个 key，都需要 key%BASE，然后再 data[key%BASE]中存储对应的链表，在链表上存储 hash 冲突的 key
 
 ```typescript
 class MyHashMap {
@@ -152,3 +153,48 @@ function subarraySum(nums: number[], k: number): number {
     }
     return count;
 };
+```
+9. 数据结构实现
+
+链表实现：https://leetcode.cn/problems/design-linked-list/
+MyHashMap
+
+10. 前缀和
+给定一个数组，根据前`i-1`项的和就可以很快的计算出第`i`项的和
+
+子数组和等于K
+https://leetcode.cn/problems/subarray-sum-equals-k/
+```javascript
+// 1. 前缀和+hash表
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var subarraySum = function (nums, k) {
+    const map = new Map();
+    // 初始赋值为0，count += 时计算会简单一点
+    map.set(0, 1);
+    let count = 0;
+    let preSum = 0;
+    for (const it of nums) {
+        preSum += it;
+        // 前n项中 k=preSum-key的个数
+        // 如果preSum===k，count可以取到1
+        const key = preSum - k;
+        if (map.has(key)) {
+            count += map.get(key);
+        }
+        // 维护前缀和的map
+        if (map.has(preSum)) {
+            map.set(preSum, map.get(preSum) + 1)
+        } else {
+            map.set(preSum, 1)
+        }
+    }
+    return count;
+};
+
+
+// 2. 双层循环，遍历每一项
+```
