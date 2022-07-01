@@ -2,7 +2,7 @@
 title: linux信号及trap
 categories: 编程
 tags: shell
-date: 2021-02-10 17:09:52
+date: 2021-05-11 09:14:00
 ---
 
 运行 shell 脚本时,按下 ctrl+C 程序就会立即终止运行.ctrl+C 就会发出一个 linux 信号,通知 shell 进程终止运行.

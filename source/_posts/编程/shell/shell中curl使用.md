@@ -4,7 +4,7 @@ categories: 编程
 tags:
   - curl
   - shell
-date: 2021-05-05 22:46:13
+date: 2022-01-12 00:05:08
 ---
 
 ### curl 请求中数据中使用变量
