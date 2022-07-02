@@ -14,6 +14,7 @@ date: 2021-05-05 22:46:13
 <a href="#rm">7. rm 删除目录或文件</a>
 <a href="#rmdir">8. rmdir 删除空目录</a>
 <a href="#ln">9. ln 硬链接和软链接</a>
+<a href="#find">10. find 查找目录下的文件</a>
 
 <h3 id="cd">cd 切换目录</h3>
 
@@ -211,16 +212,107 @@ cp /etc/mysql/my.cnf{,.back}
 | -s   | 创建软链接 |
 
 硬链接（hard link）：生成的是普通文件（-字符）
-1. inode：具有相同的inode节点多个文件互为硬链接文件
+
+1. inode：具有相同的 inode 节点多个文件互为硬链接文件
 2. 内容：硬链接相当于文件的另外一个入口
 3. 删除结果：删除硬链接文件或者源文件，文件实体未被删除。只有所有硬链接都被删除之后才能被删除。可以使用硬链接来防止重要文件误删
 
-软链接（symbolic link）：生成的是符号链接文件（1类型）
-1. inode：类似于windows里的快捷方式，inode和源文件不一样
+软链接（symbolic link）：生成的是符号链接文件（1 类型）
+
+1. inode：类似于 windows 里的快捷方式，inode 和源文件不一样
 2. 内容区别：里面存放的是源文件的路径，指向源文件实体
 3. 删除结果：删除源文件，软链接失效
 
 有关目录
-1. 目录不可以创建硬链接（因目录可以跨文件系统，但硬链接需要相同的inode），可以创建软链接。
+
+1. 目录不可以创建硬链接（因目录可以跨文件系统，但硬链接需要相同的 inode），可以创建软链接。
 2. 每个目录下都有两个硬链接'.','..'，指向当前目录和上级目录
-3. 在父目录创建子目录会导致父目录的硬链接数加1
+3. 在父目录创建子目录会导致父目录的硬链接数加 1
+
+<h3 id="find">find 查找目录下的文件</h3>
+语法格式：find   [<b>选项</b> -H,-L,-P] &nbsp;&nbsp;&nbsp;[<b>路径</b>] &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;  [<b>操作语句</b> 参数｜限定条件｜执行动作]
+
+操作语句（expression）部分
+
+###### options 模块
+
+| 命令              | 作用                                                                           |
+| ----------------- | ------------------------------------------------------------------------------ |
+| -depth            | 从最深的子目录开始查找                                                         |
+| -maxDepths levels | 查找的最大目录级数， levels 为自然数                                           |
+| -regextype type   | 改变正则表达式的模式。默认为 emacs，还有 posix-awk，posix-basic，posix-egrep， |
+
+> Posix: Portable Operating System Interface for UNIX
+
+###### tests 模块
+
+| 命令                   | 作用                                                                                                                                          |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| -mtime [-n \| n \| +n] | 以修改时间来查找，-n 天内｜ n 天｜ +n 天以前                                                                                                  |
+| -name                  | 文件名查找，只支持\*,？,[]等特殊通配符                                                                                                        |
+| -regextype type        | 改变正则表达式的模式。默认为 emacs，还有 posix-awk，posix-basic，posix-egrep，                                                                |
+| -regex                 | 正则表达式                                                                                                                                    |
+| -iregex                | 不区分大小写正则表达式                                                                                                                        |
+| -type                  | 查找某一类型文件: <br />b(块设备文件)，c(字符设备文件)，d(目录)，p（管道文件），l（符号链接文件），f（普通文件），s（socket 文件），D（door） |
+
+###### actions 模块
+
+| 命令    | 作用                      |
+| ------- | ------------------------- |
+| -delete | 将查找出的文件删除        |
+| -exec   | 执行参数给出的 shell 命令 |
+| -prune  | 不在指定目录中查找        |
+
+###### oprators 逻辑运算符
+
+| 命令 | 作用 |
+| ---- | ---- |
+| !    | 取反 |
+| -a   | 交集 |
+| -o   | 并集 |
+
+###### 实战示例
+
+```shell
+# 查找一天内修改过的文件和目录
+find . -mtime -1
+
+# 查找一天内的所有txt
+find . -mtime -1 -name '*.txt'
+
+# 查找所有的目录
+find . -type d
+
+# 查找所有的文件
+find . ! -type d
+
+# 排除某个目录
+find ./ -path "./a/1" -prune -o -print
+
+# 排除多个目录
+find . \( -path './a/1/1_1' -o -path './a/2/2_2' \) -prune -o -print
+
+# 查找n天前的文件并删除
+find . -mtime +2 -delete
+find . -mtime 1 -exec rm {} \;
+
+# 查找所有的文件并以长模式展开
+find . -type f -exec ls -l {} \;
+find . -type f|xargs ls -l
+
+# 将所有的a*文件内容中的this替换成that
+find . -type f -name "a*" -exec sed -i "s#this#that#g" {} \;
+find . -type f -name "a*" | xargs sed -i "s#that#this#g"
+
+# 删除一个目录下的所有文件，保留一个指定文件
+find . -type f -cmin -4 ! -name "b9" -exec rm -f {} \;
+```
+
+###### 服务数据注入
+
+```shell
+# 在www目录被注入了恶意弹窗
+find . -type f | xargs sed -i "s#<script>alert('xxx')</script>##g"
+
+find . -type f | xargs sed -i "/*alert('xxx')*/d"
+```
