@@ -15,6 +15,7 @@ date: 2021-05-05 22:46:13
 <a href="#rmdir">8. rmdir 删除空目录</a>
 <a href="#ln">9. ln 硬链接和软链接</a>
 <a href="#find">10. find 查找目录下的文件</a>
+<a href="#xargs">11. xargs 标准输入转换为命令行参数</a>
 
 <h3 id="cd">cd 切换目录</h3>
 
@@ -315,4 +316,48 @@ find . -type f -cmin -4 ! -name "b9" -exec rm -f {} \;
 find . -type f | xargs sed -i "s#<script>alert('xxx')</script>##g"
 
 find . -type f | xargs sed -i "/*alert('xxx')*/d"
+```
+
+###### find 中 exec 和 xargs 区别
+
+1. 查找的结果在 exec 是逐个传递给后面的命令执行，效率略低。在 xargs 是一次性传递给后边的命令执行
+2. 文件名有空格，exec 能正常处理，xargs 不能，需要特殊处理
+
+```shell
+# 查看区别
+find . -type f -exec echo hello {} \;
+find . -type f | xargs echo hello
+
+# 文件名有空格时xargs特殊处理
+find . -name 'a b' -print0| xargs -0 ls -lh
+```
+
+<h3 id="xargs">xargs 标准输入转换为命令行参数</h3>
+
+| 命令 | 作用                                                                        |
+| ---- | --------------------------------------------------------------------------- |
+| -n   | 每行最大参数数量，可将标准输入的文本话氛围多行，每行 n 个参数，默认空格分割 |
+| -i   | 以{}代替前面的结果                                                          |
+| -0   | 用 null 代替空格作为分隔符，配合 find 的 print0 选项输出使用                |
+
+```shell
+# -n
+cat a4
+# 1
+# 2
+# 3
+# 4 5 6 7 8 9
+# 10 11
+
+xargs < a4
+# 1 2 3 4 5 6 7 8 9 10 11
+
+xargs -n 3 < a4
+# 1 2 3
+# 4 5 6
+# 7 8 9
+# 10 11
+
+# -d
+echo splitXsplitXsplit|xargs -d X
 ```
