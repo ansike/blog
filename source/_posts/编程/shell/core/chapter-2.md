@@ -524,7 +524,7 @@ chmod u+x,g=r,o=r b2.jpg
 chmod 744 b2.jpg
 ```
 
-<h3 href="#umask">20. umask 显示或设置权限掩码</h3>
+<h3 id="umask">20. umask 显示或设置权限掩码</h3>
 
 功能: 是通过八进制的数值来定义用户创建文件或目录的默认权限
 语法: umask [options] [mode]
