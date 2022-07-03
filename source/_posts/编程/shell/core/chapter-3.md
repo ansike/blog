@@ -12,7 +12,7 @@ date: 2021-05-05 22:46:13
 <a href="#head">5. head 显示文件内容头部</a>
 <a href="#tail">6. tail 显示文件内容尾部</a>
 <a href="#tailf">7. tailf 跟踪日志文件</a>
-<a href="#cur">8. cur 从文本中提取一段文字并输出</a>
+<a href="#cut">8. cut 从文本中提取一段文字并输出</a>
 <a href="#split">9. split 分割文件</a>
 <a href="#paste">10. paste 合并文件</a>
 <a href="#sort">11. sort 文本排序</a>
@@ -117,7 +117,7 @@ ls /etc|more -10
 
 和 tail -f 类似，但是文件不增长，他不会访问磁盘文件，也不会更改文件的访问时间
 
-<h3 id="cur">8. cur 从文本中提取一段文字并输出</h3>
+<h3 id="cut">8. cut 从文本中提取一段文字并输出</h3>
 
 功能说明：从文件的每一行剪切字节、字符或字段，并将这些输出至标准输出
 
@@ -325,4 +325,11 @@ tr -d '\n\t\ ' <c1
 | :set nonu        | 不显示行号                               |
 | :vs filename     | 垂直分屏展示当前文件内容和 filename 文件 |
 | :sp filename     | 水平分屏展示当前文件内容和 filename 文件 |
-| I+#+Ecs          | 批量注释。ctrl+v，一次性选择多行                                 |
+| I+#+Ecs          | 批量注释。ctrl+v，一次性选择多行         |
+
+
+###### 统计目前收集到的所有简历
+```shell
+# 查找所有后缀为pdf的文件，计算行数，删除前后的空格
+find . -type f -name "*.pdf" |wc -l|tr -d " "
+```
