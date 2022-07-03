@@ -16,6 +16,15 @@ date: 2021-05-05 22:46:13
 <a href="#ln">9. ln 硬链接和软链接</a>
 <a href="#find">10. find 查找目录下的文件</a>
 <a href="#xargs">11. xargs 标准输入转换为命令行参数</a>
+<a href="#rename">12. rename 重命名文件</a>
+<a href="#basename">13. basename 显示文件名或目录名</a>
+<a href="#dirname">14. dirname 显示文件或目录路径</a>
+<a href="#chattr">15. chattr 改变文件的扩展属性</a>
+<a href="#file">16. file 显示文件类型</a>
+<a href="#md5sum">17. md5sum 计算和校验文件的 MD5 值</a>
+<a href="#chown">18. chown 改变文件或者目录的用户和用户组</a>
+<a href="#chmod">19. chmod 改变文件或目录权限</a>
+<a href="#umask">20. umask 显示或设置权限掩码</a>
 
 <h3 id="cd">cd 切换目录</h3>
 
@@ -339,6 +348,7 @@ find . -name 'a b' -print0| xargs -0 ls -lh
 | -n   | 每行最大参数数量，可将标准输入的文本话氛围多行，每行 n 个参数，默认空格分割 |
 | -i   | 以{}代替前面的结果                                                          |
 | -0   | 用 null 代替空格作为分隔符，配合 find 的 print0 选项输出使用                |
+| -d   | 自定义分隔符，进行字符串切割                                                |
 
 ```shell
 # -n
@@ -360,4 +370,170 @@ xargs -n 3 < a4
 
 # -d
 echo splitXsplitXsplit|xargs -d X
+echo splitXsplitXsplit|xargs -d X -n2
+
 ```
+
+<h3 id="rename">rename 重命名文件</h3>
+
+语法：rename from to file
+这个在 Debian 中是不一样的语法
+
+###### 批量修改文件名
+
+```shell
+rename 's/a/b/' a*.txt
+rename 's/txt/jpg/' *.txt
+```
+
+<h3 id="basename">basename 显示文件名或目录名</h3>
+
+语法：basename [file] [后缀]
+
+```shell
+basename a/1/t.txt
+# t.txt
+
+basename a/1/t.txt .txt
+# t
+```
+
+<h3 id="dirname">dirname 显示文件或目录路径</h3>
+语法：dirname [file]
+
+```shell
+dirname a/1/t.txt
+# a/1
+```
+
+<h3 id="chattr">chattr 改变文件的扩展属性</h3>
+
+功能: 改变文件的扩展熟悉。chmod 知识改变了文件的读、写、执行权限，更底层的属性控制是由 chattr 改变的
+语法: chattr [option] [mode] [file]
+
+<b>option</b>
+
+| 命令 | 作用             |
+| ---- | ---------------- |
+| -R   | 递归更改目录属性 |
+| -V   | 显示命令执行过程 |
+
+<b>mode</b>
+
+| 命令 | 作用                                                    |
+| ---- | ------------------------------------------------------- |
+| +    | 增加参数                                                |
+| -    | 减少参数                                                |
+| =    | 更新为指定参数                                          |
+| A    | 不修改文件的最后访问时间                                |
+| a    | 只能向文件中添加数据，不能删除，多用于服务日志          |
+| i    | 文件不能被删除改名，写入，新增 (即是是 root 也无法删除) |
+
+可以给文件加锁
+```shell
+# 只读权限
+chattr +a b2.jpg
+# 不可更改权限
+chattr +i b2.jpg
+```
+
+
+<h3 id="file">file 显示文件类型</h3>
+
+语法: chattr [option] [file]
+
+```shell
+file *
+# a:       directory
+# b5.jpg:  empty
+# b6.jpg:  UTF-8 Unicode text
+```
+
+<h3 id="md5sum">md5sum 计算和校验文件的MD5值</h3>
+
+语法: md5sum [option] [file]
+
+| 命令     | 作用                                    |
+| -------- | --------------------------------------- |
+| -b       | 以二进制模式读取文件                    |
+| -c       | 从指定文件中读取 MD5 校验值，并进行校验 |
+| -t       | 以文本模式读取文件（默认模式）          |
+| --quiet  | 验证通过不输出 OK                       |
+| --status | 不输出任何信息，通过返回值判断结果      |
+
+```shell
+md5sum b6.jpg
+# 3425006b2772d4e16740e83218248495  b6.jpg
+
+md5sum b6.jpg > b6.log
+cat b6.log
+# 3425006b2772d4e16740e83218248495  b6.jpg
+
+md5sum -c b6.log
+# b6.jpg: OK
+```
+
+<h3 id="chown">chown 改变文件或者目录的用户和用户组</h3>
+
+语法: chown [options] [owner]:[group]] [file]
+
+| 命令 | 作用                       |
+| ---- | -------------------------- |
+| -R   | 递归更改目录的用户和用户组 |
+
+<h3 id="chmod">19. chmod 改变文件或目录权限</h3>
+
+语法: chown [options] [mode] [file]
+
+| 命令 | 作用                   |
+| ---- | ---------------------- |
+| -R   | 递归更改目录的所有文件 |
+
+权限说明: -rw-r--r-- 1 platform platform 11 Jul 3 11:01 b6.jpg
+一个文件的类型由`-rw-r--r--`进行描述，第一位为文件类型，接下来每 3 位为一组，分别代表用户权限，用户组权限，和其他用户权限
+
+<b>权限说明</b>
+
+| 权限位 | 全称    | 含义         | 对应数字 |
+| ------ | ------- | ------------ | -------- |
+| r      | read    | 可读权限     | 4        |
+| w      | wirte   | 可写权限     | 2        |
+| x      | execute | 可执行权限   | 1        |
+| -      |         | 没有任何权限 | 0        |
+
+| 命令 | 说明                    |
+| ---- | ----------------------- |
+| u    | owner/user 文件所属用户 |
+| g    | group 文件所属用户组    |
+| o    | other 其他用户          |
+| a    | 相当于 u,g,o 的总和     |
+
++,-,= 表示对权限进行操作
+
+<b>权限和数字对应关系</b>
+rw- r-- r--
+421 400 400
+7   4   4
+`-rw-r--r--`所以最后权限位对应的数字为`744`，我们在平常的开发中经常会赋予`755`权限，其实就是当前用户有所有权限，用户组和其他用户有只读和执行权限，没有写的权限
+
+```shell
+# 给用户增加执行，用户组，其他用户赋予只读权限
+chmod u+x,g=r,o=r b2.jpg
+
+# 数字和上边的权限赋值是等价的
+chmod 744 b2.jpg
+```
+
+<h3 href="#umask">20. umask 显示或设置权限掩码</h3>
+
+功能: 是通过八进制的数值来定义用户创建文件或目录的默认权限
+语法: umask [options] [mode]
+默认掩码为 022
+
+创建文件的默认最大权限为666
+使用umask之后，文件的权限为644
+
+创建文件的默认最大权限为777
+使用umask之后，目录的权限为755
+
+
