@@ -2,7 +2,7 @@
 title: 文件过滤及内容编辑处理命令
 categories: 编程
 tags: shell
-date: 2021-05-05 22:46:13
+date: 2022-07-03 18:55:58
 ---
 
 <a href="#cat">1. cat 合并文件或查看文件内容</a>

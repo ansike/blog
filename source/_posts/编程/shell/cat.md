@@ -4,7 +4,7 @@ categories: 编程
 tags: 
   - shell
   - cat
-date: 2022-02-10 23:49:44
+date: 2022-04-27 23:22:19
 ---
 
 ### cat 在命令行中输入文本

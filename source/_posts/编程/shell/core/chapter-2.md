@@ -2,7 +2,7 @@
 title: 文件和目录操作命令
 categories: 编程
 tags: shell
-date: 2021-05-05 22:46:13
+date: 2022-07-01 21:59:03
 ---
 
 <a href="#cd">1. cd 切换目录</a>
