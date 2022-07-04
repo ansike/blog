@@ -313,22 +313,23 @@ tr -d '\n\t\ ' <c1
 
 <b>命令行模式</b>
 
-| 命令             | 说明                                     |
-| ---------------- | ---------------------------------------- |
-| wq               | 保存并退出                               |
-| q!               | 退出不保存                               |
-| n1,n2 w filename | 从 n1 到 n2 保存成 filename              |
-| n1,n2 co n3      | 从 n1 到 n2 复制到 n3 下                 |
-| n1,n2 m n3       | 从 n1 到 n2 剪切到 n3 下                 |
-| :!command        | 展示离开 vim 执行 command 命令           |
-| :set nu          | 显示行号                                 |
-| :set nonu        | 不显示行号                               |
-| :vs filename     | 垂直分屏展示当前文件内容和 filename 文件 |
-| :sp filename     | 水平分屏展示当前文件内容和 filename 文件 |
-| I+#+Ecs          | 批量注释。ctrl+v，一次性选择多行         |
-
+| 命令             | 说明                                      |
+| ---------------- | ----------------------------------------- |
+| wq               | 保存并退出                                |
+| q!               | 退出不保存                                |
+| n1,n2 w filename | 从 n1 到 n2 保存成 filename               |
+| n1,n2 co n3      | 从 n1 到 n2 复制到 n3 下                  |
+| n1,n2 m n3       | 从 n1 到 n2 剪切到 n3 下                  |
+| :!command        | 展示离开 vim 执行 command 命令            |
+| :set nu          | 显示行号                                  |
+| :set nonu        | 不显示行号                                |
+| :set paste       | 输入之后回车，按 i 粘贴文本，保留原有格式 |
+| :vs filename     | 垂直分屏展示当前文件内容和 filename 文件  |
+| :sp filename     | 水平分屏展示当前文件内容和 filename 文件  |
+| I+#+Ecs          | 批量注释。ctrl+v，一次性选择多行          |
 
 ###### 统计目前收集到的所有简历
+
 ```shell
 # 查找所有后缀为pdf的文件，计算行数，删除前后的空格
 find . -type f -name "*.pdf" |wc -l|tr -d " "
