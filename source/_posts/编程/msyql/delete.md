@@ -3,7 +3,7 @@ title: mysql 基础命令 - delete
 categories: 编程
 tags:
   - mysql
-date: 2021-05-05 22:46:13
+date: 2022-05-02 11:46:46
 ---
 
 ##### 简单 delete 语句
