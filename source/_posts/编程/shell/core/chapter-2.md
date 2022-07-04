@@ -1,5 +1,5 @@
 ---
-title: 命令行简介
+title: 文件和目录操作命令
 categories: 编程
 tags: shell
 date: 2021-05-05 22:46:13
