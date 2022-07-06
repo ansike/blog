@@ -2,7 +2,7 @@
 title: 信息显示及搜索文件命令
 categories: 编程
 tags: shell
-date: 2022-07-03 18:55:58
+date: 2022-07-07 00:02:02
 ---
 
 <a href="#uname">1. uname 显示系统信息</a>
