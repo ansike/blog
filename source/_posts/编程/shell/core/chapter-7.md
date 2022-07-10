@@ -2,7 +2,7 @@
 title: 用户管理及用户信息查询命令
 categories: 编程
 tags: shell
-date:
+date: 2022-07-09 00:26:25
 ---
 
 <a href="#useradd">1. useradd 创建用户</a>

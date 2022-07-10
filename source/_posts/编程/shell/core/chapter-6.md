@@ -2,7 +2,7 @@
 title: 打包同步文件
 categories: 编程
 tags: shell
-date: 
+date: 2022-07-08 22:44:48
 ---
 
 <a href="#tar">1. tar 打包备份</a>
