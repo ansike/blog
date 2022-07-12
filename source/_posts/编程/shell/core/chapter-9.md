@@ -2,7 +2,7 @@
 title: 进程管理命令
 categories: 编程
 tags: shell
-date:
+date: 2022-07-10 22:49:44
 ---
 
 <a href="#ps">1. ps 查看进程</a>
