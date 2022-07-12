@@ -2,13 +2,15 @@
 title: 网络命令
 categories: 编程
 tags: shell
-date: 
+date:
 ---
 
 <a href="#ifconfig">1. ifconfig 配置或显示网络接口信息</a>
 <a href="#ifup">2. ifup 激活网络接口</a>
 <a href="#ifdown">3. ifdown 禁用网络接口</a>
 <a href="#route">4. route 显示或管理路由表</a>
+<a href="#arp">5. arp 管理系统的 arp 缓存</a>
+<a href="#ip">6. ip 网络配置工具</a>
 
 <h3 id="ifconfig">1. ifconfig 配置或显示网络接口信息</h3>
 
@@ -62,6 +64,9 @@ route
 # Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 # default         n227-076-001.by 0.0.0.0         UG    0      0        0 eth0
 # 10.227.76.0     0.0.0.0         255.255.252.0   U     0      0        0 eth0
+
+route add -net 192.168.49.0/24 dev eth0
+route del -net 192.168.49.0/24 dev eth0
 ```
 
 字段说明
@@ -82,7 +87,6 @@ route
 - Use：有几个转送数据包参考到了此路由规则
 - Iface：路由对应的网络设备接口
 
-
 ```shell
 # 为默认网关，所有没被处理的请求都会走到默认网关
 # 0.0.0.0         10.227.76.1     0.0.0.0         UG    0      0        0 eth0
@@ -92,3 +96,32 @@ route del default
 route add default gw 10.0.0.2
 route dad -net 0.0.0.0 netmask 0.0.0.0 gw 10.0.0.2
 ```
+
+<h3 id="arp">5. arp 管理系统的arp缓存</h3>
+
+功能说明: 用于操作本机的 arp 缓存区。
+arp（address resolution protocl）地址解析协议。根据 IP 地址获取物理地址（MAC 地址）
+
+语法: arp [option]
+
+| 参数                 | 说明                          |
+| -------------------- | ----------------------------- |
+| -n                   | 显示数字 IP 地址              |
+| -s <主机> <MAC 地址> | 设置主机 IP 和 MAC 地址的映射 |
+| -d <主机>            | 删除指定主机的 arp            |
+| -i <接口>            | 指定网络接口                  |
+| -v                   | 显示详细的缓存条目            |
+
+<h3 id="ip">6. ip 网络配置工具</h3>
+
+功能说明: 用于显示或管理 Linux 系统的路由、网络设备、策略路由和隧道
+
+语法: ip [option] [object] [command]
+
+| 参数     | 说明                                                                                                                                                                                                                                                                 |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| -s       | 输出更详细的信息                                                                                                                                                                                                                                                     |
+| -r       | 显示主机时，不使用 IP 地址，使用域名                                                                                                                                                                                                                                 |
+| 网络对象 | link 网络设备 <br /> address IP 地址 <br /> addrlabel 协议地址管理标签 <br /> neighbour arp 或 ndisc 缓存表 <br /> route 路由表 <br /> rule 策略路由表 <br /> maddress 多播地址 <br /> mroute 多播路由缓存表 <br /> tunnel IP 隧道 <br /> xfrm IPsec 协议框架 <br /> |
+
+
