@@ -2,7 +2,7 @@
 title: 网络命令
 categories: 编程
 tags: shell
-date:
+date: 2022-07-12 09:11:16
 ---
 
 <a href="#ifconfig">1. ifconfig 配置或显示网络接口信息</a>
