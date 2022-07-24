@@ -120,4 +120,4 @@ kubectl port-forward service/node 3001:8080
 
 此时本地可直接访问 http://localhost:3001 查看数据
 
-相关代吗都可以从这儿找到 https://github.com/ansike/docker-node/tree/pure
+相关代码都可以从这儿找到 https://github.com/ansike/docker-node/tree/pure
