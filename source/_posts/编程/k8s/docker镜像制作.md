@@ -5,6 +5,7 @@ tags:
   - node
   - docker
   - k8s
+date: 2022-07-23 22:00:18
 ---
 
 环境依赖：Docker version 20.10.7, build f0df350； node 14 以上；minukube v1.26.0
