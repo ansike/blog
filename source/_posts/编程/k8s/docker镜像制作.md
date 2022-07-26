@@ -5,6 +5,7 @@ tags:
   - node
   - docker
   - k8s
+date: 2022-07-23 22:00:18
 ---
 
 环境依赖：Docker version 20.10.7, build f0df350； node 14 以上；minukube v1.26.0
@@ -107,6 +108,8 @@ docker run \
 
 minikube 的安装使用 https://minikube.sigs.k8s.io/docs/start/
 
+
+##### 通过命令方式创建deployment
 ```shell
 # minikube 装好之后先start基础服务
 minikube start
@@ -117,7 +120,38 @@ kubectl expose deployment node --type=NodePort --port=8080
 # 开启本地和k8s集群端口映射
 kubectl port-forward service/node 3001:8080
 ```
-
 此时本地可直接访问 http://localhost:3001 查看数据
+
+##### 通过yaml配置创建deployment
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-deployment
+  labels:
+    app: node
+    
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: node
+  template:
+    metadata:
+      labels:
+        app: node
+    spec:
+      containers:
+        - name: node
+          image: ansike/ansike:test-docker-node-v1
+          ports:
+            - containerPort: 8080
+```
+
+```shell
+kubectl apply -f ./node.deployment.yaml
+kubectl expose deployment node-deployment --type=NodePort --port=8080
+kubectl port-forward service/node-deployment 3001:8080
+```
 
 相关代码都可以从这儿找到 https://github.com/ansike/docker-node/tree/pure
