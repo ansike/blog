@@ -3,7 +3,7 @@ title: k8s pod生命周期
 categories: 编程
 tags:
   - k8s
-date: 
+date: 2022-07-31 23:39:05
 ---
 
 ### init container
