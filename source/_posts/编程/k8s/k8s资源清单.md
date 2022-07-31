@@ -3,6 +3,7 @@ title: k8s资源清单
 categories: 编程
 tags:
   - k8s
+date: 2022-07-30 22:51:46
 ---
 
 ### k8s 中的资源
@@ -55,7 +56,7 @@ k8s 中所有的内容都抽象为资源，资源实例化后叫对象
 pod 创建时经历过程如下
 
 1. pause 网络和数据卷初始化
-2. start initC 初始化容器
+2. start initC 初始化容器(主容器启动的前置动作，包括数据初始化，文件创建，依赖服务检测)
 3. start mainC（中间还有 start 和 stop 的回调）
   - 1. 容器启动
   - 2. 调用启动的start动作

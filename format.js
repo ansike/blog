@@ -1,10 +1,7 @@
 var fs = require("fs");
 var path = require("path");
 var exec = require("child_process").exec;
-const dirPath = path.resolve(
-  __dirname,
-  "./source/_posts/"
-);
+const dirPath = path.resolve(__dirname, "./source/_posts/");
 
 // 获取所有的md
 function getFiles(dir = "", list = []) {
@@ -28,6 +25,7 @@ function execGit() {
     exec(
       `echo $(git log --pretty=format:"%ad" --date=format:"%Y-%m-%d %H:%M:%S" ${item} | tail -1)`,
       (error, stdout, stderr) => {
+        console.log(item, stdout);
         let str = fs.readFileSync(item, { encoding: "utf-8" });
         if (dateReg.test(str)) {
           str = str.replace(
