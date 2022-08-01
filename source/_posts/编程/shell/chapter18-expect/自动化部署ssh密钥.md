@@ -2,22 +2,27 @@
 title: expect相关
 categories: 编程
 tags: shell
-date: 
+date: 2022-08-01 23:33:02
 ---
 
-#### expect常用命令
+#### expect 常用命令
+
 ```shell
 
 ```
 
-#### 自动化部署ssh密钥
+#### 自动化部署 ssh 密钥
+
 1. 生成密钥
+
 ```shell
 # 生成专有密钥
 # ssh-keygen -t rsa -f ~/.ssh/id_rsa_expect.pub -P ""
 publicKey=~/.ssh/id_rsa_expect.pub
 ```
-2. 书写expect文件,执行的单元文件
+
+2. 书写 expect 文件,执行的单元文件
+
 ```shell
 #!/bin/usr/expect
 if { $argc != 2 } {
@@ -39,7 +44,8 @@ expect {
 expect eof
 ```
 
-3. 开发shell脚本循环执行expect脚本
+3. 开发 shell 脚本循环执行 expect 脚本
+
 ```shell
 #!/bin/bash
 hosts=(
