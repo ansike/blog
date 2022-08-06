@@ -3,7 +3,7 @@ title: service(svc)
 categories: 编程
 tags:
   - k8s
-date: 
+date: 2022-08-06 23:59:06
 ---
 
 ### svc 概念

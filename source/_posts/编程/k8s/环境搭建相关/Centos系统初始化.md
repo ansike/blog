@@ -3,7 +3,7 @@ title: Centos系统初始化
 categories: 编程
 tags:
   - centos
-date: 2022-07-31 23:39:05
+date: 2022-08-06 23:59:06
 ---
 
 ### 设置系统主机名以及 Host 文件的相互解析

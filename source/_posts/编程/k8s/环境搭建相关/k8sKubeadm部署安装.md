@@ -3,7 +3,7 @@ title: Kubeadm 部署安装
 categories: 编程
 tags:
   - centos
-date: 2022-07-31 23:39:05
+date: 2022-08-06 23:59:06
 ---
 
 ### kube-proxy 开启 ipvs 的前置条件
