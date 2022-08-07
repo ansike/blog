@@ -89,11 +89,11 @@
         .map((post) => {
           const { matchedHead, matchedContent } = post;
           const div = document.createElement("div");
+          debugger;
           div.setAttribute(
             "data-url",
-            `${post.date.match(/\d{4}-\d{2}-\d{2}/)[0].replace(/\-/g, "/")}/${
-              post.slug
-            }`
+            // `${post.date.match(/\d{4}-\d{2}-\d{2}/)[0].replace(/\-/g, "/")}
+            `programming/${post.slug}`
           );
           div.className = "matched-box";
           div.innerHTML = `${matchedHead}${matchedContent}`;

@@ -3,7 +3,7 @@ title: deployment和svc实验
 categories: 编程
 tags:
   - k8s
-date: 2022-08-06 23:59:06
+date: 2022-08-08 00:00:02
 ---
 
 ### 目标
