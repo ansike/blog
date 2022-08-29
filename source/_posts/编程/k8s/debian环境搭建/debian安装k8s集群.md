@@ -266,6 +266,17 @@ kubectl get node
 ```shell
 # 文件较大，建议先下下来
 curl -O -k "https://projectcalico.docs.tigera.io/manifests/canal.yaml"
+
+# 编辑canal的net配置 net-conf.json
+# 确保Network 和集群初始化时的 podSubnet 网段一致 192.168.0.0/16
+# net-conf.json: |
+#     {
+#       "Network": "192.168.0.0/16",
+#       "Backend": {
+#         "Type": "vxlan"
+#       }
+#     }
+
 kubectl apply -f canal.yaml
 
 # 很快就能看到coredns状态变为running
