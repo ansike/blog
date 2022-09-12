@@ -1,7 +1,7 @@
 ---
 title: nginx 安装
 categories: 编程
-date: 2022-06-20 23:37:39
+date:
 ---
 
 # mac 下 nginx 的安装
@@ -46,6 +46,20 @@ brew info nginx
 从上文的日志中我们可以看到 当前 nginx 安装的路径（/usr/local/etc/nginx/）和静态服务监听的目录（/usr/local/var/www）
 接下来我们使用的部分主要就是着重对 nginx.conf 相关文件做一些简单的配置和在静态目录配置一些预期的文件
 
+**打开 error 和 access 日志**
+
+```
+# error 日志
+error_log logs/error.log;
+
+# access 日志
+log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                  '$status $body_bytes_sent "$http_referer" '
+                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+access_log  /usr/local/etc/nginx/logs/access.log  main;
+```
+
 # nginx 实验
 
 ### 实验一 打印 nginx 的 status
@@ -83,5 +97,58 @@ curl http://localhost:8082
 # Active connections: 1
 # server accepts handled requests
 #  17 17 71
+#  连接数 握手数 请求数
 # Reading: 0 Writing: 1 Waiting: 0
 ```
+
+### 实验二 访问日志轮训切割
+
+1. 在`/usr/local/etc/nginx/`目录下配置创建 shell 文件夹，创建 cut_access.sh 文件，内容如下
+
+```shell
+#!/bin/sh
+set -e
+Dateformat=$(date '+%Y%m%d%H%M%S')
+NginxLogDir=/usr/local/etc/nginx/logs
+BackupLogDir=/usr/local/etc/nginx/logs/backup
+Logname="access"
+
+# 创建备份文件夹
+[ -d $BackupLogDir ] || mkdir -p $BackupLogDir
+
+# 进入logs目录
+[ -d $NginxLogDir ] && cd $NginxLogDir || exit 1
+
+# 判断是否存在access.log文件
+[ -f "${Logname}".log ] && echo 12 || exit 1
+
+# 备份文件
+/bin/mv "${Logname}".log "${BackupLogDir}/${Dateformat}_${Logname}".log
+
+# 重启服务，重新生成文件
+/usr/local/bin/nginx -s reload
+
+```
+
+2. 设置定时任务
+
+因为还需要定时的备份，所以需要定时任务
+
+```shell
+# 查看当前已有的定时任务
+crontab -l
+
+# 创建定时任务文件
+cat >cron<<EOF
+# nginx 日志切割
+# 每分钟执行一次任务
+*/1 * * * * /bin/bash /usr/local/etc/nginx/shell/cut_access.sh
+EOF
+
+# 设置定时任务
+crontab cron
+```
+
+> 此时观察 backup 目录下的 access 文件即可看到在不断的创建，而且时间间隔正好都是 1 分钟，实际的生成中日志切割不仅仅是时间一个纬度，还有日志文件的大小。
+
+### 实验三
