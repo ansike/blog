@@ -1,7 +1,7 @@
 ---
 title: nginx基础
 categories: 编程
-date:
+date: 2022-09-12 22:08:08
 ---
 
 # mac 下 nginx 的安装
