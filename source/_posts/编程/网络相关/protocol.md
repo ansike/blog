@@ -54,6 +54,6 @@ curl http://c.biancheng.net/linux_tutorial/12/
 
 两次握手建立连接会有什么问题：已失效的请求从 client 发到 server，如果仅两次握手建立连接的话，此时 sever 向 client 发送确认之后就会认为当前连接已经建立，一直等待客户端发送数据，这样很多 server 资源就会被浪费。
 
-**四次挥手的过程**
+<!-- TODO **四次挥手的过程**
 
-1. 
+1.  -->
