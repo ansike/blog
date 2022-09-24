@@ -6,7 +6,7 @@ tags:
 date: 2022-08-08 22:50:41
 ---
 
-### TCP（transmission control protocol）
+### TCP（Transmission Control Protocol）
 
 一句话介绍：**是一种面向连接的可靠的传输层协议**
 
@@ -79,3 +79,75 @@ curl http://c.biancheng.net
 自己用 http-server 起了一个本地服务，可以看到四次挥手的过程
 
 ![四次挥手](./20220923-233327.jpeg)
+
+### HTTP (Hypertext Transfer Protocol )
+
+一句话介绍：**是一种传输超媒体文档的应用层协议**
+
+http 协议中的内容都是明文，以下我们以一个真实例子来看下 http 协议
+
+```shell
+# 访问http请求， 使用curl 打印请求的整个过程
+curl http://localhost:4000/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/protocol/ -v
+
+# *   Trying ::1...
+# * TCP_NODELAY set
+# * Connected to localhost (::1) port 4000 (#0)
+#### 请求部分
+# > GET /blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/protocol/ HTTP/1.1
+# > Host: localhost:4000
+# > User-Agent: curl/7.54.0
+# > Accept: */*
+# >
+#### 响应部分
+# < HTTP/1.1 200 OK
+# < X-Powered-By: Hexo
+# < Content-Type: text/html
+# < Date: Sat, 24 Sep 2022 07:56:02 GMT
+# < Connection: keep-alive
+# < Keep-Alive: timeout=5
+# < Transfer-Encoding: chunked
+# <
+# <!DOCTYPE html>
+# <html>
+# <head>
+#   <meta charset="utf-8">
+
+
+
+#   <title>protocol | ASK&#39;s Blog</title>
+#   ....
+```
+
+**请求部分格式**
+
+```
+[method] [path] [protocol/version]
+[request header]
+empty line
+[request body]
+```
+
+> 我们在上文的实际报文中是没有[request body]主要是因为我们没有传递 body。⚠️ 切记不是因为我们使用的是 GET 请求，http 协议中 get 和 post 没有本质区别。
+
+以下我们使用了curl工具强制使用GET方法，携带了data进行数据传递，协议是符合预期可以成功发出的。
+**网络上说get和post区别绝大多数都是错误，或者说是没有前提的论述**。在浏览器上get确实是无法发送body的，但是其他应用是可以的（curl，postman等）；在url中数据的携带也是有限制的；server接受的body大小也是有限制的；安全性更是胡扯，这些都要根据实际情况来看。
+```shell
+curl -X GET http://localhost:4000/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/protocol/ -v -d '{"a":1}' -H "Content-Type: application/json"
+> GET /blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/protocol/ HTTP/1.1
+> Host: localhost:4000
+> User-Agent: curl/7.54.0
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 7
+>
+```
+
+**响应部分格式**
+
+```
+[protocol/version] [status code] [status message]
+[response header]
+empty line
+[response body]
+```
