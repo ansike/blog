@@ -6,6 +6,35 @@ tags:
 date: 2022-08-08 22:50:41
 ---
 
+### Ethernet
+
+![ethernet](./97c13f044de260baf0ed8051091dd251.png)
+ethernet 通信的基本单位是 Frame。由头部（header），数据（payload），校验和（checcksum）三部分组成
+
+注意部分
+
+- header（14 bytes） 部分依次是 Destination MAC Address，Source MAC Address 和 EtherType (标识数据包类型，0x0800 代表 IP 包)
+- payload（46-1500 bytes）携带的数据
+- checksum（4 bytes）验证数据完整性
+
+目前有多种 ethernet 类型在使用，我们常用的就是 ethernetII
+
+header 目的地址可以分为三类：单播地址、多播地址和广播地址。
+
+### IP (Internet Protocol)
+
+一句话介绍：**是一种无连接的点到点的通信协议**
+
+为什么需要 IP 协议？
+
+1. 解决大规模的网络，异构网络的互联互通。
+2. 解耦应用层和底层网络技术。基于 ethernet 为 TCP/UDP 等提供服务。
+
+涉及的内容：分组封装，IP 编址，分组转发
+IP 分组：首部（20 bytes）和数据部分。
+IP 分片：IP 数据包在传输的过程中受 MTU（最大传输单元）的限制会进行数据包的分片传输，导致目标主机之后才会重新组装起来交给下一层协议处理。
+IP 首部的 IP Address 是由 4 字节的数字组成，是 IP 协议中核心部分，使用 IP 地址能唯一标识网络中的一台主机。
+
 ### TCP（Transmission Control Protocol）
 
 一句话介绍：**是一种面向连接的可靠的传输层协议**
@@ -130,8 +159,9 @@ empty line
 
 > 我们在上文的实际报文中是没有[request body]主要是因为我们没有传递 body。⚠️ 切记不是因为我们使用的是 GET 请求，http 协议中 get 和 post 没有本质区别。
 
-以下我们使用了curl工具强制使用GET方法，携带了data进行数据传递，协议是符合预期可以成功发出的。
-**网络上说get和post区别绝大多数都是错误，或者说是没有前提的论述**。在浏览器上get确实是无法发送body的，但是其他应用是可以的（curl，postman等）；在url中数据的携带也是有限制的；server接受的body大小也是有限制的；安全性更是胡扯，这些都要根据实际情况来看。
+以下我们使用了 curl 工具强制使用 GET 方法，携带了 data 进行数据传递，协议是符合预期可以成功发出的。
+**网络上说 get 和 post 区别绝大多数都是错误，或者说是没有前提的论述**。在浏览器上 get 确实是无法发送 body 的，但是其他应用是可以的（curl，postman 等）；在 url 中数据的携带也是有限制的；server 接受的 body 大小也是有限制的；安全性更是胡扯，这些都要根据实际情况来看。
+
 ```shell
 curl -X GET http://localhost:4000/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/protocol/ -v -d '{"a":1}' -H "Content-Type: application/json"
 > GET /blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/protocol/ HTTP/1.1
@@ -151,3 +181,12 @@ curl -X GET http://localhost:4000/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%
 empty line
 [response body]
 ```
+
+### 为什么计算机中的字节都选择用 16 进制的数进行表示
+
+常见的有 MAC 地址，python 编码之后数据
+是为了简洁实用。我们知道一个字节（byte）是 8 位（bit），我们可以选择的范围有二进制，八进制，十进制，十六进制等。二进制会很长不便于肉眼读取，八进制会导致高位不够，十进制会导致结果长度不一，十六进制正好能将一个字节拆分成两个十六进制数。
+
+> 如：10101101 => AD
+
+> DNS 是基于 UDP 传输的
