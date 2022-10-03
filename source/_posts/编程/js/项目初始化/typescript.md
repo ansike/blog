@@ -10,6 +10,7 @@ date: 2022-05-02 17:28:58
 可以直接根据内容执行初始化
 
 <!-- TODO 配置好路径和和兼容linux -->
+
 ```shell
 # 当前目录初始化
 curl https://raw.githubusercontent.com/ansike/blog/master/source/downloads/code/shell/node-util-ts.install.sh | bash
@@ -39,7 +40,7 @@ yarn init -y
 
 ### 2. 安装必须的依赖
 
-我们需要给项目安装一个 typescript 的开发依赖，在后续编译 ts 到 js 时使用。执行命令之后在项目的目录下会生成一个 node_modules 的文件夹，里边有我们需要的依赖，目前我们不用关心里边是什么，还会在 package.json 的 devDependences 中增加一个依赖声明。
+我们需要给项目安装一个 typescript 的开发依赖，在后续编译 ts 到 js 时使用。执行命令之后在项目的目录下会生成一个 node_modules 的文件夹，里边有我们需要的依赖。目前我们不用关心里边是什么，该命令会在 package.json 的 devDependences 中增加一个依赖声明。
 
 ```shell
 yarn add -D typescript
@@ -53,6 +54,8 @@ ts 在后续进行编译时是有一些配置可以根据项目进行调整的�
 ```shell
 npx tsc --init
 ```
+
+> 一般情况我们会把 outDir 设置为 dist。产物输出目录为dist否则默认输出当前文件夹下
 
 ### 4. 创建 ts 文件，编译执行
 
@@ -88,7 +91,8 @@ tsc 支持动态的编译，把上文 build 的命令增加一个 `-w` 即可，
 ```shell
 {
   "scripts": {
-    "build": "tsc -w"
+    "dev": "tsc -w"
+    "build": "tsc"
   }
 }
 ```
