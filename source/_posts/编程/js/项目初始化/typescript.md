@@ -11,7 +11,12 @@ date: 2022-05-02 17:28:58
 
 <!-- TODO 配置好路径和和兼容linux -->
 ```shell
-curl http://xxx/node-util-ts.install.sh | bash
+# 当前目录初始化
+curl https://raw.githubusercontent.com/ansike/blog/master/source/downloads/code/shell/node-util-ts.install.sh | bash
+
+# xxx目录初始化
+curl https://raw.githubusercontent.com/ansike/blog/master/source/downloads/code/shell/node-util-ts.install.sh | bash -s xxx
+
 ```
 
 可在项目根目录下选择执行以下命令
