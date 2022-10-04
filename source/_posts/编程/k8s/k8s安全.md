@@ -3,7 +3,7 @@ title: k8s安全
 categories: 编程
 tags:
   - k8s
-date: 
+date: 2022-09-28 10:38:51
 ---
 
 api server 是 k8s 集群中的核心逻辑

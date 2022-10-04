@@ -2,7 +2,7 @@
 title: cron & crontab
 categories: 编程
 tags: shell
-date: 2021-05-05 22:46:13
+date: 2022-09-28 11:14:13
 ---
 
 ### cron 和 crontab 关系

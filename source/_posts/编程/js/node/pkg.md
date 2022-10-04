@@ -4,7 +4,7 @@ categories: 编程
 tags:
   - node
   - bytecode
-date: 2022-03-06 22:44:13
+date: 2022-09-29 08:05:41
 ---
 
 ### 什么时候需要将 node 应用编译成二进制包

@@ -2,7 +2,7 @@
 title: typescript
 categories: 编程
 tags: ts
-date: 2022-05-02 17:28:58
+date: 2022-09-29 10:12:54
 ---
 
 ## 结论先行

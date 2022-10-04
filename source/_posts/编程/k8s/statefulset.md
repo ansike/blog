@@ -3,7 +3,7 @@ title: statefulset
 categories: 编程
 tags:
   - k8s
-date: 
+date: 2022-09-28 10:38:51
 ---
 
 ### 为什么需要statefulset
