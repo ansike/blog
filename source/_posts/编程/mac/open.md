@@ -3,7 +3,7 @@ title: open命令
 categories: 编程
 tags:
   - mac
-date: 2021-12-20 00:02:56
+date: 2022-10-05 10:00:35
 ---
 
 mac 中可以使用 open 命令打开文件，目录，应用程序等，实现一些便捷的操作。
