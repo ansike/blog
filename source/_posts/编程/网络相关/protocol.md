@@ -3,8 +3,10 @@ title: protocol
 categories: 编程
 tags:
   - 网络
-date: 2022-08-08 22:50:41
+date: 2022-09-22 22:49:41
 ---
+
+<!-- TODO 网卡数据 -->
 
 ### Ethernet
 
@@ -20,6 +22,8 @@ ethernet 通信的基本单位是 Frame。由头部（header），数据（paylo
 目前有多种 ethernet 类型在使用，我们常用的就是 ethernetII
 
 header 目的地址可以分为三类：单播地址、多播地址和广播地址。
+
+<!-- TODO arp -->
 
 ### IP (Internet Protocol)
 
@@ -181,6 +185,9 @@ curl -X GET http://localhost:4000/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%
 empty line
 [response body]
 ```
+
+<!-- TODO HTTPS -->
+
 
 ### 为什么计算机中的字节都选择用 16 进制的数进行表示
 
