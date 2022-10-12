@@ -1,0 +1,25 @@
+#!/usr/bin/expect -f
+# ssh自动登录机器
+# 设置变量参数
+set user root
+# 从参数中获取内容，第一个参数
+set host [lindex $argv 0]
+# 第二个参数
+set passwd [lindex $argv 1]
+# 设置过期时间, -1为用不过期
+set timeout 30
+
+spawn ssh $user@$host
+expect {
+  "password:" { send "$passwd\r"; }
+  "yes/no" { send "yes\r"; exp_continue }
+}
+
+# 登录成功之后创建一个testExpect文件夹
+expect "root" {send "mkdir testExpect\r"}
+
+# 立即退出远程登录
+send "exit\r" 
+
+# 表示交互结束
+expect eof
