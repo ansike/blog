@@ -1,7 +1,9 @@
 ---
 title: web3
 categories: 编程
-date: 2022-06-20 23:37:39
+tags:
+  - web3
+date: 2022-10-16 09:36:57
 ---
 
 > 文章翻译自 https://ethereum.org/en/web3/
@@ -10,38 +12,39 @@ date: 2022-06-20 23:37:39
 
 Web3 简介
 中心化已经帮助数十亿人接入万维网并且创建了稳定、强健的基础设施。同时少数的中心化组织在万维网中拥有较强的话语权，可以单方面的决定什么应该或者不应该被允许。
-web3 是这个困境的答案。有别与被大的科技公司垄断的 web，web3 拥抱去中心化并且正在被构建、运作、和拥有。web3 把权利交给个人手中而不是公司。在讨论 web3 之前，让我们探索一下 web 是怎么一步一步发展成今天的样子。
+
+web3 是这个困境的答案。有别与被大的科技公司垄断的 web，web3 拥抱去中心化并且正在被构建、运营、和拥有。web3 把权利交给个人手中而不是公司。在讨论 web3 之前，让我们探索一下 web 是怎么一步一步发展成今天的样子。
 
 # 早期 web
 
-自从 web 被发明出来，大多数人把它作为一个现代生活的支柱，。然而最初 web 的设想和今天大部分我们所熟知的 web 是非常完全不同的。为了更好的理解 web，让我们简单看一下 web 简短的历史 web1.0 和 web2.0。
+自从 web 被发明出来，大多数人把它作为一个现代生活的支柱。然而最初 web 的设想和今天大部分我们所熟知的 web 是非常完全不同的。为了更好的理解 web，让我们简单看一下 web 简短的历史 web1.0 和 web2.0。
 
 ### web 1.0 只读（1990-2004）
 
 1989 年，在 CERN, Geneva, Tim Berners-Lee 正在开发一个协议，这个协议就是未来的万维网。他的设想是创建一个开放的、去中心化，允许信息共享全球的协议。
 
-Berners-Lee 所创造的就是今天所知的 web1.0，大概发生在 1990-2004。web1.0 主要是一些公司拥有的静态站点，和用户之间没有任何交互，个人很少生产内容。**导致它被认为是以只读 web。**
+Berners-Lee 所创造的就是今天所知的 web1.0，大概发生在 1990-2004。web1.0 主要是一些公司拥有的静态站点，和用户之间没有任何交互，个人很少生产内容，导致它被称为只读网络。
 
 ### web 2.0 读写（2004-至今）
 
-随着社交媒体平台的出现，web2.0 开始与 2004 年。有别于只读的 web1.0，web 逐步的变成了读写站点。除了公司提供内容给用户外，他们开始提供平台去分享用户生产的内容，并且鼓励用户和用户之间进行互动。随着越来越多的用户使用网络，少数的头部公司**开始去控制不平衡的数量**在 web 上生产的价值。web2.0 页诞生了广告驱动的营收模式。当用户能创建内容，他们不能拥有它或者**从他的 xx 中获利**
+随着社交媒体平台的出现，web2.0 开始于 2004 年。有别于只读的 web1.0，web 逐步的变成了读写站点。除了公司提供内容给用户外，他们开始提供平台去分享用户生产的内容，并且鼓励用户和用户之间进行互动。随着越来越多的用户使用网络，少数的头部公司开始去掌握在 web 上生产的流量和价值。web2.0 还诞生了广告驱动的营收模式。当用户能创建内容，他们不能拥有它或者通过将内容来变现。
 
 # web3 读-写-拥有
 
-web3.0 的前提是被 coined 被以太坊的联合创始人 Gavin Wood 在以太坊在 2014 年启动之后短暂的提及。Gavin 对于早期的加密采用者**的感受（web 需要太多的信任）** 给了一个解决方案。大多数人熟悉的使用的 web 依赖信任一些私有公司的动作在公共最大利益中。
+2014年以太坊推出不久后，以太坊联合创始人 Gavin Wood 就提出了“Web 3.0”的概念。Gavin 对于早期的加密技术采用者所面临的问题（互联网需要过多的信任）提供了一个解决方案。大多数人熟悉的使用的 web 依赖信任一些私有公司的动作在公共最大利益中。
 
 ### 什么是 web3
 
-web3 已经成了一个包罗万象的新的，更好的网络版本。在它的内核，web3 使用了区块链，加密货币和 HFTs 以所有权的形势将权力返还给用户。一个 2020 年 Twitter 的帖子解释的最好：web1 只读，web2 可以读写，web3 读-写-拥有
+web3 已经成了一个包罗万象的新的，更好的网络愿景。在它的内核，web3 使用了区块链，加密货币和 HFTs 以所有权的形势将权力返还给用户。一个 2020 年 Twitter 的帖子解释的最好：web1 只读，web2 可以读写，web3 读-写-拥有
 
 ### web3 的核心
 
 虽然提出什么是 web3 的坚定的定义是一个挑战，少数几个核心的原则指出了他的初心。
 
 - web3 是去中心化的：有别于大的中心化实体，成员控制和拥有。
-- web3 是无需允许的：每个人都平等的去参与 web3，没有人被排除在外。
-- web3 是本地支付的：它使用加密货币去支付而不是依赖最新的银行基础设施。
-- web3 是无需信任的：它使用**刺激的经济的装置**而不是依赖受信的第三方。
+- web3 是无需许可的：每个人都平等的去参与 web3，没有人被排除在外。
+- web3 是原生支付的：它使用加密货币去支付而不是依赖最新的银行基础设施。
+- web3 是无需信任的：它使用激励措施和经济机制运转，而不是依赖受信的第三方。
 
 ### 为什么 web3 如此重要
 
@@ -53,7 +56,7 @@ web3 给你数字资产的所有权以史无前例的方式。例如你正在玩
 
 web3 允许直接的所有权通过不可代币来表示（[NFTs](https://ethereum.org/en/nft/)），这样没有一个人甚至游戏的创造者有能力去夺取你的所有权。并且如果你不在玩游戏了，你能够在开放的市场中出售或者交易游戏装备以回收他们的价值。
 
-##### 监管阻力
+##### 抗审查
 
 在平台和内容创作者之间权利动态严重失衡。
 
@@ -62,7 +65,7 @@ OnlyFans 是一个用户生产的承认内容网站有着超过 1 百万的内�
 在 web3，你的数据存在于区块链上。当你决定离开一个平台，你可以带着你的名誉，把它插入到另外一个你喜欢的地方。
 web2.0 需要内容创作者信任平台不会改变规则，但是监管阻力在 web3 是一个原生能力
 
-##### 去中心化自治组织（[DAOs](https://ethereum.org/en/dao/)）
+##### 去中心化自治组织（[DAO](https://ethereum.org/en/dao/)）
 
 像在 web3 拥有你自己的数据一样，你也可以拥有自己的平台作为一个集体，像在公司中使用股份一样使用 token。DAOs 能够协调下放一个平台的所有权和对未来做出决策。
 
@@ -82,32 +85,28 @@ web3 的支付基础设施是依赖银行和支付处理器的，不包括没有
 
 # web3 限制
 
-Despite the numerous benefits of Web3 in its current form, there are still many limitations that the ecosystem must address for it to flourish.
+尽管 web3 现在的形式下有很多的好处，这儿仍然有很多的限制，生态必须设法解决以便其繁荣。
 
 ### 可访问性
 
-Important Web3 features, like Sign-in with Ethereum, are already available for anyone to use at zero cost. But, the relative cost of transactions is still prohibitive to many. Web3 is less likely to be utilized in less-wealthy, developing nations due to high transaction fees. On Ethereum, these challenges are being solved through network upgrades and layer 2 scaling solutions. The technology is ready, but we need higher levels of adoption on layer 2 to make Web3 accessible to everyone.
+web3 重要的特性，像 Ethereum 登录已经准备好可供每个人零成本使用。但对于很多人来说交易的成本让人望而却步。由于较高的交易费用，不太富裕的国家不太可能使用 web3。在以太坊，这些挑战正在被解决通过升级网络和二层缩放解决。该技术已经准备好了，但是我们需要在第二层采用更高的级别去使得 web3 可以被每个人使用。
 
 ### 用户经历
 
-The technical barrier to entry to using Web3 is currently too high. Users must comprehend security concerns, understand complex technical documentation, and navigate unintuitive user interfaces. Wallet providers, in particular, are working to solve this, but more progress is needed before Web3 gets adopted en masse.
+当前技术屏障对进入使用 web3 仍然很高。用户必须理解安全问题，理解复杂的技术文档和转换到非用户直观界面。尤其是钱包提供者正在解决这个问题，但在 web3 被更广泛的采纳之，还需要取得更多的进展。
 
 ### 教育
 
-Web3 introduces new paradigms that require learning different mental models than the ones used in Web2.0. A similar education drive happened as Web1.0 was gaining popularity in the late 1990s; proponents of the world wide web used a slew of educational techniques to educate the public from simple metaphors (the information highway, browsers, surfing the web) to television broadcasts. Web3 isn't difficult, but it is different. Educational initiatives informing Web2 users of these Web3 paradigms are vital for its success.
+web3 的引入了新的范式，那需要学习不同于 web2.0 的精神模型。19 世纪 90 年代末随着 web1.0 越来越流行时，也发生了教育活动。万维网的支持者使用了一系列的教育技术，从简单的隐喻（信息高速路，浏览器，网上冲浪）到电视广播去教育公众。web3 不难，但是它是不同的。教育方案让 web2 的用户熟悉 web3 的模型对于它的成功是至关重要的
 
-Ethereum.org contributes to Web3 education through our Translation Program, aiming to translate important Ethereum content to as many languages as possible.
+Ethereum.org 通过翻译项目向 web3 教育做贡献。旨在翻译重要的以太坊内容成更多的语言。
 
 ### 中心化基础设施
 
-The Web3 ecosystem is young and quickly evolving. As a result, it currently depends mainly on centralized infrastructure (GitHub, Twitter, Discord, etc.). Many Web3 companies are rushing to fill these gaps, but building high-quality, reliable infrastructure takes time.
+web3 的生态时年轻的和快速革新的。结果是它当钱主要依赖中心化的基础设施（GitHub, Twitter, Discord 等）。许多 web3 的公司正急忙的去填补这些空白，但是构建高质量、可信赖的基础设施仍然需要时间。
 
 # 去中心化的未来
 
-Web3 is a young and evolving ecosystem. Gavin Wood coined the term in 2014, but many of these ideas have only recently become a reality. In the last year alone, there has been a considerable surge in the interest in cryptocurrency, improvements to layer 2 scaling solutions, massive experiments with new forms of governance, and revolutions in digital identity.
+web3 是一个年轻且不断发展的生态系统。Gavin Wood 在 2014 年创造了这个术语，但其中好多的知道最近才成为现实。尽在去年，我们就经历了人们对加密货币的兴趣大增、2 层扩容解决方案的改进、新治理形式的大规模试验以及数字身份的革命。
 
-We are only at the beginning of creating a better Web with Web3, but as we continue to improve the infrastructure that will support it, the future of the Web looks bright.
-
-# 怎样参与其中
-
-# 进一步阅读
+我们刚刚开始用 web3 创建更美好的互联网，但随着我们持续的去改进他的基础设施，互联网的未来是光明的。
