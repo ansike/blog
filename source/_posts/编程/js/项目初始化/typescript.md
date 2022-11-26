@@ -1,5 +1,5 @@
 ---
-title: typescript
+title: typescript util 初始化
 categories: 编程
 tags: ts
 date: 2022-09-29 10:12:54
