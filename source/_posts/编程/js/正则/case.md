@@ -4,8 +4,32 @@ categories: 编程
 tags:
   - js
   - 正则
-date: 2022-03-10 09:35:56
+date: 2022-11-26 20:28:28
 ---
+
+### 循环匹配指定模式
+
+我们对字符串做全局匹配替换时会需要该思想
+
+```javascript
+const reg = /{{(\w*)}}/g;
+const confMap = {
+  AAAA: "1",
+  BBBB: "2",
+};
+
+let str = `str1={{AAAA}}str2={{BBBB}}`;
+let arr = [];
+while ((arr = reg.exec(str))) {
+  const fullString = arr[0];
+  const matchKey = arr[1];
+  str = str.replace(fullString, confMap[matchKey]);
+  // 这行代码对于该case来说是必须的，因为replace会导致str的长度变短，不做重置的话会漏掉BBBB的case
+  reg.lastIndex = reg.lastIndex + (confMap[matchKey].length - fullString);
+}
+console.log(str);
+// str1=1str2=2
+```
 
 ### 全局匹配中（g）test 不符合预期的 case
 
