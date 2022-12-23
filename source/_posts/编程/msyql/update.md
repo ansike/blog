@@ -24,3 +24,17 @@ update Salary
 -- 奇淫巧计
 update Salary set sex = char(ascii('m')+ascii('f')-ascii(sex));
 ```
+
+##### update user password 语句
+```sql
+ALTER USER 'userName'@'localhost' IDENTIFIED BY 'New-Password-Here';
+```
+
+远程调用
+```shell
+# mysql_remote_execute
+mysql_remote_execute "$host" "$port" "$database" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" <<EOF
+  ALTER USER "$userName"@'%' IDENTIFIED BY "$password";
+  GRANT ALL PRIVILEGES ON $database.* TO "$username"@'%';
+EOF
+```

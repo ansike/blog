@@ -37,6 +37,9 @@ COMMIT;
 ```
 
 ### sql中的if语句
+https://dev.mysql.com/doc/refman/8.0/en/sql-prepared-statements.html
+mysql 8.0
+
 ```sql
 -- platform 中不存在 product 表则把 config 表重命名为 product
 BEGIN;
