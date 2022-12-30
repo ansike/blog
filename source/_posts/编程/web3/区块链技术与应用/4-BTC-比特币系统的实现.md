@@ -1,6 +1,9 @@
 ---
 title: BTC-比特币系统的实现
 categories: 编程
+tags:
+  - web3
+  - BTC
 date: 2022-12-26 17:56:07
 ---
 

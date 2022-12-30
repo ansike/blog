@@ -1,6 +1,9 @@
 ---
 title: BTC-挖矿难度
 categories: 编程
+tags:
+  - web3
+  - BTC
 date: 2022-12-30 20:00:23
 ---
 

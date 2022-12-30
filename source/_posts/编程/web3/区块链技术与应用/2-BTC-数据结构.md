@@ -1,6 +1,9 @@
 ---
 title: BTC-数据结构
 categories: 编程
+tags:
+  - web3
+  - BTC
 date: 2022-12-25 22:52:48
 ---
 

@@ -1,6 +1,9 @@
 ---
 title: BTC-比特币网络工作原理
 categories: 编程
+tags:
+  - web3
+  - BTC
 date: 2022-12-26 23:14:37
 ---
 
