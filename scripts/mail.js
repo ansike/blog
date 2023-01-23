@@ -24,11 +24,11 @@ async function main() {
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: `"${user.split("@")[0]}" <${user}>`, // sender address
+    from: `"${user}" <${user}>`, // sender address
     to: "ansike@qq.com", // list of receivers
-    subject: "travis ci result", // Subject line
-    text: "travis build done, visit detail https://app.travis-ci.com/github/ansike", // plain text body
-    html: "<b>travis build done, visit detail https://app.travis-ci.com/github/ansike</b>", // html body
+    subject: "gh build", // Subject line
+    text: "travis build done, you can visit https://ansike.github.io/blog/ to check the result and visit https://app.travis-ci.com/github/ansike to check the build detail", // plain text body
+    html: "<b>travis build done, you can visit https://ansike.github.io/blog/ to check the result and visit https://app.travis-ci.com/github/ansike to check the build detail</b>", // html body
   });
 
   console.log("Message sent: %s", info.messageId);
