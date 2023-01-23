@@ -28,7 +28,7 @@ async function main() {
     to: "ansike@qq.com", // list of receivers
     subject: "gh build", // Subject line
     text: "travis build done, you can visit https://ansike.github.io/blog/ to check the result and visit https://app.travis-ci.com/github/ansike to check the build detail", // plain text body
-    html: "<b>travis build done, you can visit https://ansike.github.io/blog/ to check the result and visit https://app.travis-ci.com/github/ansike to check the build detail</b>", // html body
+    html: "<b>travis build done.<br /> you can visit https://ansike.github.io/blog/ to check the result <br />and visit https://app.travis-ci.com/github/ansike to check the build detail</b>", // html body
   });
 
   console.log("Message sent: %s", info.messageId);
