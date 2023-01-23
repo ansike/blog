@@ -17,5 +17,4 @@ deploy:
     branch: master
   local-dir: public
 after_script: 
-  - chmod +x scripts/mail.js
   - node scripts/mail.js
