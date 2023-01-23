@@ -97,8 +97,7 @@
           div.className = "matched-box";
           div.innerHTML = `${matchedHead}${matchedContent}`;
           div.onclick = (e) => {
-            const curDom = e.path.find((item) => item === div);
-            const path = curDom.getAttribute("data-url");
+            const path = e.currentTarget.getAttribute("data-url");
             window.location.href = `/blog/${path}`;
           };
           return div;

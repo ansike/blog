@@ -3,10 +3,12 @@ const nodemailer = require("nodemailer");
 const user = process.env.MAIL_NAME;
 const pass = process.env.MAIL_PASS;
 
-console.log("user", user);
-
 // async..await is not allowed in global scope, must use a wrapper
 async function main() {
+  if (!user || !pass) {
+    console.log("there is no user or pass");
+    return;
+  }
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
   // let testAccount = await nodemailer.createTestAccount();
