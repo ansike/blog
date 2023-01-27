@@ -10,7 +10,8 @@ date: 2022-09-22 22:49:41
 
 ### Ethernet
 
-![ethernet](./97c13f044de260baf0ed8051091dd251.png)
+{% asset_img 97c13f044de260baf0ed8051091dd251.png ethernet %}
+
 ethernet 通信的基本单位是 Frame。由头部（header），数据（payload），校验和（checcksum）三部分组成
 
 注意部分
@@ -72,7 +73,8 @@ curl http://c.biancheng.net/linux_tutorial/12/
 ```
 
 查看 wireshark 中的数据，查找 http 请求，然后查找对应的三次 TCP
-![wireshark抓包](./20220922-223635.jpeg)
+{% asset_img 20220922-223635.jpeg wireshark抓包 %}
+
 
 **三次握手的过程**
 
@@ -104,14 +106,14 @@ curl http://c.biancheng.net
 ```
 
 查看 wireshark 中的数据，查找 http 请求，然后查找对应的挥手
-![三次挥手](./20220923-225149.jpeg)
+{% asset_img 20220922-225149.jpeg 三次挥手 %}
 
 此处可以看到该挥手次数和我们理解的不太一样，是**三次挥手**。
 猜想我们的连接断开很快有关，client 发送断开连接请求，server 收到之后会把即将发送的断开连接请求和上次的 ACK 进行打包发送减少了一次消息传递，最后 client 收到 server 断开的请求后发送 ACK 然后关闭连接进入 close 状态。（看网上的解释说可能和 TCP 延时机制有关 https://www.cnblogs.com/yunmeng-shi/p/16245827.html）
 
 自己用 http-server 起了一个本地服务，可以看到四次挥手的过程
 
-![四次挥手](./20220923-233327.jpeg)
+{% asset_img 20220923-233327.jpeg 四次挥手 %}
 
 ### HTTP (Hypertext Transfer Protocol )
 

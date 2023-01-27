@@ -43,14 +43,16 @@ trie缺点：存储浪费存取内容效率低（键值稀疏）
 
 解决trie缺点：Patricia Tree（进过路径压缩的树）
 
-![MPT](./mpt.jpg)
-![相邻区块的 MPT2](./mpt2.jpg)
+{% asset_img mpt.jpg MPT %}
+{% asset_img mpt2.jpg 相邻区块的 MPT2 %}
+
 后续区块的节点是直接指向前边共享节点的。
 
 问题：为什么钥保留历史状态，不在原先数据上直接修改
 答案：为了回滚，在ETH，分叉是常态，orphan block中的数据都要向前回滚，而用于ETH中的有智能合约，为了支撑只能合约的回滚，必须保持之前的状态。
 
 
-![ETH header](./ETH_header.jpg)
+{% asset_img ETH_header.jpg ETH header %}
+
 以上我们将的都是怎么存key，value是怎么存储的呢？
 经过RLP（recursive length prefix）序列化，再存储

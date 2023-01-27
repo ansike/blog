@@ -26,7 +26,8 @@ BTC中的数据结构包含了 hash points 和Merkle Tree
 2. Merkle Tree
    2.1 一个BTC区块中大约包含了4000多条交易，这么多的交易在区块中是通过Merkle Tree存储的。
    **我们常见的binary tree（二叉树）和merkle tree有什么区别？** hash point代替普通指针
-   ![每个区块的数据结构](./btc.jpg)
+{% asset_img btc.jpg 每个区块的数据结构 %}
+
 
    2.2 merkle tree最下层就是transaction，以上的部分都是对下层的一个hash计算。两个hash计算新的hash逐层向上直到 merkle root。**只要知道根hash值就能检测树下任意数据的修改。**
 
