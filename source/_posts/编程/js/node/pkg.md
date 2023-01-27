@@ -52,7 +52,7 @@ curl -O- https://xxx/install.sh | sh
 # install.sh
 #!/usr/bin/dev bash
 set -e
-# TODO 判断是否存在某个命令
+# 判断 curl 是否存在某个命令
 if [ type curl ]
 then
   curl -o https://xxx/demo-linux
@@ -75,7 +75,7 @@ echo "✅demo[$(demo -v)]已经完成安装，请使用$(demo -h)查看更多使
 # uninstall.sh
 #!/usr/bin/dev bash
 set -e
-# TODO 判断是否存在某个命令
+# 判断 demo 是否存在某个命令
 if [ type demo ]
 then
   rm -rf /usr/local/bin/demo
@@ -84,3 +84,29 @@ else
   echo "⚠️ demo不存在，无需卸载"
 fi
 ```
+
+**判断命令是否存在**
+
+格式：type [command] >/dev/null 2>&1
+格式：[command] >/dev/null 2>&1
+格式：which [command] >/dev/null 2>&1
+
+```shell
+type ls >/dev/null 2>&1
+[ $? = 0 ] && echo 1 || echo 0
+
+which ls >/dev/null 2>&1
+[ $? = 0 ] && echo 1 || echo 
+
+ls >/dev/null 2>&1     
+[ $? = 0 ] && echo 1 || echo 0
+```
+
+**/dev/null 与1和2**
+
+/dev/null 是一个可写入的文件，所有写入的内容都会丢弃
+1 stdout
+2 stderr
+
+`>/dev/null`表示讲左侧的内容输出到/dev/null文件中
+2>&1是将stderr输出到stdout中
