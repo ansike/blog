@@ -104,8 +104,9 @@ function App() {
 export default App;
 ```
 
-**在用script直接引用web3和通过npm导入web3有坑**
-
+### 注意事项
+1. 纯html的方式启动需要启动一个静态服务，否则无法自动连接钱包。
+2. 在用script直接引用和通过npm导入实例化web3时有区别：
 - script引用：const web3 = new Web3(Web3.givenProvider || "http://localhost:8545");
 - npm引用：const web3 = new Web3((window as any).web3.currentProvider || "http://127.0.0.1:8545");
 只有这样设置再调用requestAccounts时才能和metamask连接
