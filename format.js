@@ -21,11 +21,12 @@ function getFiles(dir = "", list = []) {
 const dateReg = /date:\s*/;
 function execGit() {
   const files = getFiles(dirPath);
+  console.log(files.length);
   files.forEach((item) => {
     exec(
       `echo $(git log --pretty=format:"%ad" --date=format:"%Y-%m-%d %H:%M:%S" ${item} | tail -1)`,
       (error, stdout, stderr) => {
-        console.log(item, stdout, error, stderr);
+        // console.log(item, stdout, error, stderr);
         let str = fs.readFileSync(item, { encoding: "utf-8" });
         if (dateReg.test(str)) {
           str = str.replace(
