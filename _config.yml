@@ -112,4 +112,6 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: ''
+  type: git
+  repo: https://github.com/ansike/blog #https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
+  branch: gh-pages
