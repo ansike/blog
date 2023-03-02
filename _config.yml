@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 安思科的博客
+title: ASK's Blog
 subtitle: ''
 description: '记录一些平时点滴'
-keywords: '安思科, ansike'
-author: 安思科
+keywords: 'ask, ansike'
+author: ask
 language: zh-CN
 timezone: 'Asia/Shanghai'
 
@@ -15,7 +15,7 @@ timezone: 'Asia/Shanghai'
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://ansike.github.io/blog/
 root: /blog/
-permalink: :year/:month/:day/:title/
+permalink: :category/:title/
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing index.html from permalinks
@@ -40,7 +40,10 @@ external_link:
   exclude: ''
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
+marked:
+  prependRoot: true
+  postAsset: true
 relative_link: false
 future: true
 highlight:
@@ -109,4 +112,6 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: ''
+  type: git
+  repo: https://github.com/ansike/blog #https://bitbucket.org/JohnSmith/johnsmith.bitbucket.io
+  branch: gh-pages

@@ -43,8 +43,8 @@
 
   $(".search-box-input").on("change", function (e) {
     const value = e.target.value;
-    if (value) {
-      const posts = data.Post;
+    const posts = data.Post;
+    if (value && posts) {
       const matchedPostList = posts
         .filter((post) => {
           const title = post.title;
@@ -91,15 +91,13 @@
           const div = document.createElement("div");
           div.setAttribute(
             "data-url",
-            `${post.date.match(/\d{4}-\d{2}-\d{2}/)[0].replace(/\-/g, "/")}/${
-              post.slug
-            }`
+            // `${post.date.match(/\d{4}-\d{2}-\d{2}/)[0].replace(/\-/g, "/")}
+            `programming/${post.slug}`
           );
           div.className = "matched-box";
           div.innerHTML = `${matchedHead}${matchedContent}`;
           div.onclick = (e) => {
-            const curDom = e.path.find((item) => item === div);
-            const path = curDom.getAttribute("data-url");
+            const path = e.currentTarget.getAttribute("data-url");
             window.location.href = `/blog/${path}`;
           };
           return div;

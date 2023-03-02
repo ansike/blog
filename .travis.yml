@@ -16,3 +16,5 @@ deploy:
   on:
     branch: master
   local-dir: public
+after_script: 
+  - node scripts/mail.js

@@ -2,7 +2,16 @@
 menu:
   Home: /
   Archives: /archives
-# rss: /atom.xml
+rss: /atom.xml
+
+#RSS订阅
+plugin:
+- hexo-generator-feed
+#Feed Atom
+feed:
+type: atom
+path: atom.xml
+limit: 20
 
 # Content
 excerpt_link: Read More

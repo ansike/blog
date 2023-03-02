@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>测试error收集</title>
+  </head>
+  <body>
+    html
+  </body>
+  <script src="/code/error.js"></script>
+  <script>
+    handleWindowError();
+    handleResourceError();
+    handleAjaxError();
+    handleRejectPromise();
+    handleConsoleError();
+
+    setTimeout(() => {
+      // throw new Error("this is a error");
+    }, 1000);
+
+    // const Img = document.createElement("img");
+    // Img.src = "./a.jpg";
+    // document.body.appendChild(Img);
+    // const Link = document.createElement("link");
+    // Link.href = "./a.css";
+    // Link.rel = "stylesheet";
+    // document.body.appendChild(Link);
+    // const Script = document.createElement("script");
+    // Script.src = "./a.js";
+    // document.body.appendChild(Script);
+
+    // const xhr = new XMLHttpRequest();
+    // xhr.open("get", "/a");
+    // xhr.onreadystatechange = () => {
+    //   if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+    //     console.log(xhr.response);
+    //   }
+    // };
+    // xhr.send();
+
+    // fetch('/a')
+
+    Promise.resolve().then(() => {
+      throw new Error();
+    });
+
+    // console.error('asda')
+  </script>
+</html>

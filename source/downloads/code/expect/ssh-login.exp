@@ -1,0 +1,24 @@
+#!/usr/bin/expect -f
+# ssh自动登录机器
+# 设置变量参数
+set user root
+# 从参数中获取内容，第一个参数
+set host [lindex $argv 0]
+# 第二个参数
+set passwd [lindex $argv 1]
+
+# 设置过期时间, -1为用不过期
+set timeout 30
+
+spawn ssh $user@$host
+expect "password:" { send "$passwd\r"; }
+expect "yes/no" { send "yes\r"; exp_continue }
+
+# 和上边的意思一致
+# expect {
+#   "password:" { send "$passwd\r"; }
+#   "yes/no" { send "yes\r"; exp_continue }
+# }
+
+# 主动权交给用户，开始交互式操作
+interact
