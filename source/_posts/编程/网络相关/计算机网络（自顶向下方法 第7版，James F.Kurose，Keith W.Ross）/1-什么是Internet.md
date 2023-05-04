@@ -3,13 +3,13 @@ title: 什么是Internet？
 categories: 编程
 tags:
   - 网络
-date: 
+date: 2023-05-04 09:51:36
 ---
 
 来自[中科大郑烇、杨坚全套《计算机网络（自顶向下方法 第7版，James F.Kurose，Keith W.Ross）》课程](https://www.bilibili.com/video/BV1JV411t7ow/?spm_id_from=333.337.search-card.all.click&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e)
 
 
-{% asset_img 20230430-181317.jpg 概述 %}
+{% asset_img 20230430-181317.jpeg 概述 %}
 
 网路：由节点和边组成（蜘蛛网，神经元网络）
 
@@ -77,7 +77,7 @@ date:
 - 接入网和物理媒介
   - 有线或者无线通信线路
 
-{% asset_img 20230501-195220.jpg 概述 %}
+{% asset_img 20230501-195220.jpeg 概述 %}
 
 ### 网络边缘
 - 端系统（主机）
@@ -242,7 +242,7 @@ RTT(Round Trip Time)
 **吞吐量**
 在源端到目标端的传输速率（数据量/单位时间）
 
-{% asset_img 20230504-094906.jpg 分组交换VS电路交换 %}
+{% asset_img 20230504-094906.jpeg 分组交换VS电路交换 %}
 
 <h1 id="protocol">1.7 协议层次和服务模型</h1>
 

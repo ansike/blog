@@ -24,9 +24,12 @@ function execGit() {
   console.log(files.length);
   files.forEach((item) => {
     exec(
-      `echo $(git log --pretty=format:"%ad" --date=format:"%Y-%m-%d %H:%M:%S" ${item} | tail -1)`,
+      `echo $(git log --pretty=format:"%ad" --date=format:"%Y-%m-%d %H:%M:%S" -- ${escapePath(item)} | tail -1)`,
       (error, stdout, stderr) => {
-        console.log(item, stdout, error, stderr);
+        if(stdout === '\n'){
+          // console.log({item, stdout, error, stderr});
+          console.log(item, '没有超找到记录，检查是否已经commit文件');
+        }
         let str = fs.readFileSync(item, { encoding: "utf-8" });
         if (dateReg.test(str)) {
           str = str.replace(
@@ -38,6 +41,16 @@ function execGit() {
       }
     );
   });
+}
+
+const specialChars = [
+  ' ', '!', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', ':',
+  ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '`', '{', '|',
+  '}', '~', '"'
+];
+const pat = new RegExp('([' + specialChars.join('') + '])', 'g');
+function escapePath(path) {
+  return path.replace(pat, '\\$1');
 }
 
 execGit();
