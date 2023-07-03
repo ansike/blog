@@ -10,7 +10,10 @@ date: 2022-09-07 22:36:35
 
 # input 函数
 接受用户的输入
-
+```python
+iptStr=input('你是谁？')
+print('你是：'+iptStr)
+```
 
 # 运算符
 - 算数运算符
