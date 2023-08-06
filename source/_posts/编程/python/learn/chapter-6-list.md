@@ -4,7 +4,7 @@ categories: 编程
 tags:
   - python
   - language
-date: 2022-09-07 22:36:35
+date: 2023-07-08 17:42:18
 ---
 ### 列表的创建与删除
 - 中括号

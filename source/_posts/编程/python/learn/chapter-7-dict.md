@@ -4,7 +4,7 @@ categories: 编程
 tags:
   - python
   - language
-date: 2022-09-07 22:36:35
+date: 2023-07-08 18:05:37
 ---
 ### 字典的概念
 类似于java和js中的map

@@ -4,7 +4,7 @@ categories: 编程
 tags:
   - python
   - language
-date: 2022-09-07 22:36:35
+date: 2023-07-09 00:18:44
 ---
 ### 什么是元组
 是python内置的数据结构之一，是一个不可变序列
