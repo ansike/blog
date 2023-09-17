@@ -1,0 +1,14 @@
+#!/usr/bin/expect -f
+# scp 拷贝文件
+# 设置过期时间, -1为用不过期
+set timeout -1
+
+spawn scp /Users/ansike/a.sh root@172.17.1.1:~/
+expect {
+  "password:" { send "sssss\r"; }
+  "yes/no" { send "yes\r"; exp_continue }
+}
+# 立即退出远程登录
+send "exit\r" 
+# 表示交互结束
+expect eof

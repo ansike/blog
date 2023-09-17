@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记录一些平时点滴">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ASK&#39;s Blog">
+<meta property="og:url" content="https://ansike.github.io/blog/page/3/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="记录一些平时点滴">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="ask">
+<meta property="article:tag" content=" ansike">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-编程/网络相关/计算机网络（自顶向下方法 第7版，James F.Kurose，Keith W.Ross）/1-什么是Internet" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/1-%E4%BB%80%E4%B9%88%E6%98%AFInternet/" class="article-date">
+  <time datetime="2023-05-04T01:51:36.000Z" itemprop="datePublished">2023-05-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/1-%E4%BB%80%E4%B9%88%E6%98%AFInternet/">什么是Internet？</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>来自<a href="https://www.bilibili.com/video/BV1JV411t7ow/?spm_id_from=333.337.search-card.all.click&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">中科大郑烇、杨坚全套《计算机网络（自顶向下方法 第7版，James F.Kurose，Keith W.Ross）》课程</a></p>
+
+
+<p>网路：由节点和边组成（蜘蛛网，神经元网络）</p>
+<p>计算机网络：联网的计算机构成的系统。</p>
+<ul>
+<li>主机节点（电脑，手机，ipad，联网冰箱，机顶盒，web服务器等），数据交换节点（路由器，交换机）<br>互联网</li>
+</ul>
+<p><a href="#internet">1.1 什么是Internet？</a><br><a href="#edge">1.2 网络边缘</a><br><a href="#core">1.3 网络核心</a><br><a href="#access">1.4 接入网和物理媒体</a><br><a href="#internet&isp">1.5 Internet结构和ISP</a><br><a href="#group">1.6 分组延时、丢失、吞吐量</a><br><a href="#protocol">1.7 协议层次和服务模型</a><br><a href="#history">1.8 历史</a></p>
+<h1 id="internet">什么是Internet？</h1>
+
+<ul>
+<li>从具体构成角度看<ul>
+<li>节点<ul>
+<li>主机及其上运行的应用程序</li>
+<li>路由器、交换机等网络交换设备</li>
+</ul>
+</li>
+<li>边<ul>
+<li>接入网链路：主机连接到互联网的链路</li>
+<li>主干链路：路由器间的链路</li>
+</ul>
+</li>
+<li>协议 对等层实体在通信过程中应该遵循的规则的集合<ul>
+<li>TCP/IP协议簇构成的网络</li>
+</ul>
+</li>
+<li>数以亿计的互联网计算设备<ul>
+<li>主机=端系统 （host=end system）</li>
+<li>运行网络应用程序</li>
+</ul>
+</li>
+<li>通信链路<ul>
+<li>光纤，同轴电缆，无线电，卫星</li>
+<li>传输速率=带宽（bps）</li>
+</ul>
+</li>
+<li>分组交换设备（转发分组 packets）<ul>
+<li>路由器和交换机</li>
+</ul>
+</li>
+<li>协议控制发送和接受消息（TCP、IP、HTTP、FTP、PPP）</li>
+<li>Internet（网络的网络）<ul>
+<li>松散的层次结构，互联的ISP</li>
+<li>公共的Internet vs 专用的intranet</li>
+</ul>
+</li>
+<li>Internet标准<ul>
+<li>RFC：request for comment</li>
+<li>IETF：Internet Engineering Task Force</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>从服务的角度看<ul>
+<li>使用基础设施进行通讯的分布式应用（web，email，分布式游戏，电子商务，社交网络…）</li>
+<li>通信设施为apps提供编程接口<ul>
+<li>将发送和接受数据的apps与互联网连接起来</li>
+<li>为app应用提供服务选择，类似于邮政服务：<ul>
+<li>无连接不可靠服务</li>
+<li>面向连接的可靠服务</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>分布式应用是网络存在的理由</p>
+<p><strong>互联网就是分布式应用以及分布式应用提供通信服务的基础设施</strong>。</p>
+<h1 id="edge">网络边缘</h1>
+
+<p>另外一个角度拆解互联网：按组成类型来把互联网分成一个个的子系统</p>
+<h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><ul>
+<li>网络边缘<ul>
+<li>主机</li>
+<li>应用程序（客户端和服务器）</li>
+</ul>
+</li>
+<li>网络核心<ul>
+<li>互联着的路由器</li>
+<li>网络的网络</li>
+</ul>
+</li>
+<li>接入网和物理媒介<ul>
+<li>有线或者无线通信线路</li>
+</ul>
+</li>
+</ul>
+
+
+<h3 id="网络边缘"><a href="#网络边缘" class="headerlink" title="网络边缘"></a>网络边缘</h3><ul>
+<li>端系统（主机）<ul>
+<li>运行应用程序</li>
+<li>如web，email</li>
+<li>在“网络的边缘”</li>
+</ul>
+</li>
+<li>客户/服务器模式<ul>
+<li>客户端向服务器请求，接受服务</li>
+<li>如web浏览器/服务器；email客户端/服务器</li>
+</ul>
+</li>
+<li>对等（peer-peer）模式<ul>
+<li>很少，甚至没有专门的服务器</li>
+<li>如迅雷，电驴等</li>
+</ul>
+</li>
+</ul>
+<p>采用基础设施的无连接服务</p>
+<h1 id="core">1.3 网络核心</h1>
+
+<ul>
+<li>电路交换（线路交换）<ul>
+<li>端到端的资源分配，从源端到目标端的呼叫“call”</li>
+<li>通过信令（控制信号）</li>
+<li>独享的资源，一般是传统电话</li>
+<li>网络资源分片（piece）<ul>
+<li>频分</li>
+<li>时分</li>
+<li>波分</li>
+</ul>
+</li>
+<li>线路交换不适合计算机通信<ul>
+<li>建立时间过长</li>
+<li>计算机之间有较多的突发性（有时候才会有通信动作），如果使用线路交换，浪费的时间片较多</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分组交换 packet switch<ul>
+<li>以分组为单位存储-转发<ul>
+<li>网络资源不再分为一个个片，传输时使用全部的带宽</li>
+<li>主机之间的传输数据被分为一个个分组</li>
+</ul>
+</li>
+<li>资源共享，按需使用<ul>
+<li>存储-转发：分组每次移动一跳<ul>
+<li>在转发之前节点必须收到整个分组</li>
+<li>延迟比线路交换要大</li>
+<li>增加了排队时间<!-- TODO 题目  --></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>排队延迟和丢失<ul>
+<li>如果达到速率 &gt; 输出速率<ul>
+<li>分组将会排队等待传输</li>
+<li>如果路由器的缓存用完了，分组将会丢弃</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>关键功能<ul>
+<li>路由 决定分组采用的源到目标的路径</li>
+<li>转发 将分组从路由器的输入链路到输出链路</li>
+</ul>
+</li>
+<li>统计多路复用</li>
+<li>虚电路和数据报网络</li>
+</ul>
+</li>
+</ul>
+<p><strong>线路交换 VS 分组交换</strong></p>
+<h1 id="access">1.4 接入网和物理媒体</h1>
+
+<p><strong>怎样将端系统和边缘路由器连接？</strong></p>
+<ul>
+<li>住宅接入网络 modem<ul>
+<li>调制解调 电话线</li>
+<li>DSL/ADS</li>
+<li>线缆网络</li>
+</ul>
+</li>
+<li>单位接入网络（学校，公司）</li>
+<li>无线接入网络<ul>
+<li>各无线端系统共享无线接入网络（端系统到无线路由器）通过基站或者叫接入点<ul>
+<li>无线LANs<ul>
+<li>WIFI 无线路由器</li>
+<li></li>
+</ul>
+</li>
+<li>广域无线接入<ul>
+<li>3G,4G</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="物理媒体"><a href="#物理媒体" class="headerlink" title="物理媒体"></a>物理媒体</h3><ul>
+<li>物理链路：在每个传输-接受对，跨越一种物理媒介</li>
+<li>媒体类型<ul>
+<li>导引型媒体：信号沿着固体媒介被引导（如同轴电缆，光线，双绞线）<ul>
+<li>双绞线（TP）<ul>
+<li>两根绝缘铜线<ul>
+<li>5类：100Mbps Ethernet Gbps以太网</li>
+<li>6类：10Gbps</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>同轴电缆<ul>
+<li>两根铜芯的铜导线</li>
+<li>双向</li>
+<li>基带电缆<ul>
+<li>电缆上的一个单带信道</li>
+<li>Ethernet</li>
+</ul>
+</li>
+<li>宽带电缆<ul>
+<li>电缆上有多个信道</li>
+<li>HFC</li>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>光缆<ul>
+<li>光脉冲，每个脉冲表示一个bit，在玻璃纤维中传输</li>
+<li>高速：点到点的高速传输（10Gbps-100Gbps）</li>
+<li>低误码率：两个中继器之间可以有很长的距离，不受电磁噪声的干扰</li>
+<li>安全</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>非导引型媒体：信号自由传播（如无线电）<ul>
+<li>地面微波</li>
+<li>LAN（WIFI）</li>
+<li>wide area（蜂窝）</li>
+<li>卫星</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="internet&isp">1.5 Internet结构和ISP</h1>
+
+<p>端系统通过接入ISPs（Internet Service Providers）接入到互联网<br>给定数百万接入ISPs，如何将他们互联到一起？<br>将每两个ISP直接相连是不可扩展的，需要O(n^2)连接，不可扩展。<br>现在的解法：将每个接入的ISP都接入全局ISP</p>
+<p>内容提供商（Internet Content Provider，Google、Microsoft、Akamai）可能会构建自己的网络，将他们的服务、内容更加靠近端用户，向用户提供更好的服务，减少自己的运营支出。</p>
+<p><strong>ISP是松散的层次模型</strong></p>
+<ul>
+<li>中心：第一层ISP，国家或国际覆盖，速率极高<ul>
+<li>直接与其他第一层ISP相连</li>
+<li>与大量的第二层ISP和其他客户网络相连</li>
+</ul>
+</li>
+<li>第二层ISP：更小些的（通常是区域性的）ISP<ul>
+<li>与一个或多个第一层的ISPs，也可能与其他第二层ISP</li>
+</ul>
+</li>
+<li>第三层ISP与其他本地ISP<ul>
+<li>接入网（与端系统最近）</li>
+</ul>
+</li>
+</ul>
+<p><strong>ISP之间的连接方式</strong></p>
+<ul>
+<li>POP 高层ISP面向客户网的接入点，涉及费用的结算<ul>
+<li>如一个底层ISP接入多个高层ISP，多宿（multi home）</li>
+</ul>
+</li>
+<li>多等接入：2个ISP对等互接，不涉及费用计算</li>
+<li>IXP：多个对等ISP互通互联，通常不涉及费用结算</li>
+<li>ICP部署自己的专有网络同时和各级ISP相连</li>
+</ul>
+<h1 id="group">1.6 分组延时、丢失、吞吐量</h1>
+
+
+<p><strong>分组丢失的原因？</strong><br>分组到达路由器时如果已经有数据在传输需要等待上一个分组传输完成才能传输新接受到的分组；<br>当路由器的分组队列溢出时将不会再接受新的分组导致分组的丢弃。</p>
+<p><strong>为什么不把分组调大？</strong><br>调大分组之后溢出的可能性会降低，但是服务的响应速度也不会加快，用户无法很快获得响应，用户很快丢失。</p>
+<p><strong>四种分组延迟</strong></p>
+<ul>
+<li>节点处理延迟<ul>
+<li>检查bit级差错</li>
+<li>检查分组首部和决定将分组导向何处</li>
+</ul>
+</li>
+<li>排队延迟<ul>
+<li>在输出链路上等待传输的时间</li>
+<li>依赖于路由器的拥塞程度</li>
+</ul>
+</li>
+<li>传输延时<ul>
+<li>将分组发送到链路上的时间 L/R</li>
+<li>R=链路带宽（bps）</li>
+<li>L=分组长度（bits）</li>
+<li>存储转发延迟</li>
+</ul>
+</li>
+<li>传播延迟<ul>
+<li>传播延时=d/s</li>
+<li>d=物理链路的长度</li>
+<li>s=在媒体上的传播速度</li>
+</ul>
+</li>
+</ul>
+<p>d(nodal) = d(proc)+d(queue)+d(trans)+d(prop)</p>
+<p>流量强度 = La/R</p>
+<ul>
+<li>R = 链路带宽（bps）</li>
+<li>L = 分组长度（bits）</li>
+<li>a = 分组到达队列的平均速率</li>
+</ul>
+<p>设计系统时流量强度不能大于1，最好是小于1。</p>
+<p>TTL(Time To Live)<br>RTT(Round Trip Time)</p>
+<p><strong>吞吐量</strong><br>在源端到目标端的传输速率（数据量/单位时间）</p>
+
+
+<h1 id="protocol">1.7 协议层次和服务模型</h1>
+
+<p><strong>网络是一个复杂的系统</strong></p>
+<ul>
+<li>网络功能繁杂：数字信号的物理信号承载、点到点、路由、rdt、进程区分、应用等。</li>
+<li>现实来看，网络的许多构成元素和设备<ul>
+<li>主机</li>
+<li>路由器</li>
+<li>各种媒体的链路</li>
+<li>应用</li>
+<li>协议</li>
+<li>硬件、软件</li>
+</ul>
+</li>
+</ul>
+<p><strong>层次化方式实现复杂的功能</strong></p>
+<ul>
+<li>将网络复杂的功能分成功能明确的层次，每一层实现了其中一个或一组功能，功能中有其上层可以使用的功能；</li>
+<li>本层协议实体相互交互执行本层的协议动作，目的是实现本层的功能，通过接口为上层提供更好的服务。</li>
+<li>在实现本层协议的时候，直接利用了下层所提供的服务</li>
+<li>本层的服务，借助下层服务实现的本层协议实体之间交互带来的新功能（上层可以利用的）+下层所提供的服务</li>
+</ul>
+<p><strong>服务和服务访问点</strong>  </p>
+<ul>
+<li>服务： 底层实体向上层实体提供他们之间的通信服务<ul>
+<li>服务用户（service user）</li>
+<li>服务提供者（service provider）</li>
+</ul>
+</li>
+<li>原语（primitive）：上层使用下层服务的形式，高层使用底层提供的服务，以及底层向高层一个服务都是通过服务访问原语来进行交互的—形式</li>
+<li>服务访问点SAP（Services Access Point）：上层使用下层提供的服务通过层间的借口—地点<ul>
+<li>地址（address）：下层的一个实体支撑着上层的多个实体，SAO有标志不同上层实体的作用</li>
+<li>可以有不同的实现 队列</li>
+<li>例子 传输层的SAP 端口（port）</li>
+</ul>
+</li>
+</ul>
+<p><strong>服务的类型</strong></p>
+<ul>
+<li>面向连接的服务 TCP</li>
+<li>无连接服务 UDP</li>
+</ul>
+<p><strong>服务和协议</strong></p>
+<ul>
+<li>区别：<ul>
+<li>服务：低层实体向上层实体提供他们之间的通信的能力，是通过原语来操作的，垂直</li>
+<li>协议：对等层实体之间在相互的通信的过程中，需要遵循的规则的集合，水平</li>
+</ul>
+</li>
+<li>联系<ul>
+<li>本层协议的实现需要靠下层提供的服务来实现</li>
+<li>本层实体通过协议为上层提供更好的服务</li>
+</ul>
+</li>
+</ul>
+<p><strong>数据单元（DU）</strong><br>协议数据单元PDU（protocol Data Unit）</p>
+<p>每一层协议数据单元有特殊的称呼</p>
+<ul>
+<li>应用层 数据单元叫应用报文 message</li>
+<li>传输层 数据单元叫应用报文段 segment</li>
+<li>网络层 数据单元叫分组 packet （如果无连接方式：数据报 datagram）</li>
+<li>链路层 数据单元叫帧 frame</li>
+<li>物理层 数据单元叫位 bit </li>
+</ul>
+<p><strong>Internet协议栈</strong></p>
+<ul>
+<li>应用层 <ul>
+<li>为人类用户或者其他应用进程提供网络应用服务</li>
+<li>FTP、SMTP、HTTP、DNS</li>
+</ul>
+</li>
+<li>传输层 <ul>
+<li>在网络层的基础上细分 为进程到进程，将不可靠的通信编程可靠的通信</li>
+<li>TCP、UDP</li>
+</ul>
+</li>
+<li>网络层 <ul>
+<li>源主机到目标主机，端到端（E2E）传输分组 不可靠</li>
+<li>IP、路由协议</li>
+</ul>
+</li>
+<li>数据链路层（网卡） <ul>
+<li>在相邻两点之间传输以帧为单位的数据</li>
+<li>点对点协议PPP、802.11（wifi）、Ethernet</li>
+</ul>
+</li>
+<li>物理层 在线路上传输bit</li>
+</ul>
+<h1 id="history">1.8 历史</h1>
+
+<p><strong>早期（1960以前）的计算机网络</strong></p>
+<ul>
+<li>线路交换网络</li>
+<li>线路交换的特性使得其不适合计算机之间的通信<ul>
+<li>线路建立时间过长</li>
+<li>独享方式占用通信资源，不适合突发性很强的计算机之间的通信</li>
+<li>可靠性不高，非常不适合军用通信</li>
+</ul>
+</li>
+</ul>
+<p><strong>1961-1972 早期的分组交换概念</strong></p>
+<ul>
+<li>1967:美国高级研究计划研究局考虑ARPAnet<ul>
+<li>kleinrock在MIT的同事</li>
+</ul>
+</li>
+<li>1969:第一个ARPAnet节点开始工作，UCLA<ul>
+<li>IMP 接口报文处理机</li>
+</ul>
+</li>
+<li>1969年底： 4个节点</li>
+<li>1972:<ul>
+<li>ARPAnet公众演示</li>
+<li>网络控制协议是第一个端系统直接的主机-主机协议<ul>
+<li>NCP协议：相当于传输层和网络层在一起，支持应用开发</li>
+</ul>
+</li>
+<li>第一个e-mail程序（BBN）</li>
+<li>ARPNet有15个基点</li>
+</ul>
+</li>
+</ul>
+<p><strong>1972-1980 专用网络和网络互联</strong></p>
+<ul>
+<li>出现了很多对后来来说重要的网络形式<ul>
+<li>1970 ALOHAnet 夏威夷上的微波网络</li>
+<li>1973 Metcalfe在博士论文中提出了Ethernet</li>
+<li>ATM网络</li>
+<li>ALOHAnet，Telenet，Cyclades法国等</li>
+</ul>
+</li>
+<li>1970后期，网络体系结构的必要性<ul>
+<li>专用的体系结构：DECnet，SNA，XNA</li>
+<li>标准化的体系结构</li>
+</ul>
+</li>
+<li>1974 国际互联的Cerf and Kahn体系结构<ul>
+<li>网络互联原则 定义了今天的Internet体系结构<ul>
+<li>极简，自治</li>
+<li>尽力而为（best effort）服务模型</li>
+<li>无状态的路由器</li>
+<li>分布控制</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>1979 ARPAnet的规模在持续增加，体系结构也在酝酿着变化，以支持网络互联和其他目的（性能）需求<ul>
+<li>节点树木增加，有200个节点</li>
+</ul>
+</li>
+</ul>
+<p><strong>1980-1990 体系结构变化，网络数量激增，应用丰富</strong></p>
+<ul>
+<li>1983: TCP/IP部署，标记日<ul>
+<li>NCP分化成2个层次，TCP/IP，从而出现UDP</li>
+<li>覆盖式IP解决网络互联问题</li>
+<li>主机设备和网络交换设备分开</li>
+</ul>
+</li>
+<li>1982: smtp e-mail协议定义</li>
+<li>1983: DNS定义，完场域名到IP地址的转换</li>
+<li>1985: ftp协议定义</li>
+<li>1988: TCP拥塞控制协议</li>
+<li>其他网络形式的发展<ul>
+<li>新的国家级网络：Csnet，BITnet，NSFnet，Minitel</li>
+<li>1985年：ISO/OSI提出，时机不对且太繁琐</li>
+</ul>
+</li>
+<li>100,000主机连接到网络联邦</li>
+</ul>
+<p>*<em>1990-2000’s 商业化，Web，新的应用 *</em></p>
+<ul>
+<li>1990年代初：NSF对ARPAnet的访问网，双主干，ARPAnet退役</li>
+<li>1991:NSF放宽了对NSFnet用于商业目的的限制（1995退役）。ASFNET非盈利机构维护，后面叫Internet</li>
+<li>UNIX中TCP/IP的免费捆绑</li>
+<li>1990年代初：Web<ul>
+<li>hypertext【Bush 1945, Nelson 1960’s】</li>
+<li>HTML, HTTP; Berners-Lee</li>
+<li>1994: Mosaic(Netscape, andreesen)</li>
+<li>1990年代后期：Web的商业化</li>
+</ul>
+</li>
+<li>1990后期-21世纪<ul>
+<li>TCP/IP体系结构的包容性在其上部署应用便捷，出现非常多的应用</li>
+<li>新一代杀手级应用（即时讯息，P2P文件共享，社交网络等）更进一步促进互联网的发展</li>
+<li>安全问题不断出现和修订（互联网的补丁对策）</li>
+<li>2001网络泡沫，使得一些好公司沉淀下来（谷歌，微软，苹果，Yahoo，思科）</li>
+<li>主干网的速率达到Gbps</li>
+</ul>
+</li>
+</ul>
+<p><strong>2005-现在</strong></p>
+<ul>
+<li>50亿主机：包括智能手机和平板</li>
+<li>宽带接入的快速部署</li>
+<li>高速无线接入无处不在：移动互联时代<ul>
+<li>4G部署，5G蓄势待发</li>
+<li>贷款大，终端性能高，价格便宜，应用不断增多</li>
+</ul>
+</li>
+<li>在线社交网络等新型应用的出现<ul>
+<li>Facebook 10亿用户</li>
+<li>微信，qq 输十亿用户</li>
+</ul>
+</li>
+<li>服务提供商（Google， Microsoft）创建自己的网络<ul>
+<li>通过自己的专用网络提供对搜索、视频内容和电子邮件的即刻访问</li>
+</ul>
+</li>
+<li>电子商务，大学，企业在云中运行他们的服务（Amazon EC2）</li>
+<li>体系结构酝酿着大的变化，未来网络蠢蠢欲动</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/1-%E4%BB%80%E4%B9%88%E6%98%AFInternet/" data-id="clmmsn1h000nofox08310fcm3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/web3-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/web3-2/" class="article-date">
+  <time datetime="2023-03-22T16:05:55.000Z" itemprop="datePublished">2023-03-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/web3-2/">web3 思考</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在经过半年的时间对其中的很多概念有了大致的了解之后再次看<a href="https://ethereum.org/en/web3/" target="_blank" rel="noopener">这篇文章</a>，再次思考其中的几个命题</p>
+<h1 id="重新思考什么是web3？"><a href="#重新思考什么是web3？" class="headerlink" title="重新思考什么是web3？"></a>重新思考什么是web3？</h1><p>要想讲清楚什么是web3，就必须知道什么是web以及web1和web2。<br>我们常说的web其实正确的来说叫万维网（world wide web），是一个透过互联网访问的，由许多互相链接的超文本组成的信息系统。一般来说浏览器及web服务都属于web的范畴，其中核心的几个关键词是：browser、HTML、HTTP等</p>
+<p>web1 受限于技术，产品发展的进程只能呈现一些<strong>文字的一些内容</strong>；<br>web2 在基础设施和web用户增多之后在内容形式上有了很大的突破，数据从原来的仅文字转变到<strong>图片+音视频</strong>，内容产生也从网站所有者到<strong>全民生产</strong>的状态；<br>web3 随着内容的丰富，web用户的增多，对于数据的把控有了更高的诉求。web3更多的是一种愿景，用户可以对自己生产内容有完全的把控。</p>
+<p>最后用一句话解释：<strong>web3 是用户对数据有完全控制权的一个愿景。</strong></p>
+<h3 id="思考：一个手机应用属于web范畴吗？"><a href="#思考：一个手机应用属于web范畴吗？" class="headerlink" title="思考：一个手机应用属于web范畴吗？"></a>思考：一个手机应用属于web范畴吗？</h3><p>回答该问题前提：浏览器属于web范畴，这个是毋庸置疑的，因为我们web的信息就是通过浏览器来对用户进行呈现的。<br>然后辩证的来看这个问题：</p>
+<ul>
+<li>不属于web的范畴。如果说因为它内部使用了HTTP协议和服务端进行通信就判定属于web的其实也不完全合理。因为如果需要的话手机完全可以接管TCP协议来自己实现数据通信，协议的使用与否是不能作为对web范围做判定的依据；</li>
+<li>属于web的范畴。现在很多手机应用内部都已经内嵌了webview，甚至还有一些小程序，这些都是web的协议栈进行开发，从这个角度看完全属于web应用，毕竟这些手机应用有点像套壳的浏览器了。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/web3-2/" data-id="clmmsn172007xfox04875566m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/js/typescript" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/typescript/" class="article-date">
+  <time datetime="2023-03-01T16:14:37.000Z" itemprop="datePublished">2023-03-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/typescript/">typescript方法实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>实现一些常见的 typescript 函数<br><a href="https://bigfrontend.dev/typescript" target="_blank" rel="noopener">https://bigfrontend.dev/typescript</a></p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ------------------------- map相关</span></span><br><span class="line"><span class="keyword">type</span> MyPartial&lt;T&gt; = &#123;</span><br><span class="line">  [key <span class="keyword">in</span> keyof T]?: T[key]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> MyRequired&lt;T&gt; = &#123; [k <span class="keyword">in</span> keyof T]-?: T[k] &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> MyReadonly&lt;T&gt; = &#123; readonly [k <span class="keyword">in</span> keyof T]: T[k] &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> MyRecord&lt;K <span class="keyword">extends</span> <span class="built_in">number</span> | <span class="built_in">string</span> | symbol, V&gt; = &#123;</span><br><span class="line">  [k <span class="keyword">in</span> K]: V</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> MyPick&lt;T, K <span class="keyword">extends</span> keyof T&gt; = &#123;</span><br><span class="line">  [k <span class="keyword">in</span> K]: T[k]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- union相关</span></span><br><span class="line"><span class="comment">// K extends keyof any K【可以是任意的】</span></span><br><span class="line"><span class="comment">// k in keyof T as k extends K ? never : k 【k存在于T中，但是不存在K中，大致逻辑是 k in keyof (T as (k extends K ? never : k))】</span></span><br><span class="line"><span class="keyword">type</span> MyOmit&lt;T, K <span class="keyword">extends</span> keyof <span class="built_in">any</span>&gt; = &#123;</span><br><span class="line">  [k <span class="keyword">in</span> keyof T <span class="keyword">as</span> k <span class="keyword">extends</span> K ? never : k]: T[k]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 思路二</span></span><br><span class="line"><span class="keyword">type</span> MyOmit&lt;T, K <span class="keyword">extends</span> keyof <span class="built_in">any</span>&gt; = Pick&lt;T, Exclude&lt;keyof T, K&gt;&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> MyExclude&lt;T, E&gt; = T <span class="keyword">extends</span> E ? never : T</span><br><span class="line"><span class="keyword">type</span> MyExtract&lt;T, U&gt; = T <span class="keyword">extends</span> U ? T : never</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> MyNonNullable&lt;T&gt; = T <span class="keyword">extends</span> <span class="literal">undefined</span> | <span class="literal">null</span> ? never : T</span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- 函数相关</span></span><br><span class="line"><span class="comment">// infer 表示待推断类型</span></span><br><span class="line"><span class="keyword">type</span> MyParameters&lt;T <span class="keyword">extends</span> <span class="built_in">Function</span>&gt; = T <span class="keyword">extends</span> (...args: infer Arg) =&gt; <span class="built_in">any</span></span><br><span class="line">  ? Arg</span><br><span class="line">  : never</span><br><span class="line"><span class="keyword">type</span> MyConstructorParameters&lt;T <span class="keyword">extends</span> <span class="keyword">new</span> (...args: <span class="built_in">any</span>) =&gt; <span class="built_in">any</span>&gt; =</span><br><span class="line">  T <span class="keyword">extends</span> <span class="keyword">new</span> (...args: infer P) =&gt; <span class="built_in">any</span> ? P : never</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> MyReturnType&lt;T <span class="keyword">extends</span> () =&gt; <span class="built_in">any</span>&gt; = T <span class="keyword">extends</span> () =&gt; infer P ? P : never</span><br><span class="line"><span class="keyword">type</span> MyInstanceType&lt;T <span class="keyword">extends</span> <span class="keyword">new</span> (...args: <span class="built_in">any</span>) =&gt; <span class="built_in">any</span>&gt; = T <span class="keyword">extends</span> <span class="keyword">new</span> (</span><br><span class="line">  ...args: <span class="built_in">any</span></span><br><span class="line">) =&gt; infer P</span><br><span class="line">  ? P</span><br><span class="line">  : never</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> MyThisParameterType&lt;T <span class="keyword">extends</span> (<span class="keyword">this</span>: <span class="built_in">any</span>, ...args: <span class="built_in">any</span>) =&gt; <span class="built_in">any</span>&gt; =</span><br><span class="line">  T <span class="keyword">extends</span> (<span class="keyword">this</span>: infer P, ...args: <span class="built_in">any</span>) =&gt; <span class="built_in">any</span> ? P : never</span><br><span class="line"><span class="keyword">type</span> MyOmitThisParameter&lt;T <span class="keyword">extends</span> (<span class="keyword">this</span>: <span class="built_in">any</span>, ...args: <span class="built_in">any</span>) =&gt; <span class="built_in">any</span>&gt; =</span><br><span class="line">  T <span class="keyword">extends</span> (<span class="keyword">this</span>: <span class="built_in">any</span>, ...args: infer P) =&gt; infer K ? <span class="function">(<span class="params">...args: P</span>) =&gt;</span> K : never</span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- 字符串</span></span><br><span class="line"><span class="keyword">type</span> FirstChar&lt;T <span class="keyword">extends</span> <span class="built_in">string</span>&gt; = T <span class="keyword">extends</span> <span class="string">`<span class="subst">$&#123;infer L&#125;</span><span class="subst">$&#123;infer R&#125;</span>`</span> ? L : never</span><br><span class="line"><span class="keyword">type</span> LastChar&lt;T <span class="keyword">extends</span> <span class="built_in">string</span>&gt; = T <span class="keyword">extends</span> <span class="string">`<span class="subst">$&#123;infer L&#125;</span><span class="subst">$&#123;infer R&#125;</span>`</span></span><br><span class="line">  ? R <span class="keyword">extends</span> <span class="string">''</span></span><br><span class="line">    ? L</span><br><span class="line">    : LastChar&lt;R&gt;</span><br><span class="line">  : never</span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- Tuple Union</span></span><br><span class="line"><span class="keyword">type</span> TupleToUnion&lt;T <span class="keyword">extends</span> <span class="built_in">any</span>[]&gt; = T <span class="keyword">extends</span> [f: infer E, ...rest: infer R]</span><br><span class="line">  ? E | TupleToUnion&lt;R&gt;</span><br><span class="line">  : never</span><br><span class="line"><span class="keyword">type</span> FirstItem&lt;T <span class="keyword">extends</span> <span class="built_in">any</span>[]&gt; = T <span class="keyword">extends</span> [f: infer E, ...rest: <span class="built_in">any</span>]</span><br><span class="line">  ? E</span><br><span class="line">  : never</span><br><span class="line"></span><br><span class="line"><span class="comment">//www.typescriptlang.org/docs/handbook/2/conditional-types.html#distributive-conditional-types</span></span><br><span class="line">https: <span class="keyword">type</span> IsNever&lt;T&gt; = [T] <span class="keyword">extends</span> [never] ? <span class="literal">true</span> : <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> LastItem&lt;T <span class="keyword">extends</span> <span class="built_in">any</span>[]&gt; = T <span class="keyword">extends</span> [f: infer L, ...r: infer R]</span><br><span class="line">  ? R <span class="keyword">extends</span> []</span><br><span class="line">    ? L</span><br><span class="line">    : LastItem&lt;R&gt;</span><br><span class="line">  : never</span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- String Tuple</span></span><br><span class="line"><span class="keyword">type</span> StringToTuple&lt;T <span class="keyword">extends</span> <span class="built_in">string</span>&gt; = T <span class="keyword">extends</span> <span class="string">`<span class="subst">$&#123;infer F&#125;</span><span class="subst">$&#123;infer R&#125;</span>`</span></span><br><span class="line">  ? [F, ...StringToTuple&lt;R&gt;]</span><br><span class="line">  : []</span><br><span class="line"><span class="keyword">type</span> LengthOfTuple&lt;T <span class="keyword">extends</span> <span class="built_in">any</span>[]&gt; = T[<span class="string">'length'</span>]</span><br><span class="line"><span class="keyword">type</span> LengthOfString&lt;T <span class="keyword">extends</span> <span class="built_in">string</span>&gt; = StringToTuple&lt;T&gt;[<span class="string">'length'</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- Promise</span></span><br><span class="line"><span class="keyword">type</span> UnwrapPromise&lt;T <span class="keyword">extends</span> <span class="built_in">Promise</span>&lt;<span class="built_in">any</span>&gt;&gt; = T <span class="keyword">extends</span> <span class="built_in">Promise</span>&lt;infer P&gt;</span><br><span class="line">  ? P</span><br><span class="line">  : never</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ReverseTuple&lt;T <span class="keyword">extends</span> <span class="built_in">any</span>[]&gt; = T <span class="keyword">extends</span> [...f: infer F, l: infer L]</span><br><span class="line">  ? [L, ...ReverseTuple&lt;F&gt;]</span><br><span class="line">  : []</span><br><span class="line"><span class="keyword">type</span> Flat&lt;T <span class="keyword">extends</span> <span class="built_in">any</span>[]&gt; = T <span class="keyword">extends</span> [infer L, ...infer R]</span><br><span class="line">  ? L <span class="keyword">extends</span> <span class="built_in">any</span>[]</span><br><span class="line">    ? [...Flat&lt;L&gt;, ...Flat&lt;R&gt;]</span><br><span class="line">    : [L, ...Flat&lt;R&gt;]</span><br><span class="line">  : []</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> IsEmptyType&lt;T&gt; = T <span class="keyword">extends</span> Record&lt;<span class="built_in">string</span>, <span class="built_in">string</span>&gt;</span><br><span class="line">  ? [keyof T] <span class="keyword">extends</span> [never]</span><br><span class="line">    ? <span class="literal">true</span></span><br><span class="line">    : <span class="literal">false</span></span><br><span class="line">  : <span class="literal">false</span></span><br><span class="line"><span class="keyword">type</span> Shift&lt;T <span class="keyword">extends</span> <span class="built_in">any</span>[]&gt; = T <span class="keyword">extends</span> [infer L, ...infer R] ? R : []</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> IsAny&lt;T&gt; = <span class="number">0</span> <span class="keyword">extends</span> T &amp; <span class="number">1</span> ? <span class="literal">true</span> : <span class="literal">false</span></span><br><span class="line"><span class="keyword">type</span> Push&lt;T <span class="keyword">extends</span> <span class="built_in">any</span>[], I&gt; = T <span class="keyword">extends</span> <span class="built_in">any</span>[] ? [...T, I] : never</span><br><span class="line"><span class="keyword">type</span> TupleToString&lt;T <span class="keyword">extends</span> <span class="built_in">string</span>[]&gt; = T <span class="keyword">extends</span> [infer L, ...infer R]</span><br><span class="line">  ? L <span class="keyword">extends</span> <span class="built_in">string</span></span><br><span class="line">    ? R <span class="keyword">extends</span> <span class="built_in">string</span>[]</span><br><span class="line">      ? <span class="string">`<span class="subst">$&#123;L&#125;</span><span class="subst">$&#123;TupleToString&lt;R&gt;&#125;</span>`</span></span><br><span class="line">      : L</span><br><span class="line">    : <span class="string">''</span></span><br><span class="line">  : <span class="string">''</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 新增genetic R 记录 T 的内容，当R的长度达到C时停止</span></span><br><span class="line"><span class="keyword">type</span> Repeat&lt;T, C <span class="keyword">extends</span> <span class="built_in">number</span>, R <span class="keyword">extends</span> <span class="built_in">any</span>[] = []&gt; = R[<span class="string">'length'</span>] <span class="keyword">extends</span> C</span><br><span class="line">  ? R</span><br><span class="line">  : Repeat&lt;T, C, [...R, T]&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// When conditional types act on a generic type, they become distributive when given a union type</span></span><br><span class="line"><span class="comment">// [L] extends [A] 是为了防止联合类型的分配，解决 any extends A 可能走true or false</span></span><br><span class="line"><span class="keyword">type</span> Filter&lt;T <span class="keyword">extends</span> <span class="built_in">any</span>[], A&gt; = T <span class="keyword">extends</span> [infer L, ...infer R]</span><br><span class="line">  ? [L] <span class="keyword">extends</span> [A]</span><br><span class="line">    ? [L, ...Filter&lt;R, A&gt;]</span><br><span class="line">    : Filter&lt;R, A&gt;</span><br><span class="line">  : []</span><br><span class="line"></span><br><span class="line"><span class="comment">// 新增一个genetic array 参数，使用其length属性来做加法计算比较大小</span></span><br><span class="line"><span class="keyword">type</span> LargerThan&lt;</span><br><span class="line">  A <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  B <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  C <span class="keyword">extends</span> <span class="built_in">any</span>[] = []</span><br><span class="line">&gt; = C[<span class="string">'length'</span>] <span class="keyword">extends</span> A</span><br><span class="line">  ? <span class="literal">false</span></span><br><span class="line">  : C[<span class="string">'length'</span>] <span class="keyword">extends</span> B</span><br><span class="line">  ? <span class="literal">true</span></span><br><span class="line">  : LargerThan&lt;A, B, [...C, <span class="built_in">any</span>]&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 因为C从0开始算，所以从LagerThan的角度考虑更简单一点</span></span><br><span class="line"><span class="keyword">type</span> SmallerThan&lt;</span><br><span class="line">  A <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  B <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  C <span class="keyword">extends</span> <span class="built_in">any</span>[] = []</span><br><span class="line">&gt; = C[<span class="string">'length'</span>] <span class="keyword">extends</span> B</span><br><span class="line">  ? <span class="literal">false</span></span><br><span class="line">  : C[<span class="string">'length'</span>] <span class="keyword">extends</span> A</span><br><span class="line">  ? <span class="literal">true</span></span><br><span class="line">  : SmallerThan&lt;A, B, [...C, <span class="built_in">any</span>]&gt;</span><br><span class="line"><span class="keyword">type</span> SmallerThan&lt;</span><br><span class="line">  A <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  B <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  C <span class="keyword">extends</span> <span class="built_in">any</span>[] = []</span><br><span class="line">&gt; = C[<span class="string">'length'</span>] <span class="keyword">extends</span> A</span><br><span class="line">  ? C[<span class="string">'length'</span>] <span class="keyword">extends</span> B</span><br><span class="line">    ? <span class="literal">false</span></span><br><span class="line">    : <span class="literal">true</span></span><br><span class="line">  : C[<span class="string">'length'</span>] <span class="keyword">extends</span> B</span><br><span class="line">  ? <span class="literal">false</span></span><br><span class="line">  : SmallerThan&lt;A, B, [...C, <span class="built_in">any</span>]&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Add&lt;</span><br><span class="line">  A <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  B <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  T <span class="keyword">extends</span> <span class="built_in">any</span>[] = [],</span><br><span class="line">  R <span class="keyword">extends</span> <span class="built_in">any</span>[] = []</span><br><span class="line">&gt; = A <span class="keyword">extends</span> T[<span class="string">'length'</span>]</span><br><span class="line">  ? B <span class="keyword">extends</span> R[<span class="string">'length'</span>]</span><br><span class="line">    ? [...T, ...R][<span class="string">'length'</span>]</span><br><span class="line">    : Add&lt;A, B, T, [...R, <span class="built_in">any</span>]&gt;</span><br><span class="line">  : Add&lt;A, B, [...T, <span class="built_in">any</span>], R&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 涉及到计数都可以考虑使用增加一个array generic来解决</span></span><br><span class="line"><span class="keyword">type</span> ToNumber&lt;</span><br><span class="line">  T <span class="keyword">extends</span> <span class="built_in">string</span>,</span><br><span class="line">  R <span class="keyword">extends</span> <span class="built_in">any</span>[] = []</span><br><span class="line">&gt; = <span class="string">`<span class="subst">$&#123;R[<span class="string">'length'</span>]&#125;</span>`</span> <span class="keyword">extends</span> T ? R[<span class="string">'length'</span>] : ToNumber&lt;T, [...R, <span class="built_in">any</span>]&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// https://fettblog.eu/typescript-union-to-intersection/</span></span><br><span class="line"><span class="comment">// 1. 利用union类型默认distributive特性，构建函数union</span></span><br><span class="line"><span class="comment">// 2. 从子集推算父集，自动实现联合类型交叉</span></span><br><span class="line"><span class="keyword">type</span> UnionToIntersection&lt;T&gt; = <span class="function">(<span class="params">T <span class="keyword">extends</span> <span class="built_in">any</span> ? (<span class="params">a: T</span>) =&gt; <span class="built_in">void</span> : never</span>) <span class="params">extends</span> (<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">  a: infer R</span></span></span><br><span class="line"><span class="function"><span class="params"></span>) =&gt;</span> <span class="built_in">void</span></span><br><span class="line">  ? R</span><br><span class="line">  : never</span><br><span class="line"><span class="keyword">type</span> A = UnionToIntersection&lt;&#123; a: <span class="built_in">string</span> &#125; | &#123; b: <span class="built_in">string</span> &#125; | &#123; c: <span class="built_in">string</span> &#125;&gt;</span><br><span class="line"><span class="comment">// &#123;a: string&#125; &amp; &#123;b: string&#125; &amp; &#123;c: string&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// FindIndex，借助equal实现</span></span><br><span class="line"><span class="comment">// 这个equal好理解</span></span><br><span class="line"><span class="keyword">type</span> Equal&lt;T, K&gt; = [T] <span class="keyword">extends</span> [K]</span><br><span class="line">  ? [K] <span class="keyword">extends</span> [T]</span><br><span class="line">    ? keyof T <span class="keyword">extends</span> keyof K</span><br><span class="line">      ? keyof K <span class="keyword">extends</span> keyof T</span><br><span class="line">        ? <span class="literal">true</span></span><br><span class="line">        : <span class="literal">false</span></span><br><span class="line">      : <span class="literal">false</span></span><br><span class="line">    : <span class="literal">false</span></span><br><span class="line">  : <span class="literal">false</span></span><br><span class="line"><span class="keyword">type</span> FindIndex&lt;T <span class="keyword">extends</span> <span class="built_in">any</span>[], E, R <span class="keyword">extends</span> <span class="built_in">any</span>[] = []&gt; = T <span class="keyword">extends</span> [</span><br><span class="line">  infer F,</span><br><span class="line">  ...infer L</span><br><span class="line">]</span><br><span class="line">  ? Equal&lt;E, F&gt; <span class="keyword">extends</span> <span class="literal">true</span></span><br><span class="line">    ? R[<span class="string">'length'</span>]</span><br><span class="line">    : FindIndex&lt;L, E, [...R, <span class="built_in">any</span>]&gt;</span><br><span class="line">  : never</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> A = [<span class="built_in">any</span>, never, <span class="number">1</span>, <span class="string">'2'</span>, <span class="literal">true</span>]</span><br><span class="line"><span class="keyword">type</span> B = FindIndex&lt;A, <span class="number">1</span>&gt; <span class="comment">// 2</span></span><br><span class="line"><span class="keyword">type</span> C = FindIndex&lt;A, <span class="number">3</span>&gt; <span class="comment">// never</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Equal的第二种实现</span></span><br><span class="line"><span class="keyword">type</span> Equal&lt;A, B&gt; = <span class="function">(<span class="params">&lt;T&gt;(<span class="params"></span>) =&gt; T <span class="keyword">extends</span> A ? 1 : 2</span>) <span class="params">extends</span> &lt;<span class="params">T</span>&gt;<span class="params">()</span> =&gt;</span> T <span class="keyword">extends</span> B</span><br><span class="line">  ? <span class="number">1</span></span><br><span class="line">  : <span class="number">2</span></span><br><span class="line">  ? <span class="literal">true</span></span><br><span class="line">  : <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Trim&lt;T <span class="keyword">extends</span> <span class="built_in">string</span>&gt; = T <span class="keyword">extends</span> <span class="string">` <span class="subst">$&#123;infer L&#125;</span>`</span></span><br><span class="line">  ? Trim&lt;L&gt;</span><br><span class="line">  : T <span class="keyword">extends</span> <span class="string">`<span class="subst">$&#123;infer L&#125;</span> `</span></span><br><span class="line">  ? Trim&lt;L&gt;</span><br><span class="line">  : T</span><br><span class="line"><span class="keyword">type</span> A = Trim&lt;<span class="string">'    BFE.dev'</span>&gt; <span class="comment">// 'BFE'</span></span><br><span class="line"><span class="keyword">type</span> B = Trim&lt;<span class="string">' BFE. dev  '</span>&gt; <span class="comment">// 'BFE. dev'</span></span><br><span class="line"><span class="keyword">type</span> C = Trim&lt;<span class="string">'  BFE .   dev  '</span>&gt; <span class="comment">// 'BFE .   dev'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ReplaceAll&lt;</span><br><span class="line">  S <span class="keyword">extends</span> <span class="built_in">string</span>,</span><br><span class="line">  F <span class="keyword">extends</span> <span class="built_in">string</span>,</span><br><span class="line">  T <span class="keyword">extends</span> <span class="built_in">string</span></span><br><span class="line">&gt; = F <span class="keyword">extends</span> <span class="string">''</span></span><br><span class="line">  ? S</span><br><span class="line">  : S <span class="keyword">extends</span> <span class="string">`<span class="subst">$&#123;infer L&#125;</span><span class="subst">$&#123;F&#125;</span><span class="subst">$&#123;infer R&#125;</span>`</span></span><br><span class="line">  ? <span class="string">`<span class="subst">$&#123;L&#125;</span><span class="subst">$&#123;T&#125;</span><span class="subst">$&#123;ReplaceAll&lt;R, F, T&gt;&#125;</span>`</span></span><br><span class="line">  : S</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> A = ReplaceAll&lt;<span class="string">'aba'</span>, <span class="string">'b'</span>, <span class="string">''</span>&gt; <span class="comment">// 'aa'</span></span><br><span class="line"><span class="keyword">type</span> B = ReplaceAll&lt;<span class="string">'ababbab'</span>, <span class="string">'b'</span>, <span class="string">''</span>&gt; <span class="comment">// 'aaa'</span></span><br><span class="line"><span class="keyword">type</span> C = ReplaceAll&lt;<span class="string">'ababbba'</span>, <span class="string">'bb'</span>, <span class="string">'b'</span>&gt; <span class="comment">// 'ababba'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- slice 函数实现</span></span><br><span class="line"><span class="keyword">type</span> LargerEqualThan&lt;</span><br><span class="line">  A <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  B <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  C <span class="keyword">extends</span> <span class="built_in">any</span>[] = []</span><br><span class="line">&gt; = C[<span class="string">'length'</span>] <span class="keyword">extends</span> A</span><br><span class="line">  ? C[<span class="string">'length'</span>] <span class="keyword">extends</span> B</span><br><span class="line">    ? <span class="literal">true</span></span><br><span class="line">    : <span class="literal">false</span></span><br><span class="line">  : C[<span class="string">'length'</span>] <span class="keyword">extends</span> B</span><br><span class="line">  ? <span class="literal">true</span></span><br><span class="line">  : LargerEqualThan&lt;A, B, [...C, <span class="built_in">any</span>]&gt;</span><br><span class="line"><span class="keyword">type</span> SmallerThan&lt;</span><br><span class="line">  A <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  B <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  C <span class="keyword">extends</span> <span class="built_in">any</span>[] = []</span><br><span class="line">&gt; = C[<span class="string">'length'</span>] <span class="keyword">extends</span> B</span><br><span class="line">  ? <span class="literal">false</span></span><br><span class="line">  : C[<span class="string">'length'</span>] <span class="keyword">extends</span> A</span><br><span class="line">  ? <span class="literal">true</span></span><br><span class="line">  : SmallerThan&lt;A, B, [...C, <span class="built_in">any</span>]&gt;</span><br><span class="line"><span class="keyword">type</span> Slice&lt;</span><br><span class="line">  A <span class="keyword">extends</span> <span class="built_in">any</span>[],</span><br><span class="line">  S <span class="keyword">extends</span> <span class="built_in">number</span> = <span class="number">0</span>,</span><br><span class="line">  E <span class="keyword">extends</span> <span class="built_in">number</span> = A[<span class="string">'length'</span>],</span><br><span class="line">  T1 <span class="keyword">extends</span> <span class="built_in">any</span>[] = [],</span><br><span class="line">  T2 <span class="keyword">extends</span> <span class="built_in">any</span>[] = []</span><br><span class="line">&gt; = A <span class="keyword">extends</span> [infer F, ...infer R]</span><br><span class="line">  ? LargerEqualThan&lt;T1[<span class="string">'length'</span>], S&gt; <span class="keyword">extends</span> <span class="literal">true</span></span><br><span class="line">    ? SmallerThan&lt;T1[<span class="string">'length'</span>], E&gt; <span class="keyword">extends</span> <span class="literal">true</span></span><br><span class="line">      ? Slice&lt;R, S, E, [...T1, <span class="built_in">any</span>], [...T2, F]&gt;</span><br><span class="line">      : T2</span><br><span class="line">    : Slice&lt;R, S, E, [...T1, <span class="built_in">any</span>], T2&gt;</span><br><span class="line">  : T2</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> A1 = LargerEqualThan&lt;<span class="number">2</span>, <span class="number">2</span>&gt; <span class="comment">// true</span></span><br><span class="line"><span class="keyword">type</span> A2 = SmallerThan&lt;<span class="number">1</span>, <span class="number">2</span>&gt; <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> A = Slice&lt;[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], <span class="number">0</span>, <span class="number">2</span>&gt; <span class="comment">// [1, 2]</span></span><br><span class="line"><span class="keyword">type</span> B = Slice&lt;[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>], <span class="number">2</span>&gt; <span class="comment">// [3, 4]</span></span><br><span class="line"><span class="keyword">type</span> C = Slice&lt;[<span class="built_in">number</span>, <span class="built_in">boolean</span>, bigint], <span class="number">2</span>, <span class="number">5</span>&gt; <span class="comment">// [bigint]</span></span><br><span class="line"><span class="keyword">type</span> D = Slice&lt;[<span class="built_in">string</span>, <span class="built_in">boolean</span>], <span class="number">0</span>, <span class="number">1</span>&gt; <span class="comment">// [string]</span></span><br><span class="line"><span class="keyword">type</span> E = Slice&lt;[<span class="built_in">number</span>, <span class="built_in">boolean</span>, bigint], <span class="number">5</span>, <span class="number">6</span>&gt; <span class="comment">// []</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- subtract 函数实现</span></span><br><span class="line"><span class="keyword">type</span> LargerEqualThan&lt;</span><br><span class="line">  A <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  B <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  C <span class="keyword">extends</span> <span class="built_in">any</span>[] = []</span><br><span class="line">&gt; = C[<span class="string">'length'</span>] <span class="keyword">extends</span> A</span><br><span class="line">  ? C[<span class="string">'length'</span>] <span class="keyword">extends</span> B</span><br><span class="line">    ? <span class="literal">true</span></span><br><span class="line">    : <span class="literal">false</span></span><br><span class="line">  : C[<span class="string">'length'</span>] <span class="keyword">extends</span> B</span><br><span class="line">  ? <span class="literal">true</span></span><br><span class="line">  : LargerEqualThan&lt;A, B, [...C, <span class="built_in">any</span>]&gt;</span><br><span class="line"><span class="keyword">type</span> SmallerThan&lt;</span><br><span class="line">  A <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  B <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  C <span class="keyword">extends</span> <span class="built_in">any</span>[] = []</span><br><span class="line">&gt; = C[<span class="string">'length'</span>] <span class="keyword">extends</span> B</span><br><span class="line">  ? <span class="literal">false</span></span><br><span class="line">  : C[<span class="string">'length'</span>] <span class="keyword">extends</span> A</span><br><span class="line">  ? <span class="literal">true</span></span><br><span class="line">  : SmallerThan&lt;A, B, [...C, <span class="built_in">any</span>]&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Subtract&lt;</span><br><span class="line">  A <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  B <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  R <span class="keyword">extends</span> <span class="built_in">any</span>[] = [],</span><br><span class="line">  P <span class="keyword">extends</span> <span class="built_in">any</span>[] = []</span><br><span class="line">&gt; = LargerEqualThan&lt;A, B&gt; <span class="keyword">extends</span> <span class="literal">true</span></span><br><span class="line">  ? LargerEqualThan&lt;R[<span class="string">'length'</span>], B&gt; <span class="keyword">extends</span> <span class="literal">true</span></span><br><span class="line">    ? SmallerThan&lt;R[<span class="string">'length'</span>], A&gt; <span class="keyword">extends</span> <span class="literal">true</span></span><br><span class="line">      ? Subtract&lt;A, B, [...R, <span class="built_in">any</span>], [...P, <span class="built_in">any</span>]&gt;</span><br><span class="line">      : P[<span class="string">'length'</span>]</span><br><span class="line">    : Subtract&lt;A, B, [...R, <span class="built_in">any</span>], P&gt;</span><br><span class="line">  : never</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> A = Subtract&lt;<span class="number">1</span>, <span class="number">1</span>&gt; <span class="comment">// 0</span></span><br><span class="line"><span class="keyword">type</span> B = Subtract&lt;<span class="number">10</span>, <span class="number">3</span>&gt; <span class="comment">// 7</span></span><br><span class="line"><span class="keyword">type</span> C = Subtract&lt;<span class="number">3</span>, <span class="number">10</span>&gt; <span class="comment">// never</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- Multiply 函数实现</span></span><br><span class="line"><span class="keyword">type</span> Multiply&lt;</span><br><span class="line">  A <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  B <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  BaseT <span class="keyword">extends</span> <span class="built_in">any</span>[] = [],</span><br><span class="line">  CountT <span class="keyword">extends</span> <span class="built_in">any</span>[] = [],</span><br><span class="line">  R <span class="keyword">extends</span> <span class="built_in">any</span>[] = []</span><br><span class="line">&gt; = CountT[<span class="string">'length'</span>] <span class="keyword">extends</span> B</span><br><span class="line">  ? R[<span class="string">'length'</span>]</span><br><span class="line">  : BaseT[<span class="string">'length'</span>] <span class="keyword">extends</span> A</span><br><span class="line">  ? Multiply&lt;A, B, [], [...CountT, <span class="built_in">any</span>], R&gt;</span><br><span class="line">  : Multiply&lt;A, B, [...BaseT, <span class="built_in">any</span>], CountT, [...R, <span class="built_in">any</span>]&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> A = Multiply&lt;<span class="number">1</span>, <span class="number">0</span>&gt; <span class="comment">// 0</span></span><br><span class="line"><span class="keyword">type</span> B = Multiply&lt;<span class="number">4</span>, <span class="number">6</span>&gt; <span class="comment">// 24</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- Divide 函数实现</span></span><br><span class="line"><span class="keyword">type</span> Divide&lt;</span><br><span class="line">  A <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  B <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  BaseT <span class="keyword">extends</span> <span class="built_in">any</span>[] = [],</span><br><span class="line">  CounT <span class="keyword">extends</span> <span class="built_in">any</span>[] = [],</span><br><span class="line">  R <span class="keyword">extends</span> <span class="built_in">any</span>[] = []</span><br><span class="line">&gt; = B <span class="keyword">extends</span> <span class="number">0</span></span><br><span class="line">  ? never</span><br><span class="line">  : BaseT[<span class="string">'length'</span>] <span class="keyword">extends</span> B</span><br><span class="line">  ? Divide&lt;A, B, [], [...CounT, <span class="built_in">any</span>], R&gt;</span><br><span class="line">  : R[<span class="string">'length'</span>] <span class="keyword">extends</span> A</span><br><span class="line">  ? CounT[<span class="string">'length'</span>]</span><br><span class="line">  : Divide&lt;A, B, [...BaseT, <span class="built_in">any</span>], CounT, [...R, <span class="built_in">any</span>]&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> A = Divide&lt;<span class="number">1</span>, <span class="number">0</span>&gt; <span class="comment">// never</span></span><br><span class="line"><span class="keyword">type</span> B = Divide&lt;<span class="number">4</span>, <span class="number">2</span>&gt; <span class="comment">// 2</span></span><br><span class="line"><span class="keyword">type</span> C = Divide&lt;<span class="number">10</span>, <span class="number">3</span>&gt; <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- assertsNever 函数实现</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">assertsNever</span>(<span class="params">arg: never</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">`Missing case <span class="subst">$&#123;arg&#125;</span>`</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Value = <span class="string">'a'</span> | <span class="string">'b'</span> | <span class="string">'c'</span></span><br><span class="line"><span class="keyword">declare</span> <span class="keyword">let</span> value: Value</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span> (value) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">'a'</span>:</span><br><span class="line">    <span class="keyword">break</span></span><br><span class="line">  <span class="keyword">case</span> <span class="string">'b'</span>:</span><br><span class="line">    <span class="keyword">break</span></span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">    assertsNever(value)</span><br><span class="line">    <span class="keyword">break</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- 选择排序 函数实现</span></span><br><span class="line"><span class="keyword">type</span> Sort&lt;</span><br><span class="line">  T <span class="keyword">extends</span> <span class="built_in">number</span>[],</span><br><span class="line">  CounT <span class="keyword">extends</span> <span class="built_in">any</span>[] = [],</span><br><span class="line">  CounN <span class="keyword">extends</span> <span class="built_in">any</span>[] = [],</span><br><span class="line">  R <span class="keyword">extends</span> <span class="built_in">any</span>[] = []</span><br><span class="line">&gt; = R[<span class="string">'length'</span>] <span class="keyword">extends</span> T[<span class="string">'length'</span>]</span><br><span class="line">  ? R</span><br><span class="line">  : CounT[<span class="string">'length'</span>] <span class="keyword">extends</span> T[<span class="string">'length'</span>]</span><br><span class="line">  ? Sort&lt;T, [], [...CounN, <span class="built_in">any</span>], R&gt;</span><br><span class="line">  : CounN[<span class="string">'length'</span>] <span class="keyword">extends</span> T[CounT[<span class="string">'length'</span>]]</span><br><span class="line">  ? Sort&lt;T, [...CounT, <span class="built_in">any</span>], CounN, [...R, CounN[<span class="string">'length'</span>]]&gt;</span><br><span class="line">  : Sort&lt;T, [...CounT, <span class="built_in">any</span>], CounN, R&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> A = Sort&lt;[<span class="number">100</span>, <span class="number">9</span>, <span class="number">20</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">55</span>]&gt; <span class="comment">// [0, 0, 9, 55, 100]</span></span><br><span class="line"><span class="keyword">type</span> B = Sort&lt;[<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">88</span>, <span class="number">5</span>, <span class="number">99</span>, <span class="number">400</span>]&gt; <span class="comment">// 会被认为超时</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ExtractNum&lt;</span><br><span class="line">  T <span class="keyword">extends</span> <span class="built_in">any</span>[],</span><br><span class="line">  K <span class="keyword">extends</span> <span class="built_in">number</span>,</span><br><span class="line">  P <span class="keyword">extends</span> <span class="built_in">any</span>[] = []</span><br><span class="line">&gt; = T <span class="keyword">extends</span> [infer L, ...infer R]</span><br><span class="line">  ? L <span class="keyword">extends</span> K</span><br><span class="line">    ? ExtractNum&lt;R, K, [...P, L]&gt;</span><br><span class="line">    : ExtractNum&lt;R, K, P&gt;</span><br><span class="line">  : P</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> A1 = ExtractNum&lt;[<span class="number">100</span>, <span class="number">9</span>, <span class="number">20</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">55</span>], <span class="number">0</span>&gt; <span class="comment">// [0, 0]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Sort&lt;</span><br><span class="line">  T <span class="keyword">extends</span> <span class="built_in">number</span>[],</span><br><span class="line">  CounN <span class="keyword">extends</span> <span class="built_in">any</span>[] = [],</span><br><span class="line">  R <span class="keyword">extends</span> <span class="built_in">any</span>[] = []</span><br><span class="line">&gt; = R[<span class="string">'length'</span>] <span class="keyword">extends</span> T[<span class="string">'length'</span>]</span><br><span class="line">  ? R</span><br><span class="line">  : ExtractNum&lt;T, CounN[<span class="string">'length'</span>]&gt;[<span class="string">'length'</span>] <span class="keyword">extends</span> <span class="number">0</span></span><br><span class="line">  ? Sort&lt;T, [...CounN, <span class="built_in">any</span>], R&gt;</span><br><span class="line">  : Sort&lt;T, [...CounN, <span class="built_in">any</span>], [...R, ...ExtractNum&lt;T, CounN[<span class="string">'length'</span>]&gt;]&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> A = Sort&lt;[<span class="number">1</span>, <span class="number">9</span>, <span class="number">20</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>]&gt; <span class="comment">// [0, 0, 9, 55, 100]</span></span><br><span class="line"><span class="keyword">type</span> B = Sort&lt;[<span class="number">1</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">88</span>, <span class="number">5</span>, <span class="number">99</span>, <span class="number">400</span>]&gt; <span class="comment">// [0, 1, 5, 88, 99, 100, 400]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- Capitalize 函数实现</span></span><br><span class="line"><span class="keyword">type</span> MyCapitalize&lt;T <span class="keyword">extends</span> <span class="built_in">string</span>&gt; = T <span class="keyword">extends</span> <span class="string">`<span class="subst">$&#123;infer F&#125;</span><span class="subst">$&#123;infer R&#125;</span>`</span></span><br><span class="line">  ? <span class="string">`<span class="subst">$&#123;Uppercase&lt;F&gt;&#125;</span><span class="subst">$&#123;R&#125;</span>`</span></span><br><span class="line">  : never</span><br><span class="line"><span class="keyword">type</span> A = MyCapitalize&lt;<span class="string">'bfe'</span>&gt; <span class="comment">// 'Bfe'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- Split 函数实现</span></span><br><span class="line"><span class="keyword">type</span> Split&lt;</span><br><span class="line">  S <span class="keyword">extends</span> <span class="built_in">any</span>,</span><br><span class="line">  D <span class="keyword">extends</span> <span class="built_in">string</span>,</span><br><span class="line">  R <span class="keyword">extends</span> <span class="built_in">any</span>[] = []</span><br><span class="line">&gt; = S <span class="keyword">extends</span> <span class="string">`<span class="subst">$&#123;infer L&#125;</span><span class="subst">$&#123;D&#125;</span><span class="subst">$&#123;infer B&#125;</span>`</span> ? Split&lt;B, D, [...R, L]&gt; : [...R, S]</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> A = Split&lt;<span class="string">'BFE.dev'</span>, <span class="string">'.'</span>&gt; <span class="comment">// ['BFE', 'dev']</span></span><br><span class="line"><span class="keyword">type</span> B = Split&lt;<span class="string">'bfe.dev'</span>, <span class="string">'e'</span>&gt; <span class="comment">// ['bf', '.d', 'v']</span></span><br><span class="line"><span class="keyword">type</span> C = Split&lt;<span class="string">'bfe.bfe.bfe'</span>, <span class="string">'bfe'</span>&gt; <span class="comment">// ['', '.', '.', '']</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- SnakeCase 函数实现 大驼峰=&gt;下划线</span></span><br><span class="line"><span class="keyword">type</span> SnakeCase&lt;</span><br><span class="line">  S <span class="keyword">extends</span> <span class="built_in">string</span>,</span><br><span class="line">  T <span class="keyword">extends</span> <span class="built_in">any</span>[] = [],</span><br><span class="line">  R <span class="keyword">extends</span> <span class="built_in">string</span> = <span class="string">''</span></span><br><span class="line">&gt; = S <span class="keyword">extends</span> <span class="string">`<span class="subst">$&#123;infer L&#125;</span><span class="subst">$&#123;infer P&#125;</span>`</span></span><br><span class="line">  ? T[<span class="string">'length'</span>] <span class="keyword">extends</span> <span class="number">0</span></span><br><span class="line">    ? L <span class="keyword">extends</span> Uppercase&lt;L&gt;</span><br><span class="line">      ? SnakeCase&lt;P, [...T, <span class="built_in">any</span>], <span class="string">`<span class="subst">$&#123;Lowercase&lt;L&gt;&#125;</span>`</span>&gt;</span><br><span class="line">      : SnakeCase&lt;P, [...T, <span class="built_in">any</span>], <span class="string">`<span class="subst">$&#123;L&#125;</span>`</span>&gt;</span><br><span class="line">    : L <span class="keyword">extends</span> Uppercase&lt;L&gt;</span><br><span class="line">    ? SnakeCase&lt;P, [...T, <span class="built_in">any</span>], <span class="string">`<span class="subst">$&#123;R&#125;</span>_<span class="subst">$&#123;Lowercase&lt;L&gt;&#125;</span>`</span>&gt;</span><br><span class="line">    : SnakeCase&lt;P, [...T, <span class="built_in">any</span>], <span class="string">`<span class="subst">$&#123;R&#125;</span><span class="subst">$&#123;L&#125;</span>`</span>&gt;</span><br><span class="line">  : R</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> A = SnakeCase&lt;<span class="string">'BigFrontEnd'</span>&gt; <span class="comment">// big_front_end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- CamelCase 函数实现</span></span><br><span class="line"><span class="keyword">type</span> CamelCase&lt;</span><br><span class="line">  S <span class="keyword">extends</span> <span class="built_in">string</span>,</span><br><span class="line">  C <span class="keyword">extends</span> <span class="built_in">any</span>[] = [],</span><br><span class="line">  R <span class="keyword">extends</span> <span class="built_in">string</span> = <span class="string">''</span></span><br><span class="line">&gt; = S <span class="keyword">extends</span> <span class="string">`<span class="subst">$&#123;infer L&#125;</span>_<span class="subst">$&#123;infer P&#125;</span>`</span></span><br><span class="line">  ? L <span class="keyword">extends</span> <span class="string">`<span class="subst">$&#123;infer F&#125;</span><span class="subst">$&#123;infer Rest&#125;</span>`</span></span><br><span class="line">    ? CamelCase&lt;P, [...C, <span class="built_in">any</span>], <span class="string">`<span class="subst">$&#123;R&#125;</span><span class="subst">$&#123;Uppercase&lt;F&gt;&#125;</span><span class="subst">$&#123;Rest&#125;</span>`</span>&gt;</span><br><span class="line">    : R</span><br><span class="line">  : S <span class="keyword">extends</span> <span class="string">`<span class="subst">$&#123;infer F&#125;</span><span class="subst">$&#123;infer Rest&#125;</span>`</span></span><br><span class="line">  ? CamelCase&lt;<span class="string">''</span>, [...C, <span class="built_in">any</span>], <span class="string">`<span class="subst">$&#123;R&#125;</span><span class="subst">$&#123;Uppercase&lt;F&gt;&#125;</span><span class="subst">$&#123;Rest&#125;</span>`</span>&gt;</span><br><span class="line">  : R</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> A = CamelCase&lt;<span class="string">'big_front_end'</span>&gt; <span class="comment">// BigFrontEnd</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- StringToNumber 函数实现</span></span><br><span class="line"><span class="keyword">type</span> StringToNumber&lt;</span><br><span class="line">  S <span class="keyword">extends</span> <span class="built_in">string</span>,</span><br><span class="line">  R <span class="keyword">extends</span> <span class="built_in">any</span>[] = []</span><br><span class="line">&gt; = <span class="string">`<span class="subst">$&#123;R[<span class="string">'length'</span>]&#125;</span>`</span> <span class="keyword">extends</span> S ? R[<span class="string">'length'</span>] : StringToNumber&lt;S, [...R, <span class="built_in">any</span>]&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> A = StringToNumber&lt;<span class="string">'12'</span>&gt; <span class="comment">// 123</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- Abs 函数实现</span></span><br><span class="line"><span class="keyword">type</span> StringToNumber&lt;</span><br><span class="line">  S <span class="keyword">extends</span> <span class="built_in">string</span>,</span><br><span class="line">  R <span class="keyword">extends</span> <span class="built_in">any</span>[] = []</span><br><span class="line">&gt; = S <span class="keyword">extends</span> <span class="string">`<span class="subst">$&#123;R[<span class="string">'length'</span>]&#125;</span>`</span> ? R[<span class="string">'length'</span>] : StringToNumber&lt;S, [...R, <span class="built_in">any</span>]&gt;</span><br><span class="line"><span class="keyword">type</span> Abs&lt;N <span class="keyword">extends</span> <span class="built_in">number</span>&gt; = <span class="string">`<span class="subst">$&#123;N&#125;</span>`</span> <span class="keyword">extends</span> <span class="string">`-<span class="subst">$&#123;infer R&#125;</span>`</span></span><br><span class="line">  ? StringToNumber&lt;R&gt;</span><br><span class="line">  : N</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> A = Abs&lt;<span class="number">-1</span>&gt;</span><br><span class="line"><span class="keyword">type</span> B = Abs&lt;<span class="number">0</span>&gt;</span><br><span class="line"><span class="keyword">type</span> C = Abs&lt;<span class="number">1</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- ObjectPaths 函数实现</span></span><br><span class="line"><span class="keyword">type</span> ObjectPaths&lt;O <span class="keyword">extends</span> Record&lt;<span class="built_in">string</span>, <span class="built_in">any</span>&gt;&gt; = &#123;</span><br><span class="line">  [K <span class="keyword">in</span> keyof O]: K <span class="keyword">extends</span> <span class="built_in">string</span></span><br><span class="line">    ? O[K] <span class="keyword">extends</span> Record&lt;<span class="built_in">string</span>, <span class="built_in">any</span>&gt;</span><br><span class="line">      ? <span class="string">`<span class="subst">$&#123;K&#125;</span>.<span class="subst">$&#123;ObjectPaths&lt;O[K]&gt;&#125;</span>`</span></span><br><span class="line">      : K</span><br><span class="line">    : never</span><br><span class="line">&#125;[keyof O]</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Obj = &#123;</span><br><span class="line">  a: &#123;</span><br><span class="line">    b: &#123;</span><br><span class="line">      c: <span class="number">1</span></span><br><span class="line">      d: <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">    e: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  f: <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> A = ObjectPaths&lt;Obj&gt;</span><br><span class="line"><span class="comment">// 'a.b.c' | 'a.b.d' | 'a.e' | 'f'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- DiffKeys 函数实现</span></span><br><span class="line"><span class="keyword">type</span> DiffKeys&lt;A <span class="keyword">extends</span> Record&lt;<span class="built_in">string</span>, <span class="built_in">any</span>&gt;, B <span class="keyword">extends</span> Record&lt;<span class="built_in">string</span>, <span class="built_in">any</span>&gt;&gt; =</span><br><span class="line">  | Exclude&lt;keyof A, keyof B&gt;</span><br><span class="line">  | Exclude&lt;keyof B, keyof A&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> A = DiffKeys&lt;&#123; a: <span class="number">1</span>; b: <span class="number">2</span> &#125;, &#123; b: <span class="number">1</span>; c: <span class="number">2</span> &#125;&gt; <span class="comment">// 'a' | 'c'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- MapStringUnionToObjectUnion 函数实现</span></span><br><span class="line"><span class="keyword">type</span> MapStringUnionToObjectUnion&lt;U <span class="keyword">extends</span> <span class="built_in">string</span>&gt; = U <span class="keyword">extends</span> <span class="built_in">any</span></span><br><span class="line">  ? &#123; value: U &#125;</span><br><span class="line">  : never</span><br><span class="line"><span class="keyword">type</span> B = MapStringUnionToObjectUnion&lt;<span class="string">'1'</span> | <span class="string">'2'</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ------------------------- UndefinedToNull 函数实现</span></span><br><span class="line"><span class="keyword">type</span> UndefinedToNull&lt;T&gt; = T <span class="keyword">extends</span> Record&lt;<span class="built_in">string</span>, <span class="built_in">any</span>&gt;</span><br><span class="line">  ? &#123;</span><br><span class="line">      [K <span class="keyword">in</span> keyof T]: UndefinedToNull&lt;T[K]&gt;</span><br><span class="line">    &#125;</span><br><span class="line">  : T <span class="keyword">extends</span> [infer F, ...infer L]</span><br><span class="line">  ? [UndefinedToNull&lt;F&gt;, ...UndefinedToNull&lt;L&gt;]</span><br><span class="line">  : T <span class="keyword">extends</span> <span class="literal">undefined</span></span><br><span class="line">  ? <span class="literal">null</span></span><br><span class="line">  : T</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> A = UndefinedToNull&lt;<span class="built_in">string</span>&gt; <span class="comment">// string</span></span><br><span class="line"><span class="keyword">type</span> B = UndefinedToNull&lt;<span class="literal">undefined</span>&gt; <span class="comment">// null</span></span><br><span class="line"><span class="keyword">type</span> C = UndefinedToNull&lt;[<span class="literal">undefined</span>, <span class="literal">null</span>]&gt; <span class="comment">// [null, null]</span></span><br><span class="line"><span class="keyword">type</span> D = UndefinedToNull&lt;&#123;</span><br><span class="line">  a: <span class="literal">undefined</span></span><br><span class="line">  b: [<span class="number">1</span>, <span class="literal">undefined</span>]</span><br><span class="line">&#125;&gt; <span class="comment">// &#123;a: null, b: [1, null]&#125;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/typescript/" data-id="clmmsn15r002xfox00sap8gi3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/16-ETH-交易树和收据树" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/16-ETH-%E4%BA%A4%E6%98%93%E6%A0%91%E5%92%8C%E6%94%B6%E6%8D%AE%E6%A0%91/" class="article-date">
+  <time datetime="2023-02-04T00:32:09.000Z" itemprop="datePublished">2023-02-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/16-ETH-%E4%BA%A4%E6%98%93%E6%A0%91%E5%92%8C%E6%94%B6%E6%8D%AE%E6%A0%91/">交易树&amp;收据树</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<p>交易树：每次发布新区块时，区块中的交易组成交易树。<br>收据树：每个交易执行完成会形成一个收据，记录该交易的相关信息。</p>
+<p>交易树和收据树的用处</p>
+<ol>
+<li>提供merkle proof</li>
+<li>支持更复杂的查询操作（eg：支持查找过去10天和某个智能合约相关的交易）<ul>
+<li>解决方案：引入了bloom filter数据结构</li>
+</ul>
+</li>
+</ol>
+<p>bloom filter 原理: 当一个元素被加入到集合时，通过K个散列函数将这个元素映射成一个位数组中的K个点，把它们置为1。检索时，我们只要看看这些点是不是都是1就大约知道集合中有没有它了，如果集合中的值为0说明肯定不存在，如果是1，说明被检测元素可能存在。<br>bloom filter不支持删除操作（hash collision的原因）。</p>
+<p>ETH有关bloom filter的具体例子<br>每个交易执行完成之后会形成一个收据，收据中包含一个bloom filter，记录交易的类型，地址等其他信息。<br>发布的区块在块头中有一个总的bloom filter，这个总的bloom filter是该区块中所有交易的bloom filter的并集。<br>当我们需要查找过去10天发生的某智能合约相关的所有交易方法是：</p>
+<ol>
+<li>找哪个区块的块头中的bloom filter 有我们需要的交易的类型，如果块头中没有对应的交易类型，说明这个区块不是我们需要的。</li>
+<li>如果块头中有，就去查找这个区块各收据的bloom filter</li>
+</ol>
+<p>ETH的运行过程：交易驱动的状态机（tx-driven state machine）。区块中包含tx，状态树中保存账户的状态，通过执行交易，系统从当前状态转移到下一个状态。</p>
+<p>UTXO是BTC的state machine</p>
+<h3 id="某人在ETH发布一个交易，某节点收到这个tx（A-gt-B），有无可能B的地址以前从来没有过？"><a href="#某人在ETH发布一个交易，某节点收到这个tx（A-gt-B），有无可能B的地址以前从来没有过？" class="headerlink" title="某人在ETH发布一个交易，某节点收到这个tx（A-&gt;B），有无可能B的地址以前从来没有过？"></a>某人在ETH发布一个交易，某节点收到这个tx（A-&gt;B），有无可能B的地址以前从来没有过？</h3><p>有可能，因为创建账户不需要广播，只有到收到转账才有可能写到区块中</p>
+<h3 id="现行状态树的机制是包含全部的账户的状态，可否改成金包含区块中涉及的tx的账户的状态"><a href="#现行状态树的机制是包含全部的账户的状态，可否改成金包含区块中涉及的tx的账户的状态" class="headerlink" title="现行状态树的机制是包含全部的账户的状态，可否改成金包含区块中涉及的tx的账户的状态"></a>现行状态树的机制是包含全部的账户的状态，可否改成金包含区块中涉及的tx的账户的状态</h3><ol>
+<li>查找账户的状态不方便，得往前面的区块找，如A=&gt;B的交易，要验证A的全部，如果A很长一段时间内都没有交易，就需要往前找很长。</li>
+<li>更严重的问题：还需要找B，如果B是新建的账户，只有找到创世界块（genesis block）才能确定是新的账户。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/16-ETH-%E4%BA%A4%E6%98%93%E6%A0%91%E5%92%8C%E6%94%B6%E6%8D%AE%E6%A0%91/" data-id="clmmsn1gf00lkfox0hmqlfjrl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/Dapp/智能合约" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/Dapp/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" class="article-date">
+  <time datetime="2023-02-03T15:24:27.000Z" itemprop="datePublished">2023-02-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/Dapp/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/">web3js连接智能合约</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Remix-IDE"><a href="#Remix-IDE" class="headerlink" title="Remix IDE"></a>Remix IDE</h3><p>在线IDE工具 <a href="https://remix.ethereum.org/" target="_blank" rel="noopener">https://remix.ethereum.org/</a></p>
+<h3 id="Truffle"><a href="#Truffle" class="headerlink" title="Truffle"></a>Truffle</h3><p>智能合约开发框架，基于truffle开发合约流程</p>
+<ol>
+<li><p>安装配置truffle</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g truffle</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写contracts</p>
+</li>
+</ol>
+<p>StudentStorage.sol</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; SPDX-License-Identifier: GPL-3.0</span><br><span class="line">pragma solidity &gt;&#x3D;0.4.16 &lt;0.9.0;</span><br><span class="line"></span><br><span class="line">contract StudentStorage &#123;</span><br><span class="line">    uint public age;</span><br><span class="line">    string public username;</span><br><span class="line"></span><br><span class="line">    function setData(uint256 _age, string memory _username) public &#123;</span><br><span class="line">        age &#x3D; _age;</span><br><span class="line">        username &#x3D; _username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function getData() public view returns (string memory, uint) &#123;</span><br><span class="line">        return (username, age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>编写migration</li>
+</ol>
+<p>1_deploy.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Contracts = artifacts.require(<span class="string">"StudentStorage.sol"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">deployer</span>) </span>&#123;</span><br><span class="line">  deployer.deploy(Contracts);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>执行编译部署</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">truffle migrate</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行之后结果如下</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ➜  hello-truffle git:(main) ✗ truffle migrate</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Compiling your contracts...</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ===========================</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; Compiling ./contracts/StudentStorage.sol</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; Artifacts written to /Users/ansike/project/self/dapp/hello-truffle/build/contracts</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; Compiled successfully using:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    - solc: 0.8.17+commit.8df45f5f.Emscripten.clang</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Starting migrations...</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ======================</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; Network name:    <span class="string">'development'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; Network id:      1675433963338</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; Block gas <span class="built_in">limit</span>: 30000000 (0x1c9c380)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1_deploy.js</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ===========</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">    Replacing <span class="string">'StudentStorage'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">    --------------------------</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; transaction <span class="built_in">hash</span>:    0xc87a4123b6dcf9ad9b5da0f813823d4d04694721763c92c7ec4068646eddf9e8</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; Blocks: 0            Seconds: 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; contract address:    0x5E765e2b459DaAbE5a6674A9c91Bb2338ec3af39</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; block number:        4</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; block timestamp:     1675437122</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; account:             0x6995406230412E302C14Afba8BfC2C094CDeF072</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; balance:             899.996730824988815426</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; gas used:            505059 (0x7b4e3)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; gas price:           3.089147928 gwei</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; value sent:          0 ETH</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; total cost:          0.001560201963367752 ETH</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; Saving artifacts</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    -------------------------------------</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; Total cost:     0.001560201963367752 ETH</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Summary</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> =======</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; Total deployments:   1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; Final cost:          0.001560201963367752 ETH</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>验证合约</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">truffle console</span><br><span class="line"></span><br><span class="line">const obj = await StudentStorage.deployed()</span><br><span class="line"><span class="meta">#</span><span class="bash"> truffle(development)&gt; obj.username()</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="string">'test'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> truffle(development)&gt; obj.age()</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> BN &#123; negative: 0, words: [ 11, &lt;1 empty item&gt; ], length: 1, red: null &#125;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="react-contracts-demo版本"><a href="#react-contracts-demo版本" class="headerlink" title="react+contracts demo版本"></a>react+contracts demo版本</h3><p>demo实现了通过合约在区块链上的的增删操作</p>
+<ol>
+<li>初始化sol项目和web项目</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir sol</span><br><span class="line">mkdir web</span><br><span class="line">cd sol &amp;&amp; truffle init &amp;&amp; cd ../</span><br><span class="line">cd web &amp;&amp; create-react-app web --template typescript &amp;&amp; yarn add web3 &amp;&amp; cd ../</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>编写sol代码</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; SPDX-License-Identifier: GPL-3.0</span><br><span class="line">pragma solidity &gt;&#x3D;0.4.16 &lt;0.9.0;</span><br><span class="line"></span><br><span class="line">contract StudentListStorage &#123;</span><br><span class="line">    struct Student &#123;</span><br><span class="line">        uint256 id;</span><br><span class="line">        string name;</span><br><span class="line">        uint256 age;</span><br><span class="line">        address account;</span><br><span class="line">    &#125;</span><br><span class="line">    Student[] public StudentList;</span><br><span class="line"></span><br><span class="line">    function setList(string memory _name, uint256 _age)</span><br><span class="line">        public</span><br><span class="line">        returns (uint256)</span><br><span class="line">    &#123;</span><br><span class="line">        StudentList.push(</span><br><span class="line">            Student(StudentList.length + 1, _name, _age, msg.sender)</span><br><span class="line">        );</span><br><span class="line">        return StudentList.length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function remove(uint256 index) public returns (Student[] memory) &#123;</span><br><span class="line">        if (index &gt;&#x3D; StudentList.length) return StudentList;</span><br><span class="line">        for (uint256 i &#x3D; index; i &lt; StudentList.length - 1; i++) &#123;</span><br><span class="line">            StudentList[i] &#x3D; StudentList[i + 1];</span><br><span class="line">        &#125;</span><br><span class="line">        StudentList.pop();</span><br><span class="line">        return StudentList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function getList() public view returns (Student[] memory) &#123;</span><br><span class="line">        return StudentList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>编写web代码</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useEffect, useState &#125; <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">"./App.css"</span>;</span><br><span class="line"><span class="keyword">import</span> Web3 <span class="keyword">from</span> <span class="string">"web3"</span>;</span><br><span class="line"><span class="keyword">import</span> StudentListStorage <span class="keyword">from</span> <span class="string">"./StudentListStorage.json"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 连接区块链</span></span><br><span class="line"><span class="keyword">const</span> web3 = <span class="keyword">new</span> Web3(</span><br><span class="line">  (<span class="built_in">window</span> <span class="keyword">as</span> <span class="built_in">any</span>).web3.currentProvider || <span class="string">"http://localhost:8545"</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 连接合约</span></span><br><span class="line"><span class="keyword">const</span> contract = <span class="keyword">new</span> web3.eth.Contract(</span><br><span class="line">  StudentListStorage.abi <span class="keyword">as</span> <span class="built_in">any</span>,</span><br><span class="line">  <span class="string">"0x67886Dc2cc0A6a5314d1331dE3063D663Da05c5d"</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(web3, contract)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [name, setName] = useState&lt;<span class="built_in">string</span>&gt;();</span><br><span class="line">  <span class="keyword">const</span> [age, setAge] = useState&lt;<span class="built_in">string</span>&gt;();</span><br><span class="line">  <span class="keyword">const</span> [studentList, setStudentList] = useState([]);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    getStudentList();</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> submit = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> accounts = <span class="keyword">await</span> web3.eth.requestAccounts();</span><br><span class="line">    <span class="keyword">await</span> contract.methods.setList(name, age).send(&#123; <span class="keyword">from</span>: accounts[<span class="number">0</span>] &#125;);</span><br><span class="line">    getStudentList();</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> getStudentList = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> studentList = <span class="keyword">await</span> contract.methods.getList().call();</span><br><span class="line">    <span class="built_in">console</span>.log(studentList);</span><br><span class="line">    </span><br><span class="line">    setStudentList(studentList);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">const</span> deleteStudent = <span class="keyword">async</span> (index: <span class="built_in">number</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> accounts = <span class="keyword">await</span> web3.eth.requestAccounts();</span><br><span class="line">    <span class="keyword">await</span> contract.methods.remove(index).send(&#123; <span class="keyword">from</span>: accounts[<span class="number">0</span>] &#125;);</span><br><span class="line">    getStudentList();</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">"App"</span>&gt;</span><br><span class="line">      &lt;div className=<span class="string">"form"</span> style=&#123;&#123; margin: <span class="number">20</span> &#125;&#125;&gt;</span><br><span class="line">        &lt;label htmlFor=<span class="string">"name"</span>&gt;name：&lt;<span class="regexp">/label&gt;</span></span><br><span class="line"><span class="regexp">        &lt;input</span></span><br><span class="line"><span class="regexp">          id="name"</span></span><br><span class="line"><span class="regexp">          type="text"</span></span><br><span class="line"><span class="regexp">          value=&#123;name&#125;</span></span><br><span class="line"><span class="regexp">          onChange=&#123;(e) =&gt; setName(e.target.value)&#125;</span></span><br><span class="line"><span class="regexp">        /</span>&gt;</span><br><span class="line">        &lt;label htmlFor=<span class="string">"age"</span> style=&#123;&#123; marginLeft: <span class="number">10</span> &#125;&#125;&gt;</span><br><span class="line">          age：</span><br><span class="line">        &lt;<span class="regexp">/label&gt;</span></span><br><span class="line"><span class="regexp">        &lt;input</span></span><br><span class="line"><span class="regexp">          id="age"</span></span><br><span class="line"><span class="regexp">          type="text"</span></span><br><span class="line"><span class="regexp">          value=&#123;age&#125;</span></span><br><span class="line"><span class="regexp">          onChange=&#123;(e) =&gt; setAge(e.target.value)&#125;</span></span><br><span class="line"><span class="regexp">          style=&#123;&#123; marginRight: 10 &#125;&#125;</span></span><br><span class="line"><span class="regexp">        /</span>&gt;</span><br><span class="line">        &lt;button onClick=&#123;submit&#125;&gt;submit&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">      &lt;div className=<span class="string">"studentList"</span>&gt;</span><br><span class="line">        &#123;studentList.map(<span class="function">(<span class="params">student, index</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">const</span> &#123; id, name, age, account &#125; = student;</span><br><span class="line">          <span class="keyword">return</span> (</span><br><span class="line">            &lt;div key=&#123;index&#125;&gt;</span><br><span class="line">              &#123;id&#125;-&#123;name&#125;-&#123;age&#125;-&#123;account&#125;&#123;<span class="string">" "</span>&#125;</span><br><span class="line">              &lt;span onClick=&#123;<span class="function"><span class="params">()</span> =&gt;</span> deleteStudent(index)&#125;&gt;删除&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>div&gt;</span><br><span class="line">          );</span><br><span class="line">        &#125;)&#125;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>连接合约验证能力<br>输入name和age点击增加，发起交易数据写入区块链。<br>点击数据右侧的删除，发起交易区块链写入删除记录，数据被删除。<img src="/blog/programming/%E7%BC%96%E7%A8%8B/web3/Dapp/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/20230204-072829.jpeg" class="" title="页面效果">
+
+</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>web 代码中引用的json是合约编译生成的，每次合约编译都会生成新的json文件和合约地址</li>
+<li>对合约的调用send会消耗gas需要填写account，call不会所以不用写account</li>
+</ol>
+<p>完整代码见：<a href="https://github.com/ansike/dapp/first-app" target="_blank" rel="noopener">https://github.com/ansike/dapp/first-app</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/Dapp/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" data-id="clmmsn1fq00j9fox08incewqx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/Dapp/Dapp初始化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/Dapp/Dapp%E5%88%9D%E5%A7%8B%E5%8C%96/" class="article-date">
+  <time datetime="2023-02-02T15:38:27.000Z" itemprop="datePublished">2023-02-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/Dapp/Dapp%E5%88%9D%E5%A7%8B%E5%8C%96/">初始化Dapp操作区块链数据</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-创建账户-使用钱包metamask"><a href="#1-创建账户-使用钱包metamask" class="headerlink" title="1. 创建账户 使用钱包metamask"></a>1. 创建账户 使用钱包metamask</h3><p>安装地址：<a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn" target="_blank" rel="noopener">https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn</a></p>
+<h3 id="2-使用ganache启动本地区块链"><a href="#2-使用ganache启动本地区块链" class="headerlink" title="2. 使用ganache启动本地区块链"></a>2. 使用<code>ganache</code>启动本地区块链</h3><p><a href="https://trufflesuite.com/ganache/" target="_blank" rel="noopener">https://trufflesuite.com/ganache/</a><br><a href="https://github.com/trufflesuite/ganache#readme" target="_blank" rel="noopener">https://github.com/trufflesuite/ganache#readme</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn add -g ganache</span><br><span class="line">ganache</span><br></pre></td></tr></table></figure>
+<p>启动之后会默认创建10个账户每个账户充值有1000ETH</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/web3/Dapp/Dapp%E5%88%9D%E5%A7%8B%E5%8C%96/20230202-210545.jpg" class="" title="ganache">
+
+<h3 id="3-在metamask中"><a href="#3-在metamask中" class="headerlink" title="3. 在metamask中"></a>3. 在metamask中</h3><p>在钱包中配置本地的区块链</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/web3/Dapp/Dapp%E5%88%9D%E5%A7%8B%E5%8C%96/20230202-213346.jpg" class="" title="配置本地网络">
+
+<p>获取第二步生成的私钥，导入账户</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/web3/Dapp/Dapp%E5%88%9D%E5%A7%8B%E5%8C%96/20230202-214805.jpg" class="" title="导入第二步生成的账户">
+
+<h3 id="4-引入web3-js开始操作"><a href="#4-引入web3-js开始操作" class="headerlink" title="4. 引入web3.js开始操作"></a>4. 引入<code>web3.js</code>开始操作</h3><p><a href="https://learnblockchain.cn/docs/web3.js/getting-started.html" target="_blank" rel="noopener">https://learnblockchain.cn/docs/web3.js/getting-started.html</a><br><a href="https://web3js.readthedocs.io/en/v1.8.2/getting-started.html" target="_blank" rel="noopener">https://web3js.readthedocs.io/en/v1.8.2/getting-started.html</a></p>
+<ul>
+<li><h5 id="在页面中引入script标签"><a href="#在页面中引入script标签" class="headerlink" title="在页面中引入script标签"></a>在页面中引入script标签</h5></li>
+</ul>
+<p>项目参考地址：<a href="https://github.com/ansike/dapp/" target="_blank" rel="noopener">https://github.com/ansike/dapp/</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/web3/1.8.2/web3.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">  <span class="keyword">const</span> web3 = <span class="keyword">new</span> Web3(Web3.givenProvider || <span class="string">"http://localhost:8545"</span>);</span></span><br><span class="line"><span class="actionscript">  <span class="comment">// 获取当前区块数量</span></span></span><br><span class="line"><span class="javascript">  web3.eth.getBlockNumber().then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">console</span>.log(<span class="string">"blockNumber"</span>, res);</span></span><br><span class="line">  &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><h5 id="使用cra创建项目中引入-web3"><a href="#使用cra创建项目中引入-web3" class="headerlink" title="使用cra创建项目中引入 web3"></a>使用cra创建项目中引入 web3</h5></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useEffect, useState &#125; <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">"./App.css"</span>;</span><br><span class="line"><span class="keyword">import</span> Web3 <span class="keyword">from</span> <span class="string">"web3"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Web3.givenProvider);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> web3 = <span class="keyword">new</span> Web3((<span class="built_in">window</span> <span class="keyword">as</span> any).web3.currentProvider || <span class="string">"http://127.0.0.1:8545"</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [curAccount, setCurAccount] = useState&lt;string&gt;(<span class="string">""</span>);</span><br><span class="line">  <span class="keyword">const</span> [desAccount, setDesAccount] = useState&lt;string&gt;(<span class="string">""</span>);</span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    getCurAccount();</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> transMoney = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    web3.eth</span><br><span class="line">      .sendTransaction(&#123;</span><br><span class="line">        <span class="keyword">from</span>: curAccount,</span><br><span class="line">        to: desAccount,</span><br><span class="line">        value: web3.utils.toWei(<span class="string">"1"</span>, <span class="string">"ether"</span>),</span><br><span class="line">      &#125;)</span><br><span class="line">      .then(<span class="function"><span class="keyword">function</span> (<span class="params">receipt</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"transaction done"</span>, receipt);</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> getCurAccount = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> accounts = <span class="keyword">await</span> web3.eth.getAccounts();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (!accounts.length) &#123;</span><br><span class="line">      accounts = <span class="keyword">await</span> web3.eth.requestAccounts();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'linked account：'</span>,accounts);</span><br><span class="line">    setCurAccount(accounts[<span class="number">0</span>]);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">"App"</span>&gt;</span><br><span class="line">      &lt;p&gt;&#123;curAccount&#125;&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">      &lt;input</span></span><br><span class="line"><span class="regexp">        type="text"</span></span><br><span class="line"><span class="regexp">        value=&#123;desAccount&#125;</span></span><br><span class="line"><span class="regexp">        onChange=&#123;(e) =&gt; setDesAccount(e.target.value)&#125;</span></span><br><span class="line"><span class="regexp">      /</span>&gt;</span><br><span class="line">      &lt;button onClick=&#123;transMoney&#125;&gt;transform&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ol>
+<li>纯html的方式启动需要启动一个静态服务，否则无法自动连接钱包。</li>
+<li>在用script直接引用和通过npm导入实例化web3时有区别：</li>
+</ol>
+<ul>
+<li>script引用：const web3 = new Web3(Web3.givenProvider || “<a href="http://localhost:8545&quot;">http://localhost:8545&quot;</a>);</li>
+<li>npm引用：const web3 = new Web3((window as any).web3.currentProvider || “<a href="http://127.0.0.1:8545&quot;">http://127.0.0.1:8545&quot;</a>);<br>只有这样设置再调用requestAccounts时才能和metamask连接</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/Dapp/Dapp%E5%88%9D%E5%A7%8B%E5%8C%96/" data-id="clmmsn1ft00jgfox07xomey6x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/js/自动发送邮件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E8%87%AA%E5%8A%A8%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/" class="article-date">
+  <time datetime="2023-01-25T10:58:01.000Z" itemprop="datePublished">2023-01-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E8%87%AA%E5%8A%A8%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/">自动发送邮件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="blog实现编译完成之后自动发送邮件的能力"><a href="#blog实现编译完成之后自动发送邮件的能力" class="headerlink" title="blog实现编译完成之后自动发送邮件的能力"></a>blog实现编译完成之后自动发送邮件的能力</h3><ol>
+<li><p>blog使用了<a href="https://app.travis-ci.com/" target="_blank" rel="noopener">travis ci</a>工具，在travis编译执行完成之后会调用after_script的mail.js。</p>
+</li>
+<li><p>申请163邮箱的账号和密码</p>
+</li>
+<li><p>mail.js的内容逻辑</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> nodemailer = <span class="built_in">require</span>(<span class="string">"nodemailer"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从环境变量中获取参数，参数在travis中进行预先设置</span></span><br><span class="line"><span class="keyword">const</span> user = process.env.MAIL_NAME;</span><br><span class="line"><span class="keyword">const</span> pass = process.env.MAIL_PASS;</span><br><span class="line"></span><br><span class="line"><span class="comment">// async..await is not allowed in global scope, must use a wrapper</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!user || !pass) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"there is no user or pass"</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// Generate test SMTP service account from ethereal.email</span></span><br><span class="line">  <span class="comment">// Only needed if you don't have a real mail account for testing</span></span><br><span class="line">  <span class="comment">// let testAccount = await nodemailer.createTestAccount();</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// create reusable transporter object using the default SMTP transport</span></span><br><span class="line">  <span class="keyword">let</span> transporter = nodemailer.createTransport(&#123;</span><br><span class="line">    host: <span class="string">"smtp.163.com"</span>,</span><br><span class="line">    port: <span class="number">465</span>,</span><br><span class="line">    secure: <span class="literal">true</span>, <span class="comment">// true for 465, false for other ports</span></span><br><span class="line">    auth: &#123;</span><br><span class="line">      user, <span class="comment">// generated ethereal user</span></span><br><span class="line">      pass, <span class="comment">// generated ethereal password</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// send mail with defined transport object</span></span><br><span class="line">  <span class="keyword">let</span> info = <span class="keyword">await</span> transporter.sendMail(&#123;</span><br><span class="line">    <span class="keyword">from</span>: <span class="string">`"<span class="subst">$&#123;user&#125;</span>" &lt;<span class="subst">$&#123;user&#125;</span>&gt;`</span>, <span class="comment">// sender address</span></span><br><span class="line">    to: <span class="string">"ansike@qq.com"</span>, <span class="comment">// list of receivers</span></span><br><span class="line">    subject: <span class="string">"gh build"</span>, <span class="comment">// Subject line</span></span><br><span class="line">    text: <span class="string">"travis build done, you can visit https://ansike.github.io/blog/ to check the result and visit https://app.travis-ci.com/github/ansike to check the build detail"</span>, <span class="comment">// plain text body</span></span><br><span class="line">    html: <span class="string">"&lt;b&gt;travis build done.&lt;br /&gt; you can visit https://ansike.github.io/blog/ to check the result &lt;br /&gt;and visit https://app.travis-ci.com/github/ansike to check the build detail&lt;/b&gt;"</span>, <span class="comment">// html body</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"Message sent: %s"</span>, info.messageId);</span><br><span class="line">  <span class="comment">// Message sent: &lt;b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Preview only available when sending through an Ethereal account</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"Preview URL: %s"</span>, nodemailer.getTestMessageUrl(info));</span><br><span class="line">  <span class="comment">// Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main().catch(<span class="built_in">console</span>.error);</span><br></pre></td></tr></table></figure>
+
+
+<!-- ### 发送邮件的实现原理 -->
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/%E8%87%AA%E5%8A%A8%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/" data-id="clmmsn15z003pfox08gbxbz0f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/25-课程总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/25-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/" class="article-date">
+  <time datetime="2023-01-15T13:30:38.000Z" itemprop="datePublished">2023-01-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/25-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/">课程总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<p>区块链错误的应用场景</p>
+<ul>
+<li>用BTC转账加速保险理赔。核心问题抓错，保险理赔慢不是因为支付慢，而是保险事项需要人工确认。</li>
+<li>防伪追踪（如蔬菜从产地到市场上链）。区块链的能力是区块链内容的防篡改性，但是无法辨认已经在区块上内容的真假。如果在上链时的内容就是假的，或者在运输的过程中物品被换壳，区块链是没有办法解决的。</li>
+</ul>
+<p>加密货币不应该用做同传统金融体系竞争的方面，而应该去补足传统金融体系无法解决的内容。<br>eg：餐馆，电商没有必要去接受BTC，因为支付宝已经很好的解决了线下付款的问题<br>先有的金融体系下，缺乏一种方便的跨国转账的方式，并且这种转账方式要同信息传播融合在一起。</p>
+<p>下一代互联网是“价值交换网络”，我们目前只是“信息交换网络”。</p>
+<p>对于智能合约与传统合同的看法：程序化是大趋势（software is eating the world）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/25-%E8%AF%BE%E7%A8%8B%E6%80%BB%E7%BB%93/" data-id="clmmsn1g900kzfox0ggxp7g01" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/18-ETH-挖矿算法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/18-ETH-%E6%8C%96%E7%9F%BF%E7%AE%97%E6%B3%95/" class="article-date">
+  <time datetime="2023-01-15T13:14:46.000Z" itemprop="datePublished">2023-01-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/18-ETH-%E6%8C%96%E7%9F%BF%E7%AE%97%E6%B3%95/">挖矿算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<p>BTC mining饱受争议的地方在于：要用专业的ASIC芯片，这与去中心化理念背道而驰</p>
+<p>其他的加密货币：ASIC resistance。比如LiteCoin基于scrypt就是memory hard mining puzzle</p>
+<p>ETH改进2中数据集</p>
+<ol>
+<li>16M的cache 轻节点，便于验证</li>
+<li>1G的dataset 全节点</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/18-ETH-%E6%8C%96%E7%9F%BF%E7%AE%97%E6%B3%95/" data-id="clmmsn1g100k7fox0fbm5crsz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/24-ETH-美链" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/24-ETH-%E7%BE%8E%E9%93%BE/" class="article-date">
+  <time datetime="2023-01-15T13:11:57.000Z" itemprop="datePublished">2023-01-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/24-ETH-%E7%BE%8E%E9%93%BE/">美链</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<p>美链（beauty Chain）是一个部署在ETH上的智能合约，有自己的代币BEC</p>
+<ul>
+<li>没有自己的区块链，代币的发行、转账都是通过调用智能合约中的函数来完成的</li>
+<li>可以自己定义发行规则，每个账户有多少代币也是保存在智能合约的状态变量</li>
+<li>ERC 20是ETH上发行代币的一个标准，规范了所有发行代币的合约应该实现的功能和遵循的接口</li>
+<li>美链中有一个叫batchTransfer的函数，它的功能是向多个接受者发送代币，然后把这些代币从调用者的账户上扣除。</li>
+</ul>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/24-ETH-%E7%BE%8E%E9%93%BE/20230115-210926.jpg" class="" title="代码示例">
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/24-ETH-%E7%BE%8E%E9%93%BE/" data-id="clmmsn1g700kpfox0392p89cn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/blog/page/2/">&lt; 上一页</a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><a class="page-number" href="/blog/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/21/">21</a><a class="extend next" rel="next" href="/blog/page/4/">下一页 &gt;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/python/learn/chapter-14-module/">模块和包</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/python/learn/chapter-11-bug/">函数</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>
