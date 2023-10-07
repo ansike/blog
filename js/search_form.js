@@ -60,30 +60,30 @@
             titleIndex === -1
               ? `<div class="matched-title">${title}</div>`
               : `<div class="matched-title">${title.slice(
-                  titleIndex - titleMatchedRange < 0
-                    ? 0
-                    : titleIndex - titleMatchedRange,
-                  titleIndex
-                )}<span class="matched-title-hover">${value}</span>${title.slice(
-                  titleIndex + value.length,
-                  titleIndex + value.length + titleMatchedRange
-                )}</div>`;
+                titleIndex - titleMatchedRange < 0
+                  ? 0
+                  : titleIndex - titleMatchedRange,
+                titleIndex
+              )}<span class="matched-title-hover">${value}</span>${title.slice(
+                titleIndex + value.length,
+                titleIndex + value.length + titleMatchedRange
+              )}</div>`;
 
           post.matchedContent =
             contentIndex === -1
               ? `<div class="matched-content">${content.slice(
-                  0,
-                  contentMatchedRange
-                )}</div>`
+                0,
+                contentMatchedRange
+              )}</div>`
               : `<div class="matched-content">${content.slice(
-                  contentIndex - contentMatchedRange < 0
-                    ? 0
-                    : contentIndex - contentMatchedRange,
-                  contentIndex
-                )}<span class="matched-title-hover">${value}</span>${content.slice(
-                  contentIndex + value.length,
-                  contentIndex + value.length + contentMatchedRange
-                )}</div>`;
+                contentIndex - contentMatchedRange < 0
+                  ? 0
+                  : contentIndex - contentMatchedRange,
+                contentIndex
+              )}<span class="matched-title-hover">${value}</span>${content.slice(
+                contentIndex + value.length,
+                contentIndex + value.length + contentMatchedRange
+              )}</div>`;
           return post;
         })
         .map((post) => {
@@ -98,6 +98,7 @@
           div.innerHTML = `${matchedHead}${matchedContent}`;
           div.onclick = (e) => {
             const path = e.currentTarget.getAttribute("data-url");
+            console.log("item click", path)
             window.location.href = `/blog/${path}`;
           };
           return div;
