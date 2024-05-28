@@ -75,6 +75,92 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-编程/网络相关/CIDR" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/CIDR/" class="article-date">
+  <time datetime="2022-09-07T14:36:35.000Z" itemprop="datePublished">2022-09-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/CIDR/">CIDR</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="CIDR（Classless-Inter-Doamin-Routing-）-是什么？"><a href="#CIDR（Classless-Inter-Doamin-Routing-）-是什么？" class="headerlink" title="CIDR（Classless Inter-Doamin Routing ） 是什么？"></a>CIDR（Classless Inter-Doamin Routing ） 是什么？</h3><p>中文叫无类域间路由，是一种新的 IP 寻址方案，改进了 IP 地址的分配。它取代了 A，B，C 类旧系统，极大的延长了 IPV4 的使用寿命，减缓了路由表的增长速度。</p>
+<h3 id="基于分类的-IP-地址问题"><a href="#基于分类的-IP-地址问题" class="headerlink" title="基于分类的 IP 地址问题"></a>基于分类的 IP 地址问题</h3><p>旧的寻址方法效率低下，消耗 IPV4 的速度更快，原有的类路由系统包括</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>IP 段</th>
+<th>主机数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>1.0.0.0-127.255.255.255</td>
+<td>2^24-2</td>
+</tr>
+<tr>
+<td>B</td>
+<td>128.0.0.0-192.255.255.255</td>
+<td>2^16-2</td>
+</tr>
+<tr>
+<td>C</td>
+<td>192.0.0.0-223.255.255.255</td>
+<td>2^8-2</td>
+</tr>
+<tr>
+<td>D</td>
+<td>224.0.0.0-239.255.255.255</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>在旧的寻址模式下当需要超过 254 台主机时，将不得不弃用 C 类地址选用 B 类</p>
+<h3 id="CIDR-的工作原理"><a href="#CIDR-的工作原理" class="headerlink" title="CIDR 的工作原理"></a>CIDR 的工作原理</h3><p>CIDR 基于变长子网掩码（VLSM）。它可以定义任意长度的前缀。<br>CIDR 的 IP 地址分为两部分：</p>
+<ol>
+<li>前缀：192.168.0.0 表示当前网络的地址</li>
+<li>后缀：24 表示当前网络地址占用的位数（从左往右）</li>
+</ol>
+<p>eg: 192.168.0.0/24<br>表示该网络的网络号是前 24 位 192.168.0，主机部分是后 8 位总共有 2^8-2（1-254）个主机位</p>
+<p>将多个网路合并到一个路由（路由聚合）</p>
+<ol>
+<li>将多个 IP 地址聚合到一个之后，减小骨干路由的表项压力</li>
+<li>减少 IP 地址的使用，缓解 IP 地址耗尽</li>
+</ol>
+<p><strong>例子</strong><br>有三个 IP 地址通过路由器进行转发<br>192.168.31.192/26<br>192.168.31.160/27<br>192.168.31.128/27<br>根据 CIDR 的模式可以寻找一个能涵盖所有 IP 地址的聚合地址进行转发：192.168.31.128/25<br>计算方法：查看三个 IP 地址他们从左往右完全相同位数有 25 位，我们保留相同的部分，把不同的位置位 0，就是我们需要的 IP 地址</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/CIDR/" data-id="clmmsn17f009gfox0h1nr5b4s" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-编程/k8s/debian环境搭建/debian安装k8s集群" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/debian%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/debian%E5%AE%89%E8%A3%85k8s%E9%9B%86%E7%BE%A4/" class="article-date">
@@ -717,109 +803,6 @@
 
 
   
-    <article id="post-编程/k8s/环境搭建相关/虚拟机网络模式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3/%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time datetime="2022-08-06T15:59:06.000Z" itemprop="datePublished">2022-08-06</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3/%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/">虚拟机网络的模式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>虚拟机的三种网络模式: 网络地址转换模式、桥接模式、仅主机模式</p>
-<p>下面以 virtualbox 和 centos-7 为例进行解释</p>
-<blockquote>
-<p>virtualbox: 版本 6.1.36 r152435 (Qt5.6.3)<br>Centos7 版本: 7.9.2009<br>操作系统: macOS Monterey 12.5</p>
-</blockquote>
-<p><strong>三种网络模式简单对比</strong></p>
-<table>
-<thead>
-<tr>
-<th>虚拟机网卡模式</th>
-<th>访问主机</th>
-<th>访问同局域网其他虚拟机</th>
-<th>访问网络</th>
-<th>主机访问虚拟机</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>NAT 模式</td>
-<td>yes</td>
-<td>no</td>
-<td>yes</td>
-<td>no</td>
-</tr>
-<tr>
-<td>桥接模式</td>
-<td>yes</td>
-<td>yes</td>
-<td>yes</td>
-<td>yes</td>
-</tr>
-<tr>
-<td>hostonly 模式</td>
-<td>no</td>
-<td>yes</td>
-<td>no</td>
-<td>yes</td>
-</tr>
-</tbody></table>
-<h3 id="网络地址转换模式（NAT）"><a href="#网络地址转换模式（NAT）" class="headerlink" title="网络地址转换模式（NAT）"></a>网络地址转换模式（NAT）</h3><p><strong>nat 是什么</strong><br>nat 为 network address transform 网络地址转换，一般在涉及公网和局域网要进行数据包交换时需要进行网络地址转换。</p>
-<p>该模式下的虚拟网卡不直接和外网进行通信，只作为和主机通信的接口。只要主机能访问网络，且虚拟网卡可与主机进行联通，那虚拟机就可以通过主机访问网络（不需要配置 IP，子网掩码，网关等）</p>
-<p>设置完成进入主机之后可以查看网络配置<code>ip a</code>，如果此时网卡出现 10 网断 ip 地址说明配置正常<br>如果没有分配 IP，设置<code>/etc/sysconfig/network-scripts/ifcfg-enp0s3</code> 中 ONBOOT=yes，然后 <code>systemctl restart network</code>重启网络</p>
-<p><strong>主机和虚拟机关系？</strong><br>结论: 主机不可以访问虚拟机，虚拟机可以访问主机的网络，虚拟机之间不能互相访问<br>原因: 虚拟机被分配的网卡为 10.x.x.x 的 ip，此 ip 可通过主机的网络访问互联网，也可访问主机 ip，但主机所在的网段是 192.168.x.x。因为多个虚拟机被分配的网卡是可能相同的，由此也可看出多个虚拟机之间必然是完全隔离的。</p>
-<p><strong>优劣分析</strong><br>优势: 网络配置方式简单，也可访问互联网（也不需要配置 DHCP 进行分配即可）<br>劣势: 主机无法访问虚拟机，虚拟机之前也无法互相访问，应用场景比较小。一般和其他模式配合使用。</p>
-<h3 id="桥接模式（Bridged）"><a href="#桥接模式（Bridged）" class="headerlink" title="桥接模式（Bridged）"></a>桥接模式（Bridged）</h3><p>通过虚拟网桥将主机的网卡和虚拟交换机连接在一起，虚拟机的虚拟网卡都要连接在虚拟交换机上。所以桥接模式的虚拟机需要保证与主机在同一网段并且网关，DNS 和主机网卡一致</p>
-<p>设置步骤</p>
-<ol>
-<li>设置虚拟机的网络连接方式桥接模式模式: 选择对应虚拟机=&gt;设置=&gt;网络=&gt;连接方式选桥接网络</li>
-<li>查看本机 ip，子网掩码，网关，DNS 等信息</li>
-<li>登录虚拟机，配置网卡</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 选择正确的网卡进行配置</span></span><br><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-enp0s3</span><br><span class="line"><span class="meta">#</span><span class="bash"> 可以通过 mac 地址对比确认，机器中ip a查看网卡所有的mac地址</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 第一步的网卡选择的高级选项可以看到网卡的mac地址</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> TYPE=Ethernet</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> BOOTPROTO=static <span class="comment"># 设置为静态IP</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> DEFROUTE=yes</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> IPV4_FAILURE_FATAL=no</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> NAME=enp0s3</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> UUID=79b9344a-8e4c-4fe6-ac55-ec58499cfe07</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> DEVICE=enp0s3</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ONBOOT=yes <span class="comment"># 设置开启启动</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> IPADDR=192.168.0.20 <span class="comment"># 保证和主机ip在同一网段 主机ip为192.168.0.102</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> NETMASK=255.255.255.0 <span class="comment"># 子网掩码，网关，DNS保证和主机IP一致</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> GATEWAY=192.168.0.1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> DNS1=192.168.0.1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 编辑之后网卡之后进行网络服务重启</span></span><br><span class="line">systemctl restart network</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 虚拟机ping主机</span></span><br><span class="line">ping 192.168.0.102</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 主机ping虚拟机</span></span><br><span class="line">ping 192.168.0.20</span><br></pre></td></tr></table></figure>
-
-<p>没有成功验证桥接模式虚拟机访问互联网<br>mac 在 wifi 下无法访问互联网：<a href="https://support.apple.com/zh-cn/guide/mac-help/mh43557/12.0/mac/12.0" target="_blank" rel="noopener">https://support.apple.com/zh-cn/guide/mac-help/mh43557/12.0/mac/12.0</a></p>
-<h3 id="仅主机模式（Host-Only）"><a href="#仅主机模式（Host-Only）" class="headerlink" title="仅主机模式（Host-Only）"></a>仅主机模式（Host-Only）</h3><p>是比 NAT 更封闭的网络模式。<br>该模式下创建了一个基于宿主机的虚拟局域网，局域网内的虚拟机通过宿主机上的虚拟网卡<code>vboxnet0</code>进行联通。<br>此时宿主机可以访问虚拟机，虚拟机不能访问宿主机和外网。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 此时可以在宿主机上进行 ping</span></span><br><span class="line">ping [虚拟机ip]</span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者ssh登录</span></span><br><span class="line">ssh root@[虚拟机ip]</span><br></pre></td></tr></table></figure>
-
-<p><strong>优劣分析</strong><br>优势: 主机可以访问虚拟机，虚拟机之间也可以互相访问<br>劣势: 配置方式复杂，需要根据<code>vboxnet0</code>设置自己的静态 IP。虚拟机无法访问主机。无法连接互联网。</p>
-<h3 id="网卡混杂模式"><a href="#网卡混杂模式" class="headerlink" title="网卡混杂模式"></a>网卡混杂模式</h3><p>网卡有混杂模式，在混杂模式下，所有的流量都会流经 CPU，而不是仅传递专门的处理器中。该模式一般用来进行数据嗅探</p>
-<h3 id="如何设置自己的网络呢"><a href="#如何设置自己的网络呢" class="headerlink" title="如何设置自己的网络呢"></a>如何设置自己的网络呢</h3><p>说了比较多的概念，我们在实际的学习过程应该怎么设置最简单也最容易理解呢？<br><strong>一个 nat 网卡 + 一个 hostonly 网卡</strong>即可满足我们的常规需求<br>nat 为了让虚拟机可以访问互联网，hostonly 是为了方便主机访问虚拟机及虚拟机之间互相访问。</p>
-<h3 id="软件下载"><a href="#软件下载" class="headerlink" title="软件下载"></a>软件下载</h3><p>virtualbox：<a href="https://download.virtualbox.org/virtualbox/6.1.36/VirtualBox-6.1.36-152435-OSX.dmg" target="_blank" rel="noopener">https://download.virtualbox.org/virtualbox/6.1.36/VirtualBox-6.1.36-152435-OSX.dmg</a><br>centos7：<a href="https://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-Minimal-2009.iso?spm=a2c6h.25603864.0.0.33746aeaJR8JPM" target="_blank" rel="noopener">https://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-Minimal-2009.iso?spm=a2c6h.25603864.0.0.33746aeaJR8JPM</a></p>
-<h3 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h3><p><a href="https://www.jianshu.com/p/6139ffd686de" target="_blank" rel="noopener">https://www.jianshu.com/p/6139ffd686de</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/k8s/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3/%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/" data-id="clmmsn1em00ewfox02q2xasnf" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -864,7 +847,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
     </div>
   </div>
 
@@ -875,6 +858,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
         
           <li>
             <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
@@ -892,10 +879,6 @@
             <a href="/blog/programming/%E7%BC%96%E7%A8%8B/python/learn/chapter-14-module/">模块和包</a>
           </li>
         
-          <li>
-            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/python/learn/chapter-11-bug/">函数</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -908,7 +891,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2023 ask<br>
+      &copy; 2024 ask<br>
       <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
     </div>
   </div>

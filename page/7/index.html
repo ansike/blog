@@ -75,6 +75,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-编程/msyql/insert" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/insert/" class="article-date">
+  <time datetime="2022-10-23T02:13:42.000Z" itemprop="datePublished">2022-10-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/insert/">mysql 基础命令 - insert</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>示例数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> <span class="string">`test`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> AUTO_INCREMENT=<span class="number">9</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">IGNORE</span> <span class="keyword">INTO</span> <span class="string">`test`</span> <span class="keyword">VALUES</span>  (<span class="number">1</span>, <span class="string">"test1"</span>);</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">test</span>\G;</span><br><span class="line"><span class="comment">-- drop table test;</span></span><br></pre></td></tr></table></figure>
+
+<p>insert 插入操作</p>
+<h3 id="存在某条数据时不更新且不报错，不存在时插入"><a href="#存在某条数据时不更新且不报错，不存在时插入" class="headerlink" title="存在某条数据时不更新且不报错，不存在时插入"></a>存在某条数据时不更新且不报错，不存在时插入</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">IGNORE</span> <span class="keyword">INTO</span> <span class="string">`test`</span> <span class="keyword">VALUES</span>  (<span class="number">1</span>, <span class="string">"test11"</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="存在某条数据时更新，不存时在插入"><a href="#存在某条数据时更新，不存时在插入" class="headerlink" title="存在某条数据时更新，不存时在插入"></a>存在某条数据时更新，不存时在插入</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">BEGIN</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`test`</span> <span class="keyword">VALUES</span>  (<span class="number">1</span>, <span class="string">"test11"</span>) <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span>;</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="sql中的if语句"><a href="#sql中的if语句" class="headerlink" title="sql中的if语句"></a>sql中的if语句</h3><p><a href="https://dev.mysql.com/doc/refman/8.0/en/sql-prepared-statements.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/8.0/en/sql-prepared-statements.html</a><br>mysql 8.0</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- platform 中不存在 product 表则把 config 表重命名为 product</span></span><br><span class="line"><span class="keyword">BEGIN</span>;</span><br><span class="line"><span class="keyword">SET</span> @<span class="keyword">QUERY</span> = <span class="keyword">IF</span>(</span><br><span class="line">    <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>(</span><br><span class="line">      <span class="keyword">select</span>  TABLE_NAME  <span class="keyword">from</span>  INFORMATION_SCHEMA.TABLES  <span class="keyword">where</span> TABLE_SCHEMA =<span class="string">'platform'</span> <span class="keyword">and</span>  TABLE_NAME = <span class="string">'product'</span></span><br><span class="line">    ),</span><br><span class="line">    <span class="string">'ALTER TABLE config RENAME TO product;'</span>,</span><br><span class="line">    <span class="string">'DO TRUE;'</span></span><br><span class="line">  );</span><br><span class="line"><span class="keyword">PREPARE</span> stmt <span class="keyword">FROM</span> @<span class="keyword">QUERY</span>;</span><br><span class="line"><span class="keyword">EXECUTE</span> stmt;</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建product表create_time字段</span></span><br><span class="line"><span class="keyword">BEGIN</span>;</span><br><span class="line"><span class="keyword">SET</span> @<span class="keyword">QUERY</span> = <span class="keyword">IF</span>(</span><br><span class="line">    <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>(</span><br><span class="line">      <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> information_schema.columns <span class="keyword">WHERE</span> table_schema=<span class="string">'platform'</span> <span class="keyword">AND</span> table_name = <span class="string">'product'</span> <span class="keyword">AND</span> column_name = <span class="string">'create_time'</span></span><br><span class="line">    ),</span><br><span class="line">    <span class="string">'ALTER TABLE product ADD COLUMN create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT "创建时间";'</span>,</span><br><span class="line">    <span class="string">'DO TRUE;'</span></span><br><span class="line">  );</span><br><span class="line"><span class="keyword">PREPARE</span> stmt <span class="keyword">FROM</span> @<span class="keyword">QUERY</span>;</span><br><span class="line"><span class="keyword">EXECUTE</span> stmt;</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/msyql/insert/" data-id="clmmsn166004ifox0389s8ghq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-编程/游戏/cocosCreator/全局数据共享" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/%E6%B8%B8%E6%88%8F/%E7%BC%96%E7%A8%8B/%E6%B8%B8%E6%88%8F/cocosCreator/%E5%85%A8%E5%B1%80%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB/" class="article-date">
@@ -592,60 +644,6 @@
 
 
   
-    <article id="post-编程/shell/crontab" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/crontab/" class="article-date">
-  <time datetime="2022-09-28T03:14:13.000Z" itemprop="datePublished">2022-09-28</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/crontab/">cron &amp; crontab</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="cron-和-crontab-关系"><a href="#cron-和-crontab-关系" class="headerlink" title="cron 和 crontab 关系"></a>cron 和 crontab 关系</h3><p>cron 是定时任务的实现。cron 包括两部分：crond（守护进程），crontab （工具）。<br>用户通过 crontab 编写的任务交给 crond 进行周期性的执行。</p>
-<h3 id="crontab-基础语法"><a href="#crontab-基础语法" class="headerlink" title="crontab 基础语法"></a>crontab 基础语法</h3><p>{minute} {hour} {day-of-month} {month} {day-of-week} {full-path-to-shell-script|command}</p>
-<ul>
-<li>minute: 区间为 0 – 59</li>
-<li>hour: 区间为 0 – 23</li>
-<li>day-of-month: 区间为 0 – 31</li>
-<li>month: 区间为 1 – 12. 1 是 1 月. 12 是 12 月</li>
-<li>Day-of-week: 区间为 0 – 7. 周日可以是 0 或 7</li>
-</ul>
-<ol>
-<li>每天执行一次kinit<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 创建cron文件</span></span><br><span class="line">cat &gt; kinit.cron &lt;&lt;EOF</span><br><span class="line"><span class="meta">#</span><span class="bash"> kinit 定时任务</span></span><br><span class="line">* 10 * * * kinit</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置cron任务制定用户执行</span></span><br><span class="line">sudo crontab -u ansike kinit.cron</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/crontab/" data-id="clmmsn16f005jfox0ajgeaxq2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -690,7 +688,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
     </div>
   </div>
 
@@ -701,6 +699,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
         
           <li>
             <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
@@ -718,10 +720,6 @@
             <a href="/blog/programming/%E7%BC%96%E7%A8%8B/python/learn/chapter-14-module/">模块和包</a>
           </li>
         
-          <li>
-            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/python/learn/chapter-11-bug/">函数</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -734,7 +732,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2023 ask<br>
+      &copy; 2024 ask<br>
       <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
     </div>
   </div>
