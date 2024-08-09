@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记录一些平时点滴">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ASK&#39;s Blog">
+<meta property="og:url" content="https://ansike.github.io/blog/page/5/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="记录一些平时点滴">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="ask">
+<meta property="article:tag" content=" ansike">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-编程/web3/区块链技术与应用/12-BTC-引发的思考" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/12-BTC-%E5%BC%95%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83/" class="article-date">
+  <time datetime="2023-01-01T08:07:04.000Z" itemprop="datePublished">2023-01-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/12-BTC-%E5%BC%95%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83/">BTC 引发的思考</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<h3 id="hash-指针"><a href="#hash-指针" class="headerlink" title="hash 指针"></a>hash 指针</h3><p>指针保存的是本地内存的地址，只在本地内存上才有意义，发布到其他计算机上就没有意义了。那么在发布区块的时候hash指针时怎么通过网络进行传输的呢？<br>其实是只有hash，没有指针，说指针只是形象的说法。</p>
+<p>全节点通过存储key，value存储所有的区块，查找区块就是通过查找levelDB查找hash值对应的区块。</p>
+<h3 id="区块恋"><a href="#区块恋" class="headerlink" title="区块恋"></a>区块恋</h3><p>多个人将私钥拆分成多个分别保管，丢失之后找回的概率也很小<br>2^256 &gt;&gt; 2^128 &gt;&gt; 2^64<br>而且也会增大UTXO的大小</p>
+<p>最好的办法还是多重签名 MUTILSIG</p>
+<h3 id="分布式共识"><a href="#分布式共识" class="headerlink" title="分布式共识"></a>分布式共识</h3><p>为什么比特币系统能够绕过分布式共识中的那些不可能的结论？<br>严格说BTC没有取得真正的共识：比如分叉。</p>
+<h3 id="BTC的稀缺性"><a href="#BTC的稀缺性" class="headerlink" title="BTC的稀缺性"></a>BTC的稀缺性</h3><p>冷启动问题：挖矿难度低，奖励较多。</p>
+<p>其实货币的总量固定是不适合作为货币的。</p>
+<h3 id="量子计算"><a href="#量子计算" class="headerlink" title="量子计算"></a>量子计算</h3><p>量子计算的超大算力是否会对BTC等加密货币的密码学基础产生影响？</p>
+<ol>
+<li>量子计算到应用还有很长的时间</li>
+<li>量子计算首先会冲击传统金融业，因为绝大多数的财富还在传统行业中</li>
+<li>加密和取hash时两个完全不同的操作，即使是量子计算机也无法完成逆取hash的过程。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/12-BTC-%E5%BC%95%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83/" data-id="clzmdspio00kyzwl1eigwhe0l" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/10-BTC-问答" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/10-BTC-%E9%97%AE%E7%AD%94/" class="article-date">
+  <time datetime="2022-12-31T10:02:02.000Z" itemprop="datePublished">2022-12-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/10-BTC-%E9%97%AE%E7%AD%94/">问答</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<h3 id="转账交易时接受着不在线怎么办？"><a href="#转账交易时接受着不在线怎么办？" class="headerlink" title="转账交易时接受着不在线怎么办？"></a>转账交易时接受着不在线怎么办？</h3><p>转账交易不需要接受着在线</p>
+<h3 id="转账交易中收款地址是这个节点之前从来没有听说过的，可能吗？"><a href="#转账交易中收款地址是这个节点之前从来没有听说过的，可能吗？" class="headerlink" title="转账交易中收款地址是这个节点之前从来没有听说过的，可能吗？"></a>转账交易中收款地址是这个节点之前从来没有听说过的，可能吗？</h3><p>可能的。账户的产生是用户在本地产生的公私钥对，不需要通知其他人。只有该地址之后收到钱的时候其他节点才知道该地址。</p>
+<h3 id="账户私钥丢失该怎么办？"><a href="#账户私钥丢失该怎么办？" class="headerlink" title="账户私钥丢失该怎么办？"></a>账户私钥丢失该怎么办？</h3><p>私钥丢失是完全的丢失，无法恢复。</p>
+<h3 id="私钥泄漏怎么办？"><a href="#私钥泄漏怎么办？" class="headerlink" title="私钥泄漏怎么办？"></a>私钥泄漏怎么办？</h3><p>尽快把账户上的钱转移走。</p>
+<h3 id="转账写错地址怎么办？"><a href="#转账写错地址怎么办？" class="headerlink" title="转账写错地址怎么办？"></a>转账写错地址怎么办？</h3><p>没有办法取消已发起的交易。即使地址是假的也没有办法取消。</p>
+<h3 id="如何防止别的矿工偷答案？"><a href="#如何防止别的矿工偷答案？" class="headerlink" title="如何防止别的矿工偷答案？"></a>如何防止别的矿工偷答案？</h3><p>因为coinbase tx中的收款地址是预先写入到区块中的，而想要修改首款地址而不改变区块的root hash是不可能的</p>
+<h3 id="交易费怎么知道该给哪个矿工？"><a href="#交易费怎么知道该给哪个矿工？" class="headerlink" title="交易费怎么知道该给哪个矿工？"></a>交易费怎么知道该给哪个矿工？</h3><p>事先不需要知道给哪个矿工，当前区块上包含的所有交易费（total inputs - total outputs）都属于矿工的</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/10-BTC-%E9%97%AE%E7%AD%94/" data-id="clzmdspil00jszwl14kesa70f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/9-BTC-分叉" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/9-BTC-%E5%88%86%E5%8F%89/" class="article-date">
+  <time datetime="2022-12-30T16:34:02.000Z" itemprop="datePublished">2022-12-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/9-BTC-%E5%88%86%E5%8F%89/">分叉</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<p>什么叫分叉？<br>由一条链变成多条链 </p>
+<ul>
+<li>state fork<ul>
+<li>forking attack 分叉攻击</li>
+<li>deliberate fork 故意做出的分叉</li>
+</ul>
+</li>
+<li>protocol fork 软件升级<ul>
+<li>hard fork</li>
+<li>soft fork</li>
+</ul>
+</li>
+</ul>
+<h3 id="什么是hard-fork"><a href="#什么是hard-fork" class="headerlink" title="什么是hard fork"></a>什么是hard fork</h3><p>区块数量=区块大小/每个交易的大小（1000,000/250 = 4000），所以一个区块大概能写4000个交易<br>4000/60*10 = 7 tx/sec 每秒7笔交易<br>所以为了缓解上述的问题，需要修改BTC的协议，增加 block size limit，假设 1M =&gt; 4M<br>hard fork后出现两条链，一条链是原来的1M大小的链，另外一条是4M大小的链。因为4M大小的链还能兼容之前1M的块，所以只要还有旧节点两条分叉会一直存在。</p>
+<p>现在的ETH其实就是由原来的一个区块链分出来的一条分叉，另外一条叫ETC。</p>
+<p><strong>分叉之后两条链上的交易是可以互相回放的，怎么避免？</strong><br>增加chain id，交易的时候携带chain id可以进行唯一标识</p>
+<h3 id="什么是soft-fork"><a href="#什么是soft-fork" class="headerlink" title="什么是soft fork"></a>什么是soft fork</h3><p>减少 block size limit，假设 1M =&gt; 0.5M</p>
+<p>这样在分叉之后旧节点挖出的区块不被新节点认可，但是新节点挖出的区块旧节点认可，那么在新节点算力占很大比例的时候会认为新节点构成的链是最长合法链，旧节点之后再挖出的区块都不会合入到区块链中，也就不会出现永久性分叉。</p>
+<p>hard fork和soft fork<br>分叉之后如果旧节点认为新节点是合法的，那么结果只会出现一条链，那就是软分叉。<br>系统中全部的节点更新了协议才不会出现分叉，系统中半数以上的节点更新了协议就不会出现分叉。</p>
+<p>soft fork 可能的几种情况</p>
+<ol>
+<li>扩展coinbase，extra nonce</li>
+<li>P2SH: Pay to Script Hash</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/9-BTC-%E5%88%86%E5%8F%89/" data-id="clzmdspip00ljzwl16edi13x1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/8-BTC-脚本" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/8-BTC-%E8%84%9A%E6%9C%AC/" class="article-date">
+  <time datetime="2022-12-30T16:34:02.000Z" itemprop="datePublished">2022-12-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/8-BTC-%E8%84%9A%E6%9C%AC/">脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<p>The BitCoin Scripting Language</p>
+<p>发布交易不需要记账权</p>
+<p>基于stack的脚本语言</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/8-BTC-%E8%84%9A%E6%9C%AC/" data-id="clzmdspiq00lqzwl165ia6cby" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/6-BTC-挖矿难度" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/6-BTC-%E6%8C%96%E7%9F%BF%E9%9A%BE%E5%BA%A6/" class="article-date">
+  <time datetime="2022-12-30T12:00:23.000Z" itemprop="datePublished">2022-12-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/6-BTC-%E6%8C%96%E7%9F%BF%E9%9A%BE%E5%BA%A6/">BTC-挖矿难度</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<p>H(block header) &lt;= target<br>target 越小，难度越高</p>
+<p>算法是SHA-256 就是256位二进制位</p>
+<p>difficulty = difficulty_1_target/target (difficulty_1_target位挖矿难度等于1时对应的目标阈值，挖矿难度最小就是1)</p>
+<h3 id="为什么要调整挖矿难度？"><a href="#为什么要调整挖矿难度？" class="headerlink" title="为什么要调整挖矿难度？"></a>为什么要调整挖矿难度？</h3><p>系统总算力越来越强，挖矿速度越来越快，挖矿时间越来越短。调整挖矿难度就是为了确保挖矿的时间能按照差不多固定的时间来</p>
+<p>出块时间时间越来越短的话分叉的可能就越来越多，分叉越多算力越分散，分叉过多对系统的安全性没有任何的保证。BTC协议假设大部分算力掌握在诚实的矿工手中的，系统的总算力越强，系统就越安全。<br>理论上只要有人有51%的算力就可以发动<code>51% attack</code><br>分叉越多的时候，算力就回被分散，此时不需要51%的算力就可能攻击成功。比如现在有10个分叉，那系统现在的算力现在被分散成十份，每个分叉分摊10%的算力，此时如果有一个恶意节点有超过10%的算力就很有可能构造出最长合法链。</p>
+<p>出块时间变短的好处：交易能较快的被写入区块中。</p>
+<p>出块时间：BTC 10分钟， ETH 15s</p>
+<h3 id="怎么调整挖矿难度？"><a href="#怎么调整挖矿难度？" class="headerlink" title="怎么调整挖矿难度？"></a>怎么调整挖矿难度？</h3><p>BTC中规定每隔2016区块（2016<em>10/(24</em>60) = 14天）要调整挖矿难度<br>调整公式：target = target * (actual time / expected time)<br>实际花费的时间大于预期时间，会调高target降低挖矿难度，反之亦然。</p>
+<p><strong>恶意节点不调整挖矿难度怎么办？</strong><br>每个区块中有一个nBits字段是target编码的版本标识当前的挖矿难度，如果恶意节点不调整，诚实的矿公是不会确认的。</p>
+<h3 id="BTC的数量是一定的，每个区块的限制是1M，那么BTC的总容量也就是固定的，那BTC有发展空间吗？"><a href="#BTC的数量是一定的，每个区块的限制是1M，那么BTC的总容量也就是固定的，那BTC有发展空间吗？" class="headerlink" title="BTC的数量是一定的，每个区块的限制是1M，那么BTC的总容量也就是固定的，那BTC有发展空间吗？"></a>BTC的数量是一定的，每个区块的限制是1M，那么BTC的总容量也就是固定的，那BTC有发展空间吗？</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/6-BTC-%E6%8C%96%E7%9F%BF%E9%9A%BE%E5%BA%A6/" data-id="clzmdspip00lczwl19gch610z" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/7-BTC-挖矿" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/7-BTC-%E6%8C%96%E7%9F%BF/" class="article-date">
+  <time datetime="2022-12-30T12:00:23.000Z" itemprop="datePublished">2022-12-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/7-BTC-%E6%8C%96%E7%9F%BF/">BTC-挖矿</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<h3 id="全节点和轻节点的职责"><a href="#全节点和轻节点的职责" class="headerlink" title="全节点和轻节点的职责"></a>全节点和轻节点的职责</h3><ul>
+<li>全节点<ul>
+<li>一直在线</li>
+<li>在本地的硬盘上维护完整的区块链信息</li>
+<li>监听比特币网络上的交易信息，验证每个交易的合法性</li>
+<li>决定哪些交易会被打包到区块里</li>
+<li>监听别的矿工挖出来的区块，验证其合法性</li>
+<li>挖矿<ul>
+<li>决定沿着哪条链继续挖下去？</li>
+<li>出现等长链时选择哪个分叉</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>轻节点<ul>
+<li>不是一直在线</li>
+<li>不用保存整个区块链，只要保存每个区块的块头</li>
+<li>不用保存全部交易，只保存于自己相关的交易</li>
+<li>无法校验大多数交易的合法性，只能检验与自己相关的那些交易的合法性。</li>
+<li>无法检测网上发布的区块的正确性</li>
+<li>可以验证挖矿的难度</li>
+<li>只能检测哪个时最长链，不知道哪个时最长合法链。</li>
+</ul>
+</li>
+</ul>
+<h3 id="挖矿中的注意事项"><a href="#挖矿中的注意事项" class="headerlink" title="挖矿中的注意事项"></a>挖矿中的注意事项</h3><p>挖矿的过程中发现别人已经发现别人已经挖出了新的区块且在最长合法链上，此时应该立即停止当前的挖矿，构建新的区块开始挖。这样看起来是比较可惜的，因为挖矿的性质是无记忆性（memoryless或progress free），不论前边挖了多长时间，新组装区块和现在接着去挖成功率是一样的。<br>即使挖到了合法的区块，发布到区块链上也不一定就胜利了。有可能发布的区块没有成为最长合法链，存在一些race condition。</p>
+<h3 id="BTC怎么保证安全性的？"><a href="#BTC怎么保证安全性的？" class="headerlink" title="BTC怎么保证安全性的？"></a>BTC怎么保证安全性的？</h3><ol>
+<li>密码学保证</li>
+<li>共识机制保证<br>二者必须是一起保证的</li>
+</ol>
+<h3 id="挖矿的设备"><a href="#挖矿的设备" class="headerlink" title="挖矿的设备"></a>挖矿的设备</h3><p>最早的是CPU挖矿，后来发展到了GPU挖矿，现在用到了ASIC芯片。<br>比特币挖矿主要用到了整数计算，基本用不了多少内存和硬盘，所以对于CPU挖矿和GPU挖矿来说都是效率很低的，ASIC是专门为挖矿设计生产的芯片。</p>
+<h3 id="矿池"><a href="#矿池" class="headerlink" title="矿池"></a>矿池</h3><p>矿池就是把很多的矿工聚集到一起<br>两个身份：</p>
+<ul>
+<li>矿主 负责全节点的其他职责</li>
+<li>矿工 负责计算hash值</li>
+</ul>
+<p>怎么计算分红：工作量证明<br>矿主自己提出一个降低挖矿难度的nonce值，然后交给矿工去进行挖矿，矿工挖到的区块叫almost valid block。这些share就是矿工的工作量证明。这些计算出的结果仅仅做矿工的工作量证明用作后续出块的分红。</p>
+<p>矿工有没有办法偷偷出块奖励？<br>只要矿工是按照矿主交给他的任务，那么备选区块中的收益地址就是矿主的地址，矿工是没有办法修改的。但如果他刚开始就是自己构造区块去挖，那么他的share矿主是不认的，也就相当于是自己在挖矿。</p>
+<p>GHash矿池曾经超过了总算力的50%，造成了一定的恐慌，后便GHash主动缩减了自己的算力，当然也有可能是拆分了自己的矿池。</p>
+<h3 id="算力很大之后的危害"><a href="#算力很大之后的危害" class="headerlink" title="算力很大之后的危害"></a>算力很大之后的危害</h3><ol>
+<li>forking attack分叉攻击</li>
+<li>Boycott 账户封杀，可以故意不打包某个账户</li>
+<li>盗币是不可能的</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/7-BTC-%E6%8C%96%E7%9F%BF/" data-id="clzmdspiq00lmzwl1cinb8jgr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/网络相关/跨域" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%B7%A8%E5%9F%9F/" class="article-date">
+  <time datetime="2022-12-29T07:14:11.000Z" itemprop="datePublished">2022-12-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%B7%A8%E5%9F%9F/">跨域</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在浏览器网络请求中经常会遇到跨域的问题，本周针对性的看一下跨域中遇到的概念和问题</p>
+<h3 id="什么是跨域？"><a href="#什么是跨域？" class="headerlink" title="什么是跨域？"></a>什么是跨域？</h3><p>请求所在的地址和请求的地址只要存在域名，协议，端口任意一个不同都叫跨域。</p>
+<h3 id="为啥需要跨域这个限制？"><a href="#为啥需要跨域这个限制？" class="headerlink" title="为啥需要跨域这个限制？"></a>为啥需要跨域这个限制？</h3><p>跨域问题是只存在浏览器侧的问题，服务端不存在跨域问题。<br>浏览器增加跨域限制主要是为了安全问题，限制只能自己域的服务访问同域的资源。</p>
+<h3 id="模拟跨域的动作？"><a href="#模拟跨域的动作？" class="headerlink" title="模拟跨域的动作？"></a>模拟跨域的动作？</h3><p>创建两个服务，模拟跨域问题</p>
+<ul>
+<li>服务A：<a href="http://localhost:4001" target="_blank" rel="noopener">http://localhost:4001</a></li>
+<li>服务B：<a href="http://localhost:4002" target="_blank" rel="noopener">http://localhost:4002</a></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 服务A server.js</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">const</span> app = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (req.url === <span class="string">"/"</span>) &#123;</span><br><span class="line">    res.end(fs.readFileSync(<span class="string">"./index.html"</span>));</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  res.end(<span class="string">"server1"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(<span class="number">4001</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 服务A index.html --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    fetch(<span class="string">"http://localhost:4002/"</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(res);</span></span><br><span class="line">    &#125;);</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 服务B server.js</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"><span class="keyword">const</span> app = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.end(<span class="string">"server2"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(<span class="number">4002</span>);</span><br></pre></td></tr></table></figure>
+
+<p>我们创建的服务A提供了静态页面的服务，在静态页面中会发起一个向服务B的请求，因为二者的端口不同所以发起的请求是跨域的，请求不会正常处理而是在浏览器的控制台报错 <div style="color: red">Access to fetch at ‘<a href="http://localhost:4002/&#39;" target="_blank" rel="noopener">http://localhost:4002/&#39;</a> from origin ‘<a href="http://localhost:4001&#39;">http://localhost:4001&#39;</a> has been blocked by CORS policy: No ‘Access-Control-Allow-Origin’ header is present on the requested resource. If an opaque response serves your needs, set the request’s mode to ‘no-cors’ to fetch the resource with CORS disabled.</div></p>
+<p>从报错信息有两点信息可以获取到</p>
+<ol>
+<li><p>No ‘Access-Control-Allow-Origin’ header is present on the requested resource 是说请求到的资源header上没有<code>Access-Control-Allow-Origin</code></p>
+<p>   那我们按照他提示的去做，首先设置header，因为<code>on the requested resource</code>的header所以是对服务B的返回增加这个header头</p>
+   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 服务B server.js</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"><span class="keyword">const</span> app = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line"> res.setHeader(</span><br><span class="line">   <span class="string">"Access-Control-Allow-Origin"</span>,</span><br><span class="line">   <span class="string">"http://localhost:4001"</span> <span class="comment">// 为什么值是这个下文会解释</span></span><br><span class="line"> );</span><br><span class="line"> res.end(<span class="string">"server2"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(<span class="number">4002</span>);</span><br></pre></td></tr></table></figure>
+<p>   此时我们再去请求就已经不会报错了，如果去看一下浏览器的response的话在header里可以看到 <code>Access-Control-Allow-Origin: http://localhost:4001</code></p>
+</li>
+<li><p>If an opaque response serves your needs, set the request’s mode to ‘no-cors’ to fetch the resource with CORS disabled. 加了前提：如果不透明的响应也能满足诉求，那么客户端可以设置请求模式为<code>no-cors</code>去禁止cors</p>
+<p>   其次我们把上文做的服务B的修改回退试一下第二个方案：客户端设置请求模式为<code>no-cors</code></p>
+   <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 服务A index.html --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    fetch(<span class="string">"http://localhost:4002/"</span>, &#123;</span></span><br><span class="line"><span class="actionscript">      mode: <span class="string">"no-cors"</span></span></span><br><span class="line"><span class="javascript">    &#125;).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(res);</span></span><br><span class="line">    &#125;);</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>   这时我们刷新页面在看也不会报错了，数据也能正常返回。到此为止两个解决方案都能实现跨域请求数据了，那么二者之间有什么区别呢，我们应该怎么抉择呢？</p>
+</li>
+</ol>
+<h3 id="Access-Control-Allow-Origin是什么意思，有什么能力？"><a href="#Access-Control-Allow-Origin是什么意思，有什么能力？" class="headerlink" title="Access-Control-Allow-Origin是什么意思，有什么能力？"></a>Access-Control-Allow-Origin是什么意思，有什么能力？</h3><p>Access-Control-Allow-Origin 是访问控制允许的域。这个标识出现在http的header头中，用来告知浏览器允许访问的origin有哪些。可以设置<em>，也可以设置单独的域。设置</em>还会有一些别的问题我们本次不讨论。<br>在上文的设置<code>res.setHeader(&quot;Access-Control-Allow-Origin&quot;,&quot;http://localhost:4001&quot;);</code>就是服务端告诉客户端允许4001这个服务访问4002的资源。那服务端都主动允许了，浏览器自然不会再拦截。</p>
+<h3 id="请求模式是什么，no-cors做了什么事儿？"><a href="#请求模式是什么，no-cors做了什么事儿？" class="headerlink" title="请求模式是什么，no-cors做了什么事儿？"></a>请求模式是什么，no-cors做了什么事儿？</h3><p>请求模式描确定跨域请求是否能得到有效的响应，以及响应的哪些属性是可读的。</p>
+<ul>
+<li>same-origin 必须是同源请求</li>
+<li>no-cors 允许跨域请求，但是无法拿到返回的数据 body是null（看起来没有什么意义）</li>
+<li>cors 允许跨域，一般会先发一个预检请求</li>
+<li>navigate 还没有使用过，一般是导航使用</li>
+</ul>
+<p>no-cors 就是告诉服务器不需要cors的相应头，我可以隐藏服务来请求，这样js中收到的body也就是null了。<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Request/mode" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/API/Request/mode</a></p>
+<h3 id="跨域请求cookie相关"><a href="#跨域请求cookie相关" class="headerlink" title="跨域请求cookie相关"></a>跨域请求cookie相关</h3><p>以上就把跨域的基本动作走通了，但在实际的开发中还需要携带cookie，这个在跨域请求中也是需要注</p>
+<p>我们先给服务B增加一个接口给浏览器设置cookie，调用该接口时服务会给client的response header中增加一个set-cookie的字段，表示给浏览器种的cookie。对于同域的请求浏览器会自动把cookie加到request header中的，但是跨域请求默认时没有的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 服务B server.js</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"><span class="keyword">const</span> app = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.setHeader(</span><br><span class="line">    <span class="string">"Access-Control-Allow-Origin"</span>,</span><br><span class="line">    <span class="string">"http://localhost:4001"</span> <span class="comment">// 为什么值是这个下文会解释</span></span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">if</span>(req.url === <span class="string">"/api/cookie"</span>)&#123;</span><br><span class="line">    res.setHeader(<span class="string">'set-cookie'</span>, <span class="string">'a=1; Path=/; HttpOnly'</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  res.end(<span class="string">"server2"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(<span class="number">4002</span>);</span><br></pre></td></tr></table></figure>
+
+<p>基于以上对服务B的修改，我们先查看一下inspect-&gt;应用-&gt;cookie此时还没有数据。<br>调用完 <code>http://localhost:4002/api/cookie</code> 之后，上述路径下就出现了a这个cookie，且之后的所有请求的request header都有了cookie字段且内容包含了a=1。<br>此时我们再用A服务跨域请求服务B，此时request header中没有携带cookie。<br>我们在看fetch的参数重有一个参数<code>credentials</code></p>
+<ul>
+<li>same-origin 必须同域请求</li>
+<li>include 携带cookie</li>
+<li>omit 不携带cookie<br>我们此时设置<code>credentials = &quot;include&quot;</code>，发起请求时request header中已经有了<code>Cookie: a=1</code>，但请求会失败，原因还是CORS问题<div style="color:red"><br>Access to fetch at ‘<a href="http://localhost:4002/&#39;" target="_blank" rel="noopener">http://localhost:4002/&#39;</a> from origin ‘<a href="http://localhost:4001&#39;">http://localhost:4001&#39;</a> has been blocked by CORS policy: The value of the ‘Access-Control-Allow-Credentials’ header in the response is ‘’ which must be ‘true’ when the request’s credentials mode is ‘include’.</div>
+告诉我们需要设置B服务的`Access-Control-Allow-Credentials`
+
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 服务B server.js</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"><span class="keyword">const</span> app = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.setHeader(</span><br><span class="line">    <span class="string">"Access-Control-Allow-Origin"</span>,</span><br><span class="line">    <span class="string">"http://localhost:4001"</span> <span class="comment">// 为什么值是这个下文会解释</span></span><br><span class="line">  );</span><br><span class="line">  res.setHeader(<span class="string">"Access-Control-Allow-Credentials"</span>, <span class="string">"true"</span>);</span><br><span class="line">  <span class="keyword">if</span>(req.url === <span class="string">"/api/cookie"</span>)&#123;</span><br><span class="line">    res.setHeader(<span class="string">'set-cookie'</span>, <span class="string">'a=1; Path=/; HttpOnly'</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  res.end(<span class="string">"server2"</span>+req.headers.cookie);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(<span class="number">4002</span>);</span><br></pre></td></tr></table></figure>
+<p>之后再调用发现已经可以正确的拿到数据，并且服务B也拿到了对应的cookie。</p>
+<h3 id="跨域的options请求"><a href="#跨域的options请求" class="headerlink" title="跨域的options请求"></a>跨域的options请求</h3><p>在跨域且请求为复杂请求时浏览器会首先发起options请求，询问服务器的状态判断允许的方法，如果不允许则会报错。</p>
+<p><strong>简单请求，大致为以下随具体的case看待：</strong></p>
+<ul>
+<li>http方法是以下之一：<ul>
+<li>GET</li>
+<li>HEAD</li>
+<li>POST</li>
+</ul>
+</li>
+<li>HTTP的头信息不超出以下几种字段：<ul>
+<li>Accept</li>
+<li>Accept-Language</li>
+<li>Content-Language</li>
+<li>Content-Type （需要注意额外的限制）</li>
+<li>DPR</li>
+<li>Downlink</li>
+<li>Save-Data</li>
+<li>Viewport-Width</li>
+<li>Width</li>
+</ul>
+</li>
+<li>Content-Type 的值仅限于下列三者之一：<ul>
+<li>text/plain</li>
+<li>multipart/form-data</li>
+<li>application/x-www-form-urlencoded</li>
+</ul>
+</li>
+</ul>
+<p>除了简单请求都是复杂请求，比如我们常用的<code>Content-Type:&quot;application/json&quot;</code>就是常见的一个复杂请求，在fetch中增加该header会报以下的错<div style="color:red">Access to fetch at ‘<a href="http://localhost:4002/&#39;" target="_blank" rel="noopener">http://localhost:4002/&#39;</a> from origin ‘<a href="http://localhost:4001&#39;">http://localhost:4001&#39;</a> has been blocked by CORS policy: Request header field content-type is not allowed by Access-Control-Allow-Headers in preflight response.</p>
+</div>
+
+<p>此时需要在服务B中增加<code>res.setHeader(&quot;Access-Control-Allow-Headers&quot;, &quot;content-type&quot;);</code>即可解决</p>
+<p>如果我们把fetch的请求方法改为<code>DELETE</code>，也会发出options请求，解决方法是：<code>res.setHeader(&quot;Access-Control-Allow-Methods&quot;, &quot;DELETE&quot;);</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 服务A index.html --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    fetch(<span class="string">"http://localhost:4002/"</span>, &#123;</span></span><br><span class="line"><span class="actionscript">      method: <span class="string">'DELETE'</span>,</span></span><br><span class="line"><span class="actionscript">      credentials: <span class="string">"include"</span>,</span></span><br><span class="line"><span class="actionscript">      <span class="comment">// headers: &#123;</span></span></span><br><span class="line"><span class="actionscript">      <span class="comment">//   "content-type": "application/json",</span></span></span><br><span class="line"><span class="actionscript">      <span class="comment">// &#125;,</span></span></span><br><span class="line"><span class="javascript">    &#125;).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(res);</span></span><br><span class="line">    &#125;);</span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  res.setHeader(</span><br><span class="line">    <span class="string">"Access-Control-Allow-Origin"</span>,</span><br><span class="line">    <span class="string">"http://localhost:4001"</span></span><br><span class="line">  );</span><br><span class="line">  res.setHeader(<span class="string">"Access-Control-Allow-Methods"</span>, <span class="string">"DELETE"</span>);</span><br><span class="line">  res.setHeader(<span class="string">"Access-Control-Allow-Headers"</span>, <span class="string">"content-type"</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(req.headers.cookie)</span><br><span class="line">  res.setHeader(<span class="string">"Access-Control-Allow-Credentials"</span>, <span class="string">"true"</span>);</span><br><span class="line">  <span class="keyword">if</span> (req.url === <span class="string">"/api/cookie"</span>) &#123;</span><br><span class="line">    res.setHeader(<span class="string">'set-cookie'</span>, <span class="string">'a=1; Path=/; HttpOnly; SameSite=lax'</span>);</span><br><span class="line">    res.end(<span class="string">"set cookie"</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  res.end(<span class="string">"server2"</span>+req.headers.cookie);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">4002</span>);</span><br></pre></td></tr></table></figure>
+
+<p>以上的所有代码都可以在该地址找到 <a href="https://github.com/ansike/cros-site" target="_blank" rel="noopener">https://github.com/ansike/cros-site</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%B7%A8%E5%9F%9F/" data-id="clzmdspfv009czwl19s0w1im0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/5-BTC-比特币网络工作原理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/5-BTC-%E6%AF%94%E7%89%B9%E5%B8%81%E7%BD%91%E7%BB%9C%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/" class="article-date">
+  <time datetime="2022-12-26T15:14:37.000Z" itemprop="datePublished">2022-12-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/5-BTC-%E6%AF%94%E7%89%B9%E5%B8%81%E7%BD%91%E7%BB%9C%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/">BTC-比特币网络工作原理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<p>应用层 application layer：Bitcoin Block Chain<br>网络层 network layer：P2P overlay network</p>
+<p>比特币网络的设计原则：simple, robust but not efficient.</p>
+<p>消息的传输时flooding的方式传播给所有的节点，每个区块的大小上限是1M，大概需要几十秒的时间才能传递到绝大多数的节点。</p>
+<p>每个节点维护一个等待上链的交易的集合<br>该节点监听到A-&gt;B的转账交易，就将其写入集合中。<br>这时如果有一个A-&gt;C的double spending，该节点是不会再写入的。<br>如果该节点监听到区块中有A-&gt;B的交易就会将集合中的这笔交易删掉。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/5-BTC-%E6%AF%94%E7%89%B9%E5%B8%81%E7%BD%91%E7%BB%9C%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/" data-id="clzmdspip00lfzwl1daywfz2i" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/4-BTC-比特币系统的实现" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/4-BTC-%E6%AF%94%E7%89%B9%E5%B8%81%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0/" class="article-date">
+  <time datetime="2022-12-26T09:56:07.000Z" itemprop="datePublished">2022-12-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/4-BTC-%E6%AF%94%E7%89%B9%E5%B8%81%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0/">BTC-比特币系统的实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<h3 id="基本名词"><a href="#基本名词" class="headerlink" title="基本名词"></a>基本名词</h3><p>区块链：去中心化账本<br>BTC：基于交易的账本模式（transaction-based ledger）<br>ETH：基于账户的账本模式（account-based ledger）<br>UTXO（unspent transaction output）未花费交易输出，由全节点维护。在BTC中没有一个记录所有账户余额的账本。怎么确定一个地址现在的余额呢？我们需要回顾所有的交易，并且找到所有寄给你的btc把他们都加起来。</p>
+<h3 id="交易中的输入和输出"><a href="#交易中的输入和输出" class="headerlink" title="交易中的输入和输出"></a>交易中的输入和输出</h3><p>如A给C转了3BTC，B给C转了2个BTC，这总和为5的BTC就是UTXO。现在C拥有了两笔UTXO，可以当作未来转给别人的input。</p>
+<p>如果现在C想把这5BTC转给D，矿工需要验证有没有使用过这笔UTXO，如果已经花过了就会被认为是不合法的交易。这就是BTC组织double spending的方法。</p>
+<h3 id="挖矿过程的解释"><a href="#挖矿过程的解释" class="headerlink" title="挖矿过程的解释"></a>挖矿过程的解释</h3><p>每次挖矿的过程都是一个Bernoulli trail（an experiment with binary output）<br>每次试nonce求解构成了Bernoulli process（a sequence of independent Bernoulli trait）（无记忆性）</p>
+<ol>
+<li><p>恶意的有记账权的节点写入一个伪造交易的可行性？<br>因为一个交易必须要转账方的私钥去生成签名，私钥无法拿到也就无法伪造别人的转账记录。</p>
+</li>
+<li><p>恶意的有记账权的节点发起了double spending attack怎么避免？<br>A先给B转了10BTC，记录到了一个最近的区块中。A私钥的拥有者此时挖出了新的区块，在新的区块中写了一个新的交易将10BTC转给了自己，此时如果新挖出的区块如果能并入到最长合法链那么该攻击就会生效。<br>解决方法：B在收到转账成功之后多等几个区块进行确认，也就是等到当前记账的区块后续增加几个新的区块之后再向A确认收到转账。BTC默认是six confirmation。<br>原因：block chain 是irrevocable ledger的，但是这个这种不可篡改是概率上的，刚写入的区块是容易被篡改的。</p>
+</li>
+<li><p>恶意的节点就是不记账怎么办？</p>
+</li>
+</ol>
+<p>没有关系，可以等到下一个区块进行记账。BTC一个区块中存储的交易数量为1M。</p>
+<p>selfish mining： 自己藏一堆块不发布，攒一段时间之后进行发布。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/4-BTC-%E6%AF%94%E7%89%B9%E5%B8%81%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0/" data-id="clzmdspiq00lxzwl1d89kfvyj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/3-BTC-协议" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/3-BTC-%E5%8D%8F%E8%AE%AE/" class="article-date">
+  <time datetime="2022-12-26T09:00:54.000Z" itemprop="datePublished">2022-12-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/3-BTC-%E5%8D%8F%E8%AE%AE/">BTC-协议</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<h3 id="央行如何发行数字货币？"><a href="#央行如何发行数字货币？" class="headerlink" title="央行如何发行数字货币？"></a>央行如何发行数字货币？</h3><ol>
+<li>数字货币设置唯一标识</li>
+<li>记录一下货币的持有人，避免double spending attack</li>
+</ol>
+<p>数字货币和纸质货币的区别：数字货币是可以复制的。<strong>因为数字货币本质是文件</strong>，付款方可以把数字货币复制多份。</p>
+<p>但是这样看来还是中心化的系统，去中心化的系统怎么实现呢，以下就是本节讨论的问题。</p>
+<h3 id="数字货币发行需要解决两个问题："><a href="#数字货币发行需要解决两个问题：" class="headerlink" title="数字货币发行需要解决两个问题："></a>数字货币发行需要解决两个问题：</h3><ol>
+<li>谁有权利发行。</li>
+<li>怎么验证交易的有效性。避免double spending attack</li>
+</ol>
+<h3 id="区块的拥有者"><a href="#区块的拥有者" class="headerlink" title="区块的拥有者"></a>区块的拥有者</h3><p>block reward 是唯一产生新币的途径</p>
+<p>每21万个区块减少一半的BTC，现在挖到一个区块能得倒12.5个BTC（2022年）<br>50 BTC =&gt; 25 BTC =&gt; 12.5BTC</p>
+<h3 id="验证交易的有效性"><a href="#验证交易的有效性" class="headerlink" title="验证交易的有效性"></a>验证交易的有效性</h3><p>使用区块链（block chain）。<br>block chain上有两类hash point</p>
+<ul>
+<li>block之间的指针</li>
+<li>币来源的指针</li>
+</ul>
+<p>发起交易时A向B转账有几个问题</p>
+<ol>
+<li>A需要知道B的什么信息？ 需要知道B的地址</li>
+<li>B需要知道A的什么信息？ 需要知道A的公钥，用作转账之后的验证。</li>
+<li>如何验证是A发起的交易？ B可以根据币的来源指向A确认。</li>
+<li>如何将交易信息写入区块链？ 账本的内容需要取得分布式共识。</li>
+</ol>
+<blockquote>
+<p>CAP 定理：一致性（Consistency），可用性（Availability），分区容错性（Partition tolerance）。三个要素同时最多能实现两点，不可能同时满足。</p>
+</blockquote>
+<p>consensus in bitcoin 比特币协议共识：power 工作量证明<br>比特币体系的解决方案：算力投票制度</p>
+<p>出现分叉攻击时 block chain认为最长的链是合法的链<br>同时挖到矿出现两个等长区块时，接受哪个？<br>维持一段时间看哪个区块有后续的区块，即说明接受了哪个。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/3-BTC-%E5%8D%8F%E8%AE%AE/" data-id="clzmdspip00l8zwl14ekef4fz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/blog/page/4/">&lt; 上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/3/">3</a><a class="page-number" href="/blog/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/blog/page/6/">6</a><a class="page-number" href="/blog/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/21/">21</a><a class="extend next" rel="next" href="/blog/page/6/">下一页 &gt;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>

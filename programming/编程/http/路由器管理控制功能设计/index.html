@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>路由器管理控制功能设计 | ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="软件及知识准备实验: 通过一个路由器, 将 4 台主机组建局域网 正文软件及知识准备  virtualbox 6.1.30 r148432 (Qt5.6.3)四台虚拟机 CentOS-8.5.2111-x86_64-boot.iso虚拟机网络模式  桥接 宿主机和虚拟机通过虚拟交换机进行桥接, 处于同一个网段. 如: 给宿主机所在环境的其他PC提供服务 http, ssh, ftp NAT (ne">
+<meta property="og:type" content="article">
+<meta property="og:title" content="路由器管理控制功能设计">
+<meta property="og:url" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/http/%E8%B7%AF%E7%94%B1%E5%99%A8%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="软件及知识准备实验: 通过一个路由器, 将 4 台主机组建局域网 正文软件及知识准备  virtualbox 6.1.30 r148432 (Qt5.6.3)四台虚拟机 CentOS-8.5.2111-x86_64-boot.iso虚拟机网络模式  桥接 宿主机和虚拟机通过虚拟交换机进行桥接, 处于同一个网段. 如: 给宿主机所在环境的其他PC提供服务 http, ssh, ftp NAT (ne">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/http/%E8%B7%AF%E7%94%B1%E5%99%A8%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1/20220103-225526.png">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/http/%E8%B7%AF%E7%94%B1%E5%99%A8%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1/20220103-225519.png">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/http/%E8%B7%AF%E7%94%B1%E5%99%A8%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1/20220103-225442.png">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/http/%E8%B7%AF%E7%94%B1%E5%99%A8%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1/20220103-230912.png">
+<meta property="article:published_time" content="2022-01-03T15:38:39.000Z">
+<meta property="article:modified_time" content="2024-08-08T11:42:01.063Z">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="路由器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/http/%E8%B7%AF%E7%94%B1%E5%99%A8%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1/20220103-225526.png">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-编程/http/路由器管理控制功能设计" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/http/%E8%B7%AF%E7%94%B1%E5%99%A8%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1/" class="article-date">
+  <time datetime="2022-01-03T15:38:39.000Z" itemprop="datePublished">2022-01-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      路由器管理控制功能设计
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="软件及知识准备"><a href="#软件及知识准备" class="headerlink" title="软件及知识准备"></a><a href="#软件及知识准备">软件及知识准备</a></h3><h3 id="实验-通过一个路由器-将-4-台主机组建局域网"><a href="#实验-通过一个路由器-将-4-台主机组建局域网" class="headerlink" title="实验: 通过一个路由器, 将 4 台主机组建局域网"></a><a href="#实验">实验: 通过一个路由器, 将 4 台主机组建局域网</a></h3><hr>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="软件及知识准备">软件及知识准备</h3>
+
+<p>virtualbox 6.1.30 r148432 (Qt5.6.3)<br>四台虚拟机 CentOS-8.5.2111-x86_64-boot.iso<br>虚拟机网络模式</p>
+<ul>
+<li>桥接 宿主机和虚拟机通过虚拟交换机进行桥接, 处于同一个网段. 如: 给宿主机所在环境的其他PC提供服务 http, ssh, ftp</li>
+<li>NAT (network address transfer) 网络地址转换, 通过宿主机所在的网络来访问公网. 宿主机和虚拟机在不同的网络. 如: 仅使用外部网络资源, 不对外提供服务, 配置简单</li>
+<li>Host-Only 仅主机模式下虚拟机只能访问主机, 不能连接公网. 建立与外界隔离的网络环境</li>
+</ul>
+<p>所以四台虚拟机网卡设置: host only 虚拟机之间可互相访问</p>
+<p>IP = 网络识别号 + 主机识别号</p>
+<p>局域网中的 IP<br>网络号: 网段中第一个地址 如 192.168.1.0<br>广播地址: 网段中最后一个地址 如 192.168.1.255<br>主机地址: 网段内抛掉网络号和广播地址 192.168.1.1 - 192.168.1.254 254 个地址</p>
+<p>Netmask<br>作用: 将 IP 地址划分为网络地址和主机地址</p>
+<p>Gateway<br>作用: 网络连接到另一网络的关口</p>
+<p>新增网卡 enp0s8<br>vim /ect/sysconfig/network-scripts/ifcfg-enp0s8<br>修改<br>BOOTPROTO=dhcp 改为 static<br>IPADDR=192.168.1.2 改为自己需要的即可<br>PREFIX=24</p>
+<p>启用enp0s8<br>ifup enp0s8<br>停用enp0s8<br>ifdown enp0s8</p>
+<h3 id="实验">实验: 通过一个路由器, 将 4 台主机组建局域网</h3>
+107网段<br />
+<ol>H1 192.168.107.1</ol>
+<ol>H1 192.168.107.2</ol>
+56网段
+<ol>H3 192.168.56.3</ol>
+<ol>H3 192.168.56.4</ol>
+路由器R 两个 host only 网卡, 联通两个网络
+<ol>192.168.107.124 与 H1,H2 联通</ol>
+<ol>192.168.56.124 与 H3,H4 联通</ol>
+
+<ol>
+<li>设置网卡静态 IP</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/sysconfig/network-scripts/enp0s8</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改BOOTPROTO为static, 输入静态IPADDR, 如下图[路由表]</span></span><br><span class="line">ifup enp0s8</span><br></pre></td></tr></table></figure>
+
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/http/%E8%B7%AF%E7%94%B1%E5%99%A8%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1/20220103-225526.png" class="" title="路由表">
+
+<ol start="2">
+<li>设置路由器的静态 IP, 开启路由 R,</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 开启路由转发功能</span></span><br><span class="line">echo 1 &gt;/proc/sys/net/ipv4/ip_forward</span><br></pre></td></tr></table></figure>
+
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/http/%E8%B7%AF%E7%94%B1%E5%99%A8%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1/20220103-225519.png" class="" title="ip addr">
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/http/%E8%B7%AF%E7%94%B1%E5%99%A8%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1/20220103-225442.png" class="" title="路由表">
+
+<ol start="3">
+<li>修改主机 H1-H4 的默认网关</li>
+</ol>
+<ul>
+<li>H1 和 H2 默认网关为 192.168.107.124</li>
+<li>H3 和 H4 默认网关为 192.168.56.124</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 产看路由表</span></span><br><span class="line">route -n</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除默认路由</span></span><br><span class="line">route del default gw 192.168.107.1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置默认路由</span></span><br><span class="line">route add default gw 192.168.107.124</span><br><span class="line">route add default gw 192.168.56.124</span><br></pre></td></tr></table></figure>
+
+<p>修改路由表之后和 H1 类似</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/http/%E8%B7%AF%E7%94%B1%E5%99%A8%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1/20220103-230912.png" class="" title="H1的路由表">
+
+<ol start="4">
+<li>验证联通效果(192.168.107.0 和 192.168.56.0 网络的联通)</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 192.168.107.1</span></span><br><span class="line">ping 192.168.56.3</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ping 192.168.56.4</span></span><br><span class="line">ping 192.168.107.2</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/http/%E8%B7%AF%E7%94%B1%E5%99%A8%E7%AE%A1%E7%90%86%E6%8E%A7%E5%88%B6%E5%8A%9F%E8%83%BD%E8%AE%BE%E8%AE%A1/" data-id="clzmdspfc0025zwl1eauoh2oo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/http/%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          正向代理和反向代理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E6%88%AA%E6%B5%81%E9%98%B2%E6%8A%96/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">截流和防抖</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>

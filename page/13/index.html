@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记录一些平时点滴">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ASK&#39;s Blog">
+<meta property="og:url" content="https://ansike.github.io/blog/page/13/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="记录一些平时点滴">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="ask">
+<meta property="article:tag" content=" ansike">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-编程/msyql/select" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/select/" class="article-date">
+  <time datetime="2022-05-01T15:31:27.000Z" itemprop="datePublished">2022-05-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/select/">mysql 基础命令 - select</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="简单查询语句"><a href="#简单查询语句" class="headerlink" title="简单查询语句"></a>简单查询语句</h5><blockquote>
+<p>谓词相关 =, (!=|&lt;&gt;), &gt;, &lt;</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 等于   查询所有type等于1的name</span></span><br><span class="line">selct name from lists where type=1;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 不等于   查询所有type不等于1的name</span></span><br><span class="line">selct name from lists where type!=1 or type is null;</span><br><span class="line">selct name from lists where type&lt;&gt;1 or type is null;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">为什么type!=1不能包含所有情况呢？</span></span><br><span class="line"><span class="comment">因为sql比较的三值逻辑 -- ture, false, unkonwn。</span></span><br><span class="line"><span class="comment">1.任何值与null做比较结果都是unknown；</span></span><br><span class="line"><span class="comment">2.where只会输出为true的部分；</span></span><br><span class="line"><span class="comment">所以遇到type=null时会比较结果为unknown，此时会丢弃该结果。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">sql提供了is null 和 is not null做null的特殊判断</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查找A中所有不存在于B表的数据</span></span><br><span class="line"><span class="comment">-- not in</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">Name</span> <span class="keyword">as</span> Customers <span class="keyword">from</span> Customers <span class="keyword">where</span> <span class="keyword">Id</span> <span class="keyword">not</span> <span class="keyword">in</span> (</span><br><span class="line">    <span class="keyword">select</span> CustomerId <span class="keyword">from</span> Orders</span><br><span class="line">);</span><br><span class="line"><span class="comment">-- left join</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">Name</span> <span class="keyword">as</span> Customers <span class="keyword">from</span> Customers <span class="keyword">left</span> <span class="keyword">join</span> Orders <span class="keyword">on</span> Customers.Id=Orders.CustomerId <span class="keyword">where</span> Orders.Id <span class="keyword">is</span> <span class="literal">null</span> ;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">将Orders左联Customers，以Customers.Id=Orders.CustomerId，此时会生成一个临时表，过滤临时表中Orders.Id为null的即为所求的数据</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="新字段查询语句"><a href="#新字段查询语句" class="headerlink" title="新字段查询语句"></a>新字段查询语句</h5><p><a href="https://leetcode-cn.com/problems/calculate-special-bonus/" target="_blank" rel="noopener">https://leetcode-cn.com/problems/calculate-special-bonus/</a><br>bonus 计算方式为 name 不以 M 开头，且 employee_id 为奇数</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- case when</span></span><br><span class="line"><span class="keyword">select</span></span><br><span class="line">  employee_id,</span><br><span class="line">  <span class="keyword">case</span></span><br><span class="line">    <span class="keyword">when</span> (<span class="keyword">name</span> <span class="keyword">not</span> <span class="keyword">like</span> <span class="string">"M%"</span> <span class="keyword">and</span> employee_id%<span class="number">2</span>=<span class="number">1</span>) <span class="keyword">then</span> salary</span><br><span class="line">    <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">  <span class="keyword">end</span> <span class="keyword">as</span> bonus</span><br><span class="line"><span class="keyword">from</span> Employees <span class="keyword">order</span> <span class="keyword">by</span> employee_id;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- if 有三元运算符的感觉 （该性能更高一点）</span></span><br><span class="line"><span class="keyword">select</span></span><br><span class="line">  employee_id,</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">left</span>(<span class="keyword">name</span>, <span class="number">1</span>)!=<span class="string">'M'</span> <span class="keyword">and</span> employee_id%<span class="number">2</span>=<span class="number">1</span>, salary, <span class="number">0</span>) <span class="keyword">as</span> bonus</span><br><span class="line"><span class="keyword">from</span> Employees <span class="keyword">order</span> <span class="keyword">by</span> employee_id;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/msyql/select/" data-id="clzmdspfh003rzwl14krievcv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/cat" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/cat/" class="article-date">
+  <time datetime="2022-04-27T15:22:19.000Z" itemprop="datePublished">2022-04-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/cat/">cat相关</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="cat-在命令行中输入文本"><a href="#cat-在命令行中输入文本" class="headerlink" title="cat 在命令行中输入文本"></a>cat 在命令行中输入文本</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 给a.txt输入文案 <span class="string">'xxxx'</span>，会直接覆盖原有内容</span></span><br><span class="line">cat &lt;&lt;EOF&gt; a.txt</span><br><span class="line">xxx</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 给a.txt追加 <span class="string">'xxxx'</span>，不会覆盖，只是追加</span></span><br><span class="line">cat &lt;&lt;EOF&gt;&gt; a.txt</span><br><span class="line">xxx</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/cat/" data-id="clzmdspfk005azwl19itkdp9d" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/github" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/github/" class="article-date">
+  <time datetime="2022-04-26T14:40:09.000Z" itemprop="datePublished">2022-04-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/github/">github访问</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="因为墙的缘故经常连接不上github"><a href="#因为墙的缘故经常连接不上github" class="headerlink" title="因为墙的缘故经常连接不上github"></a>因为墙的缘故经常连接不上github</h3><p>设置这些host, host可以从这个站点 <a href="https://ipaddress.com/" target="_blank" rel="noopener">https://ipaddress.com/</a> 去查</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF&gt;&gt;/etc/hosts</span><br><span class="line">140.82.113.3    github.com</span><br><span class="line">185.199.108.153 assets-cdn.github.com</span><br><span class="line">199.232.69.194  github.global.ssl.fastly.net</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/github/" data-id="clzmdspfn0065zwl16wvs13qf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/自动化/init" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/%E8%87%AA%E5%8A%A8%E5%8C%96/init/" class="article-date">
+  <time datetime="2022-04-26T14:37:56.000Z" itemprop="datePublished">2022-04-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/%E8%87%AA%E5%8A%A8%E5%8C%96/init/">shell 自动化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="需要使用的环境"><a href="#需要使用的环境" class="headerlink" title="需要使用的环境"></a>需要使用的环境</h3><ul>
+<li>node 16.0.0</li>
+</ul>
+<h3 id="需要使用的工具"><a href="#需要使用的工具" class="headerlink" title="需要使用的工具"></a>需要使用的工具</h3><ul>
+<li>git</li>
+<li>iTerm</li>
+<li></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 使用者只需要获取脚本，并执行即可</span></span><br><span class="line">curl http://xxx/install.sh | bash</span><br><span class="line"></span><br><span class="line">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ansike/init/master/init.sh)"</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/%E8%87%AA%E5%8A%A8%E5%8C%96/init/" data-id="clzmdspik00jfzwl1binq9gg3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/js/koamiddleware" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/koamiddleware/" class="article-date">
+  <time datetime="2022-04-17T08:24:45.000Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/koamiddleware/">koa application 实现</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###</p>
+<figure class="highlight javascript"><figcaption><span>index.js</span><a href="/blog/downloads/code/SelfKoa/index.js">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @Description: SelfKoa 实现</span></span><br><span class="line"><span class="comment"> * @Author: Ask</span></span><br><span class="line"><span class="comment"> * @LastEditors: Ask</span></span><br><span class="line"><span class="comment"> * @Date: 2022-04-16 21:47:44</span></span><br><span class="line"><span class="comment"> * @LastEditTime: 2022-04-17 15:49:04</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"><span class="keyword">const</span> compose = <span class="built_in">require</span>(<span class="string">"./compose.js"</span>);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> </span>{</span><br><span class="line">  stack = [];</span><br><span class="line">  serverInstance = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">constructor</span>() {</span><br><span class="line">    <span class="keyword">this</span>.serverInstance = http.createServer();</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  init() {</span><br><span class="line">    <span class="keyword">const</span> fn = compose(<span class="keyword">this</span>.stack);</span><br><span class="line">    <span class="keyword">const</span> dispatch = <span class="function">(<span class="params">{ req, res }</span>) =&gt;</span> {</span><br><span class="line">      <span class="keyword">const</span> ctx = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</span><br><span class="line">      ctx.req = req;</span><br><span class="line">      ctx.res = res;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.dispatch(ctx, fn);</span><br><span class="line">    };</span><br><span class="line">    <span class="keyword">return</span> dispatch;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  use(handle) {</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> handle !== <span class="string">"function"</span>)</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">"use 中参数必须为function类型"</span>);</span><br><span class="line">    <span class="keyword">this</span>.stack.push(handle);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  listen(port) {</span><br><span class="line">    <span class="keyword">const</span> dispatch = <span class="keyword">this</span>.init();</span><br><span class="line">    <span class="keyword">this</span>.serverInstance.on(<span class="string">"request"</span>, (req, res) =&gt; {</span><br><span class="line">      dispatch({ req, res });</span><br><span class="line">    });</span><br><span class="line">    <span class="keyword">this</span>.serverInstance.listen(port);</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  dispatch(ctx, fn) {</span><br><span class="line">    <span class="keyword">return</span> fn(ctx)</span><br><span class="line">      .then(<span class="function">(<span class="params">res</span>) =&gt;</span> {</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"use 队列执行完毕"</span>, res);</span><br><span class="line">      })</span><br><span class="line">      .catch(<span class="function">(<span class="params">err</span>) =&gt;</span> {</span><br><span class="line">        <span class="built_in">console</span>.log(err);</span><br><span class="line">      });</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = App;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/koamiddleware/" data-id="clzmdspfd002hzwl17m85d7eu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/js/函数链式调用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E5%87%BD%E6%95%B0%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8/" class="article-date">
+  <time datetime="2022-04-17T08:24:45.000Z" itemprop="datePublished">2022-04-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E5%87%BD%E6%95%B0%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8/">函数链式调用方式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="compose"><a href="#compose" class="headerlink" title="compose"></a>compose</h3><figure class="highlight javascript"><figcaption><span>compose.js</span><a href="/blog/downloads/code/linkCallback/compose.js">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> compose = <span class="function">(<span class="params">arr</span>) =&gt;</span> {</span><br><span class="line">  <span class="keyword">return</span> arr.reduce(<span class="function">(<span class="params">prev, cur</span>) =&gt;</span> {</span><br><span class="line">    <span class="keyword">return</span> <span class="function">(<span class="params">...args</span>) =&gt;</span> {</span><br><span class="line">      <span class="keyword">return</span> prev(cur(...args));</span><br><span class="line">    };</span><br><span class="line">  });</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> f1 = <span class="function">(<span class="params">n</span>) =&gt;</span> {</span><br><span class="line">  <span class="built_in">console</span>.log(n);</span><br><span class="line">  <span class="keyword">return</span> n + <span class="number">1</span>;</span><br><span class="line">};</span><br><span class="line"><span class="keyword">const</span> f2 = <span class="function">(<span class="params">n</span>) =&gt;</span> {</span><br><span class="line">  <span class="built_in">console</span>.log(n);</span><br><span class="line">  <span class="keyword">return</span> n + <span class="number">1</span>;</span><br><span class="line">};</span><br><span class="line"><span class="keyword">const</span> fn = compose([f1, f2]);</span><br><span class="line">fn(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><figcaption><span>koa-compose.js</span><a href="/blog/downloads/code/linkCallback/koa-compose.js">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * compose 函数实现</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">KoaCompose</span>(<span class="params">handles</span>) </span>{</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">Array</span>.isArray(handles)) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">"compose must be an array"</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> fn <span class="keyword">of</span> handles) {</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> fn !== <span class="string">"function"</span>)</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">"middleware must be a function"</span>);</span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params">ctx, next</span>) </span>{</span><br><span class="line">    <span class="keyword">let</span> index = <span class="number">-1</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">deal</span>(<span class="params">i</span>) </span>{</span><br><span class="line">      <span class="keyword">if</span> (i &lt;= index)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"next() called multiple times"</span>));</span><br><span class="line">      index = i;</span><br><span class="line">      <span class="keyword">let</span> fn = handles[i];</span><br><span class="line">      <span class="keyword">if</span> (i === handles.length) fn = next;</span><br><span class="line">      <span class="keyword">if</span> (!fn) <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve();</span><br><span class="line">      <span class="keyword">try</span> {</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve(</span><br><span class="line">          fn(ctx, <span class="function"><span class="keyword">function</span> <span class="title">next</span>(<span class="params"></span>) </span>{</span><br><span class="line">            deal(i + <span class="number">1</span>);</span><br><span class="line">          })</span><br><span class="line">        );</span><br><span class="line">      } <span class="keyword">catch</span> (error) {</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.reject(error);</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> deal(<span class="number">0</span>);</span><br><span class="line">  };</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> f1 = <span class="keyword">async</span> (n, next) =&gt; {</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"fn1"</span>);</span><br><span class="line">  <span class="keyword">await</span> next();</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"fn11"</span>);</span><br><span class="line">};</span><br><span class="line"><span class="keyword">const</span> f2 = <span class="keyword">async</span> (n, next) =&gt; {</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"fn2"</span>);</span><br><span class="line">  <span class="keyword">await</span> next();</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"fn22"</span>);</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fn = KoaCompose([f1, f2]);</span><br><span class="line">fn();</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/%E5%87%BD%E6%95%B0%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8/" data-id="clzmdspfe002szwl16730bcgq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/js/node/tcp" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/node/tcp/" class="article-date">
+  <time datetime="2022-03-06T14:44:13.000Z" itemprop="datePublished">2022-03-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/node/tcp/">node TCP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/node/tcp/" data-id="clzmdspi500e2zwl164xvhjlp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/js/node/v8垃圾回收机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/node/v8%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" class="article-date">
+  <time datetime="2022-03-06T14:44:13.000Z" itemprop="datePublished">2022-03-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/node/v8%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/">v8 垃圾回收机制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="回收策略简述"><a href="#回收策略简述" class="headerlink" title="回收策略简述"></a>回收策略简述</h3><ol>
+<li>回收策略主要基于分代式垃圾回收机制, 内存分为新生代和老生代</li>
+<li>新生代中的使用 scavenge 算法</li>
+<li>老生代使用标记清除(mark-sweep)+标记整理(mark+compact)</li>
+</ol>
+<h3 id="为什么要分代"><a href="#为什么要分代" class="headerlink" title="为什么要分代"></a>为什么要分代</h3><p>对象的生存时间不同,将对象按不同的存活时间分代,然后分别对不同的分代使用更适合的算法可以更高效的垃圾回收.</p>
+<h3 id="scavenge-算法的机制是什么"><a href="#scavenge-算法的机制是什么" class="headerlink" title="scavenge 算法的机制是什么"></a>scavenge 算法的机制是什么</h3><p>采用复制的方式实现垃圾回收. scavenge 将新生代内存分为两份,一个处于使用态,一个处于闲置态. 分配对象时先在使用态进行分配. 当开始垃圾回收时检查使用态中存活的对象, 将存活的对象复制到闲置态空间中, 复制完成之后两个存储的角色发生对换, 原空间内存被释放.</p>
+<h3 id="标记清除-mark-sweep-标记整理-mark-compact-是什么"><a href="#标记清除-mark-sweep-标记整理-mark-compact-是什么" class="headerlink" title="标记清除(mark-sweep), 标记整理(mark+compact)是什么"></a>标记清除(mark-sweep), 标记整理(mark+compact)是什么</h3><p>标记清除: 标记和清除. 标记阶段遍历堆中的所有对象, 对存活的对象进行标记. 清除阶段, 清除只清除没有被标记的对象.<br>标记整理: 标记和整理. 标记为死亡对象之后, 将活着的对象往一端移动, 移动完成之后直接清理掉边界外的内存. 当新晋升的对象在老生代无法分配足够的空间时才进行标记整理</p>
+<h3 id="为什么需要标记整理"><a href="#为什么需要标记整理" class="headerlink" title="为什么需要标记整理"></a>为什么需要标记整理</h3><p>标记清除会造成内存不连续问题, 标记整理可以将存活的对象整理到一起, 清理出更大的连续内部.</p>
+<h3 id="新生代向老生代晋升的条件"><a href="#新生代向老生代晋升的条件" class="headerlink" title="新生代向老生代晋升的条件"></a>新生代向老生代晋升的条件</h3><ol>
+<li>已经在新生代被 scavenge 回收过</li>
+<li>复制阶段, 如果新生代的目标空间超过 25%, 直接复制到老生代</li>
+</ol>
+<h3 id="新生代为什么使用-scavenge-老生代为什么使用标记清除和标记整理"><a href="#新生代为什么使用-scavenge-老生代为什么使用标记清除和标记整理" class="headerlink" title="新生代为什么使用 scavenge, 老生代为什么使用标记清除和标记整理"></a>新生代为什么使用 scavenge, 老生代为什么使用标记清除和标记整理</h3><p>新生代中的对象存活时间较短, scavenge 的复制方式仅需操作较少的存活对象;<br>老生代中的对象存活时间过长, 标记清除的删除模式仅需要删除较少的死亡对象; 标记整理时对标记清除的一个补充优化</p>
+<h3 id="什么是全停顿-stop-the-world"><a href="#什么是全停顿-stop-the-world" class="headerlink" title="什么是全停顿 stop-the-world"></a>什么是全停顿 stop-the-world</h3><p>为了避免 js 应用逻辑和垃圾回收器看到的不一致, 在进行垃圾回收时, 需要将应用执行暂停, 暂停的行为称为全停顿.</p>
+<h3 id="怎么优化全停顿"><a href="#怎么优化全停顿" class="headerlink" title="怎么优化全停顿"></a>怎么优化全停顿</h3><ol>
+<li>增量标记: 每标记一会儿都让出执行权, 让应用执行一会儿.</li>
+<li>延迟清理+增量式整理</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/node/v8%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" data-id="clzmdspi600efzwl1fjb5230i" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/安全/网络安全" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/%E5%AE%89%E5%85%A8/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="article-date">
+  <time datetime="2022-02-13T11:13:59.000Z" itemprop="datePublished">2022-02-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/%E5%AE%89%E5%85%A8/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="XSS-攻击"><a href="#XSS-攻击" class="headerlink" title="XSS 攻击"></a>XSS 攻击</h3><ul>
+<li><p>XSS 即跨站点脚本攻击. 攻击者利用网站漏洞将攻击的脚本代码作用在用户访问的页面中, 造成用户访问异常</p>
+</li>
+<li><p><strong>常见的 XSS</strong>: 恶意用户将携带标签的代码保存下来, 展示时标签中的脚本可能回引发页面不正常的展示.</p>
+</li>
+<li><p><strong>解决方案</strong>: 不信任非开发用户的任何输入, 将非站点的代码信息进行转码后输出到页面中.</p>
+</li>
+<li><p>xss 分类</p>
+<ol>
+<li>存储型 恶意代码入库</li>
+<li>反射型 构造恶意 URL 访问网站</li>
+<li>DOM 型 恶意代码输出页面</li>
+</ol>
+</li>
+</ul>
+<h3 id="CSRF-攻击"><a href="#CSRF-攻击" class="headerlink" title="CSRF 攻击"></a>CSRF 攻击</h3><ul>
+<li><p>CSRF 即跨站点请求伪造. 攻击者利用网站的漏洞获取用户的身份信息去实施违法犯罪.</p>
+</li>
+<li><p><strong>常见的 CSRF</strong></p>
+<ul>
+<li>用户 A 访问正常网站 A(a.com),登录之后种下 cookie;</li>
+<li>恶意网站 B(b.com)引诱用户 A 访问自己, 此时恶意网站 B 中发送了一个(a.com?action=xxx)的请求会携带网站 A 中的所有 cookie 信息</li>
+<li>网站 A(a.com)如果没有做更多的安全保证的话, 此时认为用户 A 真实的做了 action=xxx 的动作</li>
+<li>攻击者在受害者不知情的情况下完成攻击<br>相见的 CSRF: 钓鱼邮件</li>
+</ul>
+</li>
+<li><p><strong>解决方案</strong>: 限制跨域访问, 设置域名白名单; 变更 cookie 方式验证身份, 比如 JWT 方式; 增加关键操作时身份验证, 验证码方式;</p>
+</li>
+</ul>
+<h3 id="DDoS-攻击"><a href="#DDoS-攻击" class="headerlink" title="DDoS 攻击"></a>DDoS 攻击</h3><p>DDoS 分布式拒绝服务 短时间内发起大量请求,无法响应正常的访问,造成网站瘫痪</p>
+<ul>
+<li><p><strong>常见的 DDoS</strong><br>利用互联网中计算机进行对某一站点的某个接口同时进行大量访问,导致站点无法服务正常的用户甚至宕机</p>
+</li>
+<li><p><strong>解决方案</strong>:</p>
+<ul>
+<li>抓取特征请求进行拦截. 比如将可以发 50 条/s 请求的 IP 加入黑名单;</li>
+<li>如果是静态站点可以考虑加一层 CDN, 让 CDN 吸引流量, 隐藏源服务器;</li>
+<li>可以使用云厂商的弹性 IP, 收到攻击时自动更换 IP 地址;</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E5%AE%89%E5%85%A8/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" data-id="clzmdspfs0083zwl1fa2fey7x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/js/react/fiber" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/react/fiber/" class="article-date">
+  <time datetime="2022-02-13T11:13:59.000Z" itemprop="datePublished">2022-02-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/react/fiber/">filber</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/react/fiber/" data-id="clzmdspi500dzzwl1c78716my" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/blog/page/12/">&lt; 上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/11/">11</a><a class="page-number" href="/blog/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/blog/page/14/">14</a><a class="page-number" href="/blog/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/21/">21</a><a class="extend next" rel="next" href="/blog/page/14/">下一页 &gt;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记录一些平时点滴">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ASK&#39;s Blog">
+<meta property="og:url" content="https://ansike.github.io/blog/page/16/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="记录一些平时点滴">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="ask">
+<meta property="article:tag" content=" ansike">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-编程/js/柯里化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E6%9F%AF%E9%87%8C%E5%8C%96/" class="article-date">
+  <time datetime="2021-09-18T01:42:22.000Z" itemprop="datePublished">2021-09-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E6%9F%AF%E9%87%8C%E5%8C%96/">柯里化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>In mathematics and computer science, currying is the technique of translating the evaluation of a function that takes multiple arguments (or a tuple of arguments) into evaluating a sequence of functions, each with a single argument.<br>在数学和计算机科学中,柯里化是一种将多参函数转化成一系列只有一个参数函数的技术</p>
+<h5 id="经典demo"><a href="#经典demo" class="headerlink" title="经典demo"></a>经典demo</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行 add 函数，一次传入两个参数即可</span></span><br><span class="line">add(<span class="number">1</span>, <span class="number">2</span>) <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 假设有一个 curry 函数可以做到柯里化</span></span><br><span class="line"><span class="keyword">var</span> addCurry = curry(add);</span><br><span class="line">addCurry(<span class="number">1</span>)(<span class="number">2</span>) <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/%E6%9F%AF%E9%87%8C%E5%8C%96/" data-id="clzmdspff0039zwl1225oeuud" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/js/js对象" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/js%E5%AF%B9%E8%B1%A1/" class="article-date">
+  <time datetime="2021-07-21T16:13:29.000Z" itemprop="datePublished">2021-07-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/js%E5%AF%B9%E8%B1%A1/">js对象</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="对象的属性"><a href="#对象的属性" class="headerlink" title="对象的属性"></a>对象的属性</h3><p>ECMAScript中有两种属性: 数据属性和访问器属性</p>
+<ul>
+<li><p>数据属性<br>[[Configurable]] 能否删除,能否修改属性的特性,能否修改为访问器属性 默认为true<br>[[Enumerable]] 能否for-in枚举 默认为true<br>[[Writable]] 能否修改属性的值 默认为true<br>[[value]] 当前属性的值 默认为undefined</p>
+</li>
+<li><p>访问器属性<br>[[Configurable]] 能否删除,能否修改属性的特性,能否修改为数据属性 默认为true<br>[[Enumerable]] 能否for-in枚举 默认为true<br>[[Get]] 能否修改属性的值<br>[[Set]] 当前属性的值</p>
+</li>
+<li><p>注意<br>[[Configurable]]一旦被置为false之后,将不可能改为true<br>writable,value和get,set互斥,同时设置可能会报错<br><a href="https://codepen.io/ansike/pen/poPWvQY?editors=1111" target="_blank" rel="noopener">codepen查看例子</a></p>
+</li>
+</ul>
+<h3 id="创建一个对象"><a href="#创建一个对象" class="headerlink" title="创建一个对象"></a>创建一个对象</h3><ol>
+<li>new Object()</li>
+<li>Object.create()</li>
+<li>构造函数创建</li>
+</ol>
+<p>常见面试题</p>
+<ul>
+<li>新建对象时new的必要性<br>new 构造函数创建的对象可以将实例标识为一种特定的类型. 换句话说 <code>(Sub instanceof Super) === true</code></li>
+<li>new的过程发生了什么</li>
+</ul>
+<ol>
+<li>创建一个新的对象</li>
+<li>将构造函数的作用域赋值给新对象 </li>
+<li>执行构造函数(可能会给新对象添加属性)</li>
+<li>返回新的对象<br>追加: <b>构造函数有返回值且值是对象的情况下,new返回的其实构造函数返回的对象.</b></li>
+</ol>
+<h3 id="对象继承"><a href="#对象继承" class="headerlink" title="对象继承"></a>对象继承</h3><p>n中继承方式<br>最需要关注的寄生组合式继承<br>本质: copy父的原型,赋值给子的prototype,实例化子对象时执行父的constructor,<br>父亲的原型在一个新的对象中,且父的构造函数只会执行一次.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/js%E5%AF%B9%E8%B1%A1/" data-id="clzmdspfd002dzwl159necy9i" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-英语/clothes" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/english/%E8%8B%B1%E8%AF%AD/clothes/" class="article-date">
+  <time datetime="2021-05-11T01:14:00.000Z" itemprop="datePublished">2021-05-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/english/">英语</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/english/%E8%8B%B1%E8%AF%AD/clothes/">衣服 Clothes</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/english/%E8%8B%B1%E8%AF%AD/clothes/" data-id="clzmdspej000fzwl1h1eggtww" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-英语/food" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/english/%E8%8B%B1%E8%AF%AD/food/" class="article-date">
+  <time datetime="2021-05-11T01:14:00.000Z" itemprop="datePublished">2021-05-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/english/">英语</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/english/%E8%8B%B1%E8%AF%AD/food/">食物 Food</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>The food is a lot tastier than the food at other restaurant.</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/english/%E8%8B%B1%E8%AF%AD/food/" data-id="clzmdspej000gzwl126ya3kiz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/chapter17-trap/linux信号及trap" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/chapter17-trap/linux%E4%BF%A1%E5%8F%B7%E5%8F%8Atrap/" class="article-date">
+  <time datetime="2021-05-11T01:14:00.000Z" itemprop="datePublished">2021-05-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/chapter17-trap/linux%E4%BF%A1%E5%8F%B7%E5%8F%8Atrap/">linux信号及trap</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>运行 shell 脚本时,按下 ctrl+C 程序就会立即终止运行.ctrl+C 就会发出一个 linux 信号,通知 shell 进程终止运行.<br>某些情况下我们并不希望 shell 脚本在运行时被信号终端,此时可以使用屏蔽信号的手段.<br>简单说:linux 信号是由一个整数构成的异步消息. 可以由某个进程发给其他进程,也可以由用户按下特定键由系统发给某个进程.</p>
+<h4 id="系统支持的各种信号"><a href="#系统支持的各种信号" class="headerlink" title="系统支持的各种信号"></a>系统支持的各种信号</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> 1) SIGHUP       2) SIGINT       3) SIGQUIT      4) SIGILL       5) SIGTRAP</span><br><span class="line"> 6) SIGABRT      7) SIGBUS       8) SIGFPE       9) SIGKILL     10) SIGUSR1</span><br><span class="line">11) SIGSEGV     12) SIGUSR2     13) SIGPIPE     14) SIGALRM     15) SIGTERM</span><br><span class="line">16) SIGSTKFLT   17) SIGCHLD     18) SIGCONT     19) SIGSTOP     20) SIGTSTP</span><br><span class="line">21) SIGTTIN     22) SIGTTOU     23) SIGURG      24) SIGXCPU     25) SIGXFSZ</span><br><span class="line">26) SIGVTALRM   27) SIGPROF     28) SIGWINCH    29) SIGIO       30) SIGPWR</span><br><span class="line">31) SIGSYS      34) SIGRTMIN    35) SIGRTMIN+1  36) SIGRTMIN+2  37) SIGRTMIN+3</span><br><span class="line">38) SIGRTMIN+4  39) SIGRTMIN+5  40) SIGRTMIN+6  41) SIGRTMIN+7  42) SIGRTMIN+8</span><br><span class="line">43) SIGRTMIN+9  44) SIGRTMIN+10 45) SIGRTMIN+11 46) SIGRTMIN+12 47) SIGRTMIN+13</span><br><span class="line">48) SIGRTMIN+14 49) SIGRTMIN+15 50) SIGRTMAX-14 51) SIGRTMAX-13 52) SIGRTMAX-12</span><br><span class="line">53) SIGRTMAX-11 54) SIGRTMAX-10 55) SIGRTMAX-9  56) SIGRTMAX-8  57) SIGRTMAX-7</span><br><span class="line">58) SIGRTMAX-6  59) SIGRTMAX-5  60) SIGRTMAX-4  61) SIGRTMAX-3  62) SIGRTMAX-2</span><br><span class="line">63) SIGRTMAX-1  64) SIGRTMAX</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用-tap-控制信号"><a href="#使用-tap-控制信号" class="headerlink" title="使用 tap 控制信号"></a>使用 tap 控制信号</h4><p>用途: 程序被中断时完成清理工作, 或者屏蔽用户非法输入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 监听ctrl+c信号</span></span><br><span class="line">trap "echo hello" INT # trap "echo hello" 2</span><br><span class="line"><span class="meta">#</span><span class="bash"> 取消监听所有ctrl+c信号</span></span><br><span class="line">trap "" INT # trap "" 2</span><br><span class="line"><span class="meta">#</span><span class="bash"> 恢复监听ctrl+c信号</span></span><br><span class="line">trap ":" INT # trap ":" 2</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/chapter17-trap/linux%E4%BF%A1%E5%8F%B7%E5%8F%8Atrap/" data-id="clzmdspif00h6zwl14m2w7bh5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/canvas/canvas动画" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/canvas/canvas%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-05-05T14:46:13.000Z" itemprop="datePublished">2021-05-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/canvas/canvas%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ol>
+<li>canvas 基础知识，比如stroke，fill，arc，rect等基础API</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/canvas/canvas%E5%8A%A8%E7%94%BB/" data-id="clzmdspf7001jzwl1bqqiesag" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/canvas/canvas-基础特性" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/canvas/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" class="article-date">
+  <time datetime="2021-05-05T14:46:13.000Z" itemprop="datePublished">2021-05-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/canvas/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/">canvas 基础特性</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="对象创建"><a href="#对象创建" class="headerlink" title="对象创建"></a>对象创建</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// HTML</span></span><br><span class="line">&lt;canvas id=<span class="string">"canvas"</span>&gt;&lt;<span class="regexp">/canvas&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/JS</span></span><br><span class="line"><span class="regexp">const canvas = document.getElementById("canvas");</span></span><br><span class="line"><span class="regexp">const ctx = canvas.getContext("2d")</span></span><br></pre></td></tr></table></figure>
+<h3 id="canvas元素的属性和方法"><a href="#canvas元素的属性和方法" class="headerlink" title="canvas元素的属性和方法"></a>canvas元素的属性和方法</h3><p><strong>1. 属性</strong></p>
+<ul>
+<li>width</li>
+<li>height</li>
+</ul>
+<p><strong>2. 方法</strong></p>
+<ul>
+<li><ol>
+<li>getContext(contextId: “2d”, options?: CanvasRenderingContext2DSettings): CanvasRenderingContext2D | null;</li>
+<li>getContext(contextId: “bitmaprenderer”, options?: ImageBitmapRenderingContextSettings):mageBitmapRenderingContext | null;</li>
+<li>getContext(contextId: “webgl”, options?: WebGLContextAttributes): WebGLRenderingContext | null;</li>
+<li>getContext(contextId: “webgl2”, options?: WebGLContextAttributes): WebGL2RenderingContext | null;</li>
+<li>getContext(contextId: string, options?: any): RenderingContext | null;<br>// 返回绘图环境对象</li>
+</ol>
+</li>
+<li>toDataURL(type?: string, quality?: any): string; // 返回数据地址，可以直接给img的src赋值</li>
+<li>toBlob(callback: BlobCallback, type?: string, quality?: any): void; // 返回表示图像文件的blob，可以将该blob做文件上传使用</li>
+<li>transferControlToOffscreen(): OffscreenCanvas;</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/canvas/canvas-%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7/" data-id="clzmdspf7001kzwl1etcs6yke" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/css/css动画" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/css%E5%8A%A8%E7%94%BB/" class="article-date">
+  <time datetime="2021-05-05T14:46:13.000Z" itemprop="datePublished">2021-05-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/css/css%E5%8A%A8%E7%94%BB/">canvas 动画</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h3><h3 id="代码分析"><a href="#代码分析" class="headerlink" title="代码分析"></a>代码分析</h3><h3 id="原理分析"><a href="#原理分析" class="headerlink" title="原理分析"></a>原理分析</h3><h3 id="知识点总结"><a href="#知识点总结" class="headerlink" title="知识点总结"></a>知识点总结</h3><ol>
+<li>canvas 基础知识，比如stroke，fill，arc，rect等基础API</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/css/css%E5%8A%A8%E7%94%BB/" data-id="clzmdspf8001ozwl13uhd6th9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/docker/入门篇" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/docker/%E5%85%A5%E9%97%A8%E7%AF%87/" class="article-date">
+  <time datetime="2021-05-05T14:46:13.000Z" itemprop="datePublished">2021-05-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/docker/%E5%85%A5%E9%97%A8%E7%AF%87/">docker入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="docker-基础命令"><a href="#docker-基础命令" class="headerlink" title="docker 基础命令"></a>docker 基础命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 镜像相关</span></span><br><span class="line">docker images</span><br><span class="line"><span class="meta">#</span><span class="bash"> docker image rm [imageId]</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 容器相关</span></span><br><span class="line">docker ps -a</span><br><span class="line"><span class="meta">#</span><span class="bash"> docker container rm [containerId]</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> docker &#123;start|stop&#125; [containerId]</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 运行</span></span><br><span class="line">docker run</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 编译</span></span><br><span class="line">docker build</span><br><span class="line"><span class="meta">#</span><span class="bash"> docker build -f [dockerfile path] -t [name:tag] .(build上下文位置)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入容器查看</span></span><br><span class="line">docker exec -it [containerId] bash</span><br></pre></td></tr></table></figure>
+
+<h3 id="制作自己的镜像"><a href="#制作自己的镜像" class="headerlink" title="制作自己的镜像"></a>制作自己的镜像</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Dockerfile.multiarch</span></span><br><span class="line"><span class="keyword">FROM</span> hub.ask.org/base/security.debian11.nodejs14:latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># builder need</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; apt-get install -y --no-install-recommends \</span></span><br><span class="line"><span class="bash">        cpio \</span></span><br><span class="line"><span class="bash">        make \</span></span><br><span class="line"><span class="bash">    &amp;&amp; apt-get clean \</span></span><br><span class="line"><span class="bash">    &amp;&amp; rm -rf /var/lib/apt/lists/*</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> [ <span class="string">"node"</span> ]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="基于-docker-快速使用软件提供的能力"><a href="#基于-docker-快速使用软件提供的能力" class="headerlink" title="基于 docker 快速使用软件提供的能力"></a>基于 docker 快速使用软件提供的能力</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 新建目录挂载mysql data目录</span></span><br><span class="line">mkdir -p ~/data/mysql/3307</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 基于mysql 5.7的版本启动一个mysql服务，默认root密码是123456 默认创建<span class="built_in">test</span>数据库，容器的名字是mysql-3307，本地端口映射3307</span></span><br><span class="line">docker run -p 3307:3306 --name=mysql-3307 -e MYSQL_ROOT_PASSWORD=123456 -v ~/data/mysql/3307:/var/lib/mysql -d mysql:8</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看服务启动情况</span></span><br><span class="line">docker ps -a</span><br><span class="line"><span class="meta">#</span><span class="bash"> CONTAINER ID   IMAGE       COMMAND                  CREATED          STATUS          PORTS                               NAMES</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ab04cab1e6c7   mysql:5.7   <span class="string">"docker-entrypoint.s…"</span>   26 seconds ago   Up 25 seconds   33060/tcp, 0.0.0.0:3307-&gt;3306/tcp   mysql-330</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用client连接该服务</span></span><br><span class="line">mysql -uroot -h127.0.0.1 -p123456 -P3307</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动 redis 服务</span></span><br><span class="line">docker run -d -p 6381:6379 --name docker-redis -d redis --requirepass "redispw"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用 redis-cli 连接该服务</span></span><br><span class="line">redis-cli -p 6381 -a redispw</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/docker/%E5%85%A5%E9%97%A8%E7%AF%87/" data-id="clzmdspfb001wzwl14tdi1z6q" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/js/URL" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/URL/" class="article-date">
+  <time datetime="2021-05-05T14:46:13.000Z" itemprop="datePublished">2021-05-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/URL/">URL constructor</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p>以前我们要对地址栏中的URL地址进行分析处理，需要自己进行字符串分析,有了URL构造函数之后就不需要了。</p>
+<h3 id="demo-（修改-设置-query的一个参数"><a href="#demo-（修改-设置-query的一个参数" class="headerlink" title="demo （修改|设置)query的一个参数"></a>demo （修改|设置)query的一个参数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> url = <span class="string">"https://www.baidu.com/wordpress/?a=1"</span></span><br><span class="line"><span class="keyword">const</span> urlObj = <span class="keyword">new</span> URL(url)</span><br><span class="line">urlObj.searchParams.set(<span class="string">"a"</span>, <span class="number">2</span>);</span><br><span class="line"><span class="built_in">console</span>.log(urlObj.href); <span class="comment">//https://www.baidu.com/wordpress/?a=2</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * params：（url）相对地址或者绝对地址，如果是绝对地址的时候会忽略base参数</span></span><br><span class="line"><span class="comment"> * params：（base）基地址，默认为空字符串</span></span><br><span class="line"><span class="comment"> * 注意：如果参数无法组合成完整的url地址，则会报TypeError错误</span></span><br><span class="line"><span class="comment"> * return 一个人 URL实例</span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="keyword">new</span> URL(url [,base])</span><br></pre></td></tr></table></figure>
+
+<h3 id="Attributes"><a href="#Attributes" class="headerlink" title="Attributes"></a>Attributes</h3><ol>
+<li>hash</li>
+<li>host</li>
+<li>hostname</li>
+<li>href</li>
+<li>origin       常用</li>
+<li>password</li>
+<li>username</li>
+<li>pathname</li>
+<li>port</li>
+<li>protocol     eg:http:</li>
+<li>search</li>
+<li>searchParams 返回一个URLSearchParams对象，可以调用URLSearchParams对象的各种方法，对查询，设置字符串进行非常方便的处理。以下会重点说这个对象 </li>
+</ol>
+<h3 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h3><ol>
+<li>toString()   返回完整的URL地址，只能输出不能修改值</li>
+<li>toJSON       目前看是一样的（有变动再修改）</li>
+</ol>
+<h3 id="Static-Function"><a href="#Static-Function" class="headerlink" title="Static Function"></a>Static Function</h3><ol>
+<li>URL.createObjectURL(object). <strong>将对象变成一个唯一的blob URL，参数可以是File，Blob，MediaSource对象</strong></li>
+<li>URL.revokeObjectURL(objectURL);<strong>撤销上一个API创建的URL对象</strong></li>
+</ol>
+<p>eg:使用Ajax请求一个跨域图片避免canvas跨域生成问题的时候可以使用这两个静态方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> url = URL.createObjectURL(<span class="keyword">this</span>.response);</span><br><span class="line">    <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">    img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 此时你就可以使用canvas对img为所欲为了</span></span><br><span class="line">        <span class="comment">// ... code ...</span></span><br><span class="line">        <span class="comment">// 图片用完后记得释放内存</span></span><br><span class="line">        URL.revokeObjectURL(url);</span><br><span class="line">    &#125;;</span><br><span class="line">    img.src = url;</span><br><span class="line">&#125;;</span><br><span class="line">xhr.open(<span class="string">'GET'</span>, url, <span class="literal">true</span>);</span><br><span class="line">xhr.responseType = <span class="string">'blob'</span>;</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/URL/" data-id="clzmdspfc0027zwl19rl5d04e" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/blog/page/15/">&lt; 上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/14/">14</a><a class="page-number" href="/blog/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/blog/page/17/">17</a><a class="page-number" href="/blog/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/21/">21</a><a class="extend next" rel="next" href="/blog/page/17/">下一页 &gt;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>

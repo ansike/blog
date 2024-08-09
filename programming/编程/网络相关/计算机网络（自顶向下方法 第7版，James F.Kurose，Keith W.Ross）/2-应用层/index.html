@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>应用层 | ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="来自中科大郑烇、杨坚全套《计算机网络（自顶向下方法 第7版，James F.Kurose，Keith W.Ross）》课程 2.0 应用层概述2.1 应用层协议原理2.2 Web and HTTP2.3 FTP*2.4 Email，SMTP，POP3，IMAP2.5 DNS2.6 P2P应用2.7 CDN2.8 TCP套接字（Socket）编程2.9 UDP套接字编程2.10 小结 2.0 应用层">
+<meta property="og:type" content="article">
+<meta property="og:title" content="应用层">
+<meta property="og:url" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="来自中科大郑烇、杨坚全套《计算机网络（自顶向下方法 第7版，James F.Kurose，Keith W.Ross）》课程 2.0 应用层概述2.1 应用层协议原理2.2 Web and HTTP2.3 FTP*2.4 Email，SMTP，POP3，IMAP2.5 DNS2.6 P2P应用2.7 CDN2.8 TCP套接字（Socket）编程2.9 UDP套接字编程2.10 小结 2.0 应用层">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230504-115306.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230504-115954.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230505-225702.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230506-090955.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230506-232702.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230506-232940.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-094244.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-094916.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-100950.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-101213.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-102232.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-102237.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-102900.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-102906.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-221744.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-222302.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-222649.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-222812.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-222813.jpeg">
+<meta property="article:published_time" content="2023-05-04T09:35:01.000Z">
+<meta property="article:modified_time" content="2024-08-08T11:42:01.147Z">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230504-115306.jpeg">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-编程/网络相关/计算机网络（自顶向下方法 第7版，James F.Kurose，Keith W.Ross）/2-应用层" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/" class="article-date">
+  <time datetime="2023-05-04T09:35:01.000Z" itemprop="datePublished">2023-05-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      应用层
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>来自<a href="https://www.bilibili.com/video/BV1JV411t7ow/?spm_id_from=333.337.search-card.all.click&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">中科大郑烇、杨坚全套《计算机网络（自顶向下方法 第7版，James F.Kurose，Keith W.Ross）》课程</a></p>
+<p><a href="#overview">2.0 应用层概述</a><br><a href="#protocol">2.1 应用层协议原理</a><br><a href="#web">2.2 Web and HTTP</a><br><a href="#ftp">2.3 FTP*</a><br><a href="#email">2.4 Email，SMTP，POP3，IMAP</a><br><a href="#dns">2.5 DNS</a><br><a href="#p2p">2.6 P2P应用</a><br><a href="#cdn">2.7 CDN</a><br><a href="#tcp">2.8 TCP套接字（Socket）编程</a><br><a href="#udp">2.9 UDP套接字编程</a><br><a href="#summary">2.10 小结</a></p>
+<h1 id="overview">2.0 应用层概述</h1>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230504-115306.jpeg" class="" title="概述">
+
+
+<h1 id="protocol">2.1 应用层协议原理</h1>
+
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230504-115954.jpeg" class="" title="网络应用的例子">
+
+<h3 id="网络应用的体系结构"><a href="#网络应用的体系结构" class="headerlink" title="网络应用的体系结构"></a>网络应用的体系结构</h3><ul>
+<li>客户-服务器模式（C/S client/service）<ul>
+<li>服务器<ul>
+<li>一直运行</li>
+<li>固定的IP地址和周知的端口号</li>
+<li>扩展性差，数据中心进行扩展</li>
+</ul>
+</li>
+<li>客户端<ul>
+<li>主动与服务器通信</li>
+<li>与互联网有间歇性的连接</li>
+<li>可能是动态IP地址</li>
+<li>不直接与其他客户端通信</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>对等模式（P2P Peer To Peer）<ul>
+<li>（几乎）没有一直运行的服务器</li>
+<li>任意端系统之间可以进行通信</li>
+<li>每个节点即是客户端又是服务器<ul>
+<li>自扩展性-新peer节点带来新的服务能力，当然也带来新的服务请求</li>
+</ul>
+</li>
+<li>参与的主机间歇性连接且可以改变IP地址（难以管理）</li>
+<li>例子：Gnutella，迅雷</li>
+</ul>
+</li>
+<li>混合体：客户服务器和对等体系结构<ul>
+<li>Napster<ul>
+<li>文件搜索：集中<ul>
+<li>主机在中心服务器上注册其资源</li>
+<li>主机在中心服务器查询资源位置</li>
+</ul>
+</li>
+<li>文件传输： P2P<ul>
+<li>任意Peer节点之间</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>即时通信<ul>
+<li>在线检测：集中<ul>
+<li>当用户上线时，向中心服务器注册其IP地址</li>
+<li>用户与中心服务器联系，以找到其在线好友的位置</li>
+</ul>
+</li>
+<li>两个用户之间聊天 P2P</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h3><p>进程：在主机上运行的应用程序</p>
+<ul>
+<li>在同一个主机内，使用进程间通信机制通信（操作系统定义）</li>
+<li>不同主机，通过交换报文（Message）来通信<ul>
+<li>使用OS提供的通信服务</li>
+<li>按应用协议交换报文（借助传输层提供的服务）</li>
+</ul>
+</li>
+</ul>
+<p><strong>clients servers</strong></p>
+<ul>
+<li>客户端进程：发起通信的进程</li>
+<li>服务器进程：等待连接的进程</li>
+</ul>
+<blockquote>
+<p>P2P架构的应用也有客户端进程和服务器进程之分</p>
+</blockquote>
+<h3 id="分布式进程通信需要解决的问题"><a href="#分布式进程通信需要解决的问题" class="headerlink" title="分布式进程通信需要解决的问题"></a>分布式进程通信需要解决的问题</h3><ol>
+<li>进程表示和寻址问题（服务用户）</li>
+<li>传输层-应用层提供服务时如何（服务）<ol>
+<li>位置：层间界面的SAP（TCP/IP socket）</li>
+<li>形式：应用程序接口API（TCP/IP socket api）</li>
+</ol>
+</li>
+<li>如何使用传输层提供的服务，实现应用进程之间的报文交换，实现应用（用户使用服务）<ol>
+<li>定义应用层协议：报文格式，解释，时序等</li>
+<li>编制程序，使用OS提供的API，调用网络基础设施提供通信服务传报文，实现应用时序等；</li>
+</ol>
+</li>
+</ol>
+<h3 id="对进程进行编址（addressing）"><a href="#对进程进行编址（addressing）" class="headerlink" title="对进程进行编址（addressing）"></a>对进程进行编址（addressing）</h3><ul>
+<li>进程为了接受报文，必须有一个标识即：SAP（发送也需要标示）<ul>
+<li>主机：为一个32位IP地址<ul>
+<li>仅仅有IP地址不能唯一标识一个进程，在一台端系统上有很多应用进程在运行</li>
+</ul>
+</li>
+<li>所采用的传输层协议：TCP or UDP</li>
+<li>端口号（Port Numbers）</li>
+</ul>
+</li>
+<li>一些知名端口号的例子<ul>
+<li>HTTP TCP 80</li>
+<li>Mail TCP 25</li>
+<li>ftp TCP 21</li>
+</ul>
+</li>
+<li>一个进程： 用IP+port标示端节点</li>
+<li>本质上，一对主机进程之间的通信由两个端节点构成</li>
+</ul>
+<h3 id="传输层提供的服务-层间信息的代码"><a href="#传输层提供的服务-层间信息的代码" class="headerlink" title="传输层提供的服务-层间信息的代码"></a>传输层提供的服务-层间信息的代码</h3><ul>
+<li>如果socket api每次传输报文，都携带如此多的信息，太繁琐易错，不便于管理</li>
+<li>用个代号标示通信的双方或者单方：socket</li>
+<li>就像OS打开文件返回的句柄意义<ul>
+<li>对句柄的操作，就是对文件的操作</li>
+</ul>
+</li>
+<li>TCP socket<ul>
+<li>TCP服务，对两个进程之间的通信需要之前要建立连接<ul>
+<li>两个进程通信会持续一段时间，通信关系稳定</li>
+</ul>
+</li>
+<li>可以用一个证书表示两个应用实体之间的通信关系，本地标识</li>
+<li>穿过层间接口的信息量最小</li>
+<li>TCP socket：源IP，源端口，目标IP，目标端口</li>
+</ul>
+</li>
+<li>UDP socket<ul>
+<li>UDP服务，两个进程之间的通信需要之前无需建立连接<ul>
+<li>每个报文都是独立传输的</li>
+<li>前后报文可能给不同的分布式进程</li>
+</ul>
+</li>
+<li>因此只能用一个整数表示本应用实体的标示<ul>
+<li>因为这个报文可能传给另外一个分布式进程</li>
+</ul>
+</li>
+<li>穿过层间接口的信息大小最小</li>
+<li>UDP socket 2元组（本IP 本端口）</li>
+<li>但是传输报文时，必须要提高对方IP，port<ul>
+<li>接受报文时，传输层需要上传对方的IP，port</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="TCP之上的套接字（Socket）"><a href="#TCP之上的套接字（Socket）" class="headerlink" title="TCP之上的套接字（Socket）"></a>TCP之上的套接字（Socket）</h3><p>对于使用面向连接服务（TCP）的应用而言，套接字是4元组的一个具有本地意义的标示</p>
+<ul>
+<li>4元组（源IP，源port，目标IP，目标port）</li>
+<li>唯一指定了一个会话（两个进程之间的会话关系）</li>
+<li>应用使用这个标识，与远程的应用程序通信</li>
+<li>不必在每个报文的发送都要指定这4元组</li>
+<li>就像使用操作系统打开一个文件，OS返回一个文件句柄一样，以后使用这个文件句柄，而不是使用这个文件的目录名、文件名</li>
+<li>简单，便于管理</li>
+</ul>
+<h3 id="UDP之上的套接字（Socket）"><a href="#UDP之上的套接字（Socket）" class="headerlink" title="UDP之上的套接字（Socket）"></a>UDP之上的套接字（Socket）</h3><p>对于使用无连接服务（UDP）的应用而言，套接字是2元组的一个具有本地意义的标示<br>  2元组（源IP，源port）</p>
+<ul>
+<li>UDP套接字指定了应用所在的一个端节点（end point）</li>
+<li>在发送数据报时，采用创建好的本地套接字（标识ID），就不必在发送每个报文中指明白自己所采用的ip和port</li>
+<li>但是在发送报文时必须要指定对方的ip和UDP port</li>
+</ul>
+<h3 id="安全TCP"><a href="#安全TCP" class="headerlink" title="安全TCP"></a>安全TCP</h3><ul>
+<li>TCP &amp; UDP<ul>
+<li>都没有加密</li>
+<li>明文通过互联网传输，甚至密码</li>
+</ul>
+</li>
+<li>SSL<ul>
+<li>在TCP上面实现，提供加密的TCP连接</li>
+<li>私密性</li>
+<li>数据完整性</li>
+<li>端到端的鉴别</li>
+</ul>
+</li>
+<li>SSL在应用层<ul>
+<li>应用采用SSL库，SSL库使用TCP通信</li>
+</ul>
+</li>
+<li>SSL socket API<ul>
+<li>应用通过API将明文交给socket，SSL将其加密在互联网上传输</li>
+</ul>
+</li>
+</ul>
+<h1 id="web">2.2 Web and HTTP</h1>
+这部分内容比较基础不再做过多的记录
+
+<p>往返时间 RTT（round-trip-time）：一个小的分组从客户端到服务器，再回到客户端的时间（传输时间忽略）</p>
+<p><strong>获取一个文件对象需要两个RTT</strong></p>
+<ul>
+<li>一个RTT发起TCP连接</li>
+<li>一个RTT用来HTTP请求并等待HTTP响应</li>
+</ul>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230505-225702.jpeg" class="" title="网路流量例子">
+
+<p>流量强度根据计算公式 = (分组大小<em>分组速率)/带宽<br>LAN的流量强度= (0.1</em>15)/1000 = 0.15%<br>接入链路的流量强度= (0.1*15)/1.544 = 0.9715 (强度接近1，其他延时可以忽略不记)<br>总延时=LAN延时+接入延时+Internet延时 = ms + min + 2s(根据假设)</p>
+<p>最后这个网路的总延时是分钟级的，甚至更长</p>
+<p>为了解决这个问题解决方案如下</p>
+<ul>
+<li>增加接入链路的带宽<br>根本原因是接入链路流量强度接近1耗时严重，比如把接入链路的带宽从1.54Mbps升级到154Mbps<br>接入链路的流量强度= (0.1<em>15)/154 = 0.0097<br>接入链路耗时 = I/(1-I)*L/R = 0.0097/(1-0.0097)</em>(1.5/154) = 0.0000954s 很小的时间可以忽略不计<br>最后总的耗时接近2s</li>
+<li>内网增加缓存<br>比如现在40%的请求都可以走缓存，60%请求外网<br>总的时间计算方式 = 0.4<em>t1 + 0.6<em>t2<br>t1的时间是ms级可以忽略不计<br>t2 = LAN延时+接入延时+Internet延时，现在只有接入延时需要重新计算<br>增加缓存之后接入链路的流量强度 = 0.1Mb * 15 * 0.6 / 1.54Mbps = 0.58<br>t2接入延时 = I/(1-I)</em>L/R = 0.58/(1-0.58)</em>(1.5*0.6/1.54) = 0.8s 实际算出来的时间是秒级的和视频讲的不一致，但是不影响结论<br>0.6 * (ms + 0.8s + 2s) = 1.68s 比增加带宽的效果更好<br>成本：缓存服务器（比较廉价）</li>
+</ul>
+<h1 id="ftp">2.3 FTP*</h1>
+
+<h3 id="FTP-文件传输协议"><a href="#FTP-文件传输协议" class="headerlink" title="FTP 文件传输协议"></a>FTP 文件传输协议</h3><ul>
+<li>向远程主机传输文件或从远程主机上接受文件</li>
+<li>客户/服务器模式<ul>
+<li>客户端：发起传输的一方</li>
+<li>服务器：远程主机</li>
+</ul>
+</li>
+<li>ftp：RFC959</li>
+<li>ftp服务器端口 21</li>
+</ul>
+<h3 id="控制链接和数据连接分开"><a href="#控制链接和数据连接分开" class="headerlink" title="控制链接和数据连接分开"></a>控制链接和数据连接分开</h3><ul>
+<li>FTP客户端与FTP服务器通过端口21联系，并使用TCP为传输协议</li>
+<li>客户端通过控制链接或得身份确认</li>
+<li>客户端通过控制连接发送命令浏览远程目录</li>
+<li>收到一个文件传输命令时，服务器打开一个到客户端的数据连接</li>
+<li>一个文件传输完成后，服务器关闭连接</li>
+<li>服务器打开第二个TCP数据连接勇来传输另外一个文件</li>
+<li>控制连接：带外（out of band）传送</li>
+<li>FTP服务器维护用户的状态信息</li>
+<li>FTP服务器维护用户的状态信息：当前路径、用户账户与控制连接对应</li>
+</ul>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230506-090955.jpeg" class="" title="FTP命令、响应">
+
+<h1 id="email">2.4 Email，SMTP，POP3，IMAP</h1>
+
+<h3 id="电子邮件-EMail"><a href="#电子邮件-EMail" class="headerlink" title="电子邮件 EMail"></a>电子邮件 EMail</h3><ul>
+<li>3个主要组成部分<ul>
+<li>用户代理<ul>
+<li>又名“邮件阅读器”</li>
+<li>撰写、编辑和阅读邮件</li>
+<li>如Outlook、Foxmail</li>
+<li>输出和输入邮件保存在服务器上</li>
+</ul>
+</li>
+<li>邮件服务器<ul>
+<li>邮箱中管理和维护发送给用户的邮件</li>
+<li>输出报文队列保持待发送邮件报文</li>
+<li>邮件服务器之间的SMTP协议：发送email报文<ul>
+<li>客户：发送方邮件服务器</li>
+<li>服务器：接收端邮件服务器</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>简单邮件传输协议：SMTP 【RFC 2821】<ul>
+<li>使用TCP在客户端和服务器之间传送报文，端口号为25</li>
+<li>直接传输：从发送方服务器到接收方服务器</li>
+<li>传输的3个阶段<ul>
+<li>握手</li>
+<li>传输报文</li>
+<li>关闭</li>
+</ul>
+</li>
+<li>命令/响应交互<ul>
+<li>命令：ASCII文本</li>
+<li>响应：状态码和状态信息</li>
+</ul>
+</li>
+<li>报文必须为7位ASCII码</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="例子：Alice给Bob发送报文"><a href="#例子：Alice给Bob发送报文" class="headerlink" title="例子：Alice给Bob发送报文"></a>例子：Alice给Bob发送报文</h3><ol>
+<li>Alice使用用户代理撰写邮件并发送给Bob</li>
+<li>Alice的用户代理将邮件发送到她的邮件服务器：邮件放在报文队列中</li>
+<li>SMTP的客户端打开到Bob邮件服务器的TCP连接</li>
+<li>SMTP客户端通过TCP连接发送Alice的邮件</li>
+<li>Bob的邮件服务器将邮件放到Bob的邮箱</li>
+<li>Bob调用他的用户代理阅读邮件</li>
+</ol>
+<h3 id="报文格式：多媒体扩展"><a href="#报文格式：多媒体扩展" class="headerlink" title="报文格式：多媒体扩展"></a>报文格式：多媒体扩展</h3><p>MIME：多媒体邮件扩展（Multimedia mail extension），RFC 2045，0256<br>在报文首部用额外的行申明MIME内容类型</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230506-232702.jpeg" class="" title="MIME内容">
+
+<h3 id="邮件访问协议"><a href="#邮件访问协议" class="headerlink" title="邮件访问协议"></a>邮件访问协议</h3><img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230506-232940.jpeg" class="" title="邮件访问协议">
+
+<h3 id="POP3与IMAP"><a href="#POP3与IMAP" class="headerlink" title="POP3与IMAP"></a>POP3与IMAP</h3><p>POP3【本地管理文件夹】<br>用户确认阶段</p>
+<ul>
+<li><p>客户端命令： </p>
+<ul>
+<li>user: 申明用户名 </li>
+<li>pass: 口令</li>
+</ul>
+</li>
+<li><p>服务器响应 </p>
+<ul>
+<li>+OK </li>
+<li>-ERR<br>事物处理阶段, 客户端：</li>
+</ul>
+</li>
+<li><p>list: 报文号列表</p>
+</li>
+<li><p>retr: 根据报文号检索报文</p>
+</li>
+<li><p>dele: 删除</p>
+</li>
+<li><p>先前的例子使用 “下载并删除”模式。 </p>
+<ul>
+<li>如果改变客户机，Bob不能阅读邮件</li>
+</ul>
+</li>
+<li><p>“下载并保留”：不同客户机上为报文的拷贝</p>
+</li>
+<li><p>POP3在会话中是无状态的</p>
+</li>
+</ul>
+<p>IMAP 【远程管理文件夹】</p>
+<ul>
+<li>IMAP服务器将每个报文与一个文件夹联系起来</li>
+<li>允许用户用目录来组织报文</li>
+<li>允许用户读取报文组件</li>
+<li>IMAP在会话过程中保留用户状态： <ul>
+<li>目录名、报文ID与目录名之间映射</li>
+</ul>
+</li>
+</ul>
+<h1 id="dns">2.5 DNS (Domain Name System)</h1>
+
+<h3 id="DNS的必要性"><a href="#DNS的必要性" class="headerlink" title="DNS的必要性"></a>DNS的必要性</h3><p>IP地址标识主机、路由器，但IP地址不好记忆，不便人类使用(没有意义)，人类一般倾向于使用一些有意义的字符串来标识Internet上的设备。例如：<a href="mailto:qzheng@ustc.edu.cn">qzheng@ustc.edu.cn</a> 所在的邮件服务器，<a href="http://www.ustc.edu.cn" target="_blank" rel="noopener">www.ustc.edu.cn</a> 所在的web服务器。<br>存在着“字符串”—IP地址的转换的必要性，人类用户提供要访问机器的“字符串”名称由DNS负责转换成为二进制的网络地址</p>
+<h3 id="DNS系统需要解决的问题"><a href="#DNS系统需要解决的问题" class="headerlink" title="DNS系统需要解决的问题"></a>DNS系统需要解决的问题</h3><ul>
+<li>问题1：如何命名设备<ul>
+<li>用有意义的字符串：好记，便于人类用使用</li>
+<li>解决一个平面命名的重名问题：层次化命名</li>
+</ul>
+</li>
+<li>问题2：如何完成名字到IP地址的转换<ul>
+<li>分布式的数据库维护和响应名字查询</li>
+</ul>
+</li>
+<li>问题3：如何维护：增加或者删除一个域，需<ul>
+<li>要在域名系统中做哪些工作</li>
+</ul>
+</li>
+</ul>
+<h3 id="DNS-Domain-Name-System-的历史"><a href="#DNS-Domain-Name-System-的历史" class="headerlink" title="DNS(Domain Name System)的历史"></a>DNS(Domain Name System)的历史</h3><ul>
+<li>ARPANET的名字解析解决方案<ul>
+<li>主机名：没有层次的一个字符串（一个平面）</li>
+<li>存在着一个（集中）维护站：维护着一张 主机名-IP地址的映射文件：Hosts.txt</li>
+<li>每台主机定时从维护站取文件</li>
+</ul>
+</li>
+<li>ARPANET解决方案的问题<ul>
+<li>当网络中主机数量很大时 <ul>
+<li>没有层次的主机名称很难分配 </li>
+<li>文件的管理、发布、查找都很麻烦</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="DNS-Domain-Name-System-总体思路和目标"><a href="#DNS-Domain-Name-System-总体思路和目标" class="headerlink" title="DNS(Domain Name System)总体思路和目标"></a>DNS(Domain Name System)总体思路和目标</h3><ul>
+<li>DNS的主要思路<ul>
+<li>分层的、基于域的命名机制</li>
+<li>若干分布式的数据库完成名字到IP地址的转换</li>
+<li>运行在UDP之上端口号为53的应用服务</li>
+<li>核心的Internet功能，但以应用层协议实现 <ul>
+<li>在网络边缘处理复杂性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>DNS主要目的：<ul>
+<li>实现主机名-IP地址的转换(name/IP translate)</li>
+<li>其它目的 <ul>
+<li>主机别名到规范名字的转换：Host aliasing </li>
+<li>邮件服务器别名到邮件服务器的正规名字的转换：Mail server aliasing </li>
+<li>负载均衡：Load Distribution</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="问题1：DNS名字空间-The-DNS-Name-Space"><a href="#问题1：DNS名字空间-The-DNS-Name-Space" class="headerlink" title="问题1：DNS名字空间(The DNS Name Space)"></a>问题1：DNS名字空间(The DNS Name Space)</h3><p>DNS域名结构</p>
+<ul>
+<li>一个层面命名设备会有很多重名</li>
+<li>NDS采用层次树状结构的 命名方法</li>
+<li>Internet 根被划为几百个顶级域(top lever domains)<ul>
+<li>通用的(generic)<br>.com; .edu ; .gov ; .int ; .mil ; .net ; .org<br>.firm ; .hsop ; .web ; .arts ; .rec ; </li>
+<li>国家的(countries)<br>.cn ; .us ; .nl ; .jp</li>
+</ul>
+</li>
+<li>每个(子)域下面可划分为若干子域(subdomains)</li>
+<li>树叶是主机</li>
+</ul>
+<h3 id="根域名服务器"><a href="#根域名服务器" class="headerlink" title="根域名服务器"></a>根域名服务器</h3><p>北美洲10个<br>欧洲2个<br>亚洲1个还在日本</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-094244.jpeg" class="" title="根域名服务器">
+
+<h3 id="DNS命名空间（The-DNS-Name-Space）"><a href="#DNS命名空间（The-DNS-Name-Space）" class="headerlink" title="DNS命名空间（The DNS Name Space）"></a>DNS命名空间（The DNS Name Space）</h3><img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-094916.jpeg" class="" title="命名树形图">
+
+<ul>
+<li>域名(Domain Name)<ul>
+<li>从本域往上，直到树根</li>
+<li>中间使用“.”间隔不同的级别</li>
+<li>例如：ustc.edu.cn<br>auto.ustc.edu.cn<br><a href="http://www.auto" target="_blank" rel="noopener">www.auto</a>. ustc.edu.cn</li>
+<li>域的域名：可以用于表示一个域</li>
+<li>主机的域名：一个域上的一个主机</li>
+</ul>
+</li>
+<li>域名的管理<ul>
+<li>一个域管理其下的子域<br>.jp 被划分为 ac.jp co.jp<br>.cn 被划分为 edu.cn com.cn</li>
+<li>创建一个新的域，必须征得它所属域的同意</li>
+</ul>
+</li>
+<li>域与物理网络无关<ul>
+<li>域遵从组织界限，而不是物理网络 <ul>
+<li>一个域的主机可以不在一个网络 </li>
+<li>一个网络的主机不一定在一个域</li>
+</ul>
+</li>
+<li>域的划分是逻辑的，而不是物理的<h3 id="问题2：解析问题-名字服务器-Name-Server"><a href="#问题2：解析问题-名字服务器-Name-Server" class="headerlink" title="问题2：解析问题-名字服务器(Name Server)"></a>问题2：解析问题-名字服务器(Name Server)</h3></li>
+</ul>
+</li>
+<li>一个名字服务器的问题<ul>
+<li>可靠性问题：单点故障</li>
+<li>扩展性问题：通信容量</li>
+<li>维护问题：远距离的集中式数据库</li>
+</ul>
+</li>
+<li>区域(zone)<ul>
+<li>区域的划分有区域管理者自己决定</li>
+<li>将DNS名字空间划分为互不相交的区域，每个区域都是树的一部分</li>
+<li>名字服务器： <ul>
+<li>每个区域都有一个名字服务器：维护着它所管辖区域的权威信息(authoritative record) </li>
+<li>名字服务器允许被放置在区域之外，以保障可靠性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="TLD服务器"><a href="#TLD服务器" class="headerlink" title="TLD服务器"></a>TLD服务器</h3><p>顶级域(TLD)服务器：负责顶级域名（如com, org, net, edu和gov）和所有国家级的顶级域名（如cn, uk, fr, ca, jp ）</p>
+<ul>
+<li>Network solutions 公司维护com TLD服务器 </li>
+<li>Educause公司维护edu TLD服务器</li>
+</ul>
+<h3 id="区域名字服务器维护资源记录"><a href="#区域名字服务器维护资源记录" class="headerlink" title="区域名字服务器维护资源记录"></a>区域名字服务器维护资源记录</h3><ul>
+<li>资源记录(resource records)<ul>
+<li>作用：维护 域名-IP地址(其它)的映射关系</li>
+<li>位置：Name Server的分布式数据库中</li>
+</ul>
+</li>
+<li>RR格式: (domain_name, ttl, type,class,Value)<ul>
+<li>Domain_name: 域名</li>
+<li>Ttl: time to live : 生存时间(权威，缓冲记录) - Class 类别 ：对于Internet，值为IN</li>
+<li>Value 值：可以是数字，域名或ASCII串 </li>
+<li>Type 类别：资源记录的类型—见下文DNS记录</li>
+</ul>
+</li>
+</ul>
+<h3 id="DNS记录"><a href="#DNS记录" class="headerlink" title="DNS记录"></a>DNS记录</h3><p>DNS ：保存资源记录(RR)的分布式数据库</p>
+<ul>
+<li>Type=NS <ul>
+<li>Name域名(如foo.com) </li>
+<li>Value为该域名的权威服务器的域名<br>RR 格式：(name, value, type, ttl)</li>
+</ul>
+</li>
+<li>Type=A <ul>
+<li>Name为主机 </li>
+<li>Value为IP地址</li>
+</ul>
+</li>
+<li>Type=CNAME <ul>
+<li>Name为规范名字的别名 <a href="http://www.ibm.com" target="_blank" rel="noopener">www.ibm.com</a> 的规范名字为servereast.backup2.ibm.com </li>
+<li>value 为规范名字</li>
+</ul>
+</li>
+<li>Type=MX <ul>
+<li>Value为name对应的邮件服务器的名字<br>TTL：生存时间，决定了资源记录应当从缓存中删除的时间</li>
+</ul>
+</li>
+</ul>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-100950.jpeg" class="" title="dns例子">
+
+<h3 id="DNS大致工作过程"><a href="#DNS大致工作过程" class="headerlink" title="DNS大致工作过程"></a>DNS大致工作过程</h3><ul>
+<li>应用调用 解析器(resolver)</li>
+<li>解析器作为客户向Name Server发出查询报文（封装在UDP段中）</li>
+<li>Name Server返回响应报文(name/ip)<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-101213.jpeg" class="" title="DNS大致工作过程">
+
+</li>
+</ul>
+<h4 id="本地名字服务器（Local-Name-Server）"><a href="#本地名字服务器（Local-Name-Server）" class="headerlink" title="本地名字服务器（Local Name Server）"></a>本地名字服务器（Local Name Server）</h4><ul>
+<li>并不严格属于层次结构</li>
+<li>每个ISP (居民区的ISP、公司、大学）都有一个本地DNS服务器<ul>
+<li>也称为“默认名字服务器”</li>
+</ul>
+</li>
+<li>当一个主机发起一个DNS查询时，查询被送到其本地DNS服务器<ul>
+<li>起着代理的作用，将查询转发到层次结构中</li>
+</ul>
+</li>
+</ul>
+<h3 id="名字解析过程"><a href="#名字解析过程" class="headerlink" title="名字解析过程"></a>名字解析过程</h3><ul>
+<li><p>目标名字在Local Name Server中 </p>
+<ul>
+<li>情况1：查询的名字在该区域内部</li>
+<li>情况2：缓存(cashing)<br>当与本地名字服务器不能解析名字时，联系根名字服务器顺着根-TLD 一直找到 权威名字服务器</li>
+</ul>
+</li>
+<li><p>目标名字不在Local Name Server中 </p>
+<ul>
+<li><p>递归查询</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-102232.jpeg" class="" title="递归查询">
+</li>
+<li><p>迭代查询</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-102237.jpeg" class="" title="迭代查询">
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="DNS协议、报文"><a href="#DNS协议、报文" class="headerlink" title="DNS协议、报文"></a>DNS协议、报文</h3><p>DNS协议：查询和响应报文的<strong>报文格式相同</strong></p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-102900.jpeg" class="" title="DNS报文1">
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-102906.jpeg" class="" title="DNS报文2">
+
+<h3 id="DNS-提高性能：缓存"><a href="#DNS-提高性能：缓存" class="headerlink" title="DNS 提高性能：缓存"></a>DNS 提高性能：缓存</h3><ul>
+<li>一旦名字服务器学到了一个映射，就将该映射<br>缓存起来</li>
+<li>根服务器通常都在本地服务器中缓存着<ul>
+<li>使得根服务器不用经常被访问</li>
+</ul>
+</li>
+<li>目的：提高效率</li>
+<li>可能存在的问题：如果情况变化，缓存结果和权威资源记录不一致</li>
+<li>解决方案：TTL（默认2天）</li>
+</ul>
+<h3 id="问题3：维护问题：新增一个域"><a href="#问题3：维护问题：新增一个域" class="headerlink" title="问题3：维护问题：新增一个域"></a>问题3：维护问题：新增一个域</h3><ul>
+<li>在上级域的名字服务器中增加两条记录，指向这个新增<br>的子域的域名 和域名服务器的地址</li>
+<li>在新增子域的名字服务器上运行名字服务器，负责本域<br>的名字解析： 名字-&gt;IP地址<ul>
+<li>需要向该机构提供权威DNS服务器（基本的、和辅助的）的名字和IP地址 -</li>
+<li>登记机构在com TLD服务器中插入两条RR记录: (networkutopia.com, dns1.networkutopia.com, NS)<br>(dns1.networkutopia.com, 212.212.212.1, A)</li>
+</ul>
+</li>
+<li>在networkutopia.com的权威服务器中确保有<ul>
+<li>用于Web服务器的<a href="http://www.networkuptopia.com的类型为A的记录" target="_blank" rel="noopener">www.networkuptopia.com的类型为A的记录</a> </li>
+<li>用于邮件服务器mail.networkutopia.com的类型为MX的记录</li>
+</ul>
+</li>
+</ul>
+<h3 id="攻击DNS"><a href="#攻击DNS" class="headerlink" title="攻击DNS"></a>攻击DNS</h3><ul>
+<li>DDoS 攻击<ul>
+<li>对根服务器进行流量轰炸<br>攻击：发送大量ping <ul>
+<li>没有成功 </li>
+<li>原因１：根目录服务器配置了流量过滤器，防火墙 </li>
+<li>原因２：Local DNS 服务器<br>缓存了TLD服务器的IP地址, 因此无需查询根服务器</li>
+</ul>
+</li>
+<li>向TLD服务器流量轰炸攻击：发送大量查询 <ul>
+<li>可能更危险 </li>
+<li>效果一般，大部分DNS缓存了TLD</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>重定向攻击<ul>
+<li>中间人攻击 <ul>
+<li>截获查询，伪造回答，从而攻击某个（DNS回答指定的IP）站点</li>
+</ul>
+</li>
+<li>DNS中毒 <ul>
+<li>发送伪造的应答给DNS服务器，希望它能够缓存这个虚假的结果</li>
+</ul>
+</li>
+<li>技术上较困难：分布式截获和伪造</li>
+</ul>
+</li>
+<li>利用DNS基础设施进行DDoS<ul>
+<li>伪造某个IP进行查询， 攻击这个目标IP</li>
+<li>查询放大，响应报文比查询报文大</li>
+<li>效果有限</li>
+</ul>
+</li>
+</ul>
+<h1 id="p2p">2.6 P2P应用</h1>
+
+<h3 id="纯P2P架构"><a href="#纯P2P架构" class="headerlink" title="纯P2P架构"></a>纯P2P架构</h3><ul>
+<li>没有（或极少）一直运行的<br>服务器</li>
+<li>任意端系统都可以直接通信</li>
+<li>利用peer的服务能力</li>
+<li>Peer节点间歇上网，每次IP地址都有可能变化<br>例子:</li>
+<li>文件分发 (BitTorrent)</li>
+<li>流媒体(KanKan)</li>
+<li>VoIP (Skype)</li>
+</ul>
+<h3 id="P2P文件分发：-BitTorrent"><a href="#P2P文件分发：-BitTorrent" class="headerlink" title="P2P文件分发： BitTorrent"></a>P2P文件分发： BitTorrent</h3><ul>
+<li>文件被分为一个个块256KB</li>
+<li>网络中的这些peers发送接收文件块，相互服务</li>
+</ul>
+<p>tracker:跟踪torrent中参与节点<br>Torrent（洪流）: 节点的组，之间交换文件块</p>
+<p>Alice 加入服务器之后 从tracker服务器处获得peer节点列表然后开始和torrent中的peer节点交换块</p>
+<h1 id="cdn">2.7 CDN</h1>
+
+<h3 id="视频流化服务和CDN：上下文"><a href="#视频流化服务和CDN：上下文" class="headerlink" title="视频流化服务和CDN：上下文"></a>视频流化服务和CDN：上下文</h3><ul>
+<li>视频流量：占据着互联网大部分的带宽<ul>
+<li>Netflix, YouTube: 占据37%, 16% 的ISP下行流量</li>
+<li>~1B YouTube 用户, ~75M Netflix用户</li>
+</ul>
+</li>
+<li>挑战：规模性-如何服务者 ~1B 用户?<ul>
+<li>单个超级服务器无法提供服务（为什么） </li>
+</ul>
+</li>
+<li>挑战：异构性<ul>
+<li>不同用户拥有不同的能力（例如：有线接入和移动用户；带宽丰富和受限用户） </li>
+</ul>
+</li>
+<li>解决方案: 分布式的，应用层面的基础设施</li>
+</ul>
+<h3 id="多媒体视频"><a href="#多媒体视频" class="headerlink" title="多媒体视频"></a>多媒体视频</h3><ul>
+<li>视频：固定速度显示的图像序列、<ul>
+<li>e.g. 24 images/sec</li>
+</ul>
+</li>
+<li>网络视频特点： <ul>
+<li>高码率：&gt;10x于音频,高的网络带宽需求 </li>
+<li>可以被压缩 </li>
+<li>90%以上的网络流量是视频</li>
+</ul>
+</li>
+<li>数字化图像：像素的阵列 <ul>
+<li>每个像素被若干bits表示</li>
+</ul>
+</li>
+<li>编码：使用图像内和图像间的冗余来降低编码的比特数 <ul>
+<li>空间冗余(图像内) </li>
+<li>时间冗余(相邻的图像间)</li>
+</ul>
+</li>
+</ul>
+<p><strong>视频格式分类</strong></p>
+<ul>
+<li>CBR: (constant bit rate): 以固定速率编码</li>
+<li>VBR: (variable bit rate): 视频编码速率随时间的变化而变化</li>
+<li>例子: <ul>
+<li>MPEG 1 (CD-ROM) 1.5 Mbps</li>
+<li>MPEG2 (DVD) 3-6 Mbps</li>
+<li>MPEG4 (often used in Internet, &lt; 1 Mbps)</li>
+</ul>
+</li>
+</ul>
+<h3 id="多媒体流化服务：DASH"><a href="#多媒体流化服务：DASH" class="headerlink" title="多媒体流化服务：DASH"></a>多媒体流化服务：DASH</h3><ul>
+<li>DASH: Dynamic, Adaptive Streaming over HTTP</li>
+<li>服务器: <ul>
+<li>将视频文件分割成多个块 </li>
+<li>每个块独立存储，编码于不同码率（8-10种） </li>
+<li>告示文件（manifest file）: 提供不同块的URL</li>
+</ul>
+</li>
+<li>客户端: <ul>
+<li>先获取告示文件 </li>
+<li>周期性地测量服务器到客户端的带宽 </li>
+<li>查询告示文件,在一个时刻请求一个块，HTTP头部指定字节范围</li>
+<li>如果带宽足够，选择最大码率的视频块</li>
+<li>会话中的不同时刻，可以切换请求不同的编码块 (取决于当时的可用带宽)</li>
+</ul>
+</li>
+</ul>
+<h3 id="Content-Distribution-Networks"><a href="#Content-Distribution-Networks" class="headerlink" title="Content Distribution Networks"></a>Content Distribution Networks</h3><ul>
+<li>挑战: 服务器如何通过网络向上百万用户同时<br>流化视频内容 (上百万视频内容)?</li>
+<li>选择1: 单个的、大的超级服务中心“megaserver”<ul>
+<li>服务器到客户端路径上跳数较多，瓶颈链路的带宽<br>小导致停顿</li>
+<li>“二八规律”决定了网络同时充斥着同一个视频的<br>多个拷贝，效率低（付费高、带宽浪费、效果差）</li>
+<li>单点故障点，性能瓶颈</li>
+<li>周边网络的拥塞<br>评述：相当简单，但是这个方法不可扩展</li>
+</ul>
+</li>
+<li>选项2: 通过CDN，全网部署缓存节点，存储服务内容，就近为用户提供服务，提高用户体验<ul>
+<li>enter deep: 将CDN服务器深入到许多接入网<ul>
+<li>更接近用户，数量多，离用户近，管理困难</li>
+<li>Akamai, 1700个位置</li>
+</ul>
+</li>
+<li>bring home: 部署在少数(10个左右)关键位置，如将服务器簇安装于POP附近（离若干1stISP POP较近）<ul>
+<li>采用租用线路将服务器簇连接起来</li>
+<li>Limelight</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="CDN-“简单”内容访问场景"><a href="#CDN-“简单”内容访问场景" class="headerlink" title="CDN:“简单”内容访问场景"></a>CDN:“简单”内容访问场景</h3><p>Bob(客户端)请求视频<a href="http://netcinema.com/6Y7B23V" target="_blank" rel="noopener">http://netcinema.com/6Y7B23V</a><br>视频存储在CDN，位于<a href="http://KingCDN.com/NetC6y&amp;B23V" target="_blank" rel="noopener">http://KingCDN.com/NetC6y&amp;B23V</a></p>
+<ol>
+<li>Bob访问<a href="http://netcinema.com/6Y7B23V" target="_blank" rel="noopener">http://netcinema.com/6Y7B23V</a> </li>
+<li>resolve <a href="http://netcinema.com/6Y7B23V" target="_blank" rel="noopener">http://netcinema.com/6Y7B23V</a> via Bob’s local DNS</li>
+<li>netcinema’s DNS returns URL <a href="http://KingCDN.com/NetC6y&amp;B23V" target="_blank" rel="noopener">http://KingCDN.com/NetC6y&amp;B23V</a></li>
+<li>Resolve <a href="http://KingCDN.com/NetC6y&amp;B23" target="_blank" rel="noopener">http://KingCDN.com/NetC6y&amp;B23</a> via KingCDN’s authoritative DNS, which returns IP address of KingCDN server with video（CDN 簇选择策略）</li>
+<li>request video from KingCDN server, streamed via HTTP</li>
+</ol>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-221744.jpeg" class="" title="内容访问场景">
+<h3 id="案例学习-Netflix"><a href="#案例学习-Netflix" class="headerlink" title="案例学习: Netflix"></a>案例学习: Netflix</h3><img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-222302.jpeg" class="" title="Netflix">
+
+<h1 id="tcp">2.8 TCP套接字（Socket）编程</h1>
+
+<p><strong>2种传输层服务的socket类型:</strong></p>
+<ul>
+<li>TCP: 可靠的、字节流的服务</li>
+<li>UDP: 不可靠（数据UDP数据报）服务</li>
+</ul>
+<h3 id="TCP套接字编程"><a href="#TCP套接字编程" class="headerlink" title="TCP套接字编程"></a>TCP套接字编程</h3><img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-222649.jpeg" class="" title="TCP套接字编程">
+
+
+<h1 id="udp">2.9 UDP套接字编程</h1>
+
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-222812.jpeg" class="" title="UDP Socket编程">
+
+<h3 id="TCP和UDP"><a href="#TCP和UDP" class="headerlink" title="TCP和UDP"></a>TCP和UDP</h3><img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/20230507-222813.jpeg" class="" title="TCP和UDP沟通过程">
+
+<!-- TODO socket 编程实践 https://www.cnblogs.com/cangqinglang/p/9842833.html -->
+
+<h1 id="summary">2.10 小结</h1>
+
+<ul>
+<li>应用程序体系结构<ul>
+<li>客户-服务器</li>
+<li>P2P</li>
+<li>混合</li>
+</ul>
+</li>
+<li>应用程序需要的服务品质描述: <ul>
+<li>可靠性、带宽、延时、安全</li>
+</ul>
+</li>
+<li>Internet传输层服务模式<ul>
+<li>可靠的、面向连接的服务：TCP</li>
+<li>不可靠的数据报：UDP</li>
+</ul>
+</li>
+<li>流行的应用层协议: <ul>
+<li>HTTP</li>
+<li>FTP</li>
+<li>SMTP, POP, IMAP</li>
+<li>DNS</li>
+</ul>
+</li>
+<li>Socket编程</li>
+</ul>
+<p><strong>协议的知识</strong></p>
+<ul>
+<li>应用层协议报文类型：请求/响应报文： <ul>
+<li>客户端请求信息或服务 </li>
+<li>服务器以数据、状态码进行响应</li>
+</ul>
+</li>
+<li>报文格式： <ul>
+<li>首部：关于数据信息的字段</li>
+<li>数据：被交换的信息</li>
+</ul>
+</li>
+<li>控制报文 vs. 数据报文<ul>
+<li>带内、带外</li>
+</ul>
+</li>
+<li>集中式 vs. 分散式</li>
+<li>无状态 vs. 维护状态</li>
+<li>可靠的 vs. 不可靠的报文传输</li>
+<li>在网络边缘处理复杂性</li>
+</ul>
+<blockquote>
+<p>一个协议定义了在两个或多个通信实体之间交换报文的格式和次序、以及就一条报文传输和接收或其他事件采取的动作</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/" data-id="clzmdspir00m5zwl1000m40tt" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          传输层
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/1-%E4%BB%80%E4%B9%88%E6%98%AFInternet/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">什么是Internet？</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>系统管理命令 | ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. lsof 查看进程打开的文件2. free 查看系统内存信息3. iftop 动态显示网络接口流量信息 4. vmstat 虚拟内存统计 5. CPU 信息统计 6. iostat I&#x2F;O 信息统计 7. sar 收集系统信息  1. lsof 查看进程打开的文件  功能说明: lsof(list open file),列举系统中已被打开的文件，通过该命令可以根据文件找到对应的进程信息，也可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="系统管理命令">
+<meta property="og:url" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-11/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="1. lsof 查看进程打开的文件2. free 查看系统内存信息3. iftop 动态显示网络接口流量信息 4. vmstat 虚拟内存统计 5. CPU 信息统计 6. iostat I&#x2F;O 信息统计 7. sar 收集系统信息  1. lsof 查看进程打开的文件  功能说明: lsof(list open file),列举系统中已被打开的文件，通过该命令可以根据文件找到对应的进程信息，也可">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-19T02:12:41.000Z">
+<meta property="article:modified_time" content="2024-08-08T11:42:01.081Z">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="shell">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-编程/shell/core/chapter-11" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-11/" class="article-date">
+  <time datetime="2022-07-19T02:12:41.000Z" itemprop="datePublished">2022-07-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      系统管理命令
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="#lsof">1. lsof 查看进程打开的文件</a><br><a href="#free">2. free 查看系统内存信息</a><br><a href="#iftop">3. iftop 动态显示网络接口流量信息 </a><br><a href="#vmstat">4. vmstat 虚拟内存统计 </a><br><a href="#mptat">5. CPU 信息统计 </a><br><a href="#iostat">6. iostat I/O 信息统计 </a><br><a href="#sar">7. sar 收集系统信息 </a></p>
+<h3 id="lsof">1. lsof 查看进程打开的文件</h3>
+
+<p>功能说明: lsof(list open file),列举系统中已被打开的文件，通过该命令可以根据文件找到对应的进程信息，也可以通过进程信息找到进程打开的文件。</p>
+<p>语法: lsof [option]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c &lt;进程名&gt;</td>
+<td>显示指定进程名打开的文件</td>
+</tr>
+<tr>
+<td>-p &lt;进程号&gt;</td>
+<td>显示指定进程号打开的文件</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>通过监听指定的协议，端口和主机等信息，显示符合条件的进程信息</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>显示指定用户使用的文件</td>
+</tr>
+<tr>
+<td>-U</td>
+<td>显示所有 socket 文件</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 通过文件找到对应的进程</span></span><br><span class="line">lsof /usr/local/bin/node</span><br><span class="line"><span class="meta">#</span><span class="bash"> COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF       NODE NAME</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> node    44052 root  txt    REG    1,4 80181216 8635790507 /usr/<span class="built_in">local</span>/bin/node</span></span><br></pre></td></tr></table></figure>
+
+<p>COMMAND 进程的名称<br>FD 文件描述符<br>TYPE 文件类型 REG 为普通文件<br>DEVICE 磁盘名称<br>SIZE/OFF 文件的大小<br>NODE 索引节点</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 通过指定进程名查找</span></span><br><span class="line">lsof -c node</span><br><span class="line"><span class="meta">#</span><span class="bash"> COMMAND   PID USER   FD     TYPE             DEVICE SIZE/OFF       NODE NAME</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> node    44052 root  cwd      DIR                1,4      512 8598690206 /private/var/root</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> node    44052 root  txt      REG                1,4 80181216 8635790507 /usr/<span class="built_in">local</span>/bin/node</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 通过指定进程号查找</span></span><br><span class="line">lsof -p 44052</span><br><span class="line"><span class="meta">#</span><span class="bash"> ...</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> lsof -i可查看所有的进程进行</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 监听指定协议，端口，主机等信息</span></span><br><span class="line">lsof -i [46] [protocol] [@hostname] [:service|port]</span><br></pre></td></tr></table></figure>
+
+<p>46: IPv4 IPv6<br>protocol:传输协议可以是 TCP 或 UDP<br>hostname: 主机名称或 IP 地址<br>service: 进程的服务名，eg: NFS,SSH,FTP 等</p>
+<h3 id="free">2. free 查看系统内存信息</h3>
+
+<p>功能说明: 用于显示系统内存状态，具体包括系统物理内存，虚拟内存，共享内存和系统缓存。</p>
+<p>语法: free [option]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-b</td>
+<td>以 byte 为单位显示内存使用情况</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>以 MB 为单位显示内存使用情况</td>
+</tr>
+<tr>
+<td>-k</td>
+<td>以 KB 为单位显示内存使用情况(默认)</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>以 人类可读形式显示内存使用情况</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>显示内存总和列</td>
+</tr>
+<tr>
+<td>-s &lt;间隔秒数&gt;</td>
+<td>根据间隔的秒数，持续显示内存的使用情况</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>不显示系统缓存区列</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">free -h</span><br><span class="line"><span class="meta">#</span><span class="bash">               total        used        free      shared  buff/cache   available</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Mem:            15G        1.8G        3.2G        158M         10G         13G</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Swap:            0B          0B          0B</span></span><br></pre></td></tr></table></figure>
+
+<p>buff 为写入数据缓存区<br>cache 为读取数据缓存区</p>
+<h3 id="iftop">3. iftop 动态显示网络接口流量信息 </h3>
+
+<p>功能说明: 实时流量监控工具，用于监听 TCP/IP 连接</p>
+<p>语法: iftop [option]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-i</td>
+<td>指定网卡</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>不进行 DNS 解析</td>
+</tr>
+<tr>
+<td>-N</td>
+<td>不解析端口为服务名</td>
+</tr>
+<tr>
+<td>-B</td>
+<td>以 byte 为单位显示</td>
+</tr>
+<tr>
+<td>-P</td>
+<td>显示端口</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>设定网卡为混杂模式，监听所有网卡</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iftop -nNBP</span><br></pre></td></tr></table></figure>
+
+<h3 id="vmstat">4. vmstat 虚拟内存统计 </h3>
+
+<p>功能说明: vmstat（virtual memory statistics）虚拟内存统计。可以对操作系统的内存信息，进程状态和 CPU 活动等进行监视。</p>
+<p>语法: vmstat [option] [delay [count]]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>显示活跃和非活跃内存</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>显示从系统启动至今的 fork 进程数量</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>显示 slab 信息</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>显示内存相关统计信息及多种系统活动数量</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>显示磁盘相关统计信息</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>显示指定磁盘分区统计信息</td>
+</tr>
+<tr>
+<td>-S</td>
+<td>使用指定单位（k,K,m,M）显示，默认单位为 K</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 显示虚拟内存的使用情况</span></span><br><span class="line">vmstat</span><br><span class="line"><span class="meta">#</span><span class="bash"> procs -----------memory----------    ---swap-- -----io---- -system--  ------cpu-----</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  r  b   swpd   free     buff   cache   si   so    bi    bo   <span class="keyword">in</span>   cs  us sy id wa st</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  1  0      0 3109456 1263540 8944292    0    0     1    40    0    1   1  2 96  1  0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 每5s更新一次，6次后停止输出</span></span><br><span class="line">vmstat 5 6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 内存使用信息</span></span><br><span class="line">vmstat -s</span><br><span class="line"><span class="meta">#</span><span class="bash"> 磁盘的读写</span></span><br><span class="line">vmstat -d</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>procs<ul>
+<li>r 表示正在运行和等待 CPU 时间片的进程数</li>
+<li>b 表示正在等待资源的进程数</li>
+</ul>
+</li>
+<li>memory<ul>
+<li>swpd 使用虚拟内存的大小</li>
+<li>free 当前空闲的物理内存数量</li>
+<li>buff 表示 buffs 的内存数量</li>
+<li>cache cache 的内存数量</li>
+</ul>
+</li>
+<li>swap<ul>
+<li>si (swap in) 磁盘调入内存</li>
+<li>so (swap out) 内存调入磁盘</li>
+</ul>
+</li>
+<li>io<ul>
+<li>bi 读磁盘</li>
+<li>bo 写磁盘</li>
+</ul>
+</li>
+<li>system<ul>
+<li>in 每秒设备中断数</li>
+<li>cs 每秒产生的上下文切换次数</li>
+</ul>
+</li>
+<li>cpu<ul>
+<li>us 用户进程消耗 CPU 时间百分比</li>
+<li>sy 系统进程消耗 CPU 时间百分比</li>
+<li>id CPU 所在空闲时间的百分比</li>
+<li>wa I/O 等待所占用的 CPU 时间百分比</li>
+<li>st 虚拟机占用的 CPU 时间的百分比</li>
+</ul>
+</li>
+</ul>
+<h3 id="mptat">5. CPU 信息统计 </h3>
+
+<p>功能说明: mpstat (multiprocessor statistics) 实时系统监控工具。在多 CPU 系统里，还能查看特定 CPU 的信息。对比 vmstat 只能查看系统的整体情况</p>
+<p>语法: mpstat [option] [delay [count]]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-P</td>
+<td>指定 CPU 编号，eg: -P 0 第一个 CPU，-P 1 第二个 CPU，-P ALL 表示所有 CPU</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mpstat</span><br><span class="line"><span class="meta">#</span><span class="bash"> Linux 4.14.81.bm.15-amd64 (110)         07/19/2022      _x86_64_        (8 CPU)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 09:11:39 PM  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 09:11:39 PM  all    1.46    0.00    2.08    0.51    0.00    0.04    0.13    0.00    0.00   95.77</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 每5s更新一次 打印6次</span></span><br><span class="line">mpstat 5 6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示第一个CPU的信息</span></span><br><span class="line">mpstat -P 0</span><br></pre></td></tr></table></figure>
+
+<p>%user 用户进程消耗 CPU 时间百分比<br>%nice 改变过优先级的进程占用 CPU 的百分比<br>%sys 系统消耗 CPU 时间百分比<br>%iowait IO 等待占用 CPU 时间百分比<br>%irq 硬终端占用的 CPU 时间百分比<br>%soft 软终端占用的 CPU 时间百分比<br>%steal 虚拟机强制 CPU 等待的时间百分比<br>%guest 虚拟机占用 CPU 时间的百分比<br>%idle CPU 处在空闲状态的时间百分比</p>
+<h3 id="iostat">6. iostat I/O 信息统计 </h3>
+
+<p>功能说明: 对系统的磁盘 I/O 操作进行监视。主要是显示磁盘读写操作的统计信息，同时也会给出 CPU 的使用情况。</p>
+<p>语法: iostat [option] [delay [count]]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c</td>
+<td>显示 CPU 的使用情况</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>显示磁盘的使用情况</td>
+</tr>
+<tr>
+<td>-k</td>
+<td>以 KB 为单位显示数据</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>以 MB 为单位显示数据</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>显示 NFS 的使用情况</td>
+</tr>
+<tr>
+<td>-p device</td>
+<td>指定统计的磁盘设备名称，默认位所有磁盘设备</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>显示扩展信息</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 默认显示CPU和磁盘信息</span></span><br><span class="line">iostat</span><br><span class="line"><span class="meta">#</span><span class="bash"> Linux 4.14.81.bm.15-amd64 (110)         07/19/2022      _x86_64_        (8 CPU)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> avg-cpu:  %user   %nice %system %iowait  %steal   %idle</span></span><br><span class="line"><span class="meta">#</span><span class="bash">            1.46    0.00    2.12    0.51    0.13   95.77</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sdb              28.83         4.99       205.52   42707225 1759200540</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> scd0              0.00         0.01         0.00      84420          0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sda              13.16         1.73       144.61   14802182 1237880482</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 每5s更新一次 打印6次</span></span><br><span class="line">iostat 5 6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示第一个CPU的信息</span></span><br><span class="line">iostat -P 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="sar">7. sar 收集系统信息 </h3>
+
+<p>功能说明: 全面的获取系统的 CPU，运行对列，磁盘 I/O，分页（交换区），内存，CPU 中断和网络等性能数据。</p>
+<p>语法: sar [option] [delay [count]]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-A</td>
+<td>显示系统所有资源设备（CPU，内存，磁盘）的运行状况</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>显示 CPU 的使用情况</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>显示内存的使用情况</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>显示磁盘的使用情况</td>
+</tr>
+<tr>
+<td>-n keyword</td>
+<td>网络的运行状态</td>
+</tr>
+<tr>
+<td>-o filename</td>
+<td>命令以二进制形式存放在文件中</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 第一次运行该，命令可能会报错：无法打开 /var/<span class="built_in">log</span>/sa/sa17 执行一下命令即可</span></span><br><span class="line">sar -o 17</span><br><span class="line">sar -u</span><br><span class="line">sar -r</span><br><span class="line">sar -d</span><br><span class="line">sar -n DEV</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-11/" data-id="clzmdspih00i2zwl1alkt7q4m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/k8s%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          k8s入门
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-10/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">网络命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>

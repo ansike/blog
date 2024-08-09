@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记录一些平时点滴">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ASK&#39;s Blog">
+<meta property="og:url" content="https://ansike.github.io/blog/page/6/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="记录一些平时点滴">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="ask">
+<meta property="article:tag" content=" ansike">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-编程/web3/区块链技术与应用/1-BTC-密码学原理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/1-BTC-%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/" class="article-date">
+  <time datetime="2022-12-25T14:52:48.000Z" itemprop="datePublished">2022-12-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/1-BTC-%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/">BTC-密码学原理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>BTC(bitcoin)<br>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<p>加密货币 crypto currency<br>加密货币不加密：区块的地址，转账金额都是公开的</p>
+<p>比特币用到了密码学中的两个能力：哈希，签名</p>
+<ol>
+<li><p>哈希函数（cryptographic hash function）重要的性质</p>
+<ul>
+<li>collision resistance（抗碰撞）。<br>不同的输出产出相同的结果。即x不等于y但是H(x)=H(y)说明发生了hash碰撞。该碰撞是不可避免的因为输入空间大于输出空间。但是哈希碰撞无法人为制造，无法验证<br>该性质的作用：对一个message求digest<br>对message取m，m的hash值是H(m)=digest，如果有人想改m而使H(m)不变，这点是做不到的。</li>
+<li>hiding（不可逆）。<br>计算过程事单向不可逆的，即从H(m)中无法推断出m的值。<br>hiding性质前提是输入空间足够大，分布比较均匀。如果不足够大，一般在message后边拼接一个随机数，如H(x||nonce)。</li>
+<li>puzzle friendly 值hash值的预算是不可预测的。比如hash值是000..00xx..xx，无法知道哪个值更容易算出这个结果，还是需要一个一个带入计算。<br>比特币的挖矿的过程其实就是找一个nonce的过程，nonce和区块的头里的信息合一起作为输入，得出的hash值要小于等于某个指定的目标预值。H(block header)&lt;=target。block header块头里有很多域，其中一个域是可以设置的随机数nonce，挖矿的过程是不停的试随机数，使block header取hash落在指定的范围。<br>puzzle friendly是指挖矿过程没有捷径，为了使值落在一个指定范围内，只能一个一个去试。所以这个过程可以作为工作量的证明（proof of work）。<br>挖矿很难，验证很容易(difficut to solve, but easy to verify)。<br>比特币中使用的hash函数是SHA-256 (secure hash algorithm)</li>
+</ul>
+</li>
+<li><p>签名<br>比特币中开户其实就是创建一个公私钥对（public key, private key）。非对称加密RSA，加密用接收方的公钥，解密使用私钥。签名中私钥进行签名，公钥进行验证。</p>
+</li>
+</ol>
+<p><strong>私钥，公钥，钱包地址，数字签名之前的关系</strong></p>
+<ol>
+<li>私钥是随机生成的（256位二进制数字），公钥是通过私钥与椭圆曲线计算出来的，钱包地址是公钥通过hash函数计算出来的。</li>
+<li>数字签名是由交易信息+私钥计算出来的，因为数字签名隐含私钥信息，所以可以证明自己的身份。</li>
+</ol>
+<p><strong>作用区别</strong><br>公私钥可以互相解密对方加密的数据。</p>
+<ol>
+<li>公钥加密，私钥解密。公钥公开，所有人都可以加密，加密的message只有发送方和接收方可以知道。</li>
+<li>私钥签名，公钥验证。并没有解出message，只是验证了该message确实是私钥的拥有者生成的。<br>签名生成方式：signature=encrypt(privateKey, hash(message))。该签名是公开的，所有人都可以拿到signature和message来验证message确实是来自私钥的拥有者发出的。<br>签名验证方式：decrypt(publicKey, signature) === hash(message)。签名的验证实质是拿公钥对签名进行解密，解密产出的值等于hash(message)即说明message没有被串改。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/1-BTC-%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/" data-id="clzmdspil00jlzwl1eao5gkqn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/2-BTC-数据结构" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/2-BTC-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="article-date">
+  <time datetime="2022-12-25T14:52:48.000Z" itemprop="datePublished">2022-12-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/2-BTC-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">BTC-数据结构</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<p>BTC中的数据结构包含了 hash points 和Merkle Tree</p>
+<ol>
+<li><p>hash pointers<br>普通的指针存储的是某个结构体在内存中的地址，hash指针除了要保存地址还要保存结构体的hash值。可以找到结构体的位置还能检测到结构体内容有没有变化。BTC中最基本的结构体是区块链，区块链是一个一个区块组成的链表。</p>
+<p><strong>区块链和普通链表的区别是什么？</strong> hash指针代替普通指针</p>
+<p>区块链中的每个指针都是这样构成的：H(prevPoint + prevContent)，每个区块的hash指针指向前一个区块，这样所有的区块组成的链表就是区块链。使用该数据结构可以实现tamper-evident log（篡改记录证明）。只要某个区块的内容发生变化，后续所有区块的指针都会受到影响。</p>
+<blockquote>
+<p>genesis block（创世界块）中没有hash指针，most recent block(最近区块）的hash指针是存在内存中的</p>
+</blockquote>
+<p>BTC中节点的类型：全节点(full node)，轻节点(light node)</p>
+<ul>
+<li>full node：<strong>拥有完整区块链账本的节点</strong>，全节点需要占用内存同步所有的区块数据，能够独立校验区块上的所有交易并实时更新数据，负责区块链交易的广播与验证。</li>
+<li>light node：没有拥有完整区块链账本的节点。比如手机BTC钱包。</li>
+</ul>
+</li>
+<li><p>Merkle Tree<br>2.1 一个BTC区块中大约包含了4000多条交易，这么多的交易在区块中是通过Merkle Tree存储的。<br><strong>我们常见的binary tree（二叉树）和merkle tree有什么区别？</strong> hash point代替普通指针</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/2-BTC-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/btc.jpg" class="" title="每个区块的数据结构">
+
+
+</li>
+</ol>
+<p>   2.2 merkle tree最下层就是transaction，以上的部分都是对下层的一个hash计算。两个hash计算新的hash逐层向上直到 merkle root。<strong>只要知道根hash值就能检测树下任意数据的修改。</strong></p>
+<p>   2.3 每个BTC区块分为了两部分：block header, block body</p>
+<ul>
+<li>block header：<ul>
+<li>Hash point</li>
+<li>Merkel root hash</li>
+<li>Nonce</li>
+<li>version</li>
+<li>timestamp</li>
+</ul>
+</li>
+<li>block body：包含了区块的所有信息（BTC是所有的交易，以太币还包括所有的账户信息）</li>
+</ul>
+<p>   2.4 Merkle proof<br>      BTC网络参与者包括全节点和轻节点，全节点包含了block header和block body，轻节点只包含block header。<br>      <strong>轻节点如何知道某笔交易是否写入了区块中？</strong><br>     只需要向全节点拿到和该交易相关的hash信息就可以逐层向上计算hash直到merkle tree的根，对比轻节点中存储的merkel tree根hash值，相等说明交易已经写入了区块链中。</p>
+<p>   区块链挖区块的过程是什么样的？<br>   Merkle Tree是怎么新增交易的？</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/2-BTC-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" data-id="clzmdspim00kdzwl19xmm5h6b" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/web3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/web3/" class="article-date">
+  <time datetime="2022-12-25T14:50:55.000Z" itemprop="datePublished">2022-12-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/web3/">web3 翻译</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>文章翻译自 <a href="https://ethereum.org/en/web3/" target="_blank" rel="noopener">https://ethereum.org/en/web3/</a></p>
+</blockquote>
+<p>关键词：去中心化</p>
+<p>Web3 简介<br>中心化已经帮助数十亿人接入万维网并且创建了稳定、强健的基础设施。同时少数的中心化组织在万维网中拥有较强的话语权，可以单方面的决定什么应该或者不应该被允许。</p>
+<p>web3 是这个困境的答案。有别与被大的科技公司垄断的 web，web3 拥抱去中心化并且正在被构建、运营、和拥有。web3 把权利交给个人手中而不是公司。在讨论 web3 之前，让我们探索一下 web 是怎么一步一步发展成今天的样子。</p>
+<h1 id="早期-web"><a href="#早期-web" class="headerlink" title="早期 web"></a>早期 web</h1><p>自从 web 被发明出来，大多数人把它作为一个现代生活的支柱。然而最初 web 的设想和今天大部分我们所熟知的 web 是非常完全不同的。为了更好的理解 web，让我们简单看一下 web 简短的历史 web1.0 和 web2.0。</p>
+<h3 id="web-1-0-只读（1990-2004）"><a href="#web-1-0-只读（1990-2004）" class="headerlink" title="web 1.0 只读（1990-2004）"></a>web 1.0 只读（1990-2004）</h3><p>1989 年，在 CERN, Geneva, Tim Berners-Lee 正在开发一个协议，这个协议就是未来的万维网。他的设想是创建一个开放的、去中心化，允许信息共享全球的协议。</p>
+<p>Berners-Lee 所创造的就是今天所知的 web1.0，大概发生在 1990-2004。web1.0 主要是一些公司拥有的静态站点，和用户之间没有任何交互，个人很少生产内容，导致它被称为只读网络。</p>
+<h3 id="web-2-0-读写（2004-至今）"><a href="#web-2-0-读写（2004-至今）" class="headerlink" title="web 2.0 读写（2004-至今）"></a>web 2.0 读写（2004-至今）</h3><p>随着社交媒体平台的出现，web2.0 开始于 2004 年。有别于只读的 web1.0，web 逐步的变成了读写站点。除了公司提供内容给用户外，他们开始提供平台去分享用户生产的内容，并且鼓励用户和用户之间进行互动。随着越来越多的用户使用网络，少数的头部公司开始去掌握在 web 上生产的流量和价值。web2.0 还诞生了广告驱动的营收模式。当用户能创建内容，他们不能拥有它或者通过将内容来变现。</p>
+<h1 id="web3-读-写-拥有"><a href="#web3-读-写-拥有" class="headerlink" title="web3 读-写-拥有"></a>web3 读-写-拥有</h1><p>2014年以太坊推出不久后，以太坊联合创始人 Gavin Wood 就提出了“Web 3.0”的概念。Gavin 对于早期的加密技术采用者所面临的问题（互联网需要过多的信任）提供了一个解决方案。大多数人熟悉并且使用的 web 都是一些私有公司，相信他们会以大众利益出发。</p>
+<h3 id="什么是-web3"><a href="#什么是-web3" class="headerlink" title="什么是 web3"></a>什么是 web3</h3><p>web3 已经成了一个包罗万象的新的，更好的网络愿景。在它的内核，web3 使用了区块链，加密货币和 HFTs 以所有权的形式将权力返还给用户。一个 2020 年 Twitter 的帖子解释的最好：web1 只读，web2 可以读写，web3 读-写-拥有</p>
+<h3 id="web3-的核心"><a href="#web3-的核心" class="headerlink" title="web3 的核心"></a>web3 的核心</h3><p>虽然提出什么是 web3 的坚定的定义是一个挑战，少数几个核心的原则指出了他的初心。</p>
+<ul>
+<li>web3 是去中心化的：有别于大的中心化实体，成员控制和拥有。</li>
+<li>web3 是无需许可的：每个人都平等的去参与 web3，没有人被排除在外。</li>
+<li>web3 是原生支付的：它使用加密货币去支付而不是依赖最新的银行基础设施。</li>
+<li>web3 是无需信任的：它使用激励措施和经济机制运转，而不是依赖受信的第三方。</li>
+</ul>
+<h3 id="为什么-web3-如此重要"><a href="#为什么-web3-如此重要" class="headerlink" title="为什么 web3 如此重要"></a>为什么 web3 如此重要</h3><p>尽管 web3 的杀手级功能不是独立的，也不适合整齐的分类。为简单起见我们已经尝试去把他们分开以便容易理解。</p>
+<h5 id="所有权"><a href="#所有权" class="headerlink" title="所有权"></a>所有权</h5><p>web3 给你数字资产的所有权以史无前例的方式。例如你正在玩 web2 的游戏。如果你购买了游戏装备，它直接和你的账号关联。如果游戏的创造者删除了你的账号，你将失去这些装备。或者如果你不再玩这个游戏了，你将失去你在游戏中投资的价值。</p>
+<p>web3 允许直接的所有权通过不可代币来表示（<a href="https://ethereum.org/en/nft/" target="_blank" rel="noopener">NFTs</a>），这样没有一个人甚至游戏的创造者有能力去夺取你的所有权。并且如果你不在玩游戏了，你能够在开放的市场中出售或者交易游戏装备以回收他们的价值。</p>
+<h5 id="抗审查"><a href="#抗审查" class="headerlink" title="抗审查"></a>抗审查</h5><p>在平台和内容创作者之间权利动态严重失衡。</p>
+<p>OnlyFans 是一个用户生产的承认内容网站有着超过 1 百万的内容创作者，许多人把这个平台作为他们主要的收入来源。在 2021 年 8 月 OnlyFans 宣布计划去禁止色情内容。这个声明引发了平台创作者的愤怒，他们认为他们创作的平台被剥夺了收入。在强烈的反对之后这个决定被迅速的撤销。尽管创作者赢得了斗争，它提醒了 web2.0 的创作者：如果离开平台你将一无所有。</p>
+<p>在 web3，你的数据存在于区块链上。当你决定离开一个平台，你可以带着你的名誉，把它插入到另外一个你喜欢的地方。<br>web2.0 需要内容创作者信任平台不会改变规则，但是监管阻力在 web3 是一个原生能力</p>
+<h5 id="去中心化自治组织（DAO）"><a href="#去中心化自治组织（DAO）" class="headerlink" title="去中心化自治组织（DAO）"></a>去中心化自治组织（<a href="https://ethereum.org/en/dao/" target="_blank" rel="noopener">DAO</a>）</h5><p>像在 web3 拥有你自己的数据一样，你也可以拥有自己的平台作为一个集体，像在公司中使用股份一样使用 token。DAOs 能够协调下放一个平台的所有权和对未来做出决策。</p>
+<p>DAOs 在技术上被定义为商定的智能合约，可自动的对资源吃（代币）分散决策。拥有令牌的用户对资源的使用进行投票，代码自动执行投票结果</p>
+<p>然而大多数的人们把 web3 的社区定义为 DAOs。这些社区在去中心化和代码自动化上有着不同的级别。当前我们正在探索生命是 DAOs 并且他们在未来如何演变。</p>
+<h3 id="身份认证"><a href="#身份认证" class="headerlink" title="身份认证"></a>身份认证</h3><p>传统上你可以为每个你使用的平台创建一个账户。例如你可能有 Twitter，YouTube 和 Reddit 账户。想要去改变你的用户名活着头像？你不得不改变每个账户的信息。在某些情况下，你可以使用社交账号登录，但这是一个常见的监管问题。只需要一个点击，这些平台就能够锁定你，把你剔除整个的网络生活。更加糟糕的是许多平台需要你用个人信息去创建账户信任他们。</p>
+<p>web3 通过以太坊地址和 ENS 配置允许你控制自己的数字身份解决了这些问题。使用以太坊的地址提供了单一登录访问这些平台是安全的，防审查和匿名的</p>
+<h3 id="本地支付"><a href="#本地支付" class="headerlink" title="本地支付"></a>本地支付</h3><p>web3 的支付基础设施是依赖银行和支付处理器的，不包括没有银行账户的人或者是碰巧生活在错误国家境内的人。web3 使用使用 token 像 ETH 去直接打钱在浏览器中并且无需第三方信任。</p>
+<h1 id="web3-限制"><a href="#web3-限制" class="headerlink" title="web3 限制"></a>web3 限制</h1><p>尽管 web3 现在的形式下有很多的好处，这儿仍然有很多的限制，生态必须设法解决以便其繁荣。</p>
+<h3 id="可访问性"><a href="#可访问性" class="headerlink" title="可访问性"></a>可访问性</h3><p>web3 重要的特性，像 Ethereum 登录已经准备好可供每个人零成本使用。但对于很多人来说交易的成本让人望而却步。由于较高的交易费用，不太富裕的国家不太可能使用 web3。在以太坊，这些挑战正在被解决通过升级网络和二层缩放解决。该技术已经准备好了，但是我们需要在第二层采用更高的级别去使得 web3 可以被每个人使用。</p>
+<h3 id="用户经历"><a href="#用户经历" class="headerlink" title="用户经历"></a>用户经历</h3><p>当前技术屏障对进入使用 web3 仍然很高。用户必须理解安全问题，理解复杂的技术文档和转换到非用户直观界面。尤其是钱包提供者正在解决这个问题，但在 web3 被更广泛的采纳之，还需要取得更多的进展。</p>
+<h3 id="教育"><a href="#教育" class="headerlink" title="教育"></a>教育</h3><p>web3 的引入了新的范式，那需要学习不同于 web2.0 的精神模型。19 世纪 90 年代末随着 web1.0 越来越流行时，也发生了教育活动。万维网的支持者使用了一系列的教育技术，从简单的隐喻（信息高速路，浏览器，网上冲浪）到电视广播去教育公众。web3 不难，但是它是不同的。教育方案让 web2 的用户熟悉 web3 的模型对于它的成功是至关重要的</p>
+<p>Ethereum.org 通过翻译项目向 web3 教育做贡献。旨在翻译重要的以太坊内容成更多的语言。</p>
+<h3 id="中心化基础设施"><a href="#中心化基础设施" class="headerlink" title="中心化基础设施"></a>中心化基础设施</h3><p>web3 的生态时年轻的和快速革新的。结果是它当钱主要依赖中心化的基础设施（GitHub, Twitter, Discord 等）。许多 web3 的公司正急忙的去填补这些空白，但是构建高质量、可信赖的基础设施仍然需要时间。</p>
+<h1 id="去中心化的未来"><a href="#去中心化的未来" class="headerlink" title="去中心化的未来"></a>去中心化的未来</h1><p>web3 是一个年轻且不断发展的生态系统。Gavin Wood 在 2014 年创造了这个术语，但其中好多的知道最近才成为现实。尽在去年，我们就经历了人们对加密货币的兴趣大增、2 层扩容解决方案的改进、新治理形式的大规模试验以及数字身份的革命。</p>
+<p>我们刚刚开始用 web3 创建更美好的互联网，但随着我们持续的去改进他的基础设施，互联网的未来是光明的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/web3/" data-id="clzmdspft008fzwl1glgka2p4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-书/浮生六记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/%E4%B9%A6%E7%B1%8D/%E4%B9%A6/%E6%B5%AE%E7%94%9F%E5%85%AD%E8%AE%B0/" class="article-date">
+  <time datetime="2022-12-11T14:56:31.000Z" itemprop="datePublished">2022-12-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/%E4%B9%A6%E7%B1%8D/%E4%B9%A6/%E6%B5%AE%E7%94%9F%E5%85%AD%E8%AE%B0/">浮生六记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>沈复著，张佳玮译</strong><br>沈复 字三白，号梅逸<br>《浮生六记》是沈复记述其生活点滴趣味及漫游经历。原是六卷，后仅存四卷。</p>
+<p>陈芸是其伴侣</p>
+<h3 id="闺房记乐"><a href="#闺房记乐" class="headerlink" title="闺房记乐"></a>闺房记乐</h3><p>主要讲述了自己和妻子的故事。在整个行文过程中可以看到沈复对妻子的爱以及妻子对沈复的爱，二人都有小资阶级的</p>
+<h3 id="闲情记趣"><a href="#闲情记趣" class="headerlink" title="闲情记趣"></a>闲情记趣</h3><h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><h5 id="1-？"><a href="#1-？" class="headerlink" title="1. ？"></a>1. ？</h5>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/%E4%B9%A6%E7%B1%8D/%E4%B9%A6/%E6%B5%AE%E7%94%9F%E5%85%AD%E8%AE%B0/" data-id="clzmdspe60001zwl1a71y3hxg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-书/平凡的世界" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/%E4%B9%A6%E7%B1%8D/%E4%B9%A6/%E5%B9%B3%E5%87%A1%E7%9A%84%E4%B8%96%E7%95%8C/" class="article-date">
+  <time datetime="2022-12-11T14:56:31.000Z" itemprop="datePublished">2022-12-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/%E4%B9%A6%E7%B1%8D/%E4%B9%A6/%E5%B9%B3%E5%87%A1%E7%9A%84%E4%B8%96%E7%95%8C/">平凡的世界</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>路遥著</strong><br>看书完全是因为西北锤王和秀莲的 B 站视频片段。被吸引之后先把电视剧刷了一遍，刚好在研发的图书角发现有实体书，然后花了三周看完了三册书。</p>
+<h3 id="故事概要"><a href="#故事概要" class="headerlink" title="故事概要"></a>故事概要</h3><p><strong>全文讲述了在上世纪 70 年后期十年间西北地区一部分人平凡的生活片段。</strong></p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>20世纪70年代，中国经历了社会主义改造20年后，中国人民的生活状态相对建国初期非但没有变好反而更差，很多地区的人民都无法温饱，缺粮少食是人民的常态，在这种社会环境下勤劳中国人民用自己的智慧自下而上的开始了自己的改革之路。</p>
+<h3 id="主要人物介绍"><a href="#主要人物介绍" class="headerlink" title="主要人物介绍"></a>主要人物介绍</h3><ul>
+<li>孙少平：孙玉厚的二儿子，整本书的主人公。故事从孙少平在高中开始在大牙湾煤矿结束。是一个思想开放，艰苦奋斗的新青年，代表农民出身后进入城市成为工人的形象。</li>
+<li>孙少安：孙玉厚的大儿子，生产一队的队长，电视剧的主人公，很多小说中的戏份都给了他。孙少安为了家庭 13岁 辍学和父亲支撑整个家庭，代表了中国 70，80 年代中国农村部分有奋斗精神的农民形象。</li>
+<li>孙玉厚：孙家的长子。代表最为朴素的中国农民。</li>
+<li>孙玉亭：孙家的次子，少安、少平的二爸。</li>
+<li>田福军：田家次子。</li>
+<li>田晓霞：田福军的女儿。</li>
+<li>田福堂：田家长子。</li>
+<li>田润叶：田福堂的女儿。</li>
+<li>秀莲：孙少安的老婆。</li>
+<li>田润生：田福堂的儿子。</li>
+<li>金俊武：生产二队的队长。</li>
+<li>李向前：田润叶的老公。</li>
+<li>金波：和少平同期的同学。</li>
+<li>金秀：金波的妹妹。</li>
+</ul>
+<h3 id="故事详述"><a href="#故事详述" class="headerlink" title="故事详述"></a>故事详述</h3><p>Doing</p>
+<p>&emsp; &emsp;故事开始于孙少平的高中生活，但是那几乎不能叫生活，只能说是生存。每天只能吃一个高粱黑馍，在同学中间完全的自卑到大家吃完饭才去拿自己的那份饭。每个周回家一趟，只能坐金波的自行车回家，要不就只能步行了。孙少安作为家里的长子13岁初中毕业就辍学在家帮助父亲支撑整个家庭。孙少安作为双水村一队的队长很早就意识到了农民长期辛苦劳动但无法文温饱的原因，尽管努力奋斗但是整个家庭还是在水深火热之中。一家人包括整个社会都在这种情况下苦苦挣扎。<br>&emsp; &emsp;少安，润叶是青梅竹马，从小一起念书到初中毕业少安辍学，润叶最后高中毕业在县城教书。二人之间一直两小无猜，直到向前的出现，润叶开始考虑自己的少安哥。在少安的姐夫被公社的人抓走之后，少安去县城找田福堂求情，润叶向少安表白，自此开始二人之间的感情拉扯。在我的视角看对少安的选择其实是不能理解的，两情相悦即使有再多的阻碍只要润叶还在抵抗就都不是问题。但是少安竟然直接去相亲去了，最难以理解是居然能找到秀莲这么好的女人。润叶也在一气之下和向前走到了一起开始自己10多人痛苦的生活。如果说润叶的选择有错的话，至少有一半的错误是少安造成的。<br>&emsp; &emsp;在先后经历了周总理，毛主席逝世，四人帮倒台，邓小平恢复职位，整个国家开始了自己的思考过程。在安徽小岗村悄悄开始了生产承包责任制之后，国家允许部分地区尝试不同的思路，这之后在田福军的强力推行下，原西地区开始了生产承包制，少安也对自己的队进行生产责任的划分。整个双水村开始了红红火火的独立劳动。在经历了一年的实践之后都取得了很好的效果，国家也基于在农业方面的实践逐步放开了商业方面的活动。少平在经历了三天打鱼两天晒网的高中生活之后终于毕业了。经过三年的高中生活学习到的知识并没有多少，但是养成了看书的习惯。在这段时间交到了很好的朋友，是他之后的精神伴侣田晓霞。<br>&emsp; &emsp;少安在农业生产之余开始操办自己的砖厂从一个小作坊变成了原西县的大户，少平在这段时间开始了苦行僧的揽工生活，从乡村老师到粗糙的揽工汉。在揽工的过程中因为表现比较突出被曹书记看重将户口迁移到了省城，这也为之后去大牙湾煤矿铺平了道路。在此期间少平和晓霞敞开了自己的心扉，全身心的爱着彼此。</p>
+<p>&emsp; &emsp;结局：少安成为远近闻名的万元户，秀莲肺癌。少平还在自己的煤矿辛苦劳作，晓霞见义勇为牺牲。润叶和向前开始幸福的生活了在一起。</p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><h5 id="1-少安为何不和润叶在一起"><a href="#1-少安为何不和润叶在一起" class="headerlink" title="1. 少安为何不和润叶在一起"></a>1. 少安为何不和润叶在一起</h5><h5 id="2-作者为什么要写平凡的世界"><a href="#2-作者为什么要写平凡的世界" class="headerlink" title="2. 作者为什么要写平凡的世界"></a>2. 作者为什么要写平凡的世界</h5>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/%E4%B9%A6%E7%B1%8D/%E4%B9%A6/%E5%B9%B3%E5%87%A1%E7%9A%84%E4%B8%96%E7%95%8C/" data-id="clzmdspe70004zwl1gslt7pck" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/css/文字处理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/" class="article-date">
+  <time datetime="2022-12-09T02:33:38.000Z" itemprop="datePublished">2022-12-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/css/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/">文字处理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在使用 css 进行文本排版时经常会遇到几个常见的属性，接下来对这几个属性进行一次简单的总结</p>
+<ul>
+<li>white-space</li>
+<li>word-break</li>
+</ul>
+<h3 id="white-space"><a href="#white-space" class="headerlink" title="white-space"></a>white-space</h3><p>顾名思义是空格的处理规则<br>| 值       | 作用                                                         |<br>| ——– | ———————————————————— |<br>| nowrap   | 不要包裹，去掉换行符和空格，不换行。常常搭配处理文本溢出     |<br>| pre      | 保留换行符，空格等。可以记做 preserve                        |<br>| pre-wrap | 保留换行符，空格且要被盒子包裹。可以记做 preserve+wrap的集合 |<br>| pre-line | 保留换行符，合并空格 要被盒子包裹。可以记做 line+wrap        |</p>
+<h3 id="word-break"><a href="#word-break" class="headerlink" title="word-break"></a>word-break</h3><p>顾名思义是单词的处理规则<br>| 值        | 作用                   |<br>| ——— | ———————- |<br>| break-all | 打破单词严格在边界换行 |<br>| keep-all  | 单词不拆分换行         |</p>
+<p>因<code>word-break</code>的<code>break-all</code>会导致所有单词拆分换行，所以又出来了一个新的属性<br><code>word-wrap（overflow-wrap）</code>值为<code>break-word</code></p>
+<h3 id="word-break-1"><a href="#word-break-1" class="headerlink" title="word-break"></a>word-break</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/css/%E6%96%87%E5%AD%97%E5%A4%84%E7%90%86/" data-id="clzmdspfa001tzwl16qlt9gqa" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/nginx/location" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/nginx/location/" class="article-date">
+  <time datetime="2022-11-29T10:59:22.000Z" itemprop="datePublished">2022-11-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/nginx/location/">nginx location</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/nginx/location/" data-id="clzmdspfk0053zwl15i11h3xz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/js/npm/token" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/npm/token/" class="article-date">
+  <time datetime="2022-11-29T10:59:22.000Z" itemprop="datePublished">2022-11-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/npm/token/">npm token</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="npm-使用-token-发版"><a href="#npm-使用-token-发版" class="headerlink" title="npm 使用 token 发版"></a>npm 使用 token 发版</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 生成Token: 该token只有在生成的时候能获取到，token list里面只能看到截取到的token信息，如果Token需要重复使用，请自行存储</span></span><br><span class="line">npm token create [--read-only] [--cidr=list]</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除Token</span></span><br><span class="line">npm token revoke &lt;id|token&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建.npmrc文件，将以下代码放到文件中</span></span><br><span class="line">registry=http://registexxx/</span><br><span class="line">//registexxx/:_authToken=xxx</span><br><span class="line"><span class="meta">#</span><span class="bash"> //registexxx/:_authToken=<span class="variable">$&#123;NPM_TOKEN&#125;</span></span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/npm/token/" data-id="clzmdspi200dwzwl10c9u87ai" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/js/正则/case" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E6%AD%A3%E5%88%99/case/" class="article-date">
+  <time datetime="2022-11-26T12:28:28.000Z" itemprop="datePublished">2022-11-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E6%AD%A3%E5%88%99/case/">正则相关的case</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="循环匹配指定模式"><a href="#循环匹配指定模式" class="headerlink" title="循环匹配指定模式"></a>循环匹配指定模式</h3><p>我们对字符串做全局匹配替换时会需要该思想</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> reg = <span class="regexp">/&#123;&#123;(\w*)&#125;&#125;/g</span>;</span><br><span class="line"><span class="keyword">const</span> confMap = &#123;</span><br><span class="line">  AAAA: <span class="string">"1"</span>,</span><br><span class="line">  BBBB: <span class="string">"2"</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> str = <span class="string">`str1=&#123;&#123;AAAA&#125;&#125;str2=&#123;&#123;BBBB&#125;&#125;`</span>;</span><br><span class="line"><span class="keyword">let</span> arr = [];</span><br><span class="line"><span class="keyword">while</span> ((arr = reg.exec(str))) &#123;</span><br><span class="line">  <span class="keyword">const</span> fullString = arr[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">const</span> matchKey = arr[<span class="number">1</span>];</span><br><span class="line">  str = str.replace(fullString, confMap[matchKey]);</span><br><span class="line">  <span class="comment">// 这行代码对于该case来说是必须的，因为replace会导致str的长度变短，不做重置的话会漏掉BBBB的case</span></span><br><span class="line">  reg.lastIndex = reg.lastIndex + (confMap[matchKey].length - fullString);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(str);</span><br><span class="line"><span class="comment">// str1=1str2=2</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="全局匹配中（g）test-不符合预期的-case"><a href="#全局匹配中（g）test-不符合预期的-case" class="headerlink" title="全局匹配中（g）test 不符合预期的 case"></a>全局匹配中（g）test 不符合预期的 case</h3><p>需求是要写匹配三个数字的正则，我们很有可能立即会写出以下的正则</p>
+<blockquote>
+<p>const reg = /^\d{3}$/g;</p>
+</blockquote>
+<p>逻辑其实很简单：^,$ 分别表示开头和结尾，整个字符串从开始到结束都只有 3 个数字。<br>但是实际的结果却是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> reg = <span class="regexp">/^\d&#123;3&#125;$/g</span>;</span><br><span class="line">reg.test(<span class="string">"123"</span>);</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line">reg.test(<span class="string">"123"</span>);</span><br><span class="line"><span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<p>分析之后发现是因为加了<code>g</code>的原因。<br><code>g</code>是全局搜索的意思，增加之后 regexp 实例会增加<code>lastIndex</code>的属性，下一次的匹配会从<code>lastIndex</code>开始向后匹配，如果匹配不到会把<code>lastIndex</code>置为 0。<br>针对这个例子，reg 刚开始<code>lastIndex</code>为 0，第一次 test 能匹配成功 true，成功之后<code>lastIndex</code>为 3。下一次匹配从 3 开始时因超过了字符串的最大长度也无法匹配 false，<code>lastIndex</code>重置为 0。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/%E6%AD%A3%E5%88%99/case/" data-id="clzmdspi600ebzwl1ecdlbe16" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/js/正则/正则相关概念" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E6%AD%A3%E5%88%99/%E6%AD%A3%E5%88%99%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" class="article-date">
+  <time datetime="2022-11-26T11:23:12.000Z" itemprop="datePublished">2022-11-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E6%AD%A3%E5%88%99/%E6%AD%A3%E5%88%99%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/">正则相关的概念</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="贪婪匹配和非贪婪匹配"><a href="#贪婪匹配和非贪婪匹配" class="headerlink" title="贪婪匹配和非贪婪匹配"></a>贪婪匹配和非贪婪匹配</h3><p>前提是表达式中包含重复量词(*+?)才需要考虑是否为贪婪模式<br>贪婪模式是 js 正则匹配过程的默认模式, 意思为尽可能的匹配更多内容</p>
+<p>比如这段文字 <code>const str = &quot;aaa !dare you! I have !an! asdas&quot;</code><br>我们需要将!及中间的文字(!dare you!, !an!)匹配出来, , 可能会这样写正则<br>str.match(/!.+!/g)<br>实际结果是<code>[&#39;!dare you! I have !an!&#39;]</code><br>该效果即是因为贪婪模式尽可能的匹配更多的字符串导致的</p>
+<p>此时我们可以使用<code>?</code>将该贪婪模式改为非贪婪模式<br>str.match(/!.+?!/g)<br>结果即是我们预期的<code>[&#39;!dare you!&#39;, &#39;!an!&#39;]</code></p>
+<h3 id="贪婪和非贪婪匹配的整个过程"><a href="#贪婪和非贪婪匹配的整个过程" class="headerlink" title="贪婪和非贪婪匹配的整个过程"></a>贪婪和非贪婪匹配的整个过程</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/%E6%AD%A3%E5%88%99/%E6%AD%A3%E5%88%99%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5/" data-id="clzmdspi500e8zwl17gpt8v8m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/blog/page/5/">&lt; 上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/4/">4</a><a class="page-number" href="/blog/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/blog/page/7/">7</a><a class="page-number" href="/blog/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/21/">21</a><a class="extend next" rel="next" href="/blog/page/7/">下一页 &gt;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>

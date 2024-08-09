@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记录一些平时点滴">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ASK&#39;s Blog">
+<meta property="og:url" content="https://ansike.github.io/blog/page/10/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="记录一些平时点滴">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="ask">
+<meta property="article:tag" content=" ansike">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-编程/k8s/环境搭建相关/创建k8s环境" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3/%E5%88%9B%E5%BB%BAk8s%E7%8E%AF%E5%A2%83/" class="article-date">
+  <time datetime="2022-08-06T15:59:06.000Z" itemprop="datePublished">2022-08-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3/%E5%88%9B%E5%BB%BAk8s%E7%8E%AF%E5%A2%83/">创建k8s环境</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><p>创建一个 k8s 集群包含三个 node，一个 master，两个子 node<br>创建 image 为 nginx 的 deployment，直接访问可以返回 nginx 的默认页面。<br>deployment 会创建三个 pod 会分布到集群中的两个 node 上</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3/%E5%88%9B%E5%BB%BAk8s%E7%8E%AF%E5%A2%83/k8s-01.jpg" class="" title="k8s 集群安装目标">
+
+<h3 id="环境要求"><a href="#环境要求" class="headerlink" title="环境要求"></a>环境要求</h3><p>借助 virtualbox 做三台虚拟机，规划如下：<br>系统选择 centos7<br>k8s 使用最近稳定版本 1.24.3</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">192.168</span><span class="number">.56</span><span class="number">.2</span> <span class="string">master</span></span><br><span class="line"><span class="number">192.168</span><span class="number">.56</span><span class="number">.3</span> <span class="string">node01</span></span><br><span class="line"><span class="number">192.168</span><span class="number">.56</span><span class="number">.4</span> <span class="string">node02</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="机器之间免密登录"><a href="#机器之间免密登录" class="headerlink" title="机器之间免密登录"></a>机器之间免密登录</h3><p>将 <code>/etc/ssh/sshd_config</code> 中以下改行进行解注释</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PubkeyAuthentication yes</span><br><span class="line">AuthorizedKeysFile .ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p>AuthorizedKeysFile 指向了客户端的 ssh 生成的公钥在服务器端存放的文件。所以创建该文件<code>~/.ssh/authorized_keys</code>,讲客户端生成的.ssh/id_rsa.pub 复制到 authorized_keys 中<br>id_rsa.pub 生成方式 <code>ssh-keygen -t rsa</code> 一路回车即可</p>
+<h3 id="初始化系统"><a href="#初始化系统" class="headerlink" title="初始化系统"></a>初始化系统</h3>
+
+<p><a href="../Centos系统初始化">Centos 系统初始化</a></p>
+<h3 id="通过-kubeadm-安装-k8s"><a href="#通过-kubeadm-安装-k8s" class="headerlink" title="通过 kubeadm 安装 k8s"></a>通过 kubeadm 安装 k8s</h3><p><a href="../k8sKubeadm部署安装">k8sKubeadm 部署安装</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/k8s/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3/%E5%88%9B%E5%BB%BAk8s%E7%8E%AF%E5%A2%83/" data-id="clzmdspi800f5zwl11uz1a3ge" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/k8s/环境搭建相关/虚拟机网络模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3/%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time datetime="2022-08-06T15:59:06.000Z" itemprop="datePublished">2022-08-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3/%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/">虚拟机网络的模式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>虚拟机的三种网络模式: 网络地址转换模式、桥接模式、仅主机模式</p>
+<p>下面以 virtualbox 和 centos-7 为例进行解释</p>
+<blockquote>
+<p>virtualbox: 版本 6.1.36 r152435 (Qt5.6.3)<br>Centos7 版本: 7.9.2009<br>操作系统: macOS Monterey 12.5</p>
+</blockquote>
+<p><strong>三种网络模式简单对比</strong></p>
+<table>
+<thead>
+<tr>
+<th>虚拟机网卡模式</th>
+<th>访问主机</th>
+<th>访问同局域网其他虚拟机</th>
+<th>访问网络</th>
+<th>主机访问虚拟机</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NAT 模式</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr>
+<td>桥接模式</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>hostonly 模式</td>
+<td>no</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+</tr>
+</tbody></table>
+<h3 id="网络地址转换模式（NAT）"><a href="#网络地址转换模式（NAT）" class="headerlink" title="网络地址转换模式（NAT）"></a>网络地址转换模式（NAT）</h3><p><strong>nat 是什么</strong><br>nat 为 network address transform 网络地址转换，一般在涉及公网和局域网要进行数据包交换时需要进行网络地址转换。</p>
+<p>该模式下的虚拟网卡不直接和外网进行通信，只作为和主机通信的接口。只要主机能访问网络，且虚拟网卡可与主机进行联通，那虚拟机就可以通过主机访问网络（不需要配置 IP，子网掩码，网关等）</p>
+<p>设置完成进入主机之后可以查看网络配置<code>ip a</code>，如果此时网卡出现 10 网断 ip 地址说明配置正常<br>如果没有分配 IP，设置<code>/etc/sysconfig/network-scripts/ifcfg-enp0s3</code> 中 ONBOOT=yes，然后 <code>systemctl restart network</code>重启网络</p>
+<p><strong>主机和虚拟机关系？</strong><br>结论: 主机不可以访问虚拟机，虚拟机可以访问主机的网络，虚拟机之间不能互相访问<br>原因: 虚拟机被分配的网卡为 10.x.x.x 的 ip，此 ip 可通过主机的网络访问互联网，也可访问主机 ip，但主机所在的网段是 192.168.x.x。因为多个虚拟机被分配的网卡是可能相同的，由此也可看出多个虚拟机之间必然是完全隔离的。</p>
+<p><strong>优劣分析</strong><br>优势: 网络配置方式简单，也可访问互联网（也不需要配置 DHCP 进行分配即可）<br>劣势: 主机无法访问虚拟机，虚拟机之前也无法互相访问，应用场景比较小。一般和其他模式配合使用。</p>
+<h3 id="桥接模式（Bridged）"><a href="#桥接模式（Bridged）" class="headerlink" title="桥接模式（Bridged）"></a>桥接模式（Bridged）</h3><p>通过虚拟网桥将主机的网卡和虚拟交换机连接在一起，虚拟机的虚拟网卡都要连接在虚拟交换机上。所以桥接模式的虚拟机需要保证与主机在同一网段并且网关，DNS 和主机网卡一致</p>
+<p>设置步骤</p>
+<ol>
+<li>设置虚拟机的网络连接方式桥接模式模式: 选择对应虚拟机=&gt;设置=&gt;网络=&gt;连接方式选桥接网络</li>
+<li>查看本机 ip，子网掩码，网关，DNS 等信息</li>
+<li>登录虚拟机，配置网卡</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 选择正确的网卡进行配置</span></span><br><span class="line">vi /etc/sysconfig/network-scripts/ifcfg-enp0s3</span><br><span class="line"><span class="meta">#</span><span class="bash"> 可以通过 mac 地址对比确认，机器中ip a查看网卡所有的mac地址</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 第一步的网卡选择的高级选项可以看到网卡的mac地址</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> TYPE=Ethernet</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> BOOTPROTO=static <span class="comment"># 设置为静态IP</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> DEFROUTE=yes</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> IPV4_FAILURE_FATAL=no</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> NAME=enp0s3</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> UUID=79b9344a-8e4c-4fe6-ac55-ec58499cfe07</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> DEVICE=enp0s3</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ONBOOT=yes <span class="comment"># 设置开启启动</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> IPADDR=192.168.0.20 <span class="comment"># 保证和主机ip在同一网段 主机ip为192.168.0.102</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> NETMASK=255.255.255.0 <span class="comment"># 子网掩码，网关，DNS保证和主机IP一致</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> GATEWAY=192.168.0.1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> DNS1=192.168.0.1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 编辑之后网卡之后进行网络服务重启</span></span><br><span class="line">systemctl restart network</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 虚拟机ping主机</span></span><br><span class="line">ping 192.168.0.102</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 主机ping虚拟机</span></span><br><span class="line">ping 192.168.0.20</span><br></pre></td></tr></table></figure>
+
+<p>没有成功验证桥接模式虚拟机访问互联网<br>mac 在 wifi 下无法访问互联网：<a href="https://support.apple.com/zh-cn/guide/mac-help/mh43557/12.0/mac/12.0" target="_blank" rel="noopener">https://support.apple.com/zh-cn/guide/mac-help/mh43557/12.0/mac/12.0</a></p>
+<h3 id="仅主机模式（Host-Only）"><a href="#仅主机模式（Host-Only）" class="headerlink" title="仅主机模式（Host-Only）"></a>仅主机模式（Host-Only）</h3><p>是比 NAT 更封闭的网络模式。<br>该模式下创建了一个基于宿主机的虚拟局域网，局域网内的虚拟机通过宿主机上的虚拟网卡<code>vboxnet0</code>进行联通。<br>此时宿主机可以访问虚拟机，虚拟机不能访问宿主机和外网。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 此时可以在宿主机上进行 ping</span></span><br><span class="line">ping [虚拟机ip]</span><br><span class="line"><span class="meta">#</span><span class="bash"> 或者ssh登录</span></span><br><span class="line">ssh root@[虚拟机ip]</span><br></pre></td></tr></table></figure>
+
+<p><strong>优劣分析</strong><br>优势: 主机可以访问虚拟机，虚拟机之间也可以互相访问<br>劣势: 配置方式复杂，需要根据<code>vboxnet0</code>设置自己的静态 IP。虚拟机无法访问主机。无法连接互联网。</p>
+<h3 id="网卡混杂模式"><a href="#网卡混杂模式" class="headerlink" title="网卡混杂模式"></a>网卡混杂模式</h3><p>网卡有混杂模式，在混杂模式下，所有的流量都会流经 CPU，而不是仅传递专门的处理器中。该模式一般用来进行数据嗅探</p>
+<h3 id="如何设置自己的网络呢"><a href="#如何设置自己的网络呢" class="headerlink" title="如何设置自己的网络呢"></a>如何设置自己的网络呢</h3><p>说了比较多的概念，我们在实际的学习过程应该怎么设置最简单也最容易理解呢？<br><strong>一个 nat 网卡 + 一个 hostonly 网卡</strong>即可满足我们的常规需求<br>nat 为了让虚拟机可以访问互联网，hostonly 是为了方便主机访问虚拟机及虚拟机之间互相访问。</p>
+<h3 id="软件下载"><a href="#软件下载" class="headerlink" title="软件下载"></a>软件下载</h3><p>virtualbox：<a href="https://download.virtualbox.org/virtualbox/6.1.36/VirtualBox-6.1.36-152435-OSX.dmg" target="_blank" rel="noopener">https://download.virtualbox.org/virtualbox/6.1.36/VirtualBox-6.1.36-152435-OSX.dmg</a><br>centos7：<a href="https://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-Minimal-2009.iso?spm=a2c6h.25603864.0.0.33746aeaJR8JPM" target="_blank" rel="noopener">https://mirrors.aliyun.com/centos/7.9.2009/isos/x86_64/CentOS-7-x86_64-Minimal-2009.iso?spm=a2c6h.25603864.0.0.33746aeaJR8JPM</a></p>
+<h3 id="参考地址"><a href="#参考地址" class="headerlink" title="参考地址"></a>参考地址</h3><p><a href="https://www.jianshu.com/p/6139ffd686de" target="_blank" rel="noopener">https://www.jianshu.com/p/6139ffd686de</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/k8s/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3/%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%BC%8F/" data-id="clzmdspi800f9zwl13hfq2xzf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/git/git撤销" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/git/git%E6%92%A4%E9%94%80/" class="article-date">
+  <time datetime="2022-08-02T14:10:51.000Z" itemprop="datePublished">2022-08-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/git/git%E6%92%A4%E9%94%80/">git 相关回滚</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在实际的代码开发中会涉及到各种各样的撤销回滚，本文会总结一下我在开发中遇到的各种回滚。</p>
+<p>我们知道 git 仓库中有这样的概念: 工作区, 暂存区, 本地仓库, 远程仓库。表示我们当前有关代码存放的空间。<br>那关于代码文件在这三个空间中涉及的命令分别是：add, commit, push。涉及到回滚操作也和这三个命令相关。</p>
+<h3 id="工作区回滚（新建文件或编辑文件回滚）"><a href="#工作区回滚（新建文件或编辑文件回滚）" class="headerlink" title="工作区回滚（新建文件或编辑文件回滚）"></a>工作区回滚（新建文件或编辑文件回滚）</h3><p>分两种情况</p>
+<ol>
+<li>文件已经 git 追踪记录，只是有新的变动，需要回滚</li>
+</ol>
+<p>该命令会将你本地工作空间的所有的文件按照当前分支进行检出，相当于是基于当前分支进行了新的 checkout 操作，和最近的 commit 的记录中文件保持一致</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout .</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>新创建的文件，还没有被 git 追踪到</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">直接删除文件</span><br><span class="line">rm -f file</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>有没有被追踪，可以打印 git status 查看，没有追踪的文件会在 Untracked files: 里</p>
+</blockquote>
+<ol start="3">
+<li>新创建的文件，已经被 git 追踪到</li>
+</ol>
+<p>这个会比较麻烦一点，需要从 git 的 cache 中删除掉，然后再删除文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git rm -f --cached file</span><br><span class="line"><span class="meta">#</span><span class="bash"> 当然一个一个删除有点费事儿，可以删除全部缓存，然后继续后续操作，最后记得把之前的文件加入缓存就好</span></span><br><span class="line">git rm -f --cached .</span><br><span class="line">git add .</span><br></pre></td></tr></table></figure>
+
+<h3 id="暂存区回滚"><a href="#暂存区回滚" class="headerlink" title="暂存区回滚"></a>暂存区回滚</h3><p>表示已经执行 git add 命令了，此时 reset 可以将文件状态返回到工作区</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD file</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 新版本的git建议 2.24.0</span></span><br><span class="line">git restore --staged file</span><br></pre></td></tr></table></figure>
+
+<h3 id="本地仓库回滚"><a href="#本地仓库回滚" class="headerlink" title="本地仓库回滚"></a>本地仓库回滚</h3><p>表示已经执行 git commit 命令了，此时 reset 可以将文件状态返回上一个或者两个空间<br>reset 可以追加–hard, –soft, –mixed</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 撤销到指定commit，保留文件在工作空间</span></span><br><span class="line">git reset [commitId] --mixed</span><br><span class="line"><span class="meta">#</span><span class="bash"> 撤销到指定commit，保留文件再暂存区</span></span><br><span class="line">git reset [commitId] --soft</span><br><span class="line"><span class="meta">#</span><span class="bash"> 撤销到指定commit，不保留文件</span></span><br><span class="line">git reset [commitId] --hard</span><br></pre></td></tr></table></figure>
+
+<h3 id="远程仓库回滚"><a href="#远程仓库回滚" class="headerlink" title="远程仓库回滚"></a>远程仓库回滚</h3><p><strong>非必要，不进行远端仓库回滚!!!</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 该操作会造成一个新的commit，新的commit说明了是一次revert操作</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 是对指定commit的一次删除操作，原有commit不会被删除</span></span><br><span class="line">git revert [commitId]</span><br><span class="line"><span class="meta">#</span><span class="bash"> 我们还可以对revert的commit再进行revert</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 通过该命令我们可以查看到更多的git信息, 查看HEAD的指向</span></span><br><span class="line">git reflog</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/git/git%E6%92%A4%E9%94%80/" data-id="clzmdspfc001zzwl1hwx0eb6t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/git/merge和rebase比较" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/git/merge%E5%92%8Crebase%E6%AF%94%E8%BE%83/" class="article-date">
+  <time datetime="2022-08-02T14:10:51.000Z" itemprop="datePublished">2022-08-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/git/merge%E5%92%8Crebase%E6%AF%94%E8%BE%83/">git merge和rebase比较</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="rebase和merge过程"><a href="#rebase和merge过程" class="headerlink" title="rebase和merge过程"></a>rebase和merge过程</h2><p>如下，要将开发分支合入主干分支，比较在rebase和merge下的差异</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> master dev</span></span><br><span class="line">|  \</span><br><span class="line">C   E</span><br><span class="line">|   |</span><br><span class="line">B   D</span><br><span class="line">|  /</span><br><span class="line">A</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="rebase-变基-将原来的基由A变为C"><a href="#rebase-变基-将原来的基由A变为C" class="headerlink" title="rebase 变基 将原来的基由A变为C"></a>rebase 变基 将原来的基由A变为C</h4><ol>
+<li>过程: 取消dev分支D, E的commit临时保存为patch,将B, C commit 放到dev分支中. 最后将D,E依次合入dev分支.</li>
+<li>特点: 版本历史在一条直线上, 不会生成新的commitId, 新基之上原有的commitId都会改变.</li>
+<li>冲突时current和incoming判断: current的是rebase的分支(master分支代码)，incoming的是当前分支(dev分支代码). <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在dev rebase master分支, 之后提mr合入master</span></span><br><span class="line">git rebase master</span><br><span class="line"><span class="meta">#</span><span class="bash"> 图形</span></span><br><span class="line">|</span><br><span class="line">E</span><br><span class="line">|</span><br><span class="line">D</span><br><span class="line">|</span><br><span class="line">C</span><br><span class="line">|</span><br><span class="line">B</span><br><span class="line">|</span><br><span class="line">A</span><br></pre></td></tr></table></figure>
+<h4 id="merge-合并-将开发分支的commit并入主干分支"><a href="#merge-合并-将开发分支的commit并入主干分支" class="headerlink" title="merge 合并 将开发分支的commit并入主干分支"></a>merge 合并 将开发分支的commit并入主干分支</h4></li>
+<li>过程: E和C进行比较判断是否有冲突，不会修改原有的commitId.</li>
+<li>特点: 版本历史不在一条直线上, 会生成新的一个commitId：F，该commitId标识为两个分支的合并ID, 原有的commitId不变.</li>
+<li>冲突时current和incoming判断: current的是当前分支(master)，incoming的是merge的分支(dev)</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在master直接merge dev分支</span></span><br><span class="line">git merge dev</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 图形</span></span><br><span class="line">F</span><br><span class="line">|  \</span><br><span class="line">C   E</span><br><span class="line">|   |</span><br><span class="line">B   D</span><br><span class="line">|  /</span><br><span class="line">A</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="不要在公共分支rebase"><a href="#不要在公共分支rebase" class="headerlink" title="不要在公共分支rebase"></a>不要在公共分支rebase</h4><h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><ol>
+<li>在上述rebase冲突解决时<code>current的是rebase的分支(master分支代码)，incoming的是当前分支(dev分支代码)</code>不符合直观预期.<br>直观来看dev rebase的master, current应该是dev的代码,毕竟是在dev分支,但实际不是. 原因其实在rebase的过程已经说明. 冲突的发生的时机: master分支的新增的commit已全部进入dev分支, dev原有的commit开始patch到dev分支上. 所以此时可以不恰当的理解为dev的commit在往master的上合并,但是记住当前还在dev分支.</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/git/merge%E5%92%8Crebase%E6%AF%94%E8%BE%83/" data-id="clzmdspfd002azwl14vykgk34" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/chapter18-expect/自动化部署ssh密钥" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/chapter18-expect/%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2ssh%E5%AF%86%E9%92%A5/" class="article-date">
+  <time datetime="2022-08-01T15:33:02.000Z" itemprop="datePublished">2022-08-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/chapter18-expect/%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2ssh%E5%AF%86%E9%92%A5/">expect相关</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="expect-常用命令"><a href="#expect-常用命令" class="headerlink" title="expect 常用命令"></a>expect 常用命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="自动化部署-ssh-密钥"><a href="#自动化部署-ssh-密钥" class="headerlink" title="自动化部署 ssh 密钥"></a>自动化部署 ssh 密钥</h4><ol>
+<li>生成密钥</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 生成专有密钥</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ssh-keygen -t rsa -f ~/.ssh/id_rsa_expect.pub -P <span class="string">""</span></span></span><br><span class="line">publicKey=~/.ssh/id_rsa_expect.pub</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>书写 expect 文件,执行的单元文件</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/usr/expect</span></span><br><span class="line">if &#123; $argc != 2 &#125; &#123;</span><br><span class="line">  send_user "usage: expect publicKeyPath,host \n"</span><br><span class="line">  exit</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> define vars</span></span><br><span class="line">set file [lindex $argv 0]</span><br><span class="line">set host [lindex $argv 1]</span><br><span class="line">set password "Ask.2222"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> start <span class="built_in">exec</span> <span class="built_in">command</span></span></span><br><span class="line">spawn ssh-copy-id -i $file "root@$host"</span><br><span class="line">expect &#123;</span><br><span class="line">  "yes/no" &#123;send "yes\r";exp_continue&#125;</span><br><span class="line">  "*password" &#123;send "$password\r"&#125;</span><br><span class="line">&#125;</span><br><span class="line">expect eof</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>开发 shell 脚本循环执行 expect 脚本</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">hosts=(</span><br><span class="line">  47.98.143.211</span><br><span class="line">)</span><br><span class="line">for host in $hosts</span><br><span class="line">do</span><br><span class="line">  expect expect.exp ~/.ssh/id_rsa_expect.pub $host</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/chapter18-expect/%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2ssh%E5%AF%86%E9%92%A5/" data-id="clzmdspig00hhzwl11nt7czfy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/k8s/k8s资源控制器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/k8s%E8%B5%84%E6%BA%90%E6%8E%A7%E5%88%B6%E5%99%A8/" class="article-date">
+  <time datetime="2022-07-31T16:10:01.000Z" itemprop="datePublished">2022-08-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/k8s%E8%B5%84%E6%BA%90%E6%8E%A7%E5%88%B6%E5%99%A8/">控制器说明</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="控制器说明"><a href="#控制器说明" class="headerlink" title="控制器说明"></a>控制器说明</h3><p>k8s 中内置了很多控制器（controller），控制 pod 的具体状态和行为。</p>
+<ol>
+<li>ReplicaSet（rs）维持 pod 的副本数目，通过标签（label）去选择 pod</li>
+</ol>
+<p><a href="https://github.com/ansike/k8s-script/blob/main/controller/replicaset.yaml" target="_blank" rel="noopener">https://github.com/ansike/k8s-script/blob/main/controller/replicaset.yaml</a></p>
+<ol start="2">
+<li>Deployment 提供了声明式定义。deployment 创建 rs，rs 创建管理 pod</li>
+</ol>
+<p>以上两个一般用来满足无状态服务的诉求。<br>rs 维持了 pod 中副本的数量，维持的手段时通过 label 选择对应的副本，实时检测 pod 的数目和 replicas 定义的数量是否一致<br>deployment 则是通过创建 rs 来进行 pod 的管理和维护<br><a href="https://github.com/ansike/k8s-script/blob/main/controller/deployment/deployment.yaml" target="_blank" rel="noopener">https://github.com/ansike/k8s-script/blob/main/controller/deployment/deployment.yaml</a></p>
+<p>所以通过 deployment 描述的资源会同时创建 rs，但是通过 rs 创建的资源不会创建 deployment</p>
+<p><strong>deployment 常用命令</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 修改副本数为5</span></span><br><span class="line">kubectl scale deployment my-deployment --replicas=5</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改镜像为nginx</span></span><br><span class="line">kubectl set image deployment/my-deployment my-app=nginx:1.14.2</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 回滚到上一次</span></span><br><span class="line">kubectl rollout undo deployment my-deployment</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看deployment更新历史，做定向回滚使用</span></span><br><span class="line">kubectl rollout history deployment my-deployment</span><br><span class="line"><span class="meta">#</span><span class="bash"> deployment.apps/my-deployment</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> REVISION  CHANGE-CAUSE</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1         &lt;none&gt;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2         &lt;none&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 回滚到第一个版本</span></span><br><span class="line">kubectl rollout undo deployment my-deployment --to-revision=1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 以上的所有操作都可以通过直接编辑deployment实现</span></span><br><span class="line">kubectl edit deployment my-deployment</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>DaemonSet 确保全部（或一些）Node 上运行一个 Pod 的副本（和 node 相关）</li>
+</ol>
+<p>部署一个和 node 相关的服务</p>
+<ol start="4">
+<li>Job 负责批处理任务，即执行一次的任务，保证批处理的任务的一个或者个 Pod 成功结束</li>
+</ol>
+<p>部署一个 job 的<br><a href="https://github.com/ansike/k8s-script/blob/main/controller/job.yaml" target="_blank" rel="noopener">https://github.com/ansike/k8s-script/blob/main/controller/job.yaml</a></p>
+<ol start="5">
+<li>CronJob 基于时间的 Job，给定的时间点只运行一次，周期行的时间点运行</li>
+</ol>
+<p>部署一个定时启动的 job，本质是定期的启动job来进行任务处理，任务处理完成之后会删除<br><a href="https://github.com/ansike/k8s-script/blob/main/controller/cronjob.yaml" target="_blank" rel="noopener">https://github.com/ansike/k8s-script/blob/main/controller/cronjob.yaml</a></p>
+<ol start="6">
+<li>StatefulSet 稳定的持久化存储，基于 PVC 实现；稳定的网络标志；有序部署，有序收缩；（有状态服务）</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/k8s/k8s%E8%B5%84%E6%BA%90%E6%8E%A7%E5%88%B6%E5%99%A8/" data-id="clzmdspfj004jzwl1ag68ekxb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/k8s/k8spod生命周期" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/k8spod%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" class="article-date">
+  <time datetime="2022-07-31T15:39:05.000Z" itemprop="datePublished">2022-07-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/k8spod%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">k8s pod生命周期</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="init-container"><a href="#init-container" class="headerlink" title="init container"></a>init container</h3><p>于 pod 启动前的容器，可以在此时做数据，文件的初始化，做基础服务的依赖检测。</p>
+<p>initC 容器可以有多个，多个容器之间串行执行，执行完成之后才开始主容器的运行</p>
+<p><strong>该 demo 展示了一个容器依赖两个服务的启动</strong></p>
+<p><strong>1. 启动 pod</strong></p>
+<p>观察 pod 的状态一直处于 init 的状态，这是因为依赖的两个服务还没有启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 初始化pod</span></span><br><span class="line">kubectl apply -f /home/ansike/ansike/k8s-script/pod/initc/node-initc.yaml</span><br><span class="line"><span class="meta">#</span><span class="bash"> 获取pod</span></span><br><span class="line">kubectl get pods</span><br><span class="line"><span class="meta">#</span><span class="bash"> NAME   READY   STATUS     RESTARTS   AGE</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> node   0/1     Init:0/2   0          6s</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 启动第一个服务：myservice</strong></p>
+<p>启动之后需要等几十秒看 Init 的状态变成 1/2 了说明当前服务一个被 initC 检测到了<br>检测的方式其实很简单，就是用了 nslookup，向 k8s 的 coredns 进行了域名解析查询。<br>因为每一个服务启动之后都会向 k8s 进行域名注册</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 初始化服务</span></span><br><span class="line">kubectl apply -f /home/ansike/ansike/k8s-script/pod/initc/mydb.yaml</span><br><span class="line"><span class="meta">#</span><span class="bash"> 获取pod</span></span><br><span class="line">kubectl get pods</span><br><span class="line"><span class="meta">#</span><span class="bash"> NAME   READY   STATUS     RESTARTS   AGE</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> node   0/1     Init:1/2   0          5m44s</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 启动第二个服务：mydb</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 初始化服务</span></span><br><span class="line">kubectl apply -f /home/ansike/ansike/k8s-script/pod/initc/myservice.yaml</span><br><span class="line"><span class="meta">#</span><span class="bash"> 获取pod</span></span><br><span class="line">kubectl get pods</span><br><span class="line"><span class="meta">#</span><span class="bash"> NAME   READY   STATUS    RESTARTS   AGE</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> node   1/1     Running   0          7m11s</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="postStart-amp-preStop"><a href="#postStart-amp-preStop" class="headerlink" title="postStart &amp; preStop"></a>postStart &amp; preStop</h3><p>postStart 可以在启动之前做一些动作<br>preStop 可以在退出前做一些动作</p>
+<h3 id="main-container"><a href="#main-container" class="headerlink" title="main container"></a>main container</h3><p>执行正常的容器启动流程</p>
+<h3 id="probe"><a href="#probe" class="headerlink" title="probe"></a>probe</h3><p>k8s 有两个探针：就绪探针（readinessProbe），存活探针（livenessProbe）</p>
+<p>探测的方式：ExecAction，TCPSocketAction，HTTPGetAction</p>
+<p><strong>就绪探针</strong></p>
+<p>故意将 readinessProbe 检测的 port 写错，然后因为在当前端口检测不到服务，所以 READY 状态一直为 0/1<br>将 port 改正确之后，pod 很快 reday</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods</span><br><span class="line"><span class="meta">#</span><span class="bash"> NAME   READY   STATUS    RESTARTS   AGE</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> node   0/1     Running   0          2m56s</span></span><br><span class="line"></span><br><span class="line">kubectl get pods</span><br><span class="line"><span class="meta">#</span><span class="bash"> NAME   READY   STATUS    RESTARTS   AGE</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> node   1/1     Running   0          4s</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>存活探针</strong></p>
+<ol>
+<li>exec 对应 node-livenessprobe-exec.yaml 文件</li>
+</ol>
+<p>使用 busybox 创建了一个 pod，当前 pod 在启动时创建一个/tmp/live 的文件，该文件将作为存活检测的依据。<br>在 30s 后将当前文件删除，以便于存活检测生效触发 pod 重启</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">kubectl get pods -w</span><br><span class="line"><span class="meta">#</span><span class="bash"> NAME   READY   STATUS    RESTARTS      AGE</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> node   1/1     Running   1 (19s ago)   88s</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> node   1/1     Running   2 (1s ago)    2m19s</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>httpGet 对应 node-livenessprobe-httpget.yaml 文件</li>
+</ol>
+<p>启动服务之后删除 nginx 下的目标文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 删除nginx index.html文件</span></span><br><span class="line">kubectl exec -it nginx -- rm -rf /usr/share/nginx/html/index.html</span><br><span class="line"></span><br><span class="line">kubectl get pods -w</span><br><span class="line"><span class="meta">#</span><span class="bash"> NAME    READY   STATUS    RESTARTS   AGE</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> nginx   1/1     Running   0          8m20s</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> nginx   1/1     Running   1 (1s ago)   11m</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>httpGet 对应 node-livenessprobe-socket.yaml 文件</li>
+</ol>
+<p>因为改方法就是监听 container 的端口，而容器端口监听失败时 pod 自己就会重启，所以无需验证</p>
+<p>相关代码参考：<a href="https://github.com/ansike/k8s-script/tree/main/pod" target="_blank" rel="noopener">https://github.com/ansike/k8s-script/tree/main/pod</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/k8s/k8spod%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" data-id="clzmdspfi004czwl193002hn7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/k8s/k8s资源清单" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/k8s%E8%B5%84%E6%BA%90%E6%B8%85%E5%8D%95/" class="article-date">
+  <time datetime="2022-07-30T14:51:46.000Z" itemprop="datePublished">2022-07-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/k8s%E8%B5%84%E6%BA%90%E6%B8%85%E5%8D%95/">k8s资源清单</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="k8s-中的资源"><a href="#k8s-中的资源" class="headerlink" title="k8s 中的资源"></a>k8s 中的资源</h3><p>k8s 中所有的内容都抽象为资源，资源实例化后叫对象</p>
+<!-- 根据范围可以分为三类
+1. namespace: 常见命名空间 kube-system, default
+2. cluster: role
+3. metadata: HPA 通过指标进行分类 -->
+
+<ol>
+<li>工作负载型资源（workload）: Pod、ReplicaSet、Deployment、StatefulSet、DaemonSet、Job、CronJob</li>
+<li>服务发现及负载均衡资源（ServiceDiscovery LoadBalance）: Service、Ingress</li>
+<li>配置和存储型资源: Volume（存储卷）、CSI（容器存储接口）</li>
+<li>特殊类型的存储卷: ConfigMap（当配置中心来使用的资源类型）、Secret（保存敏感数据）、DownwardAPI（把外部环境中的信息输出给容器）</li>
+<li>集群级资源: Namespace、Node、Role、ClusterRole、RoleBinding、ClusterRoleBinding</li>
+<li>元数据类型资源: HPA、PodTemplate、LimitRange</li>
+</ol>
+<h3 id="资源清单"><a href="#资源清单" class="headerlink" title="资源清单"></a>资源清单</h3><p>在 k8s 中我们一般使用 yaml 格式的文件来创建符合我们预期期望的 pod，这样的文件我们一般称之为资源清单</p>
+<!-- TODO yaml 格式 -->
+
+<h3 id="常用字段解释"><a href="#常用字段解释" class="headerlink" title="常用字段解释"></a>常用字段解释</h3><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>字段类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>version</td>
+<td>string</td>
+<td>指 K8S API 的版本，目前基本是 v1，可以使用 kubectl api-version 查询</td>
+</tr>
+<tr>
+<td>kind</td>
+<td>string</td>
+<td>指 yaml 文件定义的资源类型和角色，如：Pod （注意首字母大写）</td>
+</tr>
+<tr>
+<td>metadata</td>
+<td>object</td>
+<td>元数据对象</td>
+</tr>
+<tr>
+<td>metadata.name</td>
+<td>string</td>
+<td>元数据对象的名字，自定义 pod 的名字</td>
+</tr>
+<tr>
+<td>metadata.namespace</td>
+<td>string</td>
+<td>元数据对象的命名空间</td>
+</tr>
+<tr>
+<td>spec</td>
+<td>string</td>
+<td>元数据对象的命名空间</td>
+</tr>
+<tr>
+<td>spec.containers[]</td>
+<td>list</td>
+<td>容器列表定义</td>
+</tr>
+<tr>
+<td>spec.containers[].name</td>
+<td>string</td>
+<td>容器的名字</td>
+</tr>
+<tr>
+<td>spec.containers[].image</td>
+<td>string</td>
+<td>容器使用的镜像名字</td>
+</tr>
+<tr>
+<td>spec.containers[].ports[]</td>
+<td>list</td>
+<td>容器需要使用的端口列表</td>
+</tr>
+<tr>
+<td>spec.containers[].ports[].name</td>
+<td>string</td>
+<td>容器需要使用的端口名称</td>
+</tr>
+<tr>
+<td>spec.containers[].ports[].conatinerPort</td>
+<td>string</td>
+<td>容器监听的端口号</td>
+</tr>
+<tr>
+<td>spec.containers[].ports[].hostPort</td>
+<td>string</td>
+<td>主机需要监听的端口号，设置之后同一台主机无法启动改容器相同的副本</td>
+</tr>
+<tr>
+<td>spec.containers[].env[]</td>
+<td>list</td>
+<td>环境变量</td>
+</tr>
+<tr>
+<td>spec.containers[].env[].name</td>
+<td>string</td>
+<td>环境变量 name</td>
+</tr>
+<tr>
+<td>spec.containers[].env[].value</td>
+<td>string</td>
+<td>环境变量 value</td>
+</tr>
+<tr>
+<td>spec.restartPolicy</td>
+<td>string</td>
+<td>定义 Pod 的重启策略，可选值：Always（退出就重启）, OnFailure（失败退出时重启）, Never（永远不会重启）</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="容器的生命周期"><a href="#容器的生命周期" class="headerlink" title="容器的生命周期"></a>容器的生命周期</h3><p>pod 创建时经历过程如下</p>
+<ol>
+<li>pause 网络和数据卷初始化</li>
+<li>start initC 初始化容器(主容器启动的前置动作，包括数据初始化，文件创建，依赖服务检测)</li>
+<li>start mainC（中间还有 start 和 stop 的回调）<ul>
+<li><ol>
+<li>容器启动</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>调用启动的start动作</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>主流程启动（拉去镜像，启动等）</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>中间可能会存在探活动作</li>
+</ol>
+</li>
+<li><ol start="5">
+<li>如果容器停止会调用停止的stop动作</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>initC</strong><br>initC 是主容器启动前的其他容器启动操作，所有的 initC 会初始化串行启动，所有的容器正常启动且停止之后主容器才会开始启动。</p>
+<p><strong>探针</strong>是 kubelet 对容器执行的定期诊断。</p>
+<p><strong>容器探针的分类：</strong></p>
+<ol>
+<li>ExecAction: 容器内执行指定命令。退出码为 0 表示成功</li>
+<li>TCPSocketAction: 对指定端口上的容器的 IP 地址进行 TCP 检查。如果端口打开则认为是成功的</li>
+<li>HTTPGetAction: 对指定的端口和路径上的容器的 IP 地址执行 HTTP Get 请求。如果响应码大于等于 200 且小于 400，认为是成功的</li>
+</ol>
+<p><strong>探测方式</strong><br>livenessProbe: 指示容器是否正在运行，存在于 mainC 的整个生命周期中。探活检测失败容器将根据重启策略进行相应<br>readinessProbe: 指示容器是否准备好服务请求。如果探测失败，端点控制器将从与 Pod 匹配的所有 Service 的端点中删除该 Pod 的 IP 地址。</p>
+<p><strong>pod 的分类</strong><br>自主式的 Pod: Pod 退出之后不会被自动创建<br>控制器管理的 Pod: 在控制器的生命周期里是中维持 Pod 的副本数目</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/k8s/k8s%E8%B5%84%E6%BA%90%E6%B8%85%E5%8D%95/" data-id="clzmdspfj004ozwl10t6pd5lf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/core/practice" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/practice/" class="article-date">
+  <time datetime="2022-07-24T02:58:59.000Z" itemprop="datePublished">2022-07-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/practice/">练习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="#word">1. 192. Word Frequency</a><br><a href="#Phone">2. 193. Valid Phone Numbers</a><br><a href="#Transpose">3. 194. Transpose File</a><br><a href="#Tenth">4. 195. Tenth Line</a></p>
+<h3 id="word">1. 192. Word Frequency</h3>
+https://leetcode.cn/problems/word-frequency/
+涉及命令：tr 字符替换，sort排序及反转，uniq相同行合并，awk 按列输出
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> words.txt 统计文件中的词频，倒叙输出</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> the day is sunny the the</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> the sunny is is</span></span><br><span class="line">cat words.txt | tr -s ' ' '\n'|sort|uniq -c|sort -r|awk '&#123;print $2" "$1&#125;'</span><br></pre></td></tr></table></figure>
+
+<h3 id="Phone">2. 193. Valid Phone Numbers</h3>
+
+<p><a href="https://leetcode.cn/problems/valid-phone-numbers/" target="_blank" rel="noopener">https://leetcode.cn/problems/valid-phone-numbers/</a></p>
+<p>-E 使用扩展的正则表达式，其余语法和常规语法类似</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 使用扩展正则, 匹配 file 中的有效行（1，3）</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 987-123-4567</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 123 456 7890</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> (123) 456-7890</span></span><br><span class="line">grep -E "([0-9]&#123;3&#125;-|\([0-9]&#123;3&#125;\ ))[0-9]&#123;3&#125;-[0-9]&#123;4&#125;" file</span><br></pre></td></tr></table></figure>
+
+<h3 id="Transpose">3. 194. Transpose File</h3>
+
+<p>行列置换<br>head 显示 文件第一行<br>wc -w 统计当前的输入的单词数，计算列数<br>循环当前文件的列<br>利用 awk 可以直接输出每一行的某一列，再将循环输出的列通过 xargs 进行合并成一行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> file.txt</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> name age</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> alice 21</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ryan 30</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> =&gt;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> name alice ryan</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> age 21 30</span></span><br><span class="line">column=`cat file.txt|head -n 1|wc -w`</span><br><span class="line">for((i=1;i&lt;=$column;i++)) do</span><br><span class="line">  awk '&#123;print $'''$i'''&#125;' file.txt|xargs</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h3 id="Tenth">4. 195. Tenth Line</h3>
+
+<p><a href="https://leetcode.cn/problems/tenth-line/" target="_blank" rel="noopener">https://leetcode.cn/problems/tenth-line/</a></p>
+<p>利用了 sed 取行的能力，需要搭配-n（取消 sed 默认输出）一起</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> file.txt</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Line 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Line 2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Line 3</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Line 4</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Line 5</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Line 6</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Line 7</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Line 8</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Line 9</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Line 10</span></span><br><span class="line">sed -n "10p" file.txt</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/practice/" data-id="clzmdspik00j8zwl163ig33kq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/k8s/docker镜像制作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/docker%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/" class="article-date">
+  <time datetime="2022-07-23T14:00:18.000Z" itemprop="datePublished">2022-07-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/docker%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/">docker镜像制作及使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>环境依赖：Docker version 20.10.7, build f0df350； node 14 以上；minukube v1.26.0</p>
+<h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><ol>
+<li>用 node 编写一个简单的 http 服务</li>
+<li>编写 Dockerfile，生成 docker 镜像</li>
+<li>docker 镜像上传至远程 repository 中</li>
+<li>本地 docker run 镜像使用</li>
+<li>本地 k8s run 镜像使用</li>
+</ol>
+<h3 id="简单的-http-server"><a href="#简单的-http-server" class="headerlink" title="简单的 http server"></a>简单的 http server</h3><p>这块儿没有太多好讲的，就是启动一个 http server，监听请求进行响应</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"><span class="keyword">const</span> port = process.env.port || <span class="number">8080</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"port"</span>, port);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"env"</span>, process.env.env);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"access"</span>, req.url);</span><br><span class="line">  res.end(<span class="built_in">JSON</span>.stringify(&#123; <span class="attr">url</span>: req.url, <span class="attr">headers</span>: req.headers &#125;));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(port);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`server start on <span class="subst">$&#123;port&#125;</span>`</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="编写-Dockerfile，生成-docker-镜像"><a href="#编写-Dockerfile，生成-docker-镜像" class="headerlink" title="编写 Dockerfile，生成 docker 镜像"></a>编写 Dockerfile，生成 docker 镜像</h3><p>镜像选择一定要考虑清楚，如不考虑极有可能造成最后打包的产物很大。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"># 基于node:14-buster-slim镜像产出当前镜像，可以认为该镜像时较为纯净的包含node运行环境的镜像</span><br><span class="line">FROM node:14-buster-slim</span><br><span class="line"></span><br><span class="line"># 设置当前服务在镜像中的目录</span><br><span class="line">WORKDIR &#x2F;usr&#x2F;app</span><br><span class="line"></span><br><span class="line"># 讲当前环境的文件拷贝到镜像文件中</span><br><span class="line">COPY . .</span><br><span class="line"></span><br><span class="line"># 设置环境变量</span><br><span class="line">ENV port&#x3D;8080\</span><br><span class="line">  env&#x3D;production</span><br><span class="line"></span><br><span class="line"># 对外暴露8080端口</span><br><span class="line">EXPOSE 8080</span><br><span class="line"></span><br><span class="line"># 镜像启动默认执行的命令</span><br><span class="line">CMD node index.js</span><br></pre></td></tr></table></figure>
+
+<p>基于以上的 dockerfile，我们可以使用 docker 命令去生成一个镜像</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker build -f Dockerfile -t test-docker-node:v1 .</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 可以看到新生成的镜像</span></span><br><span class="line">docker images | grep test-docker-node</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">test</span>-docker-node        v1        05322a8908ad   4 hours ago     183MB</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="docker-镜像上传至远程-repository-中"><a href="#docker-镜像上传至远程-repository-中" class="headerlink" title="docker 镜像上传至远程 repository 中"></a>docker 镜像上传至远程 repository 中</h3><p>将本地的镜像上传到远端是需要重新 docker tag 的<br>没有 repo 的话可以自己去注册一个，完全免费：<a href="https://hub.docker.com/repositories" target="_blank" rel="noopener">https://hub.docker.com/repositories</a><br>以我自己的 repo 为例</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 先登录</span></span><br><span class="line">docker login</span><br><span class="line"><span class="meta">#</span><span class="bash"> 修改tag， 我的镜像源 hots+path 是 ansike/ansike</span></span><br><span class="line">docker tag test-docker-node:v1 ansike/ansike:test-docker-node-v1</span><br><span class="line"><span class="meta">#</span><span class="bash"> 推送到远端</span></span><br><span class="line">docker push ansike/ansike:test-docker-node-v1</span><br><span class="line"><span class="meta">#</span><span class="bash"> 当然也可以拉到本地</span></span><br><span class="line">docker pull ansike/ansike:test-docker-node-v1</span><br></pre></td></tr></table></figure>
+
+<h3 id="本地-docker-run-镜像使用"><a href="#本地-docker-run-镜像使用" class="headerlink" title="本地 docker run 镜像使用"></a>本地 docker run 镜像使用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">--name=test-docker-node \</span><br><span class="line">--env=port=8080 \</span><br><span class="line">--env=env=production \</span><br><span class="line">-p 8080:8080 -t ansike/ansike:test-docker-node-v1 /bin/sh -c 'node index.js'</span><br><span class="line"><span class="meta">#</span><span class="bash"> 既可以使用刚上传远端的镜像，也可以使用本地的镜像</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -p 8080:8080 -t <span class="built_in">test</span>-docker-node:v1 /bin/sh -c <span class="string">'node index.js'</span></span></span><br></pre></td></tr></table></figure>
+
+<p>此时本地可直接访问 <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> 查看数据</p>
+<h3 id="本地-k8s-run-镜像使用"><a href="#本地-k8s-run-镜像使用" class="headerlink" title="本地 k8s run 镜像使用"></a>本地 k8s run 镜像使用</h3><p>minikube 的安装使用 <a href="https://minikube.sigs.k8s.io/docs/start/" target="_blank" rel="noopener">https://minikube.sigs.k8s.io/docs/start/</a></p>
+<h5 id="通过命令方式创建deployment"><a href="#通过命令方式创建deployment" class="headerlink" title="通过命令方式创建deployment"></a>通过命令方式创建deployment</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> minikube 装好之后先start基础服务</span></span><br><span class="line">minikube start</span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建自己服务的 deployment</span></span><br><span class="line">kubectl create deployment node --image=ansike/ansike:test-docker-node-v1</span><br><span class="line"><span class="meta">#</span><span class="bash"> 暴露当前服务 类型为NodePort， 端口为8080</span></span><br><span class="line">kubectl expose deployment node --type=NodePort --port=8080</span><br><span class="line"><span class="meta">#</span><span class="bash"> 开启本地和k8s集群端口映射</span></span><br><span class="line">kubectl port-forward service/node 3001:8080</span><br></pre></td></tr></table></figure>
+<p>此时本地可直接访问 <a href="http://localhost:3001" target="_blank" rel="noopener">http://localhost:3001</a> 查看数据</p>
+<h5 id="通过yaml配置创建deployment"><a href="#通过yaml配置创建deployment" class="headerlink" title="通过yaml配置创建deployment"></a>通过yaml配置创建deployment</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">node-deployment</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">app:</span> <span class="string">node</span></span><br><span class="line">    </span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">3</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">app:</span> <span class="string">node</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">app:</span> <span class="string">node</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">node</span></span><br><span class="line">          <span class="attr">image:</span> <span class="string">ansike/ansike:test-docker-node-v1</span></span><br><span class="line">          <span class="attr">ports:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="attr">containerPort:</span> <span class="number">8080</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubectl apply -f ./node.deployment.yaml</span><br><span class="line">kubectl expose deployment node-deployment --type=NodePort --port=8080</span><br><span class="line">kubectl port-forward service/node-deployment 3001:8080</span><br></pre></td></tr></table></figure>
+
+<p>相关代码都可以从这儿找到 <a href="https://github.com/ansike/docker-node/tree/pure" target="_blank" rel="noopener">https://github.com/ansike/docker-node/tree/pure</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/k8s/docker%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/" data-id="clzmdspfh0042zwl1abm2e2it" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/blog/page/9/">&lt; 上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/8/">8</a><a class="page-number" href="/blog/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/blog/page/11/">11</a><a class="page-number" href="/blog/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/21/">21</a><a class="extend next" rel="next" href="/blog/page/11/">下一页 &gt;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>

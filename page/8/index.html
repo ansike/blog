@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记录一些平时点滴">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ASK&#39;s Blog">
+<meta property="og:url" content="https://ansike.github.io/blog/page/8/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="记录一些平时点滴">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="ask">
+<meta property="article:tag" content=" ansike">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-编程/js/node/pkg" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/node/pkg/" class="article-date">
+  <time datetime="2022-09-29T00:05:41.000Z" itemprop="datePublished">2022-09-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/node/pkg/">node 二进制包</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="什么时候需要将-node-应用编译成二进制包"><a href="#什么时候需要将-node-应用编译成二进制包" class="headerlink" title="什么时候需要将 node 应用编译成二进制包"></a>什么时候需要将 node 应用编译成二进制包</h3><p>希望交付给用户一个无需开箱，无需安装任何依赖即可直接使用其能力的包。</p>
+<h3 id="怎么生成二进制包"><a href="#怎么生成二进制包" class="headerlink" title="怎么生成二进制包"></a>怎么生成二进制包</h3><p>我们可以通过 node 中 pkg 将 node 应用或者脚本进行二进制编码，生成多平台（linux，macos，windows 等）包。<br><strong>使用方式</strong></p>
+<ol>
+<li>命令式</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">script: pkg index.js -t node16 --out-dir&#x3D;dist</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>声明式</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">script: pkg .</span><br><span class="line"># package.json</span><br><span class="line">pkg:&#123;</span><br><span class="line">  assts:[],</span><br><span class="line">  target:[]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>有一些 case 需要注意</strong></p>
+<ul>
+<li>pkg 目前（）只支持 commonjs 的包。如果是 esm，需要转换为 commonjs 包之后再使用 pkg 打包，否则会造成打包失败。（esm 可以在删掉 package.json 中的”module”标识之后使用@xxx/ncc 进行转换）</li>
+<li>打包之后启动包没有办法使用，可以在打包时加 <code>--debug</code> 输出打包过程的日志，查看是否有错误</li>
+</ul>
+<h3 id="一键式安装脚本"><a href="#一键式安装脚本" class="headerlink" title="一键式安装脚本"></a>一键式安装脚本</h3><p>我们在安装一些软件时通常只需要一条命令即可完成安装，我们也可产出自己的 install.sh。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -O- https://xxx/install.sh | sh</span><br></pre></td></tr></table></figure>
+
+<p><strong>以下为 demo 命令的安装示例</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> install.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/dev bash</span></span><br><span class="line">set -e</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断 curl 是否存在某个命令</span></span><br><span class="line">if [ type curl ]</span><br><span class="line">then</span><br><span class="line">  curl -o https://xxx/demo-linux</span><br><span class="line">elif [ type wget ]</span><br><span class="line">then</span><br><span class="line">  curl https://xxx/demo-linux</span><br><span class="line">else</span><br><span class="line">  echo "无法下载安装需要的二进制文件，请至少安装一个下载工具：wget|curl"</span><br><span class="line">  exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">mv demo-linux /usr/local/bin/demo</span><br><span class="line">chmod +x /usr/local/bin/demo</span><br><span class="line">echo "✅demo[$(demo -v)]已经完成安装，请使用$(demo -h)查看更多使用"</span><br></pre></td></tr></table></figure>
+
+<p><strong>卸载脚本</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> uninstall.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/dev bash</span></span><br><span class="line">set -e</span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断 demo 是否存在某个命令</span></span><br><span class="line">if [ type demo ]</span><br><span class="line">then</span><br><span class="line">  rm -rf /usr/local/bin/demo</span><br><span class="line">  echo "✅demo已经完成卸载"</span><br><span class="line">else</span><br><span class="line">  echo "⚠️ demo不存在，无需卸载"</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p><strong>判断命令是否存在</strong></p>
+<p>格式：type [command] &gt;/dev/null 2&gt;&amp;1<br>格式：[command] &gt;/dev/null 2&gt;&amp;1<br>格式：which [command] &gt;/dev/null 2&gt;&amp;1</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">type ls &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">[ $? = 0 ] &amp;&amp; echo 1 || echo 0</span><br><span class="line"></span><br><span class="line">which ls &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">[ $? = 0 ] &amp;&amp; echo 1 || echo </span><br><span class="line"></span><br><span class="line">ls &gt;/dev/null 2&gt;&amp;1     </span><br><span class="line">[ $? = 0 ] &amp;&amp; echo 1 || echo 0</span><br></pre></td></tr></table></figure>
+
+<p><strong>/dev/null 与1和2</strong></p>
+<p>/dev/null 是一个可写入的文件，所有写入的内容都会丢弃<br>1 stdout<br>2 stderr</p>
+<p><code>&gt;/dev/null</code>表示讲左侧的内容输出到/dev/null文件中<br>2&gt;&amp;1是将stderr输出到stdout中</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/node/pkg/" data-id="clzmdsphy00dtzwl14g5bc1vt" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/crontab" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/crontab/" class="article-date">
+  <time datetime="2022-09-28T03:14:13.000Z" itemprop="datePublished">2022-09-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/crontab/">cron &amp; crontab</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="cron-和-crontab-关系"><a href="#cron-和-crontab-关系" class="headerlink" title="cron 和 crontab 关系"></a>cron 和 crontab 关系</h3><p>cron 是定时任务的实现。cron 包括两部分：crond（守护进程），crontab （工具）。<br>用户通过 crontab 编写的任务交给 crond 进行周期性的执行。</p>
+<h3 id="crontab-基础语法"><a href="#crontab-基础语法" class="headerlink" title="crontab 基础语法"></a>crontab 基础语法</h3><p>{minute} {hour} {day-of-month} {month} {day-of-week} {full-path-to-shell-script|command}</p>
+<ul>
+<li>minute: 区间为 0 – 59</li>
+<li>hour: 区间为 0 – 23</li>
+<li>day-of-month: 区间为 0 – 31</li>
+<li>month: 区间为 1 – 12. 1 是 1 月. 12 是 12 月</li>
+<li>Day-of-week: 区间为 0 – 7. 周日可以是 0 或 7</li>
+</ul>
+<ol>
+<li>每天执行一次kinit<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 创建cron文件</span></span><br><span class="line">cat &gt; kinit.cron &lt;&lt;EOF</span><br><span class="line"><span class="meta">#</span><span class="bash"> kinit 定时任务</span></span><br><span class="line">* 10 * * * kinit</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置cron任务制定用户执行</span></span><br><span class="line">sudo crontab -u ansike kinit.cron</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/crontab/" data-id="clzmdspfl005dzwl16vouhfse" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-生活/经济/中国经济" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E7%BB%8F%E6%B5%8E/%E4%B8%AD%E5%9B%BD%E7%BB%8F%E6%B5%8E/" class="article-date">
+  <time datetime="2022-09-28T02:38:51.000Z" itemprop="datePublished">2022-09-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/life/">生活</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/life/%E7%94%9F%E6%B4%BB/%E7%BB%8F%E6%B5%8E/%E4%B8%AD%E5%9B%BD%E7%BB%8F%E6%B5%8E/">中国经济发展史</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="中央规划"><a href="#中央规划" class="headerlink" title="中央规划"></a>中央规划</h3><p>1978 农村联产承包责任制（交够国家的，留足集体的，剩下都是自己的）</p>
+<p>承包制是在不改变所有制性质的情况下将所有权和收益权让渡给经营者个人的一种所有权和经营权分离的产权结构。承包制调动了经营者的积极性，这是在不动摇公有制的前提下所能做出的最好选择。<br>这也给了其他方向一个引导，逐步扩展到企业和央地关系领域，成为整个 80 年代的总体改革思路。</p>
+<h3 id="财政包干"><a href="#财政包干" class="headerlink" title="财政包干"></a>财政包干</h3><p>计划经济时代，中央财政统收统支导致地方活力受到压制，改开从放开搞活开始，把很多事权交给了地方，以提高地方政府的主动能动性。</p>
+<p>1980 起开始在财政领域试行承包制，基本思路是中央对各省级财政单位的财政收入和财政支出进行包干，地方增收的部分可以按一定比例留下自用，对收入下降导致的收不抵支则减少或者不予补助。</p>
+<p>根据每个地方的不同情况都有不同的方式</p>
+<ol>
+<li>定额上缴（上海每年定额上缴 105 亿）</li>
+<li>总额分成（天津的财政收入按照 46.5%进行上缴）</li>
+<li>收入递增包干（北京 先确定一个递增比例，超过比例的部分全部留给地方，比例以内的央地分成）</li>
+</ol>
+<p>中央财政由 1979 年的 20.18%上升到 1984 年的 40.5%</p>
+<p>问题：没有固定的标准，上缴基数递增比例等等，往往都是谈判的结果</p>
+<p>预算内收入：是指通过国家预算管理的财政收入，主要是税收。预算外是指不通过国家预算管理的财政收入。</p>
+<p>地方政府开始准备“藏富于企”，然后再通过收费赞助，集资摊派等收回一些收入，这样就可以避免和中央分成。于是乡镇企业在地方政府的明暗的支持下出现了蓬勃的发展，这一阶段预算外收入明显高于预算内。</p>
+<p>中央财政由 1984 年的 40.5%，降低到了 1992 年的 28.14%</p>
+<p>此时中央觉得又有问题需要进行财政改革</p>
+<h3 id="分税制改革"><a href="#分税制改革" class="headerlink" title="分税制改革"></a>分税制改革</h3><p>1994 年分税制改革启动，是我国历史上极其重要的改革，深刻影响了后续地方政府发展经济模式。<br><strong>分税制改革把税收分为 3 类</strong></p>
+<ul>
+<li>增值税</li>
+</ul>
+<p>增值税 在改革之前是最大的地方税，但在改革之后成为共享税，中央拿走 75%，地方 25%<br>受此影响 1994 年当你中央财政收入实现了 203.5%的增长</p>
+<p>分税制具有计算科学，征收规范等很多优势，大大增强了中央政府的宏观调控能力，不仅有助于中央推进改革任务，进行产业布局，还为抵御后来的国际金融冲击打下了基础。<br>凡事都有两面性，最大的问题就是央地财权和事权的不匹配（地方政府钱少了，但是事儿没少）</p>
+<p>地方政府的文教体卫都需要花钱，所以了为获取更多的钱，地方政府将目光看向了土地。</p>
+<h3 id="土地财政"><a href="#土地财政" class="headerlink" title="土地财政"></a>土地财政</h3><p>土地财政出现具有必然性，分税制改革出现之后地方税收收入大幅减少，而预算外收入又随着费改税的进程被纳入预算内，地方财政在预算内和预算外都收到了大幅度的压缩，地方政府不得不另谋出路，土地财政就此登场。</p>
+<p>90 年代我国城市化才刚刚起步<br>1998 年出现的两个事情加速了土地财政进程</p>
+<ul>
+<li>一是为应对亚洲金融危机的冲击，国务院于 1998.7.3 发布《关于进一步深化城镇住房制度改革加快住房建设的通知》正式宣布福利分房年代结束，开启了住宅商品化时代</li>
+<li>二是 8.29《土地管理法》进行修订，新土地法规定农村集体土地必须进过征地环节变成国有土地之后才能转成建设用地，这一要求确立了地方政府对土地建设的垄断权力。</li>
+</ul>
+<p>有动力有条件，还符合中央的政策方向，地方政府的土地财政从此走上快车道<br>到 2008 年次贷危机之后更是在上台阶<br>根据财政部公布的 2021 年财政收支情况，2021 年我国国有土地使用权出让收入为 87,051 亿元，而地方一般的公共预算收入为 111,077 亿元，土地收入相当于地方公共预算收入的 78.37%，已经完全顶替了财政包干时代的预算外收入，成为分税制时代的第二财政</p>
+<p>地方政府发展经济的方式也从之前的工业化，变成了工业化与城市化，房地产的黄金时代到来了</p>
+<h3 id="地方债务风险"><a href="#地方债务风险" class="headerlink" title="地方债务风险"></a>地方债务风险</h3><p>土地财政已经看上去很威风了，但其实第二财政并不是土地的最大威力，土地资本化才是。由于土地的金融属性，1 块钱的土地可以撬动数倍于己的资金，为了发挥土地的金融属性，各地政府纷纷成立城投公司等融资平台，将土地资本化撬动海量的银行资金。另一方面城投公司的政信优势也帮助孩子他们开拓了城投债等直接融资方式。土地和金融的结合让土地财政插上了翅膀，对土地金融来说 2008 年是一个尤其重要的节点，2008 年为应对次贷危机的冲击，国家推出了 4 万亿刺激计划，地方政府由于承担了大量的基建投融资任务，融资平台的融资作用更为凸显，这一时期地方政府融资平台的数量快速增长，并开始大规模举债，在海量资金的推动下，我国的城市化进程飞速推进。</p>
+<p>在中国城市百人轮胎 2021 年会上表示，第七次全国人口普查数据结构显示，十年来我国人口持续保持增长，结构发生了较大变化，城镇化率持续提高，是建国以来提高幅度最快的 10 年。<br>然而在城市化的繁荣景象下，地方债务的风险也在不断累积，并逐渐尾大，对整体经济构成了威胁。</p>
+<p>从 2010 年发布了一系列监管文件，开始对地方政府融资平台进行管控，这时候除了 2015-2016 年由于经济下行压力过大而放松过一段时间之外，全部都处于去杠杆降风险的调控阶段</p>
+<p>连番调控之下我国的去杠杆过程知道去年底的中央经济工作会议才告一段落。</p>
+<h3 id="地区不平衡和贫富差距"><a href="#地区不平衡和贫富差距" class="headerlink" title="地区不平衡和贫富差距"></a>地区不平衡和贫富差距</h3><ul>
+<li><p>城乡发展不平衡</p>
+</li>
+<li><p>地区发展不平衡</p>
+</li>
+<li><p>民生投入不足<br>我国税收以间接税为主，以直接税为辅。而间接税中又以增值税为大头。而企业税收远高于个人税收，由于利益相关，地方政府的关注点始终都在招商引资和对企业的支持维护。地方政府往往从土地开发开始就介入到企业的生产经营当中，所以生产投资<br>型政府成为我国经济的一个重要特征。此起彼伏，地方政府在民生方面的投入滞后。</p>
+</li>
+<li><p>贫富差距加大<br>房价连着低价，地价连着财政，财政连着基础设施投资。于是经济增长，地方财政，银行，房地产之间就形成了“一荣俱荣，一损俱损”的关系。这就导致城市房价有这强烈的上涨冲动，而不断飞涨的房价不断挤压了居民的消费，并导致居民财富的两极分化</p>
+</li>
+</ul>
+<h3 id="未来挑战"><a href="#未来挑战" class="headerlink" title="未来挑战"></a>未来挑战</h3><p>克服掉之前的不平衡经济就能迎来可持续发展。<br>但是平衡是结果而不是手段，是目标而不是过程，那么要想达到平衡的目标该从哪里着手呢？<br>科技革命的动能衰竭让整个世界都处于存量竞争的状态当中，而改革是靠增量来推动的。</p>
+<ol>
+<li>统一大市场。地区经济的不平衡受客观条件限制，尤其是地理条件，是不可能做到平等的，但是人均可以平等</li>
+<li>增加民生投入，缩小贫富差距。在之前的发展阶段地方政府过于关注企业，导致民生投入不足</li>
+<li>地方政府职能转型。从生产投资型转为服务型。</li>
+<li>国际国内双循环。以国内大循环为主体，国内国际双循环。</li>
+<li>金融领域改革。直接融资和去杠杆。债务风险大，杠杆率高是当前世界经济存在的普遍问题</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/life/%E7%94%9F%E6%B4%BB/%E7%BB%8F%E6%B5%8E/%E4%B8%AD%E5%9B%BD%E7%BB%8F%E6%B5%8E/" data-id="clzmdspf6001fzwl199do8k30" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/k8s/k8s-helm" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/k8s-helm/" class="article-date">
+  <time datetime="2022-09-28T02:38:51.000Z" itemprop="datePublished">2022-09-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/k8s-helm/">helm安装使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="为什么需要-helm"><a href="#为什么需要-helm" class="headerlink" title="为什么需要 helm"></a>为什么需要 helm</h3><p>没有使用 helm 前我们只能手动的去管理我们的 deployment，svc 等，步骤繁琐且在复杂的容器中部署及管理较为复杂。<br>helm 可以支持 k8s 中的应用管理（deployment，service 等）可配置，能够动态生成，然后通过调用 kubectl 自动执行 k8s 资源部署<br>此外通过打包的能力，支持发布的版本进行管理很大程度简化了 k8s 应用的部署和管理</p>
+<h3 id="helm-组件"><a href="#helm-组件" class="headerlink" title="helm 组件"></a>helm 组件</h3><p>Helm 客户端：负责 chart 和 release 的创建和管理<br>v3 版本已经将 tiller 给删除了<br>本身 client 就可以通过 KubeConfig 直接和 k8s 进行交互</p>
+<h3 id="helm-安装"><a href="#helm-安装" class="headerlink" title="helm 安装"></a>helm 安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash</span><br></pre></td></tr></table></figure>
+
+<h3 id="helm-中比较重要的概念"><a href="#helm-中比较重要的概念" class="headerlink" title="helm 中比较重要的概念"></a>helm 中比较重要的概念</h3><ol>
+<li>Chart 包。它包含 k8s 集群内部运行应用程序，工具或服务所需的所有资源定义。</li>
+<li>Repository 仓库。用来存放和共享 charts 的地方。</li>
+<li>Release 实例。运行在 k8s 中 chart 的一个实例。每个 chart 可以在集群中安装多次，每次安装都是新的 release。</li>
+</ol>
+<p>Helm 安装 Charts 到 k8s 集群中，每次安装都会创建一个新的 release，chart 存在于 respository。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/k8s/k8s-helm/" data-id="clzmdspfh0045zwl1cxtv3glj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/k8s/k8s安全" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/k8s%E5%AE%89%E5%85%A8/" class="article-date">
+  <time datetime="2022-09-28T02:38:51.000Z" itemprop="datePublished">2022-09-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/k8s%E5%AE%89%E5%85%A8/">k8s安全</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>api server 是 k8s 集群中的核心逻辑</p>
+<p>使用 https 认证</p>
+<p>证书颁发<br>kubelet 首次访问 api server 使用 token 做认证，通过之后 controller manager 会为 kubelet 生成一个证书，以后的访问都是用证书做认证。</p>
+<p>kubeconfig 包含集群参数（CA 证书，API 地址）</p>
+<p>ServiceAccount<br>pod 中容器访问 api server 的中间件，因为 pod 是动态创建和销毁的所以为 pod 手动的生成证书不太可能了，k8s 使用 service account 解决 pod 访问 API server 的认证问题</p>
+<p>RBAC (Role-Based-Access-Control) 基于角色的访问控制</p>
+<p>Role: 定义一个角色可以关联一些资源的权限<br>ClusterRole<br>RoleBinding<br>ClusterRoleBinding</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/k8s/k8s%E5%AE%89%E5%85%A8/" data-id="clzmdspfi004hzwl12vjkbo7s" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/k8s/statefulset" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/statefulset/" class="article-date">
+  <time datetime="2022-09-28T02:38:51.000Z" itemprop="datePublished">2022-09-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/statefulset/">statefulset</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="为什么需要statefulset"><a href="#为什么需要statefulset" class="headerlink" title="为什么需要statefulset"></a>为什么需要statefulset</h3><ol>
+<li>唯一：网络标识是唯一的</li>
+<li>稳定：使用pvc，持久的存储数据</li>
+<li>有序：有序的部署，扩展，更新，删除</li>
+</ol>
+<p>需要headless service负责网络标识</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/k8s/statefulset/" data-id="clzmdspfj004mzwl16anf6xml" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/网络相关/网速" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E7%BD%91%E9%80%9F/" class="article-date">
+  <time datetime="2022-09-27T14:14:32.000Z" itemprop="datePublished">2022-09-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E7%BD%91%E9%80%9F/">网速</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="我们常见的-Mbps、MB-s-到底是什么有什么区别"><a href="#我们常见的-Mbps、MB-s-到底是什么有什么区别" class="headerlink" title="我们常见的 Mbps、MB/s 到底是什么有什么区别"></a>我们常见的 Mbps、MB/s 到底是什么有什么区别</h3><p>Mbps 就是每秒传输多少 Mb(Mb per second)<br>MB/s 就是每秒传输多少 MB</p>
+<p>可以看到二者都是讲传输速度的，但是存在大写的 B 和小写 b 的区别。<br>MB 表示的是 1M 的数据，Mb 是指什么呢？<br>我们大概换算一下<br>B 表示 byte，b 表示 bit，这样看下来 B=8bit<br>也就能推算出 MB=8Mb</p>
+<p>由此我们可以推算出二者之间的换算关系<br>MB/s=8Mbps</p>
+<p><strong>但是还有一个疑问，为什么要搞两套呢？</strong><br>网络中数据传输的时候是以 bit 为单位进行传输的，所以就是 Mbps<br>在磁盘上进行数据存储是以 byte 为单位的，所以就是 MB/s</p>
+<p>所以一个 100M 的网是指 100Mbps，我们真实能感受到的速度最大就是 100/8=12.5MB/s</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E7%BD%91%E9%80%9F/" data-id="clzmdspfv0095zwl1f735bicn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/网络相关/protocol" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/protocol/" class="article-date">
+  <time datetime="2022-09-22T14:49:41.000Z" itemprop="datePublished">2022-09-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/protocol/">protocol</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- TODO 网卡数据 -->
+
+<h3 id="Ethernet"><a href="#Ethernet" class="headerlink" title="Ethernet"></a>Ethernet</h3><img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/protocol/97c13f044de260baf0ed8051091dd251.png" class="" title="ethernet">
+
+<p>ethernet 通信的基本单位是 Frame。由头部（header），数据（payload），校验和（checcksum）三部分组成</p>
+<p>注意部分</p>
+<ul>
+<li>header（14 bytes） 部分依次是 Destination MAC Address，Source MAC Address 和 EtherType (标识数据包类型，0x0800 代表 IP 包)</li>
+<li>payload（46-1500 bytes）携带的数据</li>
+<li>checksum（4 bytes）验证数据完整性</li>
+</ul>
+<p>目前有多种 ethernet 类型在使用，我们常用的就是 ethernetII</p>
+<p>header 目的地址可以分为三类：单播地址、多播地址和广播地址。</p>
+<!-- TODO arp -->
+
+<h3 id="IP-Internet-Protocol"><a href="#IP-Internet-Protocol" class="headerlink" title="IP (Internet Protocol)"></a>IP (Internet Protocol)</h3><p>一句话介绍：<strong>是一种无连接的点到点的通信协议</strong></p>
+<p>为什么需要 IP 协议？</p>
+<ol>
+<li>解决大规模的网络，异构网络的互联互通。</li>
+<li>解耦应用层和底层网络技术。基于 ethernet 为 TCP/UDP 等提供服务。</li>
+</ol>
+<p>涉及的内容：分组封装，IP 编址，分组转发<br>IP 分组：首部（20 bytes）和数据部分。<br>IP 分片：IP 数据包在传输的过程中受 MTU（最大传输单元）的限制会进行数据包的分片传输，导致目标主机之后才会重新组装起来交给下一层协议处理。<br>IP 首部的 IP Address 是由 4 字节的数字组成，是 IP 协议中核心部分，使用 IP 地址能唯一标识网络中的一台主机。</p>
+<h3 id="TCP（Transmission-Control-Protocol）"><a href="#TCP（Transmission-Control-Protocol）" class="headerlink" title="TCP（Transmission Control Protocol）"></a>TCP（Transmission Control Protocol）</h3><p>一句话介绍：<strong>是一种面向连接的可靠的传输层协议</strong></p>
+<p>解释上文中的两个关键词<br>面向连接：clinet 和 server 双方是会有一个会话保持的机制，创建的连接是 socket 连接。<br>可靠的传输：clinet 和 server 之前进行信息传递时都是准确且正确的。</p>
+<p>client 和 server 在通信时通过三次握手建立连接，连接建立之后通过该 socket 进行消息通信，数据的传输过程中 TCP 自己实现了超时重传，sequence number，ack，checksum 等确保消息的有序和正确。</p>
+<p><strong>抓取三次握手的包</strong> wireshark</p>
+<p>我们随便找一个 http 的站点 <code>http://c.biancheng.net/linux_tutorial/12/</code></p>
+<ol>
+<li>查询域名对应的 IP，每个人可能不一样，也有可能会变动</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ping c.biancheng.net</span><br><span class="line"><span class="meta">#</span><span class="bash"> IP可能会变</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> PING c.biancheng.net.w.kunlunno.com (123.138.67.8): 56 data bytes</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 64 bytes from 123.138.67.8: icmp_seq=0 ttl=54 time=16.311 ms</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置 wireshark 过滤器，开始抓包</li>
+</ol>
+<p>在过滤器中添加：ip.dst==123.138.67.8 or ip.src==123.138.67.8</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 发送请求</span></span><br><span class="line">curl http://c.biancheng.net/linux_tutorial/12/</span><br></pre></td></tr></table></figure>
+
+<p>查看 wireshark 中的数据，查找 http 请求，然后查找对应的三次 TCP</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/protocol/20220922-223635.jpeg" class="" title="wireshark抓包">
+
+
+<p><strong>三次握手的过程</strong></p>
+<ol>
+<li>client 向 server 发起一个 SYN 包，请求建立连接。SYN 包中包含一个 sequence numer 随机数 A。</li>
+<li>server 收到之后会向 client 发送一个 SYN/ACK 包，表示可以建立连接。SYN/ACK 包中包含一个发给客户端的 ACK=A+1 和一个新的 sequence numer=B。</li>
+<li>client 收到之后再向 server 发送一个 ACK 的包。ACK 包中包含一个给服务端的 ACK=B+1 和该包的序号为 A+1</li>
+</ol>
+<p>为什么 TCP 要三次握手？<br>三次握手是 client 和 server 双方知道对方收发能力的最少次数。第一次握手，server 知道 client 具有发数据的能力；第二次握手 client 知道 server 有接收数据和发送数据的能力；第三次握手，server 知道 client 有接受数据的能力。</p>
+<p>两次握手建立连接会有什么问题：已失效的请求从 client 发到 server，如果仅两次握手建立连接的话，此时 sever 向 client 发送确认之后就会认为当前连接已经建立，一直等待客户端发送数据，这样很多 server 资源就会被浪费。</p>
+<p><strong>四次挥手的过程</strong></p>
+<ol>
+<li>查询域名对应的 IP，每个人可能不一样，也有可能会变动</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ping c.biancheng.net</span><br><span class="line"><span class="meta">#</span><span class="bash"> 182.89.221.201</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置 wireshark 过滤器，开始抓包</li>
+</ol>
+<p>在过滤器中添加：ip.addr==182.89.221.201</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 发送请求</span></span><br><span class="line">curl http://c.biancheng.net</span><br></pre></td></tr></table></figure>
+
+<p>查看 wireshark 中的数据，查找 http 请求，然后查找对应的挥手</p>
+
+
+<p>此处可以看到该挥手次数和我们理解的不太一样，是<strong>三次挥手</strong>。<br>猜想我们的连接断开很快有关，client 发送断开连接请求，server 收到之后会把即将发送的断开连接请求和上次的 ACK 进行打包发送减少了一次消息传递，最后 client 收到 server 断开的请求后发送 ACK 然后关闭连接进入 close 状态。（看网上的解释说可能和 TCP 延时机制有关 <a href="https://www.cnblogs.com/yunmeng-shi/p/16245827.html）" target="_blank" rel="noopener">https://www.cnblogs.com/yunmeng-shi/p/16245827.html）</a></p>
+<p>自己用 http-server 起了一个本地服务，可以看到四次挥手的过程</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/protocol/20220923-233327.jpeg" class="" title="四次挥手">
+
+<h3 id="HTTP-Hypertext-Transfer-Protocol"><a href="#HTTP-Hypertext-Transfer-Protocol" class="headerlink" title="HTTP (Hypertext Transfer Protocol )"></a>HTTP (Hypertext Transfer Protocol )</h3><p>一句话介绍：<strong>是一种传输超媒体文档的应用层协议</strong></p>
+<p>http 协议中的内容都是明文，以下我们以一个真实例子来看下 http 协议</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 访问http请求， 使用curl 打印请求的整个过程</span></span><br><span class="line">curl http://localhost:4000/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/protocol/ -v</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> *   Trying ::1...</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> * TCP_NODELAY <span class="built_in">set</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> * Connected to localhost (::1) port 4000 (<span class="comment">#0)</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">### 请求部分</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; GET /blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/protocol/ HTTP/1.1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; Host: localhost:4000</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; User-Agent: curl/7.54.0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; Accept: */*</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"><span class="comment">### 响应部分</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt; HTTP/1.1 200 OK</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt; X-Powered-By: Hexo</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt; Content-Type: text/html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt; Date: Sat, 24 Sep 2022 07:56:02 GMT</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt; Connection: keep-alive</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt; Keep-Alive: timeout=5</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt; Transfer-Encoding: chunked</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt;html&gt;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &lt;head&gt;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   &lt;meta charset=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">   &lt;title&gt;protocol | ASK&amp;<span class="comment">#39;s Blog&lt;/title&gt;</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   ....</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>请求部分格式</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[method] [path] [protocol&#x2F;version]</span><br><span class="line">[request header]</span><br><span class="line">empty line</span><br><span class="line">[request body]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>我们在上文的实际报文中是没有[request body]主要是因为我们没有传递 body。⚠️ 切记不是因为我们使用的是 GET 请求，http 协议中 get 和 post 没有本质区别。</p>
+</blockquote>
+<p>以下我们使用了 curl 工具强制使用 GET 方法，携带了 data 进行数据传递，协议是符合预期可以成功发出的。<br><strong>网络上说 get 和 post 区别绝大多数都是错误，或者说是没有前提的论述</strong>。在浏览器上 get 确实是无法发送 body 的，但是其他应用是可以的（curl，postman 等）；在 url 中数据的携带也是有限制的；server 接受的 body 大小也是有限制的；安全性更是胡扯，这些都要根据实际情况来看。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl -X GET http://localhost:4000/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/protocol/ -v -d '&#123;"a":1&#125;' -H "Content-Type: application/json"</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> GET /blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/protocol/ HTTP/1.1</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Host: localhost:4000</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> User-Agent: curl/7.54.0</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Accept: */*</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Content-Type: application/json</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Content-Length: 7</span></span><br><span class="line"><span class="meta">&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>响应部分格式</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[protocol&#x2F;version] [status code] [status message]</span><br><span class="line">[response header]</span><br><span class="line">empty line</span><br><span class="line">[response body]</span><br></pre></td></tr></table></figure>
+
+<!-- TODO HTTPS -->
+
+
+<h3 id="为什么计算机中的字节都选择用-16-进制的数进行表示"><a href="#为什么计算机中的字节都选择用-16-进制的数进行表示" class="headerlink" title="为什么计算机中的字节都选择用 16 进制的数进行表示"></a>为什么计算机中的字节都选择用 16 进制的数进行表示</h3><p>常见的有 MAC 地址，python 编码之后数据<br>是为了简洁实用。我们知道一个字节（byte）是 8 位（bit），我们可以选择的范围有二进制，八进制，十进制，十六进制等。二进制会很长不便于肉眼读取，八进制会导致高位不够，十进制会导致结果长度不一，十六进制正好能将一个字节拆分成两个十六进制数。</p>
+<blockquote>
+<p>如：10101101 =&gt; AD</p>
+</blockquote>
+<blockquote>
+<p>DNS 是基于 UDP 传输的</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/protocol/" data-id="clzmdspfu008vzwl1cvmz62fv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-生活/经济/中国经济发展史" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E7%BB%8F%E6%B5%8E/%E4%B8%AD%E5%9B%BD%E7%BB%8F%E6%B5%8E%E5%8F%91%E5%B1%95%E5%8F%B2/" class="article-date">
+  <time datetime="2022-09-18T10:40:44.000Z" itemprop="datePublished">2022-09-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/life/">生活</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/life/%E7%94%9F%E6%B4%BB/%E7%BB%8F%E6%B5%8E/%E4%B8%AD%E5%9B%BD%E7%BB%8F%E6%B5%8E%E5%8F%91%E5%B1%95%E5%8F%B2/">中国经济发展史</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="计划经济"><a href="#计划经济" class="headerlink" title="计划经济"></a>计划经济</h3><p>在新中国成立后迅速恢复了国民经济并开展了有计划的经济建设，此阶段此阶段地方政府和人员没有太多的主观能动性，主要是中央对全国经济进行整体规划，地方政府分摊中央指派的任务，在经过了一段时间的增长之后，经济发展陷入停滞。<br>执行了近 30 年的计划经济。</p>
+<h3 id="改革开发（农村联产承包责任制）"><a href="#改革开发（农村联产承包责任制）" class="headerlink" title="改革开发（农村联产承包责任制）"></a>改革开发（农村联产承包责任制）</h3><p>1978 小岗村的“包干保证书”拉起了农村联产承包责任制的大旗（交够国家的，留足集体的，剩下都是自己的）开始试行。</p>
+<p>承包制是在不改变所有制性质的情况下将所有权和收益权让渡给经营者个人的一种所有权和经营权分离的产权结构。承包制调动了经营者的积极性，这是在不动摇公有制的前提下所能做出的最好选择。<br>这也给了其他方向提供了一个好的引导，逐步扩展到企业和央地关系领域，成为整个 80 年代的总体改革思路。</p>
+<h3 id="财政包干"><a href="#财政包干" class="headerlink" title="财政包干"></a>财政包干</h3><p>计划经济时代，中央财政统收统支导致地方活力受到压制，改开从放开搞活开始，把很多<strong>事权交给了地方，以提高地方政府的主动能动性。</strong></p>
+<p>1980 起开始在财政领域试行承包制，基本思路是中央对各省级财政单位的财政收入和财政支出进行包干，地方增收的部分可以按一定比例留下自用，对收入下降导致的收不抵支则减少征收或者不予补助。</p>
+<p>上缴的方式根据每个地方的情况都有不同的方式</p>
+<ol>
+<li>定额上缴（上海每年定额上缴 105 亿）</li>
+<li>总额分成（天津的财政收入按照 46.5%进行上缴）</li>
+<li>收入递增包干（北京 先确定一个递增比例，超过比例的部分全部留给地方，比例以内的央地分成）</li>
+</ol>
+<p>中央财政收入由 1979 年的 20.18%上升到 1984 年的 40.5%</p>
+<p>因为没有固定的标准，上缴基数递增比例等等，往往都是谈判的结果。于是地方政府开始“藏富于企”，然后再通过收费赞助，集资摊派等收回一些收入，这样就可以避免和中央分成。于是乡镇企业在地方政府的明暗的支持下出现了蓬勃的发展，这一阶段预算外收入明显高于预算内。</p>
+<p>中央财政收入由 1984 年的 40.5%，降低到了 1992 年的 28.14%</p>
+<p>此时中央财政入不敷出需要进行财政改革</p>
+<blockquote>
+<p>预算内收入：是指通过国家预算管理的财政收入，主要是税收。预算外是指不通过国家预算管理的财政收入。</p>
+</blockquote>
+<h3 id="分税制改革"><a href="#分税制改革" class="headerlink" title="分税制改革"></a>分税制改革</h3><p>1994 年分税制改革启动，是我国历史上极其重要的改革，深刻影响了后续地方政府发展经济模式。</p>
+<p><strong>分税制改革把税收分为 3 类</strong></p>
+<ul>
+<li>划分事权</li>
+<li>划分财权</li>
+<li>配套改革措施 （建立增值税）</li>
+</ul>
+<p>增值税 在改革之前是最大的地方税，但在改革之后成为共享税，中央拿走 75%，地方 25%。受此影响 1994 年当你中央财政收入实现了 203.5%的增长<br>分税制具有计算科学，征收规范等很多优势，大大增强了中央政府的宏观调控能力，不仅有助于中央推进改革任务，进行产业布局，还为抵御后来的国际金融冲击打下了基础。<br>凡事都有两面性，最大的问题就是央地财权和事权的不匹配（地方政府钱少了，但是事儿没少）<br>地方政府的文教体卫都需要花钱，所以了为获取更多的钱，地方政府将目光看向了土地。</p>
+<h3 id="土地财政"><a href="#土地财政" class="headerlink" title="土地财政"></a>土地财政</h3><p>土地财政出现具有必然性，分税制改革出现之后地方税收收入大幅减少，而预算外收入又随着费改税的进程被纳入预算内，地方财政在预算内和预算外都收到了大幅度的压缩，地方政府不得不另谋出路，土地财政就此登场。</p>
+<p>90 年代我国城市化才刚刚起步，然而 1998 年出现的两个事情加速了土地财政进程</p>
+<ul>
+<li>一是为应对亚洲金融危机的冲击，国务院于 1998.7.3 发布《关于进一步深化城镇住房制度改革加快住房建设的通知》正式宣布福利分房年代结束，开启了住宅商品化时代</li>
+<li>二是 1998.8.29《土地管理法》进行修订，新土地法规定农村集体土地必须进过征地环节变成国有土地之后才能转成建设用地，这一要求确立了地方政府对土地建设的垄断权力。</li>
+</ul>
+<p>有动力有条件，还符合中央的政策方向，地方政府的土地财政从此走上快车道，到 2008 年次贷危机之后更是在上台阶，根据财政部公布的 2021 年财政收支情况，2021 年我国国有土地使用权出让收入为 87,051 亿元，而地方一般的公共预算收入为 111,077 亿元，土地收入相当于地方公共预算收入的 78.37%，已经完全顶替了财政包干时代的预算外收入，成为分税制时代的第二财政</p>
+<p>地方政府发展经济的方式也从之前的工业化，变成了工业化与城市化，房地产的黄金时代到来了</p>
+<h3 id="地方债务风险"><a href="#地方债务风险" class="headerlink" title="地方债务风险"></a>地方债务风险</h3><p>土地财政已经看上去很威风了，但其实第二财政并不是土地的最大威力，土地资本化才是。由于土地的金融属性，1 块钱的土地可以撬动数倍于己的资金，为了发挥土地的金融属性，各地政府纷纷成立城投公司等融资平台，将土地资本化撬动海量的银行资金。另一方面城投公司的政信优势也帮助孩子他们开拓了城投债等直接融资方式。土地和金融的结合让土地财政插上了翅膀，对土地金融来说 2008 年是一个尤其重要的节点，2008 年为应对次贷危机的冲击，国家推出了 4 万亿刺激计划，地方政府由于承担了大量的基建投融资任务，融资平台的融资作用更为凸显，这一时期地方政府融资平台的数量快速增长，并开始大规模举债，在海量资金的推动下，我国的城市化进程飞速推进。</p>
+<p>在中国城市百人论坛 2021 年会上表示，第七次全国人口普查数据结构显示，十年来我国人口持续保持增长，结构发生了较大变化，城镇化率持续提高，是建国以来提高幅度最快的 10 年。然而在城市化的繁荣景象下，地方债务的风险也在不断累积，并逐渐尾大，对整体经济构成了威胁。</p>
+<p>从 2010 年发布了一系列监管文件，开始对地方政府融资平台进行管控，这时候除了 2015-2016 年由于经济下行压力过大而放松过一段时间之外，全部都处于去杠杆降风险的调控阶段。连番调控之下我国的去杠杆过程知道去年底的中央经济工作会议才告一段落。</p>
+<h3 id="地区不平衡和贫富差距"><a href="#地区不平衡和贫富差距" class="headerlink" title="地区不平衡和贫富差距"></a>地区不平衡和贫富差距</h3><ul>
+<li><p>城乡发展不平衡</p>
+</li>
+<li><p>地区发展不平衡</p>
+</li>
+<li><p>民生投入不足<br>我国税收以间接税为主，以直接税为辅。而间接税中又以增值税为大头。而企业税收远高于个人税收，由于利益相关，地方政府的关注点始终都在招商引资和对企业的支持维护。地方政府往往从土地开发开始就介入到企业的生产经营当中，所以生产投资型政府成为我国经济的一个重要特征。此起彼伏，地方政府在民生方面的投入滞后。</p>
+</li>
+<li><p>贫富差距加大<br>房价连着低价，地价连着财政，财政连着基础设施投资。于是经济增长，地方财政，银行，房地产之间就形成了“一荣俱荣，一损俱损”的关系。这就导致城市房价有这强烈的上涨冲动，而不断飞涨的房价不断挤压了居民的消费，并导致居民财富的两极分化</p>
+</li>
+</ul>
+<h3 id="未来挑战"><a href="#未来挑战" class="headerlink" title="未来挑战"></a>未来挑战</h3><p>克服掉之前的不平衡经济就能迎来可持续发展。<br>但是平衡是结果而不是手段，是目标而不是过程，那么要想达到平衡的目标该从哪里着手呢？<br>科技革命的动能衰竭让整个世界都处于存量竞争的状态当中，而改革是靠增量来推动的。</p>
+<ol>
+<li>统一大市场。地区经济的不平衡受客观条件限制，尤其是地理条件，是不可能做到平等的，但是人均可以平等</li>
+<li>增加民生投入，缩小贫富差距。在之前的发展阶段地方政府过于关注企业，导致民生投入不足</li>
+<li>地方政府职能转型。从生产投资型转为服务型。</li>
+<li>国际国内双循环。以国内大循环为主体，国内国际双循环。</li>
+<li>金融领域改革。直接融资和去杠杆。债务风险大，杠杆率高是当前世界经济存在的普遍问题</li>
+</ol>
+<h3 id="资料参考"><a href="#资料参考" class="headerlink" title="资料参考"></a>资料参考</h3><p><a href="https://www.bilibili.com/video/BV1wa41137ha?spm_id_from=333.999.0.0" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1wa41137ha?spm_id_from=333.999.0.0</a><br><a href="https://zh.wikipedia.org/wiki/1994%E5%B9%B4%E5%88%86%E7%A8%8E%E5%88%B6%E6%94%B9%E9%9D%A9" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/1994%E5%B9%B4%E5%88%86%E7%A8%8E%E5%88%B6%E6%94%B9%E9%9D%A9</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/life/%E7%94%9F%E6%B4%BB/%E7%BB%8F%E6%B5%8E/%E4%B8%AD%E5%9B%BD%E7%BB%8F%E6%B5%8E%E5%8F%91%E5%B1%95%E5%8F%B2/" data-id="clzmdspf6001izwl1bpbt68bd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/nginx/nginx基础" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/nginx/nginx%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time datetime="2022-09-12T14:08:08.000Z" itemprop="datePublished">2022-09-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/nginx/nginx%E5%9F%BA%E7%A1%80/">nginx基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="mac-下-nginx-的安装"><a href="#mac-下-nginx-的安装" class="headerlink" title="mac 下 nginx 的安装"></a>mac 下 nginx 的安装</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装</span></span><br><span class="line">brew install nginx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看安装信息</span></span><br><span class="line">brew info nginx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> nginx: stable 1.21.6 (bottled), HEAD</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> https://nginx.org/</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> /usr/<span class="built_in">local</span>/Cellar/nginx/1.21.6_1 (26 files, 2.2MB) *</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Poured from bottle on 2022-09-12 at 16:01:38</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/nginx.rb</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> License: BSD-2-Clause</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ==&gt; Dependencies</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Required: openssl@1.1 ✔, pcre2 ✔</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ==&gt; Options</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> --HEAD</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 	Install HEAD version</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ==&gt; Caveats</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Docroot is: /usr/<span class="built_in">local</span>/var/www</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> The default port has been <span class="built_in">set</span> <span class="keyword">in</span> /usr/<span class="built_in">local</span>/etc/nginx/nginx.conf to 8080 so that</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> nginx can run without sudo.</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> nginx will load all files <span class="keyword">in</span> /usr/<span class="built_in">local</span>/etc/nginx/servers/.</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> To restart nginx after an upgrade:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   brew services restart nginx</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Or, <span class="keyword">if</span> you don<span class="string">'t want/need a background service you can just run:</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   /usr/<span class="built_in">local</span>/opt/nginx/bin/nginx -g daemon off;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ==&gt; Analytics</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> install: 34,533 (30 days), 125,389 (90 days), 464,994 (365 days)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> install-on-request: 34,479 (30 days), 125,159 (90 days), 464,089 (365 days)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> build-error: 1 (30 days)</span></span><br></pre></td></tr></table></figure>
+
+<p>从上文的日志中我们可以看到 当前 nginx 安装的路径（/usr/local/etc/nginx/）和静态服务监听的目录（/usr/local/var/www）<br>接下来我们使用的部分主要就是着重对 nginx.conf 相关文件做一些简单的配置和在静态目录配置一些预期的文件</p>
+<p><strong>打开 error 和 access 日志</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># error 日志</span><br><span class="line">error_log logs&#x2F;error.log;</span><br><span class="line"></span><br><span class="line"># access 日志</span><br><span class="line">log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;</span><br><span class="line">                  &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;</span><br><span class="line">                  &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;</span><br><span class="line"></span><br><span class="line">access_log  &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;logs&#x2F;access.log  main;</span><br></pre></td></tr></table></figure>
+
+<h1 id="nginx-实验"><a href="#nginx-实验" class="headerlink" title="nginx 实验"></a>nginx 实验</h1><h3 id="实验一-打印-nginx-的-status"><a href="#实验一-打印-nginx-的-status" class="headerlink" title="实验一 打印 nginx 的 status"></a>实验一 打印 nginx 的 status</h3><p>借助 nginx 提供的模块<code>--with-http_stub_status_module</code> 通过 brew 安装的版本默认有这个模块</p>
+<p>我们需要新增一个 server，但是为了保证实验的整洁，我们在<code>/usr/local/etc/nginx/</code>新建一个 <code>nginx.conf.d</code> 文件夹，将后续实验的配置文件都放到目录中<br>在<code>/usr/local/etc/nginx/nginx.conf</code>的倒数第二行新增一行 include，确保所有的 conf 都能加入到 nginx 的配置中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include nginx.conf.d&#x2F;*.conf;</span><br></pre></td></tr></table></figure>
+
+<p>编写 conf 文件，打开 stub_status</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;nginx.conf.d/status.conf&lt;&lt;EOF</span><br><span class="line">server &#123;</span><br><span class="line">  listen 8082; # 服务暴露的端口，稍后通过端口访问服务</span><br><span class="line">  location / &#123;</span><br><span class="line">    stub_status on; # 关键在这行</span><br><span class="line">    access_log  off;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<p>验证 nginx 的状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl http://localhost:8082</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 结果</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Active connections: 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> server accepts handled requests</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  17 17 71</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  连接数 握手数 请求数</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Reading: 0 Writing: 1 Waiting: 0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="实验二-访问日志轮训切割"><a href="#实验二-访问日志轮训切割" class="headerlink" title="实验二 访问日志轮训切割"></a>实验二 访问日志轮训切割</h3><ol>
+<li>在<code>/usr/local/etc/nginx/</code>目录下配置创建 shell 文件夹，创建 cut_access.sh 文件，内容如下</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">set -e</span><br><span class="line">Dateformat=$(date '+%Y%m%d%H%M%S')</span><br><span class="line">NginxLogDir=/usr/local/etc/nginx/logs</span><br><span class="line">BackupLogDir=/usr/local/etc/nginx/logs/backup</span><br><span class="line">Logname="access"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建备份文件夹</span></span><br><span class="line">[ -d $BackupLogDir ] || mkdir -p $BackupLogDir</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入logs目录</span></span><br><span class="line">[ -d $NginxLogDir ] &amp;&amp; cd $NginxLogDir || exit 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断是否存在access.log文件</span></span><br><span class="line">[ -f "$&#123;Logname&#125;".log ] &amp;&amp; echo 12 || exit 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 备份文件</span></span><br><span class="line">/bin/mv "$&#123;Logname&#125;".log "$&#123;BackupLogDir&#125;/$&#123;Dateformat&#125;_$&#123;Logname&#125;".log</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重启服务，重新生成文件</span></span><br><span class="line">/usr/local/bin/nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>设置定时任务</li>
+</ol>
+<p>因为还需要定时的备份，所以需要定时任务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看当前已有的定时任务</span></span><br><span class="line">crontab -l</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建定时任务文件</span></span><br><span class="line">cat &gt;cron&lt;&lt;EOF</span><br><span class="line"><span class="meta">#</span><span class="bash"> nginx 日志切割</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 每分钟执行一次任务</span></span><br><span class="line">*/1 * * * * /bin/bash /usr/local/etc/nginx/shell/cut_access.sh</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置定时任务</span></span><br><span class="line">crontab cron</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此时观察 backup 目录下的 access 文件即可看到在不断的创建，而且时间间隔正好都是 1 分钟，实际的生成中日志切割不仅仅是时间一个纬度，还有日志文件的大小。</p>
+</blockquote>
+<h3 id="实验三-location"><a href="#实验三-location" class="headerlink" title="实验三 location"></a>实验三 location</h3><p>语法：location [ = | ~ | <del>* | ^</del> ] uri { ** }</p>
+<ul>
+<li>= 为完全匹配</li>
+<li>~ 区分大小写</li>
+<li>~* 不区分大小写</li>
+<li>^~ 在匹配之后不再做正则匹配</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>URI</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/</td>
+<td><a href="http://localhost:8083/" target="_blank" rel="noopener">http://localhost:8083/</a></td>
+</tr>
+<tr>
+<td>/index.html</td>
+<td><a href="http://localhost:8083/index.html" target="_blank" rel="noopener">http://localhost:8083/index.html</a></td>
+</tr>
+<tr>
+<td>/documents/documents.html</td>
+<td><a href="http://localhost:8083/documents/documents.html" target="_blank" rel="noopener">http://localhost:8083/documents/documents.html</a></td>
+</tr>
+<tr>
+<td>/images/1.gif</td>
+<td><a href="http://localhost:8083/images/1.gif" target="_blank" rel="noopener">http://localhost:8083/images/1.gif</a></td>
+</tr>
+<tr>
+<td>/documents/1.gif</td>
+<td><a href="http://localhost:8083/documents/1.gif" target="_blank" rel="noopener">http://localhost:8083/documents/1.gif</a></td>
+</tr>
+</tbody></table>
+<p>location.conf 配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;location.conf&lt;&lt;EOF</span><br><span class="line">server &#123;</span><br><span class="line">  listen       8083;</span><br><span class="line">  server_name  localhost;</span><br><span class="line">  location / &#123;</span><br><span class="line">    return 201;</span><br><span class="line">  &#125;</span><br><span class="line">  location =/ &#123;</span><br><span class="line">    return 202;</span><br><span class="line">  &#125;</span><br><span class="line">  location /documents &#123;</span><br><span class="line">    return 203;</span><br><span class="line">  &#125;</span><br><span class="line">  location ^~ /images/ &#123;</span><br><span class="line">    return 204;</span><br><span class="line">  &#125;</span><br><span class="line">  location ~* \.(gif|png|jpg)$ &#123;</span><br><span class="line">    return 205;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">nginx -s reload</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试</span></span><br><span class="line">curl http://localhost:8083/                         -w "%&#123;http_code&#125;\n"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 202 说明 = 的优先级最高</span></span><br><span class="line"></span><br><span class="line">curl http://localhost:8083/index.html               -w "%&#123;http_code&#125;\n"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 201 默认走到 /</span></span><br><span class="line"></span><br><span class="line">curl http://localhost:8083/documents/documents.html -w "%&#123;http_code&#125;\n"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 203 其他都没有匹配到，才会走到 203</span></span><br><span class="line"></span><br><span class="line">curl http://localhost:8083/images/1.gif             -w "%&#123;http_code&#125;\n"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 204 因为使用了^~ 优先级较正则高</span></span><br><span class="line"></span><br><span class="line">curl http://localhost:8083/documents/1.gif          -w "%&#123;http_code&#125;\n"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 205 正则高于路径匹配</span></span><br></pre></td></tr></table></figure>
+
+<p>优先级：<strong>全等(=) &gt; 只做常规字符串匹配(^~) &gt; 正则匹配([+?$]等) &gt; 常规字符串匹配(/xxx) &gt; 默认匹配(/)</strong></p>
+<h3 id="实验四-虚拟主机别名"><a href="#实验四-虚拟主机别名" class="headerlink" title="实验四 虚拟主机别名"></a>实验四 虚拟主机别名</h3><ol>
+<li>创建一个 vhost.conf</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;vhost.conf&lt;&lt;EOF</span><br><span class="line">server &#123;</span><br><span class="line">  listen 8084;</span><br><span class="line">  server_name www.test.com test.com;</span><br><span class="line">  location / &#123;</span><br><span class="line">    root html;</span><br><span class="line">    index index.html;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>host 中增加 vhost 的域名解析</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh -c "echo '127.0.0.1 www.test.com'&gt;&gt;/etc/hosts"</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>检查服务</li>
+</ol>
+<p>curl <a href="http://www.test.com:8084" target="_blank" rel="noopener">www.test.com:8084</a><br>curl test.com:8084</p>
+<h3 id="实验五-rewrite-301"><a href="#实验五-rewrite-301" class="headerlink" title="实验五 rewrite 301"></a>实验五 rewrite 301</h3><p>语法：rewrite regex replacement [flag];<br>默认为 null，应用位置：server，location，if<br>eg: rewrite ^/(.*) <a href="http://xxx.com/$1" target="_blank" rel="noopener">http://xxx.com/$1</a> permanent;</p>
+<p>flag 说明</p>
+<table>
+<thead>
+<tr>
+<th>flag</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>last</td>
+<td>本条规则匹配完成之后，继续向下匹配新的 location URI 规则</td>
+</tr>
+<tr>
+<td>break</td>
+<td>本条规则匹配完成之后，不再向后匹配任何规则</td>
+</tr>
+<tr>
+<td>redirect</td>
+<td>302</td>
+</tr>
+<tr>
+<td>permanent</td>
+<td>301</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 删掉之前的别名</span></span><br><span class="line">rm -rf vhost.conf</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用 rewrite 301</span></span><br><span class="line">cat &gt;301.conf&lt;&lt;EOF</span><br><span class="line">server &#123;</span><br><span class="line">  listen 8085;</span><br><span class="line">  server_name test.com;</span><br><span class="line">  rewrite ^/(.*) http://www.test.com:8085/$1 permanent;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">  listen 8085;</span><br><span class="line">  server_name www.test.com;</span><br><span class="line">  location / &#123;</span><br><span class="line">    root html;</span><br><span class="line">    index index.html;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<h3 id="实验六-登录认证"><a href="#实验六-登录认证" class="headerlink" title="实验六 登录认证"></a>实验六 登录认证</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 生成 /usr/<span class="built_in">local</span>/etc/nginx/htpasswd 文件</span></span><br><span class="line">htpasswd -bc /usr/local/etc/nginx/htpasswd ansike ansike</span><br><span class="line">chmod 400 /usr/local/etc/nginx/htpasswd</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 生产auth.conf文件</span></span><br><span class="line">cat &gt;auth.conf&lt;&lt;EOF</span><br><span class="line">server &#123;</span><br><span class="line">  listen 8086;</span><br><span class="line">  server_name localhost;</span><br><span class="line">  location / &#123;</span><br><span class="line">    root html;</span><br><span class="line">    index index.html;</span><br><span class="line">    auth_basic "请登录8086";</span><br><span class="line">    auth_basic_user_file /usr/local/etc/nginx/htpasswd;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<p>浏览器中访问 localhost:8086，此时会提示需要输入用户密码</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/nginx/nginx%E5%9F%BA%E7%A1%80/" data-id="clzmdspfj004rzwl178fkbkje" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/blog/page/7/">&lt; 上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/6/">6</a><a class="page-number" href="/blog/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/blog/page/9/">9</a><a class="page-number" href="/blog/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/21/">21</a><a class="extend next" rel="next" href="/blog/page/9/">下一页 &gt;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>

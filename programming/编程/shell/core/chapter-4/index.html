@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>文本处理三剑客 | ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. grep 文本过滤工具2. sed 字符流编辑器3. awk 入门 1. grep 文本过滤工具  功能说明: 从文本文件或管道数据流中筛选匹配的行及数据。 语法: grep [option] [pattern] [file] option    参数 说明    -v 反选   -n 显示匹配行及行号   -i 不区分大小写，默认区分大小写   -c 只统计匹配的行数   -E 使用扩展的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文本处理三剑客">
+<meta property="og:url" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-4/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="1. grep 文本过滤工具2. sed 字符流编辑器3. awk 入门 1. grep 文本过滤工具  功能说明: 从文本文件或管道数据流中筛选匹配的行及数据。 语法: grep [option] [pattern] [file] option    参数 说明    -v 反选   -n 显示匹配行及行号   -i 不区分大小写，默认区分大小写   -c 只统计匹配的行数   -E 使用扩展的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-04T16:22:22.000Z">
+<meta property="article:modified_time" content="2024-08-08T11:42:01.082Z">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="shell">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-编程/shell/core/chapter-4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-4/" class="article-date">
+  <time datetime="2022-07-04T16:22:22.000Z" itemprop="datePublished">2022-07-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      文本处理三剑客
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="#grep">1. grep 文本过滤工具</a><br><a href="#sed">2. sed 字符流编辑器</a><br><a href="#awk">3. awk 入门</a></p>
+<h3 id="grep">1. grep 文本过滤工具</h3>
+
+<p>功能说明: 从文本文件或管道数据流中筛选匹配的行及数据。</p>
+<p>语法: grep [option] [pattern] [file]</p>
+<p><b>option</b></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-v</td>
+<td>反选</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>显示匹配行及行号</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>不区分大小写，默认区分大小写</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>只统计匹配的行数</td>
+</tr>
+<tr>
+<td>-E</td>
+<td>使用扩展的 egrep 命令</td>
+</tr>
+<tr>
+<td>–color=auto</td>
+<td>为 grep 匹配的字符串添加颜色</td>
+</tr>
+<tr>
+<td>-w</td>
+<td>只匹配过滤的单词,类似单词的精确匹配</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>只输出匹配的内容</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 去除配置文件中的注视和空行</span></span><br><span class="line">grep -Ev "^$|#" /etc/mysql/my.cnf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用扩展正则, 匹配file中的有效行（1，3）</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 987-123-4567</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 123 456 7890</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> (123) 456-7890</span></span><br><span class="line">grep -E "([0-9]&#123;3&#125;-|\([0-9]&#123;3&#125;\ ))[0-9]&#123;3&#125;-[0-9]&#123;4&#125;" file</span><br></pre></td></tr></table></figure>
+
+<h6 id="openvpn-授权脚本案例"><a href="#openvpn-授权脚本案例" class="headerlink" title="openvpn 授权脚本案例"></a>openvpn 授权脚本案例</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> create by ansike</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> time 2022-07-02</span></span><br><span class="line">FILE_PATH=./openvpn/authfile.conf</span><br><span class="line">[ ! -f $FILE_PATH ] &amp;&amp; mkdir -p `dirname $FILE_PATH` &amp;&amp; touch $FILE_PATH;</span><br><span class="line"></span><br><span class="line">usage()&#123;</span><br><span class="line">  cat &lt;&lt;EOF</span><br><span class="line">  USAGE: `basename $0` (-add|-del|-search) username</span><br><span class="line">EOF</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断是否是root用户</span></span><br><span class="line">if [ $UID -ne 0 ]; then</span><br><span class="line">  echo "you are not supper user, please call root";</span><br><span class="line">  exit 1;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断参数的数量</span></span><br><span class="line">if [ $# -ne 2 ]; then</span><br><span class="line">  usage</span><br><span class="line">  exit 2;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">RETVAL=0</span><br><span class="line">case "$1" in</span><br><span class="line">  -a|-add)</span><br><span class="line">    shift</span><br><span class="line">    if grep -w "$1" $FILE_PATH &gt;&gt; /dev/null 2&gt;&amp;1 ; then</span><br><span class="line">      echo "当前用户已经存在"</span><br><span class="line">      exit;</span><br><span class="line">    else</span><br><span class="line">      chattr -i $FILE_PATH</span><br><span class="line">      /bin/cp $FILE_PATH $&#123;FILE_PATH&#125;.$(date +%F%T)</span><br><span class="line">      echo "$1"&gt;&gt;$FILE_PATH</span><br><span class="line">      [ $? -eq 0 ] &amp;&amp; echo "新增用户成功：$1"</span><br><span class="line">      chattr +i $FILE_PATH</span><br><span class="line">      exit</span><br><span class="line">    fi</span><br><span class="line">    ;;</span><br><span class="line">  -d|-del)</span><br><span class="line">    shift</span><br><span class="line">    if [ `grep -w "$1" $FILE_PATH|wc -l` -lt 1 ]; then</span><br><span class="line">      echo "当前用户不存在"</span><br><span class="line">      exit;</span><br><span class="line">    else</span><br><span class="line">      chattr -i $FILE_PATH</span><br><span class="line">      /bin/cp $FILE_PATH $&#123;FILE_PATH&#125;.$(date +%F%T)</span><br><span class="line">      sed -i "/^$&#123;1&#125;$/d" $&#123;FILE_PATH&#125;</span><br><span class="line">      [ $? -eq 0 ] &amp;&amp; echo "删除用户成功：$1"</span><br><span class="line">      chattr +i $FILE_PATH</span><br><span class="line">      exit</span><br><span class="line">    fi</span><br><span class="line">    ;;</span><br><span class="line">  -s|-search)</span><br><span class="line">    shift</span><br><span class="line">    if [ `grep -w "$1" $FILE_PATH|wc -l` -lt 1 ]; then</span><br><span class="line">      echo "当前用户不存在"</span><br><span class="line">      exit;</span><br><span class="line">    else</span><br><span class="line">      echo "当前用户存在"</span><br><span class="line">      exit</span><br><span class="line">    fi</span><br><span class="line">    ;;</span><br><span class="line">  *)</span><br><span class="line">    usage</span><br><span class="line">    exit</span><br><span class="line">    ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+<h3 id="sed">2. sed 字符流编辑器</h3>
+
+<p>全称是 Stream Editor，简称流编辑器<br>常用的功能包括对文件实现快速增删改查，其中查询功能中最常用的两大功能是过滤，取行。</p>
+<p>语法：sed [选项] [sed 内置命令字符] [输入文件]</p>
+<p>参数选项及说明</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-n</td>
+<td>取消默认的 sed 输出，常与命令 p 连用</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>直接修改文件内容而不是输出到终端。sed 默认只是修改内存中的数据，并不会影响磁盘上的文件</td>
+</tr>
+</tbody></table>
+<p>内置名字字符的说明</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a</td>
+<td>append，在指定行后添加一行或者多行文本</td>
+</tr>
+<tr>
+<td>d</td>
+<td>delete，删除匹配的文本</td>
+</tr>
+<tr>
+<td>i</td>
+<td>insert，在指定行前插入一行或多行文本</td>
+</tr>
+<tr>
+<td>p</td>
+<td>print，打印匹配的内容常与-n 连用</td>
+</tr>
+<tr>
+<td>s/regexp/replacement</td>
+<td>匹配 regexp 部分的内容，用 replacement 替换 regexp 匹配的内容。regexp 可以使用正则，replacement 部分可以使用特殊字符&amp;和\1-\9 等匹配 regexp 部分的内容</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 第二行append数据</span></span><br><span class="line">sed "2a xxx" demo.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 第二行insert数据</span></span><br><span class="line">sed "2i xxx" demo.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 第二行删除数据</span></span><br><span class="line">sed "2d" demo.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 只输出第二行。sed 输出第n行是需要关闭sed的默认输出功能的 -n</span></span><br><span class="line">sed -n "2p" demo.txt</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 账号密码格式化</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> user01</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> pass01</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> user01=pass01</span></span><br><span class="line">sed 'N;s/\n/=/g' pass</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>N 不会清空模式空间的内容。相当于连续两行为一个循环</p>
+</blockquote>
+<p>Tips</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 备份一个重要文件</span></span><br><span class="line">cp important.txt&#123;,.ori&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="awk">3. awk 入门</h3>
+awk不仅仅是一个命令，还是一种编程语言，可以用来处理数据和生成报告（excel）。是linux系统中最强大的文本处理工具，没有之一。
+
+<p>常用功能介绍</p>
+<p>| 序号 | 功能             | 说明                                                                                 |<br>| —- | —————- | ———————————————————————————— | —————— |<br>| 1    | 分割字符串       | 读取 access.log 读取 url 列，awk -F “GET                                             | HTTP” ‘{print $2}’ |<br>| 2    | 通过正则取出内容 |                                                                                      |<br>| 3    | 显示某个范围内容 | 读取 2-30 行内容，awk ‘NR==20,NR==30’ file                                           |<br>| 4    | 统计计算         | 计算总和，awk ‘{sum+=$0}END{print sum}’                                              |<br>| 5    | 数组计算和去重   | 对日志进行统计和计数，awk ‘{array[$1]++}END{for(key in array)print key,array[key]}’’ |</p>
+<p>语法：awk [option] ‘pattern{action}’ file …</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-F</td>
+<td>指定字段分隔符</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>定义或者修改一个 awk 内部的变量</td>
+</tr>
+</tbody></table>
+<p><strong>范例</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 只打印第5行数据</span></span><br><span class="line">cat /etc/passwd|awk 'NR==5'</span><br><span class="line"><span class="meta">#</span><span class="bash"> 打印行号，<span class="variable">$0</span> 表示整行内容，NR表示行号</span></span><br><span class="line">cat /etc/passwd|awk '&#123;print NR,$0&#125;'</span><br><span class="line">cat /etc/passwd|awk 'NR==2,NR==3 &#123;print NR,$0&#125;'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 打印:分割的第一列，第三列和最后一列 <span class="variable">$n</span>是第n列，<span class="variable">$NF</span>是最后一列</span></span><br><span class="line">cat /etc/passwd|awk -F ":" '&#123;print $1,$3,$NF&#125;'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查找替换函数</span></span><br><span class="line">cat /etc/passwd|awk '&#123;gsub("/sbin/nologin","/bin/bash",$0);print $0&#125;'</span><br></pre></td></tr></table></figure>
+
+<p>gsub 函数<br>语法：gsub(‘替换对象’,”替换结果”,哪一列)</p>
+<p><strong>生产案例</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 取eth0对应的ip地址</span></span><br><span class="line">ifconfig eth0|awk -F " " 'NR==2&#123;print $2&#125;'</span><br><span class="line"><span class="meta">#</span><span class="bash"> 10.227.77.110</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 统计域名的访问次数</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> cat access.log</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://www.baidu1.com/index.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://www.baidu2.com/index.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://www.baidu2.com/index.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://www.baidu.com/index.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://www.baidu.com/index.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://www.baidu.com/index.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 常规思路</span></span><br><span class="line">cat access.log |awk -F "//|/" '&#123;print $2&#125;'|sort -r|uniq -c</span><br><span class="line">      # 3 www.baidu.com</span><br><span class="line">      # 2 www.baidu2.com</span><br><span class="line">      # 1 www.baidu1.com</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 数组思路</span></span><br><span class="line">cat access.log |awk -F "//|/" '&#123;array[$2]++&#125;;END&#123;for(domain in array) print domain, array[domain]&#125;'</span><br><span class="line"><span class="meta">#</span><span class="bash"> www.baidu1.com 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> www.baidu.com 3</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> www.baidu2.com 2</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-4/" data-id="clzmdspik00j4zwl151ilcnvx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-5/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          信息显示及搜索文件命令
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">文件过滤及内容编辑处理命令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>

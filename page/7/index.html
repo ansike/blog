@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记录一些平时点滴">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ASK&#39;s Blog">
+<meta property="og:url" content="https://ansike.github.io/blog/page/7/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="记录一些平时点滴">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="ask">
+<meta property="article:tag" content=" ansike">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-编程/js/正则/正则相关的方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E6%AD%A3%E5%88%99/%E6%AD%A3%E5%88%99%E7%9B%B8%E5%85%B3%E7%9A%84%E6%96%B9%E6%B3%95/" class="article-date">
+  <time datetime="2022-11-26T11:23:12.000Z" itemprop="datePublished">2022-11-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E6%AD%A3%E5%88%99/%E6%AD%A3%E5%88%99%E7%9B%B8%E5%85%B3%E7%9A%84%E6%96%B9%E6%B3%95/">正则相关的方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>test, match, exec</p>
+<h3 id="RegExp-prototype-test"><a href="#RegExp-prototype-test" class="headerlink" title="RegExp.prototype.test"></a>RegExp.prototype.test</h3><p>语法: regexObj.test(str)<br>一般用于检测传入的字符串是否满足正则, 返回 boolean</p>
+<p>当设置了全局属性<code>g</code>之后, test 的多次调用会从上次的 lastIndex 处开始.</p>
+<h3 id="String-prototype-match"><a href="#String-prototype-match" class="headerlink" title="String.prototype.match"></a>String.prototype.match</h3><p>语法: str.match(regexp)<br>一般用于字符串捕获匹配获取特定字串<br>匹配失败返回 null<br>匹配成功返回值分情况</p>
+<ul>
+<li>有 g: 返回与完整正则表达式匹配的所有结果</li>
+<li>无 g: 返回第一个完整匹配及其捕获组 (常用这个, 且与 exec 返回结果相同).</li>
+</ul>
+<h3 id="RegExp-prototype-exec"><a href="#RegExp-prototype-exec" class="headerlink" title="RegExp.prototype.exec"></a>RegExp.prototype.exec</h3><p>语法: regexObj.exec(str)<br>RegExp 是有状态的,他可以将上次匹配到结果的位置保存在 lastIndex 属性中.使用该特性可以对字符串多次匹配的结果进行逐条遍历</p>
+<p>匹配失败返回 null<br>匹配成功返回和match的无g的情况一致</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/%E6%AD%A3%E5%88%99/%E6%AD%A3%E5%88%99%E7%9B%B8%E5%85%B3%E7%9A%84%E6%96%B9%E6%B3%95/" data-id="clzmdspi600eizwl1cw8n6f5k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/msyql/insert" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/insert/" class="article-date">
+  <time datetime="2022-10-23T02:13:42.000Z" itemprop="datePublished">2022-10-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/insert/">mysql 基础命令 - insert</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>示例数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">if</span> <span class="keyword">not</span> <span class="keyword">exists</span> <span class="string">`test`</span> (</span><br><span class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> AUTO_INCREMENT=<span class="number">9</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">IGNORE</span> <span class="keyword">INTO</span> <span class="string">`test`</span> <span class="keyword">VALUES</span>  (<span class="number">1</span>, <span class="string">"test1"</span>);</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">test</span>\G;</span><br><span class="line"><span class="comment">-- drop table test;</span></span><br></pre></td></tr></table></figure>
+
+<p>insert 插入操作</p>
+<h3 id="存在某条数据时不更新且不报错，不存在时插入"><a href="#存在某条数据时不更新且不报错，不存在时插入" class="headerlink" title="存在某条数据时不更新且不报错，不存在时插入"></a>存在某条数据时不更新且不报错，不存在时插入</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">IGNORE</span> <span class="keyword">INTO</span> <span class="string">`test`</span> <span class="keyword">VALUES</span>  (<span class="number">1</span>, <span class="string">"test11"</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="存在某条数据时更新，不存时在插入"><a href="#存在某条数据时更新，不存时在插入" class="headerlink" title="存在某条数据时更新，不存时在插入"></a>存在某条数据时更新，不存时在插入</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">BEGIN</span>;</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="string">`test`</span> <span class="keyword">VALUES</span>  (<span class="number">1</span>, <span class="string">"test11"</span>) <span class="keyword">ON</span> <span class="keyword">DUPLICATE</span> <span class="keyword">KEY</span> <span class="keyword">UPDATE</span>;</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="sql中的if语句"><a href="#sql中的if语句" class="headerlink" title="sql中的if语句"></a>sql中的if语句</h3><p><a href="https://dev.mysql.com/doc/refman/8.0/en/sql-prepared-statements.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/8.0/en/sql-prepared-statements.html</a><br>mysql 8.0</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- platform 中不存在 product 表则把 config 表重命名为 product</span></span><br><span class="line"><span class="keyword">BEGIN</span>;</span><br><span class="line"><span class="keyword">SET</span> @<span class="keyword">QUERY</span> = <span class="keyword">IF</span>(</span><br><span class="line">    <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>(</span><br><span class="line">      <span class="keyword">select</span>  TABLE_NAME  <span class="keyword">from</span>  INFORMATION_SCHEMA.TABLES  <span class="keyword">where</span> TABLE_SCHEMA =<span class="string">'platform'</span> <span class="keyword">and</span>  TABLE_NAME = <span class="string">'product'</span></span><br><span class="line">    ),</span><br><span class="line">    <span class="string">'ALTER TABLE config RENAME TO product;'</span>,</span><br><span class="line">    <span class="string">'DO TRUE;'</span></span><br><span class="line">  );</span><br><span class="line"><span class="keyword">PREPARE</span> stmt <span class="keyword">FROM</span> @<span class="keyword">QUERY</span>;</span><br><span class="line"><span class="keyword">EXECUTE</span> stmt;</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建product表create_time字段</span></span><br><span class="line"><span class="keyword">BEGIN</span>;</span><br><span class="line"><span class="keyword">SET</span> @<span class="keyword">QUERY</span> = <span class="keyword">IF</span>(</span><br><span class="line">    <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>(</span><br><span class="line">      <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> information_schema.columns <span class="keyword">WHERE</span> table_schema=<span class="string">'platform'</span> <span class="keyword">AND</span> table_name = <span class="string">'product'</span> <span class="keyword">AND</span> column_name = <span class="string">'create_time'</span></span><br><span class="line">    ),</span><br><span class="line">    <span class="string">'ALTER TABLE product ADD COLUMN create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT "创建时间";'</span>,</span><br><span class="line">    <span class="string">'DO TRUE;'</span></span><br><span class="line">  );</span><br><span class="line"><span class="keyword">PREPARE</span> stmt <span class="keyword">FROM</span> @<span class="keyword">QUERY</span>;</span><br><span class="line"><span class="keyword">EXECUTE</span> stmt;</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/msyql/insert/" data-id="clzmdspfg003mzwl1gyba5qxh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/游戏/cocosCreator/全局数据共享" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/%E6%B8%B8%E6%88%8F/%E7%BC%96%E7%A8%8B/%E6%B8%B8%E6%88%8F/cocosCreator/%E5%85%A8%E5%B1%80%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB/" class="article-date">
+  <time datetime="2022-10-23T02:13:42.000Z" itemprop="datePublished">2022-10-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/%E6%B8%B8%E6%88%8F/%E7%BC%96%E7%A8%8B/%E6%B8%B8%E6%88%8F/cocosCreator/%E5%85%A8%E5%B1%80%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB/">全局数据共享</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="为什么需要全局数据"><a href="#为什么需要全局数据" class="headerlink" title="为什么需要全局数据"></a>为什么需要全局数据</h1><p>在 cocos creator 3.6 以后的版本页面之间是通过 scene 来隔离的，不同的 scene 有着不同的上下文，切换到下一个 scene，上一个 scene 是默认被销毁的。但是在整个游戏的过程中肯定是需要一些全局状态来保存游戏过程数据，来确保游戏体验的连续性。</p>
+<h1 id="如何在-cocos-中实现全局数据共享"><a href="#如何在-cocos-中实现全局数据共享" class="headerlink" title="如何在 cocos 中实现全局数据共享"></a>如何在 cocos 中实现全局数据共享</h1><p>在 cocos 官网中提供了一种持久化 node 的方案，但是说明还是比较简单的。</p>
+<ol>
+<li>在合适的位置创建一个空节点（scene 的下一层），在该节点上挂载一个脚本</li>
+</ol>
+<p>脚本内容大致如下</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; _decorator, Component, Node, director &#125; <span class="keyword">from</span> <span class="string">"cc"</span>;</span><br><span class="line"><span class="keyword">const</span> &#123; ccclass, property &#125; = _decorator;</span><br><span class="line"></span><br><span class="line"><span class="meta">@ccclass</span>(<span class="string">"GlobalData"</span>)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> GlobalData <span class="keyword">extends</span> Component &#123;</span><br><span class="line">  <span class="meta">@property</span></span><br><span class="line">  <span class="keyword">public</span> level: <span class="built_in">number</span> = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">public</span> maxLevel: <span class="built_in">number</span> = <span class="number">1</span>;</span><br><span class="line">  onEnable() &#123;</span><br><span class="line">    director.addPersistRootNode(<span class="keyword">this</span>.node);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在其他 scene 下使用该数据</li>
+</ol>
+<p>此时 gameData 的数据就是我们在上文脚本中的数据，可直接进行同步获取和修改</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ....</span></span><br><span class="line">  onLoad() &#123;</span><br><span class="line">    <span class="comment">// 获取全局的数据节点</span></span><br><span class="line">    <span class="keyword">const</span> GlobalDataNode = director.getScene().getChildByName(<span class="string">"GlobalData"</span>);</span><br><span class="line">    <span class="keyword">if</span> (GlobalDataNode) &#123;</span><br><span class="line">      <span class="keyword">const</span> gameData = GlobalDataNode.getComponent(GameDataManager);</span><br><span class="line">      <span class="built_in">console</span>.log(gameData);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="comment">// ....</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/%E6%B8%B8%E6%88%8F/%E7%BC%96%E7%A8%8B/%E6%B8%B8%E6%88%8F/cocosCreator/%E5%85%A8%E5%B1%80%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB/" data-id="clzmdspiq00ltzwl1fx9ubi0l" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/ssh" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/ssh/" class="article-date">
+  <time datetime="2022-10-12T15:57:33.000Z" itemprop="datePublished">2022-10-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/ssh/">ssh</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="ssh-是什么？"><a href="#ssh-是什么？" class="headerlink" title="ssh 是什么？"></a>ssh 是什么？</h3><h3 id="我们为什么需要ssh"><a href="#我们为什么需要ssh" class="headerlink" title="我们为什么需要ssh"></a>我们为什么需要ssh</h3><p>有没有别的类似的软件</p>
+<h3 id="ssh是怎么保证安全的"><a href="#ssh是怎么保证安全的" class="headerlink" title="ssh是怎么保证安全的"></a>ssh是怎么保证安全的</h3><p>ssh比其他软件的优势在哪</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/ssh/" data-id="clzmdspfn006czwl1h4omewwx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/网络相关/tcpdump" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/tcpdump/" class="article-date">
+  <time datetime="2022-10-12T15:57:33.000Z" itemprop="datePublished">2022-10-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/tcpdump/">tcpdump</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>tcpdump - dump traffic on a network</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/tcpdump/" data-id="clzmdspfu008zzwl1hqxq4p22" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/bash" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/bash/" class="article-date">
+  <time datetime="2022-10-12T15:41:20.000Z" itemprop="datePublished">2022-10-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/bash/">bash</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="常用功能"><a href="#常用功能" class="headerlink" title="常用功能"></a>常用功能</h3><ol>
+<li>输入流中读取脚本执行</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo 'echo "this is receive arg $1"' | bash -s firstarg</span><br><span class="line"><span class="meta">#</span><span class="bash"> this is receive arg firstarg</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>一键安装脚本实现</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 使用curl下载到本地之后执行shell脚本</span></span><br><span class="line">curl http://xxx/install.sh | bash</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/bash/" data-id="clzmdspfj004tzwl119r0b59g" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-生活/经济/microeconemics/supplyDemand" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E7%BB%8F%E6%B5%8E/microeconemics/supplyDemand/" class="article-date">
+  <time datetime="2022-10-05T02:01:40.000Z" itemprop="datePublished">2022-10-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/life/">生活</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/life/%E7%94%9F%E6%B4%BB/%E7%BB%8F%E6%B5%8E/microeconemics/supplyDemand/">微观经济学+supply&amp;demand</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="什么是微观经济学"><a href="#什么是微观经济学" class="headerlink" title="什么是微观经济学"></a>什么是微观经济学</h3><p>微观经济学事研究如何在受限的条件下，个人或公司如何做出抉择。</p>
+<p>稀缺性驱动微观经济：scarcity is what drives microeconomics.<br>权衡：trade off things<br>机会成本：opportunity cost</p>
+<h3 id="供需模型"><a href="#供需模型" class="headerlink" title="供需模型"></a>供需模型</h3><p>support+ demand</p>
+<h4 id="模型使用三个维度去理解"><a href="#模型使用三个维度去理解" class="headerlink" title="模型使用三个维度去理解"></a>模型使用三个维度去理解</h4><ol>
+<li>直接理解 intuitive</li>
+<li>图形化 graphical</li>
+<li>数学 mathematical</li>
+</ol>
+<h4 id="水钻石悖论"><a href="#水钻石悖论" class="headerlink" title="水钻石悖论"></a>水钻石悖论</h4><p>水对于人类来说是必须的，钻石对于人来说事非必需的。正常理解水应该比钻石的价值更大，但其实不是的。<br>正是因为供需关系导致这个悖论。虽然水是必需品，但水的供应几乎是无尽的，钻石虽然是非必需品但是有限的，只能供应部分。<br>所以看待一个现象经济学的基本现象需要从供需关系入手</p>
+<p><strong>分析问题有两个角度</strong></p>
+<ul>
+<li>实证分析 (positive analysis）研究事物的本质</li>
+<li>规范分析（normative analysis）研究事情应该是什么</li>
+</ul>
+<p><strong>以 ebay 卖肾脏为例</strong> 拍卖肾脏从 2.5w 迅速升至 500w</p>
+<p>Q1. 为什么会这么贵？<br>供小于需（问题的本质，是实证分析）</p>
+<p>Q2. 这合理吗？</p>
+<p>规范分析的角度看</p>
+<ul>
+<li>标准经济学角度看供需双方都得到了自己想要的</li>
+<li>市场欺骗 可能存在提供的肾是有问题的，或者提供肾的人收到的信息不对等导致被骗</li>
+<li>公平的角度看 好像是有钱就等于公平</li>
+<li>行为经济学 人会犯错</li>
+</ul>
+<p>市场会自动分配给需要的对象<br>best for society === maximum surplus</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/life/%E7%94%9F%E6%B4%BB/%E7%BB%8F%E6%B5%8E/microeconemics/supplyDemand/" data-id="clzmdspg200d9zwl1bu1begh0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/mac/open" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/mac/open/" class="article-date">
+  <time datetime="2022-10-05T02:00:35.000Z" itemprop="datePublished">2022-10-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/mac/open/">open命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>mac 中可以使用 open 命令打开文件，目录，应用程序等，实现一些便捷的操作。</p>
+<h3 id="自动打开程序"><a href="#自动打开程序" class="headerlink" title="自动打开程序"></a>自动打开程序</h3><p>使用以下命令自动打开 terminal，执行自动登录的脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">export HOST="172.17.1.1"; export VEUSER=root; export PASSWORD=xxxx; open -n -a iTerm /Users/ansike/scripts/sshLogin/ssh-login.exp</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">-------auto login-------</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/expect</span></span><br><span class="line">set ipaddress "$env(HOST)"</span><br><span class="line">set user "$env(VEUSER)"</span><br><span class="line">set passwd "$env(PASSWORD)"</span><br><span class="line"></span><br><span class="line">set timeout 30</span><br><span class="line"></span><br><span class="line">spawn ssh $user@$ipaddress</span><br><span class="line">expect &#123;</span><br><span class="line">    "*password:" &#123; send "$passwd\r" &#125;</span><br><span class="line">    "yes/no" &#123; send "yes\r";exp_continue &#125;</span><br><span class="line">&#125;</span><br><span class="line">interact</span><br><span class="line"><span class="meta">#</span><span class="bash">-------auto login-------</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>也可以 apple 自带的 script 去执行 osascript -e ‘tell application “Terminal” to do script “expect /Users/ansike/sshLogin/ssh-login.exp”‘</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/mac/open/" data-id="clzmdspfg003fzwl17ntu3qf5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/expect/expect入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/expect/expect%E5%85%A5%E9%97%A8/" class="article-date">
+  <time datetime="2022-10-04T08:11:29.000Z" itemprop="datePublished">2022-10-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/expect/expect%E5%85%A5%E9%97%A8/">expect入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="expect-是什么？"><a href="#expect-是什么？" class="headerlink" title="expect 是什么？"></a>expect 是什么？</h3><p>是一种的脚本语言，是用来进行自动化控制和测试的工具。<br>主要和交互式软件（telnet，ssh，ftp，passwd）一起使用</p>
+<p>mac 安装 expect</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install expect</span><br></pre></td></tr></table></figure>
+
+<h3 id="自动登录脚本"><a href="#自动登录脚本" class="headerlink" title="自动登录脚本"></a>自动登录脚本</h3><figure class="highlight sh"><figcaption><span>ssh-login</span><a href="/blog/downloads/code/expect/ssh-login.exp">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/expect -f</span></span><br><span class="line"><span class="comment"># ssh自动登录机器</span></span><br><span class="line"><span class="comment"># 设置变量参数</span></span><br><span class="line"><span class="built_in">set</span> user root</span><br><span class="line"><span class="comment"># 从参数中获取内容，第一个参数</span></span><br><span class="line"><span class="built_in">set</span> host [lindex <span class="variable">$argv</span> 0]</span><br><span class="line"><span class="comment"># 第二个参数</span></span><br><span class="line"><span class="built_in">set</span> passwd [lindex <span class="variable">$argv</span> 1]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置过期时间, -1为用不过期</span></span><br><span class="line"><span class="built_in">set</span> timeout 30</span><br><span class="line"></span><br><span class="line">spawn ssh <span class="variable">$user</span>@<span class="variable">$host</span></span><br><span class="line">expect <span class="string">"password:"</span> { send <span class="string">"<span class="variable">$passwd</span>\r"</span>; }</span><br><span class="line">expect <span class="string">"yes/no"</span> { send <span class="string">"yes\r"</span>; exp_continue }</span><br><span class="line"></span><br><span class="line"><span class="comment"># 和上边的意思一致</span></span><br><span class="line"><span class="comment"># expect {</span></span><br><span class="line"><span class="comment">#   "password:" { send "$passwd\r"; }</span></span><br><span class="line"><span class="comment">#   "yes/no" { send "yes\r"; exp_continue }</span></span><br><span class="line"><span class="comment"># }</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主动权交给用户，开始交互式操作</span></span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
+
+<p>以上的脚本只需要一键即可自动登录到对应的机器上</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 注意密码中有$时需要进行转义</span></span><br><span class="line">./ssh-login.ex 172.17.1.1 "as\$xxx"</span><br></pre></td></tr></table></figure>
+
+<h3 id="scp-自动拷贝"><a href="#scp-自动拷贝" class="headerlink" title="scp 自动拷贝"></a>scp 自动拷贝</h3><figure class="highlight sh"><figcaption><span>scp</span><a href="/blog/downloads/code/expect/scp.exp">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/expect -f</span></span><br><span class="line"><span class="comment"># scp 拷贝文件</span></span><br><span class="line"><span class="comment"># 设置过期时间, -1为用不过期</span></span><br><span class="line"><span class="built_in">set</span> timeout -1</span><br><span class="line"></span><br><span class="line">spawn scp /Users/ansike/a.sh root@172.17.1.1:~/</span><br><span class="line">expect {</span><br><span class="line">  <span class="string">"password:"</span> { send <span class="string">"sssss\r"</span>; }</span><br><span class="line">  <span class="string">"yes/no"</span> { send <span class="string">"yes\r"</span>; exp_continue }</span><br><span class="line">}</span><br><span class="line"><span class="comment"># 立即退出远程登录</span></span><br><span class="line">send <span class="string">"exit\r"</span> </span><br><span class="line"><span class="comment"># 表示交互结束</span></span><br><span class="line">expect eof</span><br></pre></td></tr></table></figure>
+
+<h3 id="一次性执行脚本"><a href="#一次性执行脚本" class="headerlink" title="一次性执行脚本"></a>一次性执行脚本</h3><p>登陆机器创建文件夹</p>
+<figure class="highlight sh"><figcaption><span>once-ssh</span><a href="/blog/downloads/code/expect/once-ssh.exp">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/expect -f</span></span><br><span class="line"><span class="comment"># ssh自动登录机器</span></span><br><span class="line"><span class="comment"># 设置变量参数</span></span><br><span class="line"><span class="built_in">set</span> user root</span><br><span class="line"><span class="comment"># 从参数中获取内容，第一个参数</span></span><br><span class="line"><span class="built_in">set</span> host [lindex <span class="variable">$argv</span> 0]</span><br><span class="line"><span class="comment"># 第二个参数</span></span><br><span class="line"><span class="built_in">set</span> passwd [lindex <span class="variable">$argv</span> 1]</span><br><span class="line"><span class="comment"># 设置过期时间, -1为用不过期</span></span><br><span class="line"><span class="built_in">set</span> timeout 30</span><br><span class="line"></span><br><span class="line">spawn ssh <span class="variable">$user</span>@<span class="variable">$host</span></span><br><span class="line">expect {</span><br><span class="line">  <span class="string">"password:"</span> { send <span class="string">"<span class="variable">$passwd</span>\r"</span>; }</span><br><span class="line">  <span class="string">"yes/no"</span> { send <span class="string">"yes\r"</span>; exp_continue }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment"># 登录成功之后创建一个testExpect文件夹</span></span><br><span class="line">expect <span class="string">"root"</span> {send <span class="string">"mkdir testExpect\r"</span>}</span><br><span class="line"></span><br><span class="line"><span class="comment"># 立即退出远程登录</span></span><br><span class="line">send <span class="string">"exit\r"</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 表示交互结束</span></span><br><span class="line">expect eof</span><br></pre></td></tr></table></figure>
+
+<h3 id="批量执行脚本"><a href="#批量执行脚本" class="headerlink" title="批量执行脚本"></a>批量执行脚本</h3><p>批量登陆机器执行<code>uname -a</code>命令</p>
+<figure class="highlight sh"><figcaption><span>batch-login</span><a href="/blog/downloads/code/expect/batch-login.sh">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">HOSTS=<span class="string">"hostname1 hostname2"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> host <span class="keyword">in</span> <span class="variable">$HOSTS</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">  expect -c <span class="string">"</span></span><br><span class="line"><span class="string">    set timeout 5</span></span><br><span class="line"><span class="string">    spawn ssh root@<span class="variable">$host</span></span></span><br><span class="line"><span class="string">    expect {</span></span><br><span class="line"><span class="string">      \"password:\" { send \"23322456\r\" }</span></span><br><span class="line"><span class="string">      \"yes/no:\" { send \"yes\r\"; exp_continue }</span></span><br><span class="line"><span class="string">    }</span></span><br><span class="line"><span class="string">    expect \"*]#\" { send \"uname -a\r\" }</span></span><br><span class="line"><span class="string">    send \"exit\r\"</span></span><br><span class="line"><span class="string">    expect eof</span></span><br><span class="line"><span class="string">  "</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="expect-主要命令"><a href="#expect-主要命令" class="headerlink" title="expect 主要命令"></a>expect 主要命令</h3><p>spawn 新建一个进程，这个进程的交互由 expect 控制<br>expect 等待接受进程返回的字符串，直到超时时间，根据规则决定下一步操作<br>send 发送字符串给 expect 控制的进程<br>set 设定变量为某个值<br>exp_continue 重新执行 expect 命令分支<br>[lindex $argv 0] 获取 expect 脚本的第 1 个参数<br>[lindex $argv 1] 获取 expect 脚本的第 2 个参数<br>set timeout -1 设置超时方式为永远等待<br>set timeout 30 设置超时时间为 30 秒<br>interact 将脚本的控制权交给用户，用户可继续输入命令<br>expect eof 等待 spawn 进程结束后退出信号 eof</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/expect/expect%E5%85%A5%E9%97%A8/" data-id="clzmdspij00iuzwl1g58s54fd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/js/项目初始化/typescript" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96/typescript/" class="article-date">
+  <time datetime="2022-09-29T02:12:54.000Z" itemprop="datePublished">2022-09-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96/typescript/">typescript util 初始化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="结论先行"><a href="#结论先行" class="headerlink" title="结论先行"></a>结论先行</h2><p>可以直接根据内容执行初始化</p>
+<!-- TODO 配置好路径和和兼容linux -->
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 当前目录初始化</span></span><br><span class="line">curl https://raw.githubusercontent.com/ansike/blog/master/source/downloads/code/shell/node-util-ts.install.sh | bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> xxx目录初始化</span></span><br><span class="line">curl https://raw.githubusercontent.com/ansike/blog/master/source/downloads/code/shell/node-util-ts.install.sh | bash -s xxx</span><br></pre></td></tr></table></figure>
+
+<p>可在项目根目录下选择执行以下命令</p>
+<figure class="highlight sh"><figcaption><span>node-util-ts.install</span><a href="/blog/downloads/code/shell/node-util-ts.install.sh">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"></span><br><span class="line">PROJECT=<span class="variable">$1</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$PROJECT</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$PROJECT</span>"</span> != <span class="string">''</span> ]; <span class="keyword">then</span></span><br><span class="line">  [ -d <span class="variable">$PROJECT</span> ] &amp;&amp; {</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"目录【<span class="variable">$PROJECT</span>】已经存在，请删除后重试"</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">  }</span><br><span class="line">  mkdir <span class="variable">$PROJECT</span></span><br><span class="line">  <span class="built_in">cd</span> <span class="variable">$PROJECT</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"创建项目目录【<span class="variable">$PROJECT</span>】成功"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"使用当前目录【<span class="variable">$(PWD)</span>】创建项目"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 没有安装yarn需要提前安装一下</span></span><br><span class="line"><span class="comment"># npm install -g yarm --registry=</span></span><br><span class="line">yarn init -y</span><br><span class="line"></span><br><span class="line">yarn add -D typescript</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加tsc命令</span></span><br><span class="line"><span class="comment"># mac系统</span></span><br><span class="line">sed -i <span class="string">''</span> <span class="string">'/main/a\ </span></span><br><span class="line"><span class="string">\ \ "scripts": {\</span></span><br><span class="line"><span class="string">\ \ \ \ "build": "tsc",\</span></span><br><span class="line"><span class="string">\ \ \ \ "dev": "tsc -w"\</span></span><br><span class="line"><span class="string">\ \ },\</span></span><br><span class="line"><span class="string">'</span> package.json</span><br><span class="line"></span><br><span class="line">npx tsc --init</span><br><span class="line"><span class="comment"># 修改outDir为dist目录</span></span><br><span class="line"><span class="comment"># mac</span></span><br><span class="line">sed -i <span class="string">''</span> <span class="string">'s/\/\/ \"outDir\": \".\/\"/\"outDir\": \"\.\/dist"/'</span> tsconfig.json</span><br><span class="line"></span><br><span class="line">[ ! -d src ] &amp;&amp; mkdir src</span><br><span class="line">cat &gt;src/index.ts &lt;&lt;EOF</span><br><span class="line">console.log(<span class="string">'hello world'</span>);</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">yarn build</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看terminal输出内容是否是hello world</span></span><br><span class="line">node dist/index.js</span><br><span class="line"></span><br><span class="line">[ $? -eq 0 ] &amp;&amp; <span class="built_in">echo</span> <span class="string">"🚗大功告成"</span> || <span class="built_in">echo</span> <span class="string">"❌初始化失败"</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="具体步骤讲解"><a href="#具体步骤讲解" class="headerlink" title="具体步骤讲解"></a>具体步骤讲解</h2><h3 id="1-初始化项目"><a href="#1-初始化项目" class="headerlink" title="1. 初始化项目"></a>1. 初始化项目</h3><p>目前（2022）前端的几乎所有项目都受到了 package.json 的管理，不管是 web 还是 node，甚至是 util。只要是需要依赖其他包的项目，package.json 进行是目前的唯一的也是最好的选择</p>
+<p>依赖的管理工具目前也出现了很多，最开始的 npm，后来的 yarn，现在还有新的 pnpm。各有各的优缺点，我主要使用 yarn。</p>
+<p>在空目录下运行以下命令会生成一个一个 package.json，该文件主要是做项目的描述。内容包括项目名称版本号，仓库地址，关键词，开发和编译依赖等。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn init -y</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-安装必须的依赖"><a href="#2-安装必须的依赖" class="headerlink" title="2. 安装必须的依赖"></a>2. 安装必须的依赖</h3><p>我们需要给项目安装一个 typescript 的开发依赖，在后续编译 ts 到 js 时使用。执行命令之后在项目的目录下会生成一个 node_modules 的文件夹，里边有我们需要的依赖。目前我们不用关心里边是什么，该命令会在 package.json 的 devDependences 中增加一个依赖声明。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add -D typescript</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-typescript-声明初始化"><a href="#3-typescript-声明初始化" class="headerlink" title="3. typescript 声明初始化"></a>3. typescript 声明初始化</h3><p>ts 在后续进行编译时是有一些配置可以根据项目进行调整的，当然也可以直接在命令行中增加参数，但是还是推荐创建声明文件。一方面是可读性更强，另一方面是便于扩展配置。<br>执行该命令后会在项目根目录下创建 tsconfig.json 文件，该文件主要是 ts 的配置文件，里边有很多注释，功能一目了然。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx tsc --init</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>一般情况我们会把 outDir 设置为 dist。产物输出目录为dist否则默认输出当前文件夹下</p>
+</blockquote>
+<h3 id="4-创建-ts-文件，编译执行"><a href="#4-创建-ts-文件，编译执行" class="headerlink" title="4. 创建 ts 文件，编译执行"></a>4. 创建 ts 文件，编译执行</h3><p>创建项目文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir src</span><br><span class="line">cd src</span><br><span class="line">cat &gt;index.ts&lt;&lt;EOF</span><br><span class="line">console.log('hello world');</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p><strong>增加 package.json 的 script</strong><br>因为 tsconfig 默认会查找 src 下的 ts 文件，所以可以直接找到 src/index.ts</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"build"</span>: <span class="string">"tsc"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>使用生成的 js</strong><br>node 项目通过<code>node index.js</code>调用<br>web 项目通过引入到 html 中查看</p>
+<h3 id="5-动态编译"><a href="#5-动态编译" class="headerlink" title="5. 动态编译"></a>5. 动态编译</h3><p>tsc 支持动态的编译，把上文 build 的命令增加一个 <code>-w</code> 即可，此时修改 index.ts 中的内容，即可看到 index.js 中的内容也发生了变化。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "scripts": &#123;</span><br><span class="line">    "dev": "tsc -w"</span><br><span class="line">    "build": "tsc"</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96/typescript/" data-id="clzmdspi700eozwl14mjrdi2w" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/blog/page/6/">&lt; 上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/5/">5</a><a class="page-number" href="/blog/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/blog/page/8/">8</a><a class="page-number" href="/blog/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/21/">21</a><a class="extend next" rel="next" href="/blog/page/8/">下一页 &gt;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>

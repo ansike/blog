@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>nginx基础 | ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="mac 下 nginx 的安装12345678910111213141516171819202122232425262728293031323334# 安装brew install nginx# 查看安装信息brew info nginx# nginx: stable 1.21.6 (bottled), HEAD# HTTP(S) server and reverse proxy, and IMA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx基础">
+<meta property="og:url" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/nginx/nginx%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="mac 下 nginx 的安装12345678910111213141516171819202122232425262728293031323334# 安装brew install nginx# 查看安装信息brew info nginx# nginx: stable 1.21.6 (bottled), HEAD# HTTP(S) server and reverse proxy, and IMA">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-09-12T14:08:08.000Z">
+<meta property="article:modified_time" content="2024-08-08T11:42:01.075Z">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="ask">
+<meta property="article:tag" content=" ansike">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-编程/nginx/nginx基础" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/nginx/nginx%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time datetime="2022-09-12T14:08:08.000Z" itemprop="datePublished">2022-09-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      nginx基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="mac-下-nginx-的安装"><a href="#mac-下-nginx-的安装" class="headerlink" title="mac 下 nginx 的安装"></a>mac 下 nginx 的安装</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 安装</span></span><br><span class="line">brew install nginx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看安装信息</span></span><br><span class="line">brew info nginx</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> nginx: stable 1.21.6 (bottled), HEAD</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> https://nginx.org/</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> /usr/<span class="built_in">local</span>/Cellar/nginx/1.21.6_1 (26 files, 2.2MB) *</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Poured from bottle on 2022-09-12 at 16:01:38</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> From: https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/nginx.rb</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> License: BSD-2-Clause</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ==&gt; Dependencies</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Required: openssl@1.1 ✔, pcre2 ✔</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ==&gt; Options</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> --HEAD</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 	Install HEAD version</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ==&gt; Caveats</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Docroot is: /usr/<span class="built_in">local</span>/var/www</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> The default port has been <span class="built_in">set</span> <span class="keyword">in</span> /usr/<span class="built_in">local</span>/etc/nginx/nginx.conf to 8080 so that</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> nginx can run without sudo.</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> nginx will load all files <span class="keyword">in</span> /usr/<span class="built_in">local</span>/etc/nginx/servers/.</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> To restart nginx after an upgrade:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   brew services restart nginx</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Or, <span class="keyword">if</span> you don<span class="string">'t want/need a background service you can just run:</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">   /usr/<span class="built_in">local</span>/opt/nginx/bin/nginx -g daemon off;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ==&gt; Analytics</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> install: 34,533 (30 days), 125,389 (90 days), 464,994 (365 days)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> install-on-request: 34,479 (30 days), 125,159 (90 days), 464,089 (365 days)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> build-error: 1 (30 days)</span></span><br></pre></td></tr></table></figure>
+
+<p>从上文的日志中我们可以看到 当前 nginx 安装的路径（/usr/local/etc/nginx/）和静态服务监听的目录（/usr/local/var/www）<br>接下来我们使用的部分主要就是着重对 nginx.conf 相关文件做一些简单的配置和在静态目录配置一些预期的文件</p>
+<p><strong>打开 error 和 access 日志</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># error 日志</span><br><span class="line">error_log logs&#x2F;error.log;</span><br><span class="line"></span><br><span class="line"># access 日志</span><br><span class="line">log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;</span><br><span class="line">                  &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;</span><br><span class="line">                  &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;</span><br><span class="line"></span><br><span class="line">access_log  &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;logs&#x2F;access.log  main;</span><br></pre></td></tr></table></figure>
+
+<h1 id="nginx-实验"><a href="#nginx-实验" class="headerlink" title="nginx 实验"></a>nginx 实验</h1><h3 id="实验一-打印-nginx-的-status"><a href="#实验一-打印-nginx-的-status" class="headerlink" title="实验一 打印 nginx 的 status"></a>实验一 打印 nginx 的 status</h3><p>借助 nginx 提供的模块<code>--with-http_stub_status_module</code> 通过 brew 安装的版本默认有这个模块</p>
+<p>我们需要新增一个 server，但是为了保证实验的整洁，我们在<code>/usr/local/etc/nginx/</code>新建一个 <code>nginx.conf.d</code> 文件夹，将后续实验的配置文件都放到目录中<br>在<code>/usr/local/etc/nginx/nginx.conf</code>的倒数第二行新增一行 include，确保所有的 conf 都能加入到 nginx 的配置中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include nginx.conf.d&#x2F;*.conf;</span><br></pre></td></tr></table></figure>
+
+<p>编写 conf 文件，打开 stub_status</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;nginx.conf.d/status.conf&lt;&lt;EOF</span><br><span class="line">server &#123;</span><br><span class="line">  listen 8082; # 服务暴露的端口，稍后通过端口访问服务</span><br><span class="line">  location / &#123;</span><br><span class="line">    stub_status on; # 关键在这行</span><br><span class="line">    access_log  off;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<p>验证 nginx 的状态</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl http://localhost:8082</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 结果</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Active connections: 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> server accepts handled requests</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  17 17 71</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  连接数 握手数 请求数</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Reading: 0 Writing: 1 Waiting: 0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="实验二-访问日志轮训切割"><a href="#实验二-访问日志轮训切割" class="headerlink" title="实验二 访问日志轮训切割"></a>实验二 访问日志轮训切割</h3><ol>
+<li>在<code>/usr/local/etc/nginx/</code>目录下配置创建 shell 文件夹，创建 cut_access.sh 文件，内容如下</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">set -e</span><br><span class="line">Dateformat=$(date '+%Y%m%d%H%M%S')</span><br><span class="line">NginxLogDir=/usr/local/etc/nginx/logs</span><br><span class="line">BackupLogDir=/usr/local/etc/nginx/logs/backup</span><br><span class="line">Logname="access"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建备份文件夹</span></span><br><span class="line">[ -d $BackupLogDir ] || mkdir -p $BackupLogDir</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入logs目录</span></span><br><span class="line">[ -d $NginxLogDir ] &amp;&amp; cd $NginxLogDir || exit 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断是否存在access.log文件</span></span><br><span class="line">[ -f "$&#123;Logname&#125;".log ] &amp;&amp; echo 12 || exit 1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 备份文件</span></span><br><span class="line">/bin/mv "$&#123;Logname&#125;".log "$&#123;BackupLogDir&#125;/$&#123;Dateformat&#125;_$&#123;Logname&#125;".log</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 重启服务，重新生成文件</span></span><br><span class="line">/usr/local/bin/nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>设置定时任务</li>
+</ol>
+<p>因为还需要定时的备份，所以需要定时任务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看当前已有的定时任务</span></span><br><span class="line">crontab -l</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建定时任务文件</span></span><br><span class="line">cat &gt;cron&lt;&lt;EOF</span><br><span class="line"><span class="meta">#</span><span class="bash"> nginx 日志切割</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 每分钟执行一次任务</span></span><br><span class="line">*/1 * * * * /bin/bash /usr/local/etc/nginx/shell/cut_access.sh</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置定时任务</span></span><br><span class="line">crontab cron</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此时观察 backup 目录下的 access 文件即可看到在不断的创建，而且时间间隔正好都是 1 分钟，实际的生成中日志切割不仅仅是时间一个纬度，还有日志文件的大小。</p>
+</blockquote>
+<h3 id="实验三-location"><a href="#实验三-location" class="headerlink" title="实验三 location"></a>实验三 location</h3><p>语法：location [ = | ~ | <del>* | ^</del> ] uri { ** }</p>
+<ul>
+<li>= 为完全匹配</li>
+<li>~ 区分大小写</li>
+<li>~* 不区分大小写</li>
+<li>^~ 在匹配之后不再做正则匹配</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>URI</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/</td>
+<td><a href="http://localhost:8083/" target="_blank" rel="noopener">http://localhost:8083/</a></td>
+</tr>
+<tr>
+<td>/index.html</td>
+<td><a href="http://localhost:8083/index.html" target="_blank" rel="noopener">http://localhost:8083/index.html</a></td>
+</tr>
+<tr>
+<td>/documents/documents.html</td>
+<td><a href="http://localhost:8083/documents/documents.html" target="_blank" rel="noopener">http://localhost:8083/documents/documents.html</a></td>
+</tr>
+<tr>
+<td>/images/1.gif</td>
+<td><a href="http://localhost:8083/images/1.gif" target="_blank" rel="noopener">http://localhost:8083/images/1.gif</a></td>
+</tr>
+<tr>
+<td>/documents/1.gif</td>
+<td><a href="http://localhost:8083/documents/1.gif" target="_blank" rel="noopener">http://localhost:8083/documents/1.gif</a></td>
+</tr>
+</tbody></table>
+<p>location.conf 配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;location.conf&lt;&lt;EOF</span><br><span class="line">server &#123;</span><br><span class="line">  listen       8083;</span><br><span class="line">  server_name  localhost;</span><br><span class="line">  location / &#123;</span><br><span class="line">    return 201;</span><br><span class="line">  &#125;</span><br><span class="line">  location =/ &#123;</span><br><span class="line">    return 202;</span><br><span class="line">  &#125;</span><br><span class="line">  location /documents &#123;</span><br><span class="line">    return 203;</span><br><span class="line">  &#125;</span><br><span class="line">  location ^~ /images/ &#123;</span><br><span class="line">    return 204;</span><br><span class="line">  &#125;</span><br><span class="line">  location ~* \.(gif|png|jpg)$ &#123;</span><br><span class="line">    return 205;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">nginx -s reload</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试</span></span><br><span class="line">curl http://localhost:8083/                         -w "%&#123;http_code&#125;\n"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 202 说明 = 的优先级最高</span></span><br><span class="line"></span><br><span class="line">curl http://localhost:8083/index.html               -w "%&#123;http_code&#125;\n"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 201 默认走到 /</span></span><br><span class="line"></span><br><span class="line">curl http://localhost:8083/documents/documents.html -w "%&#123;http_code&#125;\n"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 203 其他都没有匹配到，才会走到 203</span></span><br><span class="line"></span><br><span class="line">curl http://localhost:8083/images/1.gif             -w "%&#123;http_code&#125;\n"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 204 因为使用了^~ 优先级较正则高</span></span><br><span class="line"></span><br><span class="line">curl http://localhost:8083/documents/1.gif          -w "%&#123;http_code&#125;\n"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 205 正则高于路径匹配</span></span><br></pre></td></tr></table></figure>
+
+<p>优先级：<strong>全等(=) &gt; 只做常规字符串匹配(^~) &gt; 正则匹配([+?$]等) &gt; 常规字符串匹配(/xxx) &gt; 默认匹配(/)</strong></p>
+<h3 id="实验四-虚拟主机别名"><a href="#实验四-虚拟主机别名" class="headerlink" title="实验四 虚拟主机别名"></a>实验四 虚拟主机别名</h3><ol>
+<li>创建一个 vhost.conf</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cat &gt;vhost.conf&lt;&lt;EOF</span><br><span class="line">server &#123;</span><br><span class="line">  listen 8084;</span><br><span class="line">  server_name www.test.com test.com;</span><br><span class="line">  location / &#123;</span><br><span class="line">    root html;</span><br><span class="line">    index index.html;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>host 中增加 vhost 的域名解析</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh -c "echo '127.0.0.1 www.test.com'&gt;&gt;/etc/hosts"</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>检查服务</li>
+</ol>
+<p>curl <a href="http://www.test.com:8084" target="_blank" rel="noopener">www.test.com:8084</a><br>curl test.com:8084</p>
+<h3 id="实验五-rewrite-301"><a href="#实验五-rewrite-301" class="headerlink" title="实验五 rewrite 301"></a>实验五 rewrite 301</h3><p>语法：rewrite regex replacement [flag];<br>默认为 null，应用位置：server，location，if<br>eg: rewrite ^/(.*) <a href="http://xxx.com/$1" target="_blank" rel="noopener">http://xxx.com/$1</a> permanent;</p>
+<p>flag 说明</p>
+<table>
+<thead>
+<tr>
+<th>flag</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>last</td>
+<td>本条规则匹配完成之后，继续向下匹配新的 location URI 规则</td>
+</tr>
+<tr>
+<td>break</td>
+<td>本条规则匹配完成之后，不再向后匹配任何规则</td>
+</tr>
+<tr>
+<td>redirect</td>
+<td>302</td>
+</tr>
+<tr>
+<td>permanent</td>
+<td>301</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 删掉之前的别名</span></span><br><span class="line">rm -rf vhost.conf</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用 rewrite 301</span></span><br><span class="line">cat &gt;301.conf&lt;&lt;EOF</span><br><span class="line">server &#123;</span><br><span class="line">  listen 8085;</span><br><span class="line">  server_name test.com;</span><br><span class="line">  rewrite ^/(.*) http://www.test.com:8085/$1 permanent;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">  listen 8085;</span><br><span class="line">  server_name www.test.com;</span><br><span class="line">  location / &#123;</span><br><span class="line">    root html;</span><br><span class="line">    index index.html;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<h3 id="实验六-登录认证"><a href="#实验六-登录认证" class="headerlink" title="实验六 登录认证"></a>实验六 登录认证</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 生成 /usr/<span class="built_in">local</span>/etc/nginx/htpasswd 文件</span></span><br><span class="line">htpasswd -bc /usr/local/etc/nginx/htpasswd ansike ansike</span><br><span class="line">chmod 400 /usr/local/etc/nginx/htpasswd</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 生产auth.conf文件</span></span><br><span class="line">cat &gt;auth.conf&lt;&lt;EOF</span><br><span class="line">server &#123;</span><br><span class="line">  listen 8086;</span><br><span class="line">  server_name localhost;</span><br><span class="line">  location / &#123;</span><br><span class="line">    root html;</span><br><span class="line">    index index.html;</span><br><span class="line">    auth_basic "请登录8086";</span><br><span class="line">    auth_basic_user_file /usr/local/etc/nginx/htpasswd;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+
+<p>浏览器中访问 localhost:8086，此时会提示需要输入用户密码</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/nginx/nginx%E5%9F%BA%E7%A1%80/" data-id="clzmdspfj004rzwl178fkbkje" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E7%BB%8F%E6%B5%8E/%E4%B8%AD%E5%9B%BD%E7%BB%8F%E6%B5%8E%E5%8F%91%E5%B1%95%E5%8F%B2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          中国经济发展史
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5-%E5%8F%91%E5%B1%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">基础知识-发展</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>

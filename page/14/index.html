@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记录一些平时点滴">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ASK&#39;s Blog">
+<meta property="og:url" content="https://ansike.github.io/blog/page/14/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="记录一些平时点滴">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="ask">
+<meta property="article:tag" content=" ansike">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-编程/js/react/hooks" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/react/hooks/" class="article-date">
+  <time datetime="2022-02-11T11:23:02.000Z" itemprop="datePublished">2022-02-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/react/hooks/">hooks中的常见问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>常用的 hook: useEffect, useState, useRef</p>
+<p>常用的功能</p>
+<p><a href="#1">1. 初始化即执行异步任务</a><br><a href="#2">2. UI 交互中异步任务</a><br><a href="#3">3. 初始化即执行异步任务</a></p>
+<h3 id="1">1. 初始化即执行异步任务</h3>
+#### 异步任务响应回来之前组建被销毁会报一个 warning
+
+<blockquote>
+<p>Warning: Can’t perform a React state update on an unmounted component. This is a no-op, but it indicates a memory leak in your application. To fix, cancel all subscriptions and asynchronous tasks in a useEffect cleanup function.in Notification</p>
+</blockquote>
+<blockquote>
+<p>问题： 不能在销毁的组建上执行 state 的更新，为了解决这个问题需要在 useEffect 的清理函数中取消所有的订阅和异步任务</p>
+</blockquote>
+<p>解决方案</p>
+<ol>
+<li>判断到当前函数已经销毁时不再 set state；</li>
+<li>退出执行 clean 时，取消所有订阅和异步任务；</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 临时变量禁止接口返回之后重新赋值</span></span><br><span class="line">useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> isAbort = <span class="literal">false</span>;</span><br><span class="line">  (<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">await</span> fetch(url);</span><br><span class="line">    <span class="comment">// 判断当isAbort为true时不进行赋值操作</span></span><br><span class="line">    <span class="keyword">if</span> (res &amp;&amp; !isAbort) &#123;</span><br><span class="line">      setState(res);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)();</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 此处取消所有的订阅和异步任务</span></span><br><span class="line">    isAbort = <span class="literal">true</span>;</span><br><span class="line">    <span class="comment">// unpulish()</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;, []);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接口级别的取消</span></span><br><span class="line">useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> abortController = <span class="keyword">new</span> AbortController();</span><br><span class="line">  (<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">await</span> fetch(url, &#123;</span><br><span class="line">      signal: abortController.signal,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">if</span> (res) &#123;</span><br><span class="line">      setState(res);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)();</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    abortController.abort();</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure>
+
+<p>useEffect 使用的注意事项</p>
+<blockquote>
+<p>接受两个参数：第一个参数为回调函数；第二个非必传参数为依赖项。<br>effect 第一个参数的执行时机受第二个参数影响<br>没有参数时每次 state 发生变化都会执行<br>有参数时监听到 state 变化时执行</p>
+</blockquote>
+<h3 id="2">2. UI 交互中异步任务</h3>
+UI交互时发起异步任务，组件销毁时取消异步任务。和第一种case不一样，可能无法在函数调用useEffect的销毁部分清除副作用。
+比如此时调用onClick时还触发了其他state的事件导致整个hooks重新执行，此时timer会重新定义，useEffect内部的timer
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> timer = <span class="literal">null</span>;</span><br><span class="line">useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    timer &amp;&amp; clearTimeout(timer);</span><br><span class="line">    timer = <span class="literal">null</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;, []);</span><br><span class="line"><span class="keyword">const</span> onClick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  timer = setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    setState(val);</span><br><span class="line">  &#125;, <span class="number">5000</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>useState 更新为异步更新，即调用完 set 方法后无法立即获取到更新后的值</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/react/hooks/" data-id="clzmdspi500e4zwl14ktfhw0g" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/vim" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/vim/" class="article-date">
+  <time datetime="2022-02-10T15:49:44.000Z" itemprop="datePublished">2022-02-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/vim/">vim相关</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="vim-复制保留格式"><a href="#vim-复制保留格式" class="headerlink" title="vim 复制保留格式"></a>vim 复制保留格式</h3><p>执行粘贴之前的<br>:set paste<br>执行之后关闭<br>:set nopaste</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/vim/" data-id="clzmdspfo006ozwl13eli04q1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/文本处理/awk" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/awk/" class="article-date">
+  <time datetime="2022-01-16T03:27:28.000Z" itemprop="datePublished">2022-01-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/awk/">awk</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>是 linux 系统最强大的文本处理工具. 不仅是 linux 系统中的一个命令,还是一种编程语言,可以用来处理数据和生成报告(Excel).</p>
+<h3 id="语法格式"><a href="#语法格式" class="headerlink" title="语法格式"></a>语法格式</h3><p>awk [options] ‘pattern {action}’ [FILE]</p>
+<h3 id="常用功能"><a href="#常用功能" class="headerlink" title="常用功能"></a>常用功能</h3><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>常用功能</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>指定分隔符显示某几列</td>
+<td>awk -F “GET | HTTP” ‘{print $2}’ access.log 直接取出 url 显示出日志文件的 url 这列</td>
+</tr>
+<tr>
+<td>2</td>
+<td>取出想要的内容</td>
+<td>awk <code>&#39;$6~/Failed/{print $11}&#39;</code> /var/log/secure 分析生产环境中谁在破解用户的密码</td>
+</tr>
+<tr>
+<td>3</td>
+<td>显示某个范围内的文件</td>
+<td>awk ‘NR==20,NR==30’ filename 显示 20-30 行内容</td>
+</tr>
+<tr>
+<td>4</td>
+<td>统计和计算</td>
+<td>awk ‘{sum+=$0}END{print sum}’ filename 计算总和</td>
+</tr>
+<tr>
+<td>5</td>
+<td>数组计算和去重</td>
+<td>awk ‘{array[$1]++}END {for(key in array)print key,array[key]}’ access.log 对日志进行统计和计数</td>
+</tr>
+</tbody></table>
+<h3 id="选项说明"><a href="#选项说明" class="headerlink" title="选项说明"></a>选项说明</h3><table>
+<thead>
+<tr>
+<th>参数选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-F</td>
+<td>指定字段分隔符</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>定义或修改一个 awk 内部的变量</td>
+</tr>
+</tbody></table>
+<p>NR 表示行号<br>$0 表示整行内容<br>$1-$n 表示某列<br>$NF 表示最后一列</p>
+<h3 id="命令示例"><a href="#命令示例" class="headerlink" title="命令示例"></a>命令示例</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 测试文件</span></span><br><span class="line">cat /etc/passwd</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 打印指定行和行号</span></span><br><span class="line">cat -n /etc/passwd | awk "NR==2"</span><br><span class="line">cat /etc/passwd | awk '&#123;print NR,$0&#125;'</span><br><span class="line">awk '&#123;print NR,$0&#125;' /etc/passwd</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 打印第1,3,最后列</span></span><br><span class="line">awk -F ":" '&#123;print $1,$3,$NF&#125;' /etc/passwd</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 替换文本内容 /sbin/nologin =&gt; /bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> gsub函数语法 gsub(<span class="string">"替换对象"</span>,<span class="string">"替换成什么内容"</span>,<span class="string">"哪一列"</span>),使用<span class="variable">$0</span>或者不写是整行替换</span></span><br><span class="line">awk '&#123;gsub("/sbin/nologin","/bin/bash",$0);print $0&#125;' /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<h3 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 字符串中获取版本号</span></span><br><span class="line">echo '&#123;"version": "1.0.0.1"&#125;'|awk -F "\"" '&#123;print $4&#125;'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 取出网卡中对应的ip地址(具体打印具体对待)</span></span><br><span class="line">ifconfig en0 | awk -F "\ " 'NR==4&#123;print $2&#125;'</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> https://blog.csdn.net/aywb1314/article/details/52239281</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 输入</span></span><br><span class="line">a='wang     4</span><br><span class="line">cui      3</span><br><span class="line">zhao     4</span><br><span class="line">liu      3</span><br><span class="line">liu      3</span><br><span class="line">chang    5</span><br><span class="line">li       2'</span><br><span class="line"></span><br><span class="line"><span class="meta">  #</span><span class="bash">  1 通过第一个域找出字符长度为4的</span></span><br><span class="line">echo $a | awk 'length($1) == "4" &#123;print $1&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  2 当第二列值大于3时，创建空白文件，文件名为当前行第一个域<span class="variable">$1</span> (touch <span class="variable">$1</span>)</span></span><br><span class="line">echo $a | awk '&#123;if($2&gt;3)&#123; system ("touch "$1)&#125;&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  3 将文档中 liu 字符串替换为 hong</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">  4 求第二列的和</span></span><br><span class="line">echo $a | awk '&#123;a+=$2&#125; END &#123;print a&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  5 求第二列的平均值</span></span><br><span class="line">echo $a | awk '&#123;a+=$2&#125; END &#123;print a/NR&#125;'</span><br><span class="line"><span class="meta">  #</span><span class="bash">  6 求第二列中的最大值</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">  7 将第一列过滤重复后，列出每一项，每一项的出现次数，每一项的大小总和</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/awk/" data-id="clzmdspij00ixzwl1ehdzgczv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/文本处理/sed" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/sed/" class="article-date">
+  <time datetime="2022-01-16T01:41:34.000Z" itemprop="datePublished">2022-01-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/sed/">sed</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><p>sed 是 Stream Editor 字符流编辑器<br>是操作,过滤,转换文本内容的强大工具.常用功能包括对文件实现快速的增删改查,其中查询功能中最常用的是过滤(过滤指定字符串)和取行(取出指定行)</p>
+<h3 id="语法格式"><a href="#语法格式" class="headerlink" title="语法格式"></a>语法格式</h3><p>sed [options] [内置命令字符] [FILE]</p>
+<h3 id="SYNOPSIS"><a href="#SYNOPSIS" class="headerlink" title="SYNOPSIS"></a>SYNOPSIS</h3><table>
+<thead>
+<tr>
+<th>参数选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-n</td>
+<td>取消默认 sed 的输出,常与 sed 内置命令 p 连用</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>直接修改文件内容而不是输出到终端</td>
+</tr>
+<tr>
+<td>-r (-E)</td>
+<td>使用扩展正则</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>增加多脚本</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>内置命令字符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a (append)</td>
+<td>追加文本,在指定行后添加一行或多行文本</td>
+</tr>
+<tr>
+<td>d (delete)</td>
+<td>删除匹配行的文本</td>
+</tr>
+<tr>
+<td>i (insert)</td>
+<td>在指定行前添加一行或多行文本</td>
+</tr>
+<tr>
+<td>p (print)</td>
+<td>打印匹配行的内容,与参数选项<code>-n</code>一起</td>
+</tr>
+<tr>
+<td>s/regexp/replacement/</td>
+<td>匹配 regexp 部分的内容,用 replacement 替换 regexp 匹配的内容. replacement 部分可以使用特殊字符&amp;和\1-\9, 最后可以加 g,p</td>
+</tr>
+</tbody></table>
+<h3 id="Detail"><a href="#Detail" class="headerlink" title="Detail"></a>Detail</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 准备输出字符串到test2.txt</span></span><br><span class="line">cat &gt;test2.txt&lt;&lt;EOF</span><br><span class="line">1,test1,CE</span><br><span class="line">2,test2,CT</span><br><span class="line">3,test3,CO</span><br><span class="line">4,test4,CF</span><br><span class="line">5,test5,CT</span><br><span class="line">EOF</span><br><span class="line"><span class="meta">#</span><span class="bash"> 最后输入EOF回车结束</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> a (mac中命令不一致)</span></span><br><span class="line">sed "2a 21,test21,cc" test2.txt</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> d 删除一行</span></span><br><span class="line">sed "2d" test2.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除多行</span></span><br><span class="line">sed "2,3d" test2.txt</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> i</span></span><br><span class="line">sed "2i 11,test11,s" test2.txt</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> i</span></span><br><span class="line">sed "2i 11,test11,s" test2.txt</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> p 只打印某行内容与-n连用</span></span><br><span class="line">sed -n "2p" test2.txt</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> s/regexp/replacement/ 替换文本内容</span></span><br><span class="line">sed "s#t2#t2new#g" test2.txt</span><br><span class="line">sed "s/t2/t2new/g" test2.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 字符串中获取版本号</span></span><br><span class="line">echo '&#123;"version": "1.0.0.1"&#125;' | sed -E "s/.*\"(([0-9].)*[0-9])\".*/\1/g"</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/sed/" data-id="clzmdspik00jizwl13a3w5ut0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/文本处理/grep" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/grep/" class="article-date">
+  <time datetime="2022-01-13T16:13:00.000Z" itemprop="datePublished">2022-01-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/grep/">grep</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><p>从文本文件或管道数据流中筛选匹配的行及数据</p>
+<h3 id="语法格式"><a href="#语法格式" class="headerlink" title="语法格式:"></a>语法格式:</h3><p>grep [options] [pattern] [FILE]</p>
+<h3 id="SYNOPSIS"><a href="#SYNOPSIS" class="headerlink" title="SYNOPSIS"></a>SYNOPSIS</h3><table>
+<thead>
+<tr>
+<th>参数选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-v (–invert-match)</td>
+<td>输出的行没有匹配到任何正则(反转输出)</td>
+</tr>
+<tr>
+<td>-n (–line-number)</td>
+<td>展示行号,从 1 开始. 在-cLlq 下会失效</td>
+</tr>
+<tr>
+<td>-i (–ignore-case)</td>
+<td>不区分大小写,默认区分大小写</td>
+</tr>
+<tr>
+<td>-c (–count)</td>
+<td>仅输出匹配行的数量</td>
+</tr>
+<tr>
+<td>-E (–extended-regexp)</td>
+<td>强制 grep 使用 egrep</td>
+</tr>
+<tr>
+<td>–color=[‘never‘,’always‘,’auto’]</td>
+<td>标记匹配到的文本</td>
+</tr>
+<tr>
+<td>-w (–word-regexp)</td>
+<td>只匹配过滤的单词</td>
+</tr>
+<tr>
+<td>-o (–only-matching)</td>
+<td>只打印匹配的部分</td>
+</tr>
+</tbody></table>
+<h3 id="Detail"><a href="#Detail" class="headerlink" title="Detail"></a>Detail</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">test</span> file &gt; 为覆盖, &gt;&gt;为追加</span></span><br><span class="line">echo "test1\ntest2\ntest3" &gt; test.txt</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> -v</span></span><br><span class="line">grep -v "test1" test.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> test2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> test3</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> -n</span></span><br><span class="line">grep -n "test1" test.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 1:test1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> -i</span></span><br><span class="line">grep -i "TEst1" test.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> test1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> -c</span></span><br><span class="line">grep -c "test" test.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 3</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> -E</span></span><br><span class="line">grep -E "t.*t[0-2]" test.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> test1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> test2</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> --color auto|always 匹配后为红色, never没有颜色</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> -w</span></span><br><span class="line">grep -w "test" test.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 没有匹配到单词, 因为文件中没有<span class="built_in">test</span>的单词</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> -o</span></span><br><span class="line">grep -o "t.*t" test.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">test</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">test</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">test</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 字符串中获取版本号</span></span><br><span class="line">echo '&#123;"version": "1.0.0.1"&#125;' | grep -Eo "([0-9].)+[0-9]"</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86/grep/" data-id="clzmdspij00j1zwl157rhgtq8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/shell中curl使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/shell%E4%B8%ADcurl%E4%BD%BF%E7%94%A8/" class="article-date">
+  <time datetime="2022-01-11T16:05:08.000Z" itemprop="datePublished">2022-01-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/shell%E4%B8%ADcurl%E4%BD%BF%E7%94%A8/">shell中curl使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="curl-请求中数据中使用变量"><a href="#curl-请求中数据中使用变量" class="headerlink" title="curl 请求中数据中使用变量"></a>curl 请求中数据中使用变量</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 参数为数字时直接使用单引号包裹变量即可</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 参数为字符串时使用双引号包裹单引号，再包裹变量</span></span><br><span class="line"></span><br><span class="line">a='test'</span><br><span class="line">b=2</span><br><span class="line">curl -X GET -H "content-type: application/json" -H "x:a" http://localhost:8000 --data-raw '&#123;"a":"'"$a"'","b":'$b'&#125;'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 启动以下node服务，打印如下</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> /</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> GET</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &#123;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   host: <span class="string">'localhost:8000'</span>,</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   <span class="string">'user-agent'</span>: <span class="string">'curl/7.77.0'</span>,</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   accept: <span class="string">'*/*'</span>,</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   <span class="string">'content-type'</span>: <span class="string">'application/json'</span>,</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   x: <span class="string">'a'</span>,</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   <span class="string">'content-length'</span>: <span class="string">'18'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &#125;</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &#123; a: <span class="string">'test'</span>, b: 2 &#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><figcaption><span>http.js</span><a href="/blog/downloads/code/http.js">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = http.createServer();</span><br><span class="line"></span><br><span class="line">server.on(<span class="string">"request"</span>, (req, res) =&gt; {</span><br><span class="line">  <span class="built_in">console</span>.log(req.url);</span><br><span class="line">  <span class="built_in">console</span>.log(req.method);</span><br><span class="line">  <span class="built_in">console</span>.log(req.headers);</span><br><span class="line">  <span class="keyword">let</span> data = <span class="string">""</span>;</span><br><span class="line">  req.on(<span class="string">"data"</span>, (chunk) =&gt; {</span><br><span class="line">    data += chunk;</span><br><span class="line">  });</span><br><span class="line">  </span><br><span class="line">  req.on(<span class="string">"end"</span>, () =&gt; {</span><br><span class="line">    <span class="keyword">const</span> d =<span class="built_in">JSON</span>.parse(data);</span><br><span class="line">    <span class="built_in">console</span>.log(d);</span><br><span class="line">  });</span><br><span class="line">  </span><br><span class="line">  res.end(<span class="string">"end"</span>);</span><br><span class="line">});</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">8000</span>);</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/shell%E4%B8%ADcurl%E4%BD%BF%E7%94%A8/" data-id="clzmdspfm005wzwl16wiraflh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/字符串获取" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%8E%B7%E5%8F%96/" class="article-date">
+  <time datetime="2022-01-11T01:40:11.000Z" itemprop="datePublished">2022-01-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%8E%B7%E5%8F%96/">shell正则匹配字符串</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>echo `echo “version: 1.1.1.0 asdas 1.2.1.2” | sed -nre ‘s/^[^0-9]<em>(([0-9]+.){1,}[0-9]+).</em>/\1/p’</p>
+<p>new_version=<code>echo &#39;version: 1.1.1.0 asdas&#39; | sed -nre &#39;s/^[^0-9]*(([0-9]+\.){1,}[0-9]+).*/\1/p&#39;</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%8E%B7%E5%8F%96/" data-id="clzmdspfo006lzwl18i7xfo5c" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/http/node/pipe流" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/http/node/pipe%E6%B5%81/" class="article-date">
+  <time datetime="2022-01-08T13:40:45.000Z" itemprop="datePublished">2022-01-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/http/node/pipe%E6%B5%81/">http 读 流</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">cReq, cRes</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="comment">// 读取文件文件流返回给Res对象处理</span></span><br><span class="line">  fs.ReadStream(<span class="string">'./server.js'</span>).pipe(cRes)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">8001</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'服务启动8001'</span>);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/http/node/pipe%E6%B5%81/" data-id="clzmdsphr00dizwl14l1iaxm5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/http/node/tunnel代理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/http/node/tunnel%E4%BB%A3%E7%90%86/" class="article-date">
+  <time datetime="2022-01-08T13:40:45.000Z" itemprop="datePublished">2022-01-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/http/node/tunnel%E4%BB%A3%E7%90%86/">隧道代理-https</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>以下需要创建https的整数，参考<a href="https://www.jianshu.com/p/d600bd2ef440" target="_blank" rel="noopener">创建证书跳转</a></p>
+<ol>
+<li>请求方发起connect请求</li>
+<li>代理方监听到connect请求后，尝试建立一个请求方到目标服务的tcp连接</li>
+<li>请求方和目标服务进行TLS握手</li>
+<li>验证通过之后TCP连接建立成功，随后代理方进行无脑传递数据</li>
+</ol>
+<h4 id="目标服务"><a href="#目标服务" class="headerlink" title="目标服务"></a>目标服务</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>);</span><br><span class="line"><span class="keyword">var</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = https.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'start server'</span>);</span><br><span class="line">	connectRequest(res);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="代理服务"><a href="#代理服务" class="headerlink" title="代理服务"></a>代理服务</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"><span class="keyword">const</span> net = <span class="built_in">require</span>(<span class="string">'net'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// create tunnel</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">connect</span>(<span class="params">cReq, clientSock</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'connect'</span>);</span><br><span class="line">	<span class="keyword">var</span> serverSock = net</span><br><span class="line">		<span class="comment">// 注意此处的隧道不近可以当前服务建立，也可以和任意服务简历，如果和其他服务建立之后，之后的数据通信将不会通过该服务</span></span><br><span class="line">		.connect(<span class="string">'8001'</span>, <span class="string">'127.0.0.1'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="comment">// .connect('8888', '127.0.0.1', function() &#123;</span></span><br><span class="line">			<span class="built_in">console</span>.log(<span class="string">'connect:8001'</span>);</span><br><span class="line">			clientSock.write(<span class="string">'HTTP/1.1 200 Connection Established\r\n\r\n'</span>);</span><br><span class="line">			clientSock.write(<span class="string">'这是一段文本'</span>);</span><br><span class="line">			serverSock.pipe(clientSock);</span><br><span class="line">		&#125;)</span><br><span class="line">		.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">			clientSock.end();</span><br><span class="line">		&#125;);</span><br><span class="line">	clientSock.pipe(serverSock);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">	key: fs.readFileSync(<span class="string">'./server.key'</span>),</span><br><span class="line">	cert: fs.readFileSync(<span class="string">'./server.crt'</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = https.createServer(options);</span><br><span class="line">server.on(<span class="string">'connect'</span>, connect);</span><br><span class="line">server.listen(<span class="number">8888</span>, <span class="string">'127.0.0.1'</span>, () =&gt; &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'服务8888开始启动'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="验证tunnel的服务"><a href="#验证tunnel的服务" class="headerlink" title="验证tunnel的服务"></a>验证tunnel的服务</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">	hostname: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">	port: <span class="number">8888</span>,</span><br><span class="line">	path: <span class="string">'/'</span>,</span><br><span class="line">	method: <span class="string">'CONNECT'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">//禁用证书验证，不然自签名的证书无法建立 TLS 连接</span></span><br><span class="line">process.env.NODE_TLS_REJECT_UNAUTHORIZED = <span class="string">'0'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> req = https.request(options);</span><br><span class="line"></span><br><span class="line">req.on(<span class="string">'connect'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">res, socket</span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'connect'</span>);</span><br><span class="line">	socket.write(<span class="string">'GET / HTTP/1.1\r\n'</span> + <span class="string">'Host: 127.0.0.1\r\n'</span> + <span class="string">'Connection: Close\r\n'</span> + <span class="string">'\r\n'</span>);</span><br><span class="line"></span><br><span class="line">	socket.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">chunk</span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(chunk.toString());</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">	socket.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'socket end.'</span>);</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">req.end();</span><br></pre></td></tr></table></figure>
+<p>控制台打印</p>
+<pre><code class="(node:27498)">connect
+这是一段文本
+HTTP/1.1 200 OK
+Date: Sat, 22 May 2021 14:10:42 GMT
+Connection: close
+Transfer-Encoding: chunked
+
+68f
+-----BEGIN RSA PRIVATE KEY-----
+xxx,删除无用信息
+-----END RSA PRIVATE KEY-----
+
+
+0
+
+
+socket end.</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/http/node/tunnel%E4%BB%A3%E7%90%86/" data-id="clzmdsphs00djzwl1f9x58655" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/http/node/中间人代理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/http/node/%E4%B8%AD%E9%97%B4%E4%BA%BA%E4%BB%A3%E7%90%86/" class="article-date">
+  <time datetime="2022-01-08T13:40:45.000Z" itemprop="datePublished">2022-01-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/http/node/%E4%B8%AD%E9%97%B4%E4%BA%BA%E4%BB%A3%E7%90%86/">中间人代理-http,https</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="中间人代理-http"><a href="#中间人代理-http" class="headerlink" title="中间人代理-http"></a>中间人代理-http</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 最后要请求的真实服务</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">cReq, cRes</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="comment">// 读取文件文件流返回给Res对象处理</span></span><br><span class="line">  fs.ReadStream(<span class="string">'./server.js'</span>).pipe(cRes)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">8001</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'服务启动8001'</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户直接请求的服务</span></span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = http.createServer(<span class="function">(<span class="params">cReq, cRes</span>)=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> options = &#123;</span><br><span class="line">    hostname: cReq.hostname,</span><br><span class="line">    <span class="comment">// 在这儿改了端口</span></span><br><span class="line">    port: <span class="string">"8001"</span>,</span><br><span class="line">    path: cReq.path,</span><br><span class="line">    method: cReq.method,</span><br><span class="line">    headers: cReq.headers,</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> newReq = http.request(options, (nRes)=&gt;&#123;</span><br><span class="line">    cRes.writeHead(nRes.statusCode, nRes.headers);</span><br><span class="line">    nRes.pipe(cRes);</span><br><span class="line">  &#125;).on(<span class="string">"error"</span>, (e)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e);</span><br><span class="line">    cRes.end(<span class="string">"error"</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">  cReq.pipe(newReq);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">8888</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"服务8888开始启动"</span>);</span><br><span class="line"><span class="comment">// 客户此时请求时会拿到真实服务中返回的"this data is from 8001"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="中间人代理-https"><a href="#中间人代理-https" class="headerlink" title="中间人代理-https"></a>中间人代理-https</h4><p>差异仅有http换成https，增加了证书部分<br>可以跨协议代理</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 最后要请求的真实服务</span></span><br><span class="line"><span class="keyword">const</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">	key: fs.readFileSync(<span class="string">'./server.key'</span>),</span><br><span class="line">	cert: fs.readFileSync(<span class="string">'./server.crt'</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = https.createServer(options);</span><br><span class="line"><span class="keyword">const</span> request = <span class="function">(<span class="params">cReq, cRes</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'新的请求'</span>);</span><br><span class="line">	fs.ReadStream(<span class="string">'./server.key'</span>).pipe(cRes);</span><br><span class="line">&#125;;</span><br><span class="line">server.on(<span class="string">'request'</span>, request);</span><br><span class="line">server.listen(<span class="number">8001</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'服务启动8001'</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> https = <span class="built_in">require</span>(<span class="string">'https'</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//禁用证书验证，不然自签名的证书无法建立 TLS 连接</span></span><br><span class="line">process.env.NODE_TLS_REJECT_UNAUTHORIZED = <span class="string">"0"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> request = <span class="function">(<span class="params">cReq, cRes</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'request'</span>);</span><br><span class="line">	<span class="keyword">const</span> options = &#123;</span><br><span class="line">		hostname: cReq.hostname,</span><br><span class="line">		<span class="comment">// 在这儿改了端口</span></span><br><span class="line">		port: <span class="string">'8001'</span>,</span><br><span class="line">		path: cReq.path,</span><br><span class="line">		method: cReq.method,</span><br><span class="line">		headers: cReq.headers,</span><br><span class="line">	&#125;;</span><br><span class="line">	<span class="keyword">const</span> newReq = https</span><br><span class="line">		.request(options, (nRes) =&gt; &#123;</span><br><span class="line">			cRes.writeHead(nRes.statusCode, nRes.headers);</span><br><span class="line">			nRes.pipe(cRes);</span><br><span class="line">		&#125;)</span><br><span class="line">		.on(<span class="string">'error'</span>, (e) =&gt; &#123;</span><br><span class="line">			<span class="built_in">console</span>.log(e);</span><br><span class="line">			cRes.end(<span class="string">'error'</span>);</span><br><span class="line">		&#125;);</span><br><span class="line">	cReq.pipe(newReq);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">	key: fs.readFileSync(<span class="string">'./server.key'</span>),</span><br><span class="line">	cert: fs.readFileSync(<span class="string">'./server.crt'</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> server = https.createServer(options);</span><br><span class="line">server.on(<span class="string">'request'</span>, request);</span><br><span class="line">server.listen(<span class="number">8888</span>, <span class="string">'127.0.0.1'</span>, () =&gt; &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'服务8888开始启动'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/http/node/%E4%B8%AD%E9%97%B4%E4%BA%BA%E4%BB%A3%E7%90%86/" data-id="clzmdsphs00dlzwl131w26swp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/blog/page/13/">&lt; 上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/12/">12</a><a class="page-number" href="/blog/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/blog/page/15/">15</a><a class="page-number" href="/blog/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/21/">21</a><a class="extend next" rel="next" href="/blog/page/15/">下一页 &gt;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>

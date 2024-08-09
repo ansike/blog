@@ -1,0 +1,3285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记录一些平时点滴">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ASK&#39;s Blog">
+<meta property="og:url" content="https://ansike.github.io/blog/page/11/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="记录一些平时点滴">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="ask">
+<meta property="article:tag" content=" ansike">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-编程/k8s/k8s基础概念" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/k8s%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" class="article-date">
+  <time datetime="2022-07-21T07:03:04.000Z" itemprop="datePublished">2022-07-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/k8s/k8s%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/">k8s入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h3><p>deployment: 管理pod资源<br>service: </p>
+<ul>
+<li>提供固定IP。pod可以随时启停，pod对应的ip可能随时变化。service可以提供固定IP，便于其他服务通过service ip找到提供服务的pod</li>
+<li>提供负载均衡。如随机访问，基于clinetIp的session affinity</li>
+<li>服务发现。集群内部的其他服务可通过service name访问（DNS），也可通过环境变量<br>node: 物理机或虚拟机<br>pod: 运行应用的载体</li>
+</ul>
+<h3 id="快速发布一个可用的服务"><a href="#快速发布一个可用的服务" class="headerlink" title="快速发布一个可用的服务"></a>快速发布一个可用的服务</h3><p><a href="https://minikube.sigs.k8s.io/docs/start/" target="_blank" rel="noopener">https://minikube.sigs.k8s.io/docs/start/</a></p>
+<p>基于minikube，安装完成之后，创建deployment，即可发布服务</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/k8s/k8s%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" data-id="clzmdspfi004ezwl1b1ota835" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/core/chapter-11" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-11/" class="article-date">
+  <time datetime="2022-07-19T02:12:41.000Z" itemprop="datePublished">2022-07-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-11/">系统管理命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="#lsof">1. lsof 查看进程打开的文件</a><br><a href="#free">2. free 查看系统内存信息</a><br><a href="#iftop">3. iftop 动态显示网络接口流量信息 </a><br><a href="#vmstat">4. vmstat 虚拟内存统计 </a><br><a href="#mptat">5. CPU 信息统计 </a><br><a href="#iostat">6. iostat I/O 信息统计 </a><br><a href="#sar">7. sar 收集系统信息 </a></p>
+<h3 id="lsof">1. lsof 查看进程打开的文件</h3>
+
+<p>功能说明: lsof(list open file),列举系统中已被打开的文件，通过该命令可以根据文件找到对应的进程信息，也可以通过进程信息找到进程打开的文件。</p>
+<p>语法: lsof [option]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c &lt;进程名&gt;</td>
+<td>显示指定进程名打开的文件</td>
+</tr>
+<tr>
+<td>-p &lt;进程号&gt;</td>
+<td>显示指定进程号打开的文件</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>通过监听指定的协议，端口和主机等信息，显示符合条件的进程信息</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>显示指定用户使用的文件</td>
+</tr>
+<tr>
+<td>-U</td>
+<td>显示所有 socket 文件</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 通过文件找到对应的进程</span></span><br><span class="line">lsof /usr/local/bin/node</span><br><span class="line"><span class="meta">#</span><span class="bash"> COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF       NODE NAME</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> node    44052 root  txt    REG    1,4 80181216 8635790507 /usr/<span class="built_in">local</span>/bin/node</span></span><br></pre></td></tr></table></figure>
+
+<p>COMMAND 进程的名称<br>FD 文件描述符<br>TYPE 文件类型 REG 为普通文件<br>DEVICE 磁盘名称<br>SIZE/OFF 文件的大小<br>NODE 索引节点</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 通过指定进程名查找</span></span><br><span class="line">lsof -c node</span><br><span class="line"><span class="meta">#</span><span class="bash"> COMMAND   PID USER   FD     TYPE             DEVICE SIZE/OFF       NODE NAME</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> node    44052 root  cwd      DIR                1,4      512 8598690206 /private/var/root</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> node    44052 root  txt      REG                1,4 80181216 8635790507 /usr/<span class="built_in">local</span>/bin/node</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 通过指定进程号查找</span></span><br><span class="line">lsof -p 44052</span><br><span class="line"><span class="meta">#</span><span class="bash"> ...</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> lsof -i可查看所有的进程进行</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 监听指定协议，端口，主机等信息</span></span><br><span class="line">lsof -i [46] [protocol] [@hostname] [:service|port]</span><br></pre></td></tr></table></figure>
+
+<p>46: IPv4 IPv6<br>protocol:传输协议可以是 TCP 或 UDP<br>hostname: 主机名称或 IP 地址<br>service: 进程的服务名，eg: NFS,SSH,FTP 等</p>
+<h3 id="free">2. free 查看系统内存信息</h3>
+
+<p>功能说明: 用于显示系统内存状态，具体包括系统物理内存，虚拟内存，共享内存和系统缓存。</p>
+<p>语法: free [option]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-b</td>
+<td>以 byte 为单位显示内存使用情况</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>以 MB 为单位显示内存使用情况</td>
+</tr>
+<tr>
+<td>-k</td>
+<td>以 KB 为单位显示内存使用情况(默认)</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>以 人类可读形式显示内存使用情况</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>显示内存总和列</td>
+</tr>
+<tr>
+<td>-s &lt;间隔秒数&gt;</td>
+<td>根据间隔的秒数，持续显示内存的使用情况</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>不显示系统缓存区列</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">free -h</span><br><span class="line"><span class="meta">#</span><span class="bash">               total        used        free      shared  buff/cache   available</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Mem:            15G        1.8G        3.2G        158M         10G         13G</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Swap:            0B          0B          0B</span></span><br></pre></td></tr></table></figure>
+
+<p>buff 为写入数据缓存区<br>cache 为读取数据缓存区</p>
+<h3 id="iftop">3. iftop 动态显示网络接口流量信息 </h3>
+
+<p>功能说明: 实时流量监控工具，用于监听 TCP/IP 连接</p>
+<p>语法: iftop [option]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-i</td>
+<td>指定网卡</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>不进行 DNS 解析</td>
+</tr>
+<tr>
+<td>-N</td>
+<td>不解析端口为服务名</td>
+</tr>
+<tr>
+<td>-B</td>
+<td>以 byte 为单位显示</td>
+</tr>
+<tr>
+<td>-P</td>
+<td>显示端口</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>设定网卡为混杂模式，监听所有网卡</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iftop -nNBP</span><br></pre></td></tr></table></figure>
+
+<h3 id="vmstat">4. vmstat 虚拟内存统计 </h3>
+
+<p>功能说明: vmstat（virtual memory statistics）虚拟内存统计。可以对操作系统的内存信息，进程状态和 CPU 活动等进行监视。</p>
+<p>语法: vmstat [option] [delay [count]]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>显示活跃和非活跃内存</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>显示从系统启动至今的 fork 进程数量</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>显示 slab 信息</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>显示内存相关统计信息及多种系统活动数量</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>显示磁盘相关统计信息</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>显示指定磁盘分区统计信息</td>
+</tr>
+<tr>
+<td>-S</td>
+<td>使用指定单位（k,K,m,M）显示，默认单位为 K</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 显示虚拟内存的使用情况</span></span><br><span class="line">vmstat</span><br><span class="line"><span class="meta">#</span><span class="bash"> procs -----------memory----------    ---swap-- -----io---- -system--  ------cpu-----</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  r  b   swpd   free     buff   cache   si   so    bi    bo   <span class="keyword">in</span>   cs  us sy id wa st</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  1  0      0 3109456 1263540 8944292    0    0     1    40    0    1   1  2 96  1  0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 每5s更新一次，6次后停止输出</span></span><br><span class="line">vmstat 5 6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 内存使用信息</span></span><br><span class="line">vmstat -s</span><br><span class="line"><span class="meta">#</span><span class="bash"> 磁盘的读写</span></span><br><span class="line">vmstat -d</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>procs<ul>
+<li>r 表示正在运行和等待 CPU 时间片的进程数</li>
+<li>b 表示正在等待资源的进程数</li>
+</ul>
+</li>
+<li>memory<ul>
+<li>swpd 使用虚拟内存的大小</li>
+<li>free 当前空闲的物理内存数量</li>
+<li>buff 表示 buffs 的内存数量</li>
+<li>cache cache 的内存数量</li>
+</ul>
+</li>
+<li>swap<ul>
+<li>si (swap in) 磁盘调入内存</li>
+<li>so (swap out) 内存调入磁盘</li>
+</ul>
+</li>
+<li>io<ul>
+<li>bi 读磁盘</li>
+<li>bo 写磁盘</li>
+</ul>
+</li>
+<li>system<ul>
+<li>in 每秒设备中断数</li>
+<li>cs 每秒产生的上下文切换次数</li>
+</ul>
+</li>
+<li>cpu<ul>
+<li>us 用户进程消耗 CPU 时间百分比</li>
+<li>sy 系统进程消耗 CPU 时间百分比</li>
+<li>id CPU 所在空闲时间的百分比</li>
+<li>wa I/O 等待所占用的 CPU 时间百分比</li>
+<li>st 虚拟机占用的 CPU 时间的百分比</li>
+</ul>
+</li>
+</ul>
+<h3 id="mptat">5. CPU 信息统计 </h3>
+
+<p>功能说明: mpstat (multiprocessor statistics) 实时系统监控工具。在多 CPU 系统里，还能查看特定 CPU 的信息。对比 vmstat 只能查看系统的整体情况</p>
+<p>语法: mpstat [option] [delay [count]]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-P</td>
+<td>指定 CPU 编号，eg: -P 0 第一个 CPU，-P 1 第二个 CPU，-P ALL 表示所有 CPU</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mpstat</span><br><span class="line"><span class="meta">#</span><span class="bash"> Linux 4.14.81.bm.15-amd64 (110)         07/19/2022      _x86_64_        (8 CPU)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 09:11:39 PM  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 09:11:39 PM  all    1.46    0.00    2.08    0.51    0.00    0.04    0.13    0.00    0.00   95.77</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 每5s更新一次 打印6次</span></span><br><span class="line">mpstat 5 6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示第一个CPU的信息</span></span><br><span class="line">mpstat -P 0</span><br></pre></td></tr></table></figure>
+
+<p>%user 用户进程消耗 CPU 时间百分比<br>%nice 改变过优先级的进程占用 CPU 的百分比<br>%sys 系统消耗 CPU 时间百分比<br>%iowait IO 等待占用 CPU 时间百分比<br>%irq 硬终端占用的 CPU 时间百分比<br>%soft 软终端占用的 CPU 时间百分比<br>%steal 虚拟机强制 CPU 等待的时间百分比<br>%guest 虚拟机占用 CPU 时间的百分比<br>%idle CPU 处在空闲状态的时间百分比</p>
+<h3 id="iostat">6. iostat I/O 信息统计 </h3>
+
+<p>功能说明: 对系统的磁盘 I/O 操作进行监视。主要是显示磁盘读写操作的统计信息，同时也会给出 CPU 的使用情况。</p>
+<p>语法: iostat [option] [delay [count]]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c</td>
+<td>显示 CPU 的使用情况</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>显示磁盘的使用情况</td>
+</tr>
+<tr>
+<td>-k</td>
+<td>以 KB 为单位显示数据</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>以 MB 为单位显示数据</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>显示 NFS 的使用情况</td>
+</tr>
+<tr>
+<td>-p device</td>
+<td>指定统计的磁盘设备名称，默认位所有磁盘设备</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>显示扩展信息</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 默认显示CPU和磁盘信息</span></span><br><span class="line">iostat</span><br><span class="line"><span class="meta">#</span><span class="bash"> Linux 4.14.81.bm.15-amd64 (110)         07/19/2022      _x86_64_        (8 CPU)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> avg-cpu:  %user   %nice %system %iowait  %steal   %idle</span></span><br><span class="line"><span class="meta">#</span><span class="bash">            1.46    0.00    2.12    0.51    0.13   95.77</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Device:            tps    kB_read/s    kB_wrtn/s    kB_read    kB_wrtn</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sdb              28.83         4.99       205.52   42707225 1759200540</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> scd0              0.00         0.01         0.00      84420          0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sda              13.16         1.73       144.61   14802182 1237880482</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 每5s更新一次 打印6次</span></span><br><span class="line">iostat 5 6</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示第一个CPU的信息</span></span><br><span class="line">iostat -P 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="sar">7. sar 收集系统信息 </h3>
+
+<p>功能说明: 全面的获取系统的 CPU，运行对列，磁盘 I/O，分页（交换区），内存，CPU 中断和网络等性能数据。</p>
+<p>语法: sar [option] [delay [count]]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-A</td>
+<td>显示系统所有资源设备（CPU，内存，磁盘）的运行状况</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>显示 CPU 的使用情况</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>显示内存的使用情况</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>显示磁盘的使用情况</td>
+</tr>
+<tr>
+<td>-n keyword</td>
+<td>网络的运行状态</td>
+</tr>
+<tr>
+<td>-o filename</td>
+<td>命令以二进制形式存放在文件中</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 第一次运行该，命令可能会报错：无法打开 /var/<span class="built_in">log</span>/sa/sa17 执行一下命令即可</span></span><br><span class="line">sar -o 17</span><br><span class="line">sar -u</span><br><span class="line">sar -r</span><br><span class="line">sar -d</span><br><span class="line">sar -n DEV</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-11/" data-id="clzmdspih00i2zwl1alkt7q4m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/core/chapter-10" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-10/" class="article-date">
+  <time datetime="2022-07-12T01:11:16.000Z" itemprop="datePublished">2022-07-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-10/">网络命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="#ifconfig">1. ifconfig 配置或显示网络接口信息</a><br><a href="#ifup">2. ifup 激活网络接口</a><br><a href="#ifdown">3. ifdown 禁用网络接口</a><br><a href="#route">4. route 显示或管理路由表</a><br><a href="#arp">5. arp 管理系统的 arp 缓存</a><br><a href="#ip">6. ip 网络配置工具</a><br><a href="#netstat">7. netstat 查看网络状态</a><br><a href="#ss">8. ss 查看网络状态</a><br><a href="#ping">9. ping 测试主机之间网络的连通性</a><br><a href="#traceroute">10. traceroute 追踪数据传输协议路由状况</a><br><a href="#arping">11. arping 发送 arp 请求</a><br><a href="#nc">12. nc 多功能网络工具</a><br><a href="#ssh">13. ssh 安全登录远程主机</a><br><a href="#wget">14. wget 命令行下载工具</a><br><a href="#nslookup">15. nslookup 域名查询工具</a><br><a href="#dig">16. dig 域名查询工具</a><br><a href="#host">17. host 域名查询工具</a><br><a href="#nmap">18. nmap 网络探测工具和安全/端口扫描器</a><br><a href="#tcpdump">19. tcpdump 监听网络流量</a></p>
+<h3 id="ifconfig">1. ifconfig 配置或显示网络接口信息</h3>
+
+<p>语法: ifconfig [interface] [option]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>显示所有的王阔接口信息，包括活动和非活动的</td>
+</tr>
+<tr>
+<td>up</td>
+<td>激活指定的网络接口</td>
+</tr>
+<tr>
+<td>down</td>
+<td>关闭指定的网络接口</td>
+</tr>
+<tr>
+<td>hw</td>
+<td>设置网络的物理地址（MAC 地址）</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 显示所有的网卡</span></span><br><span class="line">ifconfig</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看网卡详情</span></span><br><span class="line">ifconfig eth0</span><br></pre></td></tr></table></figure>
+
+<h3 id="ifup">2. ifup 激活网络接口</h3>
+
+<p>语法: ifup [iface]</p>
+<h3 id="ifdown">3. ifdown 禁用网络接口</h3>
+
+<p>语法: ifdown [iface]</p>
+<h3 id="route">4. route 显示或管理路由表</h3>
+
+<p>功能说明：显示或管理 Linux 系统的路由表，route 命令设置的路由主要是静态路由</p>
+<p>语法: route [option]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-n</td>
+<td>直接使用 IP 地址，不进行 DNS 解析</td>
+</tr>
+<tr>
+<td>-ee</td>
+<td>显示更详细的路由信息</td>
+</tr>
+<tr>
+<td>add</td>
+<td>添加路由信息</td>
+</tr>
+<tr>
+<td>del</td>
+<td>删除路由信息</td>
+</tr>
+<tr>
+<td>target</td>
+<td>指定目标网络或主机，可以用 ip 地址或主机/网络名</td>
+</tr>
+<tr>
+<td>-net</td>
+<td>到一个网络的路由，后面接的是一个网络号地址</td>
+</tr>
+<tr>
+<td>-host</td>
+<td>到一个主机的路由，后面接的是一个主机的地址</td>
+</tr>
+<tr>
+<td>netmask NM</td>
+<td>为添加的路由指定网络掩码</td>
+</tr>
+<tr>
+<td>gw GW</td>
+<td>为发往目标网络/主机的任何分组指定网关</td>
+</tr>
+<tr>
+<td>dev If</td>
+<td>指定那个网络设备出去，后面接网络设备名，如 eth0</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">route</span><br><span class="line"><span class="meta">#</span><span class="bash"> Kernel IP routing table</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Destination     Gateway         Genmask         Flags Metric Ref    Use Iface</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> default         n227-076-001.by 0.0.0.0         UG    0      0        0 eth0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 10.227.76.0     0.0.0.0         255.255.252.0   U     0      0        0 eth0</span></span><br><span class="line"></span><br><span class="line">route add -net 192.168.49.0/24 dev eth0</span><br><span class="line">route del -net 192.168.49.0/24 dev eth0</span><br></pre></td></tr></table></figure>
+
+<p>字段说明</p>
+<ul>
+<li>Destination： 网络号</li>
+<li>Gateway：连出网关地址，网络是通过该 IP 连出去的。如果都是 0，表示路由是通过主机传送出去的。如果有 IP 显示，表示路由必须通过 IP 才能连接出去</li>
+<li>Genmask：子网掩码（netmask），网络号和子网掩码组成一个完整的网络。</li>
+<li>Flags：路由标记信息<ul>
+<li>U(route is up)</li>
+<li>H(target is host)</li>
+<li>R(reinstate route for dynamic routing)</li>
+<li>G(use gateway)</li>
+<li>M(modified from routing daemon or redirect)</li>
+<li>D(dynamically installed by daemin or redirect)</li>
+<li>!(reject route)</li>
+</ul>
+</li>
+<li>Metric：需要经历几个网络节点（hops）才能到达路由的目标网络地址</li>
+<li>Ref：参考此路由规则的数目</li>
+<li>Use：有几个转送数据包参考到了此路由规则</li>
+<li>Iface：路由对应的网络设备接口</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 为默认网关，所有没被处理的请求都会走到默认网关</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 0.0.0.0         10.227.76.1     0.0.0.0         UG    0      0        0 eth0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除默认网关</span></span><br><span class="line">route del default</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加默认网关</span></span><br><span class="line">route add default gw 10.0.0.2</span><br><span class="line">route dad -net 0.0.0.0 netmask 0.0.0.0 gw 10.0.0.2</span><br></pre></td></tr></table></figure>
+
+<h3 id="arp">5. arp 管理系统的arp缓存</h3>
+
+<p>功能说明: 用于操作本机的 arp 缓存区。<br>arp（address resolution protocl）地址解析协议。根据 IP 地址获取物理地址（MAC 地址）</p>
+<p>语法: arp [option]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-n</td>
+<td>显示数字 IP 地址</td>
+</tr>
+<tr>
+<td>-s &lt;主机&gt; &lt;MAC 地址&gt;</td>
+<td>设置主机 IP 和 MAC 地址的映射</td>
+</tr>
+<tr>
+<td>-d &lt;主机&gt;</td>
+<td>删除指定主机的 arp</td>
+</tr>
+<tr>
+<td>-i &lt;接口&gt;</td>
+<td>指定网络接口</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示详细的缓存条目</td>
+</tr>
+</tbody></table>
+<h3 id="ip">6. ip 网络配置工具</h3>
+
+<p>功能说明: 用于显示或管理 Linux 系统的路由、网络设备、策略路由和隧道</p>
+<p>语法: ip [option] [object] [command]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-s</td>
+<td>输出更详细的信息</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>显示主机时，不使用 IP 地址，使用域名</td>
+</tr>
+<tr>
+<td>网络对象</td>
+<td>link 网络设备 <br /> address IP 地址 <br /> addrlabel 协议地址管理标签 <br /> neighbour arp 或 ndisc 缓存表 <br /> route 路由表 <br /> rule 策略路由表 <br /> maddress 多播地址 <br /> mroute 多播路由缓存表 <br /> tunnel IP 隧道 <br /> xfrm IPsec 协议框架 <br /></td>
+</tr>
+</tbody></table>
+<h3 id="netstat">7. netstat 查看网络状态</h3>
+
+<p>功能说明: 查看本机网络的连接状态、运行短裤和路由表信息。</p>
+<p>语法: netstat [option]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-r</td>
+<td>显示路由表，和 route，ip route 类似</td>
+</tr>
+<tr>
+<td>-g</td>
+<td>显示多播群组成员，和 ip maddr 类似</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>显示网络接口信息，和 ip -s link 类似</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>显示各协议的统计信息</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>显示数字形式的地址而不是解析主机，端口，用户名</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>显示处于监听和非监听的 socket 信息</td>
+</tr>
+<tr>
+<td>-A</td>
+<td>显示指定网络类型的网络连接状态</td>
+</tr>
+<tr>
+<td>-c <n></td>
+<td>每隔 n 秒刷新一次</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>仅显示 listen 的网络</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>显示所有 TCP</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>显示所有 UDP</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>显示 socket 所属进程的 PID 和名称</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 显示所有连接信息</span></span><br><span class="line">netstat -an</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示所有listen状态的TCP,UDP 的进程号和进程名</span></span><br><span class="line">netstat -lntup</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示路由表</span></span><br><span class="line">netstat -rn</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 统计各个状态的网络连接个数</span></span><br><span class="line">netstat -n|awk '/^tcp/ &#123;++array[$NF]&#125; END &#123;for(key in array) print key, array[key]&#125;'</span><br></pre></td></tr></table></figure>
+
+<h3 id="ss">8. ss 查看网络状态</h3>
+
+<p>功能说明: 类似并将取代 netstat 的工具，查看网络状态信息，包括 TCP，UDP 连接，端口等。ss 属于 iproute 包</p>
+<p>语法: ss [option] [filter]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-n</td>
+<td>显示 IP 地址不进行 DNS 解析</td>
+<td>-s</td>
+<td>显示 socket 使用统计</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>尝试显示数字 IP 和端口</td>
+<td>-4</td>
+<td>仅显示 IPv4 的 socket</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>显示所有 socket 连接</td>
+<td>-6</td>
+<td>仅显示 IPv6 的 socket</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>显示监听所有 socket</td>
+<td>-0</td>
+<td>仅显示 PACKET 的 socket</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>显示计时器信息</td>
+<td>-t</td>
+<td>仅显示 TCP 的 socket</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>显示详细的 socket 信息</td>
+<td>-u</td>
+<td>仅显示 UDP 的 socket</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>显示 socket 的内存使用情况</td>
+<td>-d</td>
+<td>仅显示 DCCP 的 socket</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>显示使用 socket 的进程</td>
+<td>-w</td>
+<td>仅显示 RAW 的 socket</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>显示 TCP 内部信息</td>
+<td>-x</td>
+<td>仅显示 Unix 的 socket</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 显示所有socket</span></span><br><span class="line">ss -an</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示所有listen状态的TCP,UDP 的进程号和进程名</span></span><br><span class="line">ss -lntup</span><br></pre></td></tr></table></figure>
+
+<h3 id="ping">9. ping 测试主机之间网络的连通性</h3>
+
+<p>功能说明: 测试主机之前网路的连通性。指定 ping 命令会使用 ICMP 传输协议，发出要求回应的信息，若远端主机没有为你，就会回应该信息，因而可得知该主机运作正常。</p>
+<p>语法: ping [option] [destination]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c <n></td>
+<td>指定 ICMP 报文的次数。否则会一直发报文</td>
+</tr>
+<tr>
+<td>-i &lt;时间间隔&gt;</td>
+<td>相邻两次报文的时间间隔，默认时间间隔位 1s</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>不查询主机名，直接显示 IP</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>只显示命令开始时的信息和运行结束时的统计信息。忽略命令运行过程中的输出信息</td>
+</tr>
+<tr>
+<td>-s &lt;数据包大小&gt;</td>
+<td>设置发送数据包的大小，默认为 56 字节加 8 字节的 ICMP 头，一共是 64 字节的 ICMP 包</td>
+</tr>
+<tr>
+<td>-t &lt;生存期&gt;</td>
+<td>设置 TTL (time to life) ICMP 经过的路由器数目值</td>
+</tr>
+<tr>
+<td>-w 截止时间</td>
+<td>超过截止时间推出 ping</td>
+</tr>
+<tr>
+<td>-W 超时时间</td>
+<td>等待响应的超时时间</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 显示所有socket</span></span><br><span class="line">ss -an</span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示所有listen状态的TCP,UDP 的进程号和进程名</span></span><br><span class="line">ss -lntup</span><br></pre></td></tr></table></figure>
+
+<h3 id="traceroute">10. traceroute 追踪数据传输协议路由状况</h3>
+
+<p>功能说明: 显示网络数据包传输到指定主机的路径信息，追踪数据传输路由状况。</p>
+<p>语法: traceroute [option] [host] [packet_len]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-q <n></td>
+<td>每一跳的探测包数量。默认是 3</td>
+</tr>
+<tr>
+<td>-I</td>
+<td>使用 ICMP ECHO 探测，即 ping</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>直接使用 IP 地址而不是主机名</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>设置最大的跳数，默认位 30</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> traceroute默认使用的是UDP，性能不是很好</span></span><br><span class="line">traceroute -n www.bytedance.com</span><br><span class="line"><span class="meta">#</span><span class="bash"> 可以使用ICMP协议</span></span><br><span class="line">traceroute -In www.bytedance.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="arping">11. arping 发送 arp 请求</h3>
+
+<p>功能说明: 用于发送 arp 请求到一个相邻主机的工具，检查局域网内的所有设备的硬件地址。</p>
+<p>语法: arping [option]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c <n></td>
+<td>发送指定次数的 arp 报文后退出</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>收到第一个应答报文时立即退出。用户判断目标主机是否存在</td>
+</tr>
+<tr>
+<td>-I 网络接口</td>
+<td>指定网络接口发送 arp 报文</td>
+</tr>
+<tr>
+<td>-w &lt;截止时间&gt;</td>
+<td>设置命令截止时间</td>
+</tr>
+<tr>
+<td>-s source</td>
+<td>设定 arping 发送的 arp 数据包中的源地址</td>
+</tr>
+</tbody></table>
+<h3 id="nc">12. nc 多功能网络工具</h3>
+
+<p>功能说明: 是一个简单、可靠、强大的网络工具，它可以建立 TCP 连接，发送 UDP 数据包，监听任意的 TCP 和 UDP 端口，进行端口扫描，处理 IPv4 和 IPv6 数据包。</p>
+<p>语法: nc [option]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-l</td>
+<td>监听指定端口，然后一直等待网络连接</td>
+</tr>
+<tr>
+<td>-z</td>
+<td>扫描时不发送任何数据</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示详细输出</td>
+</tr>
+<tr>
+<td>-w</td>
+<td>设置超市时间，对-l 失效</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>指定 nc 使用的端口，不能和-l 一起使用</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>使用 UDP，默认是 TCP 连接</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>指定发送数据的源 IP 地址，适用于多网卡主机</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 监听80端口并打印详细信息</span></span><br><span class="line">nc -lv 80</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 端口扫描</span></span><br><span class="line">nc -zv 10.227.77.100 20-9000</span><br></pre></td></tr></table></figure>
+
+<h3 id="ssh">13. ssh 安全登录远程主机</h3>
+
+<p>语法: ssh [option] [user@]hostname [command]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-p</td>
+<td>指定 ssh 登录的端口，默认为 22</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>强制分配伪终端，可在远程机器上执行任何全屏幕的程序</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>调试模式</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 登录机器执行命令</span></span><br><span class="line">ssh 10.227.77.110 "free -m"</span><br></pre></td></tr></table></figure>
+
+<h3 id="wget">14. wget 命令行下载工具</h3>
+
+<p>功能说明: 从网络上下载资源。<br>支持断点续传<br>支持 FTP 和 HTTP<br>支持代理服务器<br>非常稳定且有很强的适应性</p>
+<p>语法: wget [option] [url]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-o</td>
+<td>将命令的结果写入文件中</td>
+</tr>
+<tr>
+<td>-O</td>
+<td>指定文件名下载文件</td>
+</tr>
+<tr>
+<td>–limit-rate</td>
+<td>限速下载</td>
+</tr>
+<tr>
+<td>-b</td>
+<td>转入后台执行</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>断点续传</td>
+</tr>
+<tr>
+<td>–user-agent</td>
+<td>指定客户端标志</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>关闭下载时的输出</td>
+</tr>
+<tr>
+<td>–tries=number</td>
+<td>重试次数</td>
+</tr>
+<tr>
+<td>–spider</td>
+<td>模拟爬虫访问</td>
+</tr>
+<tr>
+<td>-T seconds/ –timeout=seconds</td>
+<td>超时时间</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 监控网站的URL是否正常</span></span><br><span class="line">wget -q -T 3 --tries=1 --spider www.baidu.com</span><br><span class="line">echo $?</span><br></pre></td></tr></table></figure>
+
+<h3 id="nslookup">15. nslookup 域名查询工具</h3>
+
+<p>语法: nslookup [option] [name] [server]</p>
+<p>nslookup 有两种模式<br>交互模式: 用户可以向域名服务器查询各类主机，域名信息，或者输出域名中的主机列表<br>非交互模式:这个一个主机或域名仅仅获取特定的名称或所需信息</p>
+<p>直接输入 nslookup，会直接进入交互模式，此时 nslookup 会连接到默认的域名服务器(即/etc/resolv/conf 的第一个 DNS 地址)<br>也支持选定不同的 dns 服务器，将第一个参数设置为<code>-</code>，第二个参数位连接的域名服务器主机名或 IP 地址</p>
+<p><strong>交互模式</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>exit</td>
+<td>退出</td>
+</tr>
+<tr>
+<td>server &lt;域名服务器&gt;</td>
+<td>指定解析域名的服务器地址</td>
+</tr>
+<tr>
+<td>set key=value</td>
+<td>设置查询关键字（域名属性）。<br /> all 域名的所有信息<br /> domain=name 指定查询的域名<br /> port=n 指定域名服务器的端口<br /> type=s 指定域名查询的类型（A,HINFO,PTR,NS,MX）<br /> retry=n 查询重试的次数<br /> timeout=n 指定查询的超时时间</td>
+</tr>
+</tbody></table>
+<p><strong>非交互模式</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-timeout</td>
+<td>超时时间</td>
+</tr>
+<tr>
+<td>-query</td>
+<td>域名查询的类型</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/resolve.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"> nameserver 10.225.109.xx</span></span><br><span class="line"></span><br><span class="line">nslookup</span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; www.baidu.com   <span class="comment">#输入查询的域名</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Server:         10.225.85.109       <span class="comment">#默认DNS服务</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Address:        10.225.85.109<span class="comment">#53    #DNS的IP和端口</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Non-authoritative answer:           <span class="comment">#说明本域名服务器的应答是从其他域名服务器查询到的信息</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Name:   www.baidu.com</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Address: 10.15.63.90                <span class="comment">#域名对应的IP</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 非交互式查询</span></span><br><span class="line">nslookup www.baidu.com 223.5.5.5</span><br></pre></td></tr></table></figure>
+
+<h3 id="dig">16. dig 域名查询工具</h3>
+
+<p>功能说明: 常用的域名查询工具，测试域名系统的工作是否正常</p>
+<p>语法: dig [option]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@&lt;DNS 服务地址&gt;</td>
+<td>指定域名解析的域名服务器</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>反向域名解析</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>指定要查询的 DNS 数据类型，如 A、MAX 和 PTR 等。默认位 A</td>
+</tr>
+<tr>
+<td>-b</td>
+<td>指定使用本机的哪个 IP 地址像域名服务器发送域名查询请求</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>指定域名服务器使用的端口号。默认使用 UDP 协议的 53 端口</td>
+</tr>
+<tr>
+<td>+trace</td>
+<td>从根域开始查询结果</td>
+</tr>
+<tr>
+<td>+nocmd</td>
+<td>不输出 dig 的版本信息</td>
+</tr>
+<tr>
+<td>+short</td>
+<td>仅输出最精简的 CNAME 信息和 A 纪录</td>
+</tr>
+<tr>
+<td>+nocomment</td>
+<td>不输出 dig 的详情注视信息</td>
+</tr>
+<tr>
+<td>+nostat</td>
+<td>不输出最后的统计信息</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查询指定域名的IP</span></span><br><span class="line">dig www.baidu.com</span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用@指定查询的DNS服务器,域名解析成IP的完整过程</span></span><br><span class="line">dig @233.5.5.5 www.baidu.com +trace</span><br><span class="line"><span class="meta">#</span><span class="bash"> 反向域名解析</span></span><br><span class="line">dig -x 10.15.63.90</span><br><span class="line"><span class="meta">#</span><span class="bash"> 只展示精简信息</span></span><br><span class="line">dig +short www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="host">17. host 域名查询工具</h3>
+
+<p>语法: host [option]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>显示详细的 DNS 信息</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>指定查询域名信息</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查询指定域名的IP</span></span><br><span class="line">host www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<h3 id="nmap">18. nmap 网络探测工具和安全/端口扫描器</h3>
+
+<p>功能说明: nmap（Network Mapper）网络探测和安全审核工具。可以发现网络上有哪些主机，主机提供了说明服务（程序名称和版本号），并探测操作系统的类型和版本信息。</p>
+<p>语法: nmap [scan type] [option] [target specification]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-sS</td>
+<td>TCP 同步扫描（TCP SYN）</td>
+</tr>
+<tr>
+<td>-sT</td>
+<td>TCP 连接扫描</td>
+</tr>
+<tr>
+<td>-sn</td>
+<td>不进行端口扫描，只检查主机正在进行。</td>
+</tr>
+<tr>
+<td>-sU</td>
+<td>扫描 UDP 端口</td>
+</tr>
+<tr>
+<td>-Pn</td>
+<td>只扫描，不 ping 主机</td>
+</tr>
+<tr>
+<td>-PS</td>
+<td>使用 SYN 包对目标主机进行扫描</td>
+</tr>
+<tr>
+<td>-PU</td>
+<td>使用 UPD ping 扫描端口</td>
+</tr>
+<tr>
+<td>-O</td>
+<td>激活对 TCP/IP 指纹特征扫描，获得远程主机的操作系统类型</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示扫描过程中的详细信息</td>
+</tr>
+<tr>
+<td>-S <IP></td>
+<td>设置扫描的源 IP 地址</td>
+</tr>
+<tr>
+<td>-g port</td>
+<td>设置扫描的源端口</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>指定扫描的端口</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>不进行 DNS 解析</td>
+</tr>
+<tr>
+<td>–exclude</td>
+<td>排除指定主机</td>
+</tr>
+<tr>
+<td>–excludefile</td>
+<td>排除指定文件中的主机</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 扫描10-100端口的服务</span></span><br><span class="line">nmap -p 10-100 127.0.0.1</span><br><span class="line"><span class="meta">#</span><span class="bash"> 扫描局域网内所有IP</span></span><br><span class="line">nmap 192.168.0.0/24</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 不扫描端口</span></span><br><span class="line">nmap -sn 192.168.0.0/24</span><br><span class="line">nmap -sn 192.168.0.0-10</span><br></pre></td></tr></table></figure>
+
+<h3 id="tcpdump">19. tcpdump 监听网络流量</h3>
+
+<p>功能说明: 截获网络数据包的包分析工具。可以将网络中传送额度数据包的“头”完全截获下来以提供分析。它支持网络层、协议、主机、端口等的过滤，支持与、或、非逻辑语句协助过滤有效信息。<br>tcpdump 需要吧网卡切换到混杂模式（promiscuoums mode），需要 root</p>
+<p>语法: tcpdump [option] [expression]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c <n></td>
+<td>接收到指定的数据包数目之后退出</td>
+</tr>
+<tr>
+<td>-i <string></td>
+<td>指定网络接口</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>不进行 DNS 解析</td>
+</tr>
+<tr>
+<td>-nn</td>
+<td>不将协议和端口数字转换成名字</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>以快速输出的方式运行</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>以详细的信息输出</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 精简模式输出 5条之后退出</span></span><br><span class="line">tcpdump -q -c 5</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 监听指定主机收到和发送的数据包</span></span><br><span class="line">tcpdump -n host 10.0.0.1</span><br><span class="line"><span class="meta">#</span><span class="bash"> 监听指定主机发出发送的数据包</span></span><br><span class="line">tcpdump -n src 10.0.0.1</span><br><span class="line"><span class="meta">#</span><span class="bash"> 监听指定主机发出收到的数据包</span></span><br><span class="line">tcpdump -n dst 10.0.0.1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 监听指定端口的数据包</span></span><br><span class="line">tcpdump -nn port 22</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 监听指定协议的数据包</span></span><br><span class="line">tcpdump -n arp</span><br><span class="line">tcpdump -n icmp</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 获取主机10.0.0.12与所有（初10.0.0.1）主机的ip数据包</span></span><br><span class="line">tcpdump -n ip host 10.0.0.12 and ! 10.0.0.1</span><br></pre></td></tr></table></figure>
+
+<p><strong>利用 tcpdump 抓包详解 tcp/ip 连接和断开过程</strong></p>
+<p>tcp 数据传递：三次握手，数据传输，四次挥手断开<br>tcp 状态表示：</p>
+<ul>
+<li>SYN（同步序列编号，Synchronize Sequence Numbers）该标志仅在三次握手建立 TCP 连接时有效。表示建立一个新的 TCP 连接</li>
+<li>ACK（确认编号，Acknowledgement Number）是对tcp请求的确认标志，提示对端系统已经成功接受了所有的数据</li>
+<li>FIN（结束标志，FINISH）用来结束一个TCP会话。但对应端口仍然吹雨一个开放状态，准备接受后续数据。</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 抓取由本地发起的发往本地端口位80的包</span></span><br><span class="line">tcpdump -n -i lo0 -s 0 'tcp port 80 and (((ip[2:2] - ((ip[0]&amp;0xf)&lt;&lt;2)) - ((tcp[12]&amp;0xf0)&gt;&gt;2)) != 0)'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 测试本地回环请求的时候需要将网络设备指向lo回环地址，否则捕获不到请求</span></span><br><span class="line">tcpdump port 8080 -i lo</span><br><span class="line"><span class="meta">#</span><span class="bash"> tcpdump: verbose output suppressed, use -v or -vv <span class="keyword">for</span> full protocol decode</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> listening on lo, link-type EN10MB (Ethernet), capture size 262144 bytes</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ==================== 三次握手</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 00:28:42.855941 IP localhost.35438 &gt; localhost.http-alt: Flags [S], seq 533327284, win 43690, options [mss 65495,sackOK,TS val 2383381400 ecr 0,nop,wscale 10], length 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 00:28:42.855962 IP localhost.http-alt &gt; localhost.35438: Flags [S.], seq 919993390, ack 533327285, win 43690, options [mss 65495,sackOK,TS val 2383381400 ecr 2383381400,nop,wscale 10], length 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 00:28:42.855977 IP localhost.35438 &gt; localhost.http-alt: Flags [.], ack 1, win 43, options [nop,nop,TS val 2383381400 ecr 2383381400], length 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ====================</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 00:28:42.856037 IP localhost.35438 &gt; localhost.http-alt: Flags [P.], seq 1:79, ack 1, win 43, options [nop,nop,TS val 2383381400 ecr 2383381400], length 78: HTTP: GET / HTTP/1.1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 00:28:42.878630 IP localhost.http-alt &gt; localhost.35438: Flags [.], seq 1:22017, ack 79, win 43, options [nop,nop,TS val 2383381423 ecr 2383381400], length 22016: HTTP: HTTP/1.1 200 OK</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 00:28:42.878669 IP localhost.35438 &gt; localhost.http-alt: Flags [.], ack 22017, win 171, options [nop,nop,TS val 2383381423 ecr 2383381423], length 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 00:28:42.878735 IP localhost.http-alt &gt; localhost.35438: Flags [P.], seq 22017:76311, ack 79, win 43, options [nop,nop,TS val 2383381423 ecr 2383381423], length 54294: HTTP</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 00:28:42.878751 IP localhost.35438 &gt; localhost.http-alt: Flags [.], ack 76311, win 299, options [nop,nop,TS val 2383381423 ecr 2383381423], length 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 00:28:42.882932 IP localhost.35438 &gt; localhost.http-alt: Flags [F.], seq 79, ack 76311, win 299, options [nop,nop,TS val 2383381427 ecr 2383381423], length 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 00:28:42.884174 IP localhost.http-alt &gt; localhost.35438: Flags [F.], seq 76311, ack 80, win 43, options [nop,nop,TS val 2383381428 ecr 2383381427], length 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 00:28:42.884191 IP localhost.35438 &gt; localhost.http-alt: Flags [.], ack 76312, win 299, options [nop,nop,TS val 2383381428 ecr 2383381428], length 0</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-10/" data-id="clzmdspii00iczwl18fo21k4i" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/core/网络相关" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/" class="article-date">
+  <time datetime="2022-07-12T01:11:16.000Z" itemprop="datePublished">2022-07-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/">网络相关</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="#IP">1. IP 地址是什么</a><br><a href="#netmask">2. netmask 子网掩码</a><br><a href="#gateway">3. gateway 网关</a><br><a href="#net">4. IP 地址，网络地址，主机号，主机地址转换过程</a><br><a href="#ipsegment">5. ip 段/数字 192.168.0.1/24 是什么</a></p>
+<h3 id="IP">1. IP地址是什么</h3>
+
+<p>简单理解：IP 地址是网络上计算机的一个编号。格式由 32 位的二进制数组成，每 8 位分成一组，以十进制表示时常见位（a.b.c.d）</p>
+<p>常见的由 A 类，B 类，C 类，特殊的 D，E 类分别为组播和科研保留</p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>特征</th>
+<th>网络范围</th>
+<th>默认掩码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A 类地址</td>
+<td>第 1 个 8 位中的第 1 位始终为 0</td>
+<td>0-127.x.x.x</td>
+<td>255.0.0.0/8</td>
+</tr>
+<tr>
+<td>B 类地址</td>
+<td>第 1 个 8 位中的第 1、2 位始终为 10</td>
+<td>128-191.x.x.x</td>
+<td>255.255.0.0/16</td>
+</tr>
+<tr>
+<td>C 类地址</td>
+<td>第 1 个 8 位中的第 1、2、3 位始终为 110</td>
+<td>192-y.x.x.x</td>
+<td>255.255.255.0/24</td>
+</tr>
+</tbody></table>
+<p>IP 地址=网络地址+主机地址</p>
+<h3 id="netmask">2. netmask 子网掩码</h3>
+
+<p>子网掩码主要的作用是将 IP 地址划分为网络地址和主机地址</p>
+<p>作用：</p>
+<ol>
+<li>判断两个 IP 是否在一个局域网内</li>
+<li>判断多少个网络号，多少个主机号</li>
+</ol>
+<h3 id="gateway">3. gateway 网关</h3>
+
+<p>是一个网络通向其他网络的 IP 地址<br>两个网络之前的通信必须通过网关进行转发<br>比如有 A 网络 192.168.1.0，B 网络 192.168.2.0，子网掩码都位 255.255.255.0. TCP/IP 协议会根据子网掩码判断 A,B 处在不同的网络中无法进行通信</p>
+<h3 id="net">4. IP地址，网络地址，主机号，主机地址转换过程</h3>
+
+<p>将 IP 地址和子网掩码转换成二进制，子网掩码从左往右全 1 的部分为网络地址，剩下的为主机地址</p>
+<p>IP 地址和子网掩码与运算结果为网络地址（主机号全是 0）<br>运算结果中的主机地址都变为 1 即为广播地址</p>
+<p>主机数量 = 2^(主机号的位数) - 2(网络号+广播地址)</p>
+<p>eg: 一个主机的 IP 地址是 202.112.14.137, 掩码是 255.255.255.224，计算这个主机所在网络的网络地址和广播地址<br>202.112.14.137 =&gt; 11001010.01110000.00001110.10001001<br>255.255.255.224 =&gt; 11111111.11111111.11111111.11100000<br>11001010.01110000.00001110.10000000 =&gt; 202.112.14.128</p>
+<p><strong>202.112.14.128</strong>为网络号<br>根据子网掩码 255.255.255.224 看，网络号由 27 位，主机号占 5 位<br>将网络地址的所有主机位补 1，最后的结果就是广播地址 11001010.01110000.00001110.10011111 =&gt; <strong>202.112.14.159</strong></p>
+<p>该网络内主机的数量=2^5-2 = 30</p>
+<h3 id="ipsegment">5. ip/数字 192.168.0.1/24 是什么</h3>
+
+<p>前半部分标识了 IP 地址，后半部分标识了当前 IP 地址的网络地址有多少位。<br>如标题中的 24 说明，网络地址有 24 位，子网掩码位 11111111.11111111.11111111.00000000=&gt;255.255.255.0</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/" data-id="clzmdspij00iqzwl1cx1f0w1o" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/core/chapter-9" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-9/" class="article-date">
+  <time datetime="2022-07-10T14:49:44.000Z" itemprop="datePublished">2022-07-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-9/">进程管理命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="#ps">1. ps 查看进程</a><br><a href="#pstree">2. pstree 显示进程状态树 </a><br><a href="#kill">3. kill 终止进程 </a><br><a href="#killall">4. killall，pkill 通过进程名终止进程 </a><br><a href="#top">5. top 实时显示系统中各个进程的资源占用状况 </a><br><a href="#nohup">6. nohup 用户退出系统进程继续工作 </a></p>
+<h3 id="ps">1. ps 查看进程</h3>
+
+<p>查看某个时刻的进程快照</p>
+<p>语法: ps [option]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>显示所有终端下执行的基础</td>
+<td>u</td>
+<td>显示进程的用户信息</td>
+</tr>
+<tr>
+<td>a</td>
+<td>显示与终端相关的所有进出，包括进程的完整路径</td>
+<td>-u</td>
+<td>显示指定用户相关的进程信息</td>
+</tr>
+<tr>
+<td>x</td>
+<td>显示与终端无关的所有进出</td>
+<td>f</td>
+<td>显示进程树</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>显示所有进程</td>
+<td>-f</td>
+<td>额外显示 UID，PID，C，STIME</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>以详细的格式显示进程的状况</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 默认输出使用者当前所在终端（窗口）的进程</span></span><br><span class="line">ps</span><br><span class="line"><span class="meta">#</span><span class="bash">     PID TTY          TIME CMD</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3064762 pts/4    00:00:00 sudo</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3064766 pts/4    00:00:00 zsh</span></span><br></pre></td></tr></table></figure>
+
+<p>PID:进程标识号<br>TTY:进程所属终端控制台<br>TIME:进程所使用总的 CPU 时间<br>CMD:正在执行的命令行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查找特定的进程</span></span><br><span class="line">ps -ef | grep ssh</span><br><span class="line"><span class="meta">#</span><span class="bash">     PID TTY          TIME CMD</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3064762 pts/4    00:00:00 sudo</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3064766 pts/4    00:00:00 zsh</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="pstree">2. pstree 显示进程状态树 </h3>
+
+<p>语法: pstree [option] [<PID>/<user>]</p>
+<h3 id="kill">3. kill 终止进程 </h3>
+
+<p>语法: kill [option] [PID]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-l</td>
+<td>列出全部的信号名称</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>指定 kill 命令值打印相关进程的进程号，而不发送任何信号</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>指定要发送的信号</td>
+</tr>
+</tbody></table>
+<p>常用的信号</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HUB(1)</td>
+<td>挂起，终端掉线或用户退出而引发</td>
+</tr>
+<tr>
+<td>INT(2)</td>
+<td>中断，通常是 ctrl+c</td>
+</tr>
+<tr>
+<td>QUIT(3)</td>
+<td>退出，通常是 ctrl+\</td>
+</tr>
+<tr>
+<td>KILL(9)</td>
+<td>立即结束进程的运行</td>
+</tr>
+<tr>
+<td>TERM(15)</td>
+<td>终止，通常在系统关机时触发</td>
+</tr>
+<tr>
+<td>TSTP(20)</td>
+<td>暂停进程的运行，通常是 ctrl+z</td>
+</tr>
+</tbody></table>
+<h3 id="killall">4. killall，pkill 通过进程名终止进程 </h3>
+
+<p>语法: killall [option] [name]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-u</td>
+<td>终止指定用户的进程</td>
+</tr>
+<tr>
+<td>-w</td>
+<td>等待被终止的进程死去</td>
+</tr>
+</tbody></table>
+<p>语法: pkill [option] [name]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-u</td>
+<td>终止指定用户的进程</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>杀死指定中断的进程</td>
+</tr>
+</tbody></table>
+<h3 id="top">5. top 实时显示系统中各个进程的资源占用状况 </h3>
+
+<p>语法: top [option]</p>
+<h3 id="nohup">6. nohup 用户退出系统进程继续工作 </h3>
+
+<p>语法: nohup [option]</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-9/" data-id="clzmdspii00inzwl105cub7pu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/core/chapter-7" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-7/" class="article-date">
+  <time datetime="2022-07-08T16:26:25.000Z" itemprop="datePublished">2022-07-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-7/">用户管理及用户信息查询命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="#useradd">1. useradd 创建用户</a><br><a href="#usermod">2. usermod 修改用户信息</a><br><a href="#userdel">3. userdel 删除用户</a><br><a href="#passwd">4. passwd 修改用户密码</a><br><a href="#su">5. su 切换用户</a><br><a href="#visudo">6. visudo 编辑 sudoers 文件 </a><br><a href="#sudo">7. sudo 以另一个用户身份执行命令</a><br><a href="#id">8. id 显示用户和用户组信息</a><br><a href="#w">9. w，who，users 显示已登陆用户信息</a><br><a href="#whoami">10. whoami 当前登录的用户名</a><br><a href="#last">11. last,lastb,lastlog 最近登录记录</a></p>
+<h3 id="useradd">1. useradd 创建用户</h3>
+
+<p>语法: useradd [option] [name]</p>
+<p>常规添加用户说明</p>
+<ol>
+<li>系统首先读取/etc/login.defs（用户定义文件） 和/etc/default/useradd（用户默认配置文件）文件中定义的参数和规则，然后根据预设的规则添加用户。</li>
+<li>向/etc/passwd（用户文件） 和/etc/group（组文件） 添加新用户和用户组纪录</li>
+<li>向/etc/shadow（用户密码文件） 和/etc/gshadow（组密码文件） 添加密码相关信息</li>
+<li>根据/etc/default/useradd 配置的信息建立 home 目录，并将/etc/skel 中所有文件复制到新的 home 目录中</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c comment</td>
+<td>新用户 comment</td>
+<td>-d</td>
+<td>每次登录时使用的 home 目录</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>过期时间</td>
+<td>-m</td>
+<td>用户目录不存在则自动创建</td>
+</tr>
+<tr>
+<td>-G</td>
+<td>设置多个 group，用,隔开</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>-D（改变用户的预设值） 添加用户说明<br>完全可以编辑/etc/default/useradd 来代替</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 目标创建新的用户，该用户可切换到root进行高权限操作</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建新的用户，增加m参数会创建home目录</span></span><br><span class="line">useradd -m platform</span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置一下用户的密码</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 之后即可使用密码登录</span></span><br><span class="line">passwd platform</span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看设置的密码</span></span><br><span class="line">cat /etc/shadow | grep platform</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> sudo 切换权限</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置 platform ALL=(ALL:ALL) ALL</span></span><br><span class="line">vim /etc/sudoers</span><br></pre></td></tr></table></figure>
+
+<h3 id="usermod">2. usermod 修改用户</h3>
+
+<p>语法: usermod [option] [username]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c</td>
+<td>comment</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>指定 home</td>
+</tr>
+<tr>
+<td>-g</td>
+<td>修改用户组</td>
+</tr>
+<tr>
+<td>-G</td>
+<td>修改多个用户组</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>追加用户组与 G 连用</td>
+</tr>
+</tbody></table>
+<h3 id="userdel">3. userdel 删除用户</h3>
+
+<p>语法: userdel [option] [username]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-f</td>
+<td>强制删除</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>删除与用户相关的所有文件</td>
+</tr>
+</tbody></table>
+<h3 id="passwd">4. passwd 修改用户密码</h3>
+
+<p>语法: passwd [option] [username]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-k</td>
+<td>为密码过期的用户更新有效期</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>锁定用户，被锁用户不能登录</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>解除用户锁定</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>删除用户的密码</td>
+</tr>
+<tr>
+<td>–stdin</td>
+<td>从标准输入中读取密码</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 一条命令设置用户密码</span></span><br><span class="line">echo "123456"|passwd --stdin platform</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> TODO 批量创建10个用户stu01-stu10,设置8位随机密码，要求不能使用shell的循环，只能使用管道</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="su">5. su 切换用户</h3>
+
+<p>功能说明：切换用户或一指定用户的身份执行命令或程序</p>
+<p>语法: su [option] [username]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-,-l,-login</td>
+<td>切换用户后初始化 home 及环境变量</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>向 shell 传递单个命令</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 切换到platform且刷新环境变量</span></span><br><span class="line">su - platform</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 不切换用户，仅使用该用户执行命令</span></span><br><span class="line">su - platform -c "ls -l ~"</span><br></pre></td></tr></table></figure>
+
+<h3 href="visudo">6. visudo 编辑sudoers文件 </h3>
+
+<p>说明：该命令编辑/etc/sudoers 文件，该文件可配置提升用户和用户组权限为 root</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 用户名 机器=(角色) 可执行命令</span></span><br><span class="line">[username] ALL(ALL:ALL) ALL</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>也可直接编辑 /etc/sudoers 文件</p>
+</blockquote>
+<h3 id="sudo">7. sudo 以另一个用户身份执行命令</h3>
+
+<p>功能说明：使用该命令可以允许普通用户在执行指定命令或程序上拥有超级用户的权限，同时该用户不需要知道 root 的密码，这个授权是通过<code>/etc/sudoers</code>管理的</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-l</td>
+<td>列出当前用户可执行的命令</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>向 shell 传递单个命令</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> platform 用户本来没有ls /root目录的权限，但是可以通过sudo提升权限</span></span><br><span class="line">sudo ls /root</span><br><span class="line"><span class="meta">#</span><span class="bash"> 列出当前用户的sudo配置权限</span></span><br><span class="line">sudo -l</span><br><span class="line"><span class="meta">#</span><span class="bash"> Matching Defaults entries <span class="keyword">for</span> platform on 110:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     env_reset, mail_badpass,</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     secure_path=/usr/<span class="built_in">local</span>/sbin\:/usr/<span class="built_in">local</span>/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> User platform may run the following commands on 110:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     (ALL : ALL) ALL</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>sudo 和 su 的区别</strong><br>概念上：su（switch user）是切换用户，sudo（super do）超级用户权限去做。<br><strong>实际上二者都有彼此的部分能力</strong>。sudo -i 可以切换到用户，su -c 也可不切换使用其他用户的身份执行命令。不太一样的地方 sudo -i 切换用户输入的是当前用户的密码（如果需要），su 切换则需要目标用户的密码<br><strong>注意点</strong></p>
+<ol>
+<li>su 切换时默认不切换环境变量，需要手动加<code>-</code>去执行切换操作</li>
+<li>可用 sudo 命令的用户必须在<code>/etc/sudoers</code>中有过合适的配置，且执行时间有限制。但是<code>sudo -i</code>可以像 su 一样切换到 root 用户</li>
+</ol>
+<h3 id="id">8. id 显示用户和用户组信息</h3>
+
+<p>功能说明：显示真实有效的 UID 和 GID</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-g</td>
+<td>GID</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>UID</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>显示名称不显示数字</td>
+</tr>
+</tbody></table>
+<h3 id="w">9. w，who，users 显示已登陆用户信息</h3>
+
+<p>w 参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-h</td>
+<td>不显示前两行标题信息</td>
+</tr>
+</tbody></table>
+<p>who,users 也可以查看当前用户</p>
+<h3 id="whoami">10. 当前登录的用户名</h3>
+
+<p>显示已登陆的用户名</p>
+<h3 id="last">11. last,lastb,lastlog 最近登录记录</h3>
+
+<p>last: 用户登录列表，从/var/log/wtmp 读取<br>last: 用户登录失败纪录，从/var/log/btmp 读取<br>lastlog: 用户最近登录记录，从/var/log/lastlog 读取</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-7/" data-id="clzmdspii00ijzwl11ed3cdgl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/core/chapter-6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-6/" class="article-date">
+  <time datetime="2022-07-08T14:44:48.000Z" itemprop="datePublished">2022-07-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-6/">打包同步文件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="#tar">1. tar 打包备份</a><br><a href="#scp">2. scp 远程复制文件</a><br><a href="#rsync">3. rsync 文件同步工具</a></p>
+<h3 id="tar">1. tar 打包备份</h3>
+
+<p>语法: tar [option] [file]</p>
+<p><b>option</b></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-z</td>
+<td>gzip 压缩或解压</td>
+<td>-c</td>
+<td>创建新的 tar 包</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示执行过程</td>
+<td>-f</td>
+<td>指定压缩文件的名字</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>不解压查看 tar 包的内容</td>
+<td>-p</td>
+<td>保持文件的原有属性</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>解开 tar 包</td>
+<td>-C</td>
+<td>指定解压的目录路径</td>
+</tr>
+<tr>
+<td>–exclude=PATTERN</td>
+<td>排除目录</td>
+<td>-h</td>
+<td>打包软连接指向大的真实源文件</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 创建tar包，且gzip压缩</span></span><br><span class="line">tar -czvf www.tar.gz temp/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 不解压查看tar包</span></span><br><span class="line">tar -tzvf www.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 解压tar包，解压方式为gzip</span></span><br><span class="line">tar -xzvf www.tar.gz</span><br></pre></td></tr></table></figure>
+
+<h3 id="scp">2. scp 远程复制文件</h3>
+
+<p>功能说明: 用于不同主机之间复制文件。scp 每次是全量完整复制，适合第一次复制，增量复制建议使用 rsync</p>
+<p>语法: scp [option] [[user@]host1:]file1 [[user@]host2:]file2</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-C</td>
+<td>压缩传输</td>
+</tr>
+<tr>
+<td>-I</td>
+<td>指定传输占用的带宽</td>
+</tr>
+<tr>
+<td>-P port</td>
+<td>指定传输端口号</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>不显示传输进度条</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>递归复制整个目录</td>
+</tr>
+</tbody></table>
+<h3 id="rsync">3. rsync 文件同步工具</h3>
+
+<p>语法: rsync [option] [SRC] [DEST]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-v</td>
+<td>详细模式输出</td>
+</tr>
+<tr>
+<td>-z</td>
+<td>压缩传输</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>递归方式保持文件所有属性，相当于 rtopgDI</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>目录递归</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>传输测试</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 一般都以avz的参数传递</span></span><br><span class="line">rsync -avz 10.227.77.10:~/xxx aaa</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-6/" data-id="clzmdspii00igzwl1djau6b6p" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/core/chapter-5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-5/" class="article-date">
+  <time datetime="2022-07-06T16:02:02.000Z" itemprop="datePublished">2022-07-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-5/">信息显示及搜索文件命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="#uname">1. uname 显示系统信息</a><br><a href="#hostname">2. hostname 显示或设置系统的主机名</a><br><a href="#stat">3. stat 显示文件或文件系统状态</a><br><a href="#du">4. du 统计磁盘的使用情况</a><br><a href="#date">5. date 显示与设置系统时间</a><br><a href="#echo">6. echo 显示一行文本</a><br><a href="#watch">7. watch 监视命令执行情况</a><br><a href="#which">8. which 显示命令的全路径</a><br><a href="#whereis">9. whereis 显示命令机器相关文件全路径</a></p>
+<h3 id="uname">1. uname 显示系统信息</h3>
+
+<p>功能说明: 显示系统相关信息，如内核版本号，硬件架构</p>
+<p>语法: uname [option]</p>
+<p><b>option</b></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>显示系统所有信息</td>
+<td>-v</td>
+<td>内核版本</td>
+</tr>
+<tr>
+<td><strong>-m</strong></td>
+<td>硬件架构(x86_64)</td>
+<td>-p</td>
+<td>主机处理器类型</td>
+</tr>
+<tr>
+<td><strong>-n</strong></td>
+<td>主机名称</td>
+<td>-o</td>
+<td>操作系统名称</td>
+</tr>
+<tr>
+<td><strong>-r</strong></td>
+<td>内核发行版本号</td>
+<td>-i</td>
+<td>硬件平台</td>
+</tr>
+<tr>
+<td><strong>-s</strong></td>
+<td>内核名称(Linux|Darwin)</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="hostname">2. hostname 显示或设置系统的主机名</h3>
+
+<p>功能说明: 显示或设置系统的主机名称</p>
+<p>语法: hostname [option]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>设置了别名之后可以显示主机别名</td>
+</tr>
+<tr>
+<td><strong>-i</strong></td>
+<td>显示主机的 IP 地址，依赖 DNS 解析</td>
+</tr>
+<tr>
+<td>-I</td>
+<td>显示所有 IP 地址</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>短格式主机名</td>
+</tr>
+</tbody></table>
+<h3 id="stat">3. stat 显示文件或文件系统状态</h3>
+
+<p>语法: stat [option] [file]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-f</td>
+<td>显示文件所在分区的文件系统状态而非文件状态</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>使用指定输出格式替代默认值</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>使用简洁格式输出</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 获取文件的权限</span></span><br><span class="line">stat -c %a /etc/hosts</span><br><span class="line"><span class="meta">#</span><span class="bash"> 644</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="du">4. du 统计磁盘的使用情况</h3>
+
+<p>语法: du [option] [file]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>所有文件大小</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>以人类可读方式查看</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>显示文件的总大小</td>
+</tr>
+<tr>
+<td>–exclude=&lt;目录或文件&gt;</td>
+<td>忽略目录或文件</td>
+</tr>
+<tr>
+<td>-X,–exclude-from=FILE</td>
+<td>从文件读取需要略过的目录或文件</td>
+</tr>
+<tr>
+<td>–max-depth=N</td>
+<td>显示 N 级子目录的大小，当 N=0 时，和-s 参数一致</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 显示文件或目录的总大小</span></span><br><span class="line">du -sh /etc/hosts</span><br><span class="line"><span class="meta">#</span><span class="bash"> 4.0K    /etc/hosts</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="date">5. date 显示与设置系统时间</h3>
+
+<p>语法: date [option] [+FORMAT]</p>
+<p><strong>option</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-d 时间字符串</td>
+<td>显示指定字符串描述的时间</td>
+</tr>
+<tr>
+<td>-f 时间文件</td>
+<td>从日期文件中按行读入时间描述</td>
+</tr>
+<tr>
+<td>-r 文件</td>
+<td>显示制定文件的最后修改时间</td>
+</tr>
+<tr>
+<td>-s 日期时间</td>
+<td>设置系统时间</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>显示或设置 UTC 时间</td>
+</tr>
+</tbody></table>
+<p><strong>FORMAT 日期格式</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%F</td>
+<td>完整日期格式（%Y-%m-%d）</td>
+</tr>
+<tr>
+<td>%T</td>
+<td>完整时间格式（%H-%M-%S）</td>
+</tr>
+<tr>
+<td>%Y</td>
+<td>年</td>
+</tr>
+<tr>
+<td>%m</td>
+<td>月</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>日</td>
+</tr>
+<tr>
+<td>%H</td>
+<td>小时</td>
+</tr>
+<tr>
+<td>%M</td>
+<td>分钟</td>
+</tr>
+<tr>
+<td>%S</td>
+<td>秒</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 显示当前日期</span></span><br><span class="line">date +%F</span><br><span class="line">date +%Y-%m-%d</span><br><span class="line"><span class="meta">#</span><span class="bash"> 2022-07-06</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 显示当前时间</span></span><br><span class="line">date +%T</span><br><span class="line">date +%H:%M:%S</span><br><span class="line"><span class="meta">#</span><span class="bash"> 日期+时间</span></span><br><span class="line">date "+%Y-%m-%d %H:%M:%S"</span><br><span class="line">date "+%F %T"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 2022-07-06 23:45:28</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 时间转换</span></span><br><span class="line">date "+%F" -d "1day"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 2022-07-07</span></span><br><span class="line">date "+%F" -d "-1year"</span><br><span class="line"><span class="meta">#</span><span class="bash"> 2021-07-06</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="echo">6. echo 显示一行文本</h3>
+
+<p>语法: echo [option] [string]</p>
+<p><strong>option</strong></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-n</td>
+<td>不要自动换行</td>
+</tr>
+<tr>
+<td>-E</td>
+<td>不解析转义字符（默认就是不解析）</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>解析转义字符 \a,\b</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 默认不解析转义字符</span></span><br><span class="line">echo "a\nb"</span><br><span class="line"><span class="meta">#</span><span class="bash"> a\nb</span></span><br><span class="line">echo -e "a\nb"</span><br><span class="line"><span class="meta">#</span><span class="bash"> a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> b</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 彩色输出</span></span><br><span class="line">echo -e "\033[30m这是黑字\033[0m"</span><br><span class="line">echo -e "\033[31m这是红字\033[0m"</span><br><span class="line">echo -e "\033[32m这是绿字\033[0m"</span><br><span class="line">echo -e "\033[33m这是黄字\033[0m"</span><br><span class="line">echo -e "\033[34m这是蓝字\033[0m"</span><br></pre></td></tr></table></figure>
+
+<h3 id="watch">7. watch 监视命令执行情况</h3>
+
+<p>语法: watch [option] [command]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-n</td>
+<td>命令执行的间隔时间，默认为 2s</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>高亮显示命令执行结果的变动之处</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>关闭顶部的一个状态显示：时间，标题</td>
+</tr>
+</tbody></table>
+<h3 id="which">8. which 显示命令的全路径</h3>
+
+<p>我们常用来查找命令的位置，查找的范围时 PATH 环境变量的路径</p>
+<p>语法: which [option] [programname]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>默认在 PATH 中从前往后查找，查找到就停止匹配。-a 将输出所有匹配项</td>
+</tr>
+</tbody></table>
+<h3 id="whereis">9. whereis 显示命令机器相关文件全路径</h3>
+
+<p>语法: whereis [option] [filename]</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-b</td>
+<td>查找可执行文件</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>查找源代码文件</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>查找 man 帮助文件</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-5/" data-id="clzmdspis00mbzwl19bzladw0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/core/chapter-4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-4/" class="article-date">
+  <time datetime="2022-07-04T16:22:22.000Z" itemprop="datePublished">2022-07-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-4/">文本处理三剑客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="#grep">1. grep 文本过滤工具</a><br><a href="#sed">2. sed 字符流编辑器</a><br><a href="#awk">3. awk 入门</a></p>
+<h3 id="grep">1. grep 文本过滤工具</h3>
+
+<p>功能说明: 从文本文件或管道数据流中筛选匹配的行及数据。</p>
+<p>语法: grep [option] [pattern] [file]</p>
+<p><b>option</b></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-v</td>
+<td>反选</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>显示匹配行及行号</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>不区分大小写，默认区分大小写</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>只统计匹配的行数</td>
+</tr>
+<tr>
+<td>-E</td>
+<td>使用扩展的 egrep 命令</td>
+</tr>
+<tr>
+<td>–color=auto</td>
+<td>为 grep 匹配的字符串添加颜色</td>
+</tr>
+<tr>
+<td>-w</td>
+<td>只匹配过滤的单词,类似单词的精确匹配</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>只输出匹配的内容</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 去除配置文件中的注视和空行</span></span><br><span class="line">grep -Ev "^$|#" /etc/mysql/my.cnf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用扩展正则, 匹配file中的有效行（1，3）</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 987-123-4567</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 123 456 7890</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> (123) 456-7890</span></span><br><span class="line">grep -E "([0-9]&#123;3&#125;-|\([0-9]&#123;3&#125;\ ))[0-9]&#123;3&#125;-[0-9]&#123;4&#125;" file</span><br></pre></td></tr></table></figure>
+
+<h6 id="openvpn-授权脚本案例"><a href="#openvpn-授权脚本案例" class="headerlink" title="openvpn 授权脚本案例"></a>openvpn 授权脚本案例</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> create by ansike</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> time 2022-07-02</span></span><br><span class="line">FILE_PATH=./openvpn/authfile.conf</span><br><span class="line">[ ! -f $FILE_PATH ] &amp;&amp; mkdir -p `dirname $FILE_PATH` &amp;&amp; touch $FILE_PATH;</span><br><span class="line"></span><br><span class="line">usage()&#123;</span><br><span class="line">  cat &lt;&lt;EOF</span><br><span class="line">  USAGE: `basename $0` (-add|-del|-search) username</span><br><span class="line">EOF</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断是否是root用户</span></span><br><span class="line">if [ $UID -ne 0 ]; then</span><br><span class="line">  echo "you are not supper user, please call root";</span><br><span class="line">  exit 1;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 判断参数的数量</span></span><br><span class="line">if [ $# -ne 2 ]; then</span><br><span class="line">  usage</span><br><span class="line">  exit 2;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">RETVAL=0</span><br><span class="line">case "$1" in</span><br><span class="line">  -a|-add)</span><br><span class="line">    shift</span><br><span class="line">    if grep -w "$1" $FILE_PATH &gt;&gt; /dev/null 2&gt;&amp;1 ; then</span><br><span class="line">      echo "当前用户已经存在"</span><br><span class="line">      exit;</span><br><span class="line">    else</span><br><span class="line">      chattr -i $FILE_PATH</span><br><span class="line">      /bin/cp $FILE_PATH $&#123;FILE_PATH&#125;.$(date +%F%T)</span><br><span class="line">      echo "$1"&gt;&gt;$FILE_PATH</span><br><span class="line">      [ $? -eq 0 ] &amp;&amp; echo "新增用户成功：$1"</span><br><span class="line">      chattr +i $FILE_PATH</span><br><span class="line">      exit</span><br><span class="line">    fi</span><br><span class="line">    ;;</span><br><span class="line">  -d|-del)</span><br><span class="line">    shift</span><br><span class="line">    if [ `grep -w "$1" $FILE_PATH|wc -l` -lt 1 ]; then</span><br><span class="line">      echo "当前用户不存在"</span><br><span class="line">      exit;</span><br><span class="line">    else</span><br><span class="line">      chattr -i $FILE_PATH</span><br><span class="line">      /bin/cp $FILE_PATH $&#123;FILE_PATH&#125;.$(date +%F%T)</span><br><span class="line">      sed -i "/^$&#123;1&#125;$/d" $&#123;FILE_PATH&#125;</span><br><span class="line">      [ $? -eq 0 ] &amp;&amp; echo "删除用户成功：$1"</span><br><span class="line">      chattr +i $FILE_PATH</span><br><span class="line">      exit</span><br><span class="line">    fi</span><br><span class="line">    ;;</span><br><span class="line">  -s|-search)</span><br><span class="line">    shift</span><br><span class="line">    if [ `grep -w "$1" $FILE_PATH|wc -l` -lt 1 ]; then</span><br><span class="line">      echo "当前用户不存在"</span><br><span class="line">      exit;</span><br><span class="line">    else</span><br><span class="line">      echo "当前用户存在"</span><br><span class="line">      exit</span><br><span class="line">    fi</span><br><span class="line">    ;;</span><br><span class="line">  *)</span><br><span class="line">    usage</span><br><span class="line">    exit</span><br><span class="line">    ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+<h3 id="sed">2. sed 字符流编辑器</h3>
+
+<p>全称是 Stream Editor，简称流编辑器<br>常用的功能包括对文件实现快速增删改查，其中查询功能中最常用的两大功能是过滤，取行。</p>
+<p>语法：sed [选项] [sed 内置命令字符] [输入文件]</p>
+<p>参数选项及说明</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-n</td>
+<td>取消默认的 sed 输出，常与命令 p 连用</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>直接修改文件内容而不是输出到终端。sed 默认只是修改内存中的数据，并不会影响磁盘上的文件</td>
+</tr>
+</tbody></table>
+<p>内置名字字符的说明</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a</td>
+<td>append，在指定行后添加一行或者多行文本</td>
+</tr>
+<tr>
+<td>d</td>
+<td>delete，删除匹配的文本</td>
+</tr>
+<tr>
+<td>i</td>
+<td>insert，在指定行前插入一行或多行文本</td>
+</tr>
+<tr>
+<td>p</td>
+<td>print，打印匹配的内容常与-n 连用</td>
+</tr>
+<tr>
+<td>s/regexp/replacement</td>
+<td>匹配 regexp 部分的内容，用 replacement 替换 regexp 匹配的内容。regexp 可以使用正则，replacement 部分可以使用特殊字符&amp;和\1-\9 等匹配 regexp 部分的内容</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 第二行append数据</span></span><br><span class="line">sed "2a xxx" demo.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 第二行insert数据</span></span><br><span class="line">sed "2i xxx" demo.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 第二行删除数据</span></span><br><span class="line">sed "2d" demo.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 只输出第二行。sed 输出第n行是需要关闭sed的默认输出功能的 -n</span></span><br><span class="line">sed -n "2p" demo.txt</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 账号密码格式化</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> user01</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> pass01</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> user01=pass01</span></span><br><span class="line">sed 'N;s/\n/=/g' pass</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>N 不会清空模式空间的内容。相当于连续两行为一个循环</p>
+</blockquote>
+<p>Tips</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 备份一个重要文件</span></span><br><span class="line">cp important.txt&#123;,.ori&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="awk">3. awk 入门</h3>
+awk不仅仅是一个命令，还是一种编程语言，可以用来处理数据和生成报告（excel）。是linux系统中最强大的文本处理工具，没有之一。
+
+<p>常用功能介绍</p>
+<p>| 序号 | 功能             | 说明                                                                                 |<br>| —- | —————- | ———————————————————————————— | —————— |<br>| 1    | 分割字符串       | 读取 access.log 读取 url 列，awk -F “GET                                             | HTTP” ‘{print $2}’ |<br>| 2    | 通过正则取出内容 |                                                                                      |<br>| 3    | 显示某个范围内容 | 读取 2-30 行内容，awk ‘NR==20,NR==30’ file                                           |<br>| 4    | 统计计算         | 计算总和，awk ‘{sum+=$0}END{print sum}’                                              |<br>| 5    | 数组计算和去重   | 对日志进行统计和计数，awk ‘{array[$1]++}END{for(key in array)print key,array[key]}’’ |</p>
+<p>语法：awk [option] ‘pattern{action}’ file …</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-F</td>
+<td>指定字段分隔符</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>定义或者修改一个 awk 内部的变量</td>
+</tr>
+</tbody></table>
+<p><strong>范例</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 只打印第5行数据</span></span><br><span class="line">cat /etc/passwd|awk 'NR==5'</span><br><span class="line"><span class="meta">#</span><span class="bash"> 打印行号，<span class="variable">$0</span> 表示整行内容，NR表示行号</span></span><br><span class="line">cat /etc/passwd|awk '&#123;print NR,$0&#125;'</span><br><span class="line">cat /etc/passwd|awk 'NR==2,NR==3 &#123;print NR,$0&#125;'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 打印:分割的第一列，第三列和最后一列 <span class="variable">$n</span>是第n列，<span class="variable">$NF</span>是最后一列</span></span><br><span class="line">cat /etc/passwd|awk -F ":" '&#123;print $1,$3,$NF&#125;'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查找替换函数</span></span><br><span class="line">cat /etc/passwd|awk '&#123;gsub("/sbin/nologin","/bin/bash",$0);print $0&#125;'</span><br></pre></td></tr></table></figure>
+
+<p>gsub 函数<br>语法：gsub(‘替换对象’,”替换结果”,哪一列)</p>
+<p><strong>生产案例</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 取eth0对应的ip地址</span></span><br><span class="line">ifconfig eth0|awk -F " " 'NR==2&#123;print $2&#125;'</span><br><span class="line"><span class="meta">#</span><span class="bash"> 10.227.77.110</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 统计域名的访问次数</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> cat access.log</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://www.baidu1.com/index.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://www.baidu2.com/index.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://www.baidu2.com/index.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://www.baidu.com/index.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://www.baidu.com/index.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://www.baidu.com/index.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 常规思路</span></span><br><span class="line">cat access.log |awk -F "//|/" '&#123;print $2&#125;'|sort -r|uniq -c</span><br><span class="line">      # 3 www.baidu.com</span><br><span class="line">      # 2 www.baidu2.com</span><br><span class="line">      # 1 www.baidu1.com</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 数组思路</span></span><br><span class="line">cat access.log |awk -F "//|/" '&#123;array[$2]++&#125;;END&#123;for(domain in array) print domain, array[domain]&#125;'</span><br><span class="line"><span class="meta">#</span><span class="bash"> www.baidu1.com 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> www.baidu.com 3</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> www.baidu2.com 2</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-4/" data-id="clzmdspik00j4zwl151ilcnvx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/core/chapter-3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-3/" class="article-date">
+  <time datetime="2022-07-03T10:55:58.000Z" itemprop="datePublished">2022-07-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-3/">文件过滤及内容编辑处理命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="#cat">1. cat 合并文件或查看文件内容</a><br><a href="#tac">2. tac 反向显示文件内容</a><br><a href="#more">3. more 分页显示文件内容</a><br><a href="#less">4. less 分页显示文件内容</a><br><a href="#head">5. head 显示文件内容头部</a><br><a href="#tail">6. tail 显示文件内容尾部</a><br><a href="#tailf">7. tailf 跟踪日志文件</a><br><a href="#cut">8. cut 从文本中提取一段文字并输出</a><br><a href="#split">9. split 分割文件</a><br><a href="#paste">10. paste 合并文件</a><br><a href="#sort">11. sort 文本排序</a><br><a href="#join">12. join 按两个文件的相同字段进行合并</a><br><a href="#uniq">12. uniq 去除重复行</a><br><a href="#wc">13. wc 统计文件的行数，单词数或字节数</a><br><a href="#iconv">14. iconv 转换文件的编码格式</a><br><a href="#dos2unix">15. dos2unix DOS 格式转换成 UNIX</a><br><a href="#diff">16. diff 比较两个文件的不同</a><br><a href="#tr">17. tr 替换删除字符</a><br><a href="#vim">18. vim 纯文本编辑器</a></p>
+<h3 id="cat">1. cat 合并文件或查看文件内容</h3>
+
+<p>功能说明: 连接多个文件并且打印到屏幕输出，或者重定向到指定的文件中。此命令常用来显示单个文件内容，或者将几个文件内容链接起来一起显示，还可以从标准输入中读取内容并显示，生产环境中它常与重定向或追加符号配合使用。</p>
+<p><b>常见功能</b></p>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>常用功能</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>查看文件内容</td>
+<td>例如：cat file.txt</td>
+</tr>
+<tr>
+<td>2</td>
+<td>把多个文件合并成一个</td>
+<td>cat file1.txt file2.txt &gt; newFile.txt</td>
+</tr>
+<tr>
+<td>4</td>
+<td>非交互式编辑或者追加内容到文件尾部</td>
+<td>忽略 br 换行, 会将内容追加到文件中: cat &gt;&gt;file.txt&lt;&lt;EOF<br/> xxxx<br/>EOF</td>
+</tr>
+<tr>
+<td>3</td>
+<td>创建编辑新文件</td>
+<td>cat &gt; file.txt，其实可以当成是非交互式的方式</td>
+</tr>
+<tr>
+<td>5</td>
+<td>清空文件内容</td>
+<td>cat /dev/null &gt; file.txt</td>
+</tr>
+</tbody></table>
+<p>语法: cat [option] [file]<br><b>options</b></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-n</td>
+<td>从 1 开始对输出的内容按行编号</td>
+</tr>
+<tr>
+<td>-b</td>
+<td>和-n 类似，会忽略空白行</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 以下两种写法都OK，都会给文件追加内容</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> cat &gt;&gt;c1.txt&lt;&lt;EOF</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> cat &lt;&lt;EOF&gt;&gt;c2.txt</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="tac">2. tac 反向显示文件内容</h3>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-b</td>
+<td>在行前添加分割标志</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>将分割标志视作正则表达式来解析</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>使用字符串替换作为分隔标志</td>
+</tr>
+</tbody></table>
+<h3 id="more">3. more 分页显示文件内容</h3>
+
+<p>语法: more [oprion] [file]</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-num</td>
+<td>指定屏幕大小显示为 num 行</td>
+</tr>
+<tr>
+<td>+num</td>
+<td>从行号 num 开始显示</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>连续多个空行显示为一行</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>不滚屏，清除整个屏幕，显示文本</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>不滚屏，从每屏的顶部开始显示文本，每显示完一行，就清楚这一行剩余的部分</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 分页展示etc/下所有目录</span></span><br><span class="line">ls /etc|more -10</span><br></pre></td></tr></table></figure>
+
+<h3 id="less">4. less 分页显示文件内容</h3>
+
+<p>功能说明: 是 more 的高级版本，不是反义词。它是真正的按需加在资源，更快的查看一个文件<br>语法: less [option] [file]</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-i</td>
+<td>搜索忽略大小写</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>显示类似于 more 命令的进度百分比</td>
+</tr>
+<tr>
+<td>-N</td>
+<td>显示每行的行号</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>将连续空行压缩为一行</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>文件显示到末尾自动退出</td>
+</tr>
+</tbody></table>
+<h3 id="head">5. head 显示文件内容头部</h3>
+
+<p>语法: less [option] [file]</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-n</td>
+<td>指定显示的行数</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>指定显示的字节</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>不显示文件头</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示文件头</td>
+</tr>
+</tbody></table>
+<h3 id="tail">6. tail 显示文件内容尾部</h3>
+
+<p>语法: tail [option] [file]</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-n</td>
+<td>指定显示的行数</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>指定显示的字节</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>实时输出变化后追加数据</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>不显示文件头</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示文件头</td>
+</tr>
+</tbody></table>
+<h3 id="tailf">7. tailf 跟踪日志文件</h3>
+
+<p>和 tail -f 类似，但是文件不增长，他不会访问磁盘文件，也不会更改文件的访问时间</p>
+<h3 id="cut">8. cut 从文本中提取一段文字并输出</h3>
+
+<p>功能说明：从文件的每一行剪切字节、字符或字段，并将这些输出至标准输出</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-b</td>
+<td>按字节分隔</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>取消分隔多字节字符，与-b 一起使用</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>按字符分隔</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>自定义分隔符，默认为 tab</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>与-d 一起使用，展示分隔的区域</td>
+</tr>
+<tr>
+<td>N</td>
+<td>N 为数字，表示第 N 个字节、字符、字段</td>
+</tr>
+<tr>
+<td>N-</td>
+<td>从第 N 个到末尾</td>
+</tr>
+<tr>
+<td>N-M</td>
+<td>从第 N 个到第 M 个</td>
+</tr>
+<tr>
+<td>-M</td>
+<td>从头到第 M 个</td>
+</tr>
+</tbody></table>
+<h3 id="split">9. split 分割文件</h3>
+
+<p>功能说明：从文件的每一行剪切字节、字符或字段，并将这些输出至标准输出</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-b</td>
+<td>按字节分隔</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>按行分割</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>指定后缀长度，默认为 2 位字母</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>使用数字后缀</td>
+</tr>
+</tbody></table>
+<h3 id="paste">10. paste 合并文件</h3>
+
+<p>与 cat 不同的是 paste 是按行进行合并的</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-d</td>
+<td>指定合并的分隔符，默认是 TAB</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>每个文件占用一行</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">paste newc00 newc01</span><br><span class="line"><span class="meta">#</span><span class="bash"> c file  xxx</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> xxx     xxx</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="sort">11. sort 文本排序</h3>
+
+<p>sort 默认按 ascii 进行升序排列</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-b</td>
+<td>忽略每行存在的空格字符</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>按照数值的大小进行排序</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>倒序排序</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>去除重复行</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>指定分隔符</td>
+</tr>
+<tr>
+<td>-k</td>
+<td>按指定区间排序</td>
+</tr>
+</tbody></table>
+<p>反向去重输出，以.为分隔符，先以第一部分排序，再以第二部分排序</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sort -ru -t. -k1,1  -k2,2 ss</span><br><span class="line"><span class="meta">#</span><span class="bash"> 3.1.1.1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2.3.1.1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1.4.1.1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1.3.1.1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1.1.1.1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="join">12. join 按两个文件的相同字段进行合并</h3>
+
+<p>语法: join [option] [file1] [file2]</p>
+<p>特定规范文件的合并</p>
+<h3 id="uniq">12. uniq 去除重复行</h3>
+
+<p>输出或忽略文件中的重复行。工作中常见使用 sort 进行排序，然后使用 uniq 去重并计数</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c</td>
+<td>去除重复行并统计次数</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>只显示重复的行</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>只显示唯一的行</td>
+</tr>
+</tbody></table>
+<p><b>统计域名的访问次数</b></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">cat file</span><br><span class="line"><span class="meta">#</span><span class="bash"> http://www.baidu.com/index.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://www.sohu.com/index.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://www.sina.com/index.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://www.baidu.com/index.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://www.toutiao.com/index.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://www.toutiao.com/index.html</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> http://www.youdao.com/index.html</span></span><br><span class="line">cut -d '/' -f 3 file|sort|uniq -c|sort -rn</span><br><span class="line"><span class="meta">#</span><span class="bash"> 2 www.toutiao.com</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2 www.baidu.com</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1 www.youdao.com</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1 www.sohu.com</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1 www.sina.com</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="wc">13. wc 统计文件的行数，单词数或字节数</h3>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-l</td>
+<td>统计行数</td>
+</tr>
+<tr>
+<td>-w</td>
+<td>统计单词数</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>统计字节数</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>统计字符数</td>
+</tr>
+<tr>
+<td>-L</td>
+<td>最长行的长度</td>
+</tr>
+</tbody></table>
+<h3 id="iconv">14. iconv 转换文件的编码格式</h3>
+
+<p>语法: iconv [option] [-f from-encoding] [-t to-encoding] [inputfile]</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-f encodingA</td>
+<td>从编码 A 转换</td>
+</tr>
+<tr>
+<td>-t encodingB</td>
+<td>转换成编码 B</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>显示系统支持的编码</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>输出到指定文件</td>
+</tr>
+</tbody></table>
+<h3 id="dos2unix">15. dos2unix DOS格式转换成UNIX</h3>
+
+<p>因为在 dos 中换行是’\r\n’，在 linux 中是’\n’，需要做转换</p>
+<blockquote>
+<p>unix2dos 是转换回去的方法</p>
+</blockquote>
+<h3 id="diff">16. diff 比较两个文件的不同</h3>
+
+<p>语法: iconv [option] [file1] [file2]</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-y</td>
+<td>以并列的方式显示文件的异同之处</td>
+</tr>
+<tr>
+<td>-W</td>
+<td>-y 时 指定显示宽度</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>使用上下文的输出格式</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>使用统一的个数输出</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>vimdiff 会以可视化的方式展示 diff</p>
+</blockquote>
+<h3 id="tr">17. tr 替换删除字符</h3>
+
+<p>语法: tr [option] [SET1] [SET2]</p>
+<p>tr 的替换是按位替换<br>| 命令 | 说明 |<br>| —- | —————————— |<br>| -d | 删除字符 |<br>| -s | 保留连续字符的第一个字符，删除其他字符。字符去重 |<br>| -c | 使用第一个字符串的补集，取反 |</p>
+<h6 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 统一大小写</span></span><br><span class="line">tr '[a-z]' '[A-Z]' &lt;c1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除特定字符串</span></span><br><span class="line">tr -d 'a' &lt;c1</span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除换行，制表，空格</span></span><br><span class="line">tr -d '\n\t\ ' &lt;c1</span><br></pre></td></tr></table></figure>
+
+<h3 id="vim">18. vim 纯文本编辑器</h3>
+
+<p><b>普通模式</b></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>gg</td>
+<td>回到第一行</td>
+</tr>
+<tr>
+<td>G</td>
+<td>到最后一行</td>
+</tr>
+<tr>
+<td>0</td>
+<td>到当前行的开头</td>
+</tr>
+<tr>
+<td>$</td>
+<td>到当前行的结尾</td>
+</tr>
+<tr>
+<td>n<Enter></td>
+<td>向下移动 n 行</td>
+</tr>
+<tr>
+<td>H</td>
+<td>当前窗口最上方</td>
+</tr>
+<tr>
+<td>M</td>
+<td>当前窗口中间</td>
+</tr>
+<tr>
+<td>L</td>
+<td>当前窗口最下方</td>
+</tr>
+<tr>
+<td>/</td>
+<td>向下寻找字符串</td>
+</tr>
+<tr>
+<td>?</td>
+<td>向上寻找字符串</td>
+</tr>
+<tr>
+<td>n</td>
+<td>向下重复前一个搜索动作</td>
+</tr>
+<tr>
+<td>N</td>
+<td>向上重复前一个搜索动作</td>
+</tr>
+<tr>
+<td>:g/A/s//B/g</td>
+<td>用 B 替换 A，斜线为分隔符，可用@，#等替代</td>
+</tr>
+<tr>
+<td>:%s/A/B/g</td>
+<td>用 B 替换 A，斜线为分隔符，可用@，#等替代</td>
+</tr>
+<tr>
+<td>:n1,n2s/A/B/gc</td>
+<td>用 B 替换 A，斜线为分隔符，可用@，#等替代</td>
+</tr>
+</tbody></table>
+<p><b>编辑模式</b></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>i</td>
+<td>光标位置开始编辑，I 相反</td>
+</tr>
+<tr>
+<td>a</td>
+<td>光标下一位置开始编辑，A 相反</td>
+</tr>
+<tr>
+<td>o</td>
+<td>下一行开始新的一行编辑，O 相反</td>
+</tr>
+</tbody></table>
+<p><b>命令行模式</b></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>wq</td>
+<td>保存并退出</td>
+</tr>
+<tr>
+<td>q!</td>
+<td>退出不保存</td>
+</tr>
+<tr>
+<td>n1,n2 w filename</td>
+<td>从 n1 到 n2 保存成 filename</td>
+</tr>
+<tr>
+<td>n1,n2 co n3</td>
+<td>从 n1 到 n2 复制到 n3 下</td>
+</tr>
+<tr>
+<td>n1,n2 m n3</td>
+<td>从 n1 到 n2 剪切到 n3 下</td>
+</tr>
+<tr>
+<td>:!command</td>
+<td>展示离开 vim 执行 command 命令</td>
+</tr>
+<tr>
+<td>:set nu</td>
+<td>显示行号</td>
+</tr>
+<tr>
+<td>:set nonu</td>
+<td>不显示行号</td>
+</tr>
+<tr>
+<td>:set paste</td>
+<td>输入之后回车，按 i 粘贴文本，保留原有格式</td>
+</tr>
+<tr>
+<td>:vs filename</td>
+<td>垂直分屏展示当前文件内容和 filename 文件</td>
+</tr>
+<tr>
+<td>:sp filename</td>
+<td>水平分屏展示当前文件内容和 filename 文件</td>
+</tr>
+<tr>
+<td>I+#+Ecs</td>
+<td>批量注释。ctrl+v，一次性选择多行</td>
+</tr>
+</tbody></table>
+<h6 id="统计目前收集到的所有简历"><a href="#统计目前收集到的所有简历" class="headerlink" title="统计目前收集到的所有简历"></a>统计目前收集到的所有简历</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查找所有后缀为pdf的文件，计算行数，删除前后的空格</span></span><br><span class="line">find . -type f -name "*.pdf" |wc -l|tr -d " "</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-3/" data-id="clzmdspih00i9zwl159ys3vct" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/blog/page/10/">&lt; 上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/9/">9</a><a class="page-number" href="/blog/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/blog/page/12/">12</a><a class="page-number" href="/blog/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/21/">21</a><a class="extend next" rel="next" href="/blog/page/12/">下一页 &gt;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>

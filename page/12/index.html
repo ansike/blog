@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记录一些平时点滴">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ASK&#39;s Blog">
+<meta property="og:url" content="https://ansike.github.io/blog/page/12/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="记录一些平时点滴">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="ask">
+<meta property="article:tag" content=" ansike">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-编程/shell/core/chapter-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-2/" class="article-date">
+  <time datetime="2022-07-01T13:59:03.000Z" itemprop="datePublished">2022-07-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-2/">文件和目录操作命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="#cd">1. cd 切换目录</a><br><a href="#mkdir">2. mkdir 创建目录</a><br><a href="#touch">3. touch 创建空文件或改变文件时间戳属性</a><br><a href="#ls">4. ls 显示目录下内容及相关属性</a><br><a href="#cp">5. cp 复制文件或目录</a><br><a href="#mv">6. mv 移动或重命名文件</a><br><a href="#rm">7. rm 删除目录或文件</a><br><a href="#rmdir">8. rmdir 删除空目录</a><br><a href="#ln">9. ln 硬链接和软链接</a><br><a href="#find">10. find 查找目录下的文件</a><br><a href="#xargs">11. xargs 标准输入转换为命令行参数</a><br><a href="#rename">12. rename 重命名文件</a><br><a href="#basename">13. basename 显示文件名或目录名</a><br><a href="#dirname">14. dirname 显示文件或目录路径</a><br><a href="#chattr">15. chattr 改变文件的扩展属性</a><br><a href="#file">16. file 显示文件类型</a><br><a href="#md5sum">17. md5sum 计算和校验文件的 MD5 值</a><br><a href="#chown">18. chown 改变文件或者目录的用户和用户组</a><br><a href="#chmod">19. chmod 改变文件或目录权限</a><br><a href="#umask">20. umask 显示或设置权限掩码</a></p>
+<h3 id="cd">cd 切换目录</h3>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cd -</td>
+<td>回到上次所在的目录（OLDPWD）</td>
+</tr>
+<tr>
+<td>cd ～</td>
+<td>回到 HOME 目录</td>
+</tr>
+<tr>
+<td>cd ..</td>
+<td>上级目录</td>
+</tr>
+</tbody></table>
+<h3 id="mkdir">mkdir 创建目录</h3>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-p</td>
+<td>递归创建目录</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>设置权限</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示创建过程</td>
+</tr>
+</tbody></table>
+<h6 id="实战-1-同时创建多个多级目录及多级子目录。"><a href="#实战-1-同时创建多个多级目录及多级子目录。" class="headerlink" title="实战 1 同时创建多个多级目录及多级子目录。"></a>实战 1 同时创建多个多级目录及多级子目录。</h6><p>如:同时创建 a/1/1_1,a/1/1_2,a/2/2_1,a/2/2_2 等</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p a/&#123;1,2&#125;/&#123;1_1,2_2&#125;</span><br><span class="line">tree a</span><br><span class="line"><span class="meta">#</span><span class="bash"> a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ├── 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> │   ├── 1_1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> │   └── 2_2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> └── 2</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     ├── 1_1</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     └── 2_2</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="实战-2-克隆目录结构"><a href="#实战-2-克隆目录结构" class="headerlink" title="实战 2 克隆目录结构"></a>实战 2 克隆目录结构</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">tree -fid --noreport a &gt; temp.txt</span><br><span class="line">cat temp.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> a/1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> a/1/1_1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> a/1/2_2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> a/2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> a/2/1_1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> a/2/2_2</span></span><br><span class="line">cd b</span><br><span class="line">mv ../temp.txt a.txt</span><br><span class="line">mkdir -pv `cat a.txt`</span><br><span class="line"><span class="meta">#</span><span class="bash"> mkdir: created directory <span class="string">'a'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mkdir: created directory <span class="string">'a/1'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mkdir: created directory <span class="string">'a/1/1_1'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mkdir: created directory <span class="string">'a/1/2_2'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mkdir: created directory <span class="string">'a/2'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mkdir: created directory <span class="string">'a/2/1_1'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mkdir: created directory <span class="string">'a/2/2_2'</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="touch">3. touch 创建空文件或改变文件时间戳属性</h3>
+linux中一切皆文件，touch也能修改目录的时间戳
+| 命令 | 作用         |
+| ---- | ------------ |
+| -a | 只更改文件的最后访问时间 |
+| -m | 只更改文件的最后修改时间 |
+
+<h6 id="批量创建多个文件"><a href="#批量创建多个文件" class="headerlink" title="批量创建多个文件"></a>批量创建多个文件</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">touch a&#123;1..5&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> -rw-r--r-- 1 ansike ansike    0 Jul  1 20:00 a1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -rw-r--r-- 1 ansike ansike    0 Jul  1 20:00 a2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -rw-r--r-- 1 ansike ansike    0 Jul  1 20:00 a3</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -rw-r--r-- 1 ansike ansike    0 Jul  1 20:00 a4</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -rw-r--r-- 1 ansike ansike    0 Jul  1 20:00 a5</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="修改文件时间属性"><a href="#修改文件时间属性" class="headerlink" title="修改文件时间属性"></a>修改文件时间属性</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看命令</span></span><br><span class="line">stat a1</span><br><span class="line"><span class="meta">#</span><span class="bash">   File: a1</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Size: 0               Blocks: 0          IO Block: 4096   regular empty file</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Device: 810h/2064d      Inode: 21500461    Links: 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Access: (0644/-rw-r--r--)  Uid: ( 1001/  ansike)   Gid: ( 1001/  ansike)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Access: 2022-07-01 20:00:00.872227631 +0800</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Modify: 2022-07-01 20:00:00.872227631 +0800</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Change: 2022-07-01 20:00:00.872227631 +0800</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  Birth: -</span></span><br><span class="line">touch -a a1</span><br><span class="line"><span class="meta">#</span><span class="bash"> Access和Change时间都发生了变化</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Access: 2022-07-01 20:02:38.352475849 +0800</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Modify: 2022-07-01 20:00:00.872227631 +0800</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Change: 2022-07-01 20:02:38.352475849 +0800</span></span><br><span class="line"></span><br><span class="line">touch -m a2</span><br><span class="line"><span class="meta">#</span><span class="bash"> Modify和Change时间都发生了变化</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Access: 2022-07-01 20:00:00.872227631 +0800</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Modify: 2022-07-01 20:05:35.116754462 +0800</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Change: 2022-07-01 20:05:35.116754462 +0800</span></span><br></pre></td></tr></table></figure>
+
+<p>所以对于文件的任何修改都会影响 Change 的值</p>
+<h3 id="ls">ls 显示目录下内容及相关属性</h3>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>显示目录下所有文件，包括<code>.</code>字符开始的隐藏文件</td>
+</tr>
+<tr>
+<td>-A</td>
+<td>显示目录下所有文件，包括隐藏文件，不包括<code>.</code>,<code>..</code>这两个目录</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>使用长格式列出文件和目录信息</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>根据修改时间排序，默认为文件名排序</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>倒序排列</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>以人类可读信息展示文件或者目录大小(搭配-l 使用)</td>
+</tr>
+<tr>
+<td>-S</td>
+<td>根据文件大小排序</td>
+</tr>
+<tr>
+<td>-R</td>
+<td></td>
+</tr>
+<tr>
+<td>-X</td>
+<td>根据扩展名排序</td>
+</tr>
+<tr>
+<td>–time</td>
+<td>默认为修改时间（Modify Time），可以改为 atime（Access Time）或 ctime（Change Time）</td>
+</tr>
+<tr>
+<td>–time-style</td>
+<td>按特定规则展示时间（long-iso 最好,full-iso,iso,locale）</td>
+</tr>
+</tbody></table>
+<h6 id="查看目录所有的文件或者文件夹"><a href="#查看目录所有的文件或者文件夹" class="headerlink" title="查看目录所有的文件或者文件夹"></a>查看目录所有的文件或者文件夹</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 递归查看所有的目录</span></span><br><span class="line">ls -RF | grep /</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 递归查看所有的文件</span></span><br><span class="line">ls -RF | grep -v /</span><br></pre></td></tr></table></figure>
+
+<h6 id="查找最近修改过的文件"><a href="#查找最近修改过的文件" class="headerlink" title="查找最近修改过的文件"></a>查找最近修改过的文件</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 以长格式形式展示，按照修改时间倒序排列，最后一个即是最近修改的文件</span></span><br><span class="line">ls -lrt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用tail优化定位</span></span><br><span class="line">ls -lrt|tail -f</span><br></pre></td></tr></table></figure>
+
+<h6 id="删除-inode-节点垃圾"><a href="#删除-inode-节点垃圾" class="headerlink" title="删除 inode 节点垃圾"></a>删除 inode 节点垃圾</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls|xargs rm -f</span><br></pre></td></tr></table></figure>
+
+<h3 id="cp">cp 复制文件或目录</h3>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-r</td>
+<td>递归复制目录及所有子文件</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>覆盖文件前需要用户确认</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>保留源文件的所有者和权限及时间信息</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>如果源文件是符号连接，仅复制符号连接本身，保留指向</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>是 p,d,r 命令的总和</td>
+</tr>
+</tbody></table>
+<h6 id="文件快速备份"><a href="#文件快速备份" class="headerlink" title="文件快速备份"></a>文件快速备份</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 我们经常会这么备份</span></span><br><span class="line">cp /etc/mysql/my.cnf /etc/mysql/my.cnf.back</span><br><span class="line"><span class="meta">#</span><span class="bash"> 借助bash对大括号的展开操作，可以很简单的写</span></span><br><span class="line">cp /etc/mysql/my.cnf&#123;,.back&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="mv">mv 移动或重命名文件</h3>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-f</td>
+<td>目标文件存在，覆盖文件前不需要用户确认</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>目标文件存在，覆盖文件前需要用户确认</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>不覆盖已存在的文件</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>适用与多个源文件到一个目标目录的情况，和 cp -t 一样，目标在前，源在后</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>仅源文件比目标文件新，或者目标文件不存在是才进行移动</td>
+</tr>
+</tbody></table>
+<h3 id="rm">rm 删除目录或文件</h3>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-f</td>
+<td>强制删除</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>删除前需确认</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>递归删除目录及内容</td>
+</tr>
+<tr>
+<td>-I</td>
+<td>删除超过三个文件或者递归删除前要求确认</td>
+</tr>
+</tbody></table>
+<h3 id="rmdir">rmdir 删除空目录</h3>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-p</td>
+<td>递归删除空目录</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示执行过程</td>
+</tr>
+</tbody></table>
+<h3 id="ln">ln 硬链接和软链接</h3>
+
+<p>创建文件间的联系。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-</td>
+<td>创建硬链接</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>创建软链接</td>
+</tr>
+</tbody></table>
+<p>硬链接（hard link）：生成的是普通文件（-字符）</p>
+<ol>
+<li>inode：具有相同的 inode 节点多个文件互为硬链接文件</li>
+<li>内容：硬链接相当于文件的另外一个入口</li>
+<li>删除结果：删除硬链接文件或者源文件，文件实体未被删除。只有所有硬链接都被删除之后才能被删除。可以使用硬链接来防止重要文件误删</li>
+</ol>
+<p>软链接（symbolic link）：生成的是符号链接文件（1 类型）</p>
+<ol>
+<li>inode：类似于 windows 里的快捷方式，inode 和源文件不一样</li>
+<li>内容区别：里面存放的是源文件的路径，指向源文件实体</li>
+<li>删除结果：删除源文件，软链接失效</li>
+</ol>
+<p>有关目录</p>
+<ol>
+<li>目录不可以创建硬链接（因目录可以跨文件系统，但硬链接需要相同的 inode），可以创建软链接。</li>
+<li>每个目录下都有两个硬链接’.’,’..’，指向当前目录和上级目录</li>
+<li>在父目录创建子目录会导致父目录的硬链接数加 1</li>
+</ol>
+<h3 id="find">find 查找目录下的文件</h3>
+语法格式：find   [<b>选项</b> -H,-L,-P] &nbsp;&nbsp;&nbsp;[<b>路径</b>] &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;  [<b>操作语句</b> 参数｜限定条件｜执行动作]
+
+<p>操作语句（expression）部分</p>
+<h6 id="options-模块"><a href="#options-模块" class="headerlink" title="options 模块"></a>options 模块</h6><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-depth</td>
+<td>从最深的子目录开始查找</td>
+</tr>
+<tr>
+<td>-maxDepths levels</td>
+<td>查找的最大目录级数， levels 为自然数</td>
+</tr>
+<tr>
+<td>-regextype type</td>
+<td>改变正则表达式的模式。默认为 emacs，还有 posix-awk，posix-basic，posix-egrep，</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Posix: Portable Operating System Interface for UNIX</p>
+</blockquote>
+<h6 id="tests-模块"><a href="#tests-模块" class="headerlink" title="tests 模块"></a>tests 模块</h6><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-mtime [-n | n | +n]</td>
+<td>以修改时间来查找，-n 天内｜ n 天｜ +n 天以前</td>
+</tr>
+<tr>
+<td>-name</td>
+<td>文件名查找，只支持*,？,[]等特殊通配符</td>
+</tr>
+<tr>
+<td>-regextype type</td>
+<td>改变正则表达式的模式。默认为 emacs，还有 posix-awk，posix-basic，posix-egrep，</td>
+</tr>
+<tr>
+<td>-regex</td>
+<td>正则表达式</td>
+</tr>
+<tr>
+<td>-iregex</td>
+<td>不区分大小写正则表达式</td>
+</tr>
+<tr>
+<td>-type</td>
+<td>查找某一类型文件: <br />b(块设备文件)，c(字符设备文件)，d(目录)，p（管道文件），l（符号链接文件），f（普通文件），s（socket 文件），D（door）</td>
+</tr>
+</tbody></table>
+<h6 id="actions-模块"><a href="#actions-模块" class="headerlink" title="actions 模块"></a>actions 模块</h6><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-delete</td>
+<td>将查找出的文件删除</td>
+</tr>
+<tr>
+<td>-exec</td>
+<td>执行参数给出的 shell 命令</td>
+</tr>
+<tr>
+<td>-prune</td>
+<td>不在指定目录中查找</td>
+</tr>
+</tbody></table>
+<h6 id="oprators-逻辑运算符"><a href="#oprators-逻辑运算符" class="headerlink" title="oprators 逻辑运算符"></a>oprators 逻辑运算符</h6><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>!</td>
+<td>取反</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>交集</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>并集</td>
+</tr>
+</tbody></table>
+<h6 id="实战示例"><a href="#实战示例" class="headerlink" title="实战示例"></a>实战示例</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查找一天内修改过的文件和目录</span></span><br><span class="line">find . -mtime -1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查找一天内的所有txt</span></span><br><span class="line">find . -mtime -1 -name '*.txt'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查找所有的目录</span></span><br><span class="line">find . -type d</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查找所有的文件</span></span><br><span class="line">find . ! -type d</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 排除某个目录</span></span><br><span class="line">find ./ -path "./a/1" -prune -o -print</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 排除多个目录</span></span><br><span class="line">find . \( -path './a/1/1_1' -o -path './a/2/2_2' \) -prune -o -print</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查找n天前的文件并删除</span></span><br><span class="line">find . -mtime +2 -delete</span><br><span class="line">find . -mtime 1 -exec rm &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查找所有的文件并以长模式展开</span></span><br><span class="line">find . -type f -exec ls -l &#123;&#125; \;</span><br><span class="line">find . -type f|xargs ls -l</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将所有的a*文件内容中的this替换成that</span></span><br><span class="line">find . -type f -name "a*" -exec sed -i "s#this#that#g" &#123;&#125; \;</span><br><span class="line">find . -type f -name "a*" | xargs sed -i "s#that#this#g"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除一个目录下的所有文件，保留一个指定文件</span></span><br><span class="line">find . -type f -cmin -4 ! -name "b9" -exec rm -f &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+<h6 id="服务数据注入"><a href="#服务数据注入" class="headerlink" title="服务数据注入"></a>服务数据注入</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在www目录被注入了恶意弹窗</span></span><br><span class="line">find . -type f | xargs sed -i "s#&lt;script&gt;alert('xxx')&lt;/script&gt;##g"</span><br><span class="line"></span><br><span class="line">find . -type f | xargs sed -i "/*alert('xxx')*/d"</span><br></pre></td></tr></table></figure>
+
+<h6 id="find-中-exec-和-xargs-区别"><a href="#find-中-exec-和-xargs-区别" class="headerlink" title="find 中 exec 和 xargs 区别"></a>find 中 exec 和 xargs 区别</h6><ol>
+<li>查找的结果在 exec 是逐个传递给后面的命令执行，效率略低。在 xargs 是一次性传递给后边的命令执行</li>
+<li>文件名有空格，exec 能正常处理，xargs 不能，需要特殊处理</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看区别</span></span><br><span class="line">find . -type f -exec echo hello &#123;&#125; \;</span><br><span class="line">find . -type f | xargs echo hello</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 文件名有空格时xargs特殊处理</span></span><br><span class="line">find . -name 'a b' -print0| xargs -0 ls -lh</span><br></pre></td></tr></table></figure>
+
+<h3 id="xargs">xargs 标准输入转换为命令行参数</h3>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-n</td>
+<td>每行最大参数数量，可将标准输入的文本话氛围多行，每行 n 个参数，默认空格分割</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>以{}代替前面的结果</td>
+</tr>
+<tr>
+<td>-0</td>
+<td>用 null 代替空格作为分隔符，配合 find 的 print0 选项输出使用</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>自定义分隔符，进行字符串切割</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> -n</span></span><br><span class="line">cat a4</span><br><span class="line"><span class="meta">#</span><span class="bash"> 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4 5 6 7 8 9</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 10 11</span></span><br><span class="line"></span><br><span class="line">xargs &lt; a4</span><br><span class="line"><span class="meta">#</span><span class="bash"> 1 2 3 4 5 6 7 8 9 10 11</span></span><br><span class="line"></span><br><span class="line">xargs -n 3 &lt; a4</span><br><span class="line"><span class="meta">#</span><span class="bash"> 1 2 3</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4 5 6</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 7 8 9</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 10 11</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> -d</span></span><br><span class="line">echo splitXsplitXsplit|xargs -d X</span><br><span class="line">echo splitXsplitXsplit|xargs -d X -n2</span><br></pre></td></tr></table></figure>
+
+<h3 id="rename">rename 重命名文件</h3>
+
+<p>语法：rename from to file<br>这个在 Debian 中是不一样的语法</p>
+<h6 id="批量修改文件名"><a href="#批量修改文件名" class="headerlink" title="批量修改文件名"></a>批量修改文件名</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rename 's/a/b/' a*.txt</span><br><span class="line">rename 's/txt/jpg/' *.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="basename">basename 显示文件名或目录名</h3>
+
+<p>语法：basename [file] [后缀]</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">basename a/1/t.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> t.txt</span></span><br><span class="line"></span><br><span class="line">basename a/1/t.txt .txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> t</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="dirname">dirname 显示文件或目录路径</h3>
+语法：dirname [file]
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dirname a/1/t.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> a/1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="chattr">chattr 改变文件的扩展属性</h3>
+
+<p>功能: 改变文件的扩展熟悉。chmod 知识改变了文件的读、写、执行权限，更底层的属性控制是由 chattr 改变的<br>语法: chattr [option] [mode] [file]</p>
+<p><b>option</b></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-R</td>
+<td>递归更改目录属性</td>
+</tr>
+<tr>
+<td>-V</td>
+<td>显示命令执行过程</td>
+</tr>
+</tbody></table>
+<p><b>mode</b></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>增加参数</td>
+</tr>
+<tr>
+<td>-</td>
+<td>减少参数</td>
+</tr>
+<tr>
+<td>=</td>
+<td>更新为指定参数</td>
+</tr>
+<tr>
+<td>A</td>
+<td>不修改文件的最后访问时间</td>
+</tr>
+<tr>
+<td>a</td>
+<td>只能向文件中添加数据，不能删除，多用于服务日志</td>
+</tr>
+<tr>
+<td>i</td>
+<td>文件不能被删除改名，写入，新增 (即是是 root 也无法删除)</td>
+</tr>
+</tbody></table>
+<p>可以给文件加锁</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 只读权限</span></span><br><span class="line">chattr +a b2.jpg</span><br><span class="line"><span class="meta">#</span><span class="bash"> 不可更改权限</span></span><br><span class="line">chattr +i b2.jpg</span><br></pre></td></tr></table></figure>
+
+<h3 id="file">file 显示文件类型</h3>
+
+<p>语法: chattr [option] [file]</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">file *</span><br><span class="line"><span class="meta">#</span><span class="bash"> a:       directory</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> b5.jpg:  empty</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> b6.jpg:  UTF-8 Unicode text</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="md5sum">md5sum 计算和校验文件的MD5值</h3>
+
+<p>语法: md5sum [option] [file]</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-b</td>
+<td>以二进制模式读取文件</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>从指定文件中读取 MD5 校验值，并进行校验</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>以文本模式读取文件（默认模式）</td>
+</tr>
+<tr>
+<td>–quiet</td>
+<td>验证通过不输出 OK</td>
+</tr>
+<tr>
+<td>–status</td>
+<td>不输出任何信息，通过返回值判断结果</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">md5sum b6.jpg</span><br><span class="line"><span class="meta">#</span><span class="bash"> 3425006b2772d4e16740e83218248495  b6.jpg</span></span><br><span class="line"></span><br><span class="line">md5sum b6.jpg &gt; b6.log</span><br><span class="line">cat b6.log</span><br><span class="line"><span class="meta">#</span><span class="bash"> 3425006b2772d4e16740e83218248495  b6.jpg</span></span><br><span class="line"></span><br><span class="line">md5sum -c b6.log</span><br><span class="line"><span class="meta">#</span><span class="bash"> b6.jpg: OK</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="chown">chown 改变文件或者目录的用户和用户组</h3>
+
+<p>语法: chown [options] [owner]:[group]] [file]</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-R</td>
+<td>递归更改目录的用户和用户组</td>
+</tr>
+</tbody></table>
+<h3 id="chmod">19. chmod 改变文件或目录权限</h3>
+
+<p>语法: chown [options] [mode] [file]</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-R</td>
+<td>递归更改目录的所有文件</td>
+</tr>
+</tbody></table>
+<p>权限说明: -rw-r–r– 1 platform platform 11 Jul 3 11:01 b6.jpg<br>一个文件的类型由<code>-rw-r--r--</code>进行描述，第一位为文件类型，接下来每 3 位为一组，分别代表用户权限，用户组权限，和其他用户权限</p>
+<p><b>权限说明</b></p>
+<table>
+<thead>
+<tr>
+<th>权限位</th>
+<th>全称</th>
+<th>含义</th>
+<th>对应数字</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r</td>
+<td>read</td>
+<td>可读权限</td>
+<td>4</td>
+</tr>
+<tr>
+<td>w</td>
+<td>wirte</td>
+<td>可写权限</td>
+<td>2</td>
+</tr>
+<tr>
+<td>x</td>
+<td>execute</td>
+<td>可执行权限</td>
+<td>1</td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td>没有任何权限</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>u</td>
+<td>owner/user 文件所属用户</td>
+</tr>
+<tr>
+<td>g</td>
+<td>group 文件所属用户组</td>
+</tr>
+<tr>
+<td>o</td>
+<td>other 其他用户</td>
+</tr>
+<tr>
+<td>a</td>
+<td>相当于 u,g,o 的总和</td>
+</tr>
+</tbody></table>
+<p>+,-,= 表示对权限进行操作</p>
+<p><b>权限和数字对应关系</b><br>rw- r– r–<br>421 400 400<br>7 4 4<br><code>-rw-r--r--</code>所以最后权限位对应的数字为<code>744</code>，我们在平常的开发中经常会赋予<code>755</code>权限，其实就是当前用户有所有权限，用户组和其他用户有只读和执行权限，没有写的权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 给用户增加执行，用户组，其他用户赋予只读权限</span></span><br><span class="line">chmod u+x,g=r,o=r b2.jpg</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 数字和上边的权限赋值是等价的</span></span><br><span class="line">chmod 744 b2.jpg</span><br></pre></td></tr></table></figure>
+
+<h3 id="umask">20. umask 显示或设置权限掩码</h3>
+
+<p>功能: 是通过八进制的数值来定义用户创建文件或目录的默认权限<br>语法: umask [options] [mode]<br>默认掩码为 022</p>
+<p>创建文件的默认最大权限为 666<br>使用 umask 之后，文件的权限为 644</p>
+<p>创建文件的默认最大权限为 777<br>使用 umask 之后，目录的权限为 755</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-2/" data-id="clzmdspih00i5zwl12srbgkje" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/js/node/js对象" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/node/js%E5%AF%B9%E8%B1%A1/" class="article-date">
+  <time datetime="2022-07-01T08:56:32.000Z" itemprop="datePublished">2022-07-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/node/js%E5%AF%B9%E8%B1%A1/">js对象</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="http缓存为什么，有了last-modify之后还要用E-tag"><a href="#http缓存为什么，有了last-modify之后还要用E-tag" class="headerlink" title="http缓存为什么，有了last-modify之后还要用E-tag"></a>http缓存为什么，有了last-modify之后还要用E-tag</h3><ol>
+<li>时间戳改动，文件不一定改动</li>
+<li>时间戳只能精确到秒级，更新频繁的内容无法生效</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/node/js%E5%AF%B9%E8%B1%A1/" data-id="clzmdsphs00dnzwl1f1kv01d5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/shell/core/chapter-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-1/" class="article-date">
+  <time datetime="2022-07-01T08:43:49.000Z" itemprop="datePublished">2022-07-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-1/">命令行简介</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="命令行的作用和意义"><a href="#命令行的作用和意义" class="headerlink" title="命令行的作用和意义"></a>命令行的作用和意义</h3><p>快速，批量，自动化，智能化管理系统及处理业务</p>
+<h3 id="命令行说明"><a href="#命令行说明" class="headerlink" title="命令行说明"></a>命令行说明</h3><p>登录 linux 到系统之后，我们经常会见到以下的命令提示，各个字符分别表示什么意思呢？<br>[xxx@yyyy ~] #，[xxx@yyyy ~] $</p>
+<ol>
+<li>xxx 表示登录的当前用户</li>
+<li>@后的 yyyy 表示主机名</li>
+<li>之后的～表示当前的目录为 home</li>
+<li>方括号之后的#或者$，前者表示 root 用户，后者表示普通用户<br>该部分受PS1描述，一版的PS1为’\u@\h:\w$‘，可以自定义该部分</li>
+</ol>
+<h3 id="命令行中常用的快捷键"><a href="#命令行中常用的快捷键" class="headerlink" title="命令行中常用的快捷键"></a>命令行中常用的快捷键</h3><h6 id="移动光标"><a href="#移动光标" class="headerlink" title="移动光标"></a>移动光标</h6><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ctrl+a</td>
+<td>移动光标到行首</td>
+</tr>
+<tr>
+<td>ctrl+e</td>
+<td>移动光标到行尾</td>
+</tr>
+</tbody></table>
+<h6 id="剪切，清除快捷键"><a href="#剪切，清除快捷键" class="headerlink" title="剪切，清除快捷键"></a>剪切，清除快捷键</h6><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ctrl+k</td>
+<td>剪切光标到行尾的字符</td>
+</tr>
+<tr>
+<td>ctrl+u</td>
+<td>剪切光标到行首的字符(zsh 中是整行剪切)</td>
+</tr>
+<tr>
+<td>ctrl+w</td>
+<td>剪切光标前的一个单词</td>
+</tr>
+<tr>
+<td>ctrl+y</td>
+<td>粘贴剪切的单词</td>
+</tr>
+</tbody></table>
+<h6 id="特殊命令"><a href="#特殊命令" class="headerlink" title="特殊命令"></a>特殊命令</h6><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ctrl+c</td>
+<td>终止当前程序</td>
+</tr>
+<tr>
+<td>ctrl+d</td>
+<td>退出当前 shell 命令行</td>
+</tr>
+<tr>
+<td>ctrl+r</td>
+<td>搜索当前使用过的历史命令</td>
+</tr>
+<tr>
+<td>ctrl+l</td>
+<td>清屏</td>
+</tr>
+<tr>
+<td>ctrl+z</td>
+<td>暂停执行在终端中执行的命令(之后可以使用 fg 恢复)</td>
+</tr>
+</tbody></table>
+<p>涉及到命令的执行前后相关的命令还有&amp;（运行时加入，程序会直接在后台运行），jobs（查看正在运行的程序），bg（后台执行暂停的程序，可以使用数字执行 bg n），fg（前台运行暂停的程序）</p>
+<h3 id="关机，重启，注销"><a href="#关机，重启，注销" class="headerlink" title="关机，重启，注销"></a>关机，重启，注销</h3><p>相似的命令有 shutdown，init，halt，poweroff，reboot。只需要关注 shutdown 和 reboot</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>shutdown -h now</td>
+<td>立即关机</td>
+</tr>
+<tr>
+<td>shutdown -r now</td>
+<td>立即重启</td>
+</tr>
+<tr>
+<td>shutdown -h +1</td>
+<td>一分钟之后关机</td>
+</tr>
+<tr>
+<td>shutdown -h 11:00</td>
+<td>定时关机</td>
+</tr>
+</tbody></table>
+<p>因为 linux 的关机原理是调整服务的运行级别，比如关机是 0，重启是 6，所有还有一个方法是执行 init 方法<br>关机：<code>init 0</code>, 重启：<code>init 6</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-1/" data-id="clzmdspih00hyzwl184vefidx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/标识了解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/%E6%A0%87%E8%AF%86%E4%BA%86%E8%A7%A3/" class="article-date">
+  <time datetime="2022-06-20T15:37:39.000Z" itemprop="datePublished">2022-06-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/%E6%A0%87%E8%AF%86%E4%BA%86%E8%A7%A3/">特殊缩写</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="EOF（end-of-file）"><a href="#EOF（end-of-file）" class="headerlink" title="EOF（end of file）"></a>EOF（end of file）</h1><p>表示文件的结尾</p>
+<h1 id="TL-DR-Too-long-Don’t-read"><a href="#TL-DR-Too-long-Don’t-read" class="headerlink" title="TL;DR (Too long; Don’t read)"></a>TL;DR (Too long; Don’t read)</h1><p>字面意思是：文章太长，不要读<br>放在文章中内容，相当于文章主要内容的摘要，代表长话短说。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E6%A0%87%E8%AF%86%E4%BA%86%E8%A7%A3/" data-id="clzmdspeu000rzwl17wdgdhky" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/编码" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BC%96%E7%A0%81/" class="article-date">
+  <time datetime="2022-06-19T10:01:41.000Z" itemprop="datePublished">2022-06-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BC%96%E7%A0%81/">编码</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="带着问题一起学习"><a href="#带着问题一起学习" class="headerlink" title="带着问题一起学习"></a>带着问题一起学习</h1><ol>
+<li>怎么检测一个字符是中文？</li>
+<li>字符串的 length 方法是返回的字符数量吗？</li>
+<li>一直在写代码的你知道你的代码是以什么编码在内存中运行吗？</li>
+<li>什么是全角字符，什么是半角字符？</li>
+<li>不同编码的字符串如何做转换？</li>
+<li>如何正确计算字符串占用空间的大小？</li>
+<li>为什么需要编码？<blockquote>
+<p>建议顺序读，有基础的同学可以直接跳转到文末看答案。</p>
+</blockquote>
+</li>
+</ol>
+<h1 id="一、名词介绍"><a href="#一、名词介绍" class="headerlink" title="一、名词介绍"></a>一、名词介绍</h1><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Unicode</td>
+<td>统一字符编码，现今计算机字符内存编码的表示方案。</td>
+</tr>
+<tr>
+<td>UCS（Unicode Character Set）</td>
+<td>unicode 字符集</td>
+</tr>
+<tr>
+<td>UTF（Unicode Transformation Format）</td>
+<td>unicode 传输格式</td>
+</tr>
+<tr>
+<td>全角字符(Fullwidth character)</td>
+<td>又称全宽字符，日文为全角文字</td>
+</tr>
+</tbody></table>
+<h1 id="二、什么是编码？"><a href="#二、什么是编码？" class="headerlink" title="二、什么是编码？"></a>二、什么是编码？</h1><p>将信息按照特定模式转换成另一种信息的过程。<br>因为目前计算机只能处理 0,1 数字，所以计算机中的字符串编码其实就是字符串和数字转换关系。<br>解码就是依据编码模式将已编码的数据进行的逆操作。</p>
+<h1 id="三、Unicode-是什么？"><a href="#三、Unicode-是什么？" class="headerlink" title="三、Unicode 是什么？"></a>三、Unicode 是什么？</h1><blockquote>
+<p>Unicode, formally the Unicode Standard, is an information technology standard for the consistent encoding, representation, and handling of text expressed in most of the world’s writing systems. The standard, which is maintained by the Unicode Consortium, defines 144,697 characters([1])([2]) covering 159 modern and historic scripts, as well as symbols, emoji, and non-visual control and formatting codes. —- wikipedia</p>
+</blockquote>
+<p>人话：世界公认的计算机字符编码，表示范围：U+000000 ～ U+10FFFF<br>大概讲一下字符串编码的历史<br>最早的计算机因为出自美国，只存储了 128 位命令及字符，已经能满足他们（英文）的需求。</p>
+<p>后来随着各个国家都需要使用计算机，便开始了各自的编码历程，比如我们熟悉的 ISO-8859-1，GB2312，GBK 等等。<br>由于世界各地都在搞自己的编码方案，导致沟通带来巨大的麻烦，这时候有一个 ISO 的组织站出来想用一种解决方案去解决世界各地的编码问题，于是 Unicode 应运而生。<br>unicode 的出现就是为了统一编码规范。</p>
+<h1 id="四、常见的-utf-8，utf-16（ucs-2），utf-32（ucs-4）是什么，它们和-unicode-之间有什么区别？"><a href="#四、常见的-utf-8，utf-16（ucs-2），utf-32（ucs-4）是什么，它们和-unicode-之间有什么区别？" class="headerlink" title="四、常见的 utf-8，utf-16（ucs-2），utf-32（ucs-4）是什么，它们和 unicode 之间有什么区别？"></a>四、常见的 utf-8，utf-16（ucs-2），utf-32（ucs-4）是什么，它们和 unicode 之间有什么区别？</h1><p>Unicode 是内存编码表示方案（是规范），而 UTF（unicode tranform format）是如何保存和传输 Unicode 的方案（是实现）这也是 UTF 与 Unicode 的区别。这几种常见的编码都是 unicode 编码的不同实现形式。</p>
+<ul>
+<li>utf-8 是变长编码以 8 个二进制位为一单位（需 1 ～ 4 字节存储）</li>
+<li>utf-16 是变长编码以 16 个二进制位为一单位（1 或 2 个 16bit 存储，需 2 或 4 字节）</li>
+<li>utf-32 是定长编码以 32 个二进制位为一单位（需 4 个字节存储所有的字符）</li>
+</ul>
+<p>所以看出 utf-n 后边的 n 其实就是存储时所使用的 bit 数量。</p>
+<h1 id="五、不同编码的字符串之间转换"><a href="#五、不同编码的字符串之间转换" class="headerlink" title="五、不同编码的字符串之间转换"></a>五、不同编码的字符串之间转换</h1><p>具体 unicode 到 utf-8 和 utf-16 的概念可以百度<br>|Unicode 符号范围 | UTF-8 编码方式|<br>|–|–|<br>|(十六进制) | （二进制）|<br>0000 0000-0000 007F | 0xxxxxxx<br>0000 0080-0000 07FF | 110xxxxx 10xxxxxx<br>0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx<br>0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</p>
+<ol>
+<li>unicode=&gt;utf-8(0b)</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">unicode2utf8</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> parseData = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; str.length; i++) &#123;</span><br><span class="line">    <span class="keyword">const</span> byteData = [];</span><br><span class="line">    <span class="comment">// js中charCodeAt读取到的code为当前字符所在位unicode的整数值</span></span><br><span class="line">    <span class="keyword">const</span> code = str.charCodeAt(i);</span><br><span class="line">    <span class="keyword">if</span> (code &gt;= <span class="number">0x10000</span>) &#123;</span><br><span class="line">      <span class="comment">// 4字节</span></span><br><span class="line">      byteData[<span class="number">0</span>] = <span class="number">0xf0</span> | ((code &amp; <span class="number">0x1c0000</span>) &gt;&gt;&gt; <span class="number">18</span>);</span><br><span class="line">      byteData[<span class="number">1</span>] = <span class="number">0x80</span> | ((code &amp; <span class="number">0x3f000</span>) &gt;&gt;&gt; <span class="number">12</span>);</span><br><span class="line">      byteData[<span class="number">2</span>] = <span class="number">0x80</span> | ((code &amp; <span class="number">0xfc0</span>) &gt;&gt;&gt; <span class="number">6</span>);</span><br><span class="line">      byteData[<span class="number">3</span>] = <span class="number">0x80</span> | (code &amp; <span class="number">0x3f</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (code &gt;= <span class="number">0x800</span>) &#123;</span><br><span class="line">      <span class="comment">// 3字节</span></span><br><span class="line">      byteData[<span class="number">0</span>] = <span class="number">0xe0</span> | ((code &amp; <span class="number">0xf000</span>) &gt;&gt;&gt; <span class="number">12</span>);</span><br><span class="line">      byteData[<span class="number">1</span>] = <span class="number">0x80</span> | ((code &amp; <span class="number">0xfc0</span>) &gt;&gt;&gt; <span class="number">6</span>);</span><br><span class="line">      byteData[<span class="number">2</span>] = <span class="number">0x80</span> | (code &amp; <span class="number">0x3f</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (code &gt;= <span class="number">0x80</span>) &#123;</span><br><span class="line">      <span class="comment">// 2字节</span></span><br><span class="line">      byteData[<span class="number">0</span>] = <span class="number">0xc0</span> | ((code &amp; <span class="number">0x7c0</span>) &gt;&gt;&gt; <span class="number">6</span>);</span><br><span class="line">      byteData[<span class="number">1</span>] = <span class="number">0x80</span> | (code &amp; <span class="number">0x3f</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 1字节</span></span><br><span class="line">      byteData[<span class="number">0</span>] = code;</span><br><span class="line">    &#125;</span><br><span class="line">    parseData.push(byteData.map(<span class="function">(<span class="params">it</span>) =&gt;</span> it.toString(<span class="number">2</span>)));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> parseData;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"unicode2utf8"</span>, unicode2utf8(<span class="string">"好"</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// '好'=&gt; [ '11100101', '10100101', '10111101' ]</span></span><br><span class="line"><span class="comment">// 去掉utf-8的公共前缀能得倒：101, 100101, 111101</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// '好'.charCodeAt(0) =&gt; 22909 =&gt; 101100101111101</span></span><br><span class="line"><span class="comment">// 由此有一个更简单的思路：字符串切割即可</span></span><br><span class="line"><span class="comment">// TODO 贴地址 unicode2utf8.js</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>utf-8(0b)=&gt;unicode<br>避免篇幅过多，这块儿就不贴代码了<br>// TODO 贴地址 utf82unicode.js<br>测试一下分别用以上两个方法进行编码及解码：我爱我的祖国，嘿嘿嘿 😄</p>
+</li>
+<li><p>\x 开头编码又是什么<br>以”\xe6\x93\x8d\xe4\xbd\x9c\xe8\xbf\x87\xe4\xba\x8e\xe9\xa2\x91\xe7\xb9\x81, \xe8\xaf\xb7 50 \xe7\xa7\x92\xe5\x90\x8e\xe5\x86\x8d\xe8\xaf\x95”为例<br>其实该字符串是 utf-8 在传输中的另外一种形式，以\x+16 进制数字的形式能更简洁的呈现出来<br>js 中没有直接翻译的方法，我们使用 python3</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;b&quot;\xe6\x93\x8d\xe4\xbd\x9c\xe8\xbf\x87\xe4\xba\x8e\xe9\xa2\x91\xe7\xb9\x81, \xe8\xaf\xb7 50 \xe7\xa7\x92\xe5\x90\x8e\xe5\x86\x8d\xe8\xaf\x95&quot;.decode(&#39;utf-8&#39;)</span><br><span class="line">&gt;&gt;&gt; &#x2F;&#x2F; &#39;操作过于频繁, 请 50 秒后再试&#39;</span><br></pre></td></tr></table></figure>
+
+<p>在线 tool: <a href="https://mothereff.in/utf-8" target="_blank" rel="noopener">https://mothereff.in/utf-8</a><br>想要抄作业的同学可以直接跳转</p>
+<h1 id="六、前端相关的编码"><a href="#六、前端相关的编码" class="headerlink" title="六、前端相关的编码"></a>六、前端相关的编码</h1><ol>
+<li>js 中代码编码使用的是什么编码<br>因为历史原因我们写的 js 在内存中使用的是 utf-16 编码<br>现在几乎所有的语言都兼容了 unicode 规范，比如在语言中 unicode 编码的字符串和表示的字符其实是完全相等的。<br>‘\u597d’===’好’ // true</li>
+<li>实体编码（entity encoding）<br>HTML 实体编码策略是以&amp;符号开头，以;分号结尾的<br>对于前端同学经常遇到的 xss 攻击就需要使用实体编码进行解决。遇到一些非信任的 dom 数据展示，一定要将 dom 转换成实体编码之后再插入到页面中，否则很容易发生存储型的 xss。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;&lt;&#x2F;html&gt; &#x3D;&gt; &lt;html&gt;&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>URL 编码（url encoding）<br>url 编码原是一种浏览器用来格式化请求的编码方式<br>encodeURI: 对一个完整的 URI 进行编码<br>encodeURIComponent: 对 URI 的一个组件进行编码</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> https:<span class="comment">//baike.baidu.com/?a=1&amp;c=%E6%B5%8B%E8%AF%95</span></span><br><span class="line"> https%<span class="number">3</span>A%<span class="number">2</span>F%<span class="number">2</span>Fbaike.baidu.com%<span class="number">2</span>F%<span class="number">3</span>Fa%<span class="number">3</span>D1%<span class="number">26</span>c%<span class="number">3</span>D%E6%B5%<span class="number">8</span>B%E8%AF%<span class="number">95</span></span><br><span class="line"></span><br><span class="line"> foo:<span class="comment">//example.com:8042/over/there?name=ferret#nose</span></span><br><span class="line"> \_/ \______________/ \________/\_________/ \__/</span><br><span class="line">  |         |              |         |        |</span><br><span class="line">scheme     authority      path     query   fragment</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>base64 编码<br>我们在浏览器的 window 上会有一个 atob 和 btoa，就是常见的 base64 编码。<br>编码规则：<ul>
+<li>从左往右每字符三分一组，不足时用 0 补齐</li>
+<li>字符转换成二进制 ASCII 编码</li>
+<li>转换后，每隔 6 位分开</li>
+<li>使用彩虹表将每 6 位的二进制位换成彩虹表中字符，补位产生的 0 使用=替代</li>
+</ul>
+</li>
+</ol>
+<h1 id="七、开发中遇到编码相关的坑"><a href="#七、开发中遇到编码相关的坑" class="headerlink" title="七、开发中遇到编码相关的坑"></a>七、开发中遇到编码相关的坑</h1><ol>
+<li>所见非所得之 linux 字符串变色<br>在 shell 中拿到的字符串不一定就是你想要的字符串 echo ‘\e[31;mgit\e[0m’<br>[图片]</li>
+<li>base64 只能编码 Latin1 范围内的字符。<br>就是想编码两字节以上的字符呢，可以看 btoa() - Web APIs | MDN</li>
+</ol>
+<h1 id="八、问题回答"><a href="#八、问题回答" class="headerlink" title="八、问题回答"></a>八、问题回答</h1><ol>
+<li>怎么检测一个字符是中文？<br>正则应该是 /[\u4E00-\u9FA5]/<br>中文在 BMP 中的范围是：U+4E00 到 U+9FA5 之间是汉字的 Unicode 编码。</li>
+<li>字符串的 length 方法是返回的字符数量吗？<br>不是，返回的是编码单元的长度。参考 5<br>[图片]</li>
+<li>一直在写代码的你知道你的代码是以什么编码在内存中运行吗？<br>length 的计算方式不太一样<br>Js =&gt; utf-16 // “try 学习”.length =&gt; 5(3+2) 中文在 utf-16 占一个单元<br>Java =&gt; utf-16 // “try 学习”.length() =&gt; 5(3+2) 中文在 utf-16 占一个单元<br>python3=&gt;unicode // len(‘try 学习’) =&gt; 5(3+2) 中文在 unicode 占一个单元<br>golang=&gt;utf-8 // len(“try 学习”) =&gt; 9(3+3*2) 中文在 utf-8 占用三个字节</li>
+<li>什么是全角字符，什么是半角字符？<br>我和我的祖国，我爱我的祖国。我和我的祖国，我爱我的祖国。我和<br>我和我的祖国，我爱我的祖国。ｌｏｖｅ　ｍｙ　ｃｏｕｎｔｒｙ．<br>我和我的祖国,我爱我的祖国.I love my counrty.<br>大家先猜一下上方相同的话语哪个是全角，哪个是半角。<br>全角和半角视觉表现上其实就是字宽，存储上现在遵循 unicode 规范。<br>单纯的就是为了汉文相关语言的展示美观<br>[图片]<br>将半角字符转换成全角会导致存储占用的空间变大。</li>
+<li>不同编码的字符串如何做转换？<br>字符串编码</li>
+<li>如何正确计算字符串占用空间的大小？<br>// TODO 贴地址 calcTxtSize/index.js</li>
+<li>为什么需要编码？<br>为了解决传输（方便，安全，减少带宽浪费）和存储（减少空间浪费）的问题。<br>参考<br><a href="https://en.wikipedia.org/wiki/Unicode" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Unicode</a><br>你需要知道的字符串编码<br>字符串和编码<br><a href="https://dailc.github.io/2017/06/03/utf8ToUtf16ToGbk.html" target="_blank" rel="noopener">https://dailc.github.io/2017/06/03/utf8ToUtf16ToGbk.html</a><br><a href="https://www.bejson.com/convert/ox2str/" target="_blank" rel="noopener">https://www.bejson.com/convert/ox2str/</a><br><a href="https://zhuanlan.zhihu.com/p/45695434" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/45695434</a><br>中文输入法为什么会有全角和半角的区别? - 知乎</li>
+</ol>
+<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><p>可以 demo 一下自己的工具<br><a href="https://mothereff.in/utf-8" target="_blank" rel="noopener">https://mothereff.in/utf-8</a><br><a href="https://base64.us/" target="_blank" rel="noopener">https://base64.us/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BC%96%E7%A0%81/" data-id="clzmdspev000tzwl1fy5bc9by" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/js/leetcode实践" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/leetcode%E5%AE%9E%E8%B7%B5/" class="article-date">
+  <time datetime="2022-05-26T15:09:34.000Z" itemprop="datePublished">2022-05-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/leetcode%E5%AE%9E%E8%B7%B5/">leetcode实践</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>该章节只会记录一些工作/生活中能用得到的 leetcode 题解思路</p>
+<ol>
+<li>整数划分<br>leetcode <a href="https://leetcode.cn/problems/coin-change/" target="_blank" rel="noopener">https://leetcode.cn/problems/coin-change/</a><br>一个整数用给定的数组中的数做拆分</li>
+</ol>
+<p>最简单的理解方式还是递归的处理整数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 自顶向下 DFS</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">coinChange</span>(<span class="params">coins, amount</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> min = <span class="built_in">Number</span>.MAX_SAFE_INTEGER;</span><br><span class="line">  <span class="keyword">const</span> deal = <span class="function">(<span class="params">left, count</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (left &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (left === <span class="number">0</span>) &#123;</span><br><span class="line">        min = <span class="built_in">Math</span>.min(min, count);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    coins.forEach(<span class="function">(<span class="params">co</span>) =&gt;</span> deal(left - co, count + <span class="number">1</span>));</span><br><span class="line">  &#125;;</span><br><span class="line">  deal(amount, <span class="number">0</span>);</span><br><span class="line">  <span class="keyword">return</span> min === <span class="built_in">Number</span>.MAX_SAFE_INTEGER ? <span class="number">-1</span> : min;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自底向上 DP</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">coinChange</span>(<span class="params">coins, amount</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> dp = <span class="keyword">new</span> <span class="built_in">Array</span>(amount + <span class="number">1</span>).fill(<span class="built_in">Number</span>.MAX_SAFE_INTEGER);</span><br><span class="line">  dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= amount; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; coins.length; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (i - coins[j] &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">        dp[i] = <span class="built_in">Math</span>.min(dp[i], dp[i - coins[j]] + <span class="number">1</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> dp[amount] === <span class="built_in">Number</span>.MAX_SAFE_INTEGER ? <span class="number">-1</span> : dp[amount];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>最长公共部分（字符串最长子串，718. 最长重复子数组）</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 两个数组的最长重复子数组</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">findLength</span>(<span class="params">nums1: number[], nums2: number[]</span>): <span class="title">number</span> </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> maxLen = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">let</span> arr = [];</span><br><span class="line">  <span class="keyword">const</span> dp = <span class="built_in">Array</span>.from(&#123; <span class="attr">length</span>: nums1.length + <span class="number">1</span> &#125;, () =&gt;</span><br><span class="line">    <span class="keyword">new</span> <span class="built_in">Array</span>(nums2.length + <span class="number">1</span>).fill(<span class="number">0</span>)</span><br><span class="line">  );</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= nums1.length; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">1</span>; j &lt;= nums2.length; j++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (nums1[i - <span class="number">1</span>] === nums2[j - <span class="number">1</span>]) &#123;</span><br><span class="line">        dp[i][j] = dp[i - <span class="number">1</span>][j - <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (dp[i][j] &gt; maxLen) &#123;</span><br><span class="line">        maxLen = dp[i][j];</span><br><span class="line">        arr = nums1.slice(i - maxLen, i);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(arr);</span><br><span class="line">  <span class="keyword">return</span> maxLen;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>树的遍历 （前，中，后）（深度优先，按层遍历）</p>
+</li>
+<li><p>两个数组的交集</p>
+</li>
+<li><p>大顶堆和小顶堆</p>
+</li>
+<li><p>数组中查找非偶数对的数(eg:[1,1,2] 查找 2)<br>最简单的做饭是利用 map 存每个数出现的次数，最后查找满足条件的数<br>还可以利用异或的<code>自反特性</code>a^a=0 且 a^0=0</p>
+</li>
+</ol>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">singleNumber</span>(<span class="params">nums: <span class="built_in">number</span>[]</span>): <span class="title">number</span> </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> res = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> num of nums) &#123;</span><br><span class="line">    res ^= num;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li><p>设计哈希映射<br>没有一个 map 能完全存储所有的映射关系，需要一种方式来实现有限的资源做无限的事儿（理论上）。<br>横向上无法扩展太多，可以从纵向考虑，对象+链表的方法</p>
+<blockquote>
+<ol>
+<li>选择一个最大的 BASE 值，作为取于的数</li>
+<li>创建结构化的数据结构(data)存储所有的 key，长度为（BASE）</li>
+<li>每次新增一个 key，都需要 key%BASE，然后再 data[key%BASE]中存储对应的链表，在链表上存储 hash 冲突的 key</li>
+</ol>
+</blockquote>
+</li>
+</ol>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> MyHashMap &#123;</span><br><span class="line">  BASE = <span class="number">679</span>;</span><br><span class="line">  data = <span class="built_in">Array</span>.from(&#123; length: <span class="keyword">this</span>.BASE &#125;, <span class="function"><span class="params">()</span> =&gt;</span> []);</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line">  put(key: <span class="built_in">number</span>, value: <span class="built_in">number</span>): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> idx = <span class="keyword">this</span>.hash(key);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> ele of <span class="keyword">this</span>.data[idx]) &#123;</span><br><span class="line">      <span class="keyword">if</span> (key === ele[<span class="number">0</span>]) &#123;</span><br><span class="line">        ele[<span class="number">1</span>] = value;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.data[idx].push([key, value]);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">get</span>(key: <span class="built_in">number</span>): <span class="built_in">number</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> idx = <span class="keyword">this</span>.hash(key);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> ele of <span class="keyword">this</span>.data[idx]) &#123;</span><br><span class="line">      <span class="keyword">if</span> (key === ele[<span class="number">0</span>]) &#123;</span><br><span class="line">        <span class="keyword">return</span> ele[<span class="number">1</span>];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  remove(key: <span class="built_in">number</span>): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> idx = <span class="keyword">this</span>.hash(key);</span><br><span class="line">    <span class="keyword">this</span>.data[idx] = <span class="keyword">this</span>.data[idx].filter(<span class="function">(<span class="params">it</span>) =&gt;</span> it[<span class="number">0</span>] !== key);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  hash(key: <span class="built_in">number</span>): <span class="built_in">number</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> key % <span class="keyword">this</span>.BASE;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>数组相关<br>和为 K 的子数组<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">subarraySum</span>(<span class="params">nums: <span class="built_in">number</span>[], k: <span class="built_in">number</span></span>): <span class="title">number</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = i; j&gt;=<span class="number">0</span>; j--) &#123; </span><br><span class="line">            sum+=nums[j];</span><br><span class="line">            <span class="keyword">if</span>(sum === k)&#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>数据结构实现</li>
+</ol>
+<p>链表实现：<a href="https://leetcode.cn/problems/design-linked-list/" target="_blank" rel="noopener">https://leetcode.cn/problems/design-linked-list/</a><br>MyHashMap</p>
+<ol start="10">
+<li>前缀和<br>给定一个数组，根据前<code>i-1</code>项的和就可以很快的计算出第<code>i</code>项的和</li>
+</ol>
+<p>子数组和等于K<br><a href="https://leetcode.cn/problems/subarray-sum-equals-k/" target="_blank" rel="noopener">https://leetcode.cn/problems/subarray-sum-equals-k/</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 前缀和+hash表</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number[]&#125;</span> <span class="variable">nums</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;number&#125;</span> <span class="variable">k</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;number&#125;</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> subarraySum = <span class="function"><span class="keyword">function</span> (<span class="params">nums, k</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line">    <span class="comment">// 初始赋值为0，count += 时计算会简单一点</span></span><br><span class="line">    map.set(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">let</span> preSum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> it <span class="keyword">of</span> nums) &#123;</span><br><span class="line">        preSum += it;</span><br><span class="line">        <span class="comment">// 前n项中 k=preSum-key的个数</span></span><br><span class="line">        <span class="comment">// 如果preSum===k，count可以取到1</span></span><br><span class="line">        <span class="keyword">const</span> key = preSum - k;</span><br><span class="line">        <span class="keyword">if</span> (map.has(key)) &#123;</span><br><span class="line">            count += map.get(key);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 维护前缀和的map</span></span><br><span class="line">        <span class="keyword">if</span> (map.has(preSum)) &#123;</span><br><span class="line">            map.set(preSum, map.get(preSum) + <span class="number">1</span>)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            map.set(preSum, <span class="number">1</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 双层循环，遍历每一项</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/leetcode%E5%AE%9E%E8%B7%B5/" data-id="clzmdspfd002kzwl16a1n8q19" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-书/1984" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/%E4%B9%A6%E7%B1%8D/%E4%B9%A6/1984/" class="article-date">
+  <time datetime="2022-05-11T14:55:55.000Z" itemprop="datePublished">2022-05-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/%E4%B9%A6%E7%B1%8D/%E4%B9%A6/1984/">1984</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>乔治·奥威尔著 舒新译<br>读该书完全是因为一个意外，因为是想读村上村树的《1Q84》阴差阳错之下就读了该书</p>
+<h3 id="故事概要"><a href="#故事概要" class="headerlink" title="故事概要"></a>故事概要</h3><p><strong>在存满黑暗，压迫世界中一个男人的觉醒，抗争，最后堕落的故事</strong></p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>在一个类型平行宇宙的世界，整个世界形成了三个独立的政体:大洋国（主人公所在的国家），欧亚国，东亚国。其实映射了英美，苏联，中国。当前各个国家都形成了独裁统治，统治阶级为了维持自己的统治采取了和之前历史中不同的统治方式：全天候 24h 监视人民，愚化人民</p>
+<h3 id="人物介绍"><a href="#人物介绍" class="headerlink" title="人物介绍"></a>人物介绍</h3><ul>
+<li>温斯顿：本文的主人公，大洋国外党党员，在真理部进行历史篡改的工作。</li>
+<li>奥布莱恩：大洋国内党党员，诱导温斯顿进入兄弟会，蒸发温斯顿的执行人</li>
+<li>朱丽亚：温斯顿的爱人</li>
+</ul>
+<h3 id="故事详述"><a href="#故事详述" class="headerlink" title="故事详述"></a>故事详述</h3><p>&emsp; &emsp;一切要从一个笔记本开始，温斯顿偶然买到了一个纸张精美的笔记本，然后就在他所认为的所在的 1984 年开始记笔记。记笔记的行为开始让他开始独立思考：当前真的是 1984 年，当前的生活究竟是进步还是倒退。他几乎已经记不起很早之前的事情了，所以开始历史的追寻，究竟什么是真的。因为他自身工作的特殊性，他也在不断接受到一些打破他观念的任务之后，促使他不断的挖掘历史真相。在寻找历史的过程中作者给了他可以叫爱情的东西。朱丽亚的出现加速了故事的发展，也坚定了温斯顿对大洋国黑暗统治阶级的认识。这时候温斯顿已经开始觉醒，想要找所谓的反抗者兄弟会团体。<br>&emsp; &emsp;可以说是奥布莱恩找到的温斯顿，也可以说是温斯顿主动找的奥布莱恩，毕竟思想的犯罪是瞒不住的。奥布莱恩作为大洋国统治阶级的代表，假装为兄弟会成员将温斯顿拉下水，然后将他送入仁爱部。在仁爱部中没有直接杀死温斯顿，他们来了一招杀人诛心的操作，着实恶心人。虽然温斯顿是他们的敌人，但是他们不会让他轻易的死去。他们会进行极力的打压，虐待，洗脑，经历最恐怖的事。让他从内心接受自己的错误，接受自己的一切才是罪恶，自己是真正的罪人。温斯顿在折磨的过程可以看到他表面上是接受了自己的所有一切罪恶，但是因为对朱丽亚的爱，其实在内心深处还是存在着一份理智的。<br>&emsp; &emsp;直到奥布莱恩把老鼠放到他脸上，经历他最恐怖的事时他终于破防了，把他的爱抛弃了。之后奥布莱恩把他释放，又用生活的琐事侵蚀他，直到他从心底真正的认为自己犯罪。奥布莱恩才给了他死的机会，实现了<strong>杀人、诛心</strong>。</p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><h5 id="1-什么是历史？"><a href="#1-什么是历史？" class="headerlink" title="1. 什么是历史？"></a>1. 什么是历史？</h5><p>文中主人公的自白和奥布莱恩都有对历史讨论过，而主人公的任务就是在改变历史或者说篡改历史。当涉及到不在记忆内的历史其实是前人书写的打了时间标签的事情记录，是极有可能篡改的。但其实本文也透露出来你脑子的历史也不一定是真实的历史，只是你对世界认知的一个投影，也是容易被改变的。</p>
+<h5 id="2-语言背叛和内心背叛？"><a href="#2-语言背叛和内心背叛？" class="headerlink" title="2. 语言背叛和内心背叛？"></a>2. 语言背叛和内心背叛？</h5><p>朱丽亚说过语言的背叛不是背叛，即使语言背叛也没关系，因为敌人是无法修改你脑中所想的，直到被抓的时候他们还是这么认为的，这和结局两人说双方都背叛了形成对比。但是通过温斯顿的视角我们看到在极端情况下语言的背叛就是发自内心的背叛，认识到爱情远没有想的那么重要。这没有性别的区分，包括在和朱丽亚最后的对话中可以看到朱丽亚也做了类似的事情，才会导致温斯顿最后的幻想也破灭了。</p>
+<h5 id="3-大洋国的统治"><a href="#3-大洋国的统治" class="headerlink" title="3. 大洋国的统治"></a>3. 大洋国的统治</h5><p>其实在苏联包括中国都存在这样极端黑暗的时刻，统治阶级出于自己统治的需要加强自身权力，弱化民众的能力。这个就少说了。。。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/%E4%B9%A6%E7%B1%8D/%E4%B9%A6/1984/" data-id="clzmdspe30000zwl14iw88oab" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/js/八股基础" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E5%85%AB%E8%82%A1%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time datetime="2022-05-02T09:28:58.000Z" itemprop="datePublished">2022-05-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E5%85%AB%E8%82%A1%E5%9F%BA%E7%A1%80/">八股基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><a href="#js">js 基础</a><br>1.1 <a href="#">js 闭包</a></li>
+<li><a href="#frame">框架相关</a></li>
+<li><a href="#engineering">工程化相关</a></li>
+<li><a href="#h5">H5</a></li>
+<li><a href="#server">服务相关</a></li>
+</ol>
+<h2 id="js">js 基础</h2>
+
+<h3 id="closure">闭包</h3>
+
+<p>概念：函数嵌套，内层函数引用外层函数变量。<br>例子：调用一个函数返回一个新的函数</p>
+<h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><p>概念：js 的对象中存在<strong>proto</strong>指向构造函数的 prototype，而构造函数 prototype 的<strong>proto</strong>会继续往上指，直到指向 Object.prototype.<strong>proto</strong> =&gt; null.<br>例子：const arr = new Array(); arr.<strong>proto</strong>===Array.prototype;</p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>js 中继承分主要有两部分组成：构造函数，原型链。其余各种继承都为这两种的排列组合。<br>构造函数继承即是执行构造函数，给 this 绑定属性。<br>原型链继承即是继承祖先类上的方法。<br>es6 中的 class 即使这两种继承的一个语法糖。</p>
+<h3 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h3><p>js 的垃圾回收借鉴自 java，采用了自动垃圾回收机制。<br>因为 js 内存分为了新生代和老生代，自动垃圾回收的算法在不同的分代中采用的方式不一样。<br>新生代中主要使用了 scavenge 算法，<br>老生代使用了标记清楚+标记整理</p>
+<h3 id="es6-语法"><a href="#es6-语法" class="headerlink" title="es6 语法"></a>es6 语法</h3><p>let const 块级作用域，定义可修改和常量变量（对比 var 都没有变量声明提前，都不可重复声明）<br>Set,Map<br>Proxy<br>Class<br>箭头函数<br>import/export</p>
+<h3 id="js-中-commonjs，esm-区别"><a href="#js-中-commonjs，esm-区别" class="headerlink" title="js 中 commonjs，esm 区别"></a>js 中 commonjs，esm 区别</h3><ol>
+<li>commonjs 输出为值的拷贝，esm 为值的引用</li>
+<li>commonjs 同步加载，esm 异步加载</li>
+<li>commonjs 运行时加载，esm 编译时输出接口</li>
+</ol>
+<p>esm import 的模块不能重新赋值<br>esm 存在 export/import 提升</p>
+<h2 id="frame">框架相关</h2>
+
+<h3 id="react-和-vue-diff-的异同"><a href="#react-和-vue-diff-的异同" class="headerlink" title="react 和 vue diff 的异同"></a>react 和 vue diff 的异同</h3><p>相同点：都是同级比较，跨级比较意义不是很大<br>不同点：</p>
+<ol>
+<li>对比节点时不同。相同节点，classname 不同，vue 会认为是不同的元素，会删除重建，react 则会修改节点属性</li>
+<li>对比顺序不同。vue 是从两端到中间，react 是从左到右。</li>
+</ol>
+<h3 id="setState-是同步还是异步？"><a href="#setState-是同步还是异步？" class="headerlink" title="setState 是同步还是异步？"></a>setState 是同步还是异步？</h3><p>看到面试经常有人问 setState 是同步还是异步，其实这个问题直接问我我肯定会懵逼，我确实不知道，可见我见到的场景还是比较少。<br>就我使用 hooks 中所有场景来看，所有使用 setState 的地方其实预期都是异步的，而且就从 js 的生态来看，所有的耗时的更新操作都应该是异步的。就包括 react 的并发模式也是默认支持异步的，所以可以认为现在的同步模式只是 react 还没有完全处理完的问题，还是尽量少用，或者不需要去 care，默认就认为是异步即可。</p>
+<h5 id="还是需要深入了解一下什么时候是异步，什么时候是同步？"><a href="#还是需要深入了解一下什么时候是异步，什么时候是同步？" class="headerlink" title="还是需要深入了解一下什么时候是异步，什么时候是同步？"></a>还是需要深入了解一下什么时候是异步，什么时候是同步？</h5><p>在 React 事件处理函数中或 React 方法中是异步<br>在 setTimeout, Promise 等异步方法中或原生事件中是同步。<br>executionContext 为<code>BatchedContext</code>时为异步，<code>NoContext</code>为同步更新</p>
+<h3 id="react，vue，angular-等前端框架-解决了什么问题？"><a href="#react，vue，angular-等前端框架-解决了什么问题？" class="headerlink" title="react，vue，angular 等前端框架 解决了什么问题？"></a>react，vue，angular 等前端框架 解决了什么问题？</h3><p>在没有这些框架的时代，甚至连 jq 都么有的时候，我们实现一个业务逻辑只能自己去 get data，响应用户操作，执行预置逻辑，将用户操作结果提交给服务，最后给用户反馈。<br>我们有了趁手的工具 jq 之后，虽然整个逻辑流程没有变，但是编写业务逻辑的速度要比原生 js 要快很多。<br>再后来我们有个这几个框架之后就不一样了，不一样主要在两个地方：</p>
+<ul>
+<li>响应用户操作；（绑定好视图和数据之后我们再也不用，手动将视图上的数据挪到发送给后端的 data 中）</li>
+<li>界面给用户反馈；（服务响应之后，我们也不需要主动的去做 dom 变动）</li>
+</ul>
+<p>其实仔细看下两个变动就是视图和数据的关系：<strong>视图&lt;=&gt;数据</strong>。从前端发展的这几十年之间，包括 js 的诞生无外乎就是为了处理视图和数据的关系。变化的方向必然是为了更为快速的开发，变化的历程其实就是命令式到声明式的转变。这种转变也是一种刀耕火种向现代化的转变，一切的逻辑都是可以预置的，一切结果都是可控的，这也是声明式的优点。</p>
+<p>然后我们在看下这些框架是通过什么手段去尝试解决这个问题？</p>
+<ol>
+<li>代码书写方式由命令式变成声明式。声明式一定就好吗？当然没有绝对的东西，但是在巨型应用出现的今天，将所有的变动依托到框架中，声明式的代码确实是能节省很多的时间成本（主要是 debug）。</li>
+<li>jsx 解决了 dom 的可编程问题。html 无法使用逻辑去编程，这一直以来都是前端比较大的痛点。</li>
+<li>制定自己的标准。按照一个优秀的标准去写代码至少会比我们天马行空的方式写出代码的代码要可读性强。</li>
+</ol>
+<p>最后回到该问题，这些框架真的解决了这个问题吗？我的答案是没有。就像松哥之前说过这几个框架都是要被淘汰的，他们只是在当前的这个阶段，临时的缓解了前端开发工程师的阵痛。真正解决必然是浏览器才能解决的，但是到时候肯定又会出现其他的问题等着工程师们继续奋斗。</p>
+<h2 id="engineering">工程化相关</h2>
+
+<h3 id="webpack-解决了什么问题？"><a href="#webpack-解决了什么问题？" class="headerlink" title="webpack 解决了什么问题？"></a>webpack 解决了什么问题？</h3><p>解决前端工程化中如何更高效的管理和维护项目的中的每个资源。<br>一个模块化解决方案</p>
+<h3 id="npm-解决了什么问题？"><a href="#npm-解决了什么问题？" class="headerlink" title="npm 解决了什么问题？"></a>npm 解决了什么问题？</h3><p>js 的包管理器就是在解决前端工程的依赖包。【嗯，问这个问题的人脑子多少会有点问题。】</p>
+<h3 id="yarn-解决了什么问题？"><a href="#yarn-解决了什么问题？" class="headerlink" title="yarn 解决了什么问题？"></a>yarn 解决了什么问题？</h3><ol>
+<li>依赖关系的确定性</li>
+<li>扁平式管理依赖</li>
+<li>离线模式（已安装的不再安装）</li>
+</ol>
+<h2 id="h5">H5</h2>
+
+<h3 id="适配方案：rem，em，vw-简述"><a href="#适配方案：rem，em，vw-简述" class="headerlink" title="适配方案：rem，em，vw 简述"></a>适配方案：rem，em，vw 简述</h3><ul>
+<li>rem: 根据不同屏幕设置 html 的 px，决定 1rem 的大小。本质是改变一个元素在不同设备上 css 像素的个数</li>
+<li>em: 继承父级设置的 font-size 大小</li>
+<li>vw: 100vw 是整个屏幕的宽度，相对整个屏幕的宽度计算当前元素的宽。</li>
+</ul>
+<h2 id="server">server</h2>
+
+<h3 id="缓存击穿，缓存穿透，缓存雪崩怎么解决？"><a href="#缓存击穿，缓存穿透，缓存雪崩怎么解决？" class="headerlink" title="缓存击穿，缓存穿透，缓存雪崩怎么解决？"></a>缓存击穿，缓存穿透，缓存雪崩怎么解决？</h3><p>缓存击穿，穿透，雪崩差不多，都是redis中查询不到对应的数据或者缓存已过期，会将请求压力直接作用到底层的存储系统。涉及一些高并发的请求可能在瞬间就会将底层数据库打挂。<br>分析该问题，解决方案大致可以从请求前（1，2，3），请求处理中（4，5）和请求后（6）进行分别处理</p>
+<ol>
+<li>缓存预热。针对一些活动场景提前将热点数据写入缓存中并设置较大的超时时间；</li>
+<li>分散过期时间。避免将所有的key的过期时间设置的一致导致过期之后缓存雪崩；</li>
+<li>提前更新。记录缓存数据是否过期，快过期前提前进行数据刷新；</li>
+<li>空值缓存。查询的数据为空仍进行较短时间的缓存；</li>
+<li>使用锁，队列。避免瞬间将load数据的请求都打到数据库中；</li>
+<li>实时监控。对恶意ip进行封禁；</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/%E5%85%AB%E8%82%A1%E5%9F%BA%E7%A1%80/" data-id="clzmdspff0030zwl18tedcpxi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/msyql/delete" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/delete/" class="article-date">
+  <time datetime="2022-05-02T03:46:46.000Z" itemprop="datePublished">2022-05-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/delete/">mysql 基础命令 - delete</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="简单-delete-语句"><a href="#简单-delete-语句" class="headerlink" title="简单 delete 语句"></a>简单 delete 语句</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 删除重复邮箱，保留最小的ID</span></span><br><span class="line"><span class="keyword">delete</span> p1 <span class="keyword">from</span> </span><br><span class="line">  Person <span class="keyword">as</span> p1, Person <span class="keyword">as</span> p2 </span><br><span class="line"><span class="keyword">where</span></span><br><span class="line">  p1.email=p2.email <span class="keyword">and</span> p1.id&gt;p2.id;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/msyql/delete/" data-id="clzmdspfg003ozwl1192l3gqo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/msyql/update" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/update/" class="article-date">
+  <time datetime="2022-05-02T03:46:46.000Z" itemprop="datePublished">2022-05-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/update/">mysql 基础命令 - update</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="简单-update-语句"><a href="#简单-update-语句" class="headerlink" title="简单 update 语句"></a>简单 update 语句</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 更换性别 case when</span></span><br><span class="line"><span class="keyword">update</span> Salary</span><br><span class="line">  <span class="keyword">set</span> sex =</span><br><span class="line">    <span class="keyword">case</span> sex</span><br><span class="line">      <span class="keyword">when</span> <span class="string">"m"</span> <span class="keyword">then</span> <span class="string">"f"</span></span><br><span class="line">      <span class="keyword">else</span> <span class="string">"m"</span></span><br><span class="line">    <span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 更换性别 if</span></span><br><span class="line"><span class="keyword">update</span> Salary</span><br><span class="line">  <span class="keyword">set</span> sex = <span class="keyword">if</span>(sex=<span class="string">'m'</span>, <span class="string">'f'</span>, <span class="string">'m'</span>);</span><br><span class="line">  </span><br><span class="line"><span class="comment">-- 奇淫巧计</span></span><br><span class="line"><span class="keyword">update</span> Salary <span class="keyword">set</span> sex = <span class="built_in">char</span>(<span class="keyword">ascii</span>(<span class="string">'m'</span>)+<span class="keyword">ascii</span>(<span class="string">'f'</span>)-<span class="keyword">ascii</span>(sex));</span><br></pre></td></tr></table></figure>
+
+<h5 id="update-user-password-语句"><a href="#update-user-password-语句" class="headerlink" title="update user password 语句"></a>update user password 语句</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">USER</span> <span class="string">'userName'</span>@<span class="string">'localhost'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'New-Password-Here'</span>;</span><br></pre></td></tr></table></figure>
+
+<p>远程调用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> mysql_remote_execute</span></span><br><span class="line">mysql_remote_execute "$host" "$port" "$database" "$DB_ROOT_USER" "$DB_ROOT_PASSWORD" &lt;&lt;EOF</span><br><span class="line">  ALTER USER "$userName"@'%' IDENTIFIED BY "$password";</span><br><span class="line">  GRANT ALL PRIVILEGES ON $database.* TO "$username"@'%';</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/msyql/update/" data-id="clzmdspfh003zzwl1aodl3mab" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/blog/page/11/">&lt; 上一页</a><a class="page-number" href="/blog/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/10/">10</a><a class="page-number" href="/blog/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/blog/page/13/">13</a><a class="page-number" href="/blog/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/21/">21</a><a class="extend next" rel="next" href="/blog/page/13/">下一页 &gt;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>

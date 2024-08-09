@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>web3js连接智能合约 | ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Remix IDE在线IDE工具 https:&#x2F;&#x2F;remix.ethereum.org&#x2F; Truffle智能合约开发框架，基于truffle开发合约流程  安装配置truffle 1npm install -g truffle  编写contracts   StudentStorage.sol 12345678910111213141516&#x2F;&#x2F; SPDX-License-Ide">
+<meta property="og:type" content="article">
+<meta property="og:title" content="web3js连接智能合约">
+<meta property="og:url" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/Dapp/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="Remix IDE在线IDE工具 https:&#x2F;&#x2F;remix.ethereum.org&#x2F; Truffle智能合约开发框架，基于truffle开发合约流程  安装配置truffle 1npm install -g truffle  编写contracts   StudentStorage.sol 12345678910111213141516&#x2F;&#x2F; SPDX-License-Ide">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/Dapp/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/20230204-072829.jpeg">
+<meta property="article:published_time" content="2023-02-03T15:24:27.000Z">
+<meta property="article:modified_time" content="2024-08-08T11:42:01.091Z">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="Dapp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/Dapp/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/20230204-072829.jpeg">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-编程/web3/Dapp/智能合约" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/Dapp/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" class="article-date">
+  <time datetime="2023-02-03T15:24:27.000Z" itemprop="datePublished">2023-02-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      web3js连接智能合约
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Remix-IDE"><a href="#Remix-IDE" class="headerlink" title="Remix IDE"></a>Remix IDE</h3><p>在线IDE工具 <a href="https://remix.ethereum.org/" target="_blank" rel="noopener">https://remix.ethereum.org/</a></p>
+<h3 id="Truffle"><a href="#Truffle" class="headerlink" title="Truffle"></a>Truffle</h3><p>智能合约开发框架，基于truffle开发合约流程</p>
+<ol>
+<li><p>安装配置truffle</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g truffle</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写contracts</p>
+</li>
+</ol>
+<p>StudentStorage.sol</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; SPDX-License-Identifier: GPL-3.0</span><br><span class="line">pragma solidity &gt;&#x3D;0.4.16 &lt;0.9.0;</span><br><span class="line"></span><br><span class="line">contract StudentStorage &#123;</span><br><span class="line">    uint public age;</span><br><span class="line">    string public username;</span><br><span class="line"></span><br><span class="line">    function setData(uint256 _age, string memory _username) public &#123;</span><br><span class="line">        age &#x3D; _age;</span><br><span class="line">        username &#x3D; _username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function getData() public view returns (string memory, uint) &#123;</span><br><span class="line">        return (username, age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>编写migration</li>
+</ol>
+<p>1_deploy.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Contracts = artifacts.require(<span class="string">"StudentStorage.sol"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">deployer</span>) </span>&#123;</span><br><span class="line">  deployer.deploy(Contracts);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><p>执行编译部署</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">truffle migrate</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行之后结果如下</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ➜  hello-truffle git:(main) ✗ truffle migrate</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Compiling your contracts...</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ===========================</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; Compiling ./contracts/StudentStorage.sol</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; Artifacts written to /Users/ansike/project/self/dapp/hello-truffle/build/contracts</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; Compiled successfully using:</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    - solc: 0.8.17+commit.8df45f5f.Emscripten.clang</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Starting migrations...</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ======================</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; Network name:    <span class="string">'development'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; Network id:      1675433963338</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; Block gas <span class="built_in">limit</span>: 30000000 (0x1c9c380)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 1_deploy.js</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ===========</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">    Replacing <span class="string">'StudentStorage'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash">    --------------------------</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; transaction <span class="built_in">hash</span>:    0xc87a4123b6dcf9ad9b5da0f813823d4d04694721763c92c7ec4068646eddf9e8</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; Blocks: 0            Seconds: 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; contract address:    0x5E765e2b459DaAbE5a6674A9c91Bb2338ec3af39</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; block number:        4</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; block timestamp:     1675437122</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; account:             0x6995406230412E302C14Afba8BfC2C094CDeF072</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; balance:             899.996730824988815426</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; gas used:            505059 (0x7b4e3)</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; gas price:           3.089147928 gwei</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; value sent:          0 ETH</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; total cost:          0.001560201963367752 ETH</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; Saving artifacts</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    -------------------------------------</span></span><br><span class="line"><span class="meta">#</span><span class="bash">    &gt; Total cost:     0.001560201963367752 ETH</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> Summary</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> =======</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; Total deployments:   1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> &gt; Final cost:          0.001560201963367752 ETH</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>验证合约</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">truffle console</span><br><span class="line"></span><br><span class="line">const obj = await StudentStorage.deployed()</span><br><span class="line"><span class="meta">#</span><span class="bash"> truffle(development)&gt; obj.username()</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="string">'test'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> truffle(development)&gt; obj.age()</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> BN &#123; negative: 0, words: [ 11, &lt;1 empty item&gt; ], length: 1, red: null &#125;</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="react-contracts-demo版本"><a href="#react-contracts-demo版本" class="headerlink" title="react+contracts demo版本"></a>react+contracts demo版本</h3><p>demo实现了通过合约在区块链上的的增删操作</p>
+<ol>
+<li>初始化sol项目和web项目</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir sol</span><br><span class="line">mkdir web</span><br><span class="line">cd sol &amp;&amp; truffle init &amp;&amp; cd ../</span><br><span class="line">cd web &amp;&amp; create-react-app web --template typescript &amp;&amp; yarn add web3 &amp;&amp; cd ../</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>编写sol代码</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; SPDX-License-Identifier: GPL-3.0</span><br><span class="line">pragma solidity &gt;&#x3D;0.4.16 &lt;0.9.0;</span><br><span class="line"></span><br><span class="line">contract StudentListStorage &#123;</span><br><span class="line">    struct Student &#123;</span><br><span class="line">        uint256 id;</span><br><span class="line">        string name;</span><br><span class="line">        uint256 age;</span><br><span class="line">        address account;</span><br><span class="line">    &#125;</span><br><span class="line">    Student[] public StudentList;</span><br><span class="line"></span><br><span class="line">    function setList(string memory _name, uint256 _age)</span><br><span class="line">        public</span><br><span class="line">        returns (uint256)</span><br><span class="line">    &#123;</span><br><span class="line">        StudentList.push(</span><br><span class="line">            Student(StudentList.length + 1, _name, _age, msg.sender)</span><br><span class="line">        );</span><br><span class="line">        return StudentList.length;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function remove(uint256 index) public returns (Student[] memory) &#123;</span><br><span class="line">        if (index &gt;&#x3D; StudentList.length) return StudentList;</span><br><span class="line">        for (uint256 i &#x3D; index; i &lt; StudentList.length - 1; i++) &#123;</span><br><span class="line">            StudentList[i] &#x3D; StudentList[i + 1];</span><br><span class="line">        &#125;</span><br><span class="line">        StudentList.pop();</span><br><span class="line">        return StudentList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function getList() public view returns (Student[] memory) &#123;</span><br><span class="line">        return StudentList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>编写web代码</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useEffect, useState &#125; <span class="keyword">from</span> <span class="string">"react"</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">"./App.css"</span>;</span><br><span class="line"><span class="keyword">import</span> Web3 <span class="keyword">from</span> <span class="string">"web3"</span>;</span><br><span class="line"><span class="keyword">import</span> StudentListStorage <span class="keyword">from</span> <span class="string">"./StudentListStorage.json"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 连接区块链</span></span><br><span class="line"><span class="keyword">const</span> web3 = <span class="keyword">new</span> Web3(</span><br><span class="line">  (<span class="built_in">window</span> <span class="keyword">as</span> <span class="built_in">any</span>).web3.currentProvider || <span class="string">"http://localhost:8545"</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 连接合约</span></span><br><span class="line"><span class="keyword">const</span> contract = <span class="keyword">new</span> web3.eth.Contract(</span><br><span class="line">  StudentListStorage.abi <span class="keyword">as</span> <span class="built_in">any</span>,</span><br><span class="line">  <span class="string">"0x67886Dc2cc0A6a5314d1331dE3063D663Da05c5d"</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(web3, contract)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">App</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [name, setName] = useState&lt;<span class="built_in">string</span>&gt;();</span><br><span class="line">  <span class="keyword">const</span> [age, setAge] = useState&lt;<span class="built_in">string</span>&gt;();</span><br><span class="line">  <span class="keyword">const</span> [studentList, setStudentList] = useState([]);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    getStudentList();</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> submit = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> accounts = <span class="keyword">await</span> web3.eth.requestAccounts();</span><br><span class="line">    <span class="keyword">await</span> contract.methods.setList(name, age).send(&#123; <span class="keyword">from</span>: accounts[<span class="number">0</span>] &#125;);</span><br><span class="line">    getStudentList();</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> getStudentList = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> studentList = <span class="keyword">await</span> contract.methods.getList().call();</span><br><span class="line">    <span class="built_in">console</span>.log(studentList);</span><br><span class="line">    </span><br><span class="line">    setStudentList(studentList);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">const</span> deleteStudent = <span class="keyword">async</span> (index: <span class="built_in">number</span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> accounts = <span class="keyword">await</span> web3.eth.requestAccounts();</span><br><span class="line">    <span class="keyword">await</span> contract.methods.remove(index).send(&#123; <span class="keyword">from</span>: accounts[<span class="number">0</span>] &#125;);</span><br><span class="line">    getStudentList();</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div className=<span class="string">"App"</span>&gt;</span><br><span class="line">      &lt;div className=<span class="string">"form"</span> style=&#123;&#123; margin: <span class="number">20</span> &#125;&#125;&gt;</span><br><span class="line">        &lt;label htmlFor=<span class="string">"name"</span>&gt;name：&lt;<span class="regexp">/label&gt;</span></span><br><span class="line"><span class="regexp">        &lt;input</span></span><br><span class="line"><span class="regexp">          id="name"</span></span><br><span class="line"><span class="regexp">          type="text"</span></span><br><span class="line"><span class="regexp">          value=&#123;name&#125;</span></span><br><span class="line"><span class="regexp">          onChange=&#123;(e) =&gt; setName(e.target.value)&#125;</span></span><br><span class="line"><span class="regexp">        /</span>&gt;</span><br><span class="line">        &lt;label htmlFor=<span class="string">"age"</span> style=&#123;&#123; marginLeft: <span class="number">10</span> &#125;&#125;&gt;</span><br><span class="line">          age：</span><br><span class="line">        &lt;<span class="regexp">/label&gt;</span></span><br><span class="line"><span class="regexp">        &lt;input</span></span><br><span class="line"><span class="regexp">          id="age"</span></span><br><span class="line"><span class="regexp">          type="text"</span></span><br><span class="line"><span class="regexp">          value=&#123;age&#125;</span></span><br><span class="line"><span class="regexp">          onChange=&#123;(e) =&gt; setAge(e.target.value)&#125;</span></span><br><span class="line"><span class="regexp">          style=&#123;&#123; marginRight: 10 &#125;&#125;</span></span><br><span class="line"><span class="regexp">        /</span>&gt;</span><br><span class="line">        &lt;button onClick=&#123;submit&#125;&gt;submit&lt;<span class="regexp">/button&gt;</span></span><br><span class="line"><span class="regexp">      &lt;/</span>div&gt;</span><br><span class="line">      &lt;div className=<span class="string">"studentList"</span>&gt;</span><br><span class="line">        &#123;studentList.map(<span class="function">(<span class="params">student, index</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">const</span> &#123; id, name, age, account &#125; = student;</span><br><span class="line">          <span class="keyword">return</span> (</span><br><span class="line">            &lt;div key=&#123;index&#125;&gt;</span><br><span class="line">              &#123;id&#125;-&#123;name&#125;-&#123;age&#125;-&#123;account&#125;&#123;<span class="string">" "</span>&#125;</span><br><span class="line">              &lt;span onClick=&#123;<span class="function"><span class="params">()</span> =&gt;</span> deleteStudent(index)&#125;&gt;删除&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">            &lt;/</span>div&gt;</span><br><span class="line">          );</span><br><span class="line">        &#125;)&#125;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> App;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>连接合约验证能力<br>输入name和age点击增加，发起交易数据写入区块链。<br>点击数据右侧的删除，发起交易区块链写入删除记录，数据被删除。<img src="/blog/programming/%E7%BC%96%E7%A8%8B/web3/Dapp/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/20230204-072829.jpeg" class="" title="页面效果">
+
+</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>web 代码中引用的json是合约编译生成的，每次合约编译都会生成新的json文件和合约地址</li>
+<li>对合约的调用send会消耗gas需要填写account，call不会所以不用写account</li>
+</ol>
+<p>完整代码见：<a href="https://github.com/ansike/dapp/first-app" target="_blank" rel="noopener">https://github.com/ansike/dapp/first-app</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/Dapp/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" data-id="clzmdspik00jbzwl17nod3waw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/16-ETH-%E4%BA%A4%E6%98%93%E6%A0%91%E5%92%8C%E6%94%B6%E6%8D%AE%E6%A0%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          交易树&amp;收据树
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/Dapp/Dapp%E5%88%9D%E5%A7%8B%E5%8C%96/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">初始化Dapp操作区块链数据</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>

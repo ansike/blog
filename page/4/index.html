@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="记录一些平时点滴">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ASK&#39;s Blog">
+<meta property="og:url" content="https://ansike.github.io/blog/page/4/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="记录一些平时点滴">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="ask">
+<meta property="article:tag" content=" ansike">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-编程/web3/区块链技术与应用/18-ETH-挖矿算法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/18-ETH-%E6%8C%96%E7%9F%BF%E7%AE%97%E6%B3%95/" class="article-date">
+  <time datetime="2023-01-15T13:14:46.000Z" itemprop="datePublished">2023-01-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/18-ETH-%E6%8C%96%E7%9F%BF%E7%AE%97%E6%B3%95/">挖矿算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<p>BTC mining饱受争议的地方在于：要用专业的ASIC芯片，这与去中心化理念背道而驰</p>
+<p>其他的加密货币：ASIC resistance。比如LiteCoin基于scrypt就是memory hard mining puzzle</p>
+<p>ETH改进2中数据集</p>
+<ol>
+<li>16M的cache 轻节点，便于验证</li>
+<li>1G的dataset 全节点</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/18-ETH-%E6%8C%96%E7%9F%BF%E7%AE%97%E6%B3%95/" data-id="clzmdspin00kkzwl1fmswh01u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/24-ETH-美链" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/24-ETH-%E7%BE%8E%E9%93%BE/" class="article-date">
+  <time datetime="2023-01-15T13:11:57.000Z" itemprop="datePublished">2023-01-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/24-ETH-%E7%BE%8E%E9%93%BE/">美链</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<p>美链（beauty Chain）是一个部署在ETH上的智能合约，有自己的代币BEC</p>
+<ul>
+<li>没有自己的区块链，代币的发行、转账都是通过调用智能合约中的函数来完成的</li>
+<li>可以自己定义发行规则，每个账户有多少代币也是保存在智能合约的状态变量</li>
+<li>ERC 20是ETH上发行代币的一个标准，规范了所有发行代币的合约应该实现的功能和遵循的接口</li>
+<li>美链中有一个叫batchTransfer的函数，它的功能是向多个接受者发送代币，然后把这些代币从调用者的账户上扣除。</li>
+</ul>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/24-ETH-%E7%BE%8E%E9%93%BE/20230115-210926.jpg" class="" title="代码示例">
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/24-ETH-%E7%BE%8E%E9%93%BE/" data-id="clzmdspio00l1zwl107n64nkp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/23-ETH-思考" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/23-ETH-%E6%80%9D%E8%80%83/" class="article-date">
+  <time datetime="2023-01-15T08:41:43.000Z" itemprop="datePublished">2023-01-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/23-ETH-%E6%80%9D%E8%80%83/">思考</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<h3 id="智能合约不智能"><a href="#智能合约不智能" class="headerlink" title="智能合约不智能"></a>智能合约不智能</h3><p>智能合约使用程序语言编写的合约代码，中间并没有人工智能相关的逻辑，只是对合约的描述，所以并不智能。</p>
+<h3 id="区块链是可以篡改的"><a href="#区块链是可以篡改的" class="headerlink" title="区块链是可以篡改的"></a>区块链是可以篡改的</h3><p>The DAO的例子就是最好的解释</p>
+<h3 id="solidity-是合适的区块链编程语言吗？"><a href="#solidity-是合适的区块链编程语言吗？" class="headerlink" title="solidity 是合适的区块链编程语言吗？"></a>solidity 是合适的区块链编程语言吗？</h3><p>BTC：简单的脚本语言，很多复杂过程无法描述<br>ETH：图灵完备（简单讲一切可计算的问题都能描述表达，这样的虚拟机或者编程语言就叫图灵完备）<br>适中：能够实现智能合约的功能，但又不容易像ETH出现安全漏洞，介于BTC和ETH之间。</p>
+<h3 id="开源的代码为什么没有及时的发现漏洞"><a href="#开源的代码为什么没有及时的发现漏洞" class="headerlink" title="开源的代码为什么没有及时的发现漏洞"></a>开源的代码为什么没有及时的发现漏洞</h3><p>开源代码理论上开源了会有很多人去检查，会更安全。但实际上真正会去看的人很少，即使看也不一定有专业知识去发现bug。</p>
+<h3 id="去中心化的意思"><a href="#去中心化的意思" class="headerlink" title="去中心化的意思"></a>去中心化的意思</h3><p>The DAO事件最后硬分叉成功的原因并不是ETH开发团队的代码。而是大多数矿工用挖矿行动的支持。<br>去中心化不等于全自动化不等于让机器决定一切，不能有认为的干预。<br>去中心化不等于已经制定的规则不能修改，而是说对规则的修改要通过去中心化的方式进行。</p>
+<h3 id="去中心化不等于分布式"><a href="#去中心化不等于分布式" class="headerlink" title="去中心化不等于分布式"></a>去中心化不等于分布式</h3><p>一个去中心化的系统必然是分布式的，分布式的系统则不一定去中心化。<br>去中心化中state machine的目的不是加速，而是为了容错。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/23-ETH-%E6%80%9D%E8%80%83/" data-id="clzmdspio00kuzwl158erceqj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/22-ETH-TheDao" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/22-ETH-TheDao/" class="article-date">
+  <time datetime="2023-01-15T08:24:22.000Z" itemprop="datePublished">2023-01-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/22-ETH-TheDao/">The Dao</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<p>DAC(Decentralized Automatics Corporation)<br>DAO(Decentralized Automatics Organization) 本质是运行在ETH的智能合约<br>DAO是去中心化自治组织。其目的是为组织规则以及决策机构编写代码，从而消除书面文件的需要，以及减少管理人员，从而创建出一个去中心化管理架构。</p>
+<p><strong>DAO的运作方式：</strong></p>
+<ul>
+<li>一组人来编写运行组织的智能合约（程序）</li>
+<li>有初始融资阶段，在这一阶段人们添加资金来购买代币，来代表其所有权–这个过程叫做众销，或者首次代币发行（ICO）–为其提供所需资源。</li>
+<li>当融资阶段结束后，DAO就开始运行。</li>
+<li>之后人们就开始向DAO建言献策如何使用这笔钱，购买DAO的成员就有资格对这些天进行投票。</li>
+</ul>
+<p><strong>DAO资金回收方式</strong><br>DAO取回资产的方式是通过拆分实现的。从原有的DAO上拆分出一部分叫split DAO或者叫child DAO，拆分的DAO可以把ETH发给自己或者投资新的项目。拆分之前有7天的辩论期，拆分之后有28天的锁定期。</p>
+<p><strong>黑客攻击ETH的The DAO案例</strong></p>
+<p>2016年6月17日，以太坊创始人V神心急如焚，急匆匆在Reddit上发了一篇帖子“DAO遭到攻击。攻击事件由此拉开序幕。</p>
+<p>2016年4月30 日，The DAO项目开始众筹。项目代币DAO，众筹时间为期28天，代币价格大约是100个DAO兑换1至1.5个以太坊。The DAO项目总共筹到了超过1200万个以太坊，几乎占到了当时以太坊数量的14%，当时价值超过1.5亿美金，参与众筹的人数超过11000人。</p>
+<p>The DAO是当时最大的众筹项目。这超出了很多人的想象，项目团队自己都没想到。众筹结束后，各交易所纷纷上架DAO代币，开始交易，一片其乐融融的景象。</p>
+<p>6月17日，黑客利用The DAO代码里的一个递归漏洞，不停地从The DAO 资金池里分离资产；随后，黑客利用了The DAO的第二个漏洞，避免分离后的资产被销毁。</p>
+<p>因为代码里规定，要过28天之后才能提现，这给了社区足够的时间研究对策。</p>
+<p>经过紧急磋商，V神不久就在以太坊官方博客发布公告《紧急状态更新：关于DAO的漏洞》。V神在公告中，解释了这次攻击的一些细节问题，同时提到已经提交了软分叉的建议（不会回滚，也不会撤销交易和区块）。</p>
+<p>受此事件影响，以太坊价格第二天暴跌约30%。</p>
+<p>很快很多矿工接受了软分叉的建议纷纷安装了新的软件。但是很快暴露了一个问题，ETH在执行合约检查地址发生错误的时候没有收取gas fee，导致网上发生了很多的（0成本）DOS攻击。于是矿工纷纷又回滚了软件升级，宣告软分叉失败。</p>
+<p>随后ETH又设计了一个硬分叉方案：通过软件升级的方法将The DAO上的资金强行转到另外一个智能合约上，这个新的智能合约只有一个功能就是退钱。本来转账是需要合法的签名才能进行转账的，但是现在新的代码里对The DAO的账户没有这个限制，可以直接将The DAO账户的资金无论本人是否同意都转移到一个新的智能合约。升级的软件规定了具体执行的日期，挖到第192w个区块，自动执行该交易。</p>
+<p>该方案产出之后引起了很大的讨论，最后是通过投票的方式决定的。结果是大部分人同意硬分叉，绝大多数矿工们也都升级了该软件，最后硬分叉成功了。</p>
+<p><strong>反对硬分叉的人认为不合理</strong></p>
+<ul>
+<li>很多ETH的持有人并没有参加投票。</li>
+<li>投票不能说明问题。</li>
+</ul>
+<p>硬分叉之后旧链还是存在的叫ETC，新链继承原来的名字ETH。</p>
+<p><strong>为什么ETH团队要插手这次事故？</strong><br>The DAO对ETH来说已经是too big to fail.</p>
+<p>两条链存在了很多问题：典型的是重放攻击（新旧链都是可以在对方的链上进行重放的 解决方案是加了chain id）</p>
+<p><strong>为什么要把所有的钱转走，而不是直接把黑客账户上的钱转走返回给原来的账户呢？</strong><br>因为之前The DAO的bug是一直会存在区块链上的。如果The DAO还存在，之后可能还会有人来利用该漏洞来攻击。所以智能合约只要存在漏洞，在区块链上是必须销毁的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/22-ETH-TheDao/" data-id="clzmdspin00krzwl13co85ll5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/21-ETH-智能合约" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/21-ETH-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" class="article-date">
+  <time datetime="2023-01-12T15:53:46.000Z" itemprop="datePublished">2023-01-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/21-ETH-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/">智能合约</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<h3 id="什么是智能合约？"><a href="#什么是智能合约？" class="headerlink" title="什么是智能合约？"></a>什么是智能合约？</h3><ul>
+<li>智能合约是运行在区块链上的一段代码，代码的逻辑定义了合约的内容</li>
+<li>智能合约的账户保存了合约当前的运行状态<ul>
+<li>balance 当前余额</li>
+<li>nonce 交易次数</li>
+<li>code 合约代码</li>
+<li>storage 存储，数据结构是一颗MPT</li>
+</ul>
+</li>
+<li>Solidity是智能合约最常用的语言，语法上和js接近</li>
+</ul>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/21-ETH-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/20230112-231104.jpg" class="" title="代码示例">
+
+<p><strong>外部账户如何调用智能合约？</strong><br>对于A-&gt;B这个交易，如果B是一个账户，则这笔tx是一次普通的转账。而如果B是一个智能合约账户，则这笔tx就是一次A对B合约的调用<br>创建一个交易，接收地址为要调用的那个智能合约的地址，data域填写钥调用的函数及其参数的编码值。</p>
+<h3 id="合约中函数调用"><a href="#合约中函数调用" class="headerlink" title="合约中函数调用"></a>合约中函数调用</h3><img src="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/21-ETH-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/20230112-231831.jpg" class="" title="一个合约调用另一个合约中的函数">
+
+<p><strong>fallback函数</strong></p>
+<ul>
+<li>匿名函数，没有参数也没有返回值</li>
+<li>在两种情况下会被调用<ul>
+<li>直接向一个合约地址转账而不加任何data</li>
+<li>被调用的函数不存在</li>
+</ul>
+</li>
+<li>如果转账金额不是0，同样需要生命payable，否则会抛异常</li>
+</ul>
+<p>智能合约的创建与运行<br>创建合约，外部账户发起一个转账交易到0x0的地址</p>
+<ul>
+<li>转账金额是0，但是要支付gas</li>
+<li>合约的代码放在data域里</li>
+</ul>
+<p>智能合约运行在EVM（Ethereum Virtual Machine）上<br>智能合约是个Turing-complete Programming Model<br>汽油费 gas fee</p>
+<p><strong>为什么需要汽油费？</strong><br>为了解决（halting problem）。全节点收到一个对智能合约的调用，计算最多需要的gas fee，并从账户中扣除相应的ETH，待调用完成后得出实际需要的gas fee，返还没有使用的。</p>
+<p>EVM中不同指令消耗的gas fee是不一样的<br>简单的指令（如四则运算）很便宜，复杂的或者需要存储状态的指令（取hash）就很贵。</p>
+<h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><p>ETH的交易具有原子性，即一个交易要么不执行，要么全不执行，不会执行一部分。</p>
+<p><strong>可以抛出错误语句：</strong></p>
+<ul>
+<li>assert(bool condition) 如果条件不满足就抛出-用于内部错误。</li>
+<li>require(bool condition) 如果条件不满足就抛出-用于输入或者外部的组件引起的错误。</li>
+<li>revert() 终止运行并会滚状态变动-无条件抛错</li>
+</ul>
+<p>嵌套调用发生错误是否会连锁式的回滚？<br>有些会（直接调用），有些不会（call调用）</p>
+<p><strong>一个全节点打包交易到区块中，这些交易有一些是对智能合约的调用，那么全节点是先执行智能合约再挖矿，还是先挖矿再执行智能合约？</strong><br>先执行后挖矿<br>因为挖矿依赖block的hash值，而hash值的计算是需要获取所有交易的信息和状态即3课树的hash，所以肯定是需要先执行交易后挖矿。</p>
+<p><strong>智能合约是否支持多线程处理？</strong><br>不支持，状态机必须是完全确定的。多线程如果对内存访问顺序不同，造成的结果可能也会不同。</p>
+<p>区块和调用信息</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/21-ETH-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/20230112-234947.jpg" class="" title="区块和调用信息">
+
+<p>地址类型</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/21-ETH-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/20230112-234954.jpg" class="" title="地址类型">
+
+<p>拍卖案例</p>
+<!-- TODO 稍后录入到sol中实现一次 -->
+
+
+
+<p>如果用户的合约没有写fallback函数，在调用转账时会抛出异常造成整个交易的回滚。<br>这种case下所有人都永久的失去参与竞拍的ETH。</p>
+<p>为了解决以上的问题，我们提供一个withdraw函数供用户主动回收竞拍失败的ETH</p>
+
+
+<p>此时如果用户的fallback函数如果是这样写，这个合约就会不断的往合约账户上转账，直到gas用完或者余额不足。</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/21-ETH-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/20230115-222200.jpg" class="" title="拍卖2-2">
+
+<p>解决方案也很简单</p>
+<ol>
+<li>第一种是<code>bids[msg.sender]=0</code>提前执行即可。</li>
+<li>第二种是使用transfer或者send，所需的gas fee很少，不足以让调用方继续递归调用。</li>
+</ol>
+<p>The DAO攻击用的就是这种方式。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/21-ETH-%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/" data-id="clzmdspin00knzwl14f4w4blu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/17-ETH-GHOST协议" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/17-ETH-GHOST%E5%8D%8F%E8%AE%AE/" class="article-date">
+  <time datetime="2023-01-04T16:08:28.000Z" itemprop="datePublished">2023-01-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/17-ETH-GHOST%E5%8D%8F%E8%AE%AE/">GHOST协议</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<p>ETH将区块的生产时间设置为10几秒可能带来一下的问题<br>出块时间10几秒，同时由于network layer限制，一个区块发布到其他节点，也需要10几秒的时间从而分叉成为常态<br>没有被纳入到区块链中的区块在BTC中叫orphan block，ETH中交uncle block。<br>对于BTC来树由于出块时间较长，上述最长合法链的机制尚可接受。但对曰ETYH来说出块时间太短，分叉成为了常态，上述机制就不再适用了。<br>对个体矿工尤其不公平，因为大矿厂有能力去制造最长合法链</p>
+<p>GHOST协议核心：给挖到orphan block的节点“安慰奖”</p>
+<ol>
+<li>对orphan block来说能被加入到最长合法链的uncle空间，可以获得一定的奖励。奖励多少和加入区块的距离成反比，距离越短，奖励越多，距离最多为6代[(2-7)/8*3]。</li>
+<li>对于主动把uncle block加入到uncle空间的区块，也可以获得（1/32*3）的奖励</li>
+</ol>
+<p>规定的目的</p>
+<ol>
+<li>全节点不用维护所有区块的uncle block信息</li>
+<li>奖励递减，使得各节点今早包含叔父区块，尽早消灭分叉</li>
+</ol>
+<h3 id="把uncle-block的tx包括进来是，其中的tx是否执行？"><a href="#把uncle-block的tx包括进来是，其中的tx是否执行？" class="headerlink" title="把uncle block的tx包括进来是，其中的tx是否执行？"></a>把uncle block的tx包括进来是，其中的tx是否执行？</h3><p>不执行，交易有可能重复，并且也不检查uncle block的合法性（值检查uncle block是否是一个合法区块）</p>
+<h3 id="uncle-block后面还跟着一串block该怎么办？是否算叔父区块"><a href="#uncle-block后面还跟着一串block该怎么办？是否算叔父区块" class="headerlink" title="uncle block后面还跟着一串block该怎么办？是否算叔父区块"></a>uncle block后面还跟着一串block该怎么办？是否算叔父区块</h3><p>不算。如果uncle block也给奖励的话会造成forking attack 太便宜了。</p>
+<h3 id="BTC和ETH得到奖励的区别"><a href="#BTC和ETH得到奖励的区别" class="headerlink" title="BTC和ETH得到奖励的区别"></a>BTC和ETH得到奖励的区别</h3><p>BTC：block reward和tx fee<br>ETH：block reward和gas fee</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/17-ETH-GHOST%E5%8D%8F%E8%AE%AE/" data-id="clzmdspim00k6zwl1052r4njs" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/15-ETH-状态树" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/15-ETH-%E7%8A%B6%E6%80%81%E6%A0%91/" class="article-date">
+  <time datetime="2023-01-01T15:47:35.000Z" itemprop="datePublished">2023-01-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/15-ETH-%E7%8A%B6%E6%80%81%E6%A0%91/">ETH 状态树</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<p>ETH的账户的状态树<br>addr（账户地址）=&gt; state（账户状态）<br>账户的地址为160bit，40位16进制数</p>
+<h3 id="ETH中账户的状态是怎么存储的？"><a href="#ETH中账户的状态是怎么存储的？" class="headerlink" title="ETH中账户的状态是怎么存储的？"></a>ETH中账户的状态是怎么存储的？</h3><p><strong>思路一</strong>：使用(key, value)的hash table存储addr和state，将hash table组成merkle tree，tree的root hash保存在block header中。</p>
+<p>存在的问题：每次出块会有新的交易打包进块中，从而改变merkle tree。但事实上只有一部分的账户发生改变，一部分改变要重写整个tree，有点得不偿失。</p>
+<p>为什么BTC没有这个问题呢？因为BTC打包的是交易，数量级没有那么大（一段时间内交易的数量有限，一个区块上限大概是4000个）。而ETH打包账户，数量级呈指数级上升（每次都必须打包所有的账户）</p>
+<p><strong>思路二</strong>：直接使用merkle tree存放账户，要改内容直接改merkle tree，是否可行<br>存在的问题：merkle没有提供一个高效的查找和更新的方法。</p>
+<p>比特币运行方式：每个节点在本地运行一个候选区块（每个节点记录的交易，顺序不一定相同），每个节点去挖矿，去竞争记账权。取得记账权的节点发布的区块中的交易就是被区块链记录的交易。<br>因为顺序为宜，所以不需要进行排序<br>为什么ETH不能这么做？因为如果由发布区块的节点发布账户信息，发布的仍然是所有的账户信息，又回到了思路一中的问题。</p>
+<p><strong>思路三</strong>：使用sorted merkle tree 是否可行<br>新增账户，产生的账户地址是随机的，就需要插入重新排序</p>
+<p>ETH中使用的存储方式MPT（merkle patricia tree）结构<br>引例：trie结构（字典树）</p>
+<p>trie特点：</p>
+<ol>
+<li>打乱顺序，trie结构不变 （天然排序，即使插入新值也不影响）</li>
+<li>具有很好的更新局部性 （更新某一数据不需要遍历整棵树）</li>
+</ol>
+<p>trie缺点：存储浪费存取内容效率低（键值稀疏）</p>
+<p>解决trie缺点：Patricia Tree（进过路径压缩的树）</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/15-ETH-%E7%8A%B6%E6%80%81%E6%A0%91/mpt.jpg" class="" title="MPT">
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/15-ETH-%E7%8A%B6%E6%80%81%E6%A0%91/mpt2.jpg" class="" title="相邻区块的 MPT2">
+
+<p>后续区块的节点是直接指向前边共享节点的。</p>
+<p>问题：为什么钥保留历史状态，不在原先数据上直接修改<br>答案：为了回滚，在ETH，分叉是常态，orphan block中的数据都要向前回滚，而用于ETH中的有智能合约，为了支撑只能合约的回滚，必须保持之前的状态。</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/15-ETH-%E7%8A%B6%E6%80%81%E6%A0%91/ETH_header.jpg" class="" title="ETH header">
+
+<p>以上我们将的都是怎么存key，value是怎么存储的呢？<br>经过RLP（recursive length prefix）序列化，再存储</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/15-ETH-%E7%8A%B6%E6%80%81%E6%A0%91/" data-id="clzmdspim00jzzwl137zvc3am" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/13-ETH-概述" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/13-ETH-%E6%A6%82%E8%BF%B0/" class="article-date">
+  <time datetime="2023-01-01T14:03:28.000Z" itemprop="datePublished">2023-01-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/13-ETH-%E6%A6%82%E8%BF%B0/">ETH概述</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<h3 id="相对BTC的改进"><a href="#相对BTC的改进" class="headerlink" title="相对BTC的改进"></a>相对BTC的改进</h3><ol>
+<li>缩短出块时间至10多s</li>
+<li>ghost共识机制</li>
+<li>mining puzzle <ul>
+<li>BTC是计算密集型</li>
+<li>ETH是memory hard （限制ASIC）</li>
+</ul>
+</li>
+<li>未来用pos(proof of work)代替pow(proof of stake)</li>
+</ol>
+<p>BitCoin：decentralized currency 1.0<br>Ethereum：decentralized contract 2.0</p>
+<p>ETH主要是做的 smart contract</p>
+<p>货币</p>
+<table>
+<thead>
+<tr>
+<th>BTC</th>
+<th>ETH</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Satoshi</td>
+<td>Wei</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/13-ETH-%E6%A6%82%E8%BF%B0/" data-id="clzmdspim00k3zwl118ot8dx0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/14-ETH-账户" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/14-ETH-%E8%B4%A6%E6%88%B7/" class="article-date">
+  <time datetime="2023-01-01T14:03:28.000Z" itemprop="datePublished">2023-01-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/14-ETH-%E8%B4%A6%E6%88%B7/">ETH 账户</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<p>ETH的账户类型 account based ledger</p>
+<p><strong>转账</strong><br>相对于BTC的账户 transaction based ledger, BTC进行转账交易时需要一次性把所有的BTC都进行发起转账交易，BTC总量大于交易的数量+fee时需要具体说明哪几个BTC转给接收方，然后把剩余的BTC转到自己的账户中，否则会当成小费转给矿工。ETH则不需要制定哪几个ETH。</p>
+<p><strong>查询余额</strong><br>BTC需要UTXO中查找对应的账户计算，ETH可以直观的看到。</p>
+<p><strong>account-based模式优缺点</strong><br>优点</p>
+<ol>
+<li>符合人主观感受，和现行的银行交易类似。</li>
+<li>可以防范double spending<br>缺点<br>replay attack 重放攻击。攻击的动作：A转给B10个ETH，过一段时间之后B重新把该动作在区块链上重放了一次，其他节点会认为是一笔新的交易将A账户中的ETH再次转给B<br>解决方案：加nonce（交易次数编号）<br>因为有nonce编号之后重放的nonce和区块链中已发布的信息就对不上认为是一个不合法的信息。</li>
+</ol>
+<p>externally owned account 所有的交易都只能由外部账户发起，不能由合约账户发起</p>
+<ul>
+<li>balance </li>
+<li>nonce<br>smart contract account 合约账户</li>
+<li>balance</li>
+<li>nonce （一个合约可以调用另一个合约，因此也要通过nonce记录调用的次数）</li>
+<li>code</li>
+<li>storage</li>
+</ul>
+<h3 id="为什么要设置ETH这个全新的体系？"><a href="#为什么要设置ETH这个全新的体系？" class="headerlink" title="为什么要设置ETH这个全新的体系？"></a>为什么要设置ETH这个全新的体系？</h3><p>智能合约要求有稳定的账户参与。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/14-ETH-%E8%B4%A6%E6%88%B7/" data-id="clzmdspin00kgzwl18yrt2lun" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-编程/web3/区块链技术与应用/11-BTC-匿名性" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/11-BTC-%E5%8C%BF%E5%90%8D%E6%80%A7/" class="article-date">
+  <time datetime="2023-01-01T08:07:04.000Z" itemprop="datePublished">2023-01-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/11-BTC-%E5%8C%BF%E5%90%8D%E6%80%A7/">匿名性</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本系列开始区块链的学习，主要内容为B站上<a href="https://www.bilibili.com/video/BV1Vt411X7JF?p=1&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">北京大学肖臻老师《区块链技术与应用》公开课</a></p>
+<p>Bitcoin and anonymity</p>
+<p>pseudonymity privacy</p>
+<p>不同的账户之间可以进行关联，账户和真实世界也可以进行关联</p>
+<p>BTC的匿名性没有很好</p>
+<p>hide your identity from whom?</p>
+<h3 id="怎么提高自己的匿名性？"><a href="#怎么提高自己的匿名性？" class="headerlink" title="怎么提高自己的匿名性？"></a>怎么提高自己的匿名性？</h3><p>BTC实现匿名<br>network layer (网络层)匿名比较好解决，多路径转发（因为转发的节点只知道上一个节点在哪不知道源节点），比如TOR（洋葱路由）<br>application layer (应用层) coin mixing 把各种人混在一起。</p>
+<h3 id="零知识证明"><a href="#零知识证明" class="headerlink" title="零知识证明"></a>零知识证明</h3><p>一方（证明者）向另一方（验证者）证明一个陈述时正确的，而无需透露该陈述是正确的外的任何信息。</p>
+<p>比特币账户证明：我是一个账号的拥有者，只需要用私钥发布一个签名，然后让其他人验证即可。</p>
+<h3 id="同态隐藏"><a href="#同态隐藏" class="headerlink" title="同态隐藏"></a>同态隐藏</h3><ul>
+<li>如果x,y不同，那么它们的加密函数值E(x),E(y)也不同。</li>
+<li>给定E(x), 很难推出x的值</li>
+<li>给定E(x)和E(y)的值，我们可以很容易的计算出某些关于x,y的加密函数值。<ul>
+<li>同态加法：通过E(x)和E(y)计算出E(x+y)的值</li>
+<li>同态乘法：通过E(x)和E(y)计算出E(x*y)的值</li>
+<li>扩展到多项式</li>
+</ul>
+</li>
+</ul>
+<h3 id="盲签方法"><a href="#盲签方法" class="headerlink" title="盲签方法"></a>盲签方法</h3><ul>
+<li>用户A提供SerialNum，<strong>银行在不知道SerialNum的情况下返回签名Token</strong>，减少A的存款</li>
+<li>用户A把SerialNum和Token交给B完成交易</li>
+<li>用户B拿SerialNum和Token交给银行验证，银行验证通过，增加B的存款。</li>
+<li>银行无法把A和B联系起来</li>
+<li>中心化</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/web3/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%8A%80%E6%9C%AF%E4%B8%8E%E5%BA%94%E7%94%A8/11-BTC-%E5%8C%BF%E5%90%8D%E6%80%A7/" data-id="clzmdspil00jpzwl1hrpl02m5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/blog/page/3/">&lt; 上一页</a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/blog/page/5/">5</a><a class="page-number" href="/blog/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/blog/page/21/">21</a><a class="extend next" rel="next" href="/blog/page/5/">下一页 &gt;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>

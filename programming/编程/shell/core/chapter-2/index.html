@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>文件和目录操作命令 | ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. cd 切换目录2. mkdir 创建目录3. touch 创建空文件或改变文件时间戳属性4. ls 显示目录下内容及相关属性5. cp 复制文件或目录6. mv 移动或重命名文件7. rm 删除目录或文件8. rmdir 删除空目录9. ln 硬链接和软链接10. find 查找目录下的文件11. xargs 标准输入转换为命令行参数12. rename 重命名文件13. basename">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件和目录操作命令">
+<meta property="og:url" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-2/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="1. cd 切换目录2. mkdir 创建目录3. touch 创建空文件或改变文件时间戳属性4. ls 显示目录下内容及相关属性5. cp 复制文件或目录6. mv 移动或重命名文件7. rm 删除目录或文件8. rmdir 删除空目录9. ln 硬链接和软链接10. find 查找目录下的文件11. xargs 标准输入转换为命令行参数12. rename 重命名文件13. basename">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-01T13:59:03.000Z">
+<meta property="article:modified_time" content="2024-08-08T11:42:01.082Z">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="shell">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-编程/shell/core/chapter-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-2/" class="article-date">
+  <time datetime="2022-07-01T13:59:03.000Z" itemprop="datePublished">2022-07-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      文件和目录操作命令
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="#cd">1. cd 切换目录</a><br><a href="#mkdir">2. mkdir 创建目录</a><br><a href="#touch">3. touch 创建空文件或改变文件时间戳属性</a><br><a href="#ls">4. ls 显示目录下内容及相关属性</a><br><a href="#cp">5. cp 复制文件或目录</a><br><a href="#mv">6. mv 移动或重命名文件</a><br><a href="#rm">7. rm 删除目录或文件</a><br><a href="#rmdir">8. rmdir 删除空目录</a><br><a href="#ln">9. ln 硬链接和软链接</a><br><a href="#find">10. find 查找目录下的文件</a><br><a href="#xargs">11. xargs 标准输入转换为命令行参数</a><br><a href="#rename">12. rename 重命名文件</a><br><a href="#basename">13. basename 显示文件名或目录名</a><br><a href="#dirname">14. dirname 显示文件或目录路径</a><br><a href="#chattr">15. chattr 改变文件的扩展属性</a><br><a href="#file">16. file 显示文件类型</a><br><a href="#md5sum">17. md5sum 计算和校验文件的 MD5 值</a><br><a href="#chown">18. chown 改变文件或者目录的用户和用户组</a><br><a href="#chmod">19. chmod 改变文件或目录权限</a><br><a href="#umask">20. umask 显示或设置权限掩码</a></p>
+<h3 id="cd">cd 切换目录</h3>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cd -</td>
+<td>回到上次所在的目录（OLDPWD）</td>
+</tr>
+<tr>
+<td>cd ～</td>
+<td>回到 HOME 目录</td>
+</tr>
+<tr>
+<td>cd ..</td>
+<td>上级目录</td>
+</tr>
+</tbody></table>
+<h3 id="mkdir">mkdir 创建目录</h3>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-p</td>
+<td>递归创建目录</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>设置权限</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示创建过程</td>
+</tr>
+</tbody></table>
+<h6 id="实战-1-同时创建多个多级目录及多级子目录。"><a href="#实战-1-同时创建多个多级目录及多级子目录。" class="headerlink" title="实战 1 同时创建多个多级目录及多级子目录。"></a>实战 1 同时创建多个多级目录及多级子目录。</h6><p>如:同时创建 a/1/1_1,a/1/1_2,a/2/2_1,a/2/2_2 等</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p a/&#123;1,2&#125;/&#123;1_1,2_2&#125;</span><br><span class="line">tree a</span><br><span class="line"><span class="meta">#</span><span class="bash"> a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ├── 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> │   ├── 1_1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> │   └── 2_2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> └── 2</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     ├── 1_1</span></span><br><span class="line"><span class="meta">#</span><span class="bash">     └── 2_2</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="实战-2-克隆目录结构"><a href="#实战-2-克隆目录结构" class="headerlink" title="实战 2 克隆目录结构"></a>实战 2 克隆目录结构</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">tree -fid --noreport a &gt; temp.txt</span><br><span class="line">cat temp.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> a</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> a/1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> a/1/1_1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> a/1/2_2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> a/2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> a/2/1_1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> a/2/2_2</span></span><br><span class="line">cd b</span><br><span class="line">mv ../temp.txt a.txt</span><br><span class="line">mkdir -pv `cat a.txt`</span><br><span class="line"><span class="meta">#</span><span class="bash"> mkdir: created directory <span class="string">'a'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mkdir: created directory <span class="string">'a/1'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mkdir: created directory <span class="string">'a/1/1_1'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mkdir: created directory <span class="string">'a/1/2_2'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mkdir: created directory <span class="string">'a/2'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mkdir: created directory <span class="string">'a/2/1_1'</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> mkdir: created directory <span class="string">'a/2/2_2'</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="touch">3. touch 创建空文件或改变文件时间戳属性</h3>
+linux中一切皆文件，touch也能修改目录的时间戳
+| 命令 | 作用         |
+| ---- | ------------ |
+| -a | 只更改文件的最后访问时间 |
+| -m | 只更改文件的最后修改时间 |
+
+<h6 id="批量创建多个文件"><a href="#批量创建多个文件" class="headerlink" title="批量创建多个文件"></a>批量创建多个文件</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">touch a&#123;1..5&#125;</span><br><span class="line"><span class="meta">#</span><span class="bash"> -rw-r--r-- 1 ansike ansike    0 Jul  1 20:00 a1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -rw-r--r-- 1 ansike ansike    0 Jul  1 20:00 a2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -rw-r--r-- 1 ansike ansike    0 Jul  1 20:00 a3</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -rw-r--r-- 1 ansike ansike    0 Jul  1 20:00 a4</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> -rw-r--r-- 1 ansike ansike    0 Jul  1 20:00 a5</span></span><br></pre></td></tr></table></figure>
+
+<h6 id="修改文件时间属性"><a href="#修改文件时间属性" class="headerlink" title="修改文件时间属性"></a>修改文件时间属性</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看命令</span></span><br><span class="line">stat a1</span><br><span class="line"><span class="meta">#</span><span class="bash">   File: a1</span></span><br><span class="line"><span class="meta">#</span><span class="bash">   Size: 0               Blocks: 0          IO Block: 4096   regular empty file</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Device: 810h/2064d      Inode: 21500461    Links: 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Access: (0644/-rw-r--r--)  Uid: ( 1001/  ansike)   Gid: ( 1001/  ansike)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Access: 2022-07-01 20:00:00.872227631 +0800</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Modify: 2022-07-01 20:00:00.872227631 +0800</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Change: 2022-07-01 20:00:00.872227631 +0800</span></span><br><span class="line"><span class="meta">#</span><span class="bash">  Birth: -</span></span><br><span class="line">touch -a a1</span><br><span class="line"><span class="meta">#</span><span class="bash"> Access和Change时间都发生了变化</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Access: 2022-07-01 20:02:38.352475849 +0800</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Modify: 2022-07-01 20:00:00.872227631 +0800</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Change: 2022-07-01 20:02:38.352475849 +0800</span></span><br><span class="line"></span><br><span class="line">touch -m a2</span><br><span class="line"><span class="meta">#</span><span class="bash"> Modify和Change时间都发生了变化</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Access: 2022-07-01 20:00:00.872227631 +0800</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Modify: 2022-07-01 20:05:35.116754462 +0800</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Change: 2022-07-01 20:05:35.116754462 +0800</span></span><br></pre></td></tr></table></figure>
+
+<p>所以对于文件的任何修改都会影响 Change 的值</p>
+<h3 id="ls">ls 显示目录下内容及相关属性</h3>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>显示目录下所有文件，包括<code>.</code>字符开始的隐藏文件</td>
+</tr>
+<tr>
+<td>-A</td>
+<td>显示目录下所有文件，包括隐藏文件，不包括<code>.</code>,<code>..</code>这两个目录</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>使用长格式列出文件和目录信息</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>根据修改时间排序，默认为文件名排序</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>倒序排列</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>以人类可读信息展示文件或者目录大小(搭配-l 使用)</td>
+</tr>
+<tr>
+<td>-S</td>
+<td>根据文件大小排序</td>
+</tr>
+<tr>
+<td>-R</td>
+<td></td>
+</tr>
+<tr>
+<td>-X</td>
+<td>根据扩展名排序</td>
+</tr>
+<tr>
+<td>–time</td>
+<td>默认为修改时间（Modify Time），可以改为 atime（Access Time）或 ctime（Change Time）</td>
+</tr>
+<tr>
+<td>–time-style</td>
+<td>按特定规则展示时间（long-iso 最好,full-iso,iso,locale）</td>
+</tr>
+</tbody></table>
+<h6 id="查看目录所有的文件或者文件夹"><a href="#查看目录所有的文件或者文件夹" class="headerlink" title="查看目录所有的文件或者文件夹"></a>查看目录所有的文件或者文件夹</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 递归查看所有的目录</span></span><br><span class="line">ls -RF | grep /</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 递归查看所有的文件</span></span><br><span class="line">ls -RF | grep -v /</span><br></pre></td></tr></table></figure>
+
+<h6 id="查找最近修改过的文件"><a href="#查找最近修改过的文件" class="headerlink" title="查找最近修改过的文件"></a>查找最近修改过的文件</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 以长格式形式展示，按照修改时间倒序排列，最后一个即是最近修改的文件</span></span><br><span class="line">ls -lrt</span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用tail优化定位</span></span><br><span class="line">ls -lrt|tail -f</span><br></pre></td></tr></table></figure>
+
+<h6 id="删除-inode-节点垃圾"><a href="#删除-inode-节点垃圾" class="headerlink" title="删除 inode 节点垃圾"></a>删除 inode 节点垃圾</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls|xargs rm -f</span><br></pre></td></tr></table></figure>
+
+<h3 id="cp">cp 复制文件或目录</h3>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-r</td>
+<td>递归复制目录及所有子文件</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>覆盖文件前需要用户确认</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>保留源文件的所有者和权限及时间信息</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>如果源文件是符号连接，仅复制符号连接本身，保留指向</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>是 p,d,r 命令的总和</td>
+</tr>
+</tbody></table>
+<h6 id="文件快速备份"><a href="#文件快速备份" class="headerlink" title="文件快速备份"></a>文件快速备份</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 我们经常会这么备份</span></span><br><span class="line">cp /etc/mysql/my.cnf /etc/mysql/my.cnf.back</span><br><span class="line"><span class="meta">#</span><span class="bash"> 借助bash对大括号的展开操作，可以很简单的写</span></span><br><span class="line">cp /etc/mysql/my.cnf&#123;,.back&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="mv">mv 移动或重命名文件</h3>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-f</td>
+<td>目标文件存在，覆盖文件前不需要用户确认</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>目标文件存在，覆盖文件前需要用户确认</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>不覆盖已存在的文件</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>适用与多个源文件到一个目标目录的情况，和 cp -t 一样，目标在前，源在后</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>仅源文件比目标文件新，或者目标文件不存在是才进行移动</td>
+</tr>
+</tbody></table>
+<h3 id="rm">rm 删除目录或文件</h3>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-f</td>
+<td>强制删除</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>删除前需确认</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>递归删除目录及内容</td>
+</tr>
+<tr>
+<td>-I</td>
+<td>删除超过三个文件或者递归删除前要求确认</td>
+</tr>
+</tbody></table>
+<h3 id="rmdir">rmdir 删除空目录</h3>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-p</td>
+<td>递归删除空目录</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示执行过程</td>
+</tr>
+</tbody></table>
+<h3 id="ln">ln 硬链接和软链接</h3>
+
+<p>创建文件间的联系。</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-</td>
+<td>创建硬链接</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>创建软链接</td>
+</tr>
+</tbody></table>
+<p>硬链接（hard link）：生成的是普通文件（-字符）</p>
+<ol>
+<li>inode：具有相同的 inode 节点多个文件互为硬链接文件</li>
+<li>内容：硬链接相当于文件的另外一个入口</li>
+<li>删除结果：删除硬链接文件或者源文件，文件实体未被删除。只有所有硬链接都被删除之后才能被删除。可以使用硬链接来防止重要文件误删</li>
+</ol>
+<p>软链接（symbolic link）：生成的是符号链接文件（1 类型）</p>
+<ol>
+<li>inode：类似于 windows 里的快捷方式，inode 和源文件不一样</li>
+<li>内容区别：里面存放的是源文件的路径，指向源文件实体</li>
+<li>删除结果：删除源文件，软链接失效</li>
+</ol>
+<p>有关目录</p>
+<ol>
+<li>目录不可以创建硬链接（因目录可以跨文件系统，但硬链接需要相同的 inode），可以创建软链接。</li>
+<li>每个目录下都有两个硬链接’.’,’..’，指向当前目录和上级目录</li>
+<li>在父目录创建子目录会导致父目录的硬链接数加 1</li>
+</ol>
+<h3 id="find">find 查找目录下的文件</h3>
+语法格式：find   [<b>选项</b> -H,-L,-P] &nbsp;&nbsp;&nbsp;[<b>路径</b>] &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;  [<b>操作语句</b> 参数｜限定条件｜执行动作]
+
+<p>操作语句（expression）部分</p>
+<h6 id="options-模块"><a href="#options-模块" class="headerlink" title="options 模块"></a>options 模块</h6><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-depth</td>
+<td>从最深的子目录开始查找</td>
+</tr>
+<tr>
+<td>-maxDepths levels</td>
+<td>查找的最大目录级数， levels 为自然数</td>
+</tr>
+<tr>
+<td>-regextype type</td>
+<td>改变正则表达式的模式。默认为 emacs，还有 posix-awk，posix-basic，posix-egrep，</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Posix: Portable Operating System Interface for UNIX</p>
+</blockquote>
+<h6 id="tests-模块"><a href="#tests-模块" class="headerlink" title="tests 模块"></a>tests 模块</h6><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-mtime [-n | n | +n]</td>
+<td>以修改时间来查找，-n 天内｜ n 天｜ +n 天以前</td>
+</tr>
+<tr>
+<td>-name</td>
+<td>文件名查找，只支持*,？,[]等特殊通配符</td>
+</tr>
+<tr>
+<td>-regextype type</td>
+<td>改变正则表达式的模式。默认为 emacs，还有 posix-awk，posix-basic，posix-egrep，</td>
+</tr>
+<tr>
+<td>-regex</td>
+<td>正则表达式</td>
+</tr>
+<tr>
+<td>-iregex</td>
+<td>不区分大小写正则表达式</td>
+</tr>
+<tr>
+<td>-type</td>
+<td>查找某一类型文件: <br />b(块设备文件)，c(字符设备文件)，d(目录)，p（管道文件），l（符号链接文件），f（普通文件），s（socket 文件），D（door）</td>
+</tr>
+</tbody></table>
+<h6 id="actions-模块"><a href="#actions-模块" class="headerlink" title="actions 模块"></a>actions 模块</h6><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-delete</td>
+<td>将查找出的文件删除</td>
+</tr>
+<tr>
+<td>-exec</td>
+<td>执行参数给出的 shell 命令</td>
+</tr>
+<tr>
+<td>-prune</td>
+<td>不在指定目录中查找</td>
+</tr>
+</tbody></table>
+<h6 id="oprators-逻辑运算符"><a href="#oprators-逻辑运算符" class="headerlink" title="oprators 逻辑运算符"></a>oprators 逻辑运算符</h6><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>!</td>
+<td>取反</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>交集</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>并集</td>
+</tr>
+</tbody></table>
+<h6 id="实战示例"><a href="#实战示例" class="headerlink" title="实战示例"></a>实战示例</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查找一天内修改过的文件和目录</span></span><br><span class="line">find . -mtime -1</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查找一天内的所有txt</span></span><br><span class="line">find . -mtime -1 -name '*.txt'</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查找所有的目录</span></span><br><span class="line">find . -type d</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查找所有的文件</span></span><br><span class="line">find . ! -type d</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 排除某个目录</span></span><br><span class="line">find ./ -path "./a/1" -prune -o -print</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 排除多个目录</span></span><br><span class="line">find . \( -path './a/1/1_1' -o -path './a/2/2_2' \) -prune -o -print</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查找n天前的文件并删除</span></span><br><span class="line">find . -mtime +2 -delete</span><br><span class="line">find . -mtime 1 -exec rm &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查找所有的文件并以长模式展开</span></span><br><span class="line">find . -type f -exec ls -l &#123;&#125; \;</span><br><span class="line">find . -type f|xargs ls -l</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 将所有的a*文件内容中的this替换成that</span></span><br><span class="line">find . -type f -name "a*" -exec sed -i "s#this#that#g" &#123;&#125; \;</span><br><span class="line">find . -type f -name "a*" | xargs sed -i "s#that#this#g"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 删除一个目录下的所有文件，保留一个指定文件</span></span><br><span class="line">find . -type f -cmin -4 ! -name "b9" -exec rm -f &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+<h6 id="服务数据注入"><a href="#服务数据注入" class="headerlink" title="服务数据注入"></a>服务数据注入</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在www目录被注入了恶意弹窗</span></span><br><span class="line">find . -type f | xargs sed -i "s#&lt;script&gt;alert('xxx')&lt;/script&gt;##g"</span><br><span class="line"></span><br><span class="line">find . -type f | xargs sed -i "/*alert('xxx')*/d"</span><br></pre></td></tr></table></figure>
+
+<h6 id="find-中-exec-和-xargs-区别"><a href="#find-中-exec-和-xargs-区别" class="headerlink" title="find 中 exec 和 xargs 区别"></a>find 中 exec 和 xargs 区别</h6><ol>
+<li>查找的结果在 exec 是逐个传递给后面的命令执行，效率略低。在 xargs 是一次性传递给后边的命令执行</li>
+<li>文件名有空格，exec 能正常处理，xargs 不能，需要特殊处理</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 查看区别</span></span><br><span class="line">find . -type f -exec echo hello &#123;&#125; \;</span><br><span class="line">find . -type f | xargs echo hello</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 文件名有空格时xargs特殊处理</span></span><br><span class="line">find . -name 'a b' -print0| xargs -0 ls -lh</span><br></pre></td></tr></table></figure>
+
+<h3 id="xargs">xargs 标准输入转换为命令行参数</h3>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-n</td>
+<td>每行最大参数数量，可将标准输入的文本话氛围多行，每行 n 个参数，默认空格分割</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>以{}代替前面的结果</td>
+</tr>
+<tr>
+<td>-0</td>
+<td>用 null 代替空格作为分隔符，配合 find 的 print0 选项输出使用</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>自定义分隔符，进行字符串切割</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> -n</span></span><br><span class="line">cat a4</span><br><span class="line"><span class="meta">#</span><span class="bash"> 1</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4 5 6 7 8 9</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 10 11</span></span><br><span class="line"></span><br><span class="line">xargs &lt; a4</span><br><span class="line"><span class="meta">#</span><span class="bash"> 1 2 3 4 5 6 7 8 9 10 11</span></span><br><span class="line"></span><br><span class="line">xargs -n 3 &lt; a4</span><br><span class="line"><span class="meta">#</span><span class="bash"> 1 2 3</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4 5 6</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 7 8 9</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 10 11</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> -d</span></span><br><span class="line">echo splitXsplitXsplit|xargs -d X</span><br><span class="line">echo splitXsplitXsplit|xargs -d X -n2</span><br></pre></td></tr></table></figure>
+
+<h3 id="rename">rename 重命名文件</h3>
+
+<p>语法：rename from to file<br>这个在 Debian 中是不一样的语法</p>
+<h6 id="批量修改文件名"><a href="#批量修改文件名" class="headerlink" title="批量修改文件名"></a>批量修改文件名</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rename 's/a/b/' a*.txt</span><br><span class="line">rename 's/txt/jpg/' *.txt</span><br></pre></td></tr></table></figure>
+
+<h3 id="basename">basename 显示文件名或目录名</h3>
+
+<p>语法：basename [file] [后缀]</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">basename a/1/t.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> t.txt</span></span><br><span class="line"></span><br><span class="line">basename a/1/t.txt .txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> t</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="dirname">dirname 显示文件或目录路径</h3>
+语法：dirname [file]
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dirname a/1/t.txt</span><br><span class="line"><span class="meta">#</span><span class="bash"> a/1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="chattr">chattr 改变文件的扩展属性</h3>
+
+<p>功能: 改变文件的扩展熟悉。chmod 知识改变了文件的读、写、执行权限，更底层的属性控制是由 chattr 改变的<br>语法: chattr [option] [mode] [file]</p>
+<p><b>option</b></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-R</td>
+<td>递归更改目录属性</td>
+</tr>
+<tr>
+<td>-V</td>
+<td>显示命令执行过程</td>
+</tr>
+</tbody></table>
+<p><b>mode</b></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+</td>
+<td>增加参数</td>
+</tr>
+<tr>
+<td>-</td>
+<td>减少参数</td>
+</tr>
+<tr>
+<td>=</td>
+<td>更新为指定参数</td>
+</tr>
+<tr>
+<td>A</td>
+<td>不修改文件的最后访问时间</td>
+</tr>
+<tr>
+<td>a</td>
+<td>只能向文件中添加数据，不能删除，多用于服务日志</td>
+</tr>
+<tr>
+<td>i</td>
+<td>文件不能被删除改名，写入，新增 (即是是 root 也无法删除)</td>
+</tr>
+</tbody></table>
+<p>可以给文件加锁</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 只读权限</span></span><br><span class="line">chattr +a b2.jpg</span><br><span class="line"><span class="meta">#</span><span class="bash"> 不可更改权限</span></span><br><span class="line">chattr +i b2.jpg</span><br></pre></td></tr></table></figure>
+
+<h3 id="file">file 显示文件类型</h3>
+
+<p>语法: chattr [option] [file]</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">file *</span><br><span class="line"><span class="meta">#</span><span class="bash"> a:       directory</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> b5.jpg:  empty</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> b6.jpg:  UTF-8 Unicode text</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="md5sum">md5sum 计算和校验文件的MD5值</h3>
+
+<p>语法: md5sum [option] [file]</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-b</td>
+<td>以二进制模式读取文件</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>从指定文件中读取 MD5 校验值，并进行校验</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>以文本模式读取文件（默认模式）</td>
+</tr>
+<tr>
+<td>–quiet</td>
+<td>验证通过不输出 OK</td>
+</tr>
+<tr>
+<td>–status</td>
+<td>不输出任何信息，通过返回值判断结果</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">md5sum b6.jpg</span><br><span class="line"><span class="meta">#</span><span class="bash"> 3425006b2772d4e16740e83218248495  b6.jpg</span></span><br><span class="line"></span><br><span class="line">md5sum b6.jpg &gt; b6.log</span><br><span class="line">cat b6.log</span><br><span class="line"><span class="meta">#</span><span class="bash"> 3425006b2772d4e16740e83218248495  b6.jpg</span></span><br><span class="line"></span><br><span class="line">md5sum -c b6.log</span><br><span class="line"><span class="meta">#</span><span class="bash"> b6.jpg: OK</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="chown">chown 改变文件或者目录的用户和用户组</h3>
+
+<p>语法: chown [options] [owner]:[group]] [file]</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-R</td>
+<td>递归更改目录的用户和用户组</td>
+</tr>
+</tbody></table>
+<h3 id="chmod">19. chmod 改变文件或目录权限</h3>
+
+<p>语法: chown [options] [mode] [file]</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-R</td>
+<td>递归更改目录的所有文件</td>
+</tr>
+</tbody></table>
+<p>权限说明: -rw-r–r– 1 platform platform 11 Jul 3 11:01 b6.jpg<br>一个文件的类型由<code>-rw-r--r--</code>进行描述，第一位为文件类型，接下来每 3 位为一组，分别代表用户权限，用户组权限，和其他用户权限</p>
+<p><b>权限说明</b></p>
+<table>
+<thead>
+<tr>
+<th>权限位</th>
+<th>全称</th>
+<th>含义</th>
+<th>对应数字</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r</td>
+<td>read</td>
+<td>可读权限</td>
+<td>4</td>
+</tr>
+<tr>
+<td>w</td>
+<td>wirte</td>
+<td>可写权限</td>
+<td>2</td>
+</tr>
+<tr>
+<td>x</td>
+<td>execute</td>
+<td>可执行权限</td>
+<td>1</td>
+</tr>
+<tr>
+<td>-</td>
+<td></td>
+<td>没有任何权限</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>u</td>
+<td>owner/user 文件所属用户</td>
+</tr>
+<tr>
+<td>g</td>
+<td>group 文件所属用户组</td>
+</tr>
+<tr>
+<td>o</td>
+<td>other 其他用户</td>
+</tr>
+<tr>
+<td>a</td>
+<td>相当于 u,g,o 的总和</td>
+</tr>
+</tbody></table>
+<p>+,-,= 表示对权限进行操作</p>
+<p><b>权限和数字对应关系</b><br>rw- r– r–<br>421 400 400<br>7 4 4<br><code>-rw-r--r--</code>所以最后权限位对应的数字为<code>744</code>，我们在平常的开发中经常会赋予<code>755</code>权限，其实就是当前用户有所有权限，用户组和其他用户有只读和执行权限，没有写的权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 给用户增加执行，用户组，其他用户赋予只读权限</span></span><br><span class="line">chmod u+x,g=r,o=r b2.jpg</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 数字和上边的权限赋值是等价的</span></span><br><span class="line">chmod 744 b2.jpg</span><br></pre></td></tr></table></figure>
+
+<h3 id="umask">20. umask 显示或设置权限掩码</h3>
+
+<p>功能: 是通过八进制的数值来定义用户创建文件或目录的默认权限<br>语法: umask [options] [mode]<br>默认掩码为 022</p>
+<p>创建文件的默认最大权限为 666<br>使用 umask 之后，文件的权限为 644</p>
+<p>创建文件的默认最大权限为 777<br>使用 umask 之后，目录的权限为 755</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-2/" data-id="clzmdspih00i5zwl12srbgkje" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/shell/core/chapter-3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          文件过滤及内容编辑处理命令
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/node/js%E5%AF%B9%E8%B1%A1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">js对象</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>

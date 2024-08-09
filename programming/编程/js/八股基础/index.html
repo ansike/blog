@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>八股基础 | ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="js 基础1.1 js 闭包 框架相关 工程化相关 H5 服务相关  js 基础  闭包  概念：函数嵌套，内层函数引用外层函数变量。例子：调用一个函数返回一个新的函数 原型链概念：js 的对象中存在proto指向构造函数的 prototype，而构造函数 prototype 的proto会继续往上指，直到指向 Object.prototype.proto &#x3D;&gt; null.例子：const">
+<meta property="og:type" content="article">
+<meta property="og:title" content="八股基础">
+<meta property="og:url" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/%E5%85%AB%E8%82%A1%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="js 基础1.1 js 闭包 框架相关 工程化相关 H5 服务相关  js 基础  闭包  概念：函数嵌套，内层函数引用外层函数变量。例子：调用一个函数返回一个新的函数 原型链概念：js 的对象中存在proto指向构造函数的 prototype，而构造函数 prototype 的proto会继续往上指，直到指向 Object.prototype.proto &#x3D;&gt; null.例子：const">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-02T09:28:58.000Z">
+<meta property="article:modified_time" content="2024-08-08T11:42:01.067Z">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="js">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-编程/js/八股基础" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E5%85%AB%E8%82%A1%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time datetime="2022-05-02T09:28:58.000Z" itemprop="datePublished">2022-05-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      八股基础
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><a href="#js">js 基础</a><br>1.1 <a href="#">js 闭包</a></li>
+<li><a href="#frame">框架相关</a></li>
+<li><a href="#engineering">工程化相关</a></li>
+<li><a href="#h5">H5</a></li>
+<li><a href="#server">服务相关</a></li>
+</ol>
+<h2 id="js">js 基础</h2>
+
+<h3 id="closure">闭包</h3>
+
+<p>概念：函数嵌套，内层函数引用外层函数变量。<br>例子：调用一个函数返回一个新的函数</p>
+<h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h3><p>概念：js 的对象中存在<strong>proto</strong>指向构造函数的 prototype，而构造函数 prototype 的<strong>proto</strong>会继续往上指，直到指向 Object.prototype.<strong>proto</strong> =&gt; null.<br>例子：const arr = new Array(); arr.<strong>proto</strong>===Array.prototype;</p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>js 中继承分主要有两部分组成：构造函数，原型链。其余各种继承都为这两种的排列组合。<br>构造函数继承即是执行构造函数，给 this 绑定属性。<br>原型链继承即是继承祖先类上的方法。<br>es6 中的 class 即使这两种继承的一个语法糖。</p>
+<h3 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h3><p>js 的垃圾回收借鉴自 java，采用了自动垃圾回收机制。<br>因为 js 内存分为了新生代和老生代，自动垃圾回收的算法在不同的分代中采用的方式不一样。<br>新生代中主要使用了 scavenge 算法，<br>老生代使用了标记清楚+标记整理</p>
+<h3 id="es6-语法"><a href="#es6-语法" class="headerlink" title="es6 语法"></a>es6 语法</h3><p>let const 块级作用域，定义可修改和常量变量（对比 var 都没有变量声明提前，都不可重复声明）<br>Set,Map<br>Proxy<br>Class<br>箭头函数<br>import/export</p>
+<h3 id="js-中-commonjs，esm-区别"><a href="#js-中-commonjs，esm-区别" class="headerlink" title="js 中 commonjs，esm 区别"></a>js 中 commonjs，esm 区别</h3><ol>
+<li>commonjs 输出为值的拷贝，esm 为值的引用</li>
+<li>commonjs 同步加载，esm 异步加载</li>
+<li>commonjs 运行时加载，esm 编译时输出接口</li>
+</ol>
+<p>esm import 的模块不能重新赋值<br>esm 存在 export/import 提升</p>
+<h2 id="frame">框架相关</h2>
+
+<h3 id="react-和-vue-diff-的异同"><a href="#react-和-vue-diff-的异同" class="headerlink" title="react 和 vue diff 的异同"></a>react 和 vue diff 的异同</h3><p>相同点：都是同级比较，跨级比较意义不是很大<br>不同点：</p>
+<ol>
+<li>对比节点时不同。相同节点，classname 不同，vue 会认为是不同的元素，会删除重建，react 则会修改节点属性</li>
+<li>对比顺序不同。vue 是从两端到中间，react 是从左到右。</li>
+</ol>
+<h3 id="setState-是同步还是异步？"><a href="#setState-是同步还是异步？" class="headerlink" title="setState 是同步还是异步？"></a>setState 是同步还是异步？</h3><p>看到面试经常有人问 setState 是同步还是异步，其实这个问题直接问我我肯定会懵逼，我确实不知道，可见我见到的场景还是比较少。<br>就我使用 hooks 中所有场景来看，所有使用 setState 的地方其实预期都是异步的，而且就从 js 的生态来看，所有的耗时的更新操作都应该是异步的。就包括 react 的并发模式也是默认支持异步的，所以可以认为现在的同步模式只是 react 还没有完全处理完的问题，还是尽量少用，或者不需要去 care，默认就认为是异步即可。</p>
+<h5 id="还是需要深入了解一下什么时候是异步，什么时候是同步？"><a href="#还是需要深入了解一下什么时候是异步，什么时候是同步？" class="headerlink" title="还是需要深入了解一下什么时候是异步，什么时候是同步？"></a>还是需要深入了解一下什么时候是异步，什么时候是同步？</h5><p>在 React 事件处理函数中或 React 方法中是异步<br>在 setTimeout, Promise 等异步方法中或原生事件中是同步。<br>executionContext 为<code>BatchedContext</code>时为异步，<code>NoContext</code>为同步更新</p>
+<h3 id="react，vue，angular-等前端框架-解决了什么问题？"><a href="#react，vue，angular-等前端框架-解决了什么问题？" class="headerlink" title="react，vue，angular 等前端框架 解决了什么问题？"></a>react，vue，angular 等前端框架 解决了什么问题？</h3><p>在没有这些框架的时代，甚至连 jq 都么有的时候，我们实现一个业务逻辑只能自己去 get data，响应用户操作，执行预置逻辑，将用户操作结果提交给服务，最后给用户反馈。<br>我们有了趁手的工具 jq 之后，虽然整个逻辑流程没有变，但是编写业务逻辑的速度要比原生 js 要快很多。<br>再后来我们有个这几个框架之后就不一样了，不一样主要在两个地方：</p>
+<ul>
+<li>响应用户操作；（绑定好视图和数据之后我们再也不用，手动将视图上的数据挪到发送给后端的 data 中）</li>
+<li>界面给用户反馈；（服务响应之后，我们也不需要主动的去做 dom 变动）</li>
+</ul>
+<p>其实仔细看下两个变动就是视图和数据的关系：<strong>视图&lt;=&gt;数据</strong>。从前端发展的这几十年之间，包括 js 的诞生无外乎就是为了处理视图和数据的关系。变化的方向必然是为了更为快速的开发，变化的历程其实就是命令式到声明式的转变。这种转变也是一种刀耕火种向现代化的转变，一切的逻辑都是可以预置的，一切结果都是可控的，这也是声明式的优点。</p>
+<p>然后我们在看下这些框架是通过什么手段去尝试解决这个问题？</p>
+<ol>
+<li>代码书写方式由命令式变成声明式。声明式一定就好吗？当然没有绝对的东西，但是在巨型应用出现的今天，将所有的变动依托到框架中，声明式的代码确实是能节省很多的时间成本（主要是 debug）。</li>
+<li>jsx 解决了 dom 的可编程问题。html 无法使用逻辑去编程，这一直以来都是前端比较大的痛点。</li>
+<li>制定自己的标准。按照一个优秀的标准去写代码至少会比我们天马行空的方式写出代码的代码要可读性强。</li>
+</ol>
+<p>最后回到该问题，这些框架真的解决了这个问题吗？我的答案是没有。就像松哥之前说过这几个框架都是要被淘汰的，他们只是在当前的这个阶段，临时的缓解了前端开发工程师的阵痛。真正解决必然是浏览器才能解决的，但是到时候肯定又会出现其他的问题等着工程师们继续奋斗。</p>
+<h2 id="engineering">工程化相关</h2>
+
+<h3 id="webpack-解决了什么问题？"><a href="#webpack-解决了什么问题？" class="headerlink" title="webpack 解决了什么问题？"></a>webpack 解决了什么问题？</h3><p>解决前端工程化中如何更高效的管理和维护项目的中的每个资源。<br>一个模块化解决方案</p>
+<h3 id="npm-解决了什么问题？"><a href="#npm-解决了什么问题？" class="headerlink" title="npm 解决了什么问题？"></a>npm 解决了什么问题？</h3><p>js 的包管理器就是在解决前端工程的依赖包。【嗯，问这个问题的人脑子多少会有点问题。】</p>
+<h3 id="yarn-解决了什么问题？"><a href="#yarn-解决了什么问题？" class="headerlink" title="yarn 解决了什么问题？"></a>yarn 解决了什么问题？</h3><ol>
+<li>依赖关系的确定性</li>
+<li>扁平式管理依赖</li>
+<li>离线模式（已安装的不再安装）</li>
+</ol>
+<h2 id="h5">H5</h2>
+
+<h3 id="适配方案：rem，em，vw-简述"><a href="#适配方案：rem，em，vw-简述" class="headerlink" title="适配方案：rem，em，vw 简述"></a>适配方案：rem，em，vw 简述</h3><ul>
+<li>rem: 根据不同屏幕设置 html 的 px，决定 1rem 的大小。本质是改变一个元素在不同设备上 css 像素的个数</li>
+<li>em: 继承父级设置的 font-size 大小</li>
+<li>vw: 100vw 是整个屏幕的宽度，相对整个屏幕的宽度计算当前元素的宽。</li>
+</ul>
+<h2 id="server">server</h2>
+
+<h3 id="缓存击穿，缓存穿透，缓存雪崩怎么解决？"><a href="#缓存击穿，缓存穿透，缓存雪崩怎么解决？" class="headerlink" title="缓存击穿，缓存穿透，缓存雪崩怎么解决？"></a>缓存击穿，缓存穿透，缓存雪崩怎么解决？</h3><p>缓存击穿，穿透，雪崩差不多，都是redis中查询不到对应的数据或者缓存已过期，会将请求压力直接作用到底层的存储系统。涉及一些高并发的请求可能在瞬间就会将底层数据库打挂。<br>分析该问题，解决方案大致可以从请求前（1，2，3），请求处理中（4，5）和请求后（6）进行分别处理</p>
+<ol>
+<li>缓存预热。针对一些活动场景提前将热点数据写入缓存中并设置较大的超时时间；</li>
+<li>分散过期时间。避免将所有的key的过期时间设置的一致导致过期之后缓存雪崩；</li>
+<li>提前更新。记录缓存数据是否过期，快过期前提前进行数据刷新；</li>
+<li>空值缓存。查询的数据为空仍进行较短时间的缓存；</li>
+<li>使用锁，队列。避免瞬间将load数据的请求都打到数据库中；</li>
+<li>实时监控。对恶意ip进行封禁；</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/js/%E5%85%AB%E8%82%A1%E5%9F%BA%E7%A1%80/" data-id="clzmdspff0030zwl18tedcpxi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/%E4%B9%A6%E7%B1%8D/%E4%B9%A6/1984/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          1984
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/delete/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">mysql 基础命令 - delete</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>

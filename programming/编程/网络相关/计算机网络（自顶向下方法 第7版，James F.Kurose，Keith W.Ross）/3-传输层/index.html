@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>传输层 | ASK&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="来自中科大郑烇、杨坚全套《计算机网络（自顶向下方法 第7版，James F.Kurose，Keith W.Ross）》课程 3.1 传输层概述3.2 多路复用解复用3.3 无连接传输 UDP3.4 可靠数据传输的原理3.5 面向连接的传输 TCP3.6 拥塞控制原理3.7 TCP拥塞控制 3.0 传输层概述 - 理解传输层的工作原理   - 多路复用&#x2F;解复用   - 可靠数据传输   - 流量控制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="传输层">
+<meta property="og:url" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/index.html">
+<meta property="og:site_name" content="ASK&#39;s Blog">
+<meta property="og:description" content="来自中科大郑烇、杨坚全套《计算机网络（自顶向下方法 第7版，James F.Kurose，Keith W.Ross）》课程 3.1 传输层概述3.2 多路复用解复用3.3 无连接传输 UDP3.4 可靠数据传输的原理3.5 面向连接的传输 TCP3.6 拥塞控制原理3.7 TCP拥塞控制 3.0 传输层概述 - 理解传输层的工作原理   - 多路复用&#x2F;解复用   - 可靠数据传输   - 流量控制">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/20230528-225749.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/20230528-225749.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/20230530-090937.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/20230530-090952.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/20230530-091007.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/20230531-090326.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/20230601-084345.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/20230601-091627.jpeg">
+<meta property="og:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/20230610-223552.jpeg">
+<meta property="article:published_time" content="2023-05-25T16:38:55.000Z">
+<meta property="article:modified_time" content="2024-08-08T11:42:01.154Z">
+<meta property="article:author" content="ask">
+<meta property="article:tag" content="网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/20230528-225749.jpeg">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="ASK&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/blog/icon/icon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">ASK&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首页</a>
+        
+          <a class="main-nav-link" href="/blog/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-box-wrap">
+        <div class="search-box">
+  <div class="search-form">
+    <input class="search-box-input" id="searchIpt" placeholder="Search" />
+    <button type="submit" class="search-box-submit">&#xF002;</button>
+  </div>
+  <div class="search-result-box"></div>
+</div>
+ 
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-编程/网络相关/计算机网络（自顶向下方法 第7版，James F.Kurose，Keith W.Ross）/3-传输层" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/" class="article-date">
+  <time datetime="2023-05-25T16:38:55.000Z" itemprop="datePublished">2023-05-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/programming/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      传输层
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>来自<a href="https://www.bilibili.com/video/BV1JV411t7ow/?spm_id_from=333.337.search-card.all.click&vd_source=22653c02dfbe0c9c7bb4a200eb87fe4e" target="_blank" rel="noopener">中科大郑烇、杨坚全套《计算机网络（自顶向下方法 第7版，James F.Kurose，Keith W.Ross）》课程</a></p>
+<p><a href="#overview">3.1 传输层概述</a><br><a href="#reuse">3.2 多路复用解复用</a><br><a href="#udp">3.3 无连接传输 UDP</a><br><a href="#rdt">3.4 可靠数据传输的原理</a><br><a href="#tcp">3.5 面向连接的传输 TCP</a><br><a href="#jam">3.6 拥塞控制原理</a><br><a href="#tcpjam">3.7 TCP拥塞控制</a></p>
+<h1 id="overview">3.0 传输层概述</h1>
+- 理解传输层的工作原理
+  - 多路复用/解复用
+  - 可靠数据传输
+  - 流量控制
+  - 拥塞控制
+- 学习internet的传输层协议
+  - TCP
+    - TCP的拥塞控制
+  - UDP
+
+<h1 id="reuse">3.1 多路复用解复用</h1>
+
+<p>TCP的复用和解复用</p>
+<p>TCP的socket其实是以下四元组的一个数字标识和唯一一个PID对应<br>在连接建立之后在服务器和客户端都会在内存中建立一个唯一的socket连接<br>发送方发送数据时【源IP，源端口】=&gt;【目标IP，目标端口】会复用该socket进行发送<br>接收方收到数据时解析数据包中的IP和端口信息，找到唯一的socket，把报文交给socket对应的process处理</p>
+<p><strong>TCP socket map</strong><br>| socket | 源IP      | 源端口 | 目标IP    | 目标端口 | PID    |<br>| —— | ——— | —— | ——— | ——– | —— |<br>| 12     | 127.0.0.1 | 80     | 127.0.0.2 | 8090     | 123123 |</p>
+<blockquote>
+<p>浏览器在加载站点资源时通过创建多个socket连接来实现并发请求，此时每个socket请求的客户端端口都是不一样的。</p>
+</blockquote>
+<p>TCP的复用和解复用<br>UDP的socket是二元组的一个数字标识和唯一的一个PID对应<br>UDP本身是面向无连接的，所以socket仅仅记录了自身IP，port和PID的对应关系<br>发送方通过同一个port发送数据时会使用同一个socket进行发送<br>接收方收到数据时解析数据包中的IP和port信息，找到唯一的socket，把报文交给socket对应的process处理<br><strong>UDP socket map</strong><br>| socket | 源IP      | 源端口 | PID    |<br>| —— | ——— | —— | —— |<br>| 12     | 127.0.0.1 | 80     | 123123 |</p>
+<h1 id="reuse">3.2 无连接传输 UDP</h1>
+
+<p>UDP User Datagram Protocol [RFC 768]</p>
+<p>UDP 只在IP层上增加了复用和解复用的能力</p>
+<p>UDP使用的场景：流媒体，DNS，SNMP</p>
+<p>在UDP上实现可靠传输：</p>
+<ul>
+<li>在应用层增加可靠传输</li>
+<li>应用特定的差错恢复</li>
+</ul>
+<p>QQ的通讯就是基于UDP的OICQ应用层协议</p>
+<p><strong>为什么没有第三种应用？</strong><br>TCP和UDP已经能支撑85%以上的应用</p>
+<p><strong>为什么叫数据报</strong><br>每个数据都是独立发送的，IP也叫数据报</p>
+<ul>
+<li>udp头部比较小，payload比较大</li>
+<li>没有拥塞控制，流量控制，发送比较快</li>
+</ul>
+<p>UDP 校验和</p>
+<ul>
+<li>目标：检测被传输报文段中的差错（如比特反转）</li>
+<li>发送方<ul>
+<li>将报文的内容视为16比特的整数</li>
+<li>校验和：报文段的加法和（1的补运算）</li>
+<li>发送方将校验和放在UDP的校验和字段</li>
+</ul>
+</li>
+<li>接收方<ul>
+<li>计算机接收到的报文段的校验和</li>
+<li>检查计算出的校验和与校验和字段是否相等<ul>
+<li>不想等：检测到有差错</li>
+<li>相等：没有检测到差错，但也有可能有差错<ul>
+<li>残存错误</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="rdt">3.3 可靠数据传输的原理</h1>
+
+<p><strong>可靠数据传输（rdt [reliable data transfer]）的原理</strong></p>
+<ul>
+<li>rdt在应用层、传输层和数据链路层都很重要</li>
+<li>是网络Top 10问题之一<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/20230528-225749.jpeg" class="" title="rdt"></li>
+<li>信道的不可靠特点决定了可靠数据传输协议（ rdt ）的复杂性</li>
+</ul>
+<p>渐进式的开发可靠数据传输协议</p>
+<ul>
+<li>rdt1.0 在可靠的信道上可靠数据传输</li>
+<li>rdt2.0 具有比特差错的信道<ul>
+<li>下层信道可能出错：将分组中的比特反转<ul>
+<li>用校验和来检测比特差错</li>
+</ul>
+</li>
+<li>怎么从差错中恢复？<ul>
+<li>确认（ACK）：接收方显示的告诉发送方分组已经被接受</li>
+<li>否定确认（NAK）：接收方显示的告诉发送方分组错误<ul>
+<li>发送方收到NAK之后，发送方重传分组</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>rdt2.0中的新机制：采用差错控制编码进行差错检测 <ul>
+<li>发送方差错控制编码、缓存 </li>
+<li>接收方使用编码检错 </li>
+<li>接收方的反馈：控制报文（ACK，NAK）：接收方-&gt;发送方 </li>
+<li>发送方收到反馈相应的动作</li>
+</ul>
+</li>
+<li>致命的缺陷：ACK/NAK出错<ul>
+<li>发送方不知道接收方发送了什么</li>
+<li>发送方如何做<ul>
+<li>重传：可能重复</li>
+<li>不重传：可能死锁（或出错）</li>
+</ul>
+</li>
+<li>引入新的机制：序号</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>rdt2.1 在2.0上增加序号的能力<ul>
+<li>发送方在每个分组中加入序号</li>
+<li>如果ACK/NAK出错，发送方重传当前分组</li>
+<li>接收方丢弃（不发给上层）重复分组</li>
+</ul>
+</li>
+<li>rdt2.2 无NAK的协议<ul>
+<li>功能同rdt2.1，但只使用ACK(ack 要编号）</li>
+<li>接收方对最后正确接收的分组发ACK，以替代NAK<ul>
+<li>接收方必须显式地包含被正确接收分组的序号</li>
+</ul>
+</li>
+<li>当收到重复的ACK（如：再次收到ack0）时，发送方与收到NAK采取相同的动作：重传当前分组</li>
+<li>为后面的一次发送多个数据单位做一个准备<ul>
+<li>一次能够发送多个</li>
+<li>每一个的应答都有：ACK，NACK；麻烦</li>
+<li>使用对前一个数据单位的ACK，代替本数据单位的nak</li>
+<li>确认信息减少一半，协议处理简单</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>rdt3.0：具有比特差错和分组丢失的信道<ul>
+<li>下层信道可能会丢失分组（数据或ACK）<ul>
+<li>会死锁</li>
+<li>机制还不够处理这种状况： <ul>
+<li>检验和 </li>
+<li>序列号</li>
+<li>ACK</li>
+<li>重传</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>方法：发送方等待ACK一段合理的时间<ul>
+<li>发送端超时重传：如果到时没有收到ACK-&gt;重传<ul>
+<li>问题：如果分组（或ACK ）只是被延迟了： <ul>
+<li>重传将会导致数据重复，但利用序列号已经可以处理这个问题 </li>
+<li>接收方必须指明被正确接收的序列号</li>
+</ul>
+</li>
+<li>需要一个倒计数定时器<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/20230528-225749.jpeg" class="" title="rdt">
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>停止等待协议</strong><br>发送方发送一个分组，然后等待接收方的应答。收到接收方的应答之后再发后续的分组</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/20230530-090937.jpeg" class="" title="rdt3.0">
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/20230530-090952.jpeg" class="" title="流水线">
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/20230530-091007.jpeg" class="" title="流水线协议">
+
+<p><strong>滑动窗口(slide window)协议</strong></p>
+<ul>
+<li>发送缓冲区 <ul>
+<li>形式：内存中的一个区域，落入缓冲区的分组可以发送 </li>
+<li>功能：用于存放已发送，但是没有得到确认的分组 </li>
+<li>必要性：需要重发时可用</li>
+</ul>
+</li>
+<li>发送缓冲区的大小：一次最多可以发送多少个未经确认的分组 <ul>
+<li>停止等待协议=1 </li>
+<li>流水线协议&gt;1，合理的值，不能很大，链路利用率不能够超100%</li>
+</ul>
+</li>
+<li>发送缓冲区中的分组 <ul>
+<li>未发送的：落入发送缓冲区的分组，可以连续发送出去；</li>
+<li>已经发送出去的、等待对方确认的分组：发送缓冲区的分组只有得到确认才能删除</li>
+</ul>
+</li>
+</ul>
+<p><strong>GBN协议和SR协议的异同</strong></p>
+<ul>
+<li>相同之处<ul>
+<li>发送窗口&gt;1</li>
+<li>一次能够可发送多个未经确认的分组</li>
+</ul>
+</li>
+<li>不同之处<ul>
+<li>GBN :接收窗口尺寸=1<ul>
+<li>接收端：只能顺序接收 </li>
+<li>发送端：从表现来看，一旦一个分组没有发成功，如：0,1,2,3,4 ; 假如1未成功，234都发送出去了，要返回1再发送；GB1</li>
+</ul>
+</li>
+<li>SR: 接收窗口尺寸&gt;1<ul>
+<li>接收端：可以乱序接收 </li>
+<li>发送端：发送0,1,2,3,4，一旦1未成功，2,3,4,已发送，无需重发，选择性发送1</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>流水线协议：总结</strong></p>
+<ul>
+<li>Go-back-N:<ul>
+<li>发送端最多在流水线中有N个未确认的分组</li>
+<li>接收端只是发送累计型确认cumulative ack<ul>
+<li>接收端如果发现gap，不确认新到来的分组</li>
+</ul>
+</li>
+<li>发送端拥有对最老的未确认分组的定时器<ul>
+<li>只需设置一个定时器</li>
+<li>当定时器到时时，重传所有未确认分组</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Selective Repeat: <ul>
+<li>发送端最多在流水线中有N个未确认的分组</li>
+<li>接收方对每个到来的分组单独确认individual ack（非累计确认）</li>
+<li>发送方为每个未确认的分组保持一个定时器<ul>
+<li>当超时定时器到时，只是重发到时的未确认分组</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>TCP 主要使用的是GBN协议，发送方可以连续发送多个报文段无需等待每个报文段的确认。SR协议可以缓存乱序到达的报文段，并按需发送确认信息。</p>
+<h1 id="tcp">3.5 面向连接的传输 TCP</h1>
+
+<p><strong>段结构</strong></p>
+<p>TCP：概述 RFCs: 793, 1122, 1323, 2018, 2581</p>
+<ul>
+<li>点对点：<ul>
+<li>一个发送方，一个接收方</li>
+</ul>
+</li>
+<li>可靠的、按顺序的字节流：<ul>
+<li>没有报文边界</li>
+</ul>
+</li>
+<li>管道化（流水线）：<ul>
+<li>TCP拥塞控制和流量控制设置窗口大小</li>
+</ul>
+</li>
+<li>发送和接收缓存</li>
+<li>全双工数据：<ul>
+<li>在同一连接中数据流双向流动</li>
+<li>MSS：最大报文段大小 MTU internet的大小是 1500B<br>一个报文+20B的TCP头部+20B的IP头部，如果正好小于1500B则正好在一个报文段中，传输内容大小为1460B，超过1500B之后需要分段发送。</li>
+</ul>
+</li>
+<li>面向连接：<ul>
+<li>在数据交换之前，通过握手（交换控制报文） 初始化发送方、接收方的状态变量</li>
+</ul>
+</li>
+<li>有流量控制：<ul>
+<li>发送方不会淹没接收方</li>
+</ul>
+</li>
+</ul>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/20230531-090326.jpeg" class="" title="tcp 报文">
+
+<p>此图中的req和ack解释</p>
+<ul>
+<li>改图描述了全双工的信息发送过程</li>
+<li>Seq 标识当前数据的序号，ACK则是对之前收到数据的确认（值为上次Seq+报文的长度），希望下次发送方发送数据从ACK的值开始</li>
+<li>ACK是累计确认，对下次接受数据的期待<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/20230601-084345.jpeg" class="" title="tcp 序号和确认号">
+
+</li>
+</ul>
+<p>TCP往返延时（RTT）和超时</p>
+<!-- TODO 计算方式没有看懂 -->
+<p>TimeoutInterval = EstimatedRTT + 4 * DevRTT（safety margin）<br>先计算一个往返时间的估计值+偏差范围的4倍，能覆盖绝大多数的超时 情况</p>
+<p><strong>可靠数据传输</strong></p>
+<ul>
+<li>产生TCP ACK的建议</li>
+</ul>
+<ol>
+<li>接收方收到一个报文之后 会启动一个辅助定时器，最多等待500ms，如果500ms内期望的下一个报文到达的话，接收方给发送方发送一个累计确认的ACK。如果超过500ms还没到给发送方一个第二个报文的期望</li>
+<li>前边一个报文没给确认，来第二个之后立即给发送方确认</li>
+<li>接收方接收到乱序报文之后立即给发送方一个期望确认</li>
+<li>接收方收到钱后两个报文，中间的报文有gap时，理解给发送方预期的ACK。</li>
+</ol>
+<ul>
+<li><p>快速重传<br>在超时定时器还没有到时间前，收到三个冗余的ACK，此时发送方会再次重传数据包。搞动作就是快速重传，因为此时还没有超时</p>
+</li>
+<li><p>三个冗余的ACK是怎么来的？<br>这个时候虽然没有超时，但是三个冗余ACK让发送方猜测序号较小的数据报出了问题，会立即重新发送，节约时间</p>
+</li>
+<li><p>初始的Seq为什么不从0开始？<br>初始的数据不是从0开始，而是双方会协商一个双向发送的Seq。因为有可能发生之前同端口的传输的数据突然到达导致数据错乱。</p>
+</li>
+</ul>
+<p>TCP在数据传输过程中只启动一个定时器，当收到一个ACK时，移动base指针到ACK确认的位置。如果此时base指针小于next指针说明还有已发送未确认的包，则重新启动定时器，如果base和next相等则无已发送的包，关闭定时器。</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/20230601-091627.jpeg" class="" title="TCP发送方事件">
+
+<p><strong>流量控制</strong><br>接受方不让发送方发送的太多太快以至于让接受方的缓冲区溢出。<br>接收方可以在回复消息的时候将ACK和空闲缓存区的大小告诉发送方，发送方收到消息之后可以控制自己的速率</p>
+<p><strong>连接管理</strong><br>TCP 三次握手：协商发送段的开始序号建立socket</p>
+<ol>
+<li>client向server说开始从x开始发送数据</li>
+<li>server向client回复确认</li>
+<li>server向client说开始从y开始发送数据</li>
+<li>client向server回复确认<br>其上2和3都是server向client发送的消息，合成一个之后就可以最简化到三次握手就可建立连接。</li>
+</ol>
+<p>TCP 四次挥手</p>
+<ol>
+<li>client向server 发送断开链接的消息</li>
+<li>server向client 发送确认<br>过一段时间之后</li>
+<li>server向client 发送断开链接的消息</li>
+<li>client向server 发送确认</li>
+</ol>
+<p>以上的2和3无法直接合并，所以需要四次。<br>断开连接1，2时client表达了自己的意图也收到server的确认，但是server仅仅是收到了期望且发送了自己的确认，但是并不完全清楚client是否真的收到了自己的确认。为了解决该问题，server在发送完确认之后会启动一个定时器，在timeout之后服务端没收到客户端的任何数据，服务端才会断开连接。3，4方向也一样。</p>
+<h1 id="jam">3.6 拥塞控制原理</h1>
+
+<p>流量控制是端到端的问题<br>拥塞控制是网络的问题</p>
+<p><strong>拥塞的代价</strong></p>
+<ol>
+<li>延迟比较大</li>
+<li>为了让网络达到有效的输出需要很高的输入</li>
+<li>拥塞时可能需要重传很多数据</li>
+</ol>
+<p>超时重传可以保证数据不丢失，但也会加剧网络拥塞的情况。<br>负反馈往往会使系统趋于平衡，而正反馈往往会让系统奔溃</p>
+<p><strong>拥塞控制的方法</strong></p>
+<ol>
+<li>端到端拥塞控制（TCP采用的方式）</li>
+</ol>
+<ul>
+<li>没有来自网络的显式反馈</li>
+<li>端系统根据延迟和丢失时间判断是否有拥塞</li>
+</ul>
+<ol start="2">
+<li>网络辅助的拥塞控制</li>
+</ol>
+<ul>
+<li>路由器提供给端系统以反馈信息<ul>
+<li>单个bit置位，显示有拥塞（SNA，DECbit，TCP/IP ECN，ATM）</li>
+<li>显式提供发送端可以采用的速率</li>
+</ul>
+</li>
+</ul>
+<p>ATM ABR 拥塞控制 （网络辅助的拥塞控制）<br>ABR: available bit rate</p>
+<ul>
+<li>如果发送端的路径“轻载”，发送方使用可用带宽</li>
+<li>如果发送方的路径拥塞了 放松方限制其发送的速度到一个最小保障的速率上</li>
+</ul>
+<p>发送方怎么知道拥塞以及最小保障是多大？<br>数据传输过程中会在中间节点上增加RM（资源管理信元）标识了是否拥塞以及最低的速率是多少</p>
+<h1 id="tcpjam">3.7 TCP拥塞控制</h1>
+
+<p>TCP使用的拥塞控制机制是端到端的控制机制【端系统根据自身得到的信息判断是否发生拥塞从而采取动作】</p>
+<p><strong>拥塞控制需要考虑的几个问题</strong></p>
+<ol>
+<li>如何检测拥塞（拥塞感知）<ul>
+<li>轻微拥塞</li>
+<li>拥塞</li>
+</ul>
+</li>
+<li>控制策略实现<ul>
+<li>拥塞时如何动作，降低速率<ul>
+<li>轻微拥塞 如何反应</li>
+<li>拥塞， 如何反应</li>
+</ul>
+</li>
+<li>拥塞缓解时如何动作，增加速率</li>
+</ul>
+</li>
+</ol>
+<p><strong>拥塞感知</strong></p>
+<ol>
+<li>timeout 【拥塞】<br>超时的原因<ul>
+<li>网络拥塞，某个路由器缓存区没空间导致丢包（概率较大）</li>
+<li>数据出错，没通过校验被丢弃（概率小）</li>
+</ul>
+</li>
+<li>收到三次重复的ACK 【轻微拥塞】</li>
+</ol>
+<p><strong>速率控制的方法</strong></p>
+<ol>
+<li>前提</li>
+</ol>
+<ul>
+<li>维持一个拥塞窗口的值：CongWin</li>
+<li>发送端限制已发送未确认的数量 LastByteSent-LastByteAcked &lt;= CongWin</li>
+</ul>
+<ol start="2">
+<li>具体策略</li>
+</ol>
+<ul>
+<li>慢启动<br>刚启动时发送1MSS的包，之后快速增大速率。</li>
+<li>AIMD：线性增，乘性减少<ul>
+<li>SS阶段：加倍增加（每个RTT）</li>
+<li>CA阶段：线性增加（每个RTT）</li>
+</ul>
+</li>
+<li>超时之后的保守策略<br>识别到超时或者三个重复的ACK时CongWin降低<ul>
+<li>超时后 CongWin降低为 1MSS，进入SS阶段</li>
+<li>三个重复ACK CongWin降低为 1/2 CongWin，进入CA阶段</li>
+</ul>
+</li>
+</ul>
+<p>MSS（Max Segment Size）最大报文段长度 1460</p>
+<p>拥塞控制发送速率也需要满足流量控制<br>SendWin = min(CongWin, RecvWin)</p>
+<p><strong>TCP慢启动初始速率</strong><br>一个IP的大小是1500，抛掉头部之后是1460，一个TCP的包大小是1460，总共是 1460<em>8 bit<br>1460</em>8/200 =  58.4kbps</p>
+<p><strong>TCP的启动过程</strong></p>
+<ol>
+<li>TCP刚启动时设置CongWin=1MSS，此时发送速率成倍增加</li>
+<li>当发生三次冗余ACK时，设置Threshold=CongWin/2，CongWin=Threshold+3，此时进入CA阶段，发送速率线性增长</li>
+<li>当超时时，Threshold=CongWin/2，CongWin=1MSS，此时进入SS阶段，发送速率指数增长。当速率到达Threshold时，进入CA阶段，发送速率线性增长</li>
+</ol>
+<p><strong>TCP的吞吐量</strong><br>TCP数据发送的过程就是CongWin动态调整的过程，不断在w/2到w之间动态调整。<br>平均窗口大小 = (w/2+w)/2 = 3/4w<br>avg TCP thruput = 3/4 * W/RTT bytes/sec</p>
+<p><strong>TCP公平性</strong><br>K个TCP会话分享一个链路带宽为R的瓶颈，每一个会话的有效带宽为 R/K</p>
+<img src="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/20230610-223552.jpeg" class="" title="tcp 公平">
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ansike.github.io/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/3-%E4%BC%A0%E8%BE%93%E5%B1%82/" data-id="clzmdspir00m1zwl1f4w74opj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/node/%E5%8A%A0%E8%A7%A3%E5%AF%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          加解密
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/programming/%E7%BC%96%E7%A8%8B/%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%EF%BC%88%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E6%96%B9%E6%B3%95%20%E7%AC%AC7%E7%89%88%EF%BC%8CJames%20F.Kurose%EF%BC%8CKeith%20W.Ross%EF%BC%89/2-%E5%BA%94%E7%94%A8%E5%B1%82/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">应用层</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E4%B9%A6%E7%B1%8D/">书籍</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E6%B8%B8%E6%88%8F/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/life/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/programming/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/english/">英语</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BTC/" rel="tag">BTC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Dapp/" rel="tag">Dapp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ETH/" rel="tag">ETH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/PC%E7%AB%AF/" rel="tag">PC端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/awk/" rel="tag">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/book/" rel="tag">book</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/bytecode/" rel="tag">bytecode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/canvas/" rel="tag">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cat/" rel="tag">cat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/clothes/" rel="tag">clothes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cocos/" rel="tag">cocos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/computed/" rel="tag">computed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/curl/" rel="tag">curl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/debian/" rel="tag">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/economy/" rel="tag">economy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/encoding/" rel="tag">encoding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/error/" rel="tag">error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/expect/" rel="tag">expect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/food/" rel="tag">food</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/grep/" rel="tag">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/http/" rel="tag">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/js/" rel="tag">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/k8s/" rel="tag">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/language/" rel="tag">language</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mac/" rel="tag">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mail/" rel="tag">mail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/merge/" rel="tag">merge</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mysql/" rel="tag">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/network/" rel="tag">network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/node/" rel="tag">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/python/" rel="tag">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/rebase/" rel="tag">rebase</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/restaurant/" rel="tag">restaurant</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/sed/" rel="tag">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/shell/" rel="tag">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/svg/" rel="tag">svg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ts/" rel="tag">ts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vim/" rel="tag">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/vue/" rel="tag">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web3/" rel="tag">web3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/webpack/" rel="tag">webpack</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9B%BE%E8%A1%A8/" rel="tag">图表</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" rel="tag">基础概念</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%A4%A7%E5%B1%8F/" rel="tag">大屏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" rel="tag">工程化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" rel="tag">手机端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%8E%92%E7%89%88/" rel="tag">排版</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%91%84%E5%BD%B1/" rel="tag">摄影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%96%87%E6%A1%A3/" rel="tag">文档</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%AD%A3%E5%88%99/" rel="tag">正则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/BTC/" style="font-size: 16.67px;">BTC</a> <a href="/blog/tags/Dapp/" style="font-size: 10.83px;">Dapp</a> <a href="/blog/tags/ETH/" style="font-size: 15px;">ETH</a> <a href="/blog/tags/PC%E7%AB%AF/" style="font-size: 10px;">PC端</a> <a href="/blog/tags/awk/" style="font-size: 10px;">awk</a> <a href="/blog/tags/book/" style="font-size: 11.67px;">book</a> <a href="/blog/tags/bytecode/" style="font-size: 10px;">bytecode</a> <a href="/blog/tags/canvas/" style="font-size: 10.83px;">canvas</a> <a href="/blog/tags/cat/" style="font-size: 10px;">cat</a> <a href="/blog/tags/centos/" style="font-size: 10.83px;">centos</a> <a href="/blog/tags/clothes/" style="font-size: 10px;">clothes</a> <a href="/blog/tags/cocos/" style="font-size: 10px;">cocos</a> <a href="/blog/tags/computed/" style="font-size: 10px;">computed</a> <a href="/blog/tags/css/" style="font-size: 10px;">css</a> <a href="/blog/tags/curl/" style="font-size: 10px;">curl</a> <a href="/blog/tags/debian/" style="font-size: 10px;">debian</a> <a href="/blog/tags/docker/" style="font-size: 10px;">docker</a> <a href="/blog/tags/economy/" style="font-size: 11.67px;">economy</a> <a href="/blog/tags/encoding/" style="font-size: 10px;">encoding</a> <a href="/blog/tags/error/" style="font-size: 10px;">error</a> <a href="/blog/tags/expect/" style="font-size: 10px;">expect</a> <a href="/blog/tags/food/" style="font-size: 10px;">food</a> <a href="/blog/tags/git/" style="font-size: 11.67px;">git</a> <a href="/blog/tags/grep/" style="font-size: 10px;">grep</a> <a href="/blog/tags/http/" style="font-size: 10px;">http</a> <a href="/blog/tags/js/" style="font-size: 19.17px;">js</a> <a href="/blog/tags/k8s/" style="font-size: 16.67px;">k8s</a> <a href="/blog/tags/language/" style="font-size: 17.5px;">language</a> <a href="/blog/tags/linux/" style="font-size: 10px;">linux</a> <a href="/blog/tags/mac/" style="font-size: 10px;">mac</a> <a href="/blog/tags/mail/" style="font-size: 10px;">mail</a> <a href="/blog/tags/merge/" style="font-size: 10px;">merge</a> <a href="/blog/tags/mysql/" style="font-size: 14.17px;">mysql</a> <a href="/blog/tags/network/" style="font-size: 10px;">network</a> <a href="/blog/tags/node/" style="font-size: 11.67px;">node</a> <a href="/blog/tags/python/" style="font-size: 17.5px;">python</a> <a href="/blog/tags/react/" style="font-size: 10.83px;">react</a> <a href="/blog/tags/rebase/" style="font-size: 10px;">rebase</a> <a href="/blog/tags/restaurant/" style="font-size: 10px;">restaurant</a> <a href="/blog/tags/sed/" style="font-size: 10.83px;">sed</a> <a href="/blog/tags/shell/" style="font-size: 20px;">shell</a> <a href="/blog/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/blog/tags/svg/" style="font-size: 10px;">svg</a> <a href="/blog/tags/ts/" style="font-size: 10px;">ts</a> <a href="/blog/tags/vim/" style="font-size: 10px;">vim</a> <a href="/blog/tags/vue/" style="font-size: 10px;">vue</a> <a href="/blog/tags/web3/" style="font-size: 18.33px;">web3</a> <a href="/blog/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/blog/tags/%E5%8A%A8%E7%94%BB/" style="font-size: 11.67px;">动画</a> <a href="/blog/tags/%E5%9B%BE%E8%A1%A8/" style="font-size: 10px;">图表</a> <a href="/blog/tags/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/" style="font-size: 13.33px;">基础概念</a> <a href="/blog/tags/%E5%A4%A7%E5%B1%8F/" style="font-size: 10px;">大屏</a> <a href="/blog/tags/%E5%B7%A5%E7%A8%8B%E5%8C%96/" style="font-size: 11.67px;">工程化</a> <a href="/blog/tags/%E6%89%8B%E6%9C%BA%E7%AB%AF/" style="font-size: 10px;">手机端</a> <a href="/blog/tags/%E6%8E%92%E7%89%88/" style="font-size: 10px;">排版</a> <a href="/blog/tags/%E6%91%84%E5%BD%B1/" style="font-size: 10px;">摄影</a> <a href="/blog/tags/%E6%96%87%E6%A1%A3/" style="font-size: 10px;">文档</a> <a href="/blog/tags/%E6%AD%A3%E5%88%99/" style="font-size: 12.5px;">正则</a> <a href="/blog/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 15.83px;">网络</a> <a href="/blog/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/12/">十二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/09/">九月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/08/">八月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/07/">七月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/05/">五月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/03/">三月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/02/">二月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2023/01/">一月 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/12/">十二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/11/">十一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/10/">十月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/09/">九月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/08/">八月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/07/">七月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/06/">六月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/05/">五月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/04/">四月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2022/01/">一月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/12/">十二月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/07/">七月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2021/05/">五月 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/life/%E7%94%9F%E6%B4%BB/%E6%91%84%E5%BD%B1/%E6%91%84%E5%BD%B1%E6%9E%84%E5%9B%BE%E6%8A%80%E5%B7%A7/">摄影构图技巧</a>
+          </li>
+        
+          <li>
+            <a href="/blog/%E5%89%8D%E7%AB%AF/%E7%BC%96%E7%A8%8B/%E5%A4%A7%E5%B1%8F/bigscreen/">大屏项目</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/js/%E9%87%8D%E5%AD%A6js/array/">array</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/css/UI%E9%80%82%E9%85%8D/">UI适配</a>
+          </li>
+        
+          <li>
+            <a href="/blog/programming/%E7%BC%96%E7%A8%8B/msyql/%E9%94%81/">mysql 的锁</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2024 ask<br>
+      <!-- Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> -->
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首页</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+
+ 
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+ 
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+  
+<script src="/blog/js/script.js"></script>
+ 
+<script src="/blog/js/search_form.js"></script>
+ 
+
+
+  </div>
+</body>
+</html>
